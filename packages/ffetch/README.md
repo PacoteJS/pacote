@@ -1,11 +1,11 @@
-# @goblindegook/ffetch
+# @pacote/ffetch
 
 [![Build Status](https://travis-ci.org/goblindegook/ffetch.svg?branch=master)](https://travis-ci.org/goblindegook/ffetch)
 
 ## Installation
 
 ```bash
-yarn add @goblindegook/ffetch
+yarn add @pacote/ffetch
 ```
 
 ## Usage
@@ -15,7 +15,7 @@ In its simplest form, `ffetch` works a lot like the
 wraps:
 
 ```typescript
-import { ffetch } from '@goblindegook/ffetch'
+import { ffetch } from '@pacote/ffetch'
 
 const response = await ffetch('https://goblindegook.com/api/kittens/1').run()
 
@@ -43,7 +43,7 @@ Whatever the result, it can be directly accessed via the `value` property, but
 without resorting to (sometimes nested) `try ... catch` constructs. For example:
 
 ```typescript
-import { ffetch } from '@goblindegook/ffetch'
+import { ffetch } from '@pacote/ffetch'
 
 // Perform the request:
 const response = await ffetch('https://goblindegook.com/api/kittens/1').run()

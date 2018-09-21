@@ -1,5 +1,5 @@
 {
-  "name": "@goblindegook/ffetch",
+  "name": "@pacote/ffetch",
   "description": "f wrapped in a TaskEither",
   "version": "1.0.0",
   "license": "MIT",
@@ -29,7 +29,8 @@
     "pretest": "yarn lint",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "prepublish": "yarn test && yarn build"
   },
   "lint-staged": {
     "linters": {
