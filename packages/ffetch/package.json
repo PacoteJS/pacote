@@ -1,6 +1,6 @@
 {
   "name": "@pacote/ffetch",
-  "description": "f wrapped in a TaskEither",
+  "description": "Fetch API wrapped in a TaskEither",
   "version": "1.0.0",
   "license": "MIT",
   "author": {
