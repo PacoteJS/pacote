@@ -11,7 +11,7 @@ test('handling successful JSON responses', async () => {
   nock(URL)
     .get('')
     .reply(200, body, {
-      'content-type': 'application/json'
+      'content-type': 'application/json; charset=utf-8'
     })
   const actual = await ffetch(URL).run()
   expect(actual).toEqual(right(body))

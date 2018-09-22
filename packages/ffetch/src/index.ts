@@ -4,8 +4,12 @@ import { task, Task } from 'fp-ts/lib/Task'
 import { StatusError, ConnectionError, FetchError, ParserError } from './errors'
 
 function parseBody<T>(response: Response): Promise<T | string> {
-  const contentType = response.headers.get('content-type')
-  return contentType === 'application/json' ? response.json() : response.text()
+  const contentType = (response.headers.get('content-type') || '')
+    .trim()
+    .toLowerCase()
+  return contentType.startsWith('application/json')
+    ? response.json()
+    : response.text()
 }
 
 function statusError<T>(response: Response): Promise<StatusError<T | string>> {
