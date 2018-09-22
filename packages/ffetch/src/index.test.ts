@@ -6,7 +6,7 @@ const URL = 'http://localhost/test'
 
 beforeEach(nock.cleanAll)
 
-test('handling successful JSON responses', async () => {
+test('successful JSON responses', async () => {
   const body = { foo: 'bar' }
   nock(URL)
     .get('')
@@ -17,8 +17,8 @@ test('handling successful JSON responses', async () => {
   expect(actual).toEqual(right(body))
 })
 
-test('handling successful plain text responses', async () => {
-  const body = '<null>'
+test('successful plain text responses', async () => {
+  const body = '<plain text>'
   nock(URL)
     .get('')
     .reply(200, body, {
@@ -28,7 +28,7 @@ test('handling successful plain text responses', async () => {
   expect(actual).toEqual(right(body))
 })
 
-test('handling connection errors', async () => {
+test('connection errors', async () => {
   const message = 'message'
   nock(URL)
     .get('')
@@ -42,7 +42,7 @@ test('handling connection errors', async () => {
   )
 })
 
-test('handling status code errors', async () => {
+test('status code errors', async () => {
   const status = 500
   const body = { foo: 'bar' }
   nock(URL)
@@ -61,8 +61,8 @@ test('handling status code errors', async () => {
   )
 })
 
-test('handling an invalid response body', async () => {
-  const body = '<not ok>'
+test('invalid response body', async () => {
+  const body = '<not json>'
   nock(URL)
     .get('')
     .reply(200, body, {
@@ -77,7 +77,7 @@ test('handling an invalid response body', async () => {
   )
 })
 
-test('handling a plain text body for status errors', async () => {
+test('plain text body for status errors', async () => {
   const status = 404
   const body = '<ok>'
   nock(URL)
@@ -96,9 +96,9 @@ test('handling a plain text body for status errors', async () => {
   )
 })
 
-test('handling an invalid JSON body for status errors', async () => {
+test('invalid JSON body for status errors', async () => {
   const status = 400
-  const body = '<not ok>'
+  const body = '<not json>'
   nock(URL)
     .get('')
     .reply(status, body, {
