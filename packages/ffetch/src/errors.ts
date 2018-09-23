@@ -28,7 +28,7 @@ export class StatusError<T> extends BaseError {
   }
 }
 
-export class ParserError<T> extends StatusError<T> {
+export class ParserError extends StatusError<undefined> {
   public readonly type: ErrorTypes = ErrorTypes.ParserError
 
   constructor(message: string, status: number) {
@@ -36,4 +36,4 @@ export class ParserError<T> extends StatusError<T> {
   }
 }
 
-export type FetchError<T> = ConnectionError | ParserError<T> | StatusError<T>
+export type FetchError<T> = ConnectionError | ParserError | StatusError<T>

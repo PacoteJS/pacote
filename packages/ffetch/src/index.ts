@@ -52,7 +52,7 @@ export function ffetch<E, T>(
             )
     )
     .chain(response =>
-      tryCatch<ParserError<E | string>, T | string>(
+      tryCatch<ParserError, T | string>(
         () => f.parse(response.clone()),
         error => new ParserError((error as Error).message, response.status)
       )
