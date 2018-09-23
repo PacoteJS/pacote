@@ -24,7 +24,7 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "lint": "tslint '{src/**/,test/**/}*.{ts,tsx}'",
+    "lint": "tslint --project tsconfig.json '{src/**/,test/**/}*.{ts,tsx}'",
     "format": "prettier --write '{src/**/,test/**/}*.{js,jsx,ts,tsx,json,css,md}'",
     "pretest": "yarn lint",
     "test": "jest",
@@ -36,7 +36,7 @@
     "linters": {
       "**/*.{js,ts,tsx,json,css,md}": [
         "prettier --write",
-        "tslint",
+        "tslint --project tsconfig.json",
         "git add"
       ]
     }
