@@ -48,7 +48,7 @@ test('status code errors', async () => {
   nock(URL)
     .get('')
     .reply(status, body, {
-      'content-type': 'application/json'
+      'content-type': 'application/json; charset=utf-8'
     })
   const actual = await ffetch(URL).run()
   expect(actual).toEqual(
@@ -62,16 +62,18 @@ test('status code errors', async () => {
 })
 
 test('invalid response body', async () => {
+  const status = 200
   const body = '<not json>'
   nock(URL)
     .get('')
-    .reply(200, body, {
-      'content-type': 'application/json'
+    .reply(status, body, {
+      'content-type': 'application/json; charset=utf-8'
     })
   const actual = await ffetch(URL).run()
   expect(actual).toEqual(
     left({
       type: 'ParserError',
+      status,
       message: expect.stringContaining('invalid json response body')
     })
   )
@@ -102,7 +104,7 @@ test('invalid JSON body for status errors', async () => {
   nock(URL)
     .get('')
     .reply(status, body, {
-      'content-type': 'application/json'
+      'content-type': 'application/json; charset=utf-8'
     })
   const actual = await ffetch(URL).run()
   expect(actual).toEqual(
@@ -111,6 +113,89 @@ test('invalid JSON body for status errors', async () => {
       message: 'Bad Request',
       status,
       body
+    })
+  )
+})
+
+test('custom body parser success', async () => {
+  const status = 201
+  const expected = `Received a response with status code ${status}.`
+  nock(URL)
+    .get('')
+    .reply(status, '')
+  const actual = await ffetch(
+    URL,
+    {},
+    {
+      parse: () => Promise.resolve(expected)
+    }
+  ).run()
+  expect(actual).toEqual(right(expected))
+})
+
+test('custom parser error', async () => {
+  const status = 200
+  const message = `custom parser error`
+  nock(URL)
+    .get('')
+    .reply(status, '')
+
+  const actual = await ffetch(
+    URL,
+    {},
+    {
+      parse: () => Promise.reject(new Error(message))
+    }
+  ).run()
+
+  expect(actual).toEqual(
+    left({
+      type: 'ParserError',
+      status,
+      message
+    })
+  )
+})
+
+test('custom error parser success', async () => {
+  const status = 418
+  const body = `Received a response with status code ${status}.`
+  nock(URL)
+    .get('')
+    .reply(status, '')
+  const actual = await ffetch(
+    URL,
+    {},
+    {
+      parseLeft: () => Promise.resolve(body)
+    }
+  ).run()
+  expect(actual).toMatchObject(
+    left({
+      type: 'StatusError',
+      body
+    })
+  )
+})
+
+test('custom error parser failure', async () => {
+  const status = 418
+  const message = 'custom error parser failure'
+  nock(URL)
+    .get('')
+    .reply(status, '')
+  const actual = await ffetch(
+    URL,
+    {},
+    {
+      parseLeft: () => Promise.reject(new Error(message))
+    }
+  ).run()
+  expect(actual).toMatchObject(
+    left({
+      type: 'ParserError',
+      status,
+      message
     })
   )
 })

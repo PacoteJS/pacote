@@ -9,14 +9,16 @@ class BaseError {
 }
 
 export class ConnectionError extends BaseError {
-  public readonly type = ErrorTypes.ConnectionError
+  public readonly type: ErrorTypes = ErrorTypes.ConnectionError
+
   constructor(message: string) {
     super(message)
   }
 }
 
 export class StatusError<T> extends BaseError {
-  public readonly type = ErrorTypes.StatusError
+  public readonly type: ErrorTypes = ErrorTypes.StatusError
+
   constructor(
     message: string,
     public status: number,
@@ -26,11 +28,12 @@ export class StatusError<T> extends BaseError {
   }
 }
 
-export class ParserError extends BaseError {
-  public readonly type = ErrorTypes.ParserError
-  constructor(message: string) {
-    super(message)
+export class ParserError<T> extends StatusError<T> {
+  public readonly type: ErrorTypes = ErrorTypes.ParserError
+
+  constructor(message: string, status: number) {
+    super(message, status)
   }
 }
 
-export type FetchError<T> = ConnectionError | ParserError | StatusError<T>
+export type FetchError<T> = ConnectionError | ParserError<T> | StatusError<T>
