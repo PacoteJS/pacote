@@ -5,7 +5,7 @@ enum ErrorTypes {
 }
 
 class BaseError {
-  constructor(public message: string) {}
+  constructor(public readonly message: string) {}
 }
 
 export class ConnectionError extends BaseError {
@@ -21,8 +21,8 @@ export class StatusError<T> extends BaseError {
 
   constructor(
     message: string,
-    public status: number,
-    public body?: T | string | null
+    public readonly status: number,
+    public readonly body?: T | string | null
   ) {
     super(message)
   }

@@ -1,7 +1,7 @@
 {
   "name": "@pacote/ffetch",
   "description": "Fetch API wrapped in a TaskEither",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "license": "MIT",
   "author": {
     "name": "Luís Rodrigues",
@@ -24,7 +24,7 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "lint": "tslint --project tsconfig.json '{src/**/,test/**/}*.{ts,tsx}'",
+    "lint": "tslint --project tsconfig.tslint.json '{src/**/,test/**/}*.{ts,tsx}'",
     "format": "prettier --write '{src/**/,test/**/}*.{js,jsx,ts,tsx,json,css,md}'",
     "pretest": "yarn lint",
     "test": "jest",
@@ -34,9 +34,13 @@
   },
   "lint-staged": {
     "linters": {
-      "**/*.{js,ts,tsx,json,css,md}": [
+      "**/*.{js,json,css,md}": [
         "prettier --write",
-        "tslint --project tsconfig.json",
+        "git add"
+      ],
+      "**/*.{ts,tsx}": [
+        "prettier --write",
+        "tslint --project tsconfig.tslint.json",
         "git add"
       ]
     }
@@ -70,6 +74,7 @@
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",
     "tslint-config-standard": "^8.0.1",
+    "tslint-immutable": "^4.7.0",
     "typescript": "^3.0.3"
   },
   "dependencies": {

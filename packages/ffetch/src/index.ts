@@ -3,10 +3,15 @@ import { tryCatch, left, right, TaskEither } from 'fp-ts/lib/TaskEither'
 import { task, Task } from 'fp-ts/lib/Task'
 import { StatusError, ConnectionError, FetchError, ParserError } from './errors'
 
-interface FRequestInit<E, T> {
-  parse(r: Response): Promise<T>
-  parseLeft(r: Response): Promise<E>
+interface FetchOptions<E, T> {
+  readonly parse: (r: Response) => Promise<T>
+  readonly parseLeft: (r: Response) => Promise<E>
 }
+
+type Fetch<E, T> = (
+  input?: Request | string,
+  init?: RequestInit
+) => TaskEither<FetchError<E | string>, T | string>
 
 function parse<T>(response: Response): Promise<T | string> {
   const contentType = (response.headers.get('content-type') || '')
@@ -32,29 +37,34 @@ function statusError<E>(
   )
 }
 
-export function ffetch<E, T>(
-  input?: Request | string,
-  init?: RequestInit,
-  fInit?: Partial<FRequestInit<E, T>>
-): TaskEither<FetchError<E | string>, T | string> {
-  const f: FRequestInit<E | string, T | string> = { parse, parseLeft, ...fInit }
+export function createFetch<E, T>(
+  fetchOptions?: Partial<FetchOptions<E, T>>
+): Fetch<E, T> {
+  const f: FetchOptions<E | string, T | string> = {
+    parse,
+    parseLeft,
+    ...fetchOptions
+  }
 
-  return tryCatch<FetchError<E | string>, Response>(
-    () => fetch(input, init),
-    error => new ConnectionError((error as Error).message)
-  )
-    .chain(
-      response =>
-        response.ok
-          ? right(task.of(response))
-          : left<StatusError<E | string>, Response>(
-              statusError(f.parseLeft, response.clone())
-            )
+  return (input, init) =>
+    tryCatch<FetchError<E | string>, Response>(
+      () => fetch(input, init),
+      error => new ConnectionError((error as Error).message)
     )
-    .chain(response =>
-      tryCatch<ParserError, T | string>(
-        () => f.parse(response.clone()),
-        error => new ParserError((error as Error).message, response.status)
+      .chain(
+        response =>
+          response.ok
+            ? right(task.of(response))
+            : left<StatusError<E | string>, Response>(
+                statusError(f.parseLeft, response.clone())
+              )
       )
-    )
+      .chain(response =>
+        tryCatch<ParserError, T | string>(
+          () => f.parse(response.clone()),
+          error => new ParserError((error as Error).message, response.status)
+        )
+      )
 }
+
+export const ffetch = createFetch()

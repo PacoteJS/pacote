@@ -1,5 +1,5 @@
 import * as nock from 'nock'
-import { ffetch } from '.'
+import { ffetch, createFetch } from '.'
 import { left, right } from 'fp-ts/lib/Either'
 
 const URL = 'http://localhost/test'
@@ -123,13 +123,13 @@ test('custom body parser success', async () => {
   nock(URL)
     .get('')
     .reply(status, '')
-  const actual = await ffetch(
-    URL,
-    {},
-    {
-      parse: () => Promise.resolve(expected)
-    }
-  ).run()
+
+  const customFetch = createFetch({
+    parse: () => Promise.resolve(expected)
+  })
+
+  const actual = await customFetch(URL).run()
+
   expect(actual).toEqual(right(expected))
 })
 
@@ -140,13 +140,11 @@ test('custom parser error', async () => {
     .get('')
     .reply(status, '')
 
-  const actual = await ffetch(
-    URL,
-    {},
-    {
-      parse: () => Promise.reject(new Error(message))
-    }
-  ).run()
+  const customFetch = createFetch({
+    parse: () => Promise.reject(new Error(message))
+  })
+
+  const actual = await customFetch(URL).run()
 
   expect(actual).toEqual(
     left({
@@ -163,13 +161,13 @@ test('custom error parser success', async () => {
   nock(URL)
     .get('')
     .reply(status, '')
-  const actual = await ffetch(
-    URL,
-    {},
-    {
-      parseLeft: () => Promise.resolve(body)
-    }
-  ).run()
+
+  const customFetch = createFetch({
+    parseLeft: () => Promise.resolve(body)
+  })
+
+  const actual = await customFetch(URL).run()
+
   expect(actual).toMatchObject(
     left({
       type: 'StatusError',
@@ -184,13 +182,13 @@ test('custom error parser failure', async () => {
   nock(URL)
     .get('')
     .reply(status, '')
-  const actual = await ffetch(
-    URL,
-    {},
-    {
-      parseLeft: () => Promise.reject(new Error(message))
-    }
-  ).run()
+
+  const customFetch = createFetch({
+    parseLeft: () => Promise.reject(new Error(message))
+  })
+
+  const actual = await customFetch(URL).run()
+
   expect(actual).toMatchObject(
     left({
       type: 'ParserError',
