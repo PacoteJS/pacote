@@ -1,0 +1,25 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "target": "es5",
+    "declaration": true,
+    "sourceMap": true,
+    "lib": ["dom", "es6", "es2015", "es2016", "es2017", "scripthost"],
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "allowJs": false,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "./packages",
+    "composite": true,
+    "paths": {
+      "@pacote/*": ["./*/src"]
+    }
+  }
+}

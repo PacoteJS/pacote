@@ -1,0 +1,68 @@
+{
+  "name": "pacote",
+  "version": "1.0.0",
+  "description": "Monorepo for the @pacote organisation.",
+  "main": "index.js",
+  "repository": "https://github.com/PacoteJS/pacote",
+  "bugs": {
+    "url": "https://github.com/PacoteJS/pacote/issues"
+  },
+  "author": "Luis Rodrigues",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "testURL": "http://localhost",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "build": "tsc -b packages/*",
+    "lint": "tslint --project tsconfig.json 'packages/*/src/**/*.{ts,tsx}'",
+    "format": "prettier --write 'packages/*/src/**/*.{js,jsx,ts,tsx,json,css,md}'",
+    "pretest": "yarn lint",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "linters": {
+      "**/*.{js,json,css,md}": [
+        "prettier --write",
+        "git add"
+      ],
+      "**/*.{ts,tsx}": [
+        "prettier --write",
+        "tslint --project tsconfig.json",
+        "git add"
+      ]
+    }
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.2",
+    "@types/node": "^10.11.2",
+    "husky": "^1.0.1",
+    "jest": "^23.6.0",
+    "lerna": "^3.4.0",
+    "lint-staged": "^7.3.0",
+    "prettier": "^1.14.3",
+    "ts-jest": "^23.10.2",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.15.0",
+    "tslint-config-standard": "^8.0.1",
+    "typescript": "^3.1.1"
+  }
+}

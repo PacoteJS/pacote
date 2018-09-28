@@ -1,0 +1,15 @@
+# EditorConfig is awesome: http://EditorConfig.org
+
+root = true
+
+[*]
+end_of_line = lf
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.xml]
+insert_final_newline = false
