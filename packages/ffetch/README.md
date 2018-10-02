@@ -65,7 +65,7 @@ const okOrDefault = response.getOrElse('some default value')
 
 ### Options
 
-The module provides a `createFetch()` factory function that llows you to
+The module provides a `createFetch()` factory function that allows you to
 override the parsing functions for success and error responses respectively.
 
 #### `parse: (r: Response) => Promise<T>`
@@ -75,7 +75,7 @@ This option can be set to a function that takes a
 and returns a `Promise` with its parsed payload.
 
 As an example, you might want to use this to include response headers in the
-response, or parse binary responses:
+result, or parse binary responses:
 
 ```typescript
 import { createFetch } from '@pacote/ffetch'
@@ -95,8 +95,8 @@ and returns a `Promise` with its parsed payload. This function is used to parse
 [non-ok](https://developer.mozilla.org/en-US/docs/Web/API/Response/ok)
 responses.
 
-For example, you might want to set a custom parser to handle text bodies on
-`5xx` class status codes and JSON content for other errors.
+For example, you mat set a custom parser to handle text bodies on `5xx` class
+status codes but JSON content for other errors:
 
 ```typescript
 import { createFetch } from '@pacote/ffetch'
