@@ -1,17 +1,20 @@
-import * as fetch from 'isomorphic-fetch'
 import { tryCatch, left, right, TaskEither } from 'fp-ts/lib/TaskEither'
 import { task, Task } from 'fp-ts/lib/Task'
 import { StatusError, ConnectionError, FetchError, ParserError } from './errors'
-
-interface FetchOptions<E, T> {
-  readonly parse: (r: Response) => Promise<T>
-  readonly parseLeft: (r: Response) => Promise<E>
-}
 
 type Fetch<E, T> = (
   input: Request | string,
   init?: RequestInit
 ) => TaskEither<FetchError<E | string>, T | string>
+
+interface FetchOptions<E, T> {
+  readonly fetch: (
+    input: Request | string,
+    init?: RequestInit
+  ) => Promise<Response>
+  readonly parse: (r: Response) => Promise<T>
+  readonly parseLeft: (r: Response) => Promise<E>
+}
 
 function parse<T>(response: Response): Promise<T | string> {
   const contentType = (response.headers.get('content-type') || '')
@@ -41,6 +44,7 @@ export function createFetch<E, T>(
   fetchOptions?: Partial<FetchOptions<E, T>>
 ): Fetch<E, T> {
   const f: FetchOptions<E | string, T | string> = {
+    fetch: window.fetch,
     parse,
     parseLeft,
     ...fetchOptions
@@ -48,7 +52,7 @@ export function createFetch<E, T>(
 
   return (input, init) =>
     tryCatch<FetchError<E | string>, Response>(
-      () => fetch(input, init),
+      () => f.fetch(input, init),
       error => new ConnectionError((error as Error).message)
     )
       .chain(

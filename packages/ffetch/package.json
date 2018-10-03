@@ -28,10 +28,10 @@
   },
   "scripts": {},
   "devDependencies": {
-    "@types/isomorphic-fetch": "^0.0.34"
+    "@types/whatwg-fetch": "^0.0.33",
+    "whatwg-fetch": "^3.0.0"
   },
   "dependencies": {
-    "fp-ts": "^1.8.1",
-    "isomorphic-fetch": "^2.2.1"
+    "fp-ts": "^1.8.1"
   }
 }

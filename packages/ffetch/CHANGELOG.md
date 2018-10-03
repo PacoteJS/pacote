@@ -1,5 +1,11 @@
 # Change Log
 
+## [v2.0.0](https://github.com/goblindegook/ffetch/tree/v2.0.0) (unreleased)
+
+[Full Changelog](https://github.com/goblindegook/ffetch/compare/v1.1.0...v2.0.0)
+
+- ffetch no longer relies on `isomorphic-fetch`, and instead uses the global `fetch` function, if available. Developers should build a custom `ffetch` function passing any Fetch API compatible polyfill in the options.
+
 ## [v1.1.0](https://github.com/goblindegook/ffetch/tree/v1.1.0) (2018-10-02)
 
 [Full Changelog](https://github.com/goblindegook/ffetch/compare/v1.0.1...v1.1.0)

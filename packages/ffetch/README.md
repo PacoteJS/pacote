@@ -66,7 +66,22 @@ const okOrDefault = response.getOrElse('some default value')
 ### Options
 
 The module provides a `createFetch()` factory function that allows you to
-override the parsing functions for success and error responses respectively.
+override the parsing functions for success and error responses respectively, as
+well as provide a Fetch API polyfill or replacement.
+
+#### `fetch: (input: Request | string, init?: RequestInit) => Promise<Response>`
+
+Provide a Fetch API polyfill or Fetch API-compatible implementation, as in Node
+environments where a Fetch API function is not globally available. For example:
+
+```typescript
+import { createFetch } from '@pacote/ffetch'
+import * as unfetch from 'unfetch'
+
+const unffetch = createFetch({ fetch: unfetch })
+
+const response = await unffetch('https://goblindegook.com/api/kittens/1').run()
+```
 
 #### `parse: (r: Response) => Promise<T>`
 
@@ -84,7 +99,9 @@ const binaryFetch = createFetch({
   parseLeft: r => r.blob()
 })
 
-const response = await binaryFetch(URL).run()
+const response = await binaryFetch(
+  'https://goblindegook.com/api/kittens/1'
+).run()
 ```
 
 #### `parseLeft: (r: Response) => Promise<E>`
@@ -105,7 +122,9 @@ const customErrorHandlingFetch = createFetch({
   parseLeft: r => (r.status >= 500 ? r.text() : r.json())
 })
 
-const response = await customErrorHandlingFetch(URL).run()
+const response = await customErrorHandlingFetch(
+  'https://goblindegook.com/api/kittens/1'
+).run()
 ```
 
 ## License
