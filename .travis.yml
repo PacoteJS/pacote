@@ -3,8 +3,6 @@ node_js:
   - 'stable'
   - '8'
   - '10'
-before_script:
-  - 'yarn'
 cache:
   directories:
     - ~/.cache
