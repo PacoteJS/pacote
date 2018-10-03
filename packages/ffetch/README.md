@@ -80,7 +80,7 @@ import * as unfetch from 'unfetch'
 
 const unffetch = createFetch({ fetch: unfetch })
 
-const response = await unffetch('https://goblindegook.com/api/kittens/1').run()
+await unffetch('https://goblindegook.com/api/kittens/1').run()
 ```
 
 #### `parse: (r: Response) => Promise<T>`
@@ -96,12 +96,10 @@ result, or parse binary responses:
 import { createFetch } from '@pacote/ffetch'
 
 const binaryFetch = createFetch({
-  parseLeft: r => r.blob()
+  parse: r => r.blob()
 })
 
-const response = await binaryFetch(
-  'https://goblindegook.com/api/kittens/1'
-).run()
+await binaryFetch('https://goblindegook.com/api/kittens/1').run()
 ```
 
 #### `parseLeft: (r: Response) => Promise<E>`
@@ -122,9 +120,7 @@ const customErrorHandlingFetch = createFetch({
   parseLeft: r => (r.status >= 500 ? r.text() : r.json())
 })
 
-const response = await customErrorHandlingFetch(
-  'https://goblindegook.com/api/kittens/1'
-).run()
+await customErrorHandlingFetch('https://goblindegook.com/api/kittens/1').run()
 ```
 
 ## License
