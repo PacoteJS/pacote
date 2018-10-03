@@ -22,6 +22,10 @@
   },
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
   "scripts": {},
   "devDependencies": {
     "@types/isomorphic-fetch": "^0.0.34"
