@@ -1,5 +1,5 @@
 import * as nock from 'nock'
-import { ffetch, createFetch } from '.'
+import { ffetch, createFetch } from '../src'
 import { left, right } from 'fp-ts/lib/Either'
 
 const URL = 'http://localhost/test'

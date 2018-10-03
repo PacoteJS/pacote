@@ -9,7 +9,7 @@ interface FetchOptions<E, T> {
 }
 
 type Fetch<E, T> = (
-  input?: Request | string,
+  input: Request | string,
   init?: RequestInit
 ) => TaskEither<FetchError<E | string>, T | string>
 

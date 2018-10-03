@@ -31,12 +31,16 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "build": "tsc -b packages/*",
-    "lint": "tslint --project tsconfig.json 'packages/*/src/**/*.{ts,tsx}'",
+    "lint": "tslint --project tsconfig.tslint.json 'packages/*/src/**/*.{ts,tsx}'",
     "format": "prettier --write 'packages/*/src/**/*.{js,jsx,ts,tsx,json,css,md}'",
     "pretest": "yarn lint",
     "test": "jest",
-    "test:coverage": "jest --coverage",
-    "precommit": "lint-staged"
+    "test:coverage": "jest --coverage"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "linters": {
@@ -46,19 +50,23 @@
       ],
       "**/*.{ts,tsx}": [
         "prettier --write",
-        "tslint --project tsconfig.json",
+        "tslint --project tsconfig.tslint.json",
         "git add"
       ]
     }
   },
   "devDependencies": {
     "@types/jest": "^23.3.2",
+    "@types/nock": "^9.3.0",
     "@types/node": "^10.11.2",
     "husky": "^1.0.1",
     "jest": "^23.6.0",
+    "jsverify": "^0.8.3",
     "lerna": "^3.4.0",
     "lint-staged": "^7.3.0",
+    "nock": "^10.0.0",
     "prettier": "^1.14.3",
+    "rimraf": "^2.6.2",
     "ts-jest": "^23.10.2",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",

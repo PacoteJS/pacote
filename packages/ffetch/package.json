@@ -14,68 +14,17 @@
     "functional programming",
     "http",
     "request",
-    "taskeither"
+    "TaskEither"
   ],
-  "repository": "github:goblindegook/ffetch",
+  "repository": "github:PacoteJS/pacote",
   "bugs": {
-    "url": "https://github.com/goblindegook/ffetch/issues"
+    "url": "https://github.com/PacoteJS/pacote/issues"
   },
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
-  "scripts": {
-    "build": "tsc",
-    "lint": "tslint --project tsconfig.tslint.json '{src/**/,test/**/}*.{ts,tsx}'",
-    "format": "prettier --write '{src/**/,test/**/}*.{js,jsx,ts,tsx,json,css,md}'",
-    "pretest": "yarn lint",
-    "test": "jest",
-    "test:coverage": "jest --coverage",
-    "precommit": "lint-staged",
-    "prepublish": "yarn test && yarn build"
-  },
-  "lint-staged": {
-    "linters": {
-      "**/*.{js,json,css,md}": [
-        "prettier --write",
-        "git add"
-      ],
-      "**/*.{ts,tsx}": [
-        "prettier --write",
-        "tslint --project tsconfig.tslint.json",
-        "git add"
-      ]
-    }
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "testURL": "http://localhost",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
-  },
+  "scripts": {},
   "devDependencies": {
-    "@types/isomorphic-fetch": "^0.0.34",
-    "@types/jest": "^23.3.2",
-    "@types/nock": "^9.3.0",
-    "husky": "^0.14.3",
-    "jest": "^23.6.0",
-    "jsverify": "^0.8.3",
-    "lint-staged": "^7.2.2",
-    "nock": "^10.0.0",
-    "prettier": "^1.14.2",
-    "ts-jest": "^23.1.4",
-    "tslint": "^5.11.0",
-    "tslint-config-prettier": "^1.15.0",
-    "tslint-config-standard": "^8.0.1",
-    "tslint-immutable": "^4.7.0",
-    "typescript": "^3.0.3"
+    "@types/isomorphic-fetch": "^0.0.34"
   },
   "dependencies": {
     "fp-ts": "^1.8.1",
