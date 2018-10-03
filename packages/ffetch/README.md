@@ -1,6 +1,6 @@
 # @pacote/ffetch
 
-[![Build Status](https://travis-ci.org/goblindegook/ffetch.svg?branch=master)](https://travis-ci.org/goblindegook/ffetch)
+[![Build Status](https://travis-ci.org/PacoteJS/pacote.svg?branch=master)](https://travis-ci.org/PacoteJS/pacote)
 
 ## Installation
 
