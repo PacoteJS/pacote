@@ -1,5 +1,5 @@
 class BaseError {
-  public readonly causes: Error | BaseError | ReadonlyArray<Error | BaseError>
+  public readonly causes: ReadonlyArray<Error | BaseError>
 
   constructor(
     public readonly message?: string,
