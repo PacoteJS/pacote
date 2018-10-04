@@ -10,23 +10,17 @@ class BaseError {
 }
 
 export class StatusError<T> extends BaseError {
-  public readonly name = 'StatusError'
-
   constructor(
     public readonly status: number,
     message?: string,
-    public readonly body?: T | string | null
+    public readonly body?: T | string
   ) {
     super(message)
   }
 }
 
-export class ConnectionError extends BaseError {
-  public readonly name = 'ConnectionError'
-}
+export class ConnectionError extends BaseError {}
 
-export class ParserError extends BaseError {
-  public readonly name = 'ParserError'
-}
+export class ParserError extends BaseError {}
 
 export type FetchError<T> = ConnectionError | ParserError | StatusError<T>

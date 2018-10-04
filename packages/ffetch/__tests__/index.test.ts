@@ -36,7 +36,6 @@ test('connection errors', async () => {
   const actual = await ffetch(url).run()
   expect(actual).toEqual(
     left({
-      name: 'ConnectionError',
       message: 'Network request failed',
       causes: [new TypeError('Network request failed')]
     })
@@ -54,7 +53,6 @@ test('status code errors', async () => {
   const actual = await ffetch(url).run()
   expect(actual).toEqual(
     left({
-      name: 'StatusError',
       message: 'Internal Server Error',
       status,
       body,
@@ -74,7 +72,6 @@ test('invalid response body', async () => {
   const actual = await ffetch(url).run()
   expect(actual).toEqual(
     left({
-      name: 'ParserError',
       message: 'Could not parse response',
       causes: [new Error('Unexpected token < in JSON at position 0')]
     })
@@ -92,7 +89,6 @@ test('plain text body for status errors', async () => {
   const actual = await ffetch(url).run()
   expect(actual).toEqual(
     left({
-      name: 'StatusError',
       message: 'Not Found',
       status,
       body,
@@ -112,7 +108,6 @@ test('invalid JSON body for status errors', async () => {
   const actual = await ffetch(url).run()
   expect(actual).toEqual(
     left({
-      name: 'StatusError',
       message: 'Bad Request',
       status,
       body,
@@ -152,7 +147,6 @@ test('custom parser error', async () => {
 
   expect(actual).toEqual(
     left({
-      name: 'ParserError',
       message: 'Could not parse response',
       causes: [error]
     })
@@ -174,7 +168,6 @@ test('custom error parser success', async () => {
 
   expect(actual).toEqual(
     left({
-      name: 'StatusError',
       status,
       message: "I'm a Teapot",
       body,
@@ -198,11 +191,9 @@ test('custom error parser failure', async () => {
 
   expect(actual).toEqual(
     left({
-      name: 'ParserError',
       message: 'Could not parse error response',
       causes: [
         {
-          name: 'StatusError',
           status,
           message: "I'm a Teapot",
           causes: []
