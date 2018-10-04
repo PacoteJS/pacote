@@ -1,39 +1,32 @@
-enum ErrorTypes {
-  ConnectionError = 'ConnectionError',
-  StatusError = 'StatusError',
-  ParserError = 'ParserError'
-}
-
 class BaseError {
-  constructor(public readonly message: string) {}
-}
+  public readonly causes: Error | BaseError | ReadonlyArray<Error | BaseError>
 
-export class ConnectionError extends BaseError {
-  public readonly type: ErrorTypes = ErrorTypes.ConnectionError
-
-  constructor(message: string) {
-    super(message)
+  constructor(
+    public readonly message?: string,
+    causes: Error | BaseError | ReadonlyArray<Error | BaseError> = []
+  ) {
+    this.causes = new Array().concat(causes)
   }
 }
 
 export class StatusError<T> extends BaseError {
-  public readonly type: ErrorTypes = ErrorTypes.StatusError
+  public readonly name = 'StatusError'
 
   constructor(
-    message: string,
     public readonly status: number,
+    message?: string,
     public readonly body?: T | string | null
   ) {
     super(message)
   }
 }
 
-export class ParserError extends StatusError<undefined> {
-  public readonly type: ErrorTypes = ErrorTypes.ParserError
+export class ConnectionError extends BaseError {
+  public readonly name = 'ConnectionError'
+}
 
-  constructor(message: string, status: number) {
-    super(message, status)
-  }
+export class ParserError extends BaseError {
+  public readonly name = 'ParserError'
 }
 
 export type FetchError<T> = ConnectionError | ParserError | StatusError<T>

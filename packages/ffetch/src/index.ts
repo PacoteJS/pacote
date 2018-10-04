@@ -32,11 +32,17 @@ function parseLeft<E>(response: Response): Promise<E | string> {
 function statusError<E>(
   parseFn: (r: Response) => Promise<E>,
   response: Response
-): Task<StatusError<E | string>> {
+): Task<StatusError<E | string> | ParserError> {
   return new Task(() =>
     parseFn(response)
-      .then(body => new StatusError(response.statusText, response.status, body))
-      .catch(({ message }) => new ParserError(message, response.status))
+      .then(body => new StatusError(response.status, response.statusText, body))
+      .catch(
+        error =>
+          new ParserError('Could not parse error response', [
+            new StatusError(response.status, response.statusText),
+            error
+          ])
+      )
   )
 }
 
@@ -53,20 +59,20 @@ export function createFetch<E, T>(
   return (input, init) =>
     tryCatch<FetchError<E | string>, Response>(
       () => f.fetch(input, init),
-      error => new ConnectionError((error as Error).message)
+      error => new ConnectionError('Network request failed', error as Error)
     )
       .chain(
         response =>
           response.ok
             ? right(task.of(response))
-            : left<StatusError<E | string>, Response>(
+            : left<StatusError<E | string> | ParserError, Response>(
                 statusError(f.parseLeft, response.clone())
               )
       )
       .chain(response =>
         tryCatch<ParserError, T | string>(
           () => f.parse(response.clone()),
-          error => new ParserError((error as Error).message, response.status)
+          error => new ParserError('Could not parse response', error as Error)
         )
       )
 }

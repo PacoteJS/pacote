@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/PacoteJS/pacote.svg?branch=master)](https://travis-ci.org/PacoteJS/pacote)
 
+Fetch API wrapped in a [`TaskEither`](https://gcanti.github.io/fp-ts/TaskEither.html).
+
 ## Installation
 
 ```bash

@@ -1,7 +1,7 @@
 {
-  "name": "@pacote/ffetch",
-  "description": "Fetch API wrapped in a TaskEither",
-  "version": "2.0.0",
+  "name": "@pacote/error",
+  "description": "Functional errors.",
+  "version": "0.0.0",
   "license": "MIT",
   "author": {
     "name": "Luís Rodrigues",
@@ -9,12 +9,9 @@
     "url": "https://goblindegook.com"
   },
   "keywords": [
-    "fetch",
+    "error",
     "fp",
-    "functional programming",
-    "http",
-    "request",
-    "TaskEither"
+    "functional programming"
   ],
   "repository": "github:PacoteJS/pacote",
   "bugs": {
@@ -27,12 +24,8 @@
     "test": "__tests__"
   },
   "scripts": {},
-  "devDependencies": {
-    "@types/whatwg-fetch": "^0.0.33",
-    "whatwg-fetch": "^3.0.0"
-  },
+  "devDependencies": {},
   "dependencies": {
-    "@pacote/error": "^0.0.0",
     "fp-ts": "^1.8.1"
   }
 }
