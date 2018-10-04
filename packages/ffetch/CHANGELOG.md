@@ -1,8 +1,8 @@
 # Change Log
 
-## [v2.0.0](https://github.com/goblindegook/ffetch/tree/v2.0.0) (2018-10-04)
+## [v2.0.0](https://github.com/PacoteJS/pacote/tree/@pacote/ffetch@2.0.0) (2018-10-04)
 
-[Full Changelog](https://github.com/goblindegook/ffetch/compare/v1.1.0...v2.0.0)
+[Full Changelog](https://github.com/PacoteJS/pacote/compare/v1.1.1...@pacote/ffetch@2.0.0)
 
 - Breaking change: `ffetch` no longer relies on `isomorphic-fetch`, and instead uses the global `fetch` function, if available. Developers should set a global polyfill or build a custom `ffetch` function passing any Fetch API compatible function in the options.
 
