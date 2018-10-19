@@ -1,6 +1,8 @@
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 
 class BaseError extends Error {
+  public name = 'BaseError'
+
   constructor(public readonly message: string = '') {
     super(message)
 
@@ -11,7 +13,8 @@ class BaseError extends Error {
   }
 }
 
-class ErrorWithCauses extends BaseError {
+class ComplexError extends BaseError {
+  public name = 'ComplexError'
   public readonly causes: ReadonlyArray<Error | BaseError>
 
   constructor(
@@ -24,6 +27,8 @@ class ErrorWithCauses extends BaseError {
 }
 
 export class StatusError<T> extends BaseError {
+  public name = 'StatusError'
+
   constructor(
     public readonly status: number,
     message?: string,
@@ -38,7 +43,9 @@ export class StatusError<T> extends BaseError {
   }
 }
 
-export class NetworkError extends ErrorWithCauses {
+export class NetworkError extends ComplexError {
+  public name = 'NetworkError'
+
   constructor(
     message: string = '',
     causes: Error | BaseError | ReadonlyArray<Error | BaseError> = []
@@ -52,7 +59,9 @@ export class NetworkError extends ErrorWithCauses {
   }
 }
 
-export class ParserError extends ErrorWithCauses {
+export class ParserError extends ComplexError {
+  public name = 'ParserError'
+
   constructor(
     message: string = '',
     causes: Error | BaseError | ReadonlyArray<Error | BaseError> = []

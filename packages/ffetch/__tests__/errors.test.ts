@@ -12,6 +12,11 @@ test('StatusError is an instance of StatusError', () => {
   expect(error).toBeInstanceOf(StatusError)
 })
 
+test('StatusError is named StatusError', () => {
+  const error = new StatusError(status)
+  expect(error.name).toBe('StatusError')
+})
+
 test('StatusError records a stack', () => {
   const error = new StatusError(status)
   expect(error.stack).toBeTruthy()
@@ -46,6 +51,11 @@ test('NetworkError is an instance of NetworkError', () => {
   expect(error).toBeInstanceOf(NetworkError)
 })
 
+test('NetworkError is named NetworkError', () => {
+  const error = new NetworkError()
+  expect(error.name).toBe('NetworkError')
+})
+
 test('NetworkError records a stack', () => {
   const error = new NetworkError()
   expect(error.stack).toBeTruthy()
@@ -77,6 +87,11 @@ test('ParserError is an instance of Error', () => {
 test('ParserError is an instance of ParserError', () => {
   const error = new ParserError()
   expect(error).toBeInstanceOf(ParserError)
+})
+
+test('ParserError is named ParserError', () => {
+  const error = new ParserError()
+  expect(error.name).toBe('ParserError')
 })
 
 test('ParserError records a stack', () => {
