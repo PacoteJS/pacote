@@ -25,7 +25,5 @@
   },
   "scripts": {},
   "devDependencies": {},
-  "dependencies": {
-    "fp-ts": "^1.8.1"
-  }
+  "dependencies": {}
 }
