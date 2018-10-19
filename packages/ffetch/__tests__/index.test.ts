@@ -135,7 +135,7 @@ test('custom parser error', async () => {
 })
 
 test('custom error parser success', async () => {
-  const status = 418
+  const status = 500
   const body = `Received a response with status code ${status}.`
   nock(url)
     .get('')
@@ -148,12 +148,12 @@ test('custom error parser success', async () => {
   const actual = await customFetch(url).run()
 
   expect(actual).toEqual(
-    left(new StatusError(status, expect.stringMatching(/I'm a Teapot/i), body))
+    left(new StatusError(status, 'Internal Server Error', body))
   )
 })
 
 test('custom error parser failure', async () => {
-  const status = 418
+  const status = 500
   const error = new Error('custom error parser failure')
   nock(url)
     .get('')
@@ -168,7 +168,7 @@ test('custom error parser failure', async () => {
   expect(actual).toEqual(
     left(
       new ParserError('Could not parse error response', [
-        new StatusError(status, expect.stringMatching(/I'm a Teapot/i)),
+        new StatusError(status, 'Internal Server Error'),
         error
       ])
     )
