@@ -34,7 +34,8 @@
     "format": "prettier --write 'packages/*/src/**/*.{js,jsx,ts,tsx,json,css,md}'",
     "pretest": "yarn lint",
     "test": "jest",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "clean": "rimraf packages/*/lib"
   },
   "husky": {
     "hooks": {
