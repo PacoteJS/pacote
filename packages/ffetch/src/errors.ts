@@ -16,7 +16,7 @@ class ErrorWithCauses extends BaseError {
 
   constructor(
     public readonly message: string = '',
-    causes: Error | BaseError | ReadonlyArray<Error | BaseError> = []
+    causes: Error | ReadonlyArray<Error> = []
   ) {
     super(message)
     this.causes = new Array().concat(causes)

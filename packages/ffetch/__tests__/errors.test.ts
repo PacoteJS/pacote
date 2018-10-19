@@ -60,10 +60,16 @@ describe('NetworkError', () => {
     expect(error.message).toBe(message)
   })
 
-  it('references originating errors', () => {
+  it('references originating error', () => {
     const cause = new Error('')
-    const error = new NetworkError('', [cause])
+    const error = new NetworkError('', cause)
     expect(error.causes).toEqual([cause])
+  })
+
+  it('references originating errors', () => {
+    const causes = [new Error('')]
+    const error = new NetworkError('', causes)
+    expect(error.causes).toEqual(causes)
   })
 })
 
@@ -89,9 +95,15 @@ describe('ParserError', () => {
     expect(error.message).toBe(message)
   })
 
-  it('references originating errors', () => {
+  it('references originating error', () => {
     const cause = new Error('')
-    const error = new ParserError('', [cause])
+    const error = new ParserError('', cause)
     expect(error.causes).toEqual([cause])
+  })
+
+  it('references originating errors', () => {
+    const causes = [new Error('')]
+    const error = new ParserError('', causes)
+    expect(error.causes).toEqual(causes)
   })
 })
