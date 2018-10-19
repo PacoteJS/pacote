@@ -147,7 +147,9 @@ test('custom error parser success', async () => {
 
   const actual = await customFetch(url).run()
 
-  expect(actual).toEqual(left(new StatusError(status, "I'm a Teapot", body)))
+  expect(actual).toEqual(
+    left(new StatusError(status, expect.stringMatching(/I'm a Teapot/i), body))
+  )
 })
 
 test('custom error parser failure', async () => {
