@@ -179,7 +179,7 @@ test('custom Fetch polyfill', async () => {
     headers: {
       get: jest.fn()
     },
-    text: jest.fn().mockResolvedValue(null)
+    text: jest.fn().mockResolvedValue('')
   })
   const customFetch = createFetch({ fetch: mockFetch })
   await customFetch(url, { method: 'POST ' }).run()
