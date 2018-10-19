@@ -2,6 +2,7 @@ import 'whatwg-fetch'
 import * as nock from 'nock'
 import { ffetch, createFetch } from '../src'
 import { left, right } from 'fp-ts/lib/Either'
+import { NetworkError, StatusError, ParserError } from '../src/errors'
 
 const url = 'http://localhost/test'
 
@@ -35,10 +36,11 @@ test('connection errors', async () => {
     .replyWithError('')
   const actual = await ffetch(url).run()
   expect(actual).toEqual(
-    left({
-      message: 'Network request failed',
-      causes: [new TypeError('Network request failed')]
-    })
+    left(
+      new NetworkError('Network request failed', [
+        new TypeError('Network request failed')
+      ])
+    )
   )
 })
 
@@ -52,12 +54,7 @@ test('status code errors', async () => {
     })
   const actual = await ffetch(url).run()
   expect(actual).toEqual(
-    left({
-      message: 'Internal Server Error',
-      status,
-      body,
-      causes: []
-    })
+    left(new StatusError(status, 'Internal Server Error', body))
   )
 })
 
@@ -71,10 +68,11 @@ test('invalid response body', async () => {
     })
   const actual = await ffetch(url).run()
   expect(actual).toEqual(
-    left({
-      message: 'Could not parse response',
-      causes: [new Error('Unexpected token < in JSON at position 0')]
-    })
+    left(
+      new ParserError('Could not parse response', [
+        new Error('Unexpected token < in JSON at position 0')
+      ])
+    )
   )
 })
 
@@ -87,14 +85,7 @@ test('plain text body for status errors', async () => {
       'content-type': 'text/plain'
     })
   const actual = await ffetch(url).run()
-  expect(actual).toEqual(
-    left({
-      message: 'Not Found',
-      status,
-      body,
-      causes: []
-    })
-  )
+  expect(actual).toEqual(left(new StatusError(status, 'Not Found', body)))
 })
 
 test('invalid JSON body for status errors', async () => {
@@ -106,14 +97,7 @@ test('invalid JSON body for status errors', async () => {
       'content-type': 'application/json; charset=utf-8'
     })
   const actual = await ffetch(url).run()
-  expect(actual).toEqual(
-    left({
-      message: 'Bad Request',
-      status,
-      body,
-      causes: []
-    })
-  )
+  expect(actual).toEqual(left(new StatusError(status, 'Bad Request', body)))
 })
 
 test('custom body parser success', async () => {
@@ -146,10 +130,7 @@ test('custom parser error', async () => {
   const actual = await customFetch(url).run()
 
   expect(actual).toEqual(
-    left({
-      message: 'Could not parse response',
-      causes: [error]
-    })
+    left(new ParserError('Could not parse response', [error]))
   )
 })
 
@@ -166,14 +147,7 @@ test('custom error parser success', async () => {
 
   const actual = await customFetch(url).run()
 
-  expect(actual).toEqual(
-    left({
-      status,
-      message: "I'm a Teapot",
-      body,
-      causes: []
-    })
-  )
+  expect(actual).toEqual(left(new StatusError(status, "I'm a Teapot", body)))
 })
 
 test('custom error parser failure', async () => {
@@ -190,17 +164,12 @@ test('custom error parser failure', async () => {
   const actual = await customFetch(url).run()
 
   expect(actual).toEqual(
-    left({
-      message: 'Could not parse error response',
-      causes: [
-        {
-          status,
-          message: "I'm a Teapot",
-          causes: []
-        },
+    left(
+      new ParserError('Could not parse error response', [
+        new StatusError(status, "I'm a Teapot"),
         error
-      ]
-    })
+      ])
+    )
   )
 })
 

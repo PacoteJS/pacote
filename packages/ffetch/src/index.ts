@@ -1,6 +1,6 @@
 import { tryCatch, left, right, TaskEither } from 'fp-ts/lib/TaskEither'
 import { task, Task } from 'fp-ts/lib/Task'
-import { StatusError, ConnectionError, FetchError, ParserError } from './errors'
+import { StatusError, NetworkError, FetchError, ParserError } from './errors'
 
 type Fetch<E, T> = (
   input: Request | string,
@@ -59,7 +59,7 @@ export function createFetch<E, T>(
   return (input, init) =>
     tryCatch<FetchError<E | string>, Response>(
       () => f.fetch(input, init),
-      error => new ConnectionError('Network request failed', error as Error)
+      error => new NetworkError('Network request failed', error as Error)
     )
       .chain(
         response =>
