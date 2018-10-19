@@ -166,7 +166,7 @@ test('custom error parser failure', async () => {
   expect(actual).toEqual(
     left(
       new ParserError('Could not parse error response', [
-        new StatusError(status, "I'm a Teapot"),
+        new StatusError(status, expect.stringMatching(/I'm a Teapot/i)),
         error
       ])
     )
