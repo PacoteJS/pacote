@@ -1,15 +1,25 @@
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 
+function inherits(instance: Object, fromClass: Function): void {
+  if (Object.setPrototypeOf) {
+    Object.setPrototypeOf(instance, fromClass.prototype)
+  }
+}
+
+function captureStackTrace(instance: Object): void {
+  if (Error.captureStackTrace) {
+    Error.captureStackTrace(instance, instance.constructor)
+  }
+}
+
 class BaseError extends Error {
   public name = 'BaseError'
 
   constructor(public readonly message: string = '') {
     super(message)
 
-    Object.setPrototypeOf(this, BaseError.prototype)
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, this.constructor)
-    }
+    inherits(this, BaseError)
+    captureStackTrace(this)
   }
 }
 
@@ -22,7 +32,11 @@ class ComplexError extends BaseError {
     causes: Error | ReadonlyArray<Error> = []
   ) {
     super(message)
+
     this.causes = new Array().concat(causes)
+
+    inherits(this, ComplexError)
+    captureStackTrace(this)
   }
 }
 
@@ -36,10 +50,8 @@ export class StatusError<T> extends BaseError {
   ) {
     super(message)
 
-    Object.setPrototypeOf(this, StatusError.prototype)
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, this.constructor)
-    }
+    inherits(this, StatusError)
+    captureStackTrace(this)
   }
 }
 
@@ -52,10 +64,8 @@ export class NetworkError extends ComplexError {
   ) {
     super(message, causes)
 
-    Object.setPrototypeOf(this, NetworkError.prototype)
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, this.constructor)
-    }
+    inherits(this, NetworkError)
+    captureStackTrace(this)
   }
 }
 
@@ -68,10 +78,8 @@ export class ParserError extends ComplexError {
   ) {
     super(message, causes)
 
-    Object.setPrototypeOf(this, ParserError.prototype)
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, this.constructor)
-    }
+    inherits(this, ParserError)
+    captureStackTrace(this)
   }
 }
 
