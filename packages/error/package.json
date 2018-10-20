@@ -17,6 +17,9 @@
   "bugs": {
     "url": "https://github.com/PacoteJS/pacote/issues"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "directories": {
