@@ -59,11 +59,9 @@ test('status code errors', async () => {
 })
 
 test('invalid response body', async () => {
-  const status = 200
-  const body = '<not json>'
   nock(url)
     .get('')
-    .reply(status, body, {
+    .reply(200, '<not json>', {
       'content-type': 'application/json; charset=utf-8'
     })
   const actual = await ffetch(url).run()
@@ -117,11 +115,10 @@ test('custom body parser success', async () => {
 })
 
 test('custom parser error', async () => {
-  const status = 200
   const error = new Error('custom parser error')
   nock(url)
     .get('')
-    .reply(status, '')
+    .reply(200, '')
 
   const customFetch = createFetch({
     parse: () => Promise.reject(error)
