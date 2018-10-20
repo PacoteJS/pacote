@@ -1,7 +1,7 @@
 {
   "name": "@pacote/error",
   "description": "Functional errors.",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "license": "MIT",
   "author": {
     "name": "Luís Rodrigues",
@@ -23,7 +23,5 @@
     "lib": "lib",
     "test": "__tests__"
   },
-  "scripts": {},
-  "devDependencies": {},
-  "dependencies": {}
+  "scripts": {}
 }

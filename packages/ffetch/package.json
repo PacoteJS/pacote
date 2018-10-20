@@ -1,7 +1,7 @@
 {
   "name": "@pacote/ffetch",
   "description": "Fetch API wrapped in a TaskEither",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "license": "MIT",
   "author": {
     "name": "Luís Rodrigues",
@@ -32,7 +32,7 @@
     "whatwg-fetch": "^3.0.0"
   },
   "dependencies": {
-    "@pacote/error": "^0.0.0",
+    "@pacote/error": "^1.0.0",
     "fp-ts": "^1.8.1"
   }
 }
