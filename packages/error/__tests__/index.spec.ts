@@ -1,4 +1,3 @@
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 import { BaseError, ComplexError } from '../src/index'
 
 test('BaseError is an instance of Error', () => {

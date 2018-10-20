@@ -1,3 +1,6 @@
+/**
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
+ */
 export function inherits(instance: Error, customClass: Function): void {
   instance.name = customClass.name
 
@@ -11,8 +14,6 @@ export function inherits(instance: Error, customClass: Function): void {
 }
 
 export class BaseError extends Error {
-  // public name = 'BaseError'
-
   constructor(public readonly message: string = '') {
     super(message)
     inherits(this, BaseError)
@@ -20,7 +21,6 @@ export class BaseError extends Error {
 }
 
 export class ComplexError extends BaseError {
-  // public name = 'ComplexError'
   public readonly causes: ReadonlyArray<Error | BaseError>
 
   constructor(

@@ -1,6 +1,15 @@
 {
-  "packages": ["packages/*"],
+  "version": "independent",
   "npmClient": "yarn",
   "useWorkspaces": true,
-  "version": "independent"
+  "packages": ["packages/*"],
+  "publish": {
+    "ignoreChanges": [
+      "__tests__/**",
+      "*.spec.ts",
+      "*.test.ts",
+      "tsconfig.json",
+      "*.md"
+    ]
+  }
 }
