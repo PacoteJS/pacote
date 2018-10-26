@@ -1,4 +1,4 @@
-import { BaseError, ComplexError, inherits } from '@pacote/error'
+import { BaseError, ComplexError } from '@pacote/error'
 
 export class StatusError<T> extends BaseError {
   constructor(
@@ -7,7 +7,7 @@ export class StatusError<T> extends BaseError {
     public readonly body?: T | string
   ) {
     super(message)
-    inherits(this, StatusError)
+    StatusError.inherits(this)
   }
 }
 
@@ -17,7 +17,7 @@ export class NetworkError extends ComplexError {
     causes: Error | BaseError | ReadonlyArray<Error | BaseError> = []
   ) {
     super(message, causes)
-    inherits(this, NetworkError)
+    NetworkError.inherits(this)
   }
 }
 
@@ -27,7 +27,7 @@ export class ParserError extends ComplexError {
     causes: Error | BaseError | ReadonlyArray<Error | BaseError> = []
   ) {
     super(message, causes)
-    inherits(this, ParserError)
+    ParserError.inherits(this)
   }
 }
 
