@@ -29,6 +29,7 @@ class StatusError extends BaseError {
 const e = new StatusError(404, 'Not found')
 
 e instanceOf Error       // true
+e instanceOf BaseError   // true
 e instanceOf StatusError // true
 e.message                // 'Not found'
 e.status                 // 404
