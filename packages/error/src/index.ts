@@ -2,10 +2,6 @@ export class BaseError extends Error {
   constructor(public readonly message: string = '') {
     super(message)
     BaseError.imprint(this)
-
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, this.constructor)
-    }
   }
 
   /**
@@ -13,6 +9,10 @@ export class BaseError extends Error {
    */
   static imprint(instance: BaseError): void {
     instance.name = this.name
+
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(instance, this)
+    }
 
     if (Object.setPrototypeOf) {
       Object.setPrototypeOf(instance, this.prototype)
