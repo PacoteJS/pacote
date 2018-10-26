@@ -1,7 +1,7 @@
 export class BaseError extends Error {
   constructor(public readonly message: string = '') {
     super(message)
-    BaseError.inherits(this)
+    BaseError.imprint(this)
 
     if (Error.captureStackTrace) {
       Error.captureStackTrace(this, this.constructor)
@@ -11,7 +11,7 @@ export class BaseError extends Error {
   /**
    * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
    */
-  static inherits(instance: Error): void {
+  static imprint(instance: BaseError): void {
     instance.name = this.name
 
     if (Object.setPrototypeOf) {
@@ -23,12 +23,9 @@ export class BaseError extends Error {
 export class ComplexError extends BaseError {
   public readonly causes: ReadonlyArray<Error | BaseError>
 
-  constructor(
-    public readonly message: string = '',
-    causes: Error | ReadonlyArray<Error> = []
-  ) {
+  constructor(message: string = '', causes: Error | ReadonlyArray<Error> = []) {
     super(message)
-    ComplexError.inherits(this)
+    ComplexError.imprint(this)
     this.causes = new Array().concat(causes)
   }
 }

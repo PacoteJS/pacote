@@ -7,27 +7,21 @@ export class StatusError<T> extends BaseError {
     public readonly body?: T | string
   ) {
     super(message)
-    StatusError.inherits(this)
+    StatusError.imprint(this)
   }
 }
 
 export class NetworkError extends ComplexError {
-  constructor(
-    message: string = '',
-    causes: Error | BaseError | ReadonlyArray<Error | BaseError> = []
-  ) {
+  constructor(message: string = '', causes: Error | ReadonlyArray<Error> = []) {
     super(message, causes)
-    NetworkError.inherits(this)
+    NetworkError.imprint(this)
   }
 }
 
 export class ParserError extends ComplexError {
-  constructor(
-    message: string = '',
-    causes: Error | BaseError | ReadonlyArray<Error | BaseError> = []
-  ) {
+  constructor(message: string = '', causes: Error | ReadonlyArray<Error> = []) {
     super(message, causes)
-    ParserError.inherits(this)
+    ParserError.imprint(this)
   }
 }
 
