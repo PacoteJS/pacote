@@ -5,13 +5,13 @@ export class BaseError extends Error {
   }
 
   /**
-   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
+   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error#Custom_Error_Types
    */
   static imprint(instance: BaseError): void {
     instance.name = this.name
 
     if (Error.captureStackTrace) {
-      Error.captureStackTrace(instance, this)
+      Error.captureStackTrace(instance, this.constructor)
     }
 
     if (Object.setPrototypeOf) {
