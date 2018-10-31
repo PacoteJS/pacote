@@ -15,14 +15,15 @@ yarn add @pacote/memoize
 ```typescript
 import { memoize } from '@pacote/memoize'
 
-const randomFunction = (max: number) => max * Math.random()
-const memoizedFunction = memoize(i => `{i}`, randomFunction)
+const randomFunction = (prefix: string) => `${prefix}${Math.random()}`
 
-memoizedFunction(1) // Randomly-generated number between 0 and 1.
-memoizedFunction(1) // Same result as previous call with 1.
+const memoizedFunction = memoize(prefix => `key_${prefix}`, randomFunction)
 
-memoizedFunction(10) // New randomly-generated number between 0 and 10.
-memoizedFunction(10) // Same result as previous call with 10.
+memoizedFunction('foo') // 'foo' followed by randomly-generated number.
+memoizedFunction('foo') // Same result as previous call with 'foo'.
+
+memoizedFunction('bar') // 'bar' followed by randomly-generated number.
+memoizedFunction('bar') // Same result as previous call with 'bar'.
 ```
 
 ## `memoize<A, T>(cacheKeyFn: (...args: A) => string, fn: (...args: A) => T): (...args: A) => T`
@@ -32,10 +33,7 @@ memoizedFunction(10) // Same result as previous call with 10.
 - A function that generates a string key for cached results. This function optionally
   takes the same arguments as the function to memoize.
 
-- The function to memoize.
-
-`memoize()` returns a version of the function provided as the second argument
-that caches results.
+- The function to memoize. `memoize()` returns a version of this function that caches results.
 
 ## License
 
