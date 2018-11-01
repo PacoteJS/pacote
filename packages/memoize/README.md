@@ -30,8 +30,8 @@ memoizedFunction('bar') // Same result as previous call with 'bar'.
 
 `memoize()` takes two function arguments:
 
-- A function that generates a string key for cached results. This function optionally
-  takes the same arguments as the function to memoize.
+- A function that generates a string key for cached results. This function takes the same
+  arguments as the function to memoize.
 
 - The function to memoize. `memoize()` returns a version of this function that caches results.
 
