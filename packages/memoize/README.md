@@ -26,7 +26,7 @@ memoizedFunction('bar') // 'bar' followed by randomly-generated number.
 memoizedFunction('bar') // Same result as previous call with 'bar'.
 ```
 
-## `memoize<A, T>(cacheKeyFn: (...args: A) => string, fn: (...args: A) => T): (...args: A) => T`
+### `memoize<A, T>(cacheKeyFn: (...args: A) => string, fn: (...args: A) => T): (...args: A) => T`
 
 `memoize()` takes two function arguments:
 
