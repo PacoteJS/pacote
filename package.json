@@ -30,7 +30,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "build": "tsc -b packages/*",
-    "lint": "tslint --project tsconfig.tslint.json 'packages/*/src/**/*.{ts,tsx}'",
+    "lint": "tslint --project tsconfig.tslint.json 'packages/*/src/**/*.{ts,tsx}' -t verbose",
     "format": "prettier --write 'packages/*/src/**/*.{js,jsx,ts,tsx,json,css,md}'",
     "pretest": "yarn lint",
     "test": "jest",
