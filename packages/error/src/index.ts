@@ -23,7 +23,10 @@ export class BaseError extends Error {
 export class ComplexError extends BaseError {
   public readonly causes: ReadonlyArray<Error | BaseError>
 
-  constructor(message: string = '', causes: Error | ReadonlyArray<Error> = []) {
+  constructor(
+    message: string = '',
+    causes: Error | BaseError | ReadonlyArray<Error | BaseError> = []
+  ) {
     super(message)
     ComplexError.imprint(this)
     this.causes = new Array().concat(causes)

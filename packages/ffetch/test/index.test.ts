@@ -1,5 +1,5 @@
 import 'whatwg-fetch'
-import * as nock from 'nock'
+import nock from 'nock'
 import { ffetch, createFetch } from '../src'
 import { left, right } from 'fp-ts/lib/Either'
 import { NetworkError, StatusError, ParserError } from '../src/errors'

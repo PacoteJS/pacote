@@ -4,5 +4,6 @@
     "rootDir": "src",
     "outDir": "lib"
   },
-  "references": [{ "path": "../error" }]
+  "references": [{ "path": "../error" }],
+  "plugins": [{ "name": "typescript-workspace-plugin" }]
 }

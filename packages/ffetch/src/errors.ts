@@ -12,14 +12,20 @@ export class StatusError<T> extends BaseError {
 }
 
 export class NetworkError extends ComplexError {
-  constructor(message: string = '', causes: Error | ReadonlyArray<Error> = []) {
+  constructor(
+    message: string = '',
+    causes: Error | BaseError | ReadonlyArray<Error | BaseError> = []
+  ) {
     super(message, causes)
     NetworkError.imprint(this)
   }
 }
 
 export class ParserError extends ComplexError {
-  constructor(message: string = '', causes: Error | ReadonlyArray<Error> = []) {
+  constructor(
+    message: string = '',
+    causes: Error | BaseError | ReadonlyArray<Error | BaseError> = []
+  ) {
     super(message, causes)
     ParserError.imprint(this)
   }
