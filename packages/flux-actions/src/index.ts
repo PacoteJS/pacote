@@ -11,10 +11,10 @@ type ActionCreator<P = void, M = Meta> = {
   type: string
 } & (P extends void
   ? {
-      (meta?: M): Action<P>
+      (payload?: P | Error, meta?: M): Action<P>
     }
   : {
-      (payload: P, meta?: M): Action<P>
+      (payload: P | Error, meta?: M): Action<P>
     })
 
 export function createAction<P, M = Meta>(type: string): ActionCreator<P, M> {

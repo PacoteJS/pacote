@@ -23,7 +23,7 @@ test('creates an action creator that takes payload and metadata', () => {
 })
 
 test('creates an action creator that takes an error', () => {
-  const testAction = createAction<{ name: string }>('@@TEST/ERROR')
+  const testAction = createAction<{ age: number }>('@@TEST/ERROR')
   const error = new Error('test')
   const action = testAction(error)
   expect(action).toEqual({ type: '@@TEST/ERROR', payload: error, error: true })
