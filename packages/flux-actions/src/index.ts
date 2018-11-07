@@ -20,8 +20,6 @@ interface Reducer<S1, S2, P> {
   (state: S1, action: Action<P>): S2
 }
 
-type ReducerMatches<S, P> = Array<[ActionCreator<P>, Reducer<S, S, P>]>
-
 interface ReducerBuilder<S> {
   on: <P>(
     creator: ActionCreator<P, any> | ReadonlyArray<ActionCreator<P, any>>,
@@ -33,19 +31,19 @@ interface ReducerBuilder<S> {
 export function createAction<P, M = ActionMeta>(
   type: string
 ): ActionCreator<P, M> {
-  const creator = (payload: P | Error, meta?: M) => ({ type, payload, meta })
+  const creator = (payload: P, meta?: M) => ({ type, payload, meta })
   return Object.assign(creator, { type }) as ActionCreator<P, M>
 }
 
-export function isAction<P>(
+export function isType<P>(
   match: ActionCreator<P, any>,
   action: Action<any>
 ): action is Action<P> {
   return action.type === match.type
 }
 
-export function reduceFromState<S>(initialState: S): ReducerBuilder<S> {
-  const matches: ReducerMatches<S, any> = []
+export function reducerFromState<S>(initialState: S): ReducerBuilder<S> {
+  const matches: Array<[ActionCreator<any>, Reducer<S, S, any>]> = []
 
   return {
     on(creators, handler) {
@@ -58,7 +56,7 @@ export function reduceFromState<S>(initialState: S): ReducerBuilder<S> {
     run(state = initialState, action) {
       return matches.reduce(
         (currentState, [type, handle]) =>
-          isAction(type, action) ? handle(currentState, action) : currentState,
+          isType(type, action) ? handle(currentState, action) : currentState,
         state
       )
     }

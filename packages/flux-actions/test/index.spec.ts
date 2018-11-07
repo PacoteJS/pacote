@@ -1,4 +1,4 @@
-import { createAction, isAction, reduceFromState } from '../src/index'
+import { createAction, isType, reducerFromState } from '../src/index'
 
 test('creates an action creator', () => {
   const testAction = createAction<void>('@@TEST/BASE')
@@ -25,16 +25,16 @@ test('creates an action creator that takes payload and metadata', () => {
 test('matches action using action creator', () => {
   const testAction = createAction<{ age: number }>('@@TEST/MATCHER')
   const action = testAction({ age: 18 }) as any
-  expect(isAction(testAction, action)).toBe(true)
+  expect(isType(testAction, action)).toBe(true)
 
-  if (isAction(testAction, action)) {
+  if (isType(testAction, action)) {
     expect(action.payload.age).toBe(18)
   }
 })
 
 test('reducer has initial state', () => {
   const initialState = 'initialState'
-  const reducer = reduceFromState(initialState)
+  const reducer = reducerFromState(initialState)
   const testAction = createAction<void>('@@TEST')
   expect(reducer.run(undefined, testAction())).toEqual(initialState)
 })
@@ -43,7 +43,7 @@ test('reducer matches a single action', () => {
   const person = createAction<{ name: string }>('@@TEST/PERSON')
   const car = createAction<{ brand: string }>('@@TEST/CAR')
 
-  const reducer = reduceFromState({ now: '', then: '' })
+  const reducer = reducerFromState({ now: '', then: '' })
     .on(person, (s, a) => ({ now: a.payload.name, then: s.now }))
     .on(car, (s, a) => ({ now: a.payload.brand, then: s.now })).run
 
@@ -64,7 +64,7 @@ test('reducer matches a list of actions', () => {
   const person = createAction<{ name: string }>('@@TEST/PERSON')
   const dog = createAction<{ name: string }>('@@TEST/DOG')
 
-  const reducer = reduceFromState({ now: '', then: '' }).on(
+  const reducer = reducerFromState({ now: '', then: '' }).on(
     [person, dog],
     (s, a) => ({ now: a.payload.name, then: s.now })
   ).run

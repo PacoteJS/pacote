@@ -18,30 +18,26 @@ yarn add @pacote/flux-actions
 
 ```typescript
 import { createAction } from '@pacote/flux-actions'
-const travel = createAction<{ year: number }>('TRAVEL')
+const changeYear = createAction<number>('CHANGE_YEAR')
 ```
 
-Calling `travel({ year: 1955 })` will generate the following action object:
+Calling `changeYear(1955)` will generate the following action object:
 
 ```javascript
 {
-  type: 'TRAVEL',
-  payload: {
-    year: 'world'
-  }
+  type: 'CHANGE_YEAR',
+  payload: 1955
 }
 ```
 
 #### Action metadata
 
-The action creator supports an optional metadata parameter. For example, `travel({ year: 1955 }, meta: { test: true })` will create:
+The action creator supports an optional metadata parameter. For example, `changeYear(1955, meta: { test: true })` will create:
 
 ```javascript
 {
-  type: 'GREET',
-  payload: {
-    year: 1955
-  },
+  type: 'CHANGE_YEAR',
+  payload: 1955,
   meta: {
     test: true
   }
@@ -50,31 +46,30 @@ The action creator supports an optional metadata parameter. For example, `travel
 
 #### Actions with errors
 
-The action creator does not handle errors (like in Flux Standard Actions). Instead, consider using monadic objects like `Either`:
+Unlike Flux Standard Actions, the action creator does not handle errors. Instead, consider using monadic objects like `Either` to wrap error conditions:
 
 ```typescript
 import { createAction } from '@pacote/flux-actions'
-import { Either, left, right } from 'fp-ts/lib/Either'
+import { Either, tryCatch } from 'fp-ts/lib/Either'
 
-const travel = createAction<Either<Error, { year: number }>>('TRAVEL')
+const changeYear = createAction<Either<Error, number>>('CHANGE_YEAR')
 
-travel(right({ year: 2015 }))
-travel(left(Error()))
+changeYear(tryCatch(...))
 ```
 
-### `isAction<Payload>(creator: ActionCreator<Payload>, action: Action<Payload>)`
+### `isType<Payload>(creator: ActionCreator<Payload>, action: Action<Payload>)`
 
 Checks whether an action matches the provided type. This ensures the action is properly typed inside the guard block.
 
 ```typescript
-import { createAction, isAction } from '@pacote/flux-actions'
+import { createAction, isType } from '@pacote/flux-actions'
 
-const travel = createAction<{ year: number }>('TRAVEL')
-const action = travel({ year: 1955 })
+const changeYear = createAction<number>('CHANGE_YEAR')
+const action = changeYear(1985)
 
-if (isType(travel, action)) {
-  // action.payload is typed inside guard
-  console.log(action.payload.year)
+if (isType(changeYear, action)) {
+  // action.payload is a number inside the guard
+  console.log(action.payload)
 }
 ```
 
@@ -89,7 +84,7 @@ const person = createAction<{ name: string }>('PERSON')
 const dog = createAction<{ name: string }>('DOG')
 const car = createAction<{ brand: string }>('CAR')
 
-const reducer = reduceFromState({ now: 'None', then: '' })
+const reducer = reducerFromState({ now: 'None', then: '' })
   // Matches multiple actions:
   .on([person, dog], (s, a) => ({ now: a.payload.name, then: s.now }))
   // Matches a single action:
@@ -103,6 +98,28 @@ const s3 = reducer.run(s2, dog({ name: 'Einstein' }))
 
 const s4 = reducer.run(s3, car({ brand: 'DeLorean' }))
 // { now: 'DeLorean', then: 'Einstein' })
+```
+
+Reducing actions with errors wrapped in `Either` could look something like this:
+
+```typescript
+import { createAction, reduceFromState } from '@pacote/flux-actions'
+import { Either, tryCatch } from 'fp-ts/lib/Either'
+
+type State = {
+  year: number
+  error: Error | null
+}
+
+const changeYear = createAction<Either<Error, number>>('CHANGE_YEAR')
+
+const reducer = reducerFromState<State>({ year: 1985, error: null })
+  .on(changeYear, (state, { payload } ) => payload.fold<State>(
+    error => ({ ...state, error }),
+    year => ({ year, error: null })
+  ))
+
+reducer.run(undefined, changeYear(tryCatch(...)))
 ```
 
 ## License
