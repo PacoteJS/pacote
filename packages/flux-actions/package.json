@@ -1,6 +1,6 @@
 {
-  "name": "@pacote/redux-actions",
-  "description": "Redux Actions.",
+  "name": "@pacote/flux-actions",
+  "description": "Typed actions and reducers for Flux and Flux-like architectures.",
   "version": "0.0.0",
   "license": "MIT",
   "author": {
@@ -9,8 +9,10 @@
     "url": "https://goblindegook.com"
   },
   "keywords": [
+    "flux",
     "redux",
-    "actions"
+    "actions",
+    "reducers"
   ],
   "repository": "github:PacoteJS/pacote",
   "bugs": {

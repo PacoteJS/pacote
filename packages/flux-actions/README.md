@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/PacoteJS/pacote.svg?branch=master)](https://travis-ci.org/PacoteJS/pacote)
 
-Typed actions and reducers for Flux architectures.
+Typed actions and reducers for Flux and Flux-like architectures.
 
 ## Installation
 

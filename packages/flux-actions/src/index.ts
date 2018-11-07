@@ -21,7 +21,7 @@ interface Reducer<S1, S2, P> {
 
 interface ReducerBuilder<S> {
   on: <P>(
-    creator: ActionCreator<P, any> | ReadonlyArray<ActionCreator<P, any>>,
+    creator: ActionCreator<P> | ReadonlyArray<ActionCreator<P>>,
     handler: Reducer<S, S, P>
   ) => ReducerBuilder<S>
   run: Reducer<S | undefined, S, any>
