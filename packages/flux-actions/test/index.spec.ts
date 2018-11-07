@@ -1,7 +1,7 @@
 import { createAction, isType, reducerFromState } from '../src/index'
 
 test('creates an action creator', () => {
-  const testAction = createAction<void>('@@TEST/BASE')
+  const testAction = createAction('@@TEST/BASE')
   const action = testAction()
   expect(action).toEqual({ type: '@@TEST/BASE' })
 })

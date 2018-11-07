@@ -6,7 +6,7 @@ export type Action<P> = {
   meta?: ActionMeta
 }
 
-type ActionCreator<P = void, M = ActionMeta> = {
+type ActionCreator<P, M = ActionMeta> = {
   type: string
   (payload: P, meta?: M): Action<P>
 } & (P extends void
@@ -27,7 +27,7 @@ interface ReducerBuilder<S> {
   run: Reducer<S | undefined, S, any>
 }
 
-export function createAction<P, M = ActionMeta>(
+export function createAction<P = void, M = ActionMeta>(
   type: string
 ): ActionCreator<P, M> {
   const creator = (payload: P, meta?: M) => ({ type, payload, meta })
