@@ -8,13 +8,12 @@ export type Action<P> = {
 
 type ActionCreator<P = void, M = ActionMeta> = {
   type: string
+  (payload: P, meta?: M): Action<P>
 } & (P extends void
   ? {
       (payload?: P, meta?: M): Action<P>
     }
-  : {
-      (payload: P, meta?: M): Action<P>
-    })
+  : {})
 
 interface Reducer<S1, S2, P> {
   (state: S1, action: Action<P>): S2
