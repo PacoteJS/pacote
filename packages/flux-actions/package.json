@@ -1,7 +1,7 @@
 {
   "name": "@pacote/flux-actions",
   "description": "Typed actions and reducers for Flux and Flux-like architectures.",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "license": "MIT",
   "author": {
     "name": "Luís Rodrigues",
