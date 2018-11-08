@@ -13,7 +13,7 @@ export class StatusError<T> extends BaseError {
 
 export class NetworkError extends ComplexError {
   constructor(
-    message: string = '',
+    message = '',
     causes: Error | BaseError | ReadonlyArray<Error | BaseError> = []
   ) {
     super(message, causes)
@@ -23,7 +23,7 @@ export class NetworkError extends ComplexError {
 
 export class ParserError extends ComplexError {
   constructor(
-    message: string = '',
+    message = '',
     causes: Error | BaseError | ReadonlyArray<Error | BaseError> = []
   ) {
     super(message, causes)

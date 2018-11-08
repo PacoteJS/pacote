@@ -106,7 +106,7 @@ test('custom body parser success', async () => {
     .reply(status, '')
 
   const customFetch = createFetch({
-    parse: () => Promise.resolve(expected)
+    parse: async () => Promise.resolve(expected)
   })
 
   const actual = await customFetch(url).run()
@@ -121,7 +121,7 @@ test('custom parser error', async () => {
     .reply(200, '')
 
   const customFetch = createFetch({
-    parse: () => Promise.reject(error)
+    parse: async () => Promise.reject(error)
   })
 
   const actual = await customFetch(url).run()
@@ -139,7 +139,7 @@ test('custom error parser success', async () => {
     .reply(status, '')
 
   const customFetch = createFetch({
-    parseLeft: () => Promise.resolve(body)
+    parseLeft: async () => Promise.resolve(body)
   })
 
   const actual = await customFetch(url).run()
@@ -157,7 +157,7 @@ test('custom error parser failure', async () => {
     .reply(status, '')
 
   const customFetch = createFetch({
-    parseLeft: () => Promise.reject(error)
+    parseLeft: async () => Promise.reject(error)
   })
 
   const actual = await customFetch(url).run()

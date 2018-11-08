@@ -1,3 +1,24 @@
 {
-  "extends": ["tslint-config-standard", "tslint-config-prettier"]
+  "extends": ["tslint-config-standard", "tslint-config-prettier"],
+  "rules": {
+    "adjacent-overload-signatures": true,
+    "ban-comma-operator": true,
+    "ban": [
+      true,
+      "fdescribe",
+      "fit",
+      ["describe", "only"],
+      ["it", "only"],
+      ["test", "only"]
+    ],
+    "member-access": true,
+    "no-inferrable-types": true,
+    "no-non-null-assertion": true,
+    "no-parameter-reassignment": true,
+    "no-reference": true,
+    "no-var-requires": true,
+    "promise-function-async": true,
+    "typedef": true,
+    "unified-signatures": true
+  }
 }

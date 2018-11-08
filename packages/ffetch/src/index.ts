@@ -16,7 +16,7 @@ interface FetchOptions<E, T> {
   readonly parseLeft: (r: Response) => Promise<E>
 }
 
-function parse<T>(response: Response): Promise<T | string> {
+async function parse<T>(response: Response): Promise<T | string> {
   const contentType = (response.headers.get('content-type') || '')
     .trim()
     .toLowerCase()
@@ -25,15 +25,15 @@ function parse<T>(response: Response): Promise<T | string> {
     : response.text()
 }
 
-function parseLeft<E>(response: Response): Promise<E | string> {
-  return parse<E>(response.clone()).catch(() => response.text())
+async function parseLeft<E>(response: Response): Promise<E | string> {
+  return parse<E>(response.clone()).catch(async () => response.text())
 }
 
 function statusError<E>(
   parseFn: (r: Response) => Promise<E>,
   response: Response
 ): Task<StatusError<E | string> | ParserError> {
-  return new Task(() =>
+  return new Task(async () =>
     parseFn(response)
       .then(body => new StatusError(response.status, response.statusText, body))
       .catch(
@@ -58,7 +58,7 @@ export function createFetch<E, T>(
 
   return (input, init) =>
     tryCatch<FetchError<E | string>, Response>(
-      () => f.fetch(input, init),
+      async () => f.fetch(input, init),
       error => new NetworkError('Network request failed', error as Error)
     )
       .chain(
@@ -71,7 +71,7 @@ export function createFetch<E, T>(
       )
       .chain(response =>
         tryCatch<ParserError, T | string>(
-          () => f.parse(response.clone()),
+          async () => f.parse(response.clone()),
           error => new ParserError('Could not parse response', error as Error)
         )
       )

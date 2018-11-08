@@ -7,7 +7,7 @@ export class BaseError extends Error {
   /**
    * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error#Custom_Error_Types
    */
-  static imprint(instance: BaseError): void {
+  public static imprint(instance: BaseError): void {
     instance.name = this.name
 
     if (Error.captureStackTrace) {
@@ -24,7 +24,7 @@ export class ComplexError extends BaseError {
   public readonly causes: ReadonlyArray<Error | BaseError>
 
   constructor(
-    message: string = '',
+    message = '',
     causes: Error | BaseError | ReadonlyArray<Error | BaseError> = []
   ) {
     super(message)
