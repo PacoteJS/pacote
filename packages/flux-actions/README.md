@@ -1,6 +1,9 @@
 # @pacote/flux-actions
 
 [![Build Status](https://travis-ci.org/PacoteJS/pacote.svg?branch=master)](https://travis-ci.org/PacoteJS/pacote)
+![version](https://badgen.net/npm/v/@pacote/flux-actions)
+![minified](https://badgen.net/bundlephobia/min/@pacote/flux-actions)
+![minified + gzip](https://badgen.net/bundlephobia/minzip/@pacote/flux-actions)
 
 Typed actions and reducers for Flux and Flux-like architectures.
 

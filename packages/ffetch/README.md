@@ -1,6 +1,9 @@
 # @pacote/ffetch
 
 [![Build Status](https://travis-ci.org/PacoteJS/pacote.svg?branch=master)](https://travis-ci.org/PacoteJS/pacote)
+![version](https://badgen.net/npm/v/@pacote/ffetch)
+![minified](https://badgen.net/bundlephobia/min/@pacote/ffetch)
+![minified + gzip](https://badgen.net/bundlephobia/minzip/@pacote/ffetch)
 
 Fetch API wrapped in a [`TaskEither`](https://gcanti.github.io/fp-ts/TaskEither.html).
 
