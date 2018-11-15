@@ -1,7 +1,7 @@
 import { createAction, reducerFromState } from '../src/index'
 import { Either, left, right } from 'fp-ts/lib/Either'
 
-test('complex paylaods', () => {
+test('complex payloads', () => {
   type Payload = Either<Error, number>
 
   type State = {
