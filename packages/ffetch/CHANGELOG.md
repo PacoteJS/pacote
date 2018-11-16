@@ -1,5 +1,11 @@
 # Change Log
 
+## [v3.0.0](https://github.com/PacoteJS/pacote/tree/@pacote/ffetch@3.0.0) (2018-11-08)
+
+[Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/ffetch@2.0.0...@pacote/ffetch@3.0.0)
+
+- Breaking change: Changes to structure and type of thrown errors.
+
 ## [v2.0.0](https://github.com/PacoteJS/pacote/tree/@pacote/ffetch@2.0.0) (2018-10-04)
 
 [Full Changelog](https://github.com/PacoteJS/pacote/compare/v1.1.1...@pacote/ffetch@2.0.0)
