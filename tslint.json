@@ -33,7 +33,6 @@
     "radix": true,
     "strict-type-predicates": true,
     "typedef": true,
-    "typeof-compare": true,
     "unified-signatures": true
   }
 }

@@ -610,9 +610,9 @@
     "@types/node" "*"
 
 "@types/node@*", "@types/node@^10.11.2":
-  version "10.12.7"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.7.tgz#195808b2d4b2e7c33e75e7d9b24aeee88f94660d"
-  integrity sha512-Zh5Z4kACfbeE8aAOYh9mqotRxaZMro8MbBQtR8vEXOMiZo2rGEh2LayJijKdlu48YnS6y2EFU/oo2NCe5P6jGw==
+  version "10.12.9"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.9.tgz#a07bfa74331471e1dc22a47eb72026843f7b95c8"
+  integrity sha512-eajkMXG812/w3w4a1OcBlaTwsFPO5F7fJ/amy+tieQxEMWBlbV1JGSjkFM+zkHNf81Cad+dfIRA+IBkvmvdAeA==
 
 "@types/whatwg-fetch@^0.0.33":
   version "0.0.33"
@@ -5790,9 +5790,9 @@ ssri@^6.0.0, ssri@^6.0.1:
     figgy-pudding "^3.5.1"
 
 stack-utils@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/stack-utils/-/stack-utils-1.0.1.tgz#d4f33ab54e8e38778b0ca5cfd3b3afb12db68620"
-  integrity sha1-1PM6tU6OOHeLDKXP07OvsS22hiA=
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/stack-utils/-/stack-utils-1.0.2.tgz#33eba3897788558bebfc2db059dc158ec36cebb8"
+  integrity sha512-MTX+MeG5U994cazkjd/9KNAapsHnibjMLnfXodlkXw76JEea0UiNzrqidzo1emMwk7w5Qhc9jd4Bn9TBb1MFwA==
 
 staged-git-files@1.1.2:
   version "1.1.2"
