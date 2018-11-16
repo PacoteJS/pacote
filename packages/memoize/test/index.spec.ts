@@ -1,9 +1,13 @@
+import { assert, property, func, string } from 'fast-check'
 import { memoize } from '../src/index'
 
 test('memoize calls the original function', () => {
-  const fn = (i: number) => `test ${i}`
-  const memoizedFn = memoize(i => `${i}`, fn)
-  expect(memoizedFn(1)).toEqual(fn(1))
+  assert(
+    property(func(string()), string(), (fn, s) => {
+      const memoizedFn = memoize(i => i, fn)
+      expect(memoizedFn(s)).toEqual(fn(s))
+    })
+  )
 })
 
 test('memoize caches function calls', () => {

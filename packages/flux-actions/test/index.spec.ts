@@ -1,25 +1,31 @@
 import { createAction, isType, reducerFromState } from '../src/index'
+import { assert, property, string, anything } from 'fast-check'
 
 test('creates an action creator', () => {
-  const testAction = createAction('@@TEST/BASE')
-  const action = testAction()
-  expect(action).toEqual({ type: '@@TEST/BASE' })
+  assert(
+    property(string(), type => {
+      const testAction = createAction(type)
+      expect(testAction()).toEqual({ type })
+    })
+  )
 })
 
 test('creates an action creator that takes a payload', () => {
-  const testAction = createAction<{ name: string }>('@@TEST/PAYLOAD')
-  const action = testAction({ name: 'test' })
-  expect(action).toEqual({ type: '@@TEST/PAYLOAD', payload: { name: 'test' } })
+  assert(
+    property(string(), anything(), (type, payload) => {
+      const testAction = createAction(type)
+      expect(testAction(payload)).toEqual({ type, payload })
+    })
+  )
 })
 
 test('creates an action creator that takes payload and metadata', () => {
-  const testAction = createAction<{ name: string }>('@@TEST/META')
-  const action = testAction({ name: 'test' }, { test: 'ok' })
-  expect(action).toEqual({
-    type: '@@TEST/META',
-    payload: { name: 'test' },
-    meta: { test: 'ok' }
-  })
+  assert(
+    property(string(), anything(), anything(), (type, payload, meta) => {
+      const testAction = createAction(type)
+      expect(testAction(payload, meta)).toEqual({ type, payload, meta })
+    })
+  )
 })
 
 test('matches action using action creator', () => {
