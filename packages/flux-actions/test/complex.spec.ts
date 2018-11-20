@@ -18,7 +18,7 @@ test('complex payloads', () => {
         error => ({ ...s, error }),
         year => ({ year, error: null })
       )
-  ).run
+  )
 
   expect(reducer(undefined, changeYear(right<Error, number>(1955)))).toEqual({
     year: 1955,

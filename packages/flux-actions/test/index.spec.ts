@@ -42,7 +42,7 @@ test('reducer has initial state', () => {
   const initialState = 'initialState'
   const reducer = reducerFromState(initialState)
   const testAction = createAction<void>('@@TEST')
-  expect(reducer.run(undefined, testAction())).toEqual(initialState)
+  expect(reducer(undefined, testAction())).toEqual(initialState)
 })
 
 test('reducer matches a single action', () => {
@@ -51,7 +51,7 @@ test('reducer matches a single action', () => {
 
   const reducer = reducerFromState({ now: '', then: '' })
     .on(person, (s, a) => ({ now: a.payload.name, then: s.now }))
-    .on(car, (s, a) => ({ now: a.payload.brand, then: s.now })).run
+    .on(car, (s, a) => ({ now: a.payload.brand, then: s.now }))
 
   const state = { now: 'Test', then: '' }
 
@@ -73,7 +73,7 @@ test('reducer matches a list of actions', () => {
   const reducer = reducerFromState({ now: '', then: '' }).on(
     [person, dog],
     (s, a) => ({ now: a.payload.name, then: s.now })
-  ).run
+  )
 
   const state = { now: 'Test', then: '' }
 
@@ -86,4 +86,16 @@ test('reducer matches a list of actions', () => {
     now: 'Einstein',
     then: 'Test'
   })
+})
+
+test('reducerFromState() returns a legacy .run() method', () => {
+  const whatever = createAction('@@TEST/WHATEVER')
+  const reducer = reducerFromState('')
+  expect(reducer.run('unchanged', whatever())).toBe('unchanged')
+})
+
+test('reducerFromState().on() returns a legacy .run() method', () => {
+  const name = createAction<string>('@@TEST/NAME')
+  const reducer = reducerFromState('').on(name, (s, a) => a.payload)
+  expect(reducer.run('', name('Dr Emmet L. Brown'))).toBe('Dr Emmet L. Brown')
 })

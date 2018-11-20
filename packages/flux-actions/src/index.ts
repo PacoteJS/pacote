@@ -15,17 +15,23 @@ type ActionCreator<P, M = ActionMeta> = {
     }
   : {})
 
-interface Reducer<S1, S2, P> {
-  (state: S1, action: Action<P>): S2
+interface Reducer<S, P> {
+  (state: S | undefined, action: Action<P>): S
 }
 
-interface ReducerBuilder<S> {
+interface ReduceHandler<S, P> {
+  (state: S, action: Action<P>): S
+}
+
+interface ReducerMethods<S> {
   on: <P>(
     creator: ActionCreator<P> | ReadonlyArray<ActionCreator<P>>,
-    handler: Reducer<S, S, P>
-  ) => ReducerBuilder<S>
-  run: Reducer<S | undefined, S, any>
+    handler: ReduceHandler<S, P>
+  ) => ReducerMethods<S>
+  run: Reducer<S, any>
 }
+
+type EnhancedReducer<S> = Reducer<S, any> & ReducerMethods<S>
 
 export function createAction<P = void, M = ActionMeta>(
   type: string
@@ -41,23 +47,23 @@ export function isType<P>(
   return action.type === match.type
 }
 
-export function reducerFromState<S>(initialState: S): ReducerBuilder<S> {
-  const matches: Array<[ActionCreator<any>, Reducer<S, S, any>]> = []
+export function reducerFromState<S>(initialState: S): EnhancedReducer<S> {
+  const matches: Array<[ActionCreator<any>, ReduceHandler<S, any>]> = []
 
-  return {
+  const reducer: Reducer<S, any> = (state = initialState, action) =>
+    matches.reduce(
+      (currentState, [type, handle]) =>
+        isType(type, action) ? handle(currentState, action) : currentState,
+      state
+    )
+
+  return Object.assign<Reducer<S, any>, ReducerMethods<S>>(reducer, {
     on(creators, handler) {
       Array()
         .concat(creators)
         .forEach(creator => matches.push([creator, handler]))
       return this
     },
-
-    run(state = initialState, action) {
-      return matches.reduce(
-        (currentState, [type, handle]) =>
-          isType(type, action) ? handle(currentState, action) : currentState,
-        state
-      )
-    }
-  }
+    run: reducer
+  })
 }

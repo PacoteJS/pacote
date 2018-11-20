@@ -94,13 +94,13 @@ const reducer = reducerFromState({ now: 'None', then: '' })
   // Matches a single action:
   .on(car, (s, a) => ({ now: a.payload.brand, then: s.now }))
 
-const s2 = reducer.run(undefined, person({ name: 'Marty McFly' }))
+const s2 = reducer(undefined, person({ name: 'Marty McFly' }))
 // { now: 'Marty McFly', then: 'None' })
 
-const s3 = reducer.run(s2, dog({ name: 'Einstein' }))
+const s3 = reducer(s2, dog({ name: 'Einstein' }))
 // { now: 'Einstein', then: 'Marty McFly' })
 
-const s4 = reducer.run(s3, car({ brand: 'DeLorean' }))
+const s4 = reducer(s3, car({ brand: 'DeLorean' }))
 // { now: 'DeLorean', then: 'Einstein' })
 ```
 
@@ -123,7 +123,7 @@ const reducer = reducerFromState<State>({ year: 1985, error: null })
     year => ({ year, error: null })
   ))
 
-reducer.run(undefined, changeYear(tryCatch(...)))
+reducer(undefined, changeYear(tryCatch(...)))
 ```
 
 ## License
