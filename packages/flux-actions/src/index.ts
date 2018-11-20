@@ -31,7 +31,13 @@ interface ReducerMethods<S> {
   run: Reducer<S, any>
 }
 
-type EnhancedReducer<S> = Reducer<S, any> & ReducerMethods<S>
+interface EnhancedReducer<S> extends Reducer<S, any> {
+  on: <P>(
+    creator: ActionCreator<P> | ReadonlyArray<ActionCreator<P>>,
+    handler: ReduceHandler<S, P>
+  ) => EnhancedReducer<S>
+  run: Reducer<S, any>
+}
 
 export function createAction<P = void, M = ActionMeta>(
   type: string
@@ -65,5 +71,5 @@ export function reducerFromState<S>(initialState: S): EnhancedReducer<S> {
       return this
     },
     run: reducer
-  })
+  }) as EnhancedReducer<S>
 }
