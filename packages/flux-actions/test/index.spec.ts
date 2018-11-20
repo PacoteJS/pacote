@@ -45,6 +45,11 @@ test('reducer has initial state', () => {
   expect(reducer(undefined, testAction())).toEqual(initialState)
 })
 
+test('reducer is a function', () => {
+  const reducer = reducerFromState('initialState')
+  expect(typeof reducer).toBe('function')
+})
+
 test('reducer matches a single action', () => {
   const person = createAction<{ name: string }>('@@TEST/PERSON')
   const car = createAction<{ brand: string }>('@@TEST/CAR')
