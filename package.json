@@ -40,7 +40,9 @@
     "pretest": "yarn lint",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "clean": "rimraf packages/*/lib"
+    "clean": "rimraf packages/*/lib",
+    "prepublish": "yarn build && yarn test",
+    "publish": "lerna publish"
   },
   "husky": {
     "hooks": {
