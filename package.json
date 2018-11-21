@@ -41,8 +41,7 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "clean": "rimraf packages/*/lib",
-    "prepublish": "yarn build && yarn test",
-    "publish": "lerna publish"
+    "prepublish": "yarn build && yarn test"
   },
   "husky": {
     "hooks": {
