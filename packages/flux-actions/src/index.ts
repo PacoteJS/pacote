@@ -15,8 +15,8 @@ type ActionCreator<P, M = ActionMeta> = {
     }
   : {})
 
-interface Reducer<S, P> {
-  (state: S | undefined, action: Action<P>): S
+interface Reducer<S> {
+  (state: S | undefined, action: Action<any>): S
 }
 
 interface ReduceHandler<S, P> {
@@ -27,17 +27,11 @@ interface ReducerMethods<S> {
   on: <P>(
     creator: ActionCreator<P> | ReadonlyArray<ActionCreator<P>>,
     handler: ReduceHandler<S, P>
-  ) => ReducerMethods<S>
-  run: Reducer<S, any>
+  ) => EnhancedReducer<S>
+  run: Reducer<S>
 }
 
-interface EnhancedReducer<S> extends Reducer<S, any> {
-  on: <P>(
-    creator: ActionCreator<P> | ReadonlyArray<ActionCreator<P>>,
-    handler: ReduceHandler<S, P>
-  ) => EnhancedReducer<S>
-  run: Reducer<S, any>
-}
+type EnhancedReducer<S> = Reducer<S> & ReducerMethods<S>
 
 export function createAction<P = void, M = ActionMeta>(
   type: string
@@ -53,23 +47,32 @@ export function isType<P>(
   return action.type === match.type
 }
 
-export function reducerFromState<S>(initialState: S): EnhancedReducer<S> {
-  const matches: Array<[ActionCreator<any>, ReduceHandler<S, any>]> = []
+type ReducerMatch<S> = [ActionCreator<any>, ReduceHandler<S, any>]
 
-  const reducer: Reducer<S, any> = (state = initialState, action) =>
+function createReducer<S>(
+  initialState: S,
+  matches: ReadonlyArray<ReducerMatch<S>>
+): EnhancedReducer<S> {
+  const reducer: Reducer<S> = (state = initialState, action) =>
     matches.reduce(
       (currentState, [type, handle]) =>
         isType(type, action) ? handle(currentState, action) : currentState,
       state
     )
 
-  return Object.assign<Reducer<S, any>, ReducerMethods<S>>(reducer, {
+  return Object.assign<Reducer<S>, ReducerMethods<S>>(reducer, {
     on(creators, handler) {
-      Array()
-        .concat(creators)
-        .forEach(creator => matches.push([creator, handler]))
-      return this
+      return createReducer(initialState, [
+        ...matches,
+        ...Array<ActionCreator<any>>()
+          .concat(creators)
+          .map<ReducerMatch<S>>(creator => [creator, handler])
+      ])
     },
     run: reducer
-  }) as EnhancedReducer<S>
+  })
+}
+
+export function reducerFromState<S>(initialState: S): EnhancedReducer<S> {
+  return createReducer(initialState, [])
 }

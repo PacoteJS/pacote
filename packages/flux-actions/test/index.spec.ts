@@ -93,7 +93,7 @@ test('reducer matches a list of actions', () => {
   })
 })
 
-test.skip('reducer is immutable', () => {
+test('reducer is immutable', () => {
   const action = createAction('@@TEST/ACTION')
   const reducer = reducerFromState('').on(action, () => 'immutability ok')
   reducer.on(action, () => 'immutability nok')
