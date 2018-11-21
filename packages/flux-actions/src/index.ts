@@ -23,6 +23,8 @@ interface ReduceHandler<S, P> {
   (state: S, action: Action<P>): S
 }
 
+type ReducerMatch<S> = [ActionCreator<any>, ReduceHandler<S, any>]
+
 interface ReducerMethods<S> {
   on: <P>(
     creator: ActionCreator<P> | ReadonlyArray<ActionCreator<P>>,
@@ -46,8 +48,6 @@ export function isType<P>(
 ): action is Action<P> {
   return action.type === match.type
 }
-
-type ReducerMatch<S> = [ActionCreator<any>, ReduceHandler<S, any>]
 
 function createReducer<S>(
   initialState: S,
