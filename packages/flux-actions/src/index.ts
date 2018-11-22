@@ -1,51 +1,45 @@
-type ActionMeta = any
-
-export type Action<P> = {
+export type Action<P = any, M = any> = {
   type: string
   payload: P
-  meta?: ActionMeta
+  meta: M
 }
 
-type ActionCreator<P, M = ActionMeta> = {
+type ActionCreator<P = any, M = any> = {
   type: string
-  (payload: P, meta?: M): Action<P>
+  (payload: P, meta?: M): Action<P, M>
 } & (P extends void
   ? {
-      (payload?: P, meta?: M): Action<P>
+      (payload?: P, meta?: M): Action<P, M>
     }
   : {})
 
-interface Reducer<S> {
-  (state: S | undefined, action: Action<any>): S
-}
+type Reducer<S> = (state: S | undefined, action: Action) => S
 
-interface ReduceHandler<S, P> {
-  (state: S, action: Action<P>): S
-}
+type ReduceHandler<S, P = any, M = any> = (state: S, action: Action<P, M>) => S
 
-type ReducerMatch<S> = [ActionCreator<any>, ReduceHandler<S, any>]
+type ReducerMatch<S> = [ActionCreator, ReduceHandler<S>]
 
-interface ReducerMethods<S> {
-  on: <P>(
-    creator: ActionCreator<P> | ReadonlyArray<ActionCreator<P>>,
-    handler: ReduceHandler<S, P>
+type ReducerMethods<S> = {
+  on: <P, M>(
+    creators: ActionCreator<P, M> | ReadonlyArray<ActionCreator<P, M>>,
+    handler: ReduceHandler<S, P, M>
   ) => EnhancedReducer<S>
   run: Reducer<S>
 }
 
 type EnhancedReducer<S> = Reducer<S> & ReducerMethods<S>
 
-export function createAction<P = void, M = ActionMeta>(
+export function createAction<P = void, M = void>(
   type: string
 ): ActionCreator<P, M> {
   const creator = (payload: P, meta?: M) => ({ type, payload, meta })
   return Object.assign(creator, { type }) as ActionCreator<P, M>
 }
 
-export function isType<P>(
-  match: ActionCreator<P, any>,
-  action: Action<any>
-): action is Action<P> {
+export function isType<P, M>(
+  match: ActionCreator<P, M>,
+  action: Action
+): action is Action<P, M> {
   return action.type === match.type
 }
 
@@ -53,18 +47,18 @@ function createReducer<S>(
   initialState: S,
   matches: ReadonlyArray<ReducerMatch<S>>
 ): EnhancedReducer<S> {
-  const reducer: Reducer<S> = (state = initialState, action) =>
+  const reducer: Reducer<S> = (currentState = initialState, action) =>
     matches.reduce(
-      (currentState, [type, handle]) =>
-        isType(type, action) ? handle(currentState, action) : currentState,
-      state
+      (state, [creator, handler]) =>
+        isType(creator, action) ? handler(state, action) : state,
+      currentState
     )
 
   return Object.assign<Reducer<S>, ReducerMethods<S>>(reducer, {
     on(creators, handler) {
       return createReducer(initialState, [
         ...matches,
-        ...Array<ActionCreator<any>>()
+        ...Array<ActionCreator>()
           .concat(creators)
           .map<ReducerMatch<S>>(creator => [creator, handler])
       ])

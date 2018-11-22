@@ -13,7 +13,7 @@ test('creates an action creator', () => {
 test('creates an action creator that takes a payload', () => {
   assert(
     property(string(), anything(), (type, payload) => {
-      const testAction = createAction(type)
+      const testAction = createAction<any>(type)
       expect(testAction(payload)).toEqual({ type, payload })
     })
   )
@@ -22,7 +22,7 @@ test('creates an action creator that takes a payload', () => {
 test('creates an action creator that takes payload and metadata', () => {
   assert(
     property(string(), anything(), anything(), (type, payload, meta) => {
-      const testAction = createAction(type)
+      const testAction = createAction<any, any>(type)
       expect(testAction(payload, meta)).toEqual({ type, payload, meta })
     })
   )
@@ -54,43 +54,29 @@ test('reducer matches a single action', () => {
   const person = createAction<{ name: string }>('@@TEST/PERSON')
   const car = createAction<{ brand: string }>('@@TEST/CAR')
 
-  const reducer = reducerFromState({ now: '', then: '' })
-    .on(person, (s, a) => ({ now: a.payload.name, then: s.now }))
-    .on(car, (s, a) => ({ now: a.payload.brand, then: s.now }))
+  const reducer = reducerFromState<string[]>([])
+    .on(person, (s, a) => [a.payload.name, ...s])
+    .on(car, (s, a) => [a.payload.brand, ...s])
 
-  const state = { now: 'Test', then: '' }
+  expect(reducer(['Test'], person({ name: 'Marty McFly' }))) //
+    .toEqual(['Marty McFly', 'Test'])
 
-  expect(reducer(state, person({ name: 'Marty McFly' }))).toEqual({
-    now: 'Marty McFly',
-    then: 'Test'
-  })
-
-  expect(reducer(state, car({ brand: 'DeLorean' }))).toEqual({
-    now: 'DeLorean',
-    then: 'Test'
-  })
+  expect(reducer(['Test'], car({ brand: 'DeLorean' }))) //
+    .toEqual(['DeLorean', 'Test'])
 })
 
 test('reducer matches a list of actions', () => {
   const person = createAction<{ name: string }>('@@TEST/PERSON')
   const dog = createAction<{ name: string }>('@@TEST/DOG')
 
-  const reducer = reducerFromState({ now: '', then: '' }).on(
-    [person, dog],
-    (s, a) => ({ now: a.payload.name, then: s.now })
-  )
+  const reducer = reducerFromState<string[]>([]) //
+    .on([person, dog], (s, a) => [a.payload.name, ...s])
 
-  const state = { now: 'Test', then: '' }
+  expect(reducer(['Test'], person({ name: 'Marty McFly' }))) //
+    .toEqual(['Marty McFly', 'Test'])
 
-  expect(reducer(state, person({ name: 'Marty McFly' }))).toEqual({
-    now: 'Marty McFly',
-    then: 'Test'
-  })
-
-  expect(reducer(state, dog({ name: 'Einstein' }))).toEqual({
-    now: 'Einstein',
-    then: 'Test'
-  })
+  expect(reducer(['Test'], dog({ name: 'Einstein' }))) //
+    .toEqual(['Einstein', 'Test'])
 })
 
 test('reducer is immutable', () => {
