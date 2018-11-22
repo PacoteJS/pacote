@@ -18,6 +18,10 @@ export class BaseError extends Error {
       Object.setPrototypeOf(instance, this.prototype)
     }
   }
+
+  public static fromString(message = '') {
+    return new this(message)
+  }
 }
 
 export class ComplexError extends BaseError {
@@ -30,5 +34,9 @@ export class ComplexError extends BaseError {
     super(message)
     ComplexError.imprint(this)
     this.causes = new Array().concat(causes)
+  }
+
+  public static fromErrors(errors: ReadonlyArray<Error | BaseError>) {
+    return new this(undefined, errors)
   }
 }

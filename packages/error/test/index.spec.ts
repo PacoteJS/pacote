@@ -1,4 +1,4 @@
-import { BaseError, ComplexError } from '../src/index'
+import { BaseError, ComplexError } from '../src'
 
 test('BaseError is an instance of Error', () => {
   const error = new BaseError()
@@ -24,6 +24,13 @@ test('BaseError has a message', () => {
   const message = 'Internal server error'
   const error = new BaseError(message)
   expect(error.message).toBe(message)
+})
+
+test('BaseError creation from string', () => {
+  const message = 'Internal server error'
+  const actual = BaseError.fromString(message)
+  const expected = new BaseError(message)
+  expect(actual).toEqual(expected)
 })
 
 test('ComplexError is an instance of Error', () => {
@@ -52,8 +59,23 @@ test('ComplexError has a message', () => {
   expect(error.message).toBe(message)
 })
 
+test('ComplexError creation from string', () => {
+  const message = 'Internal server error'
+  const actual = ComplexError.fromString(message)
+  const expected = new ComplexError(message)
+  expect(actual).toEqual(expected)
+})
+
 test('ComplexError references originating errors', () => {
   const causes = [new Error('')]
   const error = new ComplexError('', causes)
   expect(error.causes).toEqual(causes)
+})
+
+test('ComplexError creation from errors', () => {
+  const errors = [new Error('test')]
+  const actual = ComplexError.fromErrors(errors)
+  const expected = new ComplexError(undefined, errors)
+  expect(actual).toEqual(expected)
+  expect(actual.causes).toEqual(expected.causes)
 })
