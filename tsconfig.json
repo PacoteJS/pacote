@@ -12,6 +12,7 @@
     "allowSyntheticDefaultImports": true,
     "module": "commonjs",
     "moduleResolution": "node",
+    "jsx": "react",
     "allowJs": false,
     "strict": true,
     "noImplicitReturns": true,
