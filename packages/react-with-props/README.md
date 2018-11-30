@@ -37,7 +37,7 @@ const Example = withProps({ name: 'Example' }, NameValue)
 render(<Example value="with props" />)
 // => <div>Example: with props</div>
 
-// Enhance DOM component (WIP):
+// Enhance DOM component:
 const PasswordInput = withProps({ type: 'password' }, 'input')
 
 render(<PasswordInput name="secret" />)

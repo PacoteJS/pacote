@@ -48,12 +48,12 @@ test('wraps a DOM component', () => {
   expect(actual).toEqual(expected)
 })
 
-// test('wraps a DOM component and forwards props', () => {
-//   const Wrapped = withProps({}, 'footer')
-//   const { container: actual } = render(<Wrapped id="Test" />)
-//   const { container: expected } = render(<footer id="test" />)
-//   expect(actual.id).toEqual(expected.id)
-// })
+test('wraps a DOM component and forwards props', () => {
+  const Wrapped = withProps({}, 'footer')
+  const { container: actual } = render(<Wrapped id="test" />)
+  const { container: expected } = render(<footer id="test" />)
+  expect(actual.id).toEqual(expected.id)
+})
 
 test('sets the display name', () => {
   const Test = () => <div>Test</div>
