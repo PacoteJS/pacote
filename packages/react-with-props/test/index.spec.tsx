@@ -55,6 +55,13 @@ test('wraps a DOM component and forwards props', () => {
   expect(actual.id).toEqual(expected.id)
 })
 
+test('wraps a DOM component and injects props', () => {
+  const Wrapped = withProps({ id: 'test' }, 'footer')
+  const { container: actual } = render(<Wrapped />)
+  const { container: expected } = render(<footer id="test" />)
+  expect(actual.id).toEqual(expected.id)
+})
+
 test('sets the display name', () => {
   const Test = () => <div>Test</div>
   const Wrapped = withProps({}, Test)

@@ -4,9 +4,7 @@ import {
   ReactHTML,
   ComponentType,
   ReactNode,
-  FunctionComponent,
-  HTMLAttributes,
-  SVGAttributes
+  FunctionComponent
 } from 'react'
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
@@ -20,9 +18,7 @@ type Enhanced<P extends I, I> = Omit<P & { children?: ReactNode }, keyof I>
 
 type InnerProps<C, P> = C extends keyof ReactHTML
   ? any
-  : C extends keyof ReactSVG
-  ? any
-  : P
+  : (C extends keyof ReactSVG ? any : P)
 
 function getDisplayName(Component: InnerComponent): string {
   return typeof Component === 'string'
