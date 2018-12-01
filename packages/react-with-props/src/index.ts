@@ -4,7 +4,9 @@ import {
   ReactHTML,
   ComponentType,
   ReactNode,
-  FunctionComponent
+  FunctionComponent,
+  DetailedHTMLFactory,
+  DOMFactory
 } from 'react'
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
@@ -16,11 +18,19 @@ type InnerComponent<P = any> =
 
 type Enhanced<P extends I, I> = Omit<P & { children?: ReactNode }, keyof I>
 
-type InnerProps<C, P> = C extends keyof ReactHTML
-  ? any
-  : (C extends keyof ReactSVG ? any : P)
+type InnerProps<C extends InnerComponent<any>> = C extends keyof ReactHTML
+  ? ReactHTML[C] extends DetailedHTMLFactory<infer H, infer E>
+    ? H
+    : C extends keyof ReactSVG
+    ? ReactSVG[C] extends DOMFactory<infer S, SVGElement>
+      ? S
+      : never
+    : never
+  : C extends ComponentType<infer P>
+  ? P
+  : any
 
-function getDisplayName(Component: InnerComponent): string {
+function getDisplayName(Component: InnerComponent<any>): string {
   return typeof Component === 'string'
     ? Component
     : Component.displayName || Component.name || 'Component'
@@ -39,10 +49,11 @@ function getDisplayName(Component: InnerComponent): string {
  */
 
 export function withProps<
-  I extends {},
-  P extends I = InnerProps<InnerComponent, P>,
-  E = Enhanced<P, I>
->(injectedProps: I, BaseComponent: InnerComponent<P>): FunctionComponent<E> {
+  I,
+  P extends I,
+  C extends InnerComponent<P>,
+  E = Enhanced<InnerProps<C>, I>
+>(injectedProps: I, BaseComponent: C): ComponentType<E> {
   const factory = createFactory(BaseComponent as FunctionComponent<P>)
   const EnhancedComponent: FunctionComponent<E> = props =>
     factory(Object.assign<P, E, I>({} as any, props, injectedProps))

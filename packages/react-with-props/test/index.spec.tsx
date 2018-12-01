@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { FunctionComponent, ReactNode } from 'react'
 import { render, cleanup } from 'react-testing-library'
 import { withProps } from '../src'
 
@@ -12,8 +12,10 @@ test('wraps a component', () => {
   expect(actual).toEqual(expected)
 })
 
-test('forwards props to components', () => {
-  const Test = ({ text = '' }) => <>{text}</>
+test('wraps a component and forwards props', () => {
+  const Test: FunctionComponent<{ text?: string }> = ({ text = '' }) => (
+    <>{text}</>
+  )
   const Wrapped = withProps({}, Test)
   const { container: actual } = render(<Wrapped text="Test" />)
   const { container: expected } = render(<Test text="Test" />)
@@ -46,7 +48,7 @@ test('injects optional props into components', () => {
 
 test('injects mandatory props into components', () => {
   type TestProps = { name: string; value: string }
-  const Test = ({ name, value }: TestProps) => (
+  const Test: FunctionComponent<TestProps> = ({ name, value }) => (
     <>
       {name}: {value}
     </>
@@ -86,9 +88,9 @@ test('forwards children to DOM components', () => {
   expect(actual).toEqual(expected)
 })
 
-test('injects props into DOM components', () => {
-  const Wrapped = withProps({ id: 'test' }, 'footer')
-  const { container: actual } = render(<Wrapped />)
+test('wraps a DOM component and forwards props', () => {
+  const Wrapped = withProps({}, 'footer')
+  const { container: actual } = render(<Wrapped id="Test" />)
   const { container: expected } = render(<footer id="test" />)
   expect(actual.id).toEqual(expected.id)
 })
