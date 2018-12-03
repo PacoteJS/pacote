@@ -36,18 +36,6 @@ function getDisplayName(Component: InnerComponent<any>): string {
     : Component.displayName || Component.name || 'Component'
 }
 
-/**
- * Development notes:
- *
- * P = Inner (wrapped) component props.
- * I = Injected props.
- * E = Enhanced component props (E = P - I)
- *
- * Mmmm... pie.
- *
- * TODO: Infer P for DOM components.
- */
-
 export function withProps<
   I,
   P extends I,
@@ -58,5 +46,20 @@ export function withProps<
   const EnhancedComponent: FunctionComponent<E> = props =>
     factory(Object.assign<P, E, I>({} as any, props, injectedProps))
   EnhancedComponent.displayName = `WithProps(${getDisplayName(BaseComponent)})`
+  return EnhancedComponent
+}
+
+export function withDefaultProps<
+  I,
+  P extends I,
+  C extends InnerComponent<P>,
+  E = Enhanced<InnerProps<C>, I> & Partial<I>
+>(injectedProps: I, BaseComponent: C): ComponentType<E> {
+  const factory = createFactory(BaseComponent as FunctionComponent<P>)
+  const EnhancedComponent: FunctionComponent<E> = props =>
+    factory(Object.assign<P, I, E>({} as any, injectedProps, props))
+  EnhancedComponent.displayName = `WithDefaultProps(${getDisplayName(
+    BaseComponent
+  )})`
   return EnhancedComponent
 }
