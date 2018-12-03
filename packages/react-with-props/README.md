@@ -1,6 +1,5 @@
 # @pacote/react-with-props
 
-[![Demo](https://badgen.net/badge/codesandbox/demo/yellow)](https://codesandbox.io/s/...)
 [![Build Status](https://travis-ci.org/PacoteJS/pacote.svg?branch=master)](https://travis-ci.org/PacoteJS/pacote)
 ![version](https://badgen.net/npm/v/@pacote/react-with-props)
 ![minified](https://badgen.net/bundlephobia/min/@pacote/react-with-props)
@@ -15,6 +14,10 @@ yarn add @pacote/react-with-props
 ```
 
 ## Usage
+
+### withProps(props: {}, component: Component | string)
+
+Creates a new component with the provided props applied to an existing component.
 
 ```tsx
 import React from 'react'
@@ -42,6 +45,44 @@ const PasswordInput = withProps({ type: 'password' }, 'input')
 
 render(<PasswordInput name="secret" />)
 // => <input type='password' name='secret' />
+```
+
+### withDefaultProps(props: {}, component: Component | string)
+
+Like `withProps()`, but provided properties can be overridden.
+
+```tsx
+import React from 'react'
+import { withDefaultProps } from '@pacote/react-with-props'
+
+type ComponentProps = {
+  name: string
+  value: string
+}
+
+const NameValue = (props: ComponentProps) => (
+  <div>
+    {props.name}: {props.value}
+  </div>
+)
+
+// Enhance component:
+const Example = withDefaultProps(
+  { name: 'Example', value: 'default value' },
+  NameValue
+)
+
+render(<Example value="with props" />)
+// => <div>Example: with props</div>
+
+// Enhance DOM component:
+const PasswordInput = withProps(
+  { type: 'password', placeholder: 'Password' },
+  'input'
+)
+
+render(<PasswordInput name="secret" placeholder="API Key" />)
+// => <input type='password' name='secret' placeholder='API Key' />
 ```
 
 ## License
