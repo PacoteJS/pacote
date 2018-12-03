@@ -48,7 +48,7 @@ test('injects optional props into components', () => {
 
 test('injects mandatory props into components', () => {
   type TestProps = { name: string; value: string }
-  const Test: FunctionComponent<TestProps> = ({ name, value }) => (
+  const Test = ({ name, value }: TestProps) => (
     <>
       {name}: {value}
     </>

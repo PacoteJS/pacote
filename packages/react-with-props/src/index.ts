@@ -19,7 +19,7 @@ type InnerComponent<P = any> =
 type Enhanced<P extends I, I> = Omit<P & { children?: ReactNode }, keyof I>
 
 type InnerProps<C extends InnerComponent<any>> = C extends keyof ReactHTML
-  ? ReactHTML[C] extends DetailedHTMLFactory<infer H, infer E>
+  ? ReactHTML[C] extends DetailedHTMLFactory<infer H, any>
     ? H
     : C extends keyof ReactSVG
     ? ReactSVG[C] extends DOMFactory<infer S, SVGElement>
