@@ -14,9 +14,8 @@ describe('withProps()', () => {
   })
 
   test('wraps a component and forwards props', () => {
-    const Test: FunctionComponent<{ text?: string }> = ({ text = '' }) => (
-      <>{text}</>
-    )
+    type TestProps = { text?: string }
+    const Test: FunctionComponent<TestProps> = ({ text = '' }) => <>{text}</>
     const Wrapped = withProps({}, Test)
     const { container: actual } = render(<Wrapped text="Test" />)
     const { container: expected } = render(<Test text="Test" />)
@@ -24,7 +23,8 @@ describe('withProps()', () => {
   })
 
   test('forwards children to components', () => {
-    const Test = ({ children }: { children?: ReactNode }) => <>{children}</>
+    type TestProps = { children?: ReactNode }
+    const Test = ({ children }: TestProps) => <>{children}</>
     const Wrapped = withProps({}, Test)
     const { container: actual } = render(
       <Wrapped>
@@ -40,7 +40,8 @@ describe('withProps()', () => {
   })
 
   test('injects optional props into components', () => {
-    const Test = ({ text }: { text?: string }) => <>{text}</>
+    type TestProps = { text?: string }
+    const Test = ({ text }: TestProps) => <>{text}</>
     const Wrapped = withProps({ text: 'Test' }, Test)
     const { container: actual } = render(<Wrapped />)
     const { container: expected } = render(<Test text="Test" />)
@@ -118,9 +119,8 @@ describe('withDefaultProps()', () => {
   })
 
   test('wraps a component and forwards props', () => {
-    const Test: FunctionComponent<{ text?: string }> = ({ text = '' }) => (
-      <>{text}</>
-    )
+    type TestProps = { text?: string }
+    const Test: FunctionComponent<TestProps> = ({ text = '' }) => <>{text}</>
     const Wrapped = withDefaultProps({}, Test)
     const { container: actual } = render(<Wrapped text="Test" />)
     const { container: expected } = render(<Test text="Test" />)
@@ -128,7 +128,8 @@ describe('withDefaultProps()', () => {
   })
 
   test('forwards children to components', () => {
-    const Test = ({ children }: { children?: ReactNode }) => <>{children}</>
+    type TestProps = { children?: ReactNode }
+    const Test = ({ children }: TestProps) => <>{children}</>
     const Wrapped = withDefaultProps({}, Test)
     const { container: actual } = render(
       <Wrapped>
@@ -144,7 +145,8 @@ describe('withDefaultProps()', () => {
   })
 
   test('injects optional props into components', () => {
-    const Test = ({ text }: { text?: string }) => <>{text}</>
+    type TestProps = { text?: string }
+    const Test = ({ text }: TestProps) => <>{text}</>
     const Wrapped = withDefaultProps({ text: 'Test' }, Test)
     const { container: actual } = render(<Wrapped />)
     const { container: expected } = render(<Test text="Test" />)
