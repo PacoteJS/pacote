@@ -190,14 +190,14 @@ describe('withDefaultProps()', () => {
     const Wrapped = withDefaultProps({}, 'footer')
     const { container: actual } = render(<Wrapped id="test" />)
     const { container: expected } = render(<footer id="test" />)
-    expect(actual.id).toEqual(expected.id)
+    expect(actual.id).toBe(expected.id)
   })
 
   test('injects props into DOM components', () => {
     const Wrapped = withDefaultProps({ id: 'test' }, 'footer')
     const { container: actual } = render(<Wrapped />)
     const { container: expected } = render(<footer id="test" />)
-    expect(actual.id).toEqual(expected.id)
+    expect(actual.id).toBe(expected.id)
   })
 
   test('forwards children to DOM components', () => {
@@ -219,17 +219,17 @@ describe('withDefaultProps()', () => {
     const Wrapped = withDefaultProps({ id: 'test' }, 'footer')
     const { container: actual } = render(<Wrapped id="override" />)
     const { container: expected } = render(<footer id="override" />)
-    expect(actual.id).toEqual(expected.id)
+    expect(actual.id).toBe(expected.id)
   })
 
   test('sets the display name', () => {
     const Test = () => <div>Test</div>
     const Wrapped = withDefaultProps({}, Test)
-    expect(Wrapped.displayName).toEqual('WithDefaultProps(Test)')
+    expect(Wrapped.displayName).toBe('WithDefaultProps(Test)')
   })
 
   test('sets the display name for DOM components', () => {
     const Wrapped = withDefaultProps({}, 'div')
-    expect(Wrapped.displayName).toEqual('WithDefaultProps(div)')
+    expect(Wrapped.displayName).toBe('WithDefaultProps(div)')
   })
 })
