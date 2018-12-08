@@ -11,6 +11,8 @@ import {
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 
+type Injector<P, I> = (props?: P) => I
+
 type InnerComponent<P = any> =
   | ComponentType<P>
   | keyof ReactHTML
@@ -36,15 +38,13 @@ function getDisplayName(Component: InnerComponent<any>): string {
     : Component.displayName || Component.name || 'Component'
 }
 
-type Injector<P, I> = (props?: P) => I
-
 function isInjector<E, I>(injector: any): injector is Injector<E, I> {
   return typeof injector === 'function'
 }
 
 export function withProps<
-  I,
   O extends {},
+  I extends {},
   P extends I,
   C extends InnerComponent<P>,
   E = Enhanced<InnerProps<C>, I>
@@ -63,7 +63,7 @@ export function withProps<
 }
 
 export function withDefaultProps<
-  I,
+  I extends {},
   P extends I,
   C extends InnerComponent<P>,
   E = Enhanced<InnerProps<C>, I> & Partial<I>

@@ -61,20 +61,6 @@ describe('withProps()', () => {
     expect(actual).toEqual(expected)
   })
 
-  test('injects props into components from a function', () => {
-    type TestProps = { name: string; value: string }
-    const Test = ({ name, value }: TestProps) => (
-      <>
-        {name}: {value}
-      </>
-    )
-    const injector = ({ foo = '' }) => ({ name: foo })
-    const Wrapped = withProps(injector, Test)
-    const { container: actual } = render(<Wrapped foo="Test" value="OK" />)
-    const { container: expected } = render(<Test name="Test" value="OK" />)
-    expect(actual).toEqual(expected)
-  })
-
   test('wraps a DOM component', () => {
     const Wrapped = withProps({}, 'header')
     const { container: actual } = render(<Wrapped />)
@@ -120,6 +106,20 @@ describe('withProps()', () => {
   test('sets the display name for DOM components', () => {
     const Wrapped = withProps({}, 'div')
     expect(Wrapped.displayName).toEqual('WithProps(div)')
+  })
+
+  test('injects props into components from a function', () => {
+    type TestProps = { name: string; value: string }
+    const Test = ({ name, value }: TestProps) => (
+      <>
+        {name}: {value}
+      </>
+    )
+    const injector = ({ foo = '' }) => ({ name: foo })
+    const Wrapped = withProps(injector, Test)
+    const { container: actual } = render(<Wrapped foo="Test" value="OK" />)
+    const { container: expected } = render(<Test name="Test" value="OK" />)
+    expect(actual).toEqual(expected)
   })
 })
 
