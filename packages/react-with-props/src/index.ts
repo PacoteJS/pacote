@@ -36,15 +36,28 @@ function getDisplayName(Component: InnerComponent<any>): string {
     : Component.displayName || Component.name || 'Component'
 }
 
+type Injector<P, I> = (props?: P) => I
+
+function isInjector<E, I>(injector: any): injector is Injector<E, I> {
+  return typeof injector === 'function'
+}
+
 export function withProps<
   I,
+  O extends {},
   P extends I,
   C extends InnerComponent<P>,
   E = Enhanced<InnerProps<C>, I>
->(injectedProps: I, BaseComponent: C): ComponentType<E> {
+>(injected: Injector<O, I> | I, BaseComponent: C): ComponentType<O & E> {
   const factory = createFactory(BaseComponent as FunctionComponent<P>)
-  const EnhancedComponent: FunctionComponent<E> = props =>
-    factory(Object.assign<P, E, I>({} as any, props, injectedProps))
+  const EnhancedComponent: FunctionComponent<O & E> = props =>
+    factory(
+      Object.assign<P, E, I>(
+        {} as any,
+        props,
+        isInjector<O, I>(injected) ? injected(props) : injected
+      )
+    )
   EnhancedComponent.displayName = `WithProps(${getDisplayName(BaseComponent)})`
   return EnhancedComponent
 }
