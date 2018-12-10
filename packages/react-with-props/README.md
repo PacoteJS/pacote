@@ -15,7 +15,7 @@ yarn add @pacote/react-with-props
 
 ## Usage
 
-### withProps(props: {}, component: Component | string)
+### `withProps(props: {} | (outer: {}) => {}, component: Component | string)`
 
 Creates a new component with the provided props applied to an existing component.
 
@@ -35,10 +35,19 @@ const NameValue = (props: ComponentProps) => (
 )
 
 // Enhance component:
-const Example = withProps({ name: 'Example' }, NameValue)
+const ExampleValue = withProps({ name: 'Example' }, NameValue)
 
-render(<Example value="with props" />)
+render(<ExampleValue value="with props" />)
 // => <div>Example: with props</div>
+
+// Enhance component with function:
+const FieldValue = withProps(
+  ({ field = '' }) => ({ name: `[${field}]` }),
+  NameValue
+)
+
+render(<FieldValue field="Example" value="with props" />)
+// => <div>[Example]: with props</div>
 
 // Enhance DOM component:
 const PasswordInput = withProps({ type: 'password' }, 'input')
@@ -47,7 +56,7 @@ render(<PasswordInput name="secret" />)
 // => <input type='password' name='secret' />
 ```
 
-### withDefaultProps(props: {}, component: Component | string)
+### `withDefaultProps(props: {}, component: Component | string)`
 
 Like `withProps()`, but provided properties can be overridden.
 
