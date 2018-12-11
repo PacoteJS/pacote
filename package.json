@@ -38,8 +38,8 @@
     "lint": "tslint --project tsconfig.tslint.json 'packages/*/{src,test}/**/*.{ts,tsx}' -t verbose",
     "format": "prettier --write 'packages/*/{src,test}/**/*.{js,jsx,ts,tsx,json,css,md}'",
     "pretest": "yarn lint",
-    "test": "jest",
-    "test:coverage": "jest --coverage",
+    "test": "jest --maxWorkers=4",
+    "test:coverage": "yarn test --coverage",
     "clean": "rimraf packages/*/lib",
     "prepublish": "yarn build && yarn test"
   },
