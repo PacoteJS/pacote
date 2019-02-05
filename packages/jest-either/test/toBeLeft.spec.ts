@@ -5,24 +5,22 @@ expect.extend(matchers)
 
 describe('.toBeLeft()', () => {
   test('passes when object is a left', () => {
-    expect(left('left')).toBeLeft()
+    expect(left(true)).toBeLeft()
   })
 
   test('fails when object is a right', () => {
-    expect(() =>
-      expect(right('right')).toBeLeft()
-    ).toThrowErrorMatchingSnapshot()
+    expect(() => expect(right(true)).toBeLeft()).toThrowErrorMatchingSnapshot()
   })
 })
 
 describe('.not.toBeLeft()', () => {
   test('passes when object is a right', () => {
-    expect(right('right')).not.toBeLeft()
+    expect(right(true)).not.toBeLeft()
   })
 
   test('fails when object is a left', () => {
     expect(() =>
-      expect(left('left')).not.toBeLeft()
+      expect(left(false)).not.toBeLeft()
     ).toThrowErrorMatchingSnapshot()
   })
 })

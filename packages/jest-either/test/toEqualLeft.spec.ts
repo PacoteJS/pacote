@@ -5,18 +5,18 @@ expect.extend(matchers)
 
 describe('.toEqualLeft()', () => {
   test('passes when object is a left', () => {
-    expect(left({ a: { b: 'left' } })).toEqualLeft({ a: { b: 'left' } })
+    expect(left({ test: 'ok' })).toEqualLeft({ test: 'ok' })
   })
 
   test('fails when object is not equal', () => {
     expect(() =>
-      expect(left({ a: { b: 'left' } })).toEqualLeft('wrong')
+      expect(left({ test: 'ok' })).toEqualLeft('different')
     ).toThrowErrorMatchingSnapshot()
   })
 
   test('fails when object is a right', () => {
     expect(() =>
-      expect(right('right')).toEqualLeft('right')
+      expect(right('same')).toEqualLeft('same')
     ).toThrowErrorMatchingSnapshot()
   })
 })
@@ -27,12 +27,12 @@ describe('.not.toEqualLeft()', () => {
   })
 
   test('passes when object is not equal', () => {
-    expect(left({ a: { b: 'left' } })).not.toEqualLeft('wrong')
+    expect(left({ test: 'ok' })).not.toEqualLeft('different')
   })
 
   test('fails when object is a left', () => {
     expect(() =>
-      expect(left('left')).not.toEqualLeft('left')
+      expect(left('same')).not.toEqualLeft('same')
     ).toThrowErrorMatchingSnapshot()
   })
 })
