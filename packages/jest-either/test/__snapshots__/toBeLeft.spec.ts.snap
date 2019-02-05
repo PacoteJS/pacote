@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`.not.toBeLeft() fails when object is a left 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).not.toBeLeft()[22m
+
+Expected Either not to be left received:
+  [31m\\"left(\\\\\\"left\\\\\\")\\"[39m"
+`;
+
+exports[`.toBeLeft() fails when object is a right 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).toBeLeft()[22m
+
+Expected Either to be left received:
+  [31m\\"right(\\\\\\"right\\\\\\")\\"[39m"
+`;

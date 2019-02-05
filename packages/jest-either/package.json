@@ -1,0 +1,41 @@
+{
+  "name": "@pacote/jest-either",
+  "description": "Jest matcher for Either objects.",
+  "version": "0.0.0",
+  "license": "MIT",
+  "author": {
+    "name": "Luís Rodrigues",
+    "email": "hello@goblindegook.com",
+    "url": "https://goblindegook.com"
+  },
+  "keywords": [
+    "jest",
+    "matcher",
+    "test",
+    "either",
+    "fp",
+    "functional programming"
+  ],
+  "repository": "github:PacoteJS/pacote",
+  "bugs": {
+    "url": "https://github.com/PacoteJS/pacote/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {},
+  "dependencies": {
+    "@types/jest-matcher-utils": "^21.0.1",
+    "fp-ts": "^1.13.0",
+    "jest-matcher-utils": "^24.0.0"
+  },
+  "devDependencies": {
+    "@types/jest-matcher-utils": "^21.0.1"
+  }
+}
