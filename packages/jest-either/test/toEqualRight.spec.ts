@@ -4,11 +4,11 @@ import matchers from '../src'
 expect.extend(matchers)
 
 describe('.toEqualRight()', () => {
-  test('passes when object is a right', () => {
+  test('passes when object equals the right', () => {
     expect(right({ test: 'ok' })).toEqualRight({ test: 'ok' })
   })
 
-  test('fails when object is not equal', () => {
+  test('fails when object is not equal to the right', () => {
     expect(() =>
       expect(right({ test: 'ok' })).toEqualRight('different')
     ).toThrowErrorMatchingSnapshot()
@@ -26,11 +26,11 @@ describe('.not.toEqualRight()', () => {
     expect(left('left')).not.toEqualRight('left')
   })
 
-  test('passes when object is not equal', () => {
+  test('passes when object is not equal to the right', () => {
     expect(right({ test: 'ok' })).not.toEqualRight('different')
   })
 
-  test('fails when object is a right', () => {
+  test('fails when object equals the right', () => {
     expect(() =>
       expect(right('same')).not.toEqualRight('same')
     ).toThrowErrorMatchingSnapshot()

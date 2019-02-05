@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`.not.toMatchLeft() fails when object matches the left 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).not.toMatchLeft([22m[32mexpectedLeft[39m[2m)[22m
+
+Expected Either not to match left:
+  [32m{\\"a\\": 1}[39m
+
+Received left:
+  [31m{\\"a\\": 1}[39m"
+`;
+
+exports[`.toMatchLeft() fails when object does not match the left 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).toMatchLeft([22m[32mexpectedLeft[39m[2m)[22m
+
+Expected Either to match left:
+  [32m{\\"a\\": 2}[39m
+
+Received left:
+  [31m{\\"a\\": 1, \\"b\\": 2}[39m"
+`;
+
+exports[`.toMatchLeft() fails when object is a right 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).toMatchLeft([22m[32mexpectedLeft[39m[2m)[22m
+
+Expected Either to match left:
+  [32m{\\"a\\": 1}[39m
+
+Received right."
+`;

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`.not.toEqualLeft() fails when object is a left 1`] = `
+exports[`.not.toEqualLeft() fails when object equals the left 1`] = `
 "[2mexpect([22m[31mreceived[39m[2m).not.toEqualLeft([22m[32mexpectedLeft[39m[2m)[22m
 
 Expected Either not to equal left:
@@ -19,7 +19,7 @@ Expected Either to equal left:
 Received right."
 `;
 
-exports[`.toEqualLeft() fails when object is not equal 1`] = `
+exports[`.toEqualLeft() fails when object is not equal to the left 1`] = `
 "[2mexpect([22m[31mreceived[39m[2m).toEqualLeft([22m[32mexpectedLeft[39m[2m)[22m
 
 Expected Either to equal left:
