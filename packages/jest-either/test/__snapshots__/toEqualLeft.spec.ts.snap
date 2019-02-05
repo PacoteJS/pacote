@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`.not.toEqualLeft() fails when object is a left 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).not.toEqualLeft([22m[32mexpectedLeft[39m[2m)[22m
+
+Expected Either not to equal left:
+  [32m\\"left\\"[39m
+
+Received left:
+  [31m\\"left\\"[39m"
+`;
+
+exports[`.toEqualLeft() fails when object is a right 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).toEqualLeft([22m[32mexpectedLeft[39m[2m)[22m
+
+Expected Either to equal left:
+  [32m\\"right\\"[39m
+
+Received right."
+`;
+
+exports[`.toEqualLeft() fails when object is not equal 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).toEqualLeft([22m[32mexpectedLeft[39m[2m)[22m
+
+Expected Either to equal left:
+  [32m\\"wrong\\"[39m
+
+Received left:
+  [31m{\\"a\\": {\\"b\\": \\"left\\"}}[39m"
+`;

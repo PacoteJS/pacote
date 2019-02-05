@@ -1,5 +1,5 @@
-import { matcherHint, printReceived } from 'jest-matcher-utils'
-import { Either, isRight } from 'fp-ts/lib/Either'
+import { matcherHint } from 'jest-matcher-utils'
+import { Either } from 'fp-ts/lib/Either'
 
 declare global {
   namespace jest {
@@ -9,22 +9,20 @@ declare global {
   }
 }
 
-const passMessage = <L, R>(received: Either<L, R>) => () =>
+const passMessage = () => () =>
   matcherHint('.not.toBeRight', 'received', '') +
   '\n\n' +
-  'Expected Either not to be right received:\n' +
-  `  ${printReceived(received.toString())}`
+  'Expected Either not to be right received right.'
 
-const failMessage = <L, R>(received: Either<L, R>) => () =>
+const failMessage = () => () =>
   matcherHint('.toBeRight', 'received', '') +
   '\n\n' +
-  'Expected Either to be right received:\n' +
-  `  ${printReceived(received.toString())}`
+  'Expected Either to be right, received left.'
 
 export function toBeRight(received: Either<any, any>) {
-  const pass = isRight(received)
+  const pass = received.isRight()
   return {
     pass,
-    message: pass ? passMessage(received) : failMessage(received)
+    message: pass ? passMessage() : failMessage()
   }
 }
