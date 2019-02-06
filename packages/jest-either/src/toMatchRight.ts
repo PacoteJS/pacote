@@ -11,31 +11,30 @@ declare global {
   }
 }
 
-const passMessage = <R>(received: Either<any, R>, expected: Partial<R>) => () =>
+const passMessage = <R>(actual: Either<any, R>, expected: Partial<R>) => () =>
   matcherHint('.not.toMatchRight', 'received', 'rightMatch') +
   '\n\n' +
   'Expected Either not to match right:\n' +
   `  ${printReceived(expected)}` +
   '\n\n' +
-  printReceivedRight(received)
+  printReceivedRight(actual)
 
-const failMessage = <R>(received: Either<any, R>, expected: Partial<R>) => () =>
+const failMessage = <R>(actual: Either<any, R>, expected: Partial<R>) => () =>
   matcherHint('.toMatchRight', 'received', 'rightMatch') +
   '\n\n' +
   'Expected Either to match right:\n' +
   `  ${printReceived(expected)}` +
   '\n\n' +
-  printReceivedRight(received)
+  printReceivedRight(actual)
 
-export function toMatchRight<R>(
-  received: Either<any, R>,
-  expected: Partial<R>
-) {
-  const pass = received.fold(() => false, whereEq(expected))
+export function toMatchRight<R>(actual: Either<any, R>, expected: Partial<R>) {
+  const pass = actual.fold(() => false, whereEq(expected))
   return {
+    actual,
+    expected,
     pass,
     message: pass
-      ? passMessage(received, expected)
-      : failMessage(received, expected)
+      ? passMessage(actual, expected)
+      : failMessage(actual, expected)
   }
 }

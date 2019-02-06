@@ -4,17 +4,16 @@ exports[`.not.toEqualRight() fails when object equals the right 1`] = `
 "[2mexpect([22m[31mreceived[39m[2m).not.toEqualRight([22m[32mexpectedRight[39m[2m)[22m
 
 Expected Either not to equal right:
-  [31m\\"same\\"[39m
+  [32m\\"same\\"[39m
 
-Received right:
-  [31m\\"same\\"[39m"
+But it's the same."
 `;
 
 exports[`.toEqualRight() fails when object is a left 1`] = `
 "[2mexpect([22m[31mreceived[39m[2m).toEqualRight([22m[32mexpectedRight[39m[2m)[22m
 
 Expected Either to equal right:
-  [31m\\"same\\"[39m
+  [32m\\"same\\"[39m
 
 Received left."
 `;
@@ -23,7 +22,7 @@ exports[`.toEqualRight() fails when object is not equal to the right 1`] = `
 "[2mexpect([22m[31mreceived[39m[2m).toEqualRight([22m[32mexpectedRight[39m[2m)[22m
 
 Expected Either to equal right:
-  [31m\\"different\\"[39m
+  [32m\\"different\\"[39m
 
 Received right:
   [31m{\\"test\\": \\"ok\\"}[39m"

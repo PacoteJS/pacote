@@ -19,8 +19,8 @@ const failMessage = () => () =>
   '\n\n' +
   'Expected Either to be left, received right.'
 
-export function toBeLeft(received: Either<any, any>) {
-  const pass = received.isLeft()
+export function toBeLeft(actual: Either<any, any>) {
+  const pass = actual.isLeft()
   return {
     pass,
     message: pass ? passMessage() : failMessage()

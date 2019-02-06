@@ -6,8 +6,7 @@ exports[`.not.toEqualLeft() fails when object equals the left 1`] = `
 Expected Either not to equal left:
   [32m\\"same\\"[39m
 
-Received left:
-  [31m\\"same\\"[39m"
+But it's the same."
 `;
 
 exports[`.toEqualLeft() fails when object is a right 1`] = `

@@ -1,7 +1,7 @@
 import { matcherHint, printExpected } from 'jest-matcher-utils'
 import { Either } from 'fp-ts/lib/Either'
 import { equals } from 'ramda'
-import { printReceivedLeft } from './print'
+import { diffReceivedLeft } from './print'
 
 declare global {
   namespace jest {
@@ -11,28 +11,30 @@ declare global {
   }
 }
 
-const passMessage = <L>(received: Either<L, any>, expected: L) => () =>
+const passMessage = <L>(actual: Either<L, any>, expected: L) => () =>
   matcherHint('.not.toEqualLeft', 'received', 'expectedLeft') +
   '\n\n' +
   'Expected Either not to equal left:\n' +
   `  ${printExpected(expected)}` +
   '\n\n' +
-  printReceivedLeft(received)
+  "But it's the same."
 
-const failMessage = <L>(received: Either<L, any>, expected: L) => () =>
-  matcherHint('.toEqualLeft', 'received', 'expectedLeft') +
-  '\n\n' +
-  'Expected Either to equal left:\n' +
-  `  ${printExpected(expected)}` +
-  '\n\n' +
-  printReceivedLeft(received)
+const failMessage = <L>(actual: Either<L, any>, expected: L) => () => {
+  return (
+    matcherHint('.toEqualLeft', 'received', 'expectedLeft') +
+    '\n\n' +
+    diffReceivedLeft(actual, expected)
+  )
+}
 
-export function toEqualLeft<L>(received: Either<L, any>, expected: L) {
-  const pass = received.fold(equals(expected), () => false)
+export function toEqualLeft<L>(actual: Either<L, any>, expected: L) {
+  const pass = actual.fold(equals(expected), () => false)
   return {
+    actual,
+    expected,
     pass,
     message: pass
-      ? passMessage(received, expected)
-      : failMessage(received, expected)
+      ? passMessage(actual, expected)
+      : failMessage(actual, expected)
   }
 }

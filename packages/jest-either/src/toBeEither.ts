@@ -14,30 +14,28 @@ function isFunction(value: any): value is Function {
   return typeof value === 'function'
 }
 
-function predicate(received: any): received is Either<any, any> {
+function predicate(actual: any): actual is Either<any, any> {
   return (
-    !isNil(received) &&
-    isFunction(received.isLeft) &&
-    isFunction(received.isRight)
+    !isNil(actual) && isFunction(actual.isLeft) && isFunction(actual.isRight)
   )
 }
 
-const passMessage = (received: any) => () =>
+const passMessage = (actual: any) => () =>
   matcherHint('.not.toBeEither', 'received', '') +
   '\n\n' +
   'Unexpected Either, received:\n' +
-  `  ${printReceived(received)}`
+  `  ${printReceived(actual)}`
 
-const failMessage = (received: any) => () =>
+const failMessage = (actual: any) => () =>
   matcherHint('.toBeEither', 'received', '') +
   '\n\n' +
   'Expected Either, received:\n' +
-  `  ${printReceived(received)}`
+  `  ${printReceived(actual)}`
 
-export function toBeEither(received: any) {
-  const pass = predicate(received)
+export function toBeEither(actual: any) {
+  const pass = predicate(actual)
   return {
     pass,
-    message: pass ? passMessage(received) : failMessage(received)
+    message: pass ? passMessage(actual) : failMessage(actual)
   }
 }
