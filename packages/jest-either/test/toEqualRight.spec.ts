@@ -8,6 +8,12 @@ describe('.toEqualRight()', () => {
     expect(right({ test: 'ok' })).toEqualRight({ test: 'ok' })
   })
 
+  test.skip('passes when object matches the right', () => {
+    expect(right({ test: 'ok', more: 'ok' })).toEqualRight(
+      expect.objectContaining({ test: 'ok' })
+    )
+  })
+
   test('fails when object is not equal to the right', () => {
     expect(() =>
       expect(right({ test: 'ok' })).toEqualRight('different')
@@ -33,6 +39,14 @@ describe('.not.toEqualRight()', () => {
   test('fails when object equals the right', () => {
     expect(() =>
       expect(right('same')).not.toEqualRight('same')
+    ).toThrowErrorMatchingSnapshot()
+  })
+
+  test.skip('fails when object matches the right', () => {
+    expect(() =>
+      expect(right({ test: 'ok', more: 'ok' })).not.toEqualRight(
+        expect.objectContaining({ test: 'ok' })
+      )
     ).toThrowErrorMatchingSnapshot()
   })
 })

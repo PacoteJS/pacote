@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`.not.toBeEither() fails when object is a left 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).not.toBeEither()[22m
+
+Unexpected Either, received:
+  [31m{\\"_tag\\": \\"Left\\", \\"value\\": false}[39m"
+`;
+
+exports[`.not.toBeEither() fails when object is a right 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).not.toBeEither()[22m
+
+Unexpected Either, received:
+  [31m{\\"_tag\\": \\"Right\\", \\"value\\": false}[39m"
+`;
+
+exports[`.toBeEither() fails when object is not an Either 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).toBeEither()[22m
+
+Expected Either, received:
+  [31mtrue[39m"
+`;
+
+exports[`.toBeEither() fails when object is undefined 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).toBeEither()[22m
+
+Expected Either, received:
+  [31mundefined[39m"
+`;

@@ -21,6 +21,21 @@ import matchers from '@pacote/jest-either'
 expect.extend(matchers)
 ```
 
+### `.toBeEither()`
+
+```typescript
+import { left, right } from 'fp-ts/lib/Either'
+
+test('passes when value is an Either', () => {
+  expect(left(true)).toBeEither()
+  expect(right(true)).toBeEither()
+})
+
+test('passes when value is not an Either', () => {
+  expect(undefined).not.toBeEither()
+})
+```
+
 ### `.toBeRight()`
 
 ```typescript
