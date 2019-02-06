@@ -7,7 +7,12 @@
 ![minified](https://badgen.net/bundlephobia/min/@pacote/flux-actions)
 ![minified + gzip](https://badgen.net/bundlephobia/minzip/@pacote/flux-actions)
 
-Typed actions and reducers for Flux and Flux-like architectures.
+Typed actions and reducers for Flux and Flux-like architectures, including the [`useReducer` React hook](https://reactjs.org/docs/hooks-reference.html#usereducer).
+
+## Demos
+
+- [Counter using Redux](https://codesandbox.io/s/xv62o57r3z)
+- [Counter using React Hooks](https://codesandbox.io/s/2wx6n5zlj0)
 
 ## Installation
 
