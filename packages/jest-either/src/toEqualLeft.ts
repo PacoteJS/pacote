@@ -11,7 +11,7 @@ declare global {
   }
 }
 
-const passMessage = <L, R>(received: Either<L, R>, expected: L) => () =>
+const passMessage = <L>(received: Either<L, any>, expected: L) => () =>
   matcherHint('.not.toEqualLeft', 'received', 'expectedLeft') +
   '\n\n' +
   'Expected Either not to equal left:\n' +
@@ -19,7 +19,7 @@ const passMessage = <L, R>(received: Either<L, R>, expected: L) => () =>
   '\n\n' +
   printReceivedLeft(received)
 
-const failMessage = <L, R>(received: Either<L, R>, expected: L) => () =>
+const failMessage = <L>(received: Either<L, any>, expected: L) => () =>
   matcherHint('.toEqualLeft', 'received', 'expectedLeft') +
   '\n\n' +
   'Expected Either to equal left:\n' +
@@ -27,7 +27,7 @@ const failMessage = <L, R>(received: Either<L, R>, expected: L) => () =>
   '\n\n' +
   printReceivedLeft(received)
 
-export function toEqualLeft<L, R>(received: Either<L, R>, expected: L) {
+export function toEqualLeft<L>(received: Either<L, any>, expected: L) {
   const pass = received.fold(equals(expected), () => false)
   return {
     pass,
