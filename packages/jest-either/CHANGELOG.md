@@ -1,6 +1,12 @@
 # Change Log
 
-## [v2.0.0](https://github.com/PacoteJS/pacote/tree/@pacote/jest-either@2.0.0) (unreleased)
+## [v2.0.1](https://github.com/PacoteJS/pacote/tree/@pacote/jest-either@2.0.1) (2019-02-07)
+
+[Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/jest-either@2.0.0...@pacote/jest-either@2.0.1)
+
+- Fixes missing `@pacote/is-plain-object` dependency.
+
+## [v2.0.0](https://github.com/PacoteJS/pacote/tree/@pacote/jest-either@2.0.0) (2019-02-07)
 
 [Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/jest-either@1.0.0...@pacote/jest-either@2.0.0)
 

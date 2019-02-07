@@ -31,6 +31,7 @@
   },
   "scripts": {},
   "dependencies": {
+    "@pacote/is-plain-object": "^1.0.0",
     "fp-ts": "^1.13.0",
     "jest-diff": "^24.0.0",
     "jest-matcher-utils": "^24.0.0",
