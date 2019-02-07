@@ -1,6 +1,6 @@
 import { matcherHint, printReceived } from 'jest-matcher-utils'
 import { Either } from 'fp-ts/lib/Either'
-import { whereMatch } from './predicates'
+import { matchObject, matchString, rightPredicate } from './predicates'
 import { printReceivedRight } from './print'
 
 declare global {
@@ -11,7 +11,10 @@ declare global {
   }
 }
 
-const passMessage = <R>(actual: Either<any, R>, expected: Partial<R>) => () =>
+const passMessage = <R>(
+  actual: Either<any, string | R>,
+  expected: RegExp | Partial<R>
+) => () =>
   matcherHint('.not.toMatchRight', 'received', 'rightMatch') +
   '\n\n' +
   'Expected Either not to match right:\n' +
@@ -19,7 +22,10 @@ const passMessage = <R>(actual: Either<any, R>, expected: Partial<R>) => () =>
   '\n\n' +
   printReceivedRight(actual)
 
-const failMessage = <R>(actual: Either<any, R>, expected: Partial<R>) => () =>
+const failMessage = <R>(
+  actual: Either<any, string | R>,
+  expected: RegExp | Partial<R>
+) => () =>
   matcherHint('.toMatchRight', 'received', 'rightMatch') +
   '\n\n' +
   'Expected Either to match right:\n' +
@@ -27,8 +33,20 @@ const failMessage = <R>(actual: Either<any, R>, expected: Partial<R>) => () =>
   '\n\n' +
   printReceivedRight(actual)
 
-export function toMatchRight<R>(actual: Either<any, R>, expected: Partial<R>) {
-  const pass = actual.fold(() => false, whereMatch(expected))
+export function toMatchRight(actual: Either<any, string>, expected: RegExp): any
+export function toMatchRight<R>(
+  actual: Either<any, R>,
+  expected: Partial<R>
+): any
+export function toMatchRight<R>(
+  actual: Either<any, string | R>,
+  expected: RegExp | Partial<R>
+) {
+  const predicate =
+    expected instanceof RegExp ? matchString(expected) : matchObject(expected)
+
+  const pass = rightPredicate(actual, predicate)
+
   return {
     actual,
     expected,

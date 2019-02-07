@@ -21,6 +21,7 @@ const failMessage = () => () =>
 
 export function toBeRight(actual: Either<any, any>) {
   const pass = actual.isRight()
+
   return {
     pass,
     message: pass ? passMessage() : failMessage()

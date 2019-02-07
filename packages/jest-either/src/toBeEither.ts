@@ -1,6 +1,5 @@
 import { matcherHint, printReceived } from 'jest-matcher-utils'
-import { isNil } from 'ramda'
-import { Either } from 'fp-ts/lib/Either'
+import { isEither } from './predicates'
 
 declare global {
   namespace jest {
@@ -8,16 +7,6 @@ declare global {
       toBeEither(): R
     }
   }
-}
-
-function isFunction(value: any): value is Function {
-  return typeof value === 'function'
-}
-
-function predicate(actual: any): actual is Either<any, any> {
-  return (
-    !isNil(actual) && isFunction(actual.isLeft) && isFunction(actual.isRight)
-  )
 }
 
 const passMessage = (actual: any) => () =>
@@ -33,7 +22,7 @@ const failMessage = (actual: any) => () =>
   `  ${printReceived(actual)}`
 
 export function toBeEither(actual: any) {
-  const pass = predicate(actual)
+  const pass = isEither(actual)
   return {
     pass,
     message: pass ? passMessage(actual) : failMessage(actual)

@@ -2,6 +2,7 @@ import { matcherHint, printExpected } from 'jest-matcher-utils'
 import { Either } from 'fp-ts/lib/Either'
 import { equals } from 'ramda'
 import { diffReceivedLeft } from './print'
+import { leftPredicate } from './predicates'
 
 declare global {
   namespace jest {
@@ -28,7 +29,8 @@ const failMessage = <L>(actual: Either<L, any>, expected: L) => () => {
 }
 
 export function toEqualLeft<L>(actual: Either<L, any>, expected: L) {
-  const pass = actual.fold(equals(expected), () => false)
+  const pass = leftPredicate(actual, equals(expected))
+
   return {
     actual,
     expected,
