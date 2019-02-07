@@ -1,5 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`.not.toMatchLeft() fails when object deeply matches the left 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).not.toMatchLeft([22m[32mexpectedLeft[39m[2m)[22m
+
+Expected Either not to match left:
+  [32m{\\"b\\": {\\"c\\": 2}}[39m
+
+Received left:
+  [31m{\\"a\\": 1, \\"b\\": {\\"c\\": 2, \\"d\\": 3}}[39m"
+`;
+
 exports[`.not.toMatchLeft() fails when object matches the left 1`] = `
 "[2mexpect([22m[31mreceived[39m[2m).not.toMatchLeft([22m[32mexpectedLeft[39m[2m)[22m
 

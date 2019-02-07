@@ -1,6 +1,6 @@
 import { matcherHint, printReceived } from 'jest-matcher-utils'
 import { Either } from 'fp-ts/lib/Either'
-import { whereEq } from 'ramda'
+import { whereMatch } from './predicates'
 import { printReceivedRight } from './print'
 
 declare global {
@@ -28,7 +28,7 @@ const failMessage = <R>(actual: Either<any, R>, expected: Partial<R>) => () =>
   printReceivedRight(actual)
 
 export function toMatchRight<R>(actual: Either<any, R>, expected: Partial<R>) {
-  const pass = actual.fold(() => false, whereEq(expected))
+  const pass = actual.fold(() => false, whereMatch(expected))
   return {
     actual,
     expected,

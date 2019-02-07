@@ -8,8 +8,8 @@ describe('.toMatchRight()', () => {
     expect(right({ a: 1, b: 2 })).toMatchRight({ a: 1 })
   })
 
-  test.skip('passes when object deeply matches the right', () => {
-    expect(right({ a: 1, b: { c: 2, d: 3 } })).toMatchRight({ b: { c: 2 } })
+  test('passes when object deeply matches the right', () => {
+    expect(right({ a: 1, b: { c: [2], d: 3 } })).toMatchRight({ b: { c: [2] } })
   })
 
   test('fails when object does not match the left', () => {
@@ -34,7 +34,7 @@ describe('.not.toMatchRight()', () => {
     expect(right({ a: 1 })).not.toMatchRight({ a: 2 })
   })
 
-  test.skip('fails when object deeply matches the right', () => {
+  test('fails when object deeply matches the right', () => {
     expect(() =>
       expect(right({ a: 1, b: { c: 2, d: 3 } })).not.toMatchRight({
         b: { c: 2 }

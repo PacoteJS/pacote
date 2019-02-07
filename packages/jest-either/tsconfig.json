@@ -4,5 +4,6 @@
     "rootDir": "src",
     "outDir": "lib"
   },
+  "references": [{ "path": "../is-plain-object" }],
   "plugins": [{ "name": "typescript-workspace-plugin" }]
 }
