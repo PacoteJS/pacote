@@ -49,19 +49,21 @@ function isInjector<OuterProps, InjectedProps>(
 export function withProps<
   OuterProps extends {},
   InjectedProps extends {},
-  Props extends InjectedProps,
-  Component extends InnerComponent<Props>,
-  ExposedProps = Enhanced<InnerProps<Component>, InjectedProps>
+  ComponentProps extends InjectedProps,
+  Component extends InnerComponent<ComponentProps>,
+  EnhancedProps = Enhanced<InnerProps<Component>, InjectedProps>
 >(
   injected: Injector<OuterProps, InjectedProps> | InjectedProps,
   BaseComponent: Component
-): ComponentType<OuterProps & ExposedProps> {
-  const factory = createFactory(BaseComponent as FunctionComponent<Props>)
+): ComponentType<OuterProps & EnhancedProps> {
+  const factory = createFactory(BaseComponent as FunctionComponent<
+    ComponentProps
+  >)
   const EnhancedComponent: FunctionComponent<
-    OuterProps & ExposedProps
+    OuterProps & EnhancedProps
   > = props =>
     factory(
-      Object.assign<Props, ExposedProps, InjectedProps>(
+      Object.assign<ComponentProps, EnhancedProps, InjectedProps>(
         {} as any,
         props,
         isInjector<OuterProps, InjectedProps>(injected)
@@ -75,18 +77,20 @@ export function withProps<
 
 export function withDefaultProps<
   InjectedProps extends {},
-  Props extends InjectedProps,
-  Component extends InnerComponent<Props>,
-  ExposedProps = Enhanced<InnerProps<Component>, InjectedProps> &
+  ComponentProps extends InjectedProps,
+  Component extends InnerComponent<ComponentProps>,
+  EnhancedProps = Enhanced<InnerProps<Component>, InjectedProps> &
     Partial<InjectedProps>
 >(
   injectedProps: InjectedProps,
   BaseComponent: Component
-): ComponentType<ExposedProps> {
-  const factory = createFactory(BaseComponent as FunctionComponent<Props>)
-  const EnhancedComponent: FunctionComponent<ExposedProps> = props =>
+): ComponentType<EnhancedProps> {
+  const factory = createFactory(BaseComponent as FunctionComponent<
+    ComponentProps
+  >)
+  const EnhancedComponent: FunctionComponent<EnhancedProps> = props =>
     factory(
-      Object.assign<Props, InjectedProps, ExposedProps>(
+      Object.assign<ComponentProps, InjectedProps, EnhancedProps>(
         {} as any,
         injectedProps,
         props
