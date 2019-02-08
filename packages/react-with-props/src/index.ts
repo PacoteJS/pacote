@@ -11,25 +11,27 @@ import {
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 
-type Injector<P, I> = (props?: P) => I
+type Injector<Props, InjectedProps> = (props?: Props) => InjectedProps
 
-type InnerComponent<P = any> =
-  | ComponentType<P>
+type InnerComponent<Props = any> =
+  | ComponentType<Props>
   | keyof ReactHTML
   | keyof ReactSVG
 
 type Enhanced<P extends I, I> = Omit<P & { children?: ReactNode }, keyof I>
 
-type InnerProps<C extends InnerComponent<any>> = C extends keyof ReactHTML
-  ? ReactHTML[C] extends DetailedHTMLFactory<infer H, any>
-    ? H
-    : C extends keyof ReactSVG
-    ? ReactSVG[C] extends DOMFactory<infer S, SVGElement>
-      ? S
+type InnerProps<
+  Component extends InnerComponent<any>
+> = Component extends keyof ReactHTML
+  ? ReactHTML[Component] extends DetailedHTMLFactory<infer HTMLProps, any>
+    ? HTMLProps
+    : Component extends keyof ReactSVG
+    ? ReactSVG[Component] extends DOMFactory<infer SVGProps, SVGElement>
+      ? SVGProps
       : never
     : never
-  : C extends ComponentType<infer P>
-  ? P
+  : Component extends ComponentType<infer Props>
+  ? Props
   : any
 
 function getDisplayName(Component: InnerComponent<any>): string {
@@ -38,24 +40,33 @@ function getDisplayName(Component: InnerComponent<any>): string {
     : Component.displayName || Component.name || 'Component'
 }
 
-function isInjector<E, I>(injector: any): injector is Injector<E, I> {
+function isInjector<OuterProps, InjectedProps>(
+  injector: any
+): injector is Injector<OuterProps, InjectedProps> {
   return typeof injector === 'function'
 }
 
 export function withProps<
-  O extends {},
-  I extends {},
-  P extends I,
-  C extends InnerComponent<P>,
-  E = Enhanced<InnerProps<C>, I>
->(injected: Injector<O, I> | I, BaseComponent: C): ComponentType<O & E> {
-  const factory = createFactory(BaseComponent as FunctionComponent<P>)
-  const EnhancedComponent: FunctionComponent<O & E> = props =>
+  OuterProps extends {},
+  InjectedProps extends {},
+  Props extends InjectedProps,
+  Component extends InnerComponent<Props>,
+  ExposedProps = Enhanced<InnerProps<Component>, InjectedProps>
+>(
+  injected: Injector<OuterProps, InjectedProps> | InjectedProps,
+  BaseComponent: Component
+): ComponentType<OuterProps & ExposedProps> {
+  const factory = createFactory(BaseComponent as FunctionComponent<Props>)
+  const EnhancedComponent: FunctionComponent<
+    OuterProps & ExposedProps
+  > = props =>
     factory(
-      Object.assign<P, E, I>(
+      Object.assign<Props, ExposedProps, InjectedProps>(
         {} as any,
         props,
-        isInjector<O, I>(injected) ? injected(props) : injected
+        isInjector<OuterProps, InjectedProps>(injected)
+          ? injected(props)
+          : injected
       )
     )
   EnhancedComponent.displayName = `WithProps(${getDisplayName(BaseComponent)})`
@@ -63,14 +74,24 @@ export function withProps<
 }
 
 export function withDefaultProps<
-  I extends {},
-  P extends I,
-  C extends InnerComponent<P>,
-  E = Enhanced<InnerProps<C>, I> & Partial<I>
->(injectedProps: I, BaseComponent: C): ComponentType<E> {
-  const factory = createFactory(BaseComponent as FunctionComponent<P>)
-  const EnhancedComponent: FunctionComponent<E> = props =>
-    factory(Object.assign<P, I, E>({} as any, injectedProps, props))
+  InjectedProps extends {},
+  Props extends InjectedProps,
+  Component extends InnerComponent<Props>,
+  ExposedProps = Enhanced<InnerProps<Component>, InjectedProps> &
+    Partial<InjectedProps>
+>(
+  injectedProps: InjectedProps,
+  BaseComponent: Component
+): ComponentType<ExposedProps> {
+  const factory = createFactory(BaseComponent as FunctionComponent<Props>)
+  const EnhancedComponent: FunctionComponent<ExposedProps> = props =>
+    factory(
+      Object.assign<Props, InjectedProps, ExposedProps>(
+        {} as any,
+        injectedProps,
+        props
+      )
+    )
   EnhancedComponent.displayName = `WithDefaultProps(${getDisplayName(
     BaseComponent
   )})`
