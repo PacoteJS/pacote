@@ -75,7 +75,7 @@ describe('withProps()', () => {
     expect(actual.id).toEqual(expected.id)
   })
 
-  test('inject props to DOM components', () => {
+  test('injects props into DOM components', () => {
     const Wrapped = withProps({ id: 'test' }, 'footer')
     const { container: actual } = render(<Wrapped />)
     const { container: expected } = render(<footer id="test" />)
