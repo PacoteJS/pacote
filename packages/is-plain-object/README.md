@@ -18,25 +18,27 @@ yarn add @pacote/is-plain-object
 ```typescript
 import { isPlainObject } from '@pacote/is-plain-object'
 
-isPlainObject({}) // true
-isPlainObject({ an: 'object' }) // true
+// These return true:
+isPlainObject({})
+isPlainObject({ an: 'object' })
 
-isPlainObject(undefined) // false
-isPlainObject(null) // false
-isPlainObject(false) // false
-isPlainObject(true) // false
-isPlainObject(NaN) // false
-isPlainObject(Infinity) // false
-isPlainObject(0) // false
-isPlainObject('string') // false
-isPlainObject([]) // false
-isPlainObject(new ArrayBuffer(0)) // false
-isPlainObject(new Date()) // false
-isPlainObject(new Map()) // false
-isPlainObject(new Promise()) // false
-isPlainObject(new Set()) // false
-isPlainObject(new WeakMap()) // false
-isPlainObject(new WeakSet()) // false
+// All of these return false:
+isPlainObject(undefined)
+isPlainObject(null)
+isPlainObject(false)
+isPlainObject(true)
+isPlainObject(NaN)
+isPlainObject(Infinity)
+isPlainObject(0)
+isPlainObject('string')
+isPlainObject([])
+isPlainObject(new ArrayBuffer(0))
+isPlainObject(new Date())
+isPlainObject(new Map())
+isPlainObject(new Promise())
+isPlainObject(new Set())
+isPlainObject(new WeakMap())
+isPlainObject(new WeakSet())
 ```
 
 ### `isPlainObject(o: any): boolean`

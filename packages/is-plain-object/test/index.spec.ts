@@ -71,42 +71,8 @@ test('false for arrays', () => {
   )
 })
 
-test('false for array instances', () => {
-  expect(isPlainObject(new Float32Array(0))).toBe(false)
-  expect(isPlainObject(new Float64Array(0))).toBe(false)
-  expect(isPlainObject(new Int16Array(0))).toBe(false)
-  expect(isPlainObject(new Int16Array(0))).toBe(false)
-  expect(isPlainObject(new Int32Array(0))).toBe(false)
-  expect(isPlainObject(new Int32Array(0))).toBe(false)
-  expect(isPlainObject(new Int8Array(0))).toBe(false)
-  expect(isPlainObject(new Uint16Array(0))).toBe(false)
-  expect(isPlainObject(new Uint32Array(0))).toBe(false)
-  expect(isPlainObject(new Uint8Array(0))).toBe(false)
-  expect(isPlainObject(new Uint8ClampedArray(0))).toBe(false)
-})
-
-test('false for instances of Symbol', () => {
+test('false for Symbols', () => {
   expect(isPlainObject(Symbol())).toBe(false)
-})
-
-test('false for instances of Map', () => {
-  expect(isPlainObject(new Set())).toBe(false)
-})
-
-test('false for instances of WeakMap', () => {
-  expect(isPlainObject(new WeakSet())).toBe(false)
-})
-
-test('false for instances of Map', () => {
-  expect(isPlainObject(new Map())).toBe(false)
-})
-
-test('false for instances of WeakMap', () => {
-  expect(isPlainObject(new WeakMap())).toBe(false)
-})
-
-test('false for instances of Date', () => {
-  expect(isPlainObject(new Date())).toBe(false)
 })
 
 test('false for instances of RegExp', () => {
@@ -114,10 +80,28 @@ test('false for instances of RegExp', () => {
   expect(isPlainObject(RegExp(''))).toBe(false)
 })
 
-test('false for instances of ArrayBuffer', () => {
-  expect(isPlainObject(new ArrayBuffer(0))).toBe(false)
+test('false for Promises', () => {
+  expect(isPlainObject(Promise.resolve())).toBe(false)
 })
 
-test('false for promises', () => {
-  expect(isPlainObject(new Promise(() => null))).toBe(false)
+test.each([
+  ['ArrayBuffer', ArrayBuffer],
+  ['Date', Date],
+  ['Float32Array', Float32Array],
+  ['Float64Array', Float64Array],
+  ['Int16Array', Int16Array],
+  ['Int16Array', Int16Array],
+  ['Int32Array', Int32Array],
+  ['Int32Array', Int32Array],
+  ['Int8Array', Int8Array],
+  ['Map', Map],
+  ['Set', Set],
+  ['Uint16Array', Uint16Array],
+  ['Uint32Array', Uint32Array],
+  ['Uint8Array', Uint8Array],
+  ['Uint8ClampedArray', Uint8ClampedArray],
+  ['WeakMap', WeakMap],
+  ['WeakSet', WeakSet]
+])('false for instances of %s', (_, ArrayClass) => {
+  expect(isPlainObject(new ArrayClass())).toBe(false)
 })
