@@ -8,7 +8,7 @@ describe('.toEqualRight()', () => {
     expect(right({ test: 'ok' })).toEqualRight({ test: 'ok' })
   })
 
-  test('fails when object is not equal to the right', () => {
+  test('fails when object does not equal the right', () => {
     expect(() =>
       expect(right({ test: 'ok' })).toEqualRight('different')
     ).toThrowErrorMatchingSnapshot()
@@ -40,7 +40,7 @@ describe('.not.toEqualRight()', () => {
     expect(left('left')).not.toEqualRight('left')
   })
 
-  test('passes when object is not equal to the right', () => {
+  test('passes when object does not equal the right', () => {
     expect(right({ test: 'ok' })).not.toEqualRight('different')
   })
 

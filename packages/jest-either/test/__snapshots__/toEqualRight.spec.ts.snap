@@ -42,7 +42,7 @@ Expected Either to equal right:
 Received left."
 `;
 
-exports[`.toEqualRight() fails when object is not equal to the right 1`] = `
+exports[`.toEqualRight() fails when object does not equal the right 1`] = `
 "[2mexpect([22m[31mreceived[39m[2m).toEqualRight([22m[32mexpectedRight[39m[2m)[22m
 
 Expected Either to equal right:

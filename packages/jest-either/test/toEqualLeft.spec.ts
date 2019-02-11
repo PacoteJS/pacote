@@ -8,7 +8,7 @@ describe('.toEqualLeft()', () => {
     expect(left({ test: 'ok' })).toEqualLeft({ test: 'ok' })
   })
 
-  test('fails when object is not equal to the left', () => {
+  test('fails when object does not equal the left', () => {
     expect(() =>
       expect(left({ test: 'ok' })).toEqualLeft('different')
     ).toThrowErrorMatchingSnapshot()
