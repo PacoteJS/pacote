@@ -3,7 +3,7 @@
 exports[`.not.toBeRight() fails when object is a right 1`] = `
 "[2mexpect([22m[31mreceived[39m[2m).not.toBeRight()[22m
 
-Expected Either not to be right received right."
+Expected Either not to be right, received right."
 `;
 
 exports[`.toBeRight() fails when object is a left 1`] = `

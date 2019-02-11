@@ -12,7 +12,7 @@ declare global {
 const passMessage = () => () =>
   matcherHint('.not.toBeRight', 'received', '') +
   '\n\n' +
-  'Expected Either not to be right received right.'
+  'Expected Either not to be right, received right.'
 
 const failMessage = () => () =>
   matcherHint('.toBeRight', 'received', '') +
