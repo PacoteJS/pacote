@@ -1,9 +1,12 @@
 import { matcherHint, printExpected } from 'jest-matcher-utils'
 import { Either } from 'fp-ts/lib/Either'
 import { equals } from 'ramda'
-import { diffReceivedRight } from './print'
-import { rightPredicate } from './predicates'
-import { AsymmetricMatcher, isAsymmetricMatcher } from './matchers'
+import { diffReceivedRight } from './shared/print'
+import {
+  AsymmetricMatcher,
+  isAsymmetricMatcher,
+  rightPredicate
+} from './shared/predicates'
 
 declare global {
   namespace jest {
@@ -13,7 +16,7 @@ declare global {
   }
 }
 
-const passMessage = <R>(actual: Either<any, R>, expected: R) => () =>
+const passMessage = <R>(expected: R) => () =>
   matcherHint('.not.toEqualRight', 'received', 'expectedRight') +
   '\n\n' +
   'Expected Either not to equal right:\n' +
@@ -40,8 +43,6 @@ export function toEqualRight<R>(
     actual,
     expected,
     pass,
-    message: pass
-      ? passMessage(actual, expected)
-      : failMessage(actual, expected)
+    message: pass ? passMessage(expected) : failMessage(actual, expected)
   }
 }

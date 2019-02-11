@@ -2,14 +2,18 @@ import { isPlainObject } from '@pacote/is-plain-object'
 import { Either } from 'fp-ts/lib/Either'
 import { equals, map, where, F } from 'ramda'
 
-function isFunction(value: any): value is Function {
+export interface AsymmetricMatcher {
+  asymmetricMatch(other: any): boolean
+}
+
+export function isFunction(value: any): value is Function {
   return typeof value === 'function'
 }
 
-export function isEither(actual: any): actual is Either<any, any> {
-  return (
-    actual != null && isFunction(actual.isLeft) && isFunction(actual.isRight)
-  )
+export function isAsymmetricMatcher(
+  matcher: any
+): matcher is AsymmetricMatcher {
+  return isFunction(matcher.asymmetricMatch)
 }
 
 export const matchObject = (s: any) => (o: any) =>
