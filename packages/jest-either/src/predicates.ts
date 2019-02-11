@@ -17,16 +17,16 @@ export const matchObject = (s: any) => (o: any) =>
 
 export const matchString = (s: RegExp) => (o: any) => s.test(o)
 
-export function leftPredicate<L>(
-  actual: Either<L, any>,
-  predicate: (left: L) => boolean
+export function leftPredicate(
+  actual: Either<any, any>,
+  predicate: (left: any) => boolean
 ): boolean {
   return actual.fold(predicate, F)
 }
 
-export function rightPredicate<R>(
-  actual: Either<any, R>,
-  predicate: (right: R) => boolean
+export function rightPredicate(
+  actual: Either<any, any>,
+  predicate: (right: any) => boolean
 ): boolean {
   return actual.fold(F, predicate)
 }

@@ -9,6 +9,30 @@ Expected Either not to equal right:
 But it's the same."
 `;
 
+exports[`.not.toEqualRight() fails when object equals the right using an asymmetric matcher 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).not.toEqualRight([22m[32mexpectedRight[39m[2m)[22m
+
+Expected Either not to equal right:
+  [32mObjectContaining {\\"test\\": \\"ok\\"}[39m
+
+But it's the same."
+`;
+
+exports[`.toEqualRight() fails when object does not equal the right using an asymmetric matcher 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m).toEqualRight([22m[32mexpectedRight[39m[2m)[22m
+
+Difference from Right:
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- ObjectContaining {[39m
+[32m-   \\"test\\": \\"nok\\",[39m
+[31m+ Object {[39m
+[31m+   \\"test\\": \\"ok\\",[39m
+[2m  }[22m"
+`;
+
 exports[`.toEqualRight() fails when object is a left 1`] = `
 "[2mexpect([22m[31mreceived[39m[2m).toEqualRight([22m[32mexpectedRight[39m[2m)[22m
 

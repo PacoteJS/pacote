@@ -8,12 +8,6 @@ describe('.toEqualLeft()', () => {
     expect(left({ test: 'ok' })).toEqualLeft({ test: 'ok' })
   })
 
-  test.skip('passes when object matches the left', () => {
-    expect(left({ test: 'ok', more: 'ok' })).toEqualLeft(
-      expect.objectContaining({ test: 'ok' })
-    )
-  })
-
   test('fails when object is not equal to the left', () => {
     expect(() =>
       expect(left({ test: 'ok' })).toEqualLeft('different')
@@ -25,6 +19,20 @@ describe('.toEqualLeft()', () => {
       expect(right('same')).toEqualLeft('same')
     ).toThrowErrorMatchingSnapshot()
   })
+
+  test('passes when object equals the left using an asymmetric matcher', () => {
+    expect(left({ test: 'ok', more: 'ok' })).toEqualLeft(
+      expect.objectContaining({ test: 'ok' })
+    )
+  })
+
+  test('fails when object does not equal the left using an asymmetric matcher', () => {
+    expect(() =>
+      expect(left({ test: 'ok' })).toEqualLeft(
+        expect.objectContaining({ test: 'nok' })
+      )
+    ).toThrowErrorMatchingSnapshot()
+  })
 })
 
 describe('.not.toEqualLeft()', () => {
@@ -32,7 +40,7 @@ describe('.not.toEqualLeft()', () => {
     expect(right('right')).not.toEqualLeft('left')
   })
 
-  test('passes when object is not equal to the left', () => {
+  test('passes when object does not equal the left', () => {
     expect(left({ test: 'ok' })).not.toEqualLeft('different')
   })
 
@@ -42,7 +50,13 @@ describe('.not.toEqualLeft()', () => {
     ).toThrowErrorMatchingSnapshot()
   })
 
-  test.skip('fails when object matches the left', () => {
+  test('passes when object does not equal the left using an asymmetric matcher', () => {
+    expect(left({ test: 'ok' })).not.toEqualLeft(
+      expect.objectContaining({ test: 'nok' })
+    )
+  })
+
+  test('fails when object equals the left using an asymmetric matcher', () => {
     expect(() =>
       expect(left({ test: 'ok', more: 'ok' })).not.toEqualLeft(
         expect.objectContaining({ test: 'ok' })

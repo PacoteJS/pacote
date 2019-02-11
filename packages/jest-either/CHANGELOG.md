@@ -1,5 +1,11 @@
 # Change Log
 
+## [v2.1.0](https://github.com/PacoteJS/pacote/tree/@pacote/jest-either@2.1.0) (2019-02-11)
+
+[Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/jest-either@2.0.1...@pacote/jest-either@2.1.0)
+
+- Support for asymmetric matchers in `.toEqualLeft()` and `.toEqualRight()`.
+
 ## [v2.0.1](https://github.com/PacoteJS/pacote/tree/@pacote/jest-either@2.0.1) (2019-02-07)
 
 [Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/jest-either@2.0.0...@pacote/jest-either@2.0.1)
