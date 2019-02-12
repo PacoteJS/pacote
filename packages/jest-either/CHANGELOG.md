@@ -1,6 +1,6 @@
 # Change Log
 
-## [v2.1.0](https://github.com/PacoteJS/pacote/tree/@pacote/jest-either@2.1.0) (2019-02-11)
+## [v2.1.0](https://github.com/PacoteJS/pacote/tree/@pacote/jest-either@2.1.0) (2019-02-12)
 
 [Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/jest-either@2.0.1...@pacote/jest-either@2.1.0)
 

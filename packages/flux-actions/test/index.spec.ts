@@ -41,7 +41,7 @@ test('matches action using action creator', () => {
 test('reducer has initial state', () => {
   const initialState = 'initialState'
   const testReducer = reducerFromState(initialState)
-  const testAction = createAction<void>('@@TEST')
+  const testAction = createAction<void>('@@TEST/INITIAL')
   expect(testReducer(undefined, testAction())).toEqual(initialState)
 })
 
@@ -60,11 +60,11 @@ test('reducer matches a single action', () => {
     .on(person, (s, a) => [a.payload.name, ...s])
     .on(car, (s, a) => [a.payload.brand, ...s])
 
-  expect(testReducer(['Test'], person({ name: 'Marty McFly' }))) //
-    .toEqual(['Marty McFly', 'Test'])
+  const personState = testReducer(['Test'], person({ name: 'Marty McFly' }))
+  expect(personState).toEqual(['Marty McFly', 'Test'])
 
-  expect(testReducer(['Test'], car({ brand: 'DeLorean' }))) //
-    .toEqual(['DeLorean', 'Test'])
+  const carState = testReducer(['Test'], car({ brand: 'DeLorean' }))
+  expect(carState).toEqual(['DeLorean', 'Test'])
 })
 
 test('reducer matches a list of actions', () => {
@@ -74,11 +74,11 @@ test('reducer matches a list of actions', () => {
   const testReducer = reducerFromState<string[]>([]) //
     .on([person, dog], (s, a) => [a.payload.name, ...s])
 
-  expect(testReducer(['Test'], person({ name: 'Marty McFly' }))) //
-    .toEqual(['Marty McFly', 'Test'])
+  const personState = testReducer(['Test'], person({ name: 'Marty McFly' }))
+  expect(personState).toEqual(['Marty McFly', 'Test'])
 
-  expect(testReducer(['Test'], dog({ name: 'Einstein' }))) //
-    .toEqual(['Einstein', 'Test'])
+  const dogState = testReducer(['Test'], dog({ name: 'Einstein' }))
+  expect(dogState).toEqual(['Einstein', 'Test'])
 })
 
 test('reducer is immutable', () => {

@@ -63,7 +63,12 @@ function createReducer<S>(
           .map<ReducerMatch<S>>(creator => [creator, handler])
       ])
     },
-    run: reducer
+    run: (currentState, action) => {
+      console.warn(
+        'The .run() method is deprecated, invoke the reducer function directly. E.g., instead of reducer.run(...), use reducer(...).'
+      )
+      return reducer(currentState, action)
+    }
   })
 }
 
