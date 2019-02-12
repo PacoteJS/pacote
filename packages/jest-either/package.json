@@ -1,7 +1,7 @@
 {
   "name": "@pacote/jest-either",
   "description": "Jest matcher for Either objects.",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "license": "MIT",
   "author": {
     "name": "Luís Rodrigues",
@@ -31,7 +31,7 @@
   },
   "scripts": {},
   "dependencies": {
-    "@pacote/is-plain-object": "^1.0.0",
+    "@pacote/is-plain-object": "^1.0.1",
     "fp-ts": "^1.13.0",
     "jest-diff": "^24.0.0",
     "jest-matcher-utils": "^24.0.0",
