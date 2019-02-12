@@ -65,7 +65,7 @@ function createReducer<S>(
     },
     run: (currentState, action) => {
       console.warn(
-        'The .run() method is deprecated, invoke the reducer function directly. E.g., instead of reducer.run(...), use reducer(...).'
+        '@pacote/flux-actions: The .run() method is deprecated, invoke the reducer function directly. E.g., instead of reducer.run(...), use reducer(...).'
       )
       return reducer(currentState, action)
     }
