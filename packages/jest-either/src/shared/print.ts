@@ -22,7 +22,7 @@ export function diffReceivedLeft(
 ): string {
   return actual.fold(
     left => {
-      const diffString = diff(expected, left)
+      const diffString = diff(expected, left) || ''
       return diffString.includes('- Expect')
         ? `Difference from Left:\n\n${diffString}`
         : 'Expected Either to equal left:\n' +
@@ -49,7 +49,7 @@ export function diffReceivedRight(
       '\n\n' +
       printReceivedRight(actual),
     right => {
-      const diffString = diff(expected, right)
+      const diffString = diff(expected, right) || ''
       return diffString.includes('- Expect')
         ? `Difference from Right:\n\n${diffString}`
         : 'Expected Either to equal right:\n' +
