@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, cleanup, act, fireEvent } from 'react-testing-library'
+import { render, cleanup, fireEvent } from 'react-testing-library'
 import { useOutside } from '../src'
 
 beforeEach(cleanup)
@@ -28,9 +28,7 @@ test.each([
 
     const { getByText } = render(<Test />)
 
-    act(() => {
-      fireFunction(getByText('Outside'))
-    })
+    fireFunction(getByText('Outside'))
 
     expect(handler).toHaveBeenCalled()
   }
@@ -60,9 +58,7 @@ test.each([
 
     const { getByText } = render(<Test />)
 
-    act(() => {
-      fireFunction(getByText('Inside'))
-    })
+    fireFunction(getByText('Inside'))
 
     expect(handler).not.toHaveBeenCalled()
   }
@@ -82,11 +78,8 @@ test('handler is called for multiple event types', () => {
   }
 
   const { getByText } = render(<Test />)
-
-  act(() => {
-    fireEvent.click(getByText('Outside'))
-    fireEvent.touchEnd(getByText('Outside'))
-  })
+  fireEvent.click(getByText('Outside'))
+  fireEvent.touchEnd(getByText('Outside'))
 
   expect(handler).toHaveBeenCalledTimes(2)
 })
