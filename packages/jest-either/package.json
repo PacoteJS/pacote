@@ -40,6 +40,6 @@
   "devDependencies": {
     "@types/jest-diff": "^20.0.0",
     "@types/jest-matcher-utils": "^21.0.1",
-    "@types/ramda": "^0.25.47"
+    "@types/ramda": "^0.26.5"
   }
 }
