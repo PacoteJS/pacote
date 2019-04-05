@@ -84,7 +84,7 @@ test('false for Promises', () => {
   expect(isPlainObject(Promise.resolve())).toBe(false)
 })
 
-test.each([
+test.each<[string, any]>([
   ['ArrayBuffer', ArrayBuffer],
   ['Date', Date],
   ['Float32Array', Float32Array],
