@@ -68,7 +68,7 @@
     "@types/ramda": "^0.26.4",
     "fast-check": "^1.7.1",
     "fp-ts": "^1.10.0",
-    "husky": "^1.0.1",
+    "husky": "^2.0.0",
     "jest": "^24.1.0",
     "lerna": "^3.4.0",
     "lint-staged": "^8.0.4",
