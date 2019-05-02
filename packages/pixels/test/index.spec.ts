@@ -5,6 +5,10 @@ afterEach(() => {
   window.document.body.textContent = ''
 })
 
+test(`no unit conversion`, () => {
+  expect(pixels('0')).toBe(0)
+})
+
 test(`px unit conversion`, () => {
   expect(pixels('1px')).toBe(1)
 })
@@ -67,6 +71,10 @@ test(`in unit conversion`, () => {
 
 test.todo(`in unit conversion with different DPI`)
 
+test(`q unit conversion`, () => {
+  expect(pixels('1q')).toBe(0.9448818897637796)
+})
+
 test(`mm unit conversion`, () => {
   expect(pixels('1mm')).toBe(3.7795275590551185)
 })
@@ -83,6 +91,12 @@ test(`pc unit conversion`, () => {
   expect(pixels('1pc')).toBe(16)
 })
 
+test.todo(`ex unit conversion`)
+
+test.todo(`ch unit conversion`)
+
 test.todo(`vh unit conversion`)
+
+test.todo(`vw unit conversion`)
 
 test.todo(`% unit conversion`)

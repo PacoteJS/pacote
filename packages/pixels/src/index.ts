@@ -38,6 +38,9 @@ export function pixels(length: string, element?: HTMLElement): number {
     case 'in':
       return value * PIXELS_PER_INCH
 
+    case 'q':
+      return (value * PIXELS_PER_INCH) / MILLIMETRES_PER_INCH / 4
+
     case 'mm':
       return (value * PIXELS_PER_INCH) / MILLIMETRES_PER_INCH
 
