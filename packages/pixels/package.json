@@ -1,7 +1,7 @@
 {
-  "name": "@pacote/react-use-outside",
-  "description": "React hook to capture mouse or touch events outside a component.",
-  "version": "1.0.0",
+  "name": "@pacote/pixels",
+  "description": "Converts CSS unit lengths to pixels.",
+  "version": "0.0.0",
   "license": "MIT",
   "author": {
     "name": "Luís Rodrigues",
@@ -9,10 +9,7 @@
     "url": "https://goblindegook.com"
   },
   "keywords": [
-    "react",
-    "components",
-    "hoc",
-    "props"
+    "object"
   ],
   "repository": "github:PacoteJS/pacote",
   "bugs": {
@@ -27,13 +24,5 @@
     "lib": "lib",
     "test": "test"
   },
-  "scripts": {},
-  "peerDependencies": {
-    "react": "^16.8.1"
-  },
-  "devDependencies": {
-    "@types/react": "^16.8.2",
-    "react": "^16.8.1",
-    "react-dom": "^16.8.1"
-  }
+  "scripts": {}
 }
