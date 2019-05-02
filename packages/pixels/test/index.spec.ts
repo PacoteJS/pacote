@@ -69,8 +69,6 @@ test(`in unit conversion`, () => {
   expect(pixels('1in')).toBe(96)
 })
 
-test.todo(`in unit conversion with different DPI`)
-
 test(`q unit conversion`, () => {
   expect(pixels('1q')).toBe(0.9448818897637796)
 })

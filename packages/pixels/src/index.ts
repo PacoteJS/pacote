@@ -1,4 +1,4 @@
-const PIXELS_PER_INCH = 96
+const PIXELS_PER_INCH = window.devicePixelRatio * 96
 const MILLIMETRES_PER_INCH = 25.4
 const POINTS_PER_INCH = 72
 const PICAS_PER_INCH = 6
@@ -21,11 +21,7 @@ function parse(providedLength?: string | null): [number, string] {
   return [value, unit]
 }
 
-function parent(element?: HTMLElement): HTMLElement | undefined {
-  return (element && element.parentElement) || undefined
-}
-
-export function pixels(length: string, element?: HTMLElement): number {
+export function pixels(length: string, element?: HTMLElement | null): number {
   const [value, unit] = parse(length)
 
   switch (unit) {
@@ -33,7 +29,7 @@ export function pixels(length: string, element?: HTMLElement): number {
       return value * pixels(fontSize(window.document.documentElement))
 
     case 'em':
-      return value * pixels(fontSize(element), parent(element))
+      return value * pixels(fontSize(element), element && element.parentElement)
 
     case 'in':
       return value * PIXELS_PER_INCH
