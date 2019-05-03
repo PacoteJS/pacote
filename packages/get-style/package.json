@@ -1,0 +1,29 @@
+{
+  "name": "@pacote/get-style",
+  "description": "Get an element's computed style for the provided CSS property.",
+  "version": "0.0.0",
+  "license": "MIT",
+  "author": {
+    "name": "Luís Rodrigues",
+    "email": "hello@goblindegook.com",
+    "url": "https://goblindegook.com"
+  },
+  "keywords": [
+    "css",
+    "styles"
+  ],
+  "repository": "github:PacoteJS/pacote",
+  "bugs": {
+    "url": "https://github.com/PacoteJS/pacote/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {}
+}
