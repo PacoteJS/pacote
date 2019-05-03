@@ -9,7 +9,10 @@
     "url": "https://goblindegook.com"
   },
   "keywords": [
-    "object"
+    "css",
+    "styles",
+    "conversion",
+    "pixels"
   ],
   "repository": "github:PacoteJS/pacote",
   "bugs": {
@@ -24,5 +27,8 @@
     "lib": "lib",
     "test": "test"
   },
-  "scripts": {}
+  "scripts": {},
+  "dependencies": {
+    "@pacote/get-style": "^1.0.0"
+  }
 }

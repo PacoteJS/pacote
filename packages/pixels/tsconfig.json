@@ -4,5 +4,6 @@
     "rootDir": "src",
     "outDir": "lib"
   },
+  "references": [{ "path": "../get-style" }],
   "plugins": [{ "name": "typescript-workspace-plugin" }]
 }

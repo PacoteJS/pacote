@@ -97,4 +97,7 @@ test.todo(`vh unit conversion`)
 
 test.todo(`vw unit conversion`)
 
+// Extremely complicated to convert, depends on the property being converted
+// (e.g. font-size: 50% is relative to the parent element's font-height value
+// but max-height: 50% is relative to the containing element's height.)
 test.todo(`% unit conversion`)
