@@ -23,6 +23,7 @@ export function pixels(length: string, element?: HTMLElement | null): number {
   const view =
     (element && element.ownerDocument && element.ownerDocument.defaultView) ||
     window
+  const root = view.document.documentElement || view.document.body
 
   const [value, unit] = parse(length)
 
@@ -52,16 +53,30 @@ export function pixels(length: string, element?: HTMLElement | null): number {
       return (value * PIXELS_PER_INCH) / PICAS_PER_INCH
 
     case 'vh':
-      return (value * view.innerHeight) / 100
+      return (value * view.innerHeight || root.clientWidth) / 100
 
     case 'vw':
-      return (value * view.innerWidth) / 100
+      return (value * view.innerWidth || root.clientHeight) / 100
 
     case 'vmin':
-      return (value * Math.min(view.innerWidth, view.innerHeight)) / 100
+      return (
+        (value *
+          Math.min(
+            view.innerWidth || root.clientWidth,
+            view.innerHeight || root.clientHeight
+          )) /
+        100
+      )
 
     case 'vmax':
-      return (value * Math.max(view.innerWidth, view.innerHeight)) / 100
+      return (
+        (value *
+          Math.max(
+            view.innerWidth || root.clientWidth,
+            view.innerHeight || root.clientHeight
+          )) /
+        100
+      )
 
     default:
       return value
