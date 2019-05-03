@@ -3,14 +3,20 @@ const MILLIMETRES_PER_INCH = 25.4
 const POINTS_PER_INCH = 72
 const PICAS_PER_INCH = 6
 
-function computedFontSize(element: HTMLElement): string {
-  return window.getComputedStyle(element).fontSize || ''
+function getStyle(
+  element: HTMLElement,
+  property: keyof CSSStyleDeclaration
+): string {
+  const view =
+    (element.ownerDocument && element.ownerDocument.defaultView) || window
+  const style = view.getComputedStyle(element)
+  return style.getPropertyValue(property as string) || style[property]
 }
 
 function fontSize(element?: HTMLElement | null): string {
   return element
-    ? computedFontSize(element) || fontSize(element.parentElement)
-    : computedFontSize(window.document.documentElement)
+    ? getStyle(element, 'fontSize') || fontSize(element.parentElement)
+    : getStyle(window.document.documentElement, 'fontSize')
 }
 
 function parse(providedLength?: string | null): [number, string] {
