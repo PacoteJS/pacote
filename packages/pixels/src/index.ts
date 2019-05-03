@@ -1,6 +1,6 @@
 import { getStyle } from '@pacote/get-style'
 
-const PIXELS_PER_INCH = window.devicePixelRatio * 96
+const PIXELS_PER_INCH = 96
 const MILLIMETRES_PER_INCH = 25.4
 const POINTS_PER_INCH = 72
 const PICAS_PER_INCH = 6
@@ -16,10 +16,14 @@ function parse(providedLength?: string | null): [number, string] {
   const value = parseFloat(length)
   const match = length.match(/[\d-.]+(\w+)$/)
   const unit = match && match.length > 1 ? match[1] : ''
-  return [value, unit]
+  return [value, unit.toLowerCase()]
 }
 
 export function pixels(length: string, element?: HTMLElement | null): number {
+  const view =
+    (element && element.ownerDocument && element.ownerDocument.defaultView) ||
+    window
+
   const [value, unit] = parse(length)
 
   switch (unit) {
@@ -46,6 +50,18 @@ export function pixels(length: string, element?: HTMLElement | null): number {
 
     case 'pc':
       return (value * PIXELS_PER_INCH) / PICAS_PER_INCH
+
+    case 'vh':
+      return (value * view.innerHeight) / 100
+
+    case 'vw':
+      return (value * view.innerWidth) / 100
+
+    case 'vmin':
+      return (value * Math.min(view.innerWidth, view.innerHeight)) / 100
+
+    case 'vmax':
+      return (value * Math.max(view.innerWidth, view.innerHeight)) / 100
 
     default:
       return value
