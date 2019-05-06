@@ -64,7 +64,7 @@
   "devDependencies": {
     "@types/jest": "^24.0.0",
     "@types/nock": "^10.0.1",
-    "@types/node": "^11.9.0",
+    "@types/node": "^12.0.0",
     "@types/ramda": "^0.26.4",
     "fast-check": "^1.7.1",
     "fp-ts": "^1.10.0",
