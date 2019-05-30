@@ -6,7 +6,7 @@ import { NetworkError, StatusError, ParserError } from '../src/errors'
 
 const url = 'http://localhost/test'
 
-beforeEach(nock.cleanAll)
+afterEach(nock.cleanAll)
 
 test('successful JSON responses', async () => {
   const body = { foo: 'bar' }

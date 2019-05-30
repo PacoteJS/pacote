@@ -10,7 +10,7 @@ import {
 } from 'fast-check'
 import { isPlainObject } from '../src'
 
-test('true for plain objects', () => {
+test('Plain objects are plain objects', () => {
   assert(
     property(object(), o => {
       expect(isPlainObject(o)).toBe(true)
@@ -18,7 +18,7 @@ test('true for plain objects', () => {
   )
 })
 
-test('true for instances of Proxy', () => {
+test('Proxy is a plain object', () => {
   assert(
     property(object(), o => {
       expect(isPlainObject(new Proxy(o, {}))).toBe(true)
@@ -26,20 +26,20 @@ test('true for instances of Proxy', () => {
   )
 })
 
-test('false for undefined', () => {
+test('Undefined is not a plain object', () => {
   expect(isPlainObject(undefined)).toBe(false)
 })
 
-test('false for null', () => {
+test('Null is not a plain object', () => {
   expect(isPlainObject(null)).toBe(false)
 })
 
-test('false for booleans', () => {
+test('A boolean is not a plain object', () => {
   expect(isPlainObject(true)).toBe(false)
   expect(isPlainObject(false)).toBe(false)
 })
 
-test('false for strings', () => {
+test('A string is not a plain object', () => {
   assert(
     property(string(), s => {
       expect(isPlainObject(s)).toBe(false)
@@ -47,7 +47,7 @@ test('false for strings', () => {
   )
 })
 
-test('false for numbers', () => {
+test('A number is not a plain object', () => {
   assert(
     property(float(), f => {
       expect(isPlainObject(f)).toBe(false)
@@ -55,7 +55,7 @@ test('false for numbers', () => {
   )
 })
 
-test('false for functions', () => {
+test('A function is not a plain object', () => {
   assert(
     property(func(anything()), f => {
       expect(isPlainObject(f)).toBe(false)
@@ -63,7 +63,7 @@ test('false for functions', () => {
   )
 })
 
-test('false for arrays', () => {
+test('An array is not a plain object', () => {
   assert(
     property(array(anything()), a => {
       expect(isPlainObject(a)).toBe(false)
@@ -71,16 +71,16 @@ test('false for arrays', () => {
   )
 })
 
-test('false for Symbols', () => {
+test('Symbol is not a plain object', () => {
   expect(isPlainObject(Symbol())).toBe(false)
 })
 
-test('false for instances of RegExp', () => {
+test('RegExp is not a plain object', () => {
   expect(isPlainObject(/a/)).toBe(false)
   expect(isPlainObject(RegExp(''))).toBe(false)
 })
 
-test('false for Promises', () => {
+test('Promise is not a plain object', () => {
   expect(isPlainObject(Promise.resolve())).toBe(false)
 })
 
@@ -102,6 +102,6 @@ test.each<[string, any]>([
   ['Uint8ClampedArray', Uint8ClampedArray],
   ['WeakMap', WeakMap],
   ['WeakSet', WeakSet]
-])('false for instances of %s', (_, ArrayClass) => {
+])('%s is not a plain object', (_, ArrayClass) => {
   expect(isPlainObject(new ArrayClass())).toBe(false)
 })

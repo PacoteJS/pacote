@@ -1,8 +1,8 @@
 import React from 'react'
-import { render, cleanup, fireEvent } from 'react-testing-library'
+import { render, cleanup, fireEvent } from '@testing-library/react'
 import { useOutside } from '../src'
 
-beforeEach(cleanup)
+afterEach(cleanup)
 
 test.each<
   [keyof DocumentEventMap, (element: Element | Window, options?: {}) => boolean]
