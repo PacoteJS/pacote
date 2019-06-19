@@ -1,5 +1,7 @@
 import { BaseError, ComplexError } from '@pacote/error'
 
+type ErrorCauses = Error | BaseError | readonly (Error | BaseError)[]
+
 export class StatusError<T> extends BaseError {
   constructor(
     public readonly status: number,
@@ -12,20 +14,14 @@ export class StatusError<T> extends BaseError {
 }
 
 export class NetworkError extends ComplexError {
-  constructor(
-    message = '',
-    causes: Error | BaseError | ReadonlyArray<Error | BaseError> = []
-  ) {
+  constructor(message = '', causes: ErrorCauses = []) {
     super(message, causes)
     NetworkError.imprint(this)
   }
 }
 
 export class ParserError extends ComplexError {
-  constructor(
-    message = '',
-    causes: Error | BaseError | ReadonlyArray<Error | BaseError> = []
-  ) {
+  constructor(message = '', causes: ErrorCauses = []) {
     super(message, causes)
     ParserError.imprint(this)
   }

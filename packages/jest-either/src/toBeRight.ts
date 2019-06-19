@@ -1,5 +1,6 @@
 import { matcherHint } from 'jest-matcher-utils'
-import { Either } from 'fp-ts/lib/Either'
+import { Either, isRight } from 'fp-ts/lib/Either'
+import { pipe } from 'fp-ts/lib/pipeable'
 
 declare global {
   namespace jest {
@@ -20,7 +21,10 @@ const failMessage = () => () =>
   'Expected Either to be right, received left.'
 
 export function toBeRight(actual: Either<any, any>) {
-  const pass = actual.isRight()
+  const pass = pipe(
+    actual,
+    isRight
+  )
 
   return {
     pass,

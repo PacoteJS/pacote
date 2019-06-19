@@ -1,5 +1,5 @@
-import { tryCatch, left, right, TaskEither } from 'fp-ts/lib/TaskEither'
-import { task, Task } from 'fp-ts/lib/Task'
+import { tryCatch, left2v, TaskEither, chain } from 'fp-ts/lib/TaskEither'
+import { pipe } from 'fp-ts/lib/pipeable'
 import { StatusError, NetworkError, FetchError, ParserError } from './errors'
 
 type Fetch<E, T> = (
@@ -29,20 +29,34 @@ async function parseLeft<E>(response: Response): Promise<E | string> {
   return parse<E>(response.clone()).catch(async () => response.text())
 }
 
-function statusError<E>(
+function handleSuccess<T>(
+  parseFn: (r: Response) => Promise<T>,
+  response: Response
+): TaskEither<ParserError, T | string> {
+  return tryCatch(
+    async () => parseFn(response),
+    error => new ParserError('Could not parse response', error as Error)
+  )
+}
+
+function handleFailure<E>(
   parseFn: (r: Response) => Promise<E>,
   response: Response
-): Task<StatusError<E | string> | ParserError> {
-  return new Task(async () =>
-    parseFn(response)
-      .then(body => new StatusError(response.status, response.statusText, body))
-      .catch(
-        error =>
-          new ParserError('Could not parse error response', [
-            new StatusError(response.status, response.statusText),
-            error
-          ])
+): TaskEither<StatusError<E> | ParserError, never> {
+  return pipe(
+    tryCatch(
+      async () => parseFn(response),
+      error =>
+        new ParserError('Could not parse error response', [
+          new StatusError(response.status, response.statusText),
+          error as Error
+        ])
+    ),
+    chain(body =>
+      left2v<StatusError<E> | ParserError>(
+        new StatusError(response.status, response.statusText, body)
       )
+    )
   )
 }
 
@@ -57,24 +71,17 @@ export function createFetch<E, T>(
   }
 
   return (input, init) =>
-    tryCatch<FetchError<E | string>, Response>(
-      async () => f.fetch(input, init),
-      error => new NetworkError('Network request failed', error as Error)
+    pipe(
+      tryCatch(
+        async () => f.fetch(input, init),
+        error => new NetworkError('Network request failed', error as Error)
+      ),
+      chain(response =>
+        response.ok
+          ? handleSuccess(f.parse, response)
+          : handleFailure(f.parseLeft, response)
+      )
     )
-      .chain(
-        response =>
-          response.ok
-            ? right(task.of(response))
-            : left<StatusError<E | string> | ParserError, Response>(
-                statusError(f.parseLeft, response.clone())
-              )
-      )
-      .chain(response =>
-        tryCatch<ParserError, T | string>(
-          async () => f.parse(response.clone()),
-          error => new ParserError('Could not parse response', error as Error)
-        )
-      )
 }
 
 export const ffetch = createFetch()

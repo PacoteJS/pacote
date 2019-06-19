@@ -1,5 +1,6 @@
 import { isPlainObject } from '@pacote/is-plain-object'
-import { Either } from 'fp-ts/lib/Either'
+import { Either, fold } from 'fp-ts/lib/Either'
+import { pipe } from 'fp-ts/lib/pipeable'
 import { equals, map, where, F } from 'ramda'
 
 export interface AsymmetricMatcher {
@@ -25,12 +26,18 @@ export function leftPredicate(
   actual: Either<any, any>,
   predicate: (left: any) => boolean
 ): boolean {
-  return actual.fold(predicate, F)
+  return pipe(
+    actual,
+    fold(predicate, F)
+  )
 }
 
 export function rightPredicate(
   actual: Either<any, any>,
   predicate: (right: any) => boolean
 ): boolean {
-  return actual.fold(F, predicate)
+  return pipe(
+    actual,
+    fold(F, predicate)
+  )
 }

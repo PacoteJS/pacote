@@ -25,7 +25,6 @@
     "no-reference": true,
     "no-shadowed-variable": true,
     "no-unnecessary-class": true,
-    "no-use-before-declare": true,
     "no-var-requires": true,
     "prefer-const": true,
     "prefer-function-over-method": true,

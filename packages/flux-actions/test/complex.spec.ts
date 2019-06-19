@@ -1,5 +1,6 @@
+import { Either, left, right, fold } from 'fp-ts/lib/Either'
+import { pipe } from 'fp-ts/lib/pipeable'
 import { createAction, reducerFromState } from '../src/index'
-import { Either, left, right } from 'fp-ts/lib/Either'
 
 test('complex payloads', () => {
   type Payload = Either<Error, number>
@@ -14,9 +15,9 @@ test('complex payloads', () => {
   const reducer = reducerFromState<State>({ year: 1985, error: null }).on(
     changeYear,
     (s, a) =>
-      a.payload.fold<State>(
-        error => ({ ...s, error }),
-        year => ({ year, error: null })
+      pipe(
+        a.payload,
+        fold(error => ({ ...s, error }), year => ({ year, error: null }))
       )
   )
 
