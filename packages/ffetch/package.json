@@ -35,6 +35,6 @@
   },
   "dependencies": {
     "@pacote/error": "^2.0.2",
-    "fp-ts": "^1.8.1"
+    "fp-ts": "^1.19.0"
   }
 }
