@@ -7,22 +7,22 @@ test('complex payloads', () => {
 
   type State = {
     year: number
-    error: Error | null
+    error?: Error
   }
 
   const changeYear = createAction<Payload>('CHANGE_YEAR')
 
-  const reducer = reducerFromState<State>({ year: 1985, error: null }).on(
+  const reducer = reducerFromState<State>({ year: 1985 }).on(
     changeYear,
     (s, a) =>
       pipe(
         a.payload,
-        fold(error => ({ ...s, error }), year => ({ year, error: null }))
+        fold(error => ({ ...s, error }), year => ({ year, error: undefined }))
       )
   )
 
   expect(reducer(undefined, changeYear(right<Error, number>(1955)))) //
-    .toEqual({ year: 1955, error: null })
+    .toEqual({ year: 1955 })
 
   expect(reducer(undefined, changeYear(left<Error, number>(Error())))) //
     .toEqual({ year: 1985, error: Error() })

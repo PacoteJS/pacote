@@ -118,15 +118,15 @@ import { Either, tryCatch } from 'fp-ts/lib/Either'
 
 type State = {
   year: number
-  error: Error | null
+  error?: Error
 }
 
 const changeYear = createAction<Either<Error, number>>('CHANGE_YEAR')
 
-const reducer = reducerFromState<State>({ year: 1985, error: null })
+const reducer = reducerFromState<State>({ year: 1985 })
   .on(changeYear, (state, { payload } ) => payload.fold<State>(
     error => ({ ...state, error }),
-    year => ({ year, error: null })
+    year => ({ year, error: undefined })
   ))
 
 reducer(undefined, changeYear(tryCatch(...)))

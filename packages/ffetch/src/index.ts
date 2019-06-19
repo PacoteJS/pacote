@@ -1,5 +1,5 @@
-import { tryCatch, left2v, TaskEither, chain } from 'fp-ts/lib/TaskEither'
 import { pipe } from 'fp-ts/lib/pipeable'
+import { tryCatch, left2v, TaskEither, chain } from 'fp-ts/lib/TaskEither'
 import { StatusError, NetworkError, FetchError, ParserError } from './errors'
 
 type Fetch<E, T> = (
@@ -43,43 +43,42 @@ function handleFailure<E>(
   parseFn: (r: Response) => Promise<E>,
   response: Response
 ): TaskEither<StatusError<E> | ParserError, never> {
+  const statusError = (body?: E) =>
+    new StatusError(response.status, response.statusText, body)
+
   return pipe(
     tryCatch(
-      async () => parseFn(response),
+      async () => parseFn(response).then(statusError),
       error =>
         new ParserError('Could not parse error response', [
-          new StatusError(response.status, response.statusText),
+          statusError(),
           error as Error
         ])
     ),
-    chain(body =>
-      left2v<StatusError<E> | ParserError>(
-        new StatusError(response.status, response.statusText, body)
-      )
-    )
+    chain(error => left2v<StatusError<E> | ParserError>(error))
   )
 }
 
 export function createFetch<E, T>(
-  fetchOptions?: Partial<FetchOptions<E, T>>
+  options?: Partial<FetchOptions<E, T>>
 ): Fetch<E, T> {
-  const f: FetchOptions<E | string, T | string> = {
+  const o: FetchOptions<E | string, T | string> = {
     fetch: window.fetch,
     parse,
     parseLeft,
-    ...fetchOptions
+    ...options
   }
 
   return (input, init) =>
     pipe(
       tryCatch(
-        async () => f.fetch(input, init),
+        async () => o.fetch(input, init),
         error => new NetworkError('Network request failed', error as Error)
       ),
       chain(response =>
         response.ok
-          ? handleSuccess(f.parse, response)
-          : handleFailure(f.parseLeft, response)
+          ? handleSuccess(o.parse, response)
+          : handleFailure(o.parseLeft, response)
       )
     )
 }
