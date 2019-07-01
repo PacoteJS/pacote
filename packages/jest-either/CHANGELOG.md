@@ -1,5 +1,12 @@
 # Change Log
 
+## [v3.0.0](https://github.com/PacoteJS/pacote/tree/@pacote/jest-either@3.0.0) (2019-07-01)
+
+[Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/jest-either@2.1.0...@pacote/jest-either@3.0.0)
+
+- **Breaking change:** This version now targets `fp-ts` 2.0.0 or more recent.
+- **Breaking change:** This library now requires `fp-ts` to be installed as a peer dependency.
+
 ## [v2.1.0](https://github.com/PacoteJS/pacote/tree/@pacote/jest-either@2.1.0) (2019-02-12)
 
 [Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/jest-either@2.0.1...@pacote/jest-either@2.1.0)

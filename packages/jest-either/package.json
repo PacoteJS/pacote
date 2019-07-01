@@ -32,14 +32,17 @@
   "scripts": {},
   "dependencies": {
     "@pacote/is-plain-object": "^1.0.3",
-    "fp-ts": "^2.0.0",
     "jest-diff": "^24.0.0",
     "jest-matcher-utils": "^24.0.0",
     "ramda": "^0.26.1"
   },
+  "peerDependencies": {
+    "fp-ts": "^2.0.0"
+  },
   "devDependencies": {
     "@types/jest-diff": "^20.0.0",
     "@types/jest-matcher-utils": "^21.0.1",
-    "@types/ramda": "^0.26.5"
+    "@types/ramda": "^0.26.5",
+    "fp-ts": "^2.0.0"
   }
 }

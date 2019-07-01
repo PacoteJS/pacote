@@ -7,14 +7,10 @@ export interface AsymmetricMatcher {
   asymmetricMatch(other: any): boolean
 }
 
-export function isFunction(value: any): value is Function {
-  return typeof value === 'function'
-}
-
 export function isAsymmetricMatcher(
   matcher: any
 ): matcher is AsymmetricMatcher {
-  return isFunction(matcher.asymmetricMatch)
+  return typeof matcher.asymmetricMatch === 'function'
 }
 
 export const matchObject = (s: any) => (o: any) =>

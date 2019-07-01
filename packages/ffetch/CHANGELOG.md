@@ -1,22 +1,28 @@
 # Change Log
 
-## [v4.0.0](https://github.com/PacoteJS/pacote/tree/@pacote/ffetch@4.0.0) (2018-11-08)
+## [v5.0.0](https://github.com/PacoteJS/pacote/tree/@pacote/ffetch@5.0.0) (2019-07-01)
+
+[Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/ffetch@4.0.0...@pacote/ffetch@5.0.0)
+
+- **Breaking change:** This library now requires `fp-ts` to be installed as a peer dependency.
+
+## [v4.0.0](https://github.com/PacoteJS/pacote/tree/@pacote/ffetch@4.0.0) (2019-07-01)
 
 [Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/ffetch@3.0.4...@pacote/ffetch@4.0.0)
 
-- Breaking change: Due to the way `fp-ts` 2.0.0 operates, `await ffetch(...).run()` is now executed using `await ffetch(...)()`.
+- **Breaking change:** Due to the way `fp-ts` 2.0.0 operates, `await ffetch(...).run()` is now executed using `await ffetch(...)()`.
 
 ## [v3.0.0](https://github.com/PacoteJS/pacote/tree/@pacote/ffetch@3.0.0) (2018-11-08)
 
 [Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/ffetch@2.0.0...@pacote/ffetch@3.0.0)
 
-- Breaking change: Changes to structure and type of thrown errors.
+- **Breaking change:** Changes to structure and type of thrown errors.
 
 ## [v2.0.0](https://github.com/PacoteJS/pacote/tree/@pacote/ffetch@2.0.0) (2018-10-04)
 
 [Full Changelog](https://github.com/PacoteJS/pacote/compare/v1.1.1...@pacote/ffetch@2.0.0)
 
-- Breaking change: `ffetch` no longer relies on `isomorphic-fetch`, and instead uses the global `fetch` function, if available. Developers should set a global polyfill or build a custom `ffetch` function passing any Fetch API compatible function in the options.
+- **Breaking change:** `ffetch` no longer relies on `isomorphic-fetch`, and instead uses the global `fetch` function, if available. Developers should set a global polyfill or build a custom `ffetch` function passing any Fetch API compatible function in the options.
 
 ## [v1.1.0](https://github.com/goblindegook/ffetch/tree/v1.1.0) (2018-10-02)
 
