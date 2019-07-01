@@ -21,7 +21,7 @@ API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) it wraps:
 ```typescript
 import { ffetch } from '@pacote/ffetch'
 
-const response = await ffetch('https://goblindegook.com/api/kittens/1').run()
+const response = await ffetch('https://goblindegook.com/api/kittens/1')()
 
 console.log(result.value) // yields either an error or the response body
 ```
@@ -35,7 +35,7 @@ doesn't immediately run and allows chaining extra functionality. For example,
 you could more simply implement features like request cancellation and retrying
 around such an abstraction.
 
-In the example above, executing `ffetch(...).run()` returns a `Promise` like the
+In the example above, executing `ffetch(...)()` returns a `Promise` like the
 Fetch API does. But instead of resolving to a successful response (or rejecting
 on error), this `Promise` resolves to an
 [`Either`](https://gcanti.github.io/fp-ts/Either.html) representation that holds
@@ -50,7 +50,7 @@ without resorting to (sometimes nested) `try ... catch` constructs. For example:
 import { ffetch } from '@pacote/ffetch'
 
 // Perform the request:
-const response = await ffetch('https://goblindegook.com/api/kittens/1').run()
+const response = await ffetch('https://goblindegook.com/api/kittens/1')()
 
 // Handling success and failure responses separately:
 response
@@ -85,7 +85,7 @@ import * as unfetch from 'unfetch'
 
 const unffetch = createFetch({ fetch: unfetch })
 
-await unffetch('https://goblindegook.com/api/kittens/1').run()
+await unffetch('https://goblindegook.com/api/kittens/1')()
 ```
 
 #### `parse: (r: Response) => Promise<T>`
@@ -104,7 +104,7 @@ const binaryFetch = createFetch({
   parse: r => r.blob()
 })
 
-await binaryFetch('https://goblindegook.com/api/kittens/1').run()
+await binaryFetch('https://goblindegook.com/api/kittens/1')()
 ```
 
 #### `parseLeft: (r: Response) => Promise<E>`
@@ -125,7 +125,7 @@ const customErrorHandlingFetch = createFetch({
   parseLeft: r => (r.status >= 500 ? r.text() : r.json())
 })
 
-await customErrorHandlingFetch('https://goblindegook.com/api/kittens/1').run()
+await customErrorHandlingFetch('https://goblindegook.com/api/kittens/1')()
 ```
 
 ## License
