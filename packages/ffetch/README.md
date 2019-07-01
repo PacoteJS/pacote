@@ -48,24 +48,30 @@ without resorting to (sometimes nested) `try ... catch` constructs. For example:
 
 ```typescript
 import { ffetch } from '@pacote/ffetch'
+import { pipe } from 'fp-ts/lib/pipeable'
+import { map, mapLeft, getOrElse } from 'fp-ts/lib/Either'
 
 // Perform the request:
 const response = await ffetch('https://goblindegook.com/api/kittens/1')()
 
 // Handling success and failure responses separately:
-response
-  .map(body => {
+pipe(
+  response,
+  map(body => {
     /* handle successful response */
     return body
-  })
-  .leftMap(error => {
+  }),
+  mapLeft(error => {
     /* handle request failure */
     return error
   })
 )
 
 // Get the successful response body falling back to some default value:
-const okOrDefault = response.getOrElse('some default value')
+const okOrDefault = pipe(
+  response,
+  getOrElse(() => 'some default value')
+)
 ```
 
 ### Options
