@@ -4,14 +4,14 @@ exports[`.not.toBeEither() fails when object is a left 1`] = `
 "[2mexpect([22m[31mreceived[39m[2m).not.toBeEither()[22m
 
 Unexpected Either, received:
-  [31m{\\"_tag\\": \\"Left\\", \\"value\\": false}[39m"
+  [31m{\\"_tag\\": \\"Left\\", \\"left\\": false}[39m"
 `;
 
 exports[`.not.toBeEither() fails when object is a right 1`] = `
 "[2mexpect([22m[31mreceived[39m[2m).not.toBeEither()[22m
 
 Unexpected Either, received:
-  [31m{\\"_tag\\": \\"Right\\", \\"value\\": false}[39m"
+  [31m{\\"_tag\\": \\"Right\\", \\"right\\": false}[39m"
 `;
 
 exports[`.toBeEither() fails when object is not an Either 1`] = `

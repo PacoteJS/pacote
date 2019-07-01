@@ -1,5 +1,11 @@
 # Change Log
 
+## [v4.0.0](https://github.com/PacoteJS/pacote/tree/@pacote/ffetch@4.0.0) (2018-11-08)
+
+[Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/ffetch@3.0.4...@pacote/ffetch@4.0.0)
+
+- Breaking change: Due to the way `fp-ts` 2.0.0 operates, `await ffetch(...).run()` is now executed using `await ffetch(...)()`.
+
 ## [v3.0.0](https://github.com/PacoteJS/pacote/tree/@pacote/ffetch@3.0.0) (2018-11-08)
 
 [Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/ffetch@2.0.0...@pacote/ffetch@3.0.0)

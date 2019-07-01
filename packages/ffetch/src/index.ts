@@ -1,5 +1,5 @@
 import { pipe } from 'fp-ts/lib/pipeable'
-import { tryCatch, left2v, TaskEither, chain } from 'fp-ts/lib/TaskEither'
+import { tryCatch, left, TaskEither, chain } from 'fp-ts/lib/TaskEither'
 import { StatusError, NetworkError, FetchError, ParserError } from './errors'
 
 type Fetch<E, T> = (
@@ -55,7 +55,7 @@ function handleFailure<E>(
           error as Error
         ])
     ),
-    chain(error => left2v<StatusError<E> | ParserError>(error))
+    chain(error => left<StatusError<E> | ParserError>(error))
   )
 }
 

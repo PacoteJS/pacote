@@ -1,6 +1,5 @@
 import { matcherHint, printReceived } from 'jest-matcher-utils'
-import { Either } from 'fp-ts/lib/Either'
-import { isFunction } from './shared/predicates'
+import { Either, isLeft } from 'fp-ts/lib/Either'
 
 declare global {
   namespace jest {
@@ -24,7 +23,9 @@ const failMessage = (actual: any) => () =>
 
 function isEither(actual: any): actual is Either<any, any> {
   return (
-    actual != null && isFunction(actual.isLeft) && isFunction(actual.isRight)
+    actual !== undefined &&
+    actual !== null &&
+    (isLeft(actual) === true || isLeft(actual) === false)
   )
 }
 

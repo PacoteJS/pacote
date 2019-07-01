@@ -2,6 +2,7 @@ import 'whatwg-fetch'
 import nock from 'nock'
 import { ffetch, createFetch } from '../src'
 import { left, right } from 'fp-ts/lib/Either'
+
 import { NetworkError, StatusError, ParserError } from '../src/errors'
 
 const url = 'http://localhost/test'
@@ -15,7 +16,9 @@ test('successful JSON responses', async () => {
     .reply(200, body, {
       'content-type': 'application/json; charset=utf-8'
     })
-  const actual = await ffetch(url).run()
+
+  const actual = await ffetch(url)()
+
   expect(actual).toEqual(right(body))
 })
 
@@ -26,7 +29,7 @@ test('successful plain text responses', async () => {
     .reply(200, body, {
       'content-type': 'text/plain'
     })
-  const actual = await ffetch(url).run()
+  const actual = await ffetch(url)()
   expect(actual).toEqual(right(body))
 })
 
@@ -34,7 +37,7 @@ test('connection errors', async () => {
   nock(url)
     .get('')
     .replyWithError('')
-  const actual = await ffetch(url).run()
+  const actual = await ffetch(url)()
   expect(actual).toEqual(
     left(
       new NetworkError('Network request failed', [
@@ -52,7 +55,7 @@ test('status code errors', async () => {
     .reply(status, body, {
       'content-type': 'application/json; charset=utf-8'
     })
-  const actual = await ffetch(url).run()
+  const actual = await ffetch(url)()
   expect(actual).toEqual(
     left(new StatusError(status, 'Internal Server Error', body))
   )
@@ -64,7 +67,7 @@ test('invalid response body', async () => {
     .reply(200, '<not json>', {
       'content-type': 'application/json; charset=utf-8'
     })
-  const actual = await ffetch(url).run()
+  const actual = await ffetch(url)()
   expect(actual).toEqual(
     left(
       new ParserError('Could not parse response', [
@@ -82,7 +85,7 @@ test('plain text body for status errors', async () => {
     .reply(status, body, {
       'content-type': 'text/plain'
     })
-  const actual = await ffetch(url).run()
+  const actual = await ffetch(url)()
   expect(actual).toEqual(left(new StatusError(status, 'Not Found', body)))
 })
 
@@ -94,7 +97,7 @@ test('invalid JSON body for status errors', async () => {
     .reply(status, body, {
       'content-type': 'application/json; charset=utf-8'
     })
-  const actual = await ffetch(url).run()
+  const actual = await ffetch(url)()
   expect(actual).toEqual(left(new StatusError(status, 'Bad Request', body)))
 })
 
@@ -109,7 +112,7 @@ test('custom body parser success', async () => {
     parse: async () => Promise.resolve(expected)
   })
 
-  const actual = await customFetch(url).run()
+  const actual = await customFetch(url)()
 
   expect(actual).toEqual(right(expected))
 })
@@ -124,7 +127,7 @@ test('custom parser error', async () => {
     parse: async () => Promise.reject(error)
   })
 
-  const actual = await customFetch(url).run()
+  const actual = await customFetch(url)()
 
   expect(actual).toEqual(
     left(new ParserError('Could not parse response', [error]))
@@ -142,7 +145,7 @@ test('custom error parser success', async () => {
     parseLeft: async () => Promise.resolve(body)
   })
 
-  const actual = await customFetch(url).run()
+  const actual = await customFetch(url)()
 
   expect(actual).toEqual(
     left(new StatusError(status, 'Internal Server Error', body))
@@ -160,7 +163,7 @@ test('custom error parser failure', async () => {
     parseLeft: async () => Promise.reject(error)
   })
 
-  const actual = await customFetch(url).run()
+  const actual = await customFetch(url)()
 
   expect(actual).toEqual(
     left(
@@ -181,6 +184,6 @@ test('custom Fetch polyfill', async () => {
     text: jest.fn().mockResolvedValue('')
   })
   const customFetch = createFetch({ fetch: mockFetch })
-  await customFetch(url, { method: 'POST ' }).run()
+  await customFetch(url, { method: 'POST ' })()
   expect(mockFetch).toHaveBeenCalledWith(url, { method: 'POST ' })
 })
