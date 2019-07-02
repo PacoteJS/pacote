@@ -1,7 +1,7 @@
 import { useRef, RefObject, useEffect } from 'react'
 
 export function useOutside<E extends HTMLElement>(
-  type: keyof DocumentEventMap | Array<keyof DocumentEventMap>,
+  type: keyof DocumentEventMap | (keyof DocumentEventMap)[],
   handler: EventListener
 ): RefObject<E> {
   const types = Array<keyof DocumentEventMap>().concat(type)

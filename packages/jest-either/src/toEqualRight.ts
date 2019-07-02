@@ -9,6 +9,7 @@ import {
 } from './shared/predicates'
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace jest {
     interface Matchers<R> {
       toEqualRight(expected: any): R

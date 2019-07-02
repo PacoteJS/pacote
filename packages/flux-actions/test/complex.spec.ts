@@ -5,7 +5,7 @@ import { createAction, reducerFromState } from '../src/index'
 test('complex payloads', () => {
   type Payload = Either<Error, number>
 
-  type State = {
+  interface State {
     year: number
     error?: Error
   }

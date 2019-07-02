@@ -4,6 +4,7 @@ import { matchObject, matchString, rightPredicate } from './shared/predicates'
 import { printReceivedRight } from './shared/print'
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace jest {
     interface Matchers<R> {
       toMatchRight(expected: any): R

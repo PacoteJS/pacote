@@ -1,6 +1,8 @@
 type Fn<A extends any[], R> = (...args: A) => R
 
-type Cache<R> = { [key: string]: R }
+interface Cache<R> {
+  [key: string]: R
+}
 
 function createCache<R>() {
   const cache: Cache<R> = {}

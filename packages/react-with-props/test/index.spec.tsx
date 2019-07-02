@@ -14,7 +14,9 @@ describe('withProps()', () => {
   })
 
   test('wraps a component and forwards props', () => {
-    type TestProps = { text?: string }
+    interface TestProps {
+      text?: string
+    }
     const Test: FunctionComponent<TestProps> = ({ text = '' }) => <>{text}</>
     const Wrapped = withProps({}, Test)
     const { container: actual } = render(<Wrapped text="Test" />)
@@ -23,7 +25,9 @@ describe('withProps()', () => {
   })
 
   test('forwards children to components', () => {
-    type TestProps = { children?: ReactNode }
+    interface TestProps {
+      children?: ReactNode
+    }
     const Test = ({ children }: TestProps) => <>{children}</>
     const Wrapped = withProps({}, Test)
     const { container: actual } = render(
@@ -40,7 +44,9 @@ describe('withProps()', () => {
   })
 
   test('injects optional props into components', () => {
-    type TestProps = { text?: string }
+    interface TestProps {
+      text?: string
+    }
     const Test = ({ text }: TestProps) => <>{text}</>
     const Wrapped = withProps({ text: 'Test' }, Test)
     const { container: actual } = render(<Wrapped />)
@@ -49,7 +55,10 @@ describe('withProps()', () => {
   })
 
   test('injects mandatory props into components', () => {
-    type TestProps = { name: string; value: string }
+    interface TestProps {
+      name: string
+      value: string
+    }
     const Test = ({ name, value }: TestProps) => (
       <>
         {name}: {value}
@@ -109,7 +118,10 @@ describe('withProps()', () => {
   })
 
   test('injects props into components from a function', () => {
-    type TestProps = { name: string; value: string }
+    interface TestProps {
+      name: string
+      value: string
+    }
     const Test = ({ name, value }: TestProps) => (
       <>
         {name}: {value}
@@ -133,7 +145,9 @@ describe('withDefaultProps()', () => {
   })
 
   test('wraps a component and forwards props', () => {
-    type TestProps = { text?: string }
+    interface TestProps {
+      text?: string
+    }
     const Test: FunctionComponent<TestProps> = ({ text = '' }) => <>{text}</>
     const Wrapped = withDefaultProps({}, Test)
     const { container: actual } = render(<Wrapped text="Test" />)
@@ -142,7 +156,9 @@ describe('withDefaultProps()', () => {
   })
 
   test('forwards children to components', () => {
-    type TestProps = { children?: ReactNode }
+    interface TestProps {
+      children?: ReactNode
+    }
     const Test = ({ children }: TestProps) => <>{children}</>
     const Wrapped = withDefaultProps({}, Test)
     const { container: actual } = render(
@@ -159,7 +175,9 @@ describe('withDefaultProps()', () => {
   })
 
   test('injects optional props into components', () => {
-    type TestProps = { text?: string }
+    interface TestProps {
+      text?: string
+    }
     const Test = ({ text }: TestProps) => <>{text}</>
     const Wrapped = withDefaultProps({ text: 'Test' }, Test)
     const { container: actual } = render(<Wrapped />)
@@ -168,7 +186,10 @@ describe('withDefaultProps()', () => {
   })
 
   test('injects mandatory props into components', () => {
-    type TestProps = { name: string; value: string }
+    interface TestProps {
+      name: string
+      value: string
+    }
     const Test = ({ name, value }: TestProps) => (
       <>
         {name}: {value}
@@ -181,7 +202,10 @@ describe('withDefaultProps()', () => {
   })
 
   test('overrides injected props into components', () => {
-    type TestProps = { name: string; value: string }
+    interface TestProps {
+      name: string
+      value: string
+    }
     const Test = ({ name, value }: TestProps) => (
       <>
         {name}: {value}

@@ -72,7 +72,7 @@ test('An array is not a plain object', () => {
 })
 
 test('Symbol is not a plain object', () => {
-  expect(isPlainObject(Symbol())).toBe(false)
+  expect(isPlainObject(Symbol(''))).toBe(false)
 })
 
 test('RegExp is not a plain object', () => {

@@ -1,6 +1,9 @@
 export class BaseError extends Error {
-  constructor(public readonly message: string = '') {
+  public readonly message: string
+
+  public constructor(message = '') {
     super(message)
+    this.message = message
     BaseError.imprint(this)
   }
 
@@ -19,24 +22,26 @@ export class BaseError extends Error {
     }
   }
 
-  public static fromString(message = '') {
+  public static fromString(message = ''): BaseError {
     return new this(message)
   }
 }
 
 export class ComplexError extends BaseError {
-  public readonly causes: ReadonlyArray<Error | BaseError>
+  public readonly causes: readonly (Error | BaseError)[]
 
-  constructor(
+  public constructor(
     message = '',
-    causes: Error | BaseError | ReadonlyArray<Error | BaseError> = []
+    causes: Error | BaseError | readonly (Error | BaseError)[] = []
   ) {
     super(message)
     ComplexError.imprint(this)
-    this.causes = new Array().concat(causes)
+    this.causes = Array<Error | BaseError>().concat(causes)
   }
 
-  public static fromErrors(errors: ReadonlyArray<Error | BaseError>) {
+  public static fromErrors(
+    errors: readonly (Error | BaseError)[]
+  ): ComplexError {
     return new this(undefined, errors)
   }
 }

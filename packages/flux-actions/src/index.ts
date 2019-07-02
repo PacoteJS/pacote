@@ -1,4 +1,4 @@
-export type Action<P = any, M = any> = {
+export interface Action<P = any, M = any> {
   type: string
   payload: P
   meta: M
@@ -19,9 +19,9 @@ type ReduceHandler<S, P = any, M = any> = (state: S, action: Action<P, M>) => S
 
 type ReducerMatch<S> = [ActionCreator, ReduceHandler<S>]
 
-type ReducerMethods<S> = {
+interface ReducerMethods<S> {
   on: <P, M>(
-    creators: ActionCreator<P, M> | ReadonlyArray<ActionCreator<P, M>>,
+    creators: ActionCreator<P, M> | ActionCreator<P, M>[],
     handler: ReduceHandler<S, P, M>
   ) => EnhancedReducer<S>
   run: Reducer<S>
@@ -45,7 +45,7 @@ export function isType<P, M>(
 
 function createReducer<S>(
   initialState: S,
-  matches: ReadonlyArray<ReducerMatch<S>>
+  matches: readonly ReducerMatch<S>[]
 ): EnhancedReducer<S> {
   const reducer: Reducer<S> = (currentState = initialState, action) =>
     matches.reduce(

@@ -2,6 +2,7 @@ import { matcherHint, printReceived } from 'jest-matcher-utils'
 import { Either, isLeft } from 'fp-ts/lib/Either'
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace jest {
     interface Matchers<R> {
       toBeEither(): R

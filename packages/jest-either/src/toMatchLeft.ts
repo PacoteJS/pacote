@@ -1,9 +1,12 @@
+// eslint-disable export
+
 import { matcherHint, printExpected } from 'jest-matcher-utils'
 import { Either } from 'fp-ts/lib/Either'
 import { matchObject, matchString, leftPredicate } from './shared/predicates'
 import { printReceivedLeft } from './shared/print'
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace jest {
     interface Matchers<R> {
       toMatchLeft(expected: any): R
