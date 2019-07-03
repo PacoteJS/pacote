@@ -4,15 +4,10 @@ import { useOutside } from '../src'
 
 afterEach(cleanup)
 
-test.each<
-  [keyof DocumentEventMap, (element: Element | Window, options?: {}) => boolean]
->([
-  ['click', fireEvent.click],
-  ['touchend', fireEvent.touchEnd],
-  ['mouseover', fireEvent.mouseOver]
-])('handler is called on %s outside', (type, fireFunction) => {
-  const handler = jest.fn()
-
+function renderTestComponent(
+  type: keyof DocumentEventMap | (keyof DocumentEventMap)[],
+  handler: EventListener
+) {
   const Test = () => {
     const ref = useOutside<HTMLDivElement>(type, handler)
     return (
@@ -23,10 +18,19 @@ test.each<
     )
   }
 
-  const { getByText } = render(<Test />)
+  return render(<Test />)
+}
 
+test.each<
+  [keyof DocumentEventMap, (element: Element | Window, options?: {}) => boolean]
+>([
+  ['click', fireEvent.click],
+  ['touchend', fireEvent.touchEnd],
+  ['mouseover', fireEvent.mouseOver]
+])('handler is called on %s outside', (type, fireFunction) => {
+  const handler = jest.fn()
+  const { getByText } = renderTestComponent(type, handler)
   fireFunction(getByText('Outside'))
-
   expect(handler).toHaveBeenCalled()
 })
 
@@ -38,40 +42,15 @@ test.each<
   ['mouseover', fireEvent.mouseOver]
 ])('handler is not called on %s inside', (type, fireFunction) => {
   const handler = jest.fn()
-
-  const Test = () => {
-    const ref = useOutside<HTMLDivElement>(type, handler)
-    return (
-      <>
-        <div ref={ref}>Inside</div>
-        <div>Outside</div>
-      </>
-    )
-  }
-
-  const { getByText } = render(<Test />)
-
+  const { getByText } = renderTestComponent(type, handler)
   fireFunction(getByText('Inside'))
-
   expect(handler).not.toHaveBeenCalled()
 })
 
 test('handler is called for multiple event types', () => {
   const handler = jest.fn()
-
-  const Test = () => {
-    const ref = useOutside<HTMLDivElement>(['click', 'touchend'], handler)
-    return (
-      <>
-        <div ref={ref}>Inside</div>
-        <div>Outside</div>
-      </>
-    )
-  }
-
-  const { getByText } = render(<Test />)
+  const { getByText } = renderTestComponent(['click', 'touchend'], handler)
   fireEvent.click(getByText('Outside'))
   fireEvent.touchEnd(getByText('Outside'))
-
   expect(handler).toHaveBeenCalledTimes(2)
 })
