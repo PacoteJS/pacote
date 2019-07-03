@@ -24,7 +24,6 @@ interface ReducerMethods<S> {
     creators: ActionCreator<P, M> | ActionCreator<P, M>[],
     handler: ReduceHandler<S, P, M>
   ) => EnhancedReducer<S>
-  run: Reducer<S>
 }
 
 type EnhancedReducer<S> = Reducer<S> & ReducerMethods<S>
@@ -62,12 +61,6 @@ function createReducer<S>(
           .concat(creators)
           .map<ReducerMatch<S>>(creator => [creator, handler])
       ])
-    },
-    run: (currentState, action) => {
-      console.warn(
-        '@pacote/flux-actions: The .run() method is deprecated, invoke the reducer function directly. E.g., instead of reducer.run(...), use reducer(...).'
-      )
-      return reducer(currentState, action)
     }
   })
 }
