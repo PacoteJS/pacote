@@ -8,7 +8,7 @@ function createCache<R>() {
   const cache: Cache<R> = {}
 
   return {
-    has: (key: string) => cache.hasOwnProperty(key),
+    has: (key: string) => Object.hasOwnProperty.call(cache, key),
 
     get: (key: string) => cache[key],
 

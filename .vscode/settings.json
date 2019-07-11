@@ -2,6 +2,7 @@
   "editor.formatOnSave": true,
   "prettier.tslintIntegration": true,
   "typescript.tsdk": "node_modules/typescript/lib",
-  "jest.pathToJest": "yarn test",
-  "eslint.enable": true
+  "eslint.enable": true,
+  "prettier.eslintIntegration": true,
+  "html.format.enable": false
 }
