@@ -38,7 +38,7 @@
     "bootstrap": "lerna bootstrap",
     "build": "tsc -b packages/*",
     "clean": "rimraf packages/*/lib",
-    "create": "plop",
+    "plop": "plop",
     "format": "prettier --write 'packages/*/{src,test}/**/*.{js,jsx,ts,tsx,json,css,md}'",
     "lint": "eslint 'packages/*/{src,test}/**/*.{ts,tsx}'",
     "prepublish": "yarn build && yarn test",
