@@ -1,5 +1,4 @@
 {
-  "name": "pacote",
   "description": "Monorepo for the @pacote organisation.",
   "main": "index.js",
   "repository": "https://github.com/PacoteJS/pacote",
