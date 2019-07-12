@@ -16,18 +16,28 @@ yarn add @pacote/computus
 ## Usage
 
 ```typescript
-import { gregorian } from '@pacote/computus'
+import { gregorian, julian } from '@pacote/computus'
 
 gregorian(2020) // .toLocaleDateString() => '4/12/2020'
+julian(2020) // .toLocaleDateString() => '4/19/2020'
 ```
 
 ### `gregorian(year: number): Date`
 
-The function takes a year and returns a `Date` object with the Gregorian
+This function takes a year and returns a `Date` object with the Gregorian
 calendar Easter day on that year at midnight.
 
-This function uses a version of the Meeus/Jones/Butcher algorithm published by
+The function uses a version of the Meeus/Jones/Butcher algorithm published by
 _New Scientist_ on 30 March 1961.
+
+### `julian(year: number): Date`
+
+This function takes a year and returns a `Date` object with the Eastern Orthodox
+Easter day on that year at midnight. Please note that this date is returned for
+the Gregorian calendar, 13 days (as of 1900 through 2099) after the Julian date.
+
+The function implements the Jean Meeus algorithm from his book _Astronomical
+Algorithms_ (1991).
 
 ## License
 
