@@ -29,7 +29,9 @@
     "lib": "lib",
     "test": "test"
   },
-  "scripts": {},
+  "scripts": {
+    "build": "tsc -b ."
+  },
   "dependencies": {
     "@pacote/is-plain-object": "file:../is-plain-object",
     "jest-diff": "^24.0.0",

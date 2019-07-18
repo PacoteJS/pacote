@@ -27,7 +27,9 @@
     "lib": "lib",
     "test": "test"
   },
-  "scripts": {},
+  "scripts": {
+    "build": "tsc -b ."
+  },
   "dependencies": {
     "@pacote/get-style": "file:../get-style"
   }
