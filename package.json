@@ -36,8 +36,8 @@
   },
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "build": "tsc -b packages/*",
-    "clean": "rimraf packages/*/lib",
+    "build": "tsc -b packages/error packages/get-style packages/is-plain-object packages/*",
+    "clean": "rimraf coverage packages/*/lib",
     "plop": "plop",
     "format": "prettier --write 'packages/*/{src,test}/**/*.{js,jsx,ts,tsx,json,css,md}'",
     "lint": "eslint 'packages/*/{src,test}/**/*.{ts,tsx}'",

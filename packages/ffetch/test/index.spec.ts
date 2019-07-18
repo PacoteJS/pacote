@@ -1,9 +1,10 @@
 import 'whatwg-fetch'
 import nock from 'nock'
+import matchers from '@pacote/jest-either'
 import { ffetch, createFetch } from '../src'
-import { left, right } from 'fp-ts/lib/Either'
-
 import { NetworkError, StatusError, ParserError } from '../src/errors'
+
+expect.extend(matchers)
 
 const url = 'http://localhost/test'
 
@@ -16,10 +17,8 @@ test('successful JSON responses', async () => {
     .reply(200, body, {
       'content-type': 'application/json; charset=utf-8'
     })
-
   const actual = await ffetch(url)()
-
-  expect(actual).toEqual(right(body))
+  expect(actual).toEqualRight(body)
 })
 
 test('successful plain text responses', async () => {
@@ -30,7 +29,7 @@ test('successful plain text responses', async () => {
       'content-type': 'text/plain'
     })
   const actual = await ffetch(url)()
-  expect(actual).toEqual(right(body))
+  expect(actual).toEqualRight(body)
 })
 
 test('connection errors', async () => {
@@ -38,12 +37,10 @@ test('connection errors', async () => {
     .get('')
     .replyWithError('')
   const actual = await ffetch(url)()
-  expect(actual).toEqual(
-    left(
-      new NetworkError('Network request failed', [
-        new TypeError('Network request failed')
-      ])
-    )
+  expect(actual).toEqualLeft(
+    new NetworkError('Network request failed', [
+      new TypeError('Network request failed')
+    ])
   )
 })
 
@@ -56,8 +53,8 @@ test('status code errors', async () => {
       'content-type': 'application/json; charset=utf-8'
     })
   const actual = await ffetch(url)()
-  expect(actual).toEqual(
-    left(new StatusError(status, 'Internal Server Error', body))
+  expect(actual).toEqualLeft(
+    new StatusError(status, 'Internal Server Error', body)
   )
 })
 
@@ -68,12 +65,10 @@ test('invalid response body', async () => {
       'content-type': 'application/json; charset=utf-8'
     })
   const actual = await ffetch(url)()
-  expect(actual).toEqual(
-    left(
-      new ParserError('Could not parse response', [
-        new Error('Unexpected token < in JSON at position 0')
-      ])
-    )
+  expect(actual).toEqualLeft(
+    new ParserError('Could not parse response', [
+      new Error('Unexpected token < in JSON at position 0')
+    ])
   )
 })
 
@@ -86,7 +81,7 @@ test('plain text body for status errors', async () => {
       'content-type': 'text/plain'
     })
   const actual = await ffetch(url)()
-  expect(actual).toEqual(left(new StatusError(status, 'Not Found', body)))
+  expect(actual).toEqualLeft(new StatusError(status, 'Not Found', body))
 })
 
 test('invalid JSON body for status errors', async () => {
@@ -98,7 +93,7 @@ test('invalid JSON body for status errors', async () => {
       'content-type': 'application/json; charset=utf-8'
     })
   const actual = await ffetch(url)()
-  expect(actual).toEqual(left(new StatusError(status, 'Bad Request', body)))
+  expect(actual).toEqualLeft(new StatusError(status, 'Bad Request', body))
 })
 
 test('custom body parser success', async () => {
@@ -114,7 +109,7 @@ test('custom body parser success', async () => {
 
   const actual = await customFetch(url)()
 
-  expect(actual).toEqual(right(expected))
+  expect(actual).toEqualRight(expected)
 })
 
 test('custom parser error', async () => {
@@ -129,8 +124,8 @@ test('custom parser error', async () => {
 
   const actual = await customFetch(url)()
 
-  expect(actual).toEqual(
-    left(new ParserError('Could not parse response', [error]))
+  expect(actual).toEqualLeft(
+    new ParserError('Could not parse response', [error])
   )
 })
 
@@ -147,8 +142,8 @@ test('custom error parser success', async () => {
 
   const actual = await customFetch(url)()
 
-  expect(actual).toEqual(
-    left(new StatusError(status, 'Internal Server Error', body))
+  expect(actual).toEqualLeft(
+    new StatusError(status, 'Internal Server Error', body)
   )
 })
 
@@ -165,13 +160,11 @@ test('custom error parser failure', async () => {
 
   const actual = await customFetch(url)()
 
-  expect(actual).toEqual(
-    left(
-      new ParserError('Could not parse error response', [
-        new StatusError(status, 'Internal Server Error'),
-        error
-      ])
-    )
+  expect(actual).toEqualLeft(
+    new ParserError('Could not parse error response', [
+      new StatusError(status, 'Internal Server Error'),
+      error
+    ])
   )
 })
 
