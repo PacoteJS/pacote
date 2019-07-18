@@ -1,7 +1,7 @@
 {
   "name": "@pacote/immutable",
   "description": "Immutable generic type.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "author": {
     "name": "Luís Rodrigues",
