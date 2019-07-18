@@ -41,7 +41,6 @@
     "plop": "plop",
     "format": "prettier --write 'packages/*/{src,test}/**/*.{js,jsx,ts,tsx,json,css,md}'",
     "lint": "eslint 'packages/*/{src,test}/**/*.{ts,tsx}'",
-    "prepublish": "yarn build && yarn test",
     "pretest": "yarn lint",
     "test:coverage": "yarn test --coverage",
     "test": "jest"
