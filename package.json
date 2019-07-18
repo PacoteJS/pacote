@@ -36,7 +36,7 @@
   },
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "build": "tsc -b packages/error packages/get-style packages/is-plain-object packages/*",
+    "build": "tsc -b packages/error packages/get-style packages/is-plain-object packages/jest-either packages/*",
     "clean": "rimraf coverage packages/*/lib",
     "plop": "plop",
     "format": "prettier --write 'packages/*/{src,test}/**/*.{js,jsx,ts,tsx,json,css,md}'",
@@ -65,9 +65,12 @@
   "devDependencies": {
     "@testing-library/react": "^8.0.1",
     "@types/jest": "^24.0.0",
+    "@types/jest-diff": "^20.0.0",
+    "@types/jest-matcher-utils": "^21.0.1",
     "@types/nock": "^10.0.1",
     "@types/node": "^12.0.0",
-    "@types/ramda": "^0.26.14",
+    "@types/ramda": "^0.26.5",
+    "@types/react": "^16.8.2",
     "@typescript-eslint/eslint-plugin": "^1.11.0",
     "@typescript-eslint/parser": "^1.11.0",
     "eslint": "^6.0.1",
@@ -91,9 +94,26 @@
     "prettier": "^1.14.3",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
+    "redux": "^4.0.1",
     "rimraf": "^2.6.2",
     "ts-jest": "23.1.4",
     "typescript": "^3.3.1",
-    "typescript-workspace-plugin": "^2.0.1"
+    "typescript-workspace-plugin": "^2.0.1",
+    "whatwg-fetch": "^3.0.0"
+  },
+  "name": "pacote",
+  "dependencies": {
+    "@pacote/computus": "file:packages/computus",
+    "@pacote/error": "file:packages/error",
+    "@pacote/ffetch": "file:packages/ffetch",
+    "@pacote/flux-actions": "file:packages/flux-actions",
+    "@pacote/get-style": "file:packages/get-style",
+    "@pacote/immutable": "file:packages/immutable",
+    "@pacote/is-plain-object": "file:packages/is-plain-object",
+    "@pacote/jest-either": "file:packages/jest-either",
+    "@pacote/memoize": "file:packages/memoize",
+    "@pacote/pixels": "file:packages/pixels",
+    "@pacote/react-use-outside": "file:packages/react-use-outside",
+    "@pacote/react-with-props": "file:packages/react-with-props"
   }
 }

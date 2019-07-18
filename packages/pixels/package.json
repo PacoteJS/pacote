@@ -29,6 +29,6 @@
   },
   "scripts": {},
   "dependencies": {
-    "@pacote/get-style": "^1.0.0"
+    "@pacote/get-style": "file:../get-style"
   }
 }

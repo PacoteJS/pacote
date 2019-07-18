@@ -34,11 +34,9 @@
     "fp-ts": "^2.0.0"
   },
   "devDependencies": {
-    "@pacote/jest-either": "^3.0.1",
-    "fp-ts": "^2.0.0",
-    "whatwg-fetch": "^3.0.0"
+    "@pacote/jest-either": "file:../jest-either"
   },
   "dependencies": {
-    "@pacote/error": "^2.0.3"
+    "@pacote/error": "file:../error"
   }
 }

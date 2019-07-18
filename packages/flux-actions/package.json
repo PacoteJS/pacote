@@ -27,8 +27,5 @@
     "lib": "lib",
     "test": "test"
   },
-  "scripts": {},
-  "devDependencies": {
-    "redux": "^4.0.1"
-  }
+  "scripts": {}
 }
