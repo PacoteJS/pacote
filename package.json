@@ -42,7 +42,7 @@
   },
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "build": "lerna run build",
+    "build": "lerna run --parallel build",
     "clean": "rimraf coverage packages/*/lib packages/*/tsconfig.tsbuildinfo",
     "plop": "plop",
     "format": "prettier --write 'packages/*/{src,test}/**/*.{js,jsx,ts,tsx,json,css,md}'",

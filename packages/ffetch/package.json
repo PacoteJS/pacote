@@ -35,9 +35,6 @@
   "peerDependencies": {
     "fp-ts": "^2.0.0"
   },
-  "devDependencies": {
-    "@pacote/jest-either": "file:../jest-either"
-  },
   "dependencies": {
     "@pacote/error": "file:../error"
   }
