@@ -1121,6 +1121,51 @@
     universal-user-agent "^3.0.0"
     url-template "^2.0.8"
 
+"@pacote/computus@file:packages/computus":
+  version "1.1.0"
+
+"@pacote/error@file:packages/error":
+  version "2.0.3"
+
+"@pacote/ffetch@file:packages/ffetch":
+  version "5.0.1"
+  dependencies:
+    "@pacote/error" "file:../../Library/Caches/Yarn/v4/npm-@pacote-ffetch-5.0.1-39bfcc6e-e7dc-4185-8269-394ee92c26bc-1563476897905/node_modules/@pacote/error"
+
+"@pacote/flux-actions@file:packages/flux-actions":
+  version "1.1.8"
+
+"@pacote/get-style@file:packages/get-style":
+  version "1.0.0"
+
+"@pacote/immutable@file:packages/immutable":
+  version "1.0.1"
+
+"@pacote/is-plain-object@file:packages/is-plain-object":
+  version "1.0.4"
+
+"@pacote/jest-either@file:packages/jest-either":
+  version "3.0.1"
+  dependencies:
+    "@pacote/is-plain-object" "file:../../Library/Caches/Yarn/v4/npm-@pacote-jest-either-3.0.1-5b35d4d7-1d95-4c9e-8a90-2236a4cff313-1563476897911/node_modules/@pacote/is-plain-object"
+    jest-diff "^24.0.0"
+    jest-matcher-utils "^24.0.0"
+    ramda "^0.26.1"
+
+"@pacote/memoize@file:packages/memoize":
+  version "1.0.2"
+
+"@pacote/pixels@file:packages/pixels":
+  version "1.0.1"
+  dependencies:
+    "@pacote/get-style" "file:../../Library/Caches/Yarn/v4/npm-@pacote-pixels-1.0.1-933034a7-aaa9-4460-8299-9ba4da87d0a6-1563476897925/node_modules/@pacote/get-style"
+
+"@pacote/react-use-outside@file:packages/react-use-outside":
+  version "1.0.3"
+
+"@pacote/react-with-props@file:packages/react-with-props":
+  version "1.0.6"
+
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@samverschueren/stream-to-observable/-/stream-to-observable-0.3.0.tgz#ecdf48d532c58ea477acfcab80348424f8d0662f"
@@ -1270,7 +1315,7 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.1.tgz#f1a11e7babb0c3cad68100be381d1e064c68f1f6"
   integrity sha512-CFzn9idOEpHrgdw8JsoTkaDDyRWk1jrzIV8djzcgpq0y9tG4B4lFT+Nxh52DVpDXV+n4+NPNv7M1Dj5uMp6XFg==
 
-"@types/ramda@^0.26.14", "@types/ramda@^0.26.5":
+"@types/ramda@^0.26.5":
   version "0.26.16"
   resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.26.16.tgz#1245a75b0cb5f27bc8fccace720da13cfafa18e2"
   integrity sha512-J+cv6Tm8tCovBt2SqEpy6Mzuf3XPPUW5X491yCHSgKs7epz2yNPupCik4BOIzpg5VF23cs6P2X8e66IUBPrgmQ==
