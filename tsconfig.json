@@ -26,10 +26,5 @@
       "@pacote/*": ["./*/src"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "packages/*/node_modules",
-    "packages/*/lib",
-    "packages/*/test"
-  ]
+  "exclude": ["node_modules", "packages/*/lib", "packages/*/test"]
 }

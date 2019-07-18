@@ -20,6 +20,9 @@
     ]
   },
   "jest": {
+    "roots": [
+      "<rootDir>packages"
+    ],
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
@@ -32,7 +35,10 @@
       "jsx",
       "json",
       "node"
-    ]
+    ],
+    "moduleNameMapper": {
+      "@pacote/(.+)$": "<rootDir>packages/$1/src"
+    }
   },
   "scripts": {
     "bootstrap": "lerna bootstrap",
