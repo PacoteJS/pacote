@@ -1,5 +1,6 @@
-.vscode/
-coverage/
+*.log
 .DS_Store
 tsconfig.json
-*.log
+tsconfig.tsbuildinfo
+.vscode/
+coverage/
