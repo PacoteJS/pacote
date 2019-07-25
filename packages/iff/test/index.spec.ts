@@ -19,10 +19,6 @@ describe(`when only the consequent function is provided`, () => {
     expect(actual).toEqual(some('consequent'))
   })
 
-  test(`calls consequent when predicate is satisfied, yielding Some(null)`, () => {
-    expect(iff(true, () => null)).toEqual(some(null))
-  })
-
   test(`yields None when predicate fails and alternative is undefined`, () => {
     const actual = iff(false, () => 'consequent')
     expect(actual).toEqual(none)
