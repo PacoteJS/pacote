@@ -41,7 +41,8 @@
     }
   },
   "scripts": {
-    "bootstrap": "lerna bootstrap",
+    "lerna:bootstrap": "lerna bootstrap",
+    "lerna:link": "lerna link convert",
     "build": "lerna run --parallel build",
     "clean": "rimraf coverage packages/*/lib packages/*/tsconfig.tsbuildinfo",
     "plop": "plop",
@@ -113,6 +114,7 @@
     "@pacote/ffetch": "file:packages/ffetch",
     "@pacote/flux-actions": "file:packages/flux-actions",
     "@pacote/get-style": "file:packages/get-style",
+    "@pacote/iff": "file:packages/iff",
     "@pacote/immutable": "file:packages/immutable",
     "@pacote/is-plain-object": "file:packages/is-plain-object",
     "@pacote/jest-either": "file:packages/jest-either",

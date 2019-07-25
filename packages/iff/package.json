@@ -1,0 +1,37 @@
+{
+  "name": "@pacote/iff",
+  "description": "Conditional expressions with Option support.",
+  "version": "0.0.0",
+  "license": "MIT",
+  "author": {
+    "name": "Luís Rodrigues",
+    "email": "hello@goblindegook.com",
+    "url": "https://goblindegook.com"
+  },
+  "keywords": [
+    "conditional",
+    "fp",
+    "functional programming",
+    "Option",
+    "Maybe"
+  ],
+  "repository": "github:PacoteJS/pacote",
+  "bugs": {
+    "url": "https://github.com/PacoteJS/pacote/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "build": "tsc -b ."
+  },
+  "peerDependencies": {
+    "fp-ts": "^2.0.0"
+  }
+}
