@@ -48,6 +48,11 @@ module.exports = plop => {
         data
       },
       {
+        type: 'add',
+        path: 'packages/{{ name }}/.npmignore',
+        templateFile: 'templates/npmignore.hbs'
+      },
+      {
         type: 'addMany',
         destination: 'packages/{{ name }}',
         base: 'templates/basic',
@@ -96,6 +101,11 @@ module.exports = plop => {
         path: 'packages/{{ name }}/LICENSE',
         templateFile: 'templates/LICENSE.hbs',
         data
+      },
+      {
+        type: 'add',
+        path: 'packages/{{ name }}/.npmignore',
+        templateFile: 'templates/npmignore.hbs'
       },
       {
         type: 'addMany',
