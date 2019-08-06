@@ -22,7 +22,7 @@ export class BaseError extends Error {
     }
   }
 
-  public static fromString(message = ''): BaseError {
+  public static fromString(message?: string): BaseError {
     return new this(message)
   }
 }

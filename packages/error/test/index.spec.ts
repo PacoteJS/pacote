@@ -33,6 +33,12 @@ test('BaseError creation from string', () => {
   expect(actual).toEqual(expected)
 })
 
+test('BaseError creation from null string', () => {
+  const actual = BaseError.fromString()
+  const expected = new BaseError('')
+  expect(actual).toEqual(expected)
+})
+
 test('ComplexError is an instance of Error', () => {
   const error = new ComplexError()
   expect(error).toBeInstanceOf(Error)
@@ -63,6 +69,12 @@ test('ComplexError creation from string', () => {
   const message = 'Internal server error'
   const actual = ComplexError.fromString(message)
   const expected = new ComplexError(message)
+  expect(actual).toEqual(expected)
+})
+
+test('ComplexError creation from null string', () => {
+  const actual = ComplexError.fromString()
+  const expected = new ComplexError('')
   expect(actual).toEqual(expected)
 })
 
