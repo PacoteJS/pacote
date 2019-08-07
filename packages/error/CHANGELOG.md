@@ -1,5 +1,11 @@
 # Change Log
 
+## [v2.1.0](https://github.com/PacoteJS/pacote/tree/@pacote/error@2.1.0) (2019-08-07)
+
+[Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/error@2.0.5...@pacote/error@2.1.0)
+
+- Introduces ES module support.
+
 ## [v2.0.5](https://github.com/PacoteJS/pacote/tree/@pacote/error@2.0.5) (2019-07-25)
 
 [Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/error@2.0.4...@pacote/error@2.0.5)
