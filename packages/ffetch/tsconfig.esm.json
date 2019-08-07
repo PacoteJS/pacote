@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "es2019",
+    "outDir": "lib/esm",
+    "declarationMap": false,
+    "sourceMap": false
+  },
+  "references": [
+    { "path": "../error/tsconfig.esm.json" },
+    { "path": "../jest-either" }
+  ]
+}
