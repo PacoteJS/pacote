@@ -1140,7 +1140,7 @@
 "@pacote/ffetch@file:packages/ffetch":
   version "5.0.3"
   dependencies:
-    "@pacote/error" "file:../../Library/Caches/Yarn/v4/npm-@pacote-ffetch-5.0.3-5c1d656a-fa41-4e69-82ec-3689be25fa3d-1565085630919/node_modules/@pacote/error"
+    "@pacote/error" "file:../../Library/Caches/Yarn/v4/npm-@pacote-ffetch-5.0.3-36f742bf-547b-4bc6-83b3-6a788cdaf054-1565180498918/node_modules/@pacote/error"
 
 "@pacote/flux-actions@file:packages/flux-actions":
   version "2.0.1"
@@ -1160,7 +1160,7 @@
 "@pacote/jest-either@file:packages/jest-either":
   version "3.0.3"
   dependencies:
-    "@pacote/is-plain-object" "file:../../Library/Caches/Yarn/v4/npm-@pacote-jest-either-3.0.3-7e91f7b9-e159-4bf4-8af7-f52b70edb09d-1565085630925/node_modules/@pacote/is-plain-object"
+    "@pacote/is-plain-object" "file:../../Library/Caches/Yarn/v4/npm-@pacote-jest-either-3.0.3-0b77d5b2-e8a7-4e8c-904f-df6d1d889644-1565180498925/node_modules/@pacote/is-plain-object"
     jest-diff "^24.0.0"
     jest-matcher-utils "^24.0.0"
     ramda "^0.26.1"
@@ -1171,7 +1171,7 @@
 "@pacote/pixels@file:packages/pixels":
   version "1.0.3"
   dependencies:
-    "@pacote/get-style" "file:../../Library/Caches/Yarn/v4/npm-@pacote-pixels-1.0.3-f72df7eb-42fc-49c3-9f8e-3f16daf8e162-1565085630949/node_modules/@pacote/get-style"
+    "@pacote/get-style" "file:../../Library/Caches/Yarn/v4/npm-@pacote-pixels-1.0.3-8ad1d2d3-7915-4256-bc5c-c4581bd78e93-1565180498937/node_modules/@pacote/get-style"
 
 "@pacote/react-use-outside@file:packages/react-use-outside":
   version "1.0.5"
@@ -1203,9 +1203,9 @@
     wait-for-expect "^1.2.0"
 
 "@testing-library/react@^8.0.1":
-  version "8.0.7"
-  resolved "https://registry.yarnpkg.com/@testing-library/react/-/react-8.0.7.tgz#b5992c9156e926850a0e3a7c882ae1aed83b1c77"
-  integrity sha512-6XoeWSr3UCdxMswbkW0BmuXYw8a6w+stt+5gg4D4zAcljfhXETQ5o28bjJFwNab4OPg8gBNK8KIVot86L4Q8Vg==
+  version "8.0.8"
+  resolved "https://registry.yarnpkg.com/@testing-library/react/-/react-8.0.8.tgz#aeba59adaf2b9258117bea927428a8fe4240db06"
+  integrity sha512-GvA5rcyT2TsFozqijEejXI64P4mMmzX2qkEfb7JNKrkdFXLiXdZqSYr/96PerLpsN23gJkKicAhqqT8qo9Kr3g==
   dependencies:
     "@babel/runtime" "^7.5.4"
     "@testing-library/dom" "^5.5.4"
@@ -1319,9 +1319,9 @@
     "@types/node" "*"
 
 "@types/node@*", "@types/node@^12.0.0":
-  version "12.6.9"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.6.9.tgz#ffeee23afdc19ab16e979338e7b536fdebbbaeaf"
-  integrity sha512-+YB9FtyxXGyD54p8rXwWaN1EWEyar5L58GlGWgtH2I9rGmLGBQcw63+0jw+ujqVavNuO47S1ByAjm9zdHMnskw==
+  version "12.7.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.7.0.tgz#545dde2a1a5c27d281cfb8308d6736e0708f5d6c"
+  integrity sha512-vqcj1MVm2Sla4PpMfYKh1MyDN4D2f/mPIZD7RdAGqEsbE+JxfeqQHHVbRDQ0Nqn8i73gJa1HQ1Pu3+nH4Q0Yiw==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -1334,9 +1334,11 @@
   integrity sha512-CFzn9idOEpHrgdw8JsoTkaDDyRWk1jrzIV8djzcgpq0y9tG4B4lFT+Nxh52DVpDXV+n4+NPNv7M1Dj5uMp6XFg==
 
 "@types/ramda@^0.26.5":
-  version "0.26.18"
-  resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.26.18.tgz#a80f02b046edd5ff777e863732591bd50c53236e"
-  integrity sha512-wK3NLaAkL/ht7Nw4IZsOagJuYqzZgoboFvILolOPtmoKyy25gTdz/uvB/bXsv6vdWENYv+ml5ph873P2d/+9HA==
+  version "0.26.19"
+  resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.26.19.tgz#400580597566c016e9743f17c1c48bf4671cda81"
+  integrity sha512-lJuMZDXqZ8W2hl0Gz+wEPUhXcf/tZRuaO5vrxFD3Dv2XMqgTZVw+bvfS6iQAsio9XQV+uhkggtT4eLhDmUpI5g==
+  dependencies:
+    ts-toolbelt "^3.2.22"
 
 "@types/react@^16.8.2":
   version "16.8.24"
@@ -3347,9 +3349,9 @@ form-data@~2.3.2:
     mime-types "^2.1.12"
 
 fp-ts@^2.0.0:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/fp-ts/-/fp-ts-2.0.3.tgz#b6af5481aa5df027de250bacefa19d36d79edd51"
-  integrity sha512-b/WPo5AVPDYbdye/AGOMST/tqudtgbpMjm3TJGkd36ROihD67UEKFeUH83V3iSdrIG4wwoFsd6lLpjtpek1oVw==
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/fp-ts/-/fp-ts-2.0.4.tgz#a07ceef59c2460616fcf70367708ebe4d1c2212f"
+  integrity sha512-oRQbFqqGcvorkEj92dAcM4/RH1TARJCt8wVgynRIp8v4uOzVCe4kCs7vKSYpIXQsvtpyCt9nVVFqufSX8VYghg==
 
 fragment-cache@^0.2.1:
   version "0.2.1"
@@ -6971,7 +6973,7 @@ rxjs@^6.3.3, rxjs@^6.4.0:
   dependencies:
     tslib "^1.9.0"
 
-safe-buffer@^5.0.1, safe-buffer@^5.1.1, safe-buffer@^5.1.2, safe-buffer@^5.2.0:
+safe-buffer@^5.0.1, safe-buffer@^5.1.1, safe-buffer@^5.1.2, safe-buffer@^5.2.0, safe-buffer@~5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.2.0.tgz#b74daec49b1148f88c64b68d49b1e815c1f2f519"
   integrity sha512-fZEwUGbVl7kouZs1jCdMLdt95hdIv0ZeHg6L7qPeciMZhZ+/gdesW4wgTARkrFWEpspjEATAzUGPG8N2jJiwbg==
@@ -7374,11 +7376,11 @@ string-width@^3.0.0:
     strip-ansi "^5.1.0"
 
 string_decoder@^1.1.1:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.2.0.tgz#fe86e738b19544afe70469243b2a1ee9240eae8d"
-  integrity sha512-6YqyX6ZWEYguAxgZzHGL7SsCeGx3V2TtOTqZz1xSTSWnqsbWwbptafNyvf/ACquZUXV3DANr5BDIwNYe1mN42w==
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.3.0.tgz#42f114594a46cf1a8e30b0a84f56c78c3edac21e"
+  integrity sha512-hkRX8U1WjJFd8LsDJ2yQ/wWWxaopEsABU1XfkM8A+j0+85JAGppt16cr1Whg6KIbb4okU6Mql6BOj+uup/wKeA==
   dependencies:
-    safe-buffer "~5.1.0"
+    safe-buffer "~5.2.0"
 
 string_decoder@~1.1.1:
   version "1.1.1"
@@ -7715,6 +7717,11 @@ ts-jest@23.1.4:
     fs-extra "6.0.1"
     json5 "^0.5.0"
     lodash "^4.17.10"
+
+ts-toolbelt@^3.2.22:
+  version "3.2.23"
+  resolved "https://registry.yarnpkg.com/ts-toolbelt/-/ts-toolbelt-3.2.23.tgz#7b3ea621a7a58e0e4c1884b100695ca87189df38"
+  integrity sha512-WA0jP0SFchHWM+NrC2TaVC6AArt1/e01M7RddkiVyOpBtGvDVE7ZIZkUZ8Tpu2tB+zhAphToFdJhOry0p1lXbA==
 
 tslib@^1.8.1, tslib@^1.9.0, tslib@^1.9.3:
   version "1.10.0"
