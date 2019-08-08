@@ -7,8 +7,5 @@
     "declarationMap": false,
     "sourceMap": false
   },
-  "references": [
-    { "path": "../error/tsconfig.esm.json" },
-    { "path": "../jest-either/tsconfig.esm.json" }
-  ]
+  "references": [{ "path": "../is-plain-object/tsconfig.esm.json" }]
 }

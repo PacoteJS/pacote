@@ -7,8 +7,5 @@
     "declarationMap": false,
     "sourceMap": false
   },
-  "references": [
-    { "path": "../error/tsconfig.cjs.json" },
-    { "path": "../jest-either/tsconfig.cjs.json" }
-  ]
+  "references": [{ "path": "../get-style/tsconfig.cjs.json" }]
 }

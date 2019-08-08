@@ -23,14 +23,17 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
+  "typings": "lib/esm/index.d.ts",
   "directories": {
     "lib": "lib",
     "test": "test"
   },
   "scripts": {
-    "build": "tsc -b ."
+    "build": "yarn build:esm && yarn build:cjs",
+    "build:cjs": "tsc -p ./tsconfig.cjs.json",
+    "build:esm": "tsc -p ./tsconfig.esm.json"
   },
   "dependencies": {
     "@pacote/is-plain-object": "file:../is-plain-object",

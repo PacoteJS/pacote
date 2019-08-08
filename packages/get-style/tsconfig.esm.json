@@ -6,9 +6,5 @@
     "outDir": "lib/esm",
     "declarationMap": false,
     "sourceMap": false
-  },
-  "references": [
-    { "path": "../error/tsconfig.esm.json" },
-    { "path": "../jest-either/tsconfig.esm.json" }
-  ]
+  }
 }

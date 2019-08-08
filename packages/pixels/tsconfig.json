@@ -1,8 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "lib"
+    "rootDir": "src"
   },
   "references": [{ "path": "../get-style" }],
   "plugins": [{ "name": "typescript-workspace-plugin" }]

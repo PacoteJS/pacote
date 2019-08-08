@@ -1,8 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "lib"
+    "rootDir": "src"
   },
   "references": [{ "path": "../is-plain-object" }],
   "plugins": [{ "name": "typescript-workspace-plugin" }]
