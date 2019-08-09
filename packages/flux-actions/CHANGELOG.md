@@ -1,5 +1,11 @@
 # Change Log
 
+## [v2.1.0](https://github.com/PacoteJS/pacote/tree/@pacote/flux-actions@2.1.0) (2019-08-09)
+
+[Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/flux-actions@2.0.1...@pacote/flux-actions@2.1.0)
+
+- Introduces ES module support.
+
 ## [v2.0.1](https://github.com/PacoteJS/pacote/tree/@pacote/flux-actions@2.0.1) (2019-07-25)
 
 [Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/flux-actions@2.0.0...@pacote/flux-actions@2.0.1)
