@@ -1,5 +1,11 @@
 # Change Log
 
+## [v3.1.0](https://github.com/PacoteJS/pacote/tree/@pacote/jest-either@3.1.0) (2019-08-09)
+
+[Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/jest-either@3.0.3...@pacote/jest-either@3.1.0)
+
+- Introduces ES module support.
+
 ## [v3.0.3](https://github.com/PacoteJS/pacote/tree/@pacote/jest-either@3.0.3) (2019-07-25)
 
 [Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/jest-either@3.0.2...@pacote/jest-either@3.0.3)

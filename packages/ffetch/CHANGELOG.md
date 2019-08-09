@@ -1,6 +1,6 @@
 # Change Log
 
-## [v5.0.3](https://github.com/PacoteJS/pacote/tree/@pacote/ffetch@5.1.0) (2019-08-08)
+## [v5.1.0](https://github.com/PacoteJS/pacote/tree/@pacote/ffetch@5.1.0) (2019-08-08)
 
 [Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/ffetch@5.0.3...@pacote/ffetch@5.1.0)
 
