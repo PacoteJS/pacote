@@ -55,6 +55,13 @@ module.exports = plop => {
       {
         type: 'addMany',
         destination: 'packages/{{ name }}',
+        base: 'templates',
+        templateFiles: '**/tsconfig.*.hbs',
+        data
+      },
+      {
+        type: 'addMany',
+        destination: 'packages/{{ name }}',
         base: 'templates/basic',
         templateFiles: '**/*.*.hbs',
         data
@@ -106,6 +113,13 @@ module.exports = plop => {
         type: 'add',
         path: 'packages/{{ name }}/.npmignore',
         templateFile: 'templates/npmignore.hbs'
+      },
+      {
+        type: 'addMany',
+        destination: 'packages/{{ name }}',
+        base: 'templates',
+        templateFiles: '**/tsconfig.*.hbs',
+        data
       },
       {
         type: 'addMany',
