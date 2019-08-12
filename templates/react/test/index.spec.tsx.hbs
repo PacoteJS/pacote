@@ -1,8 +1,6 @@
 import React from 'react'
-import { render, cleanup } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { {{ camelCase name }} } from '../src/index'
-
-afterEach(cleanup)
 
 test(`test`, () => {
   expect({{ camelCase name }}()).toBe(true)

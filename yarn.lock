@@ -1140,7 +1140,7 @@
 "@pacote/ffetch@file:packages/ffetch":
   version "5.1.0"
   dependencies:
-    "@pacote/error" "file:../../Library/Caches/Yarn/v4/npm-@pacote-ffetch-5.1.0-3f1a9ef5-d426-4ab0-9883-9c8916423782-1565452992679/node_modules/@pacote/error"
+    "@pacote/error" "file:../../Library/Caches/Yarn/v4/npm-@pacote-ffetch-5.1.0-d9ed33a2-4a40-4081-8a99-2b02af78fdb0-1565621785944/node_modules/@pacote/error"
 
 "@pacote/flux-actions@file:packages/flux-actions":
   version "2.1.0"
@@ -1160,7 +1160,7 @@
 "@pacote/jest-either@file:packages/jest-either":
   version "3.1.0"
   dependencies:
-    "@pacote/is-plain-object" "file:../../Library/Caches/Yarn/v4/npm-@pacote-jest-either-3.1.0-f2d655aa-b7e4-4056-b235-7eb01d0d5d24-1565452992689/node_modules/@pacote/is-plain-object"
+    "@pacote/is-plain-object" "file:../../Library/Caches/Yarn/v4/npm-@pacote-jest-either-3.1.0-1b58df8e-0508-49e8-a42b-dfce5b05c1f9-1565621785954/node_modules/@pacote/is-plain-object"
     jest-diff "^24.0.0"
     jest-matcher-utils "^24.0.0"
     ramda "^0.26.1"
@@ -1171,7 +1171,7 @@
 "@pacote/pixels@file:packages/pixels":
   version "1.1.0"
   dependencies:
-    "@pacote/get-style" "file:../../Library/Caches/Yarn/v4/npm-@pacote-pixels-1.1.0-4bcb868a-50f8-4026-bf2b-d1f89af7727a-1565452992716/node_modules/@pacote/get-style"
+    "@pacote/get-style" "file:../../Library/Caches/Yarn/v4/npm-@pacote-pixels-1.1.0-3b469e49-283f-4d5d-92e0-9f53d86080fe-1565621785967/node_modules/@pacote/get-style"
 
 "@pacote/react-use-outside@file:packages/react-use-outside":
   version "1.0.6"
@@ -1191,24 +1191,24 @@
   resolved "https://registry.yarnpkg.com/@sheerun/mutationobserver-shim/-/mutationobserver-shim-0.3.2.tgz#8013f2af54a2b7d735f71560ff360d3a8176a87b"
   integrity sha512-vTCdPp/T/Q3oSqwHmZ5Kpa9oI7iLtGl3RQaA/NyLHikvcrPxACkkKVr/XzkSPJWXHRhKGzVvb0urJsbMlRxi1Q==
 
-"@testing-library/dom@^5.6.1":
-  version "5.6.1"
-  resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-5.6.1.tgz#705a1cb4a039b877c1e69e916824038e837ab637"
-  integrity sha512-Y1T2bjtvQMewffn1CJ28kpgnuvPYKsBcZMagEH0ppfEMZPDc8AkkEnTk4smrGZKw0cblNB3lhM2FMnpfLExlHg==
+"@testing-library/dom@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-6.0.0.tgz#34e28e69e49bd6347fc64a5dde4c4f9aabbd17d3"
+  integrity sha512-B5XTz3uMsbqbdR9CZlnwpZjTE3fCWuqRkz/zvDc2Ej/vuHmTM0Ur2v0XPwr7usWfGIBsahEK5HL1E91+4IFiBg==
   dependencies:
     "@babel/runtime" "^7.5.5"
     "@sheerun/mutationobserver-shim" "^0.3.2"
     aria-query "3.0.0"
     pretty-format "^24.8.0"
-    wait-for-expect "^1.2.0"
+    wait-for-expect "^1.3.0"
 
-"@testing-library/react@^8.0.1":
-  version "8.0.9"
-  resolved "https://registry.yarnpkg.com/@testing-library/react/-/react-8.0.9.tgz#1ecd96bc3471b06dd2f9763b6e53a7ace28a54a2"
-  integrity sha512-I7zd+MW5wk8rQA5VopZgBfxGKUd91jgZ6Vzj2gMqFf2iGGtKwvI5SVTrIJcSFaOXK88T2EUsbsIKugDtoqOcZQ==
+"@testing-library/react@^9.1.0":
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/@testing-library/react/-/react-9.1.0.tgz#c00c4ff90c5f9015365f63b7759a57c428b6ab56"
+  integrity sha512-XMtU8AmGX472c7+qXaaVZ2QpDKPA56vRaVEjlFBPDL8im2erM6DF0KJlwzLcc2wrvfYkcMDbreFyL0vdalubrQ==
   dependencies:
     "@babel/runtime" "^7.5.5"
-    "@testing-library/dom" "^5.6.1"
+    "@testing-library/dom" "^6.0.0"
 
 "@types/babel__core@^7.1.0":
   version "7.1.2"
@@ -7957,7 +7957,7 @@ w3c-hr-time@^1.0.1:
   dependencies:
     browser-process-hrtime "^0.1.2"
 
-wait-for-expect@^1.2.0:
+wait-for-expect@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/wait-for-expect/-/wait-for-expect-1.3.0.tgz#65241ce355425f907f5d127bdb5e72c412ff830c"
   integrity sha512-8fJU7jiA96HfGPt+P/UilelSAZfhMBJ52YhKzlmZQvKEZU2EcD1GQ0yqGB6liLdHjYtYAoGVigYwdxr5rktvzA==

@@ -1,8 +1,6 @@
 import React, { FunctionComponent, ReactNode } from 'react'
-import { render, cleanup } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { withProps, withDefaultProps } from '../src'
-
-afterEach(cleanup)
 
 describe('withProps()', () => {
   test('wraps a component', () => {
