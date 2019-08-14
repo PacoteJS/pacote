@@ -1,6 +1,6 @@
 # Change Log
 
-## [v1.2.0](https://github.com/PacoteJS/pacote/tree/@pacote/computus/1.2.0) (2019-08-11)
+## [v1.2.0](https://github.com/PacoteJS/pacote/tree/@pacote/computus/1.2.0) (2019-08-14)
 
 [Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/computus@1.1.2...@pacote/computus@1.2.0)
 

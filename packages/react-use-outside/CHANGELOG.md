@@ -1,6 +1,6 @@
 # Change Log
 
-## [v1.1.0](https://github.com/PacoteJS/pacote/tree/@pacote/react-use-outside/1.1.0) (2019-08-11)
+## [v1.1.0](https://github.com/PacoteJS/pacote/tree/@pacote/react-use-outside/1.1.0) (2019-08-14)
 
 [Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/react-use-outside@1.0.5...@pacote/react-use-outside@1.1.0)
 
