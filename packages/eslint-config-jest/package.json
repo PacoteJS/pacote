@@ -1,7 +1,7 @@
 {
   "name": "@pacote/eslint-config-jest",
   "description": "Shareable ESLint configuration for Jest.",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "license": "MIT",
   "author": {
     "name": "Luís Rodrigues",
