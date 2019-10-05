@@ -1,6 +1,12 @@
 module.exports = {
   overrides: [
     {
+      files: ['__mocks__/**/*.js'],
+      env: {
+        jest: true
+      }
+    },
+    {
       files: ['**/*.{test,spec}.{js,jsx,ts,tsx}'],
       env: {
         jest: true
