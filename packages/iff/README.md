@@ -25,7 +25,7 @@ iff(true, () => 1) // => 1 Some(1)
 iff(false, () => 1) // => 1 None
 ```
 
-### `iff(predicate: boolean, onConsequent: T, onAlternative?: T): T`
+### `iff(predicate: boolean, onConsequent: () => T, onAlternative?: () => T): T`
 
 `iff()` evaluates a _predicate_ and returns the result of calling
 _onConsequent()_ if the predicate is `true` or the result of _onAlternative()_
