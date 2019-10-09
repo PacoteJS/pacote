@@ -120,6 +120,7 @@
     "@pacote/get-style": "file:packages/get-style",
     "@pacote/iff": "file:packages/iff",
     "@pacote/immutable": "file:packages/immutable",
+    "@pacote/interpolate": "file:packages/interpolate",
     "@pacote/is-plain-object": "file:packages/is-plain-object",
     "@pacote/jest-either": "file:packages/jest-either",
     "@pacote/memoize": "file:packages/memoize",
