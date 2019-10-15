@@ -1,6 +1,6 @@
 {
   "name": "@pacote/shuffle",
-  "description": "An implementation of the Fisher–Yates algorithm for shuffling collections.",
+  "description": "An implementation of the Durstenfeld algorithm for shuffling collections.",
   "version": "0.0.0",
   "license": "MIT",
   "author": {
@@ -10,6 +10,8 @@
   },
   "keywords": [
     "shuffle",
+    "random",
+    "durstenfeld",
     "fisher-yates"
   ],
   "repository": "github:PacoteJS/pacote",

@@ -5,7 +5,7 @@
 ![minified](https://badgen.net/bundlephobia/min/@pacote/shuffle)
 ![minified + gzip](https://badgen.net/bundlephobia/minzip/@pacote/shuffle)
 
-An implementation of the Fisher–Yates algorithm for shuffling collections.
+An implementation of the Durstenfeld algorithm for shuffling collections.
 
 ## Installation
 

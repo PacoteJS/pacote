@@ -2,7 +2,7 @@ import { assert, property, integer } from 'fast-check'
 import { range } from 'ramda'
 import { shuffle } from '../src/index'
 
-test('shuffling a numerical array', () => {
+test('shuffling an array', () => {
   const items = range(0, 100)
   expect(shuffle(items)).not.toEqual(items)
 })
