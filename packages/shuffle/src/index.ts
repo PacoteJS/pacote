@@ -8,7 +8,7 @@ function swap<T>(i: number, j: number, items: T[]): void {
   items[j] = swapped
 }
 
-export function shuffle<T>(items: T[]): T[] {
+export function shuffle<T>(items: readonly T[]): T[] {
   const shuffled = [...items]
   for (let i = 0; i < items.length - 1; i++) {
     swap(i, random(i, items.length), shuffled)
