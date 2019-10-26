@@ -125,6 +125,7 @@
     "@pacote/memoize": "file:packages/memoize",
     "@pacote/pixels": "file:packages/pixels",
     "@pacote/react-use-outside": "file:packages/react-use-outside",
-    "@pacote/react-with-props": "file:packages/react-with-props"
+    "@pacote/react-with-props": "file:packages/react-with-props",
+    "@pacote/shuffle": "file:packages/shuffle"
   }
 }
