@@ -15,14 +15,13 @@ function parse(providedLength?: string | null): [number, string] {
   const length = providedLength || '0'
   const value = parseFloat(length)
   const match = length.match(/[\d-.]+(\w+)$/)
-  const unit = match && match.length > 1 ? match[1] : ''
+  const unit = match?.[1] ?? ''
   return [value, unit.toLowerCase()]
 }
 
 export function pixels(length: string, element?: HTMLElement | null): number {
-  const view =
-    (element && element.ownerDocument && element.ownerDocument.defaultView) ||
-    window
+  // eslint-disable-next-line no-undef
+  const view = element?.ownerDocument?.defaultView || window
   const root = view.document.documentElement || view.document.body
 
   const [value, unit] = parse(length)
@@ -32,7 +31,8 @@ export function pixels(length: string, element?: HTMLElement | null): number {
       return value * pixels(fontSize(window.document.documentElement))
 
     case 'em':
-      return value * pixels(fontSize(element), element && element.parentElement)
+      // eslint-disable-next-line no-undef
+      return value * pixels(fontSize(element), element?.parentElement)
 
     case 'in':
       return value * PIXELS_PER_INCH

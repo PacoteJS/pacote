@@ -54,12 +54,11 @@ export function withProps<
   injected: Injector<OuterProps, InjectedProps> | InjectedProps,
   BaseComponent: Component
 ): ComponentType<OuterProps & EnhancedProps> {
-  const factory = createFactory(BaseComponent as FunctionComponent<
-    ComponentProps
-  >)
-  const EnhancedComponent: FunctionComponent<
-    OuterProps & EnhancedProps
-  > = props =>
+  const factory = createFactory(
+    BaseComponent as FunctionComponent<ComponentProps>
+  )
+  const EnhancedComponent: FunctionComponent<OuterProps &
+    EnhancedProps> = props =>
     factory(
       Object.assign<ComponentProps, EnhancedProps, InjectedProps>(
         {} as any,
@@ -83,9 +82,9 @@ export function withDefaultProps<
   injectedProps: InjectedProps,
   BaseComponent: Component
 ): ComponentType<EnhancedProps> {
-  const factory = createFactory(BaseComponent as FunctionComponent<
-    ComponentProps
-  >)
+  const factory = createFactory(
+    BaseComponent as FunctionComponent<ComponentProps>
+  )
   const EnhancedComponent: FunctionComponent<EnhancedProps> = props =>
     factory(
       Object.assign<ComponentProps, InjectedProps, EnhancedProps>(

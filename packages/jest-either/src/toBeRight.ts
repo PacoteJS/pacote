@@ -5,7 +5,7 @@ import { pipe } from 'fp-ts/lib/pipeable'
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace jest {
-    interface Matchers<R> {
+    interface Matchers<R, T> {
       toBeRight(): R
     }
   }
@@ -22,10 +22,7 @@ const failMessage = () => () =>
   'Expected Either to be right, received left.'
 
 export function toBeRight(actual: Either<any, any>) {
-  const pass = pipe(
-    actual,
-    isRight
-  )
+  const pass = pipe(actual, isRight)
 
   return {
     pass,

@@ -6,14 +6,14 @@ import { NetworkError, StatusError, ParserError } from '../src/errors'
 
 expect.extend(matchers)
 
-const url = 'http://localhost/test'
+const url = 'http://localhost'
 
 afterEach(nock.cleanAll)
 
 test('successful JSON responses', async () => {
   const body = { foo: 'bar' }
   nock(url)
-    .get('')
+    .get('/')
     .reply(200, body, {
       'content-type': 'application/json; charset=utf-8'
     })
@@ -24,7 +24,7 @@ test('successful JSON responses', async () => {
 test('successful plain text responses', async () => {
   const body = '<plain text>'
   nock(url)
-    .get('')
+    .get('/')
     .reply(200, body, {
       'content-type': 'text/plain'
     })
@@ -34,7 +34,7 @@ test('successful plain text responses', async () => {
 
 test('connection errors', async () => {
   nock(url)
-    .get('')
+    .get('/')
     .replyWithError('')
   const actual = await ffetch(url)()
   expect(actual).toEqualLeft(
@@ -48,7 +48,7 @@ test('status code errors', async () => {
   const status = 500
   const body = { foo: 'bar' }
   nock(url)
-    .get('')
+    .get('/')
     .reply(status, body, {
       'content-type': 'application/json; charset=utf-8'
     })
@@ -60,7 +60,7 @@ test('status code errors', async () => {
 
 test('invalid response body', async () => {
   nock(url)
-    .get('')
+    .get('/')
     .reply(200, '<not json>', {
       'content-type': 'application/json; charset=utf-8'
     })
@@ -76,7 +76,7 @@ test('plain text body for status errors', async () => {
   const status = 404
   const body = '<ok>'
   nock(url)
-    .get('')
+    .get('/')
     .reply(status, body, {
       'content-type': 'text/plain'
     })
@@ -88,7 +88,7 @@ test('invalid JSON body for status errors', async () => {
   const status = 400
   const body = '<not json>'
   nock(url)
-    .get('')
+    .get('/')
     .reply(status, body, {
       'content-type': 'application/json; charset=utf-8'
     })
@@ -100,7 +100,7 @@ test('custom body parser success', async () => {
   const status = 201
   const expected = `Received a response with status code ${status}.`
   nock(url)
-    .get('')
+    .get('/')
     .reply(status, '')
 
   const customFetch = createFetch({
@@ -115,7 +115,7 @@ test('custom body parser success', async () => {
 test('custom parser error', async () => {
   const error = new Error('custom parser error')
   nock(url)
-    .get('')
+    .get('/')
     .reply(200, '')
 
   const customFetch = createFetch({
@@ -133,7 +133,7 @@ test('custom error parser success', async () => {
   const status = 500
   const body = `Received a response with status code ${status}.`
   nock(url)
-    .get('')
+    .get('/')
     .reply(status, '')
 
   const customFetch = createFetch({
@@ -151,7 +151,7 @@ test('custom error parser failure', async () => {
   const status = 500
   const error = new Error('custom error parser failure')
   nock(url)
-    .get('')
+    .get('/')
     .reply(status, '')
 
   const customFetch = createFetch({

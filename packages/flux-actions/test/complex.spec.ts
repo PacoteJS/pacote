@@ -17,7 +17,10 @@ test('complex payloads', () => {
     (s, a) =>
       pipe(
         a.payload,
-        fold(error => ({ ...s, error }), year => ({ year, error: undefined }))
+        fold(
+          error => ({ ...s, error }),
+          year => ({ year, error: undefined })
+        )
       )
   )
 

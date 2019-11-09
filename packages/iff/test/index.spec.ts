@@ -3,12 +3,20 @@ import { iff } from '../src/index'
 
 describe(`when both consequent and alternative functions are provided`, () => {
   test(`calls consequent when predicate is satisfied`, () => {
-    const actual = iff(true, () => 'consequent', () => 'alternative')
+    const actual = iff(
+      true,
+      () => 'consequent',
+      () => 'alternative'
+    )
     expect(actual).toBe('consequent')
   })
 
   test(`calls alternative when predicate fails`, () => {
-    const actual = iff(false, () => 'consequent', () => 'alternative')
+    const actual = iff(
+      false,
+      () => 'consequent',
+      () => 'alternative'
+    )
     expect(actual).toBe('alternative')
   })
 })

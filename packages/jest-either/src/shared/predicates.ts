@@ -22,18 +22,12 @@ export function leftPredicate(
   actual: Either<any, any>,
   predicate: (left: any) => boolean
 ): boolean {
-  return pipe(
-    actual,
-    fold(predicate, F)
-  )
+  return pipe(actual, fold(predicate, F))
 }
 
 export function rightPredicate(
   actual: Either<any, any>,
   predicate: (right: any) => boolean
 ): boolean {
-  return pipe(
-    actual,
-    fold(F, predicate)
-  )
+  return pipe(actual, fold(F, predicate))
 }
