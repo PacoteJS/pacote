@@ -20,8 +20,7 @@ function parse(providedLength?: string | null): [number, string] {
 }
 
 export function pixels(length: string, element?: HTMLElement | null): number {
-  // eslint-disable-next-line no-undef
-  const view = element?.ownerDocument?.defaultView || window
+  const view = element?.ownerDocument?.defaultView ?? window
   const root = view.document.documentElement || view.document.body
 
   const [value, unit] = parse(length)
@@ -31,7 +30,6 @@ export function pixels(length: string, element?: HTMLElement | null): number {
       return value * pixels(fontSize(window.document.documentElement))
 
     case 'em':
-      // eslint-disable-next-line no-undef
       return value * pixels(fontSize(element), element?.parentElement)
 
     case 'in':
