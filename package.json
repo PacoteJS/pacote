@@ -103,7 +103,7 @@
     "redux": "4.0.4",
     "rimraf": "3.0.0",
     "ts-jest": "23.1.4",
-    "typescript": "3.7.2",
+    "typescript": "3.7.3",
     "typescript-workspace-plugin": "2.0.1",
     "whatwg-fetch": "3.0.0"
   },
