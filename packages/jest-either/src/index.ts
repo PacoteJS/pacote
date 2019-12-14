@@ -6,7 +6,6 @@ import { toEqualRight } from './toEqualRight'
 import { toMatchLeft } from './toMatchLeft'
 import { toMatchRight } from './toMatchRight'
 
-// tslint:disable-next-line:no-default-export
 export default {
   toBeEither,
   toBeLeft,
