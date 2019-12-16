@@ -11,7 +11,7 @@ export function iff<T>(
   onConsequent: () => T,
   onAlternative?: () => T
 ): T | Option<T> {
-  return onAlternative != null
+  return onAlternative
     ? predicate
       ? onConsequent()
       : onAlternative()
