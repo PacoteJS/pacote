@@ -20,22 +20,18 @@
     ]
   },
   "jest": {
+    "globals": {
+      "ts-jest": {
+        "diagnostics": {
+          "warnOnly": true
+        }
+      }
+    },
     "roots": [
       "<rootDir>packages"
     ],
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "preset": "ts-jest",
     "testURL": "http://localhost",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ],
     "moduleNameMapper": {
       "@pacote/(.+)$": "<rootDir>packages/$1/src"
     }
@@ -102,7 +98,7 @@
     "react-dom": "16.12.0",
     "redux": "4.0.4",
     "rimraf": "3.0.0",
-    "ts-jest": "23.1.4",
+    "ts-jest": "^24.2.0",
     "typescript": "3.7.3",
     "typescript-workspace-plugin": "2.0.1",
     "whatwg-fetch": "3.0.0"
