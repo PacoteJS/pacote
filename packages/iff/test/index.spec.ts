@@ -31,8 +31,4 @@ describe(`when only the consequent function is provided`, () => {
     const actual = iff(false, () => 'consequent')
     expect(actual).toEqual(none)
   })
-
-  test(`yields None when predicate fails and alternative is null`, () => {
-    expect(iff(false, () => 'consequent', null)).toEqual(none)
-  })
 })
