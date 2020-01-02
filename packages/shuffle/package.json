@@ -2,6 +2,7 @@
   "name": "@pacote/shuffle",
   "description": "An implementation of the Durstenfeld algorithm for shuffling collections.",
   "version": "1.0.2",
+  "sideEffects": false,
   "license": "MIT",
   "author": {
     "name": "Luís Rodrigues",

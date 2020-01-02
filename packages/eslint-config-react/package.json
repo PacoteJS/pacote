@@ -2,6 +2,7 @@
   "name": "@pacote/eslint-config-react",
   "description": "Shareable ESLint configuration for React.",
   "version": "1.0.2",
+  "sideEffects": false,
   "license": "MIT",
   "author": {
     "name": "Luís Rodrigues",

@@ -2,6 +2,7 @@
   "name": "@pacote/eslint-config",
   "description": "Shareable ESLint configuration.",
   "version": "1.0.3",
+  "sideEffects": false,
   "license": "MIT",
   "author": {
     "name": "Luís Rodrigues",

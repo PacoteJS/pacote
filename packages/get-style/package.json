@@ -2,6 +2,7 @@
   "name": "@pacote/get-style",
   "description": "Get an element's computed style for the provided CSS property.",
   "version": "1.1.0",
+  "sideEffects": false,
   "license": "MIT",
   "author": {
     "name": "Luís Rodrigues",

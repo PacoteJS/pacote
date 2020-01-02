@@ -2,6 +2,7 @@
   "name": "@pacote/error",
   "description": "Functional errors.",
   "version": "2.1.1",
+  "sideEffects": false,
   "license": "MIT",
   "author": {
     "name": "Luís Rodrigues",
