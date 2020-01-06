@@ -1,5 +1,11 @@
 # Change Log
 
+## [v1.2.0](https://github.com/PacoteJS/pacote/tree/@pacote/immutable/1.2.0) (2020-01-06)
+
+[Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/immutable@1.1.0...@pacote/immutable@1.2.0)
+
+- `Map` and `Set` immutability.
+
 ## [v1.1.0](https://github.com/PacoteJS/pacote/tree/@pacote/immutable/1.1.0) (2019-08-14)
 
 [Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/immutable@1.0.3...@pacote/immutable@1.1.0)
