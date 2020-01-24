@@ -39,8 +39,8 @@
   },
   "dependencies": {
     "@pacote/is-plain-object": "file:../is-plain-object",
-    "jest-diff": "^24.0.0",
-    "jest-matcher-utils": "^24.0.0",
+    "jest-diff": "^25.1.0",
+    "jest-matcher-utils": "^25.1.0",
     "ramda": "^0.26.1"
   },
   "peerDependencies": {
