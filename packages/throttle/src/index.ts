@@ -3,40 +3,30 @@ interface ThrottledFunction<T> {
   cancel: () => void
 }
 
-export function throttle<T extends any, R extends any>(
-  fn: (...args: T[]) => R,
+export function throttle<T extends any>(
+  fn: (...args: T[]) => any,
   delay = 0
 ): ThrottledFunction<T> {
   let lastCalled = 0
-  let leading = true
-  let pending = false
   let timer: NodeJS.Timeout
 
-  const callFn = (...args: T[]): void => {
-    lastCalled = Date.now()
-    fn(...args)
-  }
-
   const throttledFn = (...args: T[]): void => {
-    const msSinceLastCall = Date.now() - lastCalled
-    const remainingDelay = Math.max(0, delay - msSinceLastCall)
+    const remainingDelay = Math.max(0, lastCalled + delay - Date.now())
 
-    if (leading) {
-      leading = false
-      callFn(...args)
-    } else if (!pending || remainingDelay) {
-      pending = true
+    if (remainingDelay) {
       clearTimeout(timer)
-
       timer = setTimeout(() => {
-        pending = false
-        callFn(...args)
+        lastCalled = Date.now()
+        fn(...args)
       }, remainingDelay)
+    } else {
+      lastCalled = Date.now()
+      fn(...args)
     }
   }
 
   throttledFn.cancel = () => {
-    pending = false
+    lastCalled = 0
     clearTimeout(timer)
   }
 

@@ -18,22 +18,25 @@ yarn add @pacote/throttle
 ```typescript
 import { throttle } from '@pacote/throttle'
 
-// By calling `throttledFn` repeatedly, `fn` is called once immediately and then at most once every 100ms:
 const throttledFn = throttle(fn, 100)
+
+throttledFn() // fn() is called immediately
+throttledFn() // fn() is scheduled for execution after 100ms
+throttledFn() // fn() is scheduled for execution, cancelling the previous one
 ```
 
-### `throttle(fn: Function, delay = 0): Function`
+### `throttle<T>(fn: (...args: T[]) => any, delay = 0): (...args: T[]) => void`
 
 `throttle()` creates a throttled version of the passed function.
 
-By calling the throttled function repeatedly, the original functions is called
+By calling the throttled function repeatedly, the original function is called
 once immediately and then at most once for every period of time determined by
 the `delay` argument.
 
 The `delay` argument is optional and defaults to `0` when not supplied.
 
-The throttled function supplies a `.cancel()` method to cancel delayed
-invokations.
+The throttled function supplies a `.cancel()` method that can be used to cancel
+a pending invocation.
 
 ## License
 

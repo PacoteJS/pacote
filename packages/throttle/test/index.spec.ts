@@ -109,9 +109,3 @@ test(`cancelling pending function calls`, () => {
   expect(fn).not.toHaveBeenCalledWith(2)
   expect(fn).toHaveBeenCalledWith(3)
 })
-
-test.todo(`throttled function returns the result of a single invokation`)
-
-test.todo(
-  `throttled function returns the most recent result of multiple invokations`
-)

@@ -1,7 +1,7 @@
 # Change Log
 
-## [v0.0.0](https://github.com/PacoteJS/pacote/tree/@pacote/throttle/0.0.0) (unreleased)
+## [v1.0.0](https://github.com/PacoteJS/pacote/tree/@pacote/throttle/1.0.0) (2020-02-01)
 
-[Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/throttle@0.0.0...@pacote/throttle@0.0.0)
+[Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/throttle@1.0.0...@pacote/throttle@1.0.0)
 
 - Initial release.
