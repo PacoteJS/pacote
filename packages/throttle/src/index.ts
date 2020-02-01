@@ -12,12 +12,6 @@ export function throttle<T extends any, R extends any>(
   let pending = false
   let timer: NodeJS.Timeout
 
-  const cancel = () => {
-    lastCalled = 0
-    pending = false
-    clearTimeout(timer)
-  }
-
   const callFn = (...args: T[]): void => {
     lastCalled = Date.now()
     fn(...args)
@@ -30,7 +24,7 @@ export function throttle<T extends any, R extends any>(
     if (leading) {
       leading = false
       callFn(...args)
-    } else if (lastCalled === 0 || !pending || remainingDelay) {
+    } else if (!pending || remainingDelay) {
       pending = true
       clearTimeout(timer)
 
@@ -41,7 +35,10 @@ export function throttle<T extends any, R extends any>(
     }
   }
 
-  throttledFn.cancel = cancel
+  throttledFn.cancel = () => {
+    pending = false
+    clearTimeout(timer)
+  }
 
   return throttledFn
 }
