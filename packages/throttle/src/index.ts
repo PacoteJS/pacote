@@ -1,16 +1,19 @@
-interface ThrottledFunction<T> {
-  (...args: T[]): void
+interface Throttled<A extends any[]> {
+  (...args: A): void
+}
+
+interface Cancellable {
   cancel: () => void
 }
 
-export function throttle<T extends any>(
-  fn: (...args: T[]) => any,
+export function throttle<A extends any[]>(
+  fn: (...args: A) => any,
   delay = 0
-): ThrottledFunction<T> {
+): Throttled<A> & Cancellable {
   let lastCalled = 0
   let timer: NodeJS.Timeout
 
-  const throttledFn = (...args: T[]): void => {
+  const throttledFn: Throttled<A> = (...args) => {
     const remainingDelay = Math.max(0, lastCalled + delay - Date.now())
 
     if (remainingDelay) {
@@ -25,10 +28,10 @@ export function throttle<T extends any>(
     }
   }
 
-  throttledFn.cancel = () => {
-    lastCalled = 0
-    clearTimeout(timer)
-  }
-
-  return throttledFn
+  return Object.assign<Throttled<A>, Cancellable>(throttledFn, {
+    cancel: () => {
+      lastCalled = 0
+      clearTimeout(timer)
+    }
+  })
 }
