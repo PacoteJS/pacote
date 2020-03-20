@@ -1,0 +1,8 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "src"
+  },
+  "references": [{ "path": "../option" }],
+  "plugins": [{ "name": "typescript-workspace-plugin" }]
+}

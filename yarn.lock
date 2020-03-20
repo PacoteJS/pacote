@@ -1238,6 +1238,12 @@
 "@pacote/computus@file:packages/computus":
   version "1.2.1"
 
+"@pacote/emitter@file:packages/emitter":
+  version "0.0.0"
+
+"@pacote/equals@file:packages/equals":
+  version "0.0.0"
+
 "@pacote/error@file:packages/error":
   version "2.1.2"
 
@@ -1253,7 +1259,7 @@
 "@pacote/ffetch@file:packages/ffetch":
   version "5.1.1"
   dependencies:
-    "@pacote/error" "file:../../Library/Caches/Yarn/v6/npm-@pacote-ffetch-5.1.1-1983dcf7-b04c-4203-a7a5-1082102ad981-1584635164273/node_modules/@pacote/error"
+    "@pacote/error" "file:../../Library/Caches/Yarn/v6/npm-@pacote-ffetch-5.1.1-7aafa18a-d72f-45d5-90b1-e05da8aaf6be-1584667186766/node_modules/@pacote/error"
 
 "@pacote/flux-actions@file:packages/flux-actions":
   version "2.1.1"
@@ -1276,7 +1282,7 @@
 "@pacote/jest-either@file:packages/jest-either":
   version "3.1.2"
   dependencies:
-    "@pacote/is-plain-object" "file:../../Library/Caches/Yarn/v6/npm-@pacote-jest-either-3.1.2-1bb3839e-69a9-45db-a378-a338233fbafd-1584635164290/node_modules/@pacote/is-plain-object"
+    "@pacote/is-plain-object" "file:../../Library/Caches/Yarn/v6/npm-@pacote-jest-either-3.1.2-c986e67c-c67b-48b3-b02b-6e7dc044068b-1584667186775/node_modules/@pacote/is-plain-object"
     jest-diff "^25.1.0"
     jest-matcher-utils "^25.1.0"
     ramda "^0.27.0"
@@ -1284,16 +1290,24 @@
 "@pacote/memoize@file:packages/memoize":
   version "1.1.1"
 
+"@pacote/option@file:packages/option":
+  version "0.0.0"
+
 "@pacote/pixels@file:packages/pixels":
   version "1.1.1"
   dependencies:
-    "@pacote/get-style" "file:../../Library/Caches/Yarn/v6/npm-@pacote-pixels-1.1.1-b66f3d65-2359-434c-be34-cec8315569a1-1584635164304/node_modules/@pacote/get-style"
+    "@pacote/get-style" "file:../../Library/Caches/Yarn/v6/npm-@pacote-pixels-1.1.1-8175ede1-8a1f-4071-a4e2-6b723461043d-1584667186788/node_modules/@pacote/get-style"
 
 "@pacote/react-use-outside@file:packages/react-use-outside":
   version "1.1.1"
 
 "@pacote/react-with-props@file:packages/react-with-props":
   version "1.1.1"
+
+"@pacote/result@file:packages/result":
+  version "0.0.0"
+  dependencies:
+    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-result-0.0.0-b57b05e5-df3d-4269-ac06-d82667a61f42-1584667186793/node_modules/@pacote/option"
 
 "@pacote/shuffle@file:packages/shuffle":
   version "1.0.3"

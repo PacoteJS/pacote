@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "ES3",
+    "outDir": "lib/cjs",
+    "declarationMap": false,
+    "sourceMap": false
+  },
+  "references": [{ "path": "../option/tsconfig.cjs.json" }]
+}

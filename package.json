@@ -103,6 +103,7 @@
   "name": "pacote",
   "dependencies": {
     "@pacote/computus": "file:packages/computus",
+    "@pacote/emitter": "file:packages/emitter",
     "@pacote/error": "file:packages/error",
     "@pacote/eslint-config": "file:packages/eslint-config",
     "@pacote/eslint-config-jest": "file:packages/eslint-config-jest",
@@ -116,9 +117,11 @@
     "@pacote/is-plain-object": "file:packages/is-plain-object",
     "@pacote/jest-either": "file:packages/jest-either",
     "@pacote/memoize": "file:packages/memoize",
+    "@pacote/option": "file:packages/option",
     "@pacote/pixels": "file:packages/pixels",
     "@pacote/react-use-outside": "file:packages/react-use-outside",
     "@pacote/react-with-props": "file:packages/react-with-props",
+    "@pacote/result": "file:packages/result",
     "@pacote/shuffle": "file:packages/shuffle",
     "@pacote/throttle": "file:packages/throttle"
   }
