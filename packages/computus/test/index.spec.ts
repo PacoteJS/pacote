@@ -8,7 +8,7 @@ describe('Gregorian calendar Easter', () => {
 
   test('always on or after 22 March', () => {
     assert(
-      property(integer(1583, 65536), year => {
+      property(integer(1583, 65536), (year) => {
         expect(gregorian(year).getTime()).toBeGreaterThanOrEqual(
           new Date(year, 2, 22).getTime()
         )
@@ -18,7 +18,7 @@ describe('Gregorian calendar Easter', () => {
 
   test('always on or before 25 April', () => {
     assert(
-      property(integer(1583, 65536), year => {
+      property(integer(1583, 65536), (year) => {
         expect(gregorian(year).getTime()).toBeLessThanOrEqual(
           new Date(year, 3, 25).getTime()
         )
@@ -28,7 +28,7 @@ describe('Gregorian calendar Easter', () => {
 
   test('always on a Sunday', () => {
     assert(
-      property(integer(1583, 65536), year => {
+      property(integer(1583, 65536), (year) => {
         expect(gregorian(year).getDay()).toBe(0)
       })
     )
@@ -58,7 +58,7 @@ describe('Julian calendar Easter', () => {
 
   test('always on a Sunday', () => {
     assert(
-      property(integer(1900, 2099), year => {
+      property(integer(1900, 2099), (year) => {
         expect(julian(year).getDay()).toBe(0)
       })
     )

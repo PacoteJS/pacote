@@ -6,13 +6,13 @@ import {
   func,
   object,
   property,
-  string
+  string,
 } from 'fast-check'
 import { isPlainObject } from '../src'
 
 test('Plain objects are plain objects', () => {
   assert(
-    property(object(), o => {
+    property(object(), (o) => {
       expect(isPlainObject(o)).toBe(true)
     })
   )
@@ -20,7 +20,7 @@ test('Plain objects are plain objects', () => {
 
 test('Proxy is a plain object', () => {
   assert(
-    property(object(), o => {
+    property(object(), (o) => {
       expect(isPlainObject(new Proxy(o, {}))).toBe(true)
     })
   )
@@ -41,7 +41,7 @@ test('A boolean is not a plain object', () => {
 
 test('A string is not a plain object', () => {
   assert(
-    property(string(), s => {
+    property(string(), (s) => {
       expect(isPlainObject(s)).toBe(false)
     })
   )
@@ -49,7 +49,7 @@ test('A string is not a plain object', () => {
 
 test('A number is not a plain object', () => {
   assert(
-    property(float(), f => {
+    property(float(), (f) => {
       expect(isPlainObject(f)).toBe(false)
     })
   )
@@ -57,7 +57,7 @@ test('A number is not a plain object', () => {
 
 test('A function is not a plain object', () => {
   assert(
-    property(func(anything()), f => {
+    property(func(anything()), (f) => {
       expect(isPlainObject(f)).toBe(false)
     })
   )
@@ -65,7 +65,7 @@ test('A function is not a plain object', () => {
 
 test('An array is not a plain object', () => {
   assert(
-    property(array(anything()), a => {
+    property(array(anything()), (a) => {
       expect(isPlainObject(a)).toBe(false)
     })
   )
@@ -101,7 +101,7 @@ test.each<[string, any]>([
   ['Uint8Array', Uint8Array],
   ['Uint8ClampedArray', Uint8ClampedArray],
   ['WeakMap', WeakMap],
-  ['WeakSet', WeakSet]
+  ['WeakSet', WeakSet],
 ])('%s is not a plain object', (_, ArrayClass) => {
   expect(isPlainObject(new ArrayClass())).toBe(false)
 })

@@ -14,7 +14,7 @@ function createCache<R>() {
 
     set: (key: string, value: R) => {
       cache[key] = value
-    }
+    },
   }
 }
 

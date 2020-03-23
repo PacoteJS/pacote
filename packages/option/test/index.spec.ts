@@ -72,23 +72,23 @@ describe('getOrElse()', () => {
 
 describe('map()', () => {
   test('maps None to None', () => {
-    expect(O.map<number, number>(x => x + 1, O.None)).toEqual(O.None)
+    expect(O.map<number, number>((x) => x + 1, O.None)).toEqual(O.None)
   })
 
   test('maps Some using the provided function', () => {
-    expect(O.map(x => x + 1, O.Some(1))).toEqual(O.Some(2))
+    expect(O.map((x) => x + 1, O.Some(1))).toEqual(O.Some(2))
   })
 })
 
 describe('flatMap()', () => {
   test('binds None to None', () => {
-    expect(O.flatMap<number, string>(x => O.Some(`${x + 1}`), O.None)).toEqual(
-      O.None
-    )
+    expect(
+      O.flatMap<number, string>((x) => O.Some(`${x + 1}`), O.None)
+    ).toEqual(O.None)
   })
 
   test('binds Some using the provided function', () => {
-    expect(O.flatMap(x => O.Some(`${x + 1}`), O.Some(1))).toEqual(O.Some('2'))
+    expect(O.flatMap((x) => O.Some(`${x + 1}`), O.Some(1))).toEqual(O.Some('2'))
   })
 })
 
@@ -132,7 +132,7 @@ describe('fold()', () => {
   test('applies mapping function to None', () => {
     expect(
       O.fold<string, number>(
-        s => s.length,
+        (s) => s.length,
         () => 0,
         O.None
       )
@@ -142,7 +142,7 @@ describe('fold()', () => {
   test('applies mapping function to O.Some(T)', () => {
     expect(
       O.fold(
-        s => s.length,
+        (s) => s.length,
         () => 0,
         O.Some('test')
       )
@@ -155,7 +155,7 @@ describe('monad laws', () => {
     fc.assert(
       fc.property(fc.func(fc.anything()), fc.anything(), (fn, value) => {
         return equals(
-          O.flatMap(x => O.Some(fn(x)), O.Some(value)),
+          O.flatMap((x) => O.Some(fn(x)), O.Some(value)),
           O.Some(fn(value))
         )
       })
@@ -164,7 +164,7 @@ describe('monad laws', () => {
 
   test('right identity', () => {
     fc.assert(
-      fc.property(fc.anything(), value => {
+      fc.property(fc.anything(), (value) => {
         return equals(O.flatMap(O.Some, O.Some(value)), O.Some(value))
       })
     )
@@ -179,10 +179,10 @@ describe('monad laws', () => {
         (f, g, value) => {
           return equals(
             O.flatMap(
-              x => O.Some(g(x)),
-              O.flatMap(x => O.Some(f(x)), O.Some(value))
+              (x) => O.Some(g(x)),
+              O.flatMap((x) => O.Some(f(x)), O.Some(value))
             ),
-            O.flatMap(x => O.Some(g(f(x))), O.Some(value))
+            O.flatMap((x) => O.Some(g(f(x))), O.Some(value))
           )
         }
       )

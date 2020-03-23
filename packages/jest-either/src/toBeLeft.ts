@@ -25,6 +25,6 @@ export function toBeLeft(actual: Either<any, any>) {
   const pass = pipe(actual, isLeft)
   return {
     pass,
-    message: pass ? passMessage() : failMessage()
+    message: pass ? passMessage() : failMessage(),
   }
 }

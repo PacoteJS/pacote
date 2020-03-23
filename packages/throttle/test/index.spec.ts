@@ -23,7 +23,7 @@ const tock = (() => {
       // eslint-disable-next-line no-unused-expressions
       spy?.mockRestore()
       jest.useRealTimers()
-    }
+    },
   }
 })()
 

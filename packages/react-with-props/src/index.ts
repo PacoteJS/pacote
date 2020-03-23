@@ -6,7 +6,7 @@ import {
   ReactNode,
   FunctionComponent,
   DetailedHTMLFactory,
-  DOMFactory
+  DOMFactory,
 } from 'react'
 
 type Injector<Props, InjectedProps> = (props?: Props) => InjectedProps
@@ -57,8 +57,9 @@ export function withProps<
   const factory = createFactory(
     BaseComponent as FunctionComponent<ComponentProps>
   )
-  const EnhancedComponent: FunctionComponent<OuterProps &
-    EnhancedProps> = props =>
+  const EnhancedComponent: FunctionComponent<OuterProps & EnhancedProps> = (
+    props
+  ) =>
     factory(
       Object.assign<ComponentProps, EnhancedProps, InjectedProps>(
         {} as any,
@@ -85,7 +86,7 @@ export function withDefaultProps<
   const factory = createFactory(
     BaseComponent as FunctionComponent<ComponentProps>
   )
-  const EnhancedComponent: FunctionComponent<EnhancedProps> = props =>
+  const EnhancedComponent: FunctionComponent<EnhancedProps> = (props) =>
     factory(
       Object.assign<ComponentProps, InjectedProps, EnhancedProps>(
         {} as any,

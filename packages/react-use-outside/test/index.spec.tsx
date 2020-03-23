@@ -24,7 +24,7 @@ test.each<
 >([
   ['click', fireEvent.click],
   ['touchend', fireEvent.touchEnd],
-  ['mouseover', fireEvent.mouseOver]
+  ['mouseover', fireEvent.mouseOver],
 ])('handler is called on %s outside', (type, fireFunction) => {
   const handler = jest.fn()
   const { getByText } = renderTestComponent(type, handler)
@@ -37,7 +37,7 @@ test.each<
 >([
   ['click', fireEvent.click],
   ['touchend', fireEvent.touchEnd],
-  ['mouseover', fireEvent.mouseOver]
+  ['mouseover', fireEvent.mouseOver],
 ])('handler is not called on %s inside', (type, fireFunction) => {
   const handler = jest.fn()
   const { getByText } = renderTestComponent(type, handler)

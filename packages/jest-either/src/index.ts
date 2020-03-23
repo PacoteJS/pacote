@@ -13,5 +13,5 @@ export default {
   toEqualLeft,
   toEqualRight,
   toMatchLeft,
-  toMatchRight
+  toMatchRight,
 }

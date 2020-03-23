@@ -7,7 +7,7 @@ export function printReceivedLeft(actual: Either<any, any>): string {
   return pipe(
     actual,
     fold(
-      left => `Received left:` + '\n' + `  ${printReceived(left)}`,
+      (left) => `Received left:` + '\n' + `  ${printReceived(left)}`,
       () => `Received right.`
     )
   )
@@ -18,7 +18,7 @@ export function printReceivedRight(actual: Either<any, any>): string {
     actual,
     fold(
       () => `Received left.`,
-      right => `Received right:` + '\n' + `  ${printReceived(right)}`
+      (right) => `Received right:` + '\n' + `  ${printReceived(right)}`
     )
   )
 }
@@ -30,7 +30,7 @@ export function diffReceivedLeft(
   return pipe(
     actual,
     fold(
-      left => {
+      (left) => {
         const diffString = diff(expected, left) || ''
         return diffString.includes('- Expect')
           ? `Difference from Left:\n\n${diffString}`
@@ -60,7 +60,7 @@ export function diffReceivedRight(
         `  ${printExpected(expected)}` +
         '\n\n' +
         printReceivedRight(actual),
-      right => {
+      (right) => {
         const diffString = diff(expected, right) || ''
         return diffString.includes('- Expect')
           ? `Difference from Right:\n\n${diffString}`

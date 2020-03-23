@@ -4,7 +4,7 @@ import { memoize } from '../src/index'
 test('memoize calls the original function', () => {
   assert(
     property(func(string()), string(), (fn, s) => {
-      const memoizedFn = memoize(i => i, fn)
+      const memoizedFn = memoize((i) => i, fn)
       expect(memoizedFn(s)).toEqual(fn(s))
     })
   )

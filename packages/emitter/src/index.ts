@@ -16,12 +16,12 @@ export function createEmitter<E extends Events>(): Emitter<E> {
 
       return () => {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        events[name] = events[name]!.filter(cb => cb !== fn)
+        events[name] = events[name]!.filter((cb) => cb !== fn)
       }
     },
     emit(name, ...args) {
       // eslint-disable-next-line no-unused-expressions
-      events[name]?.forEach(fn => fn(...args))
-    }
+      events[name]?.forEach((fn) => fn(...args))
+    },
   }
 }

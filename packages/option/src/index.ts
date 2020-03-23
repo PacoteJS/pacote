@@ -9,7 +9,7 @@ interface Some<T> {
 
 const Type = {
   Some: Symbol('Some'),
-  None: Symbol('None')
+  None: Symbol('None'),
 }
 
 export type Option<T> = None | Some<T>
@@ -17,7 +17,7 @@ export type Option<T> = None | Some<T>
 export function Some<T>(value: T): Some<T> {
   return {
     type: Type.Some,
-    value
+    value,
   }
 }
 

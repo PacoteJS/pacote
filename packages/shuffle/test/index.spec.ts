@@ -9,7 +9,7 @@ test('shuffling an array', () => {
 
 test('shuffling preserves collection items', () => {
   assert(
-    property(integer(1, 100), length => {
+    property(integer(1, 100), (length) => {
       const items = range(0, length)
       const shuffled = shuffle(items)
       expect(shuffled.sort()).toEqual(items.sort())

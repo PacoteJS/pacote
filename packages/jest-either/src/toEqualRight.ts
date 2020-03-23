@@ -5,7 +5,7 @@ import { diffReceivedRight } from './shared/print'
 import {
   AsymmetricMatcher,
   isAsymmetricMatcher,
-  rightPredicate
+  rightPredicate,
 } from './shared/predicates'
 
 declare global {
@@ -44,6 +44,6 @@ export function toEqualRight<R>(
     actual,
     expected,
     pass,
-    message: pass ? passMessage(expected) : failMessage(actual, expected)
+    message: pass ? passMessage(expected) : failMessage(actual, expected),
   }
 }

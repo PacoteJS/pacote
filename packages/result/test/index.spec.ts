@@ -3,6 +3,20 @@ import { equals } from 'ramda'
 import * as O from '@pacote/option'
 import * as R from '../src/index'
 
+describe('ofNullable()', () => {
+  test('creates Err on null', () => {
+    expect(R.ofNullable('error', null)).toEqual(R.Err('error'))
+  })
+
+  test('creates Err on undefined', () => {
+    expect(R.ofNullable('error', undefined)).toEqual(R.Err('error'))
+  })
+
+  test('returns Ok(T) on non-null value', () => {
+    expect(R.ofNullable('error', 'ok')).toEqual(R.Ok('ok'))
+  })
+})
+
 describe('isOk()', () => {
   test('returns false on Err', () => {
     expect(R.isOk(R.Err('error'))).toBe(false)
@@ -49,7 +63,7 @@ describe('getOrElse()', () => {
   })
 
   test('evaluates the function and returns its result on Err', () => {
-    expect(R.getOrElse(err => 'default: ' + err, R.Err('error'))).toBe(
+    expect(R.getOrElse((err) => 'default: ' + err, R.Err('error'))).toBe(
       'default: error'
     )
   })
@@ -58,36 +72,36 @@ describe('getOrElse()', () => {
 describe('map()', () => {
   test('leaves Err unchanged', () => {
     expect(
-      R.map<string, string, number>(s => s.length, R.Err('error'))
+      R.map<string, string, number>((s) => s.length, R.Err('error'))
     ).toEqual(R.Err('error'))
   })
 
   test('maps Ok result', () => {
-    expect(R.map(s => s.length, R.Ok('ok'))).toEqual(R.Ok(2))
+    expect(R.map((s) => s.length, R.Ok('ok'))).toEqual(R.Ok(2))
   })
 })
 
 describe('mapErr()', () => {
   test('leaves Ok unchanged', () => {
-    expect(R.mapErr<string, string, number>(s => s.length, R.Ok('ok'))).toEqual(
-      R.Ok('ok')
-    )
+    expect(
+      R.mapErr<string, string, number>((s) => s.length, R.Ok('ok'))
+    ).toEqual(R.Ok('ok'))
   })
 
   test('maps Err result', () => {
-    expect(R.mapErr(s => s.length, R.Err('error'))).toEqual(R.Err(5))
+    expect(R.mapErr((s) => s.length, R.Err('error'))).toEqual(R.Err(5))
   })
 })
 
 describe('flatMap()', () => {
   test('leaves Err unchanged', () => {
     expect(
-      R.flatMap<string, string, number>(s => R.Ok(s.length), R.Err('error'))
+      R.flatMap<string, string, number>((s) => R.Ok(s.length), R.Err('error'))
     ).toEqual(R.Err('error'))
   })
 
   test('maps Ok result', () => {
-    expect(R.flatMap(s => R.Ok(s.length), R.Ok('ok'))).toEqual(R.Ok(2))
+    expect(R.flatMap((s) => R.Ok(s.length), R.Ok('ok'))).toEqual(R.Ok(2))
   })
 })
 
@@ -109,8 +123,8 @@ describe('fold()', () => {
   test('applies mapping function to Err(E)', () => {
     expect(
       R.fold(
-        t => `Ok(${t})`,
-        e => `Err(${e})`,
+        (t) => `Ok(${t})`,
+        (e) => `Err(${e})`,
         R.Err(0)
       )
     ).toEqual('Err(0)')
@@ -119,8 +133,8 @@ describe('fold()', () => {
   test('applies mapping function to Ok(T)', () => {
     expect(
       R.fold(
-        t => `Ok(${t})`,
-        e => `Err(${e})`,
+        (t) => `Ok(${t})`,
+        (e) => `Err(${e})`,
         R.Ok(1)
       )
     ).toEqual('Ok(1)')
@@ -157,26 +171,12 @@ describe('and()', () => {
   })
 })
 
-describe('ofNullable()', () => {
-  test('creates Err on null', () => {
-    expect(R.ofNullable('error', null)).toEqual(R.Err('error'))
-  })
-
-  test('creates Err on undefined', () => {
-    expect(R.ofNullable('error', undefined)).toEqual(R.Err('error'))
-  })
-
-  test('returns Ok(T) on non-null value', () => {
-    expect(R.ofNullable('error', 'ok')).toEqual(R.Ok('ok'))
-  })
-})
-
 describe('monad laws', () => {
   test('left identity', () => {
     fc.assert(
       fc.property(fc.func(fc.anything()), fc.anything(), (fn, value) => {
         return equals(
-          R.flatMap(x => R.Ok(fn(x)), R.Ok(value)),
+          R.flatMap((x) => R.Ok(fn(x)), R.Ok(value)),
           R.Ok(fn(value))
         )
       })
@@ -185,7 +185,7 @@ describe('monad laws', () => {
 
   test('right identity', () => {
     fc.assert(
-      fc.property(fc.anything(), value => {
+      fc.property(fc.anything(), (value) => {
         return equals(R.flatMap(R.Ok, R.Ok(value)), R.Ok(value))
       })
     )
@@ -200,10 +200,10 @@ describe('monad laws', () => {
         (f, g, value) => {
           return equals(
             R.flatMap(
-              x => R.Ok(g(x)),
-              R.flatMap(x => R.Ok(f(x)), R.Ok(value))
+              (x) => R.Ok(g(x)),
+              R.flatMap((x) => R.Ok(f(x)), R.Ok(value))
             ),
-            R.flatMap(x => R.Ok(g(f(x))), R.Ok(value))
+            R.flatMap((x) => R.Ok(g(f(x))), R.Ok(value))
           )
         }
       )

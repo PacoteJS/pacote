@@ -56,6 +56,6 @@ export function toMatchLeft<L>(
     pass,
     message: pass
       ? passMessage(actual, expected)
-      : failMessage(actual, expected)
+      : failMessage(actual, expected),
   }
 }

@@ -34,6 +34,6 @@ export function toBeEither(actual: any) {
   const pass = isEither(actual)
   return {
     pass,
-    message: pass ? passMessage(actual) : failMessage(actual)
+    message: pass ? passMessage(actual) : failMessage(actual),
   }
 }

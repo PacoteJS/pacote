@@ -26,6 +26,6 @@ export function toBeRight(actual: Either<any, any>) {
 
   return {
     pass,
-    message: pass ? passMessage() : failMessage()
+    message: pass ? passMessage() : failMessage(),
   }
 }

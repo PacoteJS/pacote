@@ -54,6 +54,6 @@ export function toMatchRight<R>(
     pass,
     message: pass
       ? passMessage(actual, expected)
-      : failMessage(actual, expected)
+      : failMessage(actual, expected),
   }
 }

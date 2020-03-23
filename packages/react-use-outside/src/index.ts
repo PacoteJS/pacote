@@ -21,10 +21,10 @@ export function useOutside<E extends HTMLElement>(
 
     const types = Array<EventType>().concat(type)
 
-    types.forEach(t => document.addEventListener(t, listener, true))
+    types.forEach((t) => document.addEventListener(t, listener, true))
 
     return () => {
-      types.forEach(t => document.removeEventListener(t, listener, true))
+      types.forEach((t) => document.removeEventListener(t, listener, true))
     }
   }, [type, handler, inside])
 

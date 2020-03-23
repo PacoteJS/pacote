@@ -3,7 +3,7 @@ import { assert, property, string, anything } from 'fast-check'
 
 test('creates an action creator', () => {
   assert(
-    property(string(), type => {
+    property(string(), (type) => {
       const testAction = createAction(type)
       expect(testAction()).toEqual({ type })
     })

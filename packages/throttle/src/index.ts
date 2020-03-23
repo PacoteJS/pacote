@@ -32,6 +32,6 @@ export function throttle<A extends any[]>(
     cancel: () => {
       lastCalled = 0
       clearTimeout(timer)
-    }
+    },
   })
 }

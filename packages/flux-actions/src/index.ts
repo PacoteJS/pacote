@@ -59,9 +59,9 @@ function createReducer<S>(
         ...matches,
         ...Array<ActionCreator>()
           .concat(creators)
-          .map<ReducerMatch<S>>(creator => [creator, handler])
+          .map<ReducerMatch<S>>((creator) => [creator, handler]),
       ])
-    }
+    },
   })
 }
 

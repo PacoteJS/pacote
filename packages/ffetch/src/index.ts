@@ -35,7 +35,7 @@ function handleSuccess<T>(
 ): TaskEither<ParserError, T | string> {
   return tryCatch(
     async () => parseFn(response),
-    error => new ParserError('Could not parse response', error as Error)
+    (error) => new ParserError('Could not parse response', error as Error)
   )
 }
 
@@ -49,13 +49,13 @@ function handleFailure<E>(
   return pipe(
     tryCatch(
       async () => parseFn(response).then(statusError),
-      error =>
+      (error) =>
         new ParserError('Could not parse error response', [
           statusError(),
-          error as Error
+          error as Error,
         ])
     ),
-    chain(error => left<StatusError<E> | ParserError>(error))
+    chain((error) => left<StatusError<E> | ParserError>(error))
   )
 }
 
@@ -66,16 +66,16 @@ export function createFetch<E, T>(
     fetch: window.fetch,
     parse,
     parseLeft,
-    ...options
+    ...options,
   }
 
   return (input, init) =>
     pipe(
       tryCatch(
         async () => o.fetch(input, init),
-        error => new NetworkError('Network request failed', error as Error)
+        (error) => new NetworkError('Network request failed', error as Error)
       ),
-      chain(response =>
+      chain((response) =>
         response.ok
           ? handleSuccess(o.parse, response)
           : handleFailure(o.parseLeft, response)
