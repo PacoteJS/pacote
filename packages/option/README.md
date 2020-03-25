@@ -16,7 +16,7 @@ yarn add @pacote/option
 ## Usage
 
 ```typescript
-import { None, Some } from '@pacote/option'
+import { None, Some, map } from '@pacote/option'
 
 function divide(numerator: number, denominator: number): Option<number> {
   return denominator === 0 : None ? Some(numerator / denominator)
