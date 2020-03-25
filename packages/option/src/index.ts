@@ -43,7 +43,7 @@ export function flatten<T>(option: Option<Option<T>>): Option<T> {
   return isSome(option) ? option.value : None
 }
 
-export function getOrElse<T, U>(fn: () => U, option: Option<T>): T | U {
+export function getOrElse<T>(fn: () => T, option: Option<T>): T {
   return isSome(option) ? option.value : fn()
 }
 

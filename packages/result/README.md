@@ -42,7 +42,68 @@ map(n => n + 1, divide(4, 0)) // => Err('division by zero')
 
 ## Functions
 
-TODO: Documentation
+### `ofNullable<T, E>(error: E, value: T): Result<T, E>`
+
+Creates a new instance of `Result` based on the value being passed. If `null` or
+`undefined`, it returns `Err(error)`. Otherwise, it returns `Ok(value)`.
+
+### `isOk<T, E>(value: Result<T, E>): boolean`
+
+Returns `true` if the passed result is `Ok`. Otherwise, it returns `false`.
+
+### `isErr<T, E>(value: Result<T, E>): boolean`
+
+Returns `true` if the passed result is `Err`. Otherwise, it returns `false`.
+
+### `getOrElse<T, E>(fn: (err: E) => T, result: Result<T, E>): T`
+
+Returns the value contained in the result. If the result is `Err`, it evaluates
+the provided function for an alternative.
+
+### `ok<T, E>(result: Result<T, E>): Option<T>`
+
+Evaluates the result and returns an `Option` that is:
+
+- `None` if the result is `Err`, or
+- `Some` wrapping the result value if it's `Ok`.
+
+### `err<T, E>(result: Result<T, E>): Option<E>`
+
+Evaluates the result and returns an `Option` that is:
+
+- `None` if the result is `Ok`, or
+- `Some` wrapping the result error if it's `Err`.
+
+### `map<T, E, U>(fn: (value: T) => U, result: Result<T, E>): Result<U, E>`
+
+Maps a `Result<T, E>` to `Result<U, E>` by applying a function to the contained
+value.
+
+### `mapErr<T, E, F>(fn: (value: E) => F, result: Result<T, E>): Result<T, F>`
+
+Maps a `Result<T, E>` to `Result<T, F>` by applying a function to the contained
+error.
+
+### `flatMap<T, E, U>(fn: (value: T) => Result<U, E>, result: Result<T, E>): Result<U, E>`
+
+Calls `fn` if the result is `Ok`, otherwise returns the `Err` value.
+
+### `flatten<T, E>(result: Result<Result<T, E>, E>): Result<T, E>`
+
+Converts `Result<Result<T, E>, E>` to `Result<T, E>`.
+
+### `fold<T, E, R>(onOk: (ok: T) => R, onErr: (err: E) => R, result: Result<T, E>): R`
+
+Applies the `onOk` function to the value contained in `Ok`, otherwise it
+computes a default using `onErr` if it is an error.
+
+### `or<T, E>(alternative: Result<T, E>, result: Result<T, E>): Result<T, E>`
+
+Returns the result if it is `Ok`, otherwise returns the alternative.
+
+### `and<T, E, U>(alternative: Result<U, E>, result: Result<T, E>): Result<U, E>`
+
+Returns the result if it is `Err`, otherwise returns the alternative.
 
 ## License
 

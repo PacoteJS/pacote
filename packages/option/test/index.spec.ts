@@ -66,7 +66,7 @@ describe('getOrElse()', () => {
   })
 
   test('evaluates the function and returns its result on None', () => {
-    expect(O.getOrElse(() => 'default', O.Some(1))).toBe(1)
+    expect(O.getOrElse(() => 0, O.Some(1))).toBe(1)
   })
 })
 

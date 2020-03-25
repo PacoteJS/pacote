@@ -14,6 +14,7 @@ const Type = {
   Ok: Symbol('Ok'),
   Err: Symbol('Err'),
 }
+
 type Result<T, E> = Ok<T> | Err<E>
 
 export function Ok<T>(value: T): Result<T, never> {
