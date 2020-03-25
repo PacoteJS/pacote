@@ -16,7 +16,7 @@ yarn add @pacote/result
 ## Usage
 
 ```typescript
-import { Ok, Err } from '@pacote/result'
+import { Ok, Err, map } from '@pacote/result'
 
 function divide(numerator: number, denominator: number): Option<number> {
   return denominator === 0 : Err('division by zero') ? Ok(numerator / denominator)
