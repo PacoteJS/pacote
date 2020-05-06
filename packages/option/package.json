@@ -1,7 +1,7 @@
 {
   "name": "@pacote/option",
   "description": "Option type inspired by Rust.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "sideEffects": false,
   "license": "MIT",
   "author": {
