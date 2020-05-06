@@ -3,45 +3,45 @@ module.exports = {
     {
       files: ['__mocks__/**/*.js'],
       env: {
-        jest: true
-      }
+        jest: true,
+      },
     },
     {
       files: ['**/*.{test,spec}.{js,jsx,ts,tsx}'],
       env: {
-        jest: true
+        jest: true,
       },
       rules: {
         'no-restricted-globals': [
           'error',
           {
             name: 'fit',
-            message: 'Use it instead.'
+            message: 'Use it instead.',
           },
           {
             name: 'fdescribe',
-            message: 'Use describe instead.'
-          }
+            message: 'Use describe instead.',
+          },
         ],
         'no-restricted-properties': [
           'error',
           {
             object: 'describe',
             property: 'only',
-            message: 'Use describe instead.'
+            message: 'Use describe instead.',
           },
           {
             object: 'it',
             property: 'only',
-            message: 'Use it instead.'
+            message: 'Use it instead.',
           },
           {
             object: 'test',
             property: 'only',
-            message: 'Use test instead.'
-          }
-        ]
-      }
-    }
-  ]
+            message: 'Use test instead.',
+          },
+        ],
+      },
+    },
+  ],
 }
