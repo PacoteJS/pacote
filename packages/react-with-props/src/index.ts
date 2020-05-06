@@ -1,5 +1,5 @@
 import {
-  createFactory,
+  createElement,
   ReactSVG,
   ReactHTML,
   ComponentType,
@@ -54,13 +54,11 @@ export function withProps<
   injected: Injector<OuterProps, InjectedProps> | InjectedProps,
   BaseComponent: Component
 ): ComponentType<OuterProps & EnhancedProps> {
-  const factory = createFactory(
-    BaseComponent as FunctionComponent<ComponentProps>
-  )
   const EnhancedComponent: FunctionComponent<OuterProps & EnhancedProps> = (
     props
   ) =>
-    factory(
+    createElement(
+      BaseComponent,
       Object.assign<ComponentProps, EnhancedProps, InjectedProps>(
         {} as any,
         props,
@@ -83,11 +81,9 @@ export function withDefaultProps<
   injectedProps: InjectedProps,
   BaseComponent: Component
 ): ComponentType<EnhancedProps> {
-  const factory = createFactory(
-    BaseComponent as FunctionComponent<ComponentProps>
-  )
   const EnhancedComponent: FunctionComponent<EnhancedProps> = (props) =>
-    factory(
+    createElement(
+      BaseComponent,
       Object.assign<ComponentProps, InjectedProps, EnhancedProps>(
         {} as any,
         injectedProps,
