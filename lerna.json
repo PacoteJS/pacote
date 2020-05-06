@@ -4,11 +4,11 @@
   "useWorkspaces": true,
   "packages": ["packages/*"],
   "publish": {
-    "ignoreChanges": [
-      "test/**",
-      "*.spec.ts",
-      "*.test.ts",
-      "*.md"
-    ]
+    "ignoreChanges": ["test/**", "*.spec.ts", "*.test.ts", "*.md"]
+  },
+  "command": {
+    "version": {
+      "message": "chore(release): publish %s"
+    }
   }
 }
