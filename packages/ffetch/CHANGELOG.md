@@ -1,5 +1,14 @@
 # Change Log
 
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [5.1.3](https://github.com/PacoteJS/pacote/compare/@pacote/ffetch@5.1.2...@pacote/ffetch@5.1.3) (2020-05-21)
+
+**Note:** Version bump only for package @pacote/ffetch
+
+# Change Log
+
 ## [v5.1.0](https://github.com/PacoteJS/pacote/tree/@pacote/ffetch@5.1.0) (2019-08-08)
 
 [Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/ffetch@5.0.3...@pacote/ffetch@5.1.0)
