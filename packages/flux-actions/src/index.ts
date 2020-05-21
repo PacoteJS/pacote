@@ -11,7 +11,7 @@ type ActionCreator<P = any, M = any> = {
   ? {
       (payload?: P, meta?: M): Action<P, M>
     }
-  : {})
+  : Record<string, unknown>)
 
 type Reducer<S> = (state: S | undefined, action: Action) => S
 

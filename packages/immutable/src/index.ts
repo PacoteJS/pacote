@@ -4,11 +4,11 @@ export type Immutable<T> = T extends Array<infer E>
   ? ImmutableMap<K, V>
   : T extends Set<infer E>
   ? ImmutableSet<E>
-  : T extends object
-  ? ImmutableObject<T>
+  : T extends Record<string, infer V>
+  ? ImmutableObject<T, V>
   : T
 
 type ImmutableArray<T> = ReadonlyArray<Immutable<T>>
-type ImmutableObject<T> = { readonly [P in keyof T]: Immutable<T[P]> }
-type ImmutableMap<K, T> = ReadonlyMap<K, Immutable<T>>
+type ImmutableObject<T, V> = { readonly [P in keyof T]: Immutable<V> }
+type ImmutableMap<K, V> = ReadonlyMap<K, Immutable<V>>
 type ImmutableSet<T> = ReadonlySet<Immutable<T>>

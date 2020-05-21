@@ -45,8 +45,8 @@ function isInjector<OuterProps, InjectedProps>(
 }
 
 export function withProps<
-  OuterProps extends {},
-  InjectedProps extends {},
+  OuterProps extends Record<string, unknown>,
+  InjectedProps extends Record<string, unknown>,
   ComponentProps extends InjectedProps,
   Component extends InnerComponent<ComponentProps>,
   EnhancedProps = Enhanced<InnerProps<Component>, InjectedProps>
@@ -72,7 +72,7 @@ export function withProps<
 }
 
 export function withDefaultProps<
-  InjectedProps extends {},
+  InjectedProps extends Record<string, unknown>,
   ComponentProps extends InjectedProps,
   Component extends InnerComponent<ComponentProps>,
   EnhancedProps = Enhanced<InnerProps<Component>, InjectedProps> &

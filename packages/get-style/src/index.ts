@@ -4,5 +4,7 @@ export function getStyle(
 ): string {
   const view = element.ownerDocument?.defaultView || window
   const style = view.getComputedStyle(element)
-  return style.getPropertyValue(property as string) || style[property]
+  return (
+    style.getPropertyValue(property as string) || (style[property] as string)
+  )
 }

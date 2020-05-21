@@ -1,4 +1,4 @@
-export function isPlainObject(o: any): o is {} {
+export function isPlainObject(o: unknown): o is Record<string, unknown> {
   return (
     o != null &&
     typeof o === 'object' &&
