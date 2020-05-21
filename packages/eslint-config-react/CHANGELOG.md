@@ -11,9 +11,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @pacote/eslint-config-react
 
-# Change Log
-
-## [v1.0.0](https://github.com/PacoteJS/pacote/tree/@pacote/eslint-config-react/1.0.0) (2019-10-05)
+## [1.0.0](https://github.com/PacoteJS/pacote/tree/@pacote/eslint-config-react/1.0.0) (2019-10-05)
 
 [Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/eslint-config-react@1.0.0...@pacote/eslint-config-react@1.0.0)
 

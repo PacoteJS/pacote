@@ -1,7 +1,8 @@
 # Change Log
 
-## [v0.0.0](https://github.com/PacoteJS/pacote/tree/@pacote/emitter/0.0.0) (unreleased)
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-[Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/emitter@0.0.0...@pacote/emitter@0.0.0)
+## [1.0.0](https://github.com/PacoteJS/pacote/tree/@pacote/emitter/1.0.0) (2020-03-25)
 
 - Initial release.

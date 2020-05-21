@@ -9,9 +9,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - 🐛 use Record<string, unknown> to represent object types ([7ce2ad3](https://github.com/PacoteJS/pacote/commit/7ce2ad3e25762bd86c90771791b0571f99f1ea32))
 
-# Change Log
-
-## [v1.1.3](https://github.com/PacoteJS/pacote/tree/@pacote/react-with-props/1.1.3) (2020-05-07)
+## [1.1.3](https://github.com/PacoteJS/pacote/tree/@pacote/react-with-props/1.1.3) (2020-05-07)
 
 [Full Changelog](https://github.com/PacoteJS/pacote/compare/@pacote/react-with-props@1.1.2...@pacote/react-with-props@1.1.3)
 
