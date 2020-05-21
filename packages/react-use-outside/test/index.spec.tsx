@@ -20,7 +20,10 @@ function renderTestComponent(
 }
 
 test.each<
-  [keyof DocumentEventMap, (element: Element | Window, options?: {}) => boolean]
+  [
+    keyof DocumentEventMap,
+    (element: Element | Window, options?: Record<string, unknown>) => boolean
+  ]
 >([
   ['click', fireEvent.click],
   ['touchend', fireEvent.touchEnd],
@@ -33,7 +36,10 @@ test.each<
 })
 
 test.each<
-  [keyof DocumentEventMap, (element: Element | Window, options?: {}) => boolean]
+  [
+    keyof DocumentEventMap,
+    (element: Element | Window, options?: Record<string, unknown>) => boolean
+  ]
 >([
   ['click', fireEvent.click],
   ['touchend', fireEvent.touchEnd],

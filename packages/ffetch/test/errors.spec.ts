@@ -34,10 +34,8 @@ test('StatusError has a message', () => {
 })
 
 test('StatusError has a response body', () => {
-  const body = {
-    content: 'parsed',
-  }
-  const error = new StatusError<{}>(status, '', body)
+  const body = { content: 'parsed' }
+  const error = new StatusError(status, '', body)
   expect(error.body).toEqual(body)
 })
 
