@@ -3,8 +3,5 @@
     "@pacote/eslint-config",
     "@pacote/eslint-config-jest",
     "@pacote/eslint-config-react"
-  ],
-  "rules": {
-    "@typescript-eslint/explicit-module-boundary-types": "off"
-  }
+  ]
 }
