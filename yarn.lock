@@ -1529,35 +1529,35 @@
   version "1.0.6"
 
 "@pacote/eslint-config@file:packages/eslint-config":
-  version "2.0.2"
+  version "3.0.0"
 
 "@pacote/ffetch@file:packages/ffetch":
-  version "5.1.2"
+  version "5.1.3"
   dependencies:
-    "@pacote/error" "file:../../Library/Caches/Yarn/v6/npm-@pacote-ffetch-5.1.2-5421e184-9eb2-440c-9326-320158f38284-1590084988966/node_modules/@pacote/error"
+    "@pacote/error" "file:../../Library/Caches/Yarn/v6/npm-@pacote-ffetch-5.1.3-47250c59-ea9f-4f9c-b2e3-67707415058d-1590090147578/node_modules/@pacote/error"
 
 "@pacote/flux-actions@file:packages/flux-actions":
-  version "2.1.2"
+  version "2.1.3"
 
 "@pacote/get-style@file:packages/get-style":
-  version "1.1.1"
+  version "1.1.2"
 
 "@pacote/iff@file:packages/iff":
   version "1.1.2"
 
 "@pacote/immutable@file:packages/immutable":
-  version "1.2.0"
+  version "1.2.1"
 
 "@pacote/interpolate@file:packages/interpolate":
   version "1.0.3"
 
 "@pacote/is-plain-object@file:packages/is-plain-object":
-  version "1.1.2"
+  version "1.1.3"
 
 "@pacote/jest-either@file:packages/jest-either":
-  version "4.0.0"
+  version "4.0.1"
   dependencies:
-    "@pacote/is-plain-object" "file:../../Library/Caches/Yarn/v6/npm-@pacote-jest-either-4.0.0-adfa5422-7e4c-4f00-9088-7c5c70831a2a-1590084988976/node_modules/@pacote/is-plain-object"
+    "@pacote/is-plain-object" "file:../../Library/Caches/Yarn/v6/npm-@pacote-jest-either-4.0.1-2d3d285f-c2b7-49a3-a2a8-0e7fd231bbfc-1590090147590/node_modules/@pacote/is-plain-object"
     jest-diff "^26.0.1"
     jest-matcher-utils "^26.0.1"
     ramda "^0.27.0"
@@ -1569,20 +1569,20 @@
   version "1.0.2"
 
 "@pacote/pixels@file:packages/pixels":
-  version "1.1.1"
+  version "1.1.2"
   dependencies:
-    "@pacote/get-style" "file:../../Library/Caches/Yarn/v6/npm-@pacote-pixels-1.1.1-82001ad9-cb27-4041-8b77-6be41c9ac279-1590084988992/node_modules/@pacote/get-style"
+    "@pacote/get-style" "file:../../Library/Caches/Yarn/v6/npm-@pacote-pixels-1.1.2-e6d92bcc-ef1d-4bf4-b70b-258d03487800-1590090147605/node_modules/@pacote/get-style"
 
 "@pacote/react-use-outside@file:packages/react-use-outside":
-  version "1.1.2"
+  version "1.1.3"
 
 "@pacote/react-with-props@file:packages/react-with-props":
-  version "1.1.3"
+  version "1.1.4"
 
 "@pacote/result@file:packages/result":
   version "1.0.2"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-result-1.0.2-20e8d37d-d0a4-4b3b-8ada-9422aa5737f2-1590084988995/node_modules/@pacote/option"
+    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-result-1.0.2-6314efdb-4627-4e84-a9c8-a25eafd720f6-1590090147609/node_modules/@pacote/option"
 
 "@pacote/shuffle@file:packages/shuffle":
   version "1.0.4"
@@ -4226,6 +4226,11 @@ getpass@^0.1.1:
   integrity sha1-Xv+OPmhNVprkyysSgmBOi6YhSfo=
   dependencies:
     assert-plus "^1.0.0"
+
+git-cz@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/git-cz/-/git-cz-4.5.0.tgz#26ed424b81484722087cf9cd57395343a56b63c1"
+  integrity sha512-YdownSHWnCLzkQUtZtmet5OvqEyItNu0n/oi7EL8OZk3oaci6BQ4dIub0kHApDCIsyKCrwyljAtuMl03EdbzaA==
 
 git-raw-commits@2.0.0:
   version "2.0.0"
