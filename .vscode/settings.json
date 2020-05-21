@@ -3,5 +3,6 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "eslint.enable": true,
   "html.format.enable": false,
-  "workbench.colorCustomizations": {}
+  "workbench.colorCustomizations": {},
+  "deno.enable": false
 }
