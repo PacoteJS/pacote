@@ -1,7 +1,7 @@
 {
   "name": "@pacote/result",
   "description": "Result type inspired by Rust.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "sideEffects": false,
   "license": "MIT",
   "author": {

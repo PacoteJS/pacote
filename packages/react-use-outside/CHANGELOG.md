@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.4](https://github.com/PacoteJS/pacote/compare/@pacote/react-use-outside@1.1.3...@pacote/react-use-outside@1.1.4) (2020-06-03)
+
+**Note:** Version bump only for package @pacote/react-use-outside
+
 ## [1.1.3](https://github.com/PacoteJS/pacote/compare/@pacote/react-use-outside@1.1.2...@pacote/react-use-outside@1.1.3) (2020-05-21)
 
 **Note:** Version bump only for package @pacote/react-use-outside
