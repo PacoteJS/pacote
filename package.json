@@ -100,7 +100,7 @@
     "react-dom": "^16.13.0",
     "redux": "^4.0.5",
     "rimraf": "^3.0.1",
-    "ts-jest": "^25.0.0",
+    "ts-jest": "^26.0.0",
     "typescript": "^3.7.4",
     "typescript-workspace-plugin": "2.0.1",
     "whatwg-fetch": "3.0.0"
