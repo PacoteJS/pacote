@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.0.0](https://github.com/PacoteJS/pacote/compare/@pacote/ffetch@5.1.4...@pacote/ffetch@6.0.0) (2020-06-04)
+
+### Bug Fixes
+
+- 🐛 proper error type widening on failure response parsing ([db02ef3](https://github.com/PacoteJS/pacote/commit/db02ef3c30635d0c600b0203f6729a0908e588e8))
+
+### BREAKING CHANGES
+
+- 🧨 requires fp-ts 2.6.0 or newer
+
 ## [5.1.4](https://github.com/PacoteJS/pacote/compare/@pacote/ffetch@5.1.3...@pacote/ffetch@5.1.4) (2020-06-03)
 
 **Note:** Version bump only for package @pacote/ffetch
