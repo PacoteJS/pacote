@@ -38,7 +38,7 @@
     "prepublish": "yarn build"
   },
   "peerDependencies": {
-    "fp-ts": "^2.0.0"
+    "fp-ts": "^2.6.0"
   },
   "dependencies": {
     "@pacote/error": "file:../error"
