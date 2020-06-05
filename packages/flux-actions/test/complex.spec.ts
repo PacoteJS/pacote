@@ -1,9 +1,8 @@
-import { Either, left, right, fold } from 'fp-ts/lib/Either'
-import { pipe } from 'fp-ts/lib/pipeable'
+import { Result, fold, Ok, Err } from '@pacote/result'
 import { createAction, reducerFromState } from '../src/index'
 
 test('complex payloads', () => {
-  type Payload = Either<Error, number>
+  type Payload = Result<number, Error>
 
   interface State {
     year: number
@@ -15,18 +14,16 @@ test('complex payloads', () => {
   const reducer = reducerFromState<State>({ year: 1985 }).on(
     changeYear,
     (s, a) =>
-      pipe(
-        a.payload,
-        fold(
-          (error) => ({ ...s, error }),
-          (year) => ({ year, error: undefined })
-        )
+      fold(
+        (year) => ({ year }),
+        (error) => ({ ...s, error }),
+        a.payload
       )
   )
 
-  expect(reducer(undefined, changeYear(right<Error, number>(1955)))) //
+  expect(reducer(undefined, changeYear(Ok(1955)))) //
     .toEqual({ year: 1955 })
 
-  expect(reducer(undefined, changeYear(left<Error, number>(Error())))) //
+  expect(reducer(undefined, changeYear(Err(Error())))) //
     .toEqual({ year: 1985, error: Error() })
 })
