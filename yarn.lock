@@ -1538,7 +1538,7 @@
 "@pacote/ffetch@file:packages/ffetch":
   version "6.0.0"
   dependencies:
-    "@pacote/error" "file:../../Library/Caches/Yarn/v6/npm-@pacote-ffetch-6.0.0-195b9324-cf90-440b-9132-877da9f4be1a-1592900061744/node_modules/@pacote/error"
+    "@pacote/error" "file:../../Library/Caches/Yarn/v6/npm-@pacote-ffetch-6.0.0-cd964ea1-b9f8-468b-9786-9080b2829281-1592901221973/node_modules/@pacote/error"
 
 "@pacote/flux-actions@file:packages/flux-actions":
   version "2.1.4"
@@ -1561,7 +1561,7 @@
 "@pacote/jest-either@file:packages/jest-either":
   version "4.0.2"
   dependencies:
-    "@pacote/is-plain-object" "file:../../Library/Caches/Yarn/v6/npm-@pacote-jest-either-4.0.2-f8d6ce88-a9ee-49a7-a1a7-7e4c07bef2ee-1592900061757/node_modules/@pacote/is-plain-object"
+    "@pacote/is-plain-object" "file:../../Library/Caches/Yarn/v6/npm-@pacote-jest-either-4.0.2-09e678d1-4189-4949-84ce-ca99baeb8bbc-1592901221985/node_modules/@pacote/is-plain-object"
     jest-diff "^26.0.1"
     jest-matcher-utils "^26.0.1"
     ramda "^0.27.0"
@@ -1575,7 +1575,7 @@
 "@pacote/pixels@file:packages/pixels":
   version "1.1.2"
   dependencies:
-    "@pacote/get-style" "file:../../Library/Caches/Yarn/v6/npm-@pacote-pixels-1.1.2-5ebd6ed3-97d7-40bf-b0f7-be04fdd6655e-1592900061773/node_modules/@pacote/get-style"
+    "@pacote/get-style" "file:../../Library/Caches/Yarn/v6/npm-@pacote-pixels-1.1.2-6745a6ee-7ff5-49a0-ba1a-7004bbf274d2-1592901222001/node_modules/@pacote/get-style"
 
 "@pacote/react-use-outside@file:packages/react-use-outside":
   version "1.1.4"
@@ -1586,7 +1586,7 @@
 "@pacote/result@file:packages/result":
   version "1.0.3"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-result-1.0.3-eb36100c-3bf0-44b0-ba4a-550cf8acce0f-1592900061778/node_modules/@pacote/option"
+    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-result-1.0.3-dbdbbffc-d21f-4228-9dd6-a9bc7618d656-1592901222006/node_modules/@pacote/option"
 
 "@pacote/shuffle@file:packages/shuffle":
   version "1.0.5"
@@ -4431,6 +4431,13 @@ has-ansi@^2.0.0:
   dependencies:
     ansi-regex "^2.0.0"
 
+has-ansi@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/has-ansi/-/has-ansi-3.0.0.tgz#36077ef1d15f333484aa7fa77a28606f1c655b37"
+  integrity sha1-Ngd+8dFfMzSEqn+neihgbxxlWzc=
+  dependencies:
+    ansi-regex "^3.0.0"
+
 has-flag@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/has-flag/-/has-flag-3.0.0.tgz#b5d454dc2199ae225699f3467e5a07f3b955bafd"
@@ -5449,6 +5456,15 @@ jest-runtime@^26.0.1:
     strip-bom "^4.0.0"
     yargs "^15.3.1"
 
+jest-serializer-ansi@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/jest-serializer-ansi/-/jest-serializer-ansi-1.0.3.tgz#b4303a48159f8f3a92bb38c3c9e5df18014e2905"
+  integrity sha512-WYxhEjUxuAvOrECAzIBy65OWLfEnVOxb7RerNFpBSXW2cf4u8YaC/j7688OgCQ4WD80dYx5KnPh2jFVnk91XTw==
+  dependencies:
+    has-ansi "^3.0.0"
+    lodash "^4.17.4"
+    strip-ansi "^4.0.0"
+
 jest-serializer@^26.0.0:
   version "26.0.0"
   resolved "https://registry.yarnpkg.com/jest-serializer/-/jest-serializer-26.0.0.tgz#f6c521ddb976943b93e662c0d4d79245abec72a3"
@@ -5921,7 +5937,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.2.1:
+lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.4, lodash@^4.2.1:
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==

@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`.not.toBeRight() fails when object is a right 1`] = `
-"[2mexpect([22m[31mreceived[39m[2m).not.toBeRight()[22m
+"expect(received).not.toBeRight()
 
 Expected Either not to be right, received right."
 `;
 
 exports[`.toBeRight() fails when object is a left 1`] = `
-"[2mexpect([22m[31mreceived[39m[2m).toBeRight()[22m
+"expect(received).toBeRight()
 
 Expected Either to be right, received left."
 `;

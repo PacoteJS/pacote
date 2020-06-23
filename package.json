@@ -34,7 +34,10 @@
     "testURL": "http://localhost",
     "moduleNameMapper": {
       "@pacote/(.+)$": "<rootDir>packages/$1/src"
-    }
+    },
+    "snapshotSerializers": [
+      "jest-serializer-ansi"
+    ]
   },
   "scripts": {
     "commit": "git-cz",
@@ -92,6 +95,7 @@
     "git-cz": "^4.5.0",
     "husky": "^4.2.1",
     "jest": "^26.0.1",
+    "jest-serializer-ansi": "^1.0.3",
     "lerna": "^3.20.2",
     "lint-staged": "^10.0.2",
     "nock": "^12.0.1",

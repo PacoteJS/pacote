@@ -1,53 +1,53 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`.not.toEqualRight() fails when object equals the right 1`] = `
-"[2mexpect([22m[31mreceived[39m[2m).not.toEqualRight([22m[32mexpectedRight[39m[2m)[22m
+"expect(received).not.toEqualRight(expectedRight)
 
 Expected Either not to equal right:
-  [32m\\"same\\"[39m
+  "same"
 
 But it's the same."
 `;
 
 exports[`.not.toEqualRight() fails when object equals the right using an asymmetric matcher 1`] = `
-"[2mexpect([22m[31mreceived[39m[2m).not.toEqualRight([22m[32mexpectedRight[39m[2m)[22m
+"expect(received).not.toEqualRight(expectedRight)
 
 Expected Either not to equal right:
-  [32mObjectContaining {\\"test\\": \\"ok\\"}[39m
+  ObjectContaining {"test": "ok"}
 
 But it's the same."
 `;
 
+exports[`.toEqualRight() fails when object does not equal the right 1`] = `
+"expect(received).toEqualRight(expectedRight)
+
+Expected Either to equal right:
+  "different"
+
+Received right:
+  {"test": "ok"}"
+`;
+
 exports[`.toEqualRight() fails when object does not equal the right using an asymmetric matcher 1`] = `
-"[2mexpect([22m[31mreceived[39m[2m).toEqualRight([22m[32mexpectedRight[39m[2m)[22m
+"expect(received).toEqualRight(expectedRight)
 
 Difference from Right:
 
-[32m- Expected[39m
-[31m+ Received[39m
+- Expected
++ Received
 
-[32m- ObjectContaining {[39m
-[32m-   \\"test\\": \\"nok\\",[39m
-[31m+ Object {[39m
-[31m+   \\"test\\": \\"ok\\",[39m
-[2m  }[22m"
+- ObjectContaining {
+-   "test": "nok",
++ Object {
++   "test": "ok",
+  }"
 `;
 
 exports[`.toEqualRight() fails when object is a left 1`] = `
-"[2mexpect([22m[31mreceived[39m[2m).toEqualRight([22m[32mexpectedRight[39m[2m)[22m
+"expect(received).toEqualRight(expectedRight)
 
 Expected Either to equal right:
-  [32m\\"same\\"[39m
+  "same"
 
 Received left."
-`;
-
-exports[`.toEqualRight() fails when object does not equal the right 1`] = `
-"[2mexpect([22m[31mreceived[39m[2m).toEqualRight([22m[32mexpectedRight[39m[2m)[22m
-
-Expected Either to equal right:
-  [32m\\"different\\"[39m
-
-Received right:
-  [31m{\\"test\\": \\"ok\\"}[39m"
 `;
