@@ -13,11 +13,11 @@ describe('.toBeEither()', () => {
   })
 
   test('fails when object is undefined', () => {
-    expect(() => expect(undefined).toBeEither()).toThrowErrorMatchingSnapshot()
+    expect(() => expect(undefined).toBeEither()).toThrowError()
   })
 
   test('fails when object is not an Either', () => {
-    expect(() => expect(true).toBeEither()).toThrowErrorMatchingSnapshot()
+    expect(() => expect(true).toBeEither()).toThrowError()
   })
 })
 
@@ -31,14 +31,10 @@ describe('.not.toBeEither()', () => {
   })
 
   test('fails when object is a left', () => {
-    expect(() =>
-      expect(left(false)).not.toBeEither()
-    ).toThrowErrorMatchingSnapshot()
+    expect(() => expect(left(false)).not.toBeEither()).toThrowError()
   })
 
   test('fails when object is a right', () => {
-    expect(() =>
-      expect(right(false)).not.toBeEither()
-    ).toThrowErrorMatchingSnapshot()
+    expect(() => expect(right(false)).not.toBeEither()).toThrowError()
   })
 })

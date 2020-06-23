@@ -9,7 +9,7 @@ describe('.toBeLeft()', () => {
   })
 
   test('fails when object is a right', () => {
-    expect(() => expect(right(true)).toBeLeft()).toThrowErrorMatchingSnapshot()
+    expect(() => expect(right(true)).toBeLeft()).toThrowError()
   })
 })
 
@@ -19,8 +19,6 @@ describe('.not.toBeLeft()', () => {
   })
 
   test('fails when object is a left', () => {
-    expect(() =>
-      expect(left(false)).not.toBeLeft()
-    ).toThrowErrorMatchingSnapshot()
+    expect(() => expect(left(false)).not.toBeLeft()).toThrowError()
   })
 })

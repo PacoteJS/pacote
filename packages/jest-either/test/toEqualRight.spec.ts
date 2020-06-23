@@ -11,13 +11,11 @@ describe('.toEqualRight()', () => {
   test('fails when object does not equal the right', () => {
     expect(() =>
       expect(right({ test: 'ok' })).toEqualRight('different')
-    ).toThrowErrorMatchingSnapshot()
+    ).toThrowError()
   })
 
   test('fails when object is a left', () => {
-    expect(() =>
-      expect(left('same')).toEqualRight('same')
-    ).toThrowErrorMatchingSnapshot()
+    expect(() => expect(left('same')).toEqualRight('same')).toThrowError()
   })
 
   test('passes when object equals the right using an asymmetric matcher', () => {
@@ -31,7 +29,7 @@ describe('.toEqualRight()', () => {
       expect(right({ test: 'ok' })).toEqualRight(
         expect.objectContaining({ test: 'nok' })
       )
-    ).toThrowErrorMatchingSnapshot()
+    ).toThrowError()
   })
 })
 
@@ -45,9 +43,7 @@ describe('.not.toEqualRight()', () => {
   })
 
   test('fails when object equals the right', () => {
-    expect(() =>
-      expect(right('same')).not.toEqualRight('same')
-    ).toThrowErrorMatchingSnapshot()
+    expect(() => expect(right('same')).not.toEqualRight('same')).toThrowError()
   })
 
   test('passes when object does not equal the right using an asymmetric matcher', () => {
@@ -61,6 +57,6 @@ describe('.not.toEqualRight()', () => {
       expect(right({ test: 'ok', more: 'ok' })).not.toEqualRight(
         expect.objectContaining({ test: 'ok' })
       )
-    ).toThrowErrorMatchingSnapshot()
+    ).toThrowError()
   })
 })
