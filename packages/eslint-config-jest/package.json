@@ -19,6 +19,7 @@
   },
   "main": "index.js",
   "peerDependencies": {
-    "eslint": ">= 6"
+    "eslint": ">= 6",
+    "eslint-plugin-jest-dom": "^3.0.1"
   }
 }
