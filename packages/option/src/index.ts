@@ -1,38 +1,36 @@
+const T_NONE = Symbol('None')
+const T_SOME = Symbol('Some')
+
 interface None {
-  readonly type: symbol
+  readonly type: typeof T_NONE
 }
 
 interface Some<T> {
-  readonly type: symbol
+  readonly type: typeof T_SOME
   readonly value: T
-}
-
-const Type = {
-  Some: Symbol('Some'),
-  None: Symbol('None'),
 }
 
 export type Option<T> = None | Some<T>
 
 export function Some<T>(value: T): Some<T> {
   return {
-    type: Type.Some,
+    type: T_SOME,
     value,
   }
 }
 
-export const None: None = { type: Type.None }
+export const None: None = { type: T_NONE }
 
 export function ofNullable<T>(value?: T | null): Option<T> {
   return value == null ? None : Some(value)
 }
 
 export function isSome<T>(option: Option<T>): option is Some<T> {
-  return option.type === Type.Some
+  return option.type === T_SOME
 }
 
 export function isNone<T>(option: Option<T>): option is None {
-  return option.type === Type.None
+  return option.type === T_NONE
 }
 
 export function contains<T>(match: T, option: Option<T>): boolean {

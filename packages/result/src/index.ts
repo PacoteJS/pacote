@@ -1,42 +1,40 @@
 import { Some, None, Option } from '@pacote/option'
 
+const T_OK = Symbol('Ok')
+const T_ERR = Symbol('Err')
+
 interface Ok<T> {
-  readonly type: symbol
+  readonly type: typeof T_OK
   readonly value: T
 }
 
 interface Err<E> {
-  readonly type: symbol
+  readonly type: typeof T_ERR
   readonly value: E
-}
-
-const Type = {
-  Ok: Symbol('Ok'),
-  Err: Symbol('Err'),
 }
 
 export type Result<T, E> = Ok<T> | Err<E>
 
 export function Ok<T>(value: T): Result<T, never> {
   return {
-    type: Type.Ok,
+    type: T_OK,
     value,
   }
 }
 
 export function Err<E>(value: E): Result<never, E> {
   return {
-    type: Type.Err,
+    type: T_ERR,
     value,
   }
 }
 
 export function isOk<T, E>(value: Result<T, E>): value is Ok<T> {
-  return value.type === Type.Ok
+  return value.type === T_OK
 }
 
 export function isErr<T, E>(value: Result<T, E>): value is Err<E> {
-  return value.type === Type.Err
+  return value.type === T_ERR
 }
 
 export function ok<T, E>(result: Result<T, E>): Option<T> {
