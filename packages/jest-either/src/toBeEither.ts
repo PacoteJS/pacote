@@ -1,5 +1,5 @@
 import { matcherHint, printReceived } from 'jest-matcher-utils'
-import { Either, isLeft } from 'fp-ts/lib/Either'
+import { Either, isLeft, isRight } from 'fp-ts/lib/Either'
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -26,7 +26,7 @@ function isEither(actual: any): actual is Either<any, any> {
   return (
     actual !== undefined &&
     actual !== null &&
-    (isLeft(actual) === true || isLeft(actual) === false)
+    (isLeft(actual) === true || isRight(actual) === true)
   )
 }
 

@@ -1,6 +1,5 @@
 import { matcherHint } from 'jest-matcher-utils'
 import { Either, isLeft } from 'fp-ts/lib/Either'
-import { pipe } from 'fp-ts/lib/pipeable'
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -22,7 +21,7 @@ const failMessage = () => () =>
   'Expected Either to be left, received right.'
 
 export function toBeLeft(actual: Either<any, any>) {
-  const pass = pipe(actual, isLeft)
+  const pass = isLeft(actual)
   return {
     pass,
     message: pass ? passMessage() : failMessage(),
