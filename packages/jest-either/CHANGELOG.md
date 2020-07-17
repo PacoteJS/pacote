@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.4](https://github.com/PacoteJS/pacote/compare/@pacote/jest-either@4.0.3...@pacote/jest-either@4.0.4) (2020-07-17)
+
+### Bug Fixes
+
+- 🐛 fixes toBeEither check ([813bda1](https://github.com/PacoteJS/pacote/commit/813bda1956a704df2c0e8bba890fa9fb618f62c1))
+
 ## [4.0.3](https://github.com/PacoteJS/pacote/compare/@pacote/jest-either@4.0.2...@pacote/jest-either@4.0.3) (2020-07-07)
 
 **Note:** Version bump only for package @pacote/jest-either
