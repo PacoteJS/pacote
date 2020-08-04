@@ -140,10 +140,8 @@ function _find<T>(
   index: number,
   collection: LinkedList<T>
 ): T | undefined {
-  return isEmpty(current)
-    ? undefined
-    : predicate(car(current), index, collection)
-    ? car(current)
+  return isEmpty(current) || predicate(car(current), index, collection)
+    ? head(current)
     : _find(predicate, rest(current), index + 1, collection)
 }
 
