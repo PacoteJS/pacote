@@ -12,6 +12,7 @@ import {
   filter,
   map,
   reduce,
+  find,
 } from '../src/index'
 import { assert, property, array, anything, nat } from 'fast-check'
 
@@ -78,7 +79,7 @@ describe('prepend()', () => {
 describe('append()', () => {
   test('appending to an empty list sets the length to 1', () => {
     const original = listOf()
-    const appended = append('after', original)
+    const appended = append('value', original)
     expect(length(appended)).toEqual(1)
   })
 
@@ -123,7 +124,16 @@ describe('reverse()', () => {
 })
 
 describe('concat()', () => {
-  test('concatenation property', () => {
+  test('concatenation with null element', () => {
+    assert(
+      property(array(anything()), (items) => {
+        const list = listOf(...items)
+        expect(concat(list, listOf())).toEqual(list)
+      })
+    )
+  })
+
+  test('distributivity', () => {
     assert(
       property(array(anything()), array(anything()), (a, b) => {
         expect(concat(listOf(...a), listOf(...b))).toEqual(listOf(...a, ...b))
@@ -133,7 +143,7 @@ describe('concat()', () => {
 })
 
 describe('rest()', () => {
-  test('rest property', () => {
+  test('returns the list with the head element removed', () => {
     assert(
       property(array(anything()), ([h, ...r]) => {
         expect(rest(listOf(h, ...r))).toEqual(listOf(...r))
@@ -144,9 +154,8 @@ describe('rest()', () => {
 
 describe('filter()', () => {
   test('returns an empty list unchanged', () => {
-    const list = listOf()
-    const predicate = jest.fn()
-    expect(filter(predicate, list)).toEqual(list)
+    const emptyList = listOf()
+    expect(filter(() => true, emptyList)).toEqual(emptyList)
   })
 
   test('calls the predicate function for every item in the list', () => {
@@ -246,6 +255,45 @@ describe('reduce()', () => {
   })
 })
 
-test.todo('find()')
+describe('find()', () => {
+  test('returns undefined if the list is empty', () => {
+    const emptyList = listOf()
+    expect(find(() => true, emptyList)).toEqual(undefined)
+  })
+
+  test('returns the first item of the list when the predicate is true', () => {
+    assert(
+      property(array(anything()), ([first, ...remaining]) => {
+        const list = listOf(first, ...remaining)
+        const predicate = () => true
+        expect(find(predicate, list)).toEqual(first)
+      })
+    )
+  })
+
+  test('returns undefined when the predicate is false', () => {
+    assert(
+      property(array(anything()), (items) => {
+        const list = listOf(...items)
+        const predicate = () => false
+        expect(find(predicate, list)).toEqual(undefined)
+      })
+    )
+  })
+
+  test("calls the predicate function for every item in the list until it's satisfied", () => {
+    const list = listOf(1, 2, 3)
+    const predicate = jest.fn((i) => i === 2)
+
+    const actual = find(predicate, list)
+
+    expect(predicate).toHaveBeenCalledTimes(2)
+    expect(predicate).toHaveBeenCalledWith(1, 0, list)
+    expect(predicate).toHaveBeenCalledWith(2, 1, list)
+
+    expect(actual).toEqual(2)
+  })
+})
+
 test.todo('reduceRight()')
 test.todo('sort()')

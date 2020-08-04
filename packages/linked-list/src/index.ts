@@ -133,3 +133,23 @@ export function filter<T>(
     )
   )
 }
+
+function _find<T>(
+  predicate: Predicate<T>,
+  current: LinkedList<T>,
+  index: number,
+  collection: LinkedList<T>
+): T | undefined {
+  return isEmpty(current)
+    ? undefined
+    : predicate(car(current), index, collection)
+    ? car(current)
+    : _find(predicate, rest(current), index + 1, collection)
+}
+
+export function find<T>(
+  predicate: Predicate<T>,
+  list: LinkedList<T>
+): T | undefined {
+  return _find(predicate, list, 0, list)
+}
