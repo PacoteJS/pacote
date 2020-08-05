@@ -1,36 +1,77 @@
 import {
-  listOf,
-  length,
-  head,
-  tail,
-  toArray,
-  prepend,
   append,
   concat,
-  reverse,
-  rest,
   filter,
+  find,
+  head,
+  isEmpty,
+  length,
+  listOf,
   map,
+  prepend,
   reduce,
   reduceRight,
-  find,
+  rest,
+  reverse,
+  tail,
+  toArray,
 } from '../src/index'
-import { assert, property, array, anything, nat } from 'fast-check'
+import { assert, property, array, anything, nat, func } from 'fast-check'
 
-describe('listOf()', () => {
-  test('new lists have no length', () => {
+const arbitraryArray = array(anything())
+
+describe('isEmpty()', () => {
+  test('new empty lists are empty', () => {
     const list = listOf()
-    expect(length(list)).toBe(0)
+    expect(isEmpty(list)).toBe(true)
   })
 
-  test('new lists have no head', () => {
+  test('new non-empty lists are not empty', () => {
+    const list = listOf('value')
+    expect(isEmpty(list)).toBe(false)
+  })
+})
+
+describe('length()', () => {
+  test('new lists have a length equal to the items originally passed', () => {
+    assert(
+      property(arbitraryArray, (items) => {
+        const list = listOf(...items)
+        expect(length(list)).toEqual(items.length)
+      })
+    )
+  })
+})
+
+describe('head()', () => {
+  test('new empty lists have no head', () => {
     const list = listOf()
     expect(head(list)).toBe(undefined)
   })
 
-  test('new lists have no tail', () => {
+  test('new lists have the first item provided as their head', () => {
+    assert(
+      property(arbitraryArray, (items) => {
+        const list = listOf(...items)
+        expect(head(list)).toEqual(items[0])
+      })
+    )
+  })
+})
+
+describe('tail()', () => {
+  test('new empty lists have no tail', () => {
     const list = listOf()
     expect(tail(list)).toBe(undefined)
+  })
+
+  test('new lists have the last item provided as their tail', () => {
+    assert(
+      property(arbitraryArray, (items) => {
+        const list = listOf(...items)
+        expect(tail(list)).toEqual(items[items.length - 1])
+      })
+    )
   })
 })
 
@@ -42,7 +83,7 @@ describe('toArray()', () => {
 
   test('linked lists can be converted to and from arrays', () => {
     assert(
-      property(array(anything()), (items) =>
+      property(arbitraryArray, (items) =>
         expect(toArray(listOf(...items))).toEqual(items)
       )
     )
@@ -52,7 +93,7 @@ describe('toArray()', () => {
 describe('prepend()', () => {
   test('prepending increases the length by 1', () => {
     assert(
-      property(array(anything()), (items) => {
+      property(arbitraryArray, (items) => {
         const original = listOf(...items)
         const prepended = prepend('before', original)
         expect(length(prepended)).toEqual(length(original) + 1)
@@ -97,7 +138,7 @@ describe('append()', () => {
 
   test('appending to a list places value at the tail', () => {
     assert(
-      property(array(anything()), anything(), (items, item) => {
+      property(arbitraryArray, anything(), (items, item) => {
         const original = listOf(...items)
         expect(tail(append(item, original))).toEqual(item)
       })
@@ -108,7 +149,7 @@ describe('append()', () => {
 describe('reverse()', () => {
   test('reverses a linked list', () => {
     assert(
-      property(array(anything()), (a) => {
+      property(arbitraryArray, (a) => {
         expect(reverse(listOf(...a))).toEqual(listOf(...a.reverse()))
       })
     )
@@ -116,7 +157,7 @@ describe('reverse()', () => {
 
   test('inverse property', () => {
     assert(
-      property(array(anything()), (a) => {
+      property(arbitraryArray, (a) => {
         const list = listOf(...a)
         expect(reverse(reverse(list))).toEqual(list)
       })
@@ -127,7 +168,7 @@ describe('reverse()', () => {
 describe('concat()', () => {
   test('concatenation with null element', () => {
     assert(
-      property(array(anything()), (items) => {
+      property(arbitraryArray, (items) => {
         const list = listOf(...items)
         expect(concat(list, listOf())).toEqual(list)
       })
@@ -136,7 +177,7 @@ describe('concat()', () => {
 
   test('distributivity', () => {
     assert(
-      property(array(anything()), array(anything()), (a, b) => {
+      property(arbitraryArray, arbitraryArray, (a, b) => {
         expect(concat(listOf(...a), listOf(...b))).toEqual(listOf(...a, ...b))
       })
     )
@@ -146,7 +187,7 @@ describe('concat()', () => {
 describe('rest()', () => {
   test('returns the list with the head element removed', () => {
     assert(
-      property(array(anything()), ([h, ...r]) => {
+      property(arbitraryArray, ([h, ...r]) => {
         expect(rest(listOf(h, ...r))).toEqual(listOf(...r))
       })
     )
@@ -161,7 +202,7 @@ describe('filter()', () => {
 
   test('calls the predicate function for every item in the list', () => {
     assert(
-      property(array(anything()), (items) => {
+      property(arbitraryArray, (items) => {
         const list = listOf(...items)
         const predicate = jest.fn()
 
@@ -177,7 +218,7 @@ describe('filter()', () => {
 
   test('returns the full list when the predicate is true', () => {
     assert(
-      property(array(anything()), (items) => {
+      property(arbitraryArray, (items) => {
         const list = listOf(...items)
         const predicate = () => true
         expect(filter(predicate, list)).toEqual(list)
@@ -187,7 +228,7 @@ describe('filter()', () => {
 
   test('returns an empty list when the predicate is false', () => {
     assert(
-      property(array(anything()), (items) => {
+      property(arbitraryArray, (items) => {
         const list = listOf(...items)
         const predicate = () => false
         expect(filter(predicate, list)).toEqual(listOf())
@@ -204,7 +245,7 @@ describe('map()', () => {
 
   test('calls the mapper function for every item in the list', () => {
     assert(
-      property(array(anything()), (items) => {
+      property(arbitraryArray, (items) => {
         const list = listOf(...items)
         const mapper = jest.fn()
 
@@ -219,15 +260,8 @@ describe('map()', () => {
   })
 
   test('creates a new list with the items of the list transformed', () => {
-    const mapper = (i: number) => `${i + 1}`
-
-    assert(
-      property(array(nat()), (items) => {
-        const actual = map(mapper, listOf(...items))
-        const expected = listOf(...items.map(mapper))
-        expect(actual).toEqual(expected)
-      })
-    )
+    const mapper = (i: number) => i + 1
+    expect(map(mapper, listOf(1, 2, 3))).toEqual(listOf(2, 3, 4))
   })
 })
 
@@ -289,7 +323,7 @@ describe('find()', () => {
 
   test('returns the first item of the list when the predicate is true', () => {
     assert(
-      property(array(anything()), ([first, ...remaining]) => {
+      property(arbitraryArray, ([first, ...remaining]) => {
         const list = listOf(first, ...remaining)
         const predicate = () => true
         expect(find(predicate, list)).toEqual(first)
@@ -299,7 +333,7 @@ describe('find()', () => {
 
   test('returns undefined when the predicate is false', () => {
     assert(
-      property(array(anything()), (items) => {
+      property(arbitraryArray, (items) => {
         const list = listOf(...items)
         const predicate = () => false
         expect(find(predicate, list)).toEqual(undefined)
@@ -321,4 +355,15 @@ describe('find()', () => {
   })
 })
 
+test.todo('entries()') // IterableIterator<[number, T]>
+test.todo('every()')
+test.todo('findIndex()')
+test.todo('get()')
+test.todo('includes()')
+test.todo('indexOf()')
+test.todo('keys()') // IterableIterator<number>
+test.todo('lastIndexOf()')
+test.todo('slice()')
+test.todo('some()')
 test.todo('sort()')
+test.todo('values()') // IterableIterator<T>

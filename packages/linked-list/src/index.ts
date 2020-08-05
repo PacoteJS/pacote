@@ -23,7 +23,7 @@ function empty<T>(): LinkedList<T> {
   return undefined
 }
 
-function isEmpty(list: any): list is Empty {
+export function isEmpty(list: any): list is Empty {
   return list === undefined
 }
 
