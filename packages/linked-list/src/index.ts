@@ -161,3 +161,38 @@ export function find<T>(
 ): T | undefined {
   return _find(predicate, list, 0, list)
 }
+
+function _iterator<T, R>(
+  list: LinkedList<T>,
+  result: (key: number, value: T) => R
+): IterableIterator<R> {
+  let key = 0
+  let current = list
+
+  return {
+    [Symbol.iterator]: function () {
+      return this
+    },
+    next: function () {
+      if (isEmpty(current)) {
+        return { done: true, value: undefined }
+      } else {
+        const value = result(key++, car(current))
+        current = rest(current)
+        return { done: false, value }
+      }
+    },
+  }
+}
+
+export function entries<T>(list: LinkedList<T>): IterableIterator<[number, T]> {
+  return _iterator(list, (key, value) => [key, value])
+}
+
+export function keys<T>(list: LinkedList<T>): IterableIterator<number> {
+  return _iterator(list, (key) => key)
+}
+
+export function values<T>(list: LinkedList<T>): IterableIterator<T> {
+  return _iterator(list, (_, value) => value)
+}

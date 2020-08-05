@@ -1,10 +1,12 @@
 import {
   append,
   concat,
+  entries,
   filter,
   find,
   head,
   isEmpty,
+  keys,
   length,
   listOf,
   map,
@@ -15,8 +17,9 @@ import {
   reverse,
   tail,
   toArray,
+  values,
 } from '../src/index'
-import { assert, property, array, anything, nat, func } from 'fast-check'
+import { assert, property, array, anything } from 'fast-check'
 
 const arbitraryArray = array(anything())
 
@@ -355,15 +358,129 @@ describe('find()', () => {
   })
 })
 
-test.todo('entries()') // IterableIterator<[number, T]>
+describe('entries()', () => {
+  test('iterator is done for empty lists', () => {
+    const list = listOf()
+    const iterator = entries(list)
+
+    expect(iterator.next().done).toEqual(true)
+  })
+
+  test('iterator holds undefined value for empty lists', () => {
+    const list = listOf()
+    const iterator = entries(list)
+
+    expect(iterator.next().value).toEqual(undefined)
+  })
+
+  test('iterator is not done at the start of non-empty lists', () => {
+    const list = listOf('value')
+    const iterator = entries(list)
+
+    expect(iterator.next().done).toEqual(false)
+  })
+
+  test('iterator holds the head value at the start of non-empty lists', () => {
+    const list = listOf('value')
+    const iterator = entries(list)
+
+    expect(iterator.next().value).toEqual([0, 'value'])
+  })
+
+  test('iterator can iterate over multiple items', () => {
+    const list = listOf('first', 'second')
+    const iterator = entries(list)
+
+    expect(iterator.next().value).toEqual([0, 'first'])
+    expect(iterator.next().value).toEqual([1, 'second'])
+    expect(iterator.next().done).toEqual(true)
+  })
+})
+
+describe('keys()', () => {
+  test('iterator is done for empty lists', () => {
+    const list = listOf()
+    const iterator = keys(list)
+
+    expect(iterator.next().done).toEqual(true)
+  })
+
+  test('iterator holds undefined value for empty lists', () => {
+    const list = listOf()
+    const iterator = keys(list)
+
+    expect(iterator.next().value).toEqual(undefined)
+  })
+
+  test('iterator is not done at the start of non-empty lists', () => {
+    const list = listOf('value')
+    const iterator = keys(list)
+
+    expect(iterator.next().done).toEqual(false)
+  })
+
+  test('iterator holds the head value at the start of non-empty lists', () => {
+    const list = listOf('value')
+    const iterator = keys(list)
+
+    expect(iterator.next().value).toEqual(0)
+  })
+
+  test('iterator can iterate over multiple items', () => {
+    const list = listOf('first', 'second')
+    const iterator = keys(list)
+
+    expect(iterator.next().value).toEqual(0)
+    expect(iterator.next().value).toEqual(1)
+    expect(iterator.next().done).toEqual(true)
+  })
+})
+
+describe('values()', () => {
+  test('iterator is done for empty lists', () => {
+    const list = listOf()
+    const iterator = values(list)
+
+    expect(iterator.next().done).toEqual(true)
+  })
+
+  test('iterator holds undefined value for empty lists', () => {
+    const list = listOf()
+    const iterator = values(list)
+
+    expect(iterator.next().value).toEqual(undefined)
+  })
+
+  test('iterator is not done at the start of non-empty lists', () => {
+    const list = listOf('value')
+    const iterator = values(list)
+
+    expect(iterator.next().done).toEqual(false)
+  })
+
+  test('iterator holds the head value at the start of non-empty lists', () => {
+    const list = listOf('value')
+    const iterator = values(list)
+
+    expect(iterator.next().value).toEqual('value')
+  })
+
+  test('iterator can iterate over multiple items', () => {
+    const list = listOf('first', 'second')
+    const iterator = values(list)
+
+    expect(iterator.next().value).toEqual('first')
+    expect(iterator.next().value).toEqual('second')
+    expect(iterator.next().done).toEqual(true)
+  })
+})
+
 test.todo('every()')
 test.todo('findIndex()')
 test.todo('get()')
 test.todo('includes()')
 test.todo('indexOf()')
-test.todo('keys()') // IterableIterator<number>
 test.todo('lastIndexOf()')
 test.todo('slice()')
 test.todo('some()')
 test.todo('sort()')
-test.todo('values()') // IterableIterator<T>
