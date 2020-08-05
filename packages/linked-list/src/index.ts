@@ -1,12 +1,10 @@
-const T_NOTHING = Symbol('Nothing')
+type Empty = undefined
+type Cons<T> = readonly [T, Cons<T> | Empty]
+type LinkedList<T> = Cons<T> | Empty
 
-type Cons<T> = readonly [T, Cons<T> | undefined]
-type EmptyCons = readonly [typeof T_NOTHING, undefined]
-type LinkedList<T> = Cons<T> | EmptyCons
-
-type Map<T, R> = (value: T, index: number, collection: LinkedList<T>) => R
-type Predicate<T> = Map<T, boolean>
-type Reduce<T, R> = (
+type MapFn<T, R> = (value: T, index: number, collection: LinkedList<T>) => R
+type PredicateFn<T> = MapFn<T, boolean>
+type ReduceFn<T, R> = (
   acc: R,
   value: T,
   index: number,
@@ -17,32 +15,34 @@ function car<T>(cons: Cons<T>): T {
   return cons[0]
 }
 
-function cdr<T>(cons: Cons<T> | EmptyCons): Cons<T> | undefined {
+function cdr<T>(cons: Cons<T>): Cons<T> | Empty {
   return cons[1]
 }
 
 function empty<T>(): LinkedList<T> {
-  return [T_NOTHING, undefined]
+  return undefined
 }
 
-function isEmpty(list: any): list is EmptyCons {
-  return car(list) === T_NOTHING
+function isEmpty(list: any): list is Empty {
+  return list === undefined
 }
 
 function _reduce<T, R>(
-  accumulator: R,
-  reducer: Reduce<T, R>,
+  acc: R,
+  reducer: ReduceFn<T, R>,
   current: LinkedList<T>,
+  step: number,
   index: number,
   collection: LinkedList<T>
 ): R {
   return isEmpty(current)
-    ? accumulator
+    ? acc
     : _reduce(
-        reducer(accumulator, car(current), index, collection),
+        reducer(acc, car(current), index, collection),
         reducer,
-        cdr(current) ?? empty(),
-        index + 1,
+        cdr(current),
+        step,
+        index + step,
         collection
       )
 }
@@ -61,26 +61,24 @@ export function head<T>(list: LinkedList<T>): T | undefined {
   return isEmpty(list) ? undefined : car(list)
 }
 
+export function reverse<T>(list: LinkedList<T>): LinkedList<T> {
+  return reduce((acc, value) => prepend(value, acc), empty(), list)
+}
+
 export function tail<T>(list: LinkedList<T>): T | undefined {
   return reduce<T, T | undefined>((_, value) => value, undefined, list)
 }
 
 export function prepend<T>(value: T, list: LinkedList<T>): Cons<T> {
-  return [value, isEmpty(list) ? undefined : list]
-}
-
-export function reverse<T>(list: LinkedList<T>): LinkedList<T> {
-  return reduce((acc, value) => prepend(value, acc), empty(), list)
+  return [value, list]
 }
 
 export function append<T>(value: T, list: LinkedList<T>): LinkedList<T> {
-  return isEmpty(list)
-    ? prepend(value, list)
-    : reverse(prepend(value, reverse(list)))
+  return reverse(prepend(value, reverse(list)))
 }
 
 export function rest<T>(list: LinkedList<T>): LinkedList<T> {
-  return cdr(list) ?? empty()
+  return isEmpty(list) ? list : cdr(list)
 }
 
 export function concat<T>(
@@ -102,18 +100,30 @@ export function toArray<T>(list: LinkedList<T>): T[] {
 }
 
 export function reduce<T, R>(
-  reducer: Reduce<T, R>,
+  reducer: ReduceFn<T, R>,
   initial: R,
   list: LinkedList<T>
 ): R {
-  return _reduce(initial, reducer, list, 0, list)
+  return _reduce(initial, reducer, list, 1, 0, list)
 }
 
-export function map<T, R>(map: Map<T, R>, list: LinkedList<T>): LinkedList<R> {
+export function reduceRight<T, R>(
+  reducer: ReduceFn<T, R>,
+  initial: R,
+  list: LinkedList<T>
+): R {
+  const lastIndex = length(list) - 1
+  return _reduce(initial, reducer, reverse(list), -1, lastIndex, list)
+}
+
+export function map<T, R>(
+  mapper: MapFn<T, R>,
+  list: LinkedList<T>
+): LinkedList<R> {
   return reverse(
     reduce(
       (acc, value, index, collection) =>
-        prepend(map(value, index, collection), acc),
+        prepend(mapper(value, index, collection), acc),
       empty<R>(),
       list
     )
@@ -121,7 +131,7 @@ export function map<T, R>(map: Map<T, R>, list: LinkedList<T>): LinkedList<R> {
 }
 
 export function filter<T>(
-  predicate: Predicate<T>,
+  predicate: PredicateFn<T>,
   list: LinkedList<T>
 ): LinkedList<T> {
   return reverse(
@@ -135,7 +145,7 @@ export function filter<T>(
 }
 
 function _find<T>(
-  predicate: Predicate<T>,
+  predicate: PredicateFn<T>,
   current: LinkedList<T>,
   index: number,
   collection: LinkedList<T>
@@ -146,7 +156,7 @@ function _find<T>(
 }
 
 export function find<T>(
-  predicate: Predicate<T>,
+  predicate: PredicateFn<T>,
   list: LinkedList<T>
 ): T | undefined {
   return _find(predicate, list, 0, list)

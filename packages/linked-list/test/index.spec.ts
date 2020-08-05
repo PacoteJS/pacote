@@ -12,6 +12,7 @@ import {
   filter,
   map,
   reduce,
+  reduceRight,
   find,
 } from '../src/index'
 import { assert, property, array, anything, nat } from 'fast-check'
@@ -98,7 +99,7 @@ describe('append()', () => {
     assert(
       property(array(anything()), anything(), (items, item) => {
         const original = listOf(...items)
-        expect(append(item, original)).toEqual(listOf(...items, item))
+        expect(tail(append(item, original))).toEqual(item)
       })
     )
   })
@@ -255,6 +256,31 @@ describe('reduce()', () => {
   })
 })
 
+describe('reduceRight()', () => {
+  test('returns the initial value for an empty list', () => {
+    const list = listOf<number>()
+    expect(reduceRight((acc, i) => acc + i, 0, list)).toEqual(0)
+  })
+
+  test('calls the reducer function for every item in the list', () => {
+    const list = listOf(1, 2, 3)
+    const reducer = jest.fn((acc, i) => acc + i)
+
+    reduceRight(reducer, 0, list)
+
+    expect(reducer).toHaveBeenCalledTimes(3)
+    expect(reducer).toHaveBeenCalledWith(0, 3, 2, list)
+    expect(reducer).toHaveBeenCalledWith(3, 2, 1, list)
+    expect(reducer).toHaveBeenCalledWith(5, 1, 0, list)
+  })
+
+  test('reduces the items in the list to a result', () => {
+    const list = listOf(1, 2, 3)
+    const actual = reduceRight((total, value) => total + value, 0, list)
+    expect(actual).toEqual(6)
+  })
+})
+
 describe('find()', () => {
   test('returns undefined if the list is empty', () => {
     const emptyList = listOf()
@@ -295,5 +321,4 @@ describe('find()', () => {
   })
 })
 
-test.todo('reduceRight()')
 test.todo('sort()')
