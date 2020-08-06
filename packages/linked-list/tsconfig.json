@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "checkJs": false,
     "rootDir": "src",
     "downlevelIteration": true
   },

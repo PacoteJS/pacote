@@ -144,22 +144,78 @@ export function filter<T>(
   )
 }
 
-function _find<T>(
-  predicate: PredicateFn<T>,
+function _find<T, R>(
+  predicate: (value: T, index: number) => boolean,
+  whenFound: (current: T, index: number) => R,
+  whenFinished: () => R,
   current: LinkedList<T>,
-  index: number,
-  collection: LinkedList<T>
-): T | undefined {
-  return isEmpty(current) || predicate(car(current), index, collection)
-    ? head(current)
-    : _find(predicate, rest(current), index + 1, collection)
+  index: number
+): R {
+  return isEmpty(current)
+    ? whenFinished()
+    : predicate(car(current), index)
+    ? whenFound(car(current), index)
+    : _find(predicate, whenFound, whenFinished, rest(current), index + 1)
+}
+
+export function indexOf<T>(value: T, list: LinkedList<T>): number {
+  return _find(
+    (current) => current === value,
+    (_, index) => index,
+    () => -1,
+    list,
+    0
+  )
+}
+
+export function lastIndexOf<T>(value: T, list: LinkedList<T>): number {
+  const lastIndex = _find(
+    (current) => current === value,
+    (_, index) => index,
+    () => -1,
+    reverse(list),
+    0
+  )
+  return lastIndex === -1 ? lastIndex : length(list) - lastIndex - 1
 }
 
 export function find<T>(
   predicate: PredicateFn<T>,
   list: LinkedList<T>
 ): T | undefined {
-  return _find(predicate, list, 0, list)
+  return _find(
+    (current, index) => predicate(current, index, list),
+    (value) => value,
+    () => undefined,
+    list,
+    0
+  )
+}
+
+export function every<T>(
+  predicate: PredicateFn<T>,
+  list: LinkedList<T>
+): boolean {
+  return _find(
+    (current, index) => !predicate(current, index, list),
+    () => false,
+    () => true,
+    list,
+    0
+  )
+}
+
+export function some<T>(
+  predicate: PredicateFn<T>,
+  list: LinkedList<T>
+): boolean {
+  return _find(
+    (current, index) => predicate(current, index, list),
+    () => true,
+    () => false,
+    list,
+    0
+  )
 }
 
 function _iterator<T, R>(
@@ -195,4 +251,28 @@ export function keys<T>(list: LinkedList<T>): IterableIterator<number> {
 
 export function values<T>(list: LinkedList<T>): IterableIterator<T> {
   return _iterator(list, (_, value) => value)
+}
+
+export function get<T>(index: number, list: LinkedList<T>): T | undefined {
+  return find((_, idx) => idx === index, list)
+}
+
+function _sliceFrom<T>(start: number, list: LinkedList<T>): LinkedList<T> {
+  return start > 0 ? _sliceFrom(start - 1, rest(list)) : list
+}
+
+export function slice<T>(
+  start: number,
+  end: number,
+  list: LinkedList<T>
+): LinkedList<T> {
+  const size = length(list)
+  const slicedList = _sliceFrom(start, list)
+  return size > end
+    ? reverse(_sliceFrom(size - end, reverse(slicedList)))
+    : slicedList
+}
+
+export function includes<T>(value: T, list: LinkedList<T>): boolean {
+  return some((v) => v === value, list)
 }

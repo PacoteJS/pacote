@@ -2,11 +2,16 @@ import {
   append,
   concat,
   entries,
+  every,
   filter,
   find,
+  get,
   head,
+  includes,
+  indexOf,
   isEmpty,
   keys,
+  lastIndexOf,
   length,
   listOf,
   map,
@@ -15,11 +20,13 @@ import {
   reduceRight,
   rest,
   reverse,
+  slice,
+  some,
   tail,
   toArray,
   values,
 } from '../src/index'
-import { assert, property, array, anything } from 'fast-check'
+import { assert, property, array, anything, integer, nat } from 'fast-check'
 
 const arbitraryArray = array(anything())
 
@@ -475,12 +482,163 @@ describe('values()', () => {
   })
 })
 
-test.todo('every()')
-test.todo('findIndex()')
-test.todo('get()')
-test.todo('includes()')
-test.todo('indexOf()')
-test.todo('lastIndexOf()')
-test.todo('slice()')
-test.todo('some()')
+describe('indexOf()', () => {
+  test("returns -1 when the value can't be found", () => {
+    const list = listOf()
+    expect(indexOf('value', list)).toBe(-1)
+  })
+
+  test('returns 0 when the value is found at the head', () => {
+    const list = listOf('value')
+    expect(indexOf('value', list)).toBe(0)
+  })
+
+  test('returns the last index when the value is found at the tail', () => {
+    const list = listOf('first', 'second', 'value')
+    expect(indexOf('value', list)).toBe(2)
+  })
+
+  test('returns the index of the value when found', () => {
+    const list = listOf('first', 'value', 'value', 'third')
+    expect(indexOf('value', list)).toBe(1)
+  })
+})
+
+describe('lastIndexOf()', () => {
+  test("returns -1 when the value can't be found", () => {
+    const list = listOf()
+    expect(lastIndexOf('value', list)).toBe(-1)
+  })
+
+  test('returns 0 when the value is found at the head', () => {
+    const list = listOf('value')
+    expect(lastIndexOf('value', list)).toBe(0)
+  })
+
+  test('returns the last index when the value is found at the tail', () => {
+    const list = listOf('first', 'second', 'value')
+    expect(lastIndexOf('value', list)).toBe(2)
+  })
+
+  test('returns the index of the first value from the right', () => {
+    const list = listOf('first', 'value', 'value', 'third')
+    expect(lastIndexOf('value', list)).toBe(2)
+  })
+})
+
+describe('get()', () => {
+  test('returns undefined for negative indices', () => {
+    assert(
+      property(integer(-1), arbitraryArray, (index, array) => {
+        const list = listOf(...array)
+        expect(get(index, list)).toEqual(undefined)
+      })
+    )
+  })
+
+  test('returns the value at index', () => {
+    assert(
+      property(arbitraryArray, nat(), (array, index) => {
+        const list = listOf(...array)
+        expect(get(index, list)).toEqual(array[index])
+      })
+    )
+  })
+})
+
+describe('slice()', () => {
+  test('any slice of an empty list is an empty list', () => {
+    const emptyList = listOf()
+    expect(slice(0, 1, emptyList)).toEqual(emptyList)
+  })
+
+  test('slicing a list between two indices', () => {
+    const list = listOf(1, 2, 3, 4)
+    const expected = listOf(2, 3)
+    expect(slice(1, 3, list)).toEqual(expected)
+  })
+
+  test('slicing before the start of the list returns the list from the start', () => {
+    const list = listOf(1, 2, 3, 4)
+    const expected = listOf(1, 2)
+    expect(slice(-1, 2, list)).toEqual(expected)
+  })
+
+  test('slicing past the end of the list returns the list until the end', () => {
+    const list = listOf(1, 2, 3, 4)
+    const expected = listOf(3, 4)
+    expect(slice(2, 5, list)).toEqual(expected)
+  })
+
+  test('an exact slice returns the full list', () => {
+    const list = listOf(1, 2, 3, 4)
+    expect(slice(0, 4, list)).toEqual(list)
+  })
+
+  test.todo('a list can be sliced from a starting index')
+})
+
+describe('every()', () => {
+  test('returns true for empty lists', () => {
+    const list = listOf()
+    expect(every(() => true, list)).toEqual(true)
+  })
+
+  test('returns false when predicate is false for at least one item', () => {
+    const list = listOf(1, 2)
+    expect(every((value) => value < 2, list)).toEqual(false)
+  })
+
+  test('predicate is called for every item until the predicate fails', () => {
+    const list = listOf(1, 2, 3)
+    const predicate = jest.fn((value) => value < 2)
+
+    every(predicate, list)
+
+    expect(predicate).toHaveBeenCalledTimes(2)
+    expect(predicate).toHaveBeenCalledWith(1, 0, list)
+    expect(predicate).toHaveBeenCalledWith(2, 1, list)
+  })
+})
+
+describe('some()', () => {
+  test('returns false for empty lists', () => {
+    const list = listOf()
+    expect(some(() => true, list)).toEqual(false)
+  })
+
+  test('returns true when predicate is true for at least one item', () => {
+    const list = listOf(1, 2)
+    expect(some((value) => value > 1, list)).toEqual(true)
+  })
+
+  test('predicate is called for every item until the predicate succeeds', () => {
+    const list = listOf(1, 2, 3)
+    const predicate = jest.fn((value) => value > 1)
+
+    some(predicate, list)
+
+    expect(predicate).toHaveBeenCalledTimes(2)
+    expect(predicate).toHaveBeenCalledWith(1, 0, list)
+    expect(predicate).toHaveBeenCalledWith(2, 1, list)
+  })
+})
+
+describe('includes()', () => {
+  test('returns false for empty lists', () => {
+    const list = listOf<string>()
+    expect(includes('value', list)).toEqual(false)
+  })
+
+  test('returns true when the list includes the item', () => {
+    const list = listOf('first', 'second')
+    expect(includes('value', list)).toEqual(false)
+  })
+
+  test('returns false when the list does not include the item', () => {
+    const list = listOf('first', 'second', 'value')
+    expect(includes('value', list)).toEqual(true)
+  })
+})
+
 test.todo('sort()')
