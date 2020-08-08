@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "module": "ESNext",
+    "target": "ES2019",
+    "outDir": "lib/esm",
+    "checkJs": false,
+    "declarationMap": false,
+    "sourceMap": false
+  },
+  "plugins": [{ "name": "typescript-workspace-plugin" }]
+}

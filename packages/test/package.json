@@ -1,0 +1,35 @@
+{
+  "name": "@pacote/test",
+  "description": "A simple test runner.",
+  "type": "module",
+  "engines": {
+    "node": ">=12"
+  },
+  "version": "0.0.0",
+  "sideEffects": false,
+  "license": "MIT",
+  "author": {
+    "name": "Luís Rodrigues",
+    "email": "hello@goblindegook.com",
+    "url": "https://goblindegook.com"
+  },
+  "keywords": [],
+  "repository": "github:PacoteJS/pacote",
+  "bugs": {
+    "url": "https://github.com/PacoteJS/pacote/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "module": "lib/esm/index.js",
+  "typings": "lib/esm/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "build": "yarn build:esm",
+    "build:esm": "tsc -p ./tsconfig.json",
+    "prepublish": "yarn build"
+  }
+}
