@@ -15,15 +15,17 @@ export type ReduceFn<T, R> = (
   collection: LinkedList<T>
 ) => R
 
+export type CompareFn<T> = (a: T, b: T) => number
+
 export function car<T>(cons: Cons<T>): T {
   return cons[0]
 }
 
-export function cdr<T>(cons: Cons<T>): LinkedList<T> {
-  return cons[1]
+export function cdr<T>(cons: Cons<T> | Empty): Cons<T> | Empty {
+  return cons?.[1]
 }
 
-export function empty<T>(): LinkedList<T> {
+export function emptyList<T>(): LinkedList<T> {
   return undefined
 }
 

@@ -18,15 +18,25 @@ import {
   prepend,
   reduce,
   reduceRight,
+  remove,
   rest,
   reverse,
   slice,
   some,
+  sort,
   tail,
   toArray,
   values,
 } from '../src/index'
-import { assert, property, array, anything, integer, nat } from 'fast-check'
+import {
+  assert,
+  property,
+  array,
+  anything,
+  integer,
+  nat,
+  string,
+} from 'fast-check'
 
 const arbitraryArray = array(anything())
 
@@ -546,6 +556,30 @@ describe('get()', () => {
   })
 })
 
+describe('remove()', () => {
+  test('returns the list unchanged if empty', () => {
+    const list = listOf()
+    expect(remove(0, list)).toEqual(list)
+  })
+
+  test('returns an empty list if the list has a single element', () => {
+    const list = listOf(1)
+    const emptyList = listOf()
+    expect(remove(0, list)).toEqual(emptyList)
+  })
+
+  test('removes an element from the middle of the list', () => {
+    const list = listOf(1, 2, 3, 4, 5)
+    const expected = listOf(1, 2, 4, 5)
+    expect(remove(2, list)).toEqual(expected)
+  })
+
+  test('an invalid index leaves the list unchanged', () => {
+    const list = listOf(1, 2, 3)
+    expect(remove(99, list)).toEqual(list)
+  })
+})
+
 describe('slice()', () => {
   test('any slice of an empty list is an empty list', () => {
     const emptyList = listOf()
@@ -641,4 +675,74 @@ describe('includes()', () => {
   })
 })
 
-test.todo('sort()')
+describe('sort()', () => {
+  test('empty lists are already sorted', () => {
+    const list = listOf()
+    const expected = listOf()
+    expect(sort(list)).toEqual(expected)
+  })
+
+  test('single-item lists are already sorted', () => {
+    const list = listOf('a')
+    const expected = listOf('a')
+    expect(sort(list)).toEqual(expected)
+  })
+
+  test('sorting out of order lists with the default compare function', () => {
+    const list = listOf('b', 'a')
+    const expected = listOf('a', 'b')
+    expect(sort(list)).toEqual(expected)
+  })
+
+  test('the default compare function sorts numbers alphabetically', () => {
+    const list = listOf(9, 80)
+    const expected = listOf(80, 9)
+    expect(sort(list)).toEqual(expected)
+  })
+
+  test('the default compare function sorts undefined items at the end', () => {
+    const list = listOf(undefined, 1)
+    const expected = listOf(1, undefined)
+    expect(sort(list)).toEqual(expected)
+  })
+
+  test('sort with compare function', () => {
+    const list = listOf(9, 80)
+    const expected = listOf(9, 80)
+    const compareFn = jest.fn((a, b) => a - b)
+    expect(sort(compareFn, list)).toEqual(expected)
+  })
+
+  test('sort stability', () => {
+    const list = listOf({ weight: 1, order: 1 }, { weight: 1, order: 2 })
+    const compareFn = jest.fn((a, b) => a.weight - b.weight)
+    expect(sort(compareFn, list)).toEqual(list)
+  })
+
+  test('sort preserves length', () => {
+    assert(
+      property(array(string()), (strings) => {
+        const list = listOf(...strings)
+        expect(length(sort(list))).toEqual(length(list))
+      })
+    )
+  })
+
+  test('sort is idempotent', () => {
+    assert(
+      property(array(string()), (strings) => {
+        const list = listOf(...strings)
+        expect(sort(sort(list))).toEqual(sort(list))
+      })
+    )
+  })
+
+  test('Array#sort comparison', () => {
+    assert(
+      property(arbitraryArray, (array) => {
+        const list = listOf(...array)
+        expect(sort(list)).toEqual(listOf(...array.sort()))
+      })
+    )
+  })
+})

@@ -2,7 +2,7 @@ import {
   car,
   cdr,
   Cons,
-  empty,
+  emptyList,
   isEmpty,
   iterator,
   LinkedList,
@@ -11,6 +11,7 @@ import {
   recursiveFind,
   recursiveReduce,
   ReduceFn,
+  CompareFn,
 } from './internal'
 
 export { isEmpty } from './internal'
@@ -18,7 +19,7 @@ export { isEmpty } from './internal'
 export function listOf<T>(...items: T[]): LinkedList<T> {
   return items
     .reverse()
-    .reduce((list, value) => prepend(value, list), empty<T>())
+    .reduce((list, value) => prepend(value, list), emptyList<T>())
 }
 
 export function length<T>(list: LinkedList<T>): number {
@@ -34,7 +35,7 @@ export function rest<T>(list: LinkedList<T>): LinkedList<T> {
 }
 
 export function reverse<T>(list: LinkedList<T>): LinkedList<T> {
-  return reduce((acc, value) => prepend(value, acc), empty(), list)
+  return reduce((acc, value) => prepend(value, acc), emptyList(), list)
 }
 
 export function tail<T>(list: LinkedList<T>): T | undefined {
@@ -92,7 +93,7 @@ export function map<T, R>(
     reduce(
       (acc, value, index, collection) =>
         prepend(mapper(value, index, collection), acc),
-      empty<R>(),
+      emptyList<R>(),
       list
     )
   )
@@ -106,7 +107,7 @@ export function filter<T>(
     reduce(
       (acc, value, index, collection) =>
         predicate(value, index, collection) ? prepend(value, acc) : acc,
-      empty<T>(),
+      emptyList<T>(),
       list
     )
   )
@@ -209,4 +210,41 @@ export function slice<T>(
   return size > end
     ? reverse(recursiveSliceFrom(size - end, reverse(slicedList)))
     : slicedList
+}
+
+function recursiveRemove<T>(
+  index: number,
+  before: LinkedList<T>,
+  after: LinkedList<T>,
+  currentIndex: number
+): LinkedList<T> {
+  return isEmpty(after) || currentIndex >= index
+    ? reduce((acc, value) => prepend(value, acc), cdr(after), before)
+    : recursiveRemove(
+        index,
+        prepend(car(after), before),
+        cdr(after),
+        currentIndex + 1
+      )
+}
+
+export function remove<T>(index: number, list: LinkedList<T>): LinkedList<T> {
+  return recursiveRemove(index, emptyList<T>(), list, 0)
+}
+
+export function sort<T>(list: LinkedList<T>): LinkedList<T>
+export function sort<T>(
+  compare: CompareFn<T>,
+  list: LinkedList<T>
+): LinkedList<T>
+export function sort<T>(
+  compareOrList: LinkedList<T> | CompareFn<T>,
+  listOrNothing?: LinkedList<T>
+): LinkedList<T> {
+  const [compare, list] =
+    typeof compareOrList === 'function'
+      ? [compareOrList, listOrNothing]
+      : [undefined, compareOrList]
+  // TODO: implement merge sort
+  return listOf(...toArray(list).sort(compare))
 }
