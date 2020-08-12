@@ -31,7 +31,7 @@ export function head<T>(list: LinkedList<T>): T | undefined {
 }
 
 export function rest<T>(list: LinkedList<T>): LinkedList<T> {
-  return isEmpty(list) ? list : cdr(list)
+  return cdr(list)
 }
 
 export function reverse<T>(list: LinkedList<T>): LinkedList<T> {
@@ -193,23 +193,28 @@ export function get<T>(index: number, list: LinkedList<T>): T | undefined {
   return find((_, idx) => idx === index, list)
 }
 
-function recursiveSliceFrom<T>(
-  start: number,
-  list: LinkedList<T>
-): LinkedList<T> {
-  return start > 0 ? recursiveSliceFrom(start - 1, rest(list)) : list
+function sliceFromStart<T>(offset: number, list: LinkedList<T>): LinkedList<T> {
+  return offset > 0 ? sliceFromStart(offset - 1, cdr(list)) : list
 }
 
+function sliceFromEnd<T>(offset: number, list: LinkedList<T>): LinkedList<T> {
+  return offset > 0 ? reverse(sliceFromStart(offset, reverse(list))) : list
+}
+
+export function slice<T>(start: number, list: LinkedList<T>): LinkedList<T>
 export function slice<T>(
   start: number,
   end: number,
   list: LinkedList<T>
+): LinkedList<T>
+export function slice<T>(
+  start: number,
+  end: number | LinkedList<T>,
+  list?: LinkedList<T>
 ): LinkedList<T> {
-  const size = length(list)
-  const slicedList = recursiveSliceFrom(start, list)
-  return size > end
-    ? reverse(recursiveSliceFrom(size - end, reverse(slicedList)))
-    : slicedList
+  return typeof end !== 'number'
+    ? sliceFromStart(start, end)
+    : sliceFromEnd(length(list) - end, sliceFromStart(start, list))
 }
 
 function recursiveRemove<T>(

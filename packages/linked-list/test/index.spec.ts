@@ -609,7 +609,11 @@ describe('slice()', () => {
     expect(slice(0, 4, list)).toEqual(list)
   })
 
-  test.todo('a list can be sliced from a starting index')
+  test('a list can be sliced from a starting index', () => {
+    const list = listOf(1, 2, 3, 4)
+    const expected = listOf(3, 4)
+    expect(slice(2, list)).toEqual(expected)
+  })
 })
 
 describe('every()', () => {
@@ -714,9 +718,10 @@ describe('sort()', () => {
   })
 
   test('sort stability', () => {
-    const list = listOf({ weight: 1, order: 1 }, { weight: 1, order: 2 })
-    const compareFn = jest.fn((a, b) => a.weight - b.weight)
-    expect(sort(compareFn, list)).toEqual(list)
+    const compareFn = jest.fn(([a0], [b0]) => a0 - b0)
+    const list = listOf([1, 1], [2, 3], [1, 2])
+    const expected = listOf([1, 1], [1, 2], [2, 3])
+    expect(sort(compareFn, list)).toEqual(expected)
   })
 
   test('sort preserves length', () => {
