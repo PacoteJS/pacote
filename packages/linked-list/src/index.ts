@@ -14,7 +14,7 @@ import {
   CompareFn,
 } from './internal'
 
-export { isEmpty } from './internal'
+export { isEmpty, cdr as rest } from './internal'
 
 export function listOf<T>(...items: T[]): LinkedList<T> {
   return items
@@ -28,10 +28,6 @@ export function length<T>(list: LinkedList<T>): number {
 
 export function head<T>(list: LinkedList<T>): T | undefined {
   return isEmpty(list) ? undefined : car(list)
-}
-
-export function rest<T>(list: LinkedList<T>): LinkedList<T> {
-  return cdr(list)
 }
 
 export function reverse<T>(list: LinkedList<T>): LinkedList<T> {

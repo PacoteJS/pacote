@@ -123,6 +123,7 @@
     "@pacote/interpolate": "file:packages/interpolate",
     "@pacote/is-plain-object": "file:packages/is-plain-object",
     "@pacote/jest-either": "file:packages/jest-either",
+    "@pacote/linked-list": "file:packages/linked-list",
     "@pacote/memoize": "file:packages/memoize",
     "@pacote/option": "file:packages/option",
     "@pacote/pixels": "file:packages/pixels",
