@@ -2,7 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "module": "ESNext",
-    "target": "ES2019",
+    "target": "esnext",
     "outDir": "lib/esm",
     "declarationMap": false,
     "sourceMap": false
