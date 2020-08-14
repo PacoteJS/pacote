@@ -30,6 +30,7 @@
   "scripts": {
     "build": "yarn build:esm",
     "build:esm": "tsc -p ./tsconfig.json",
-    "prepublish": "yarn build"
+    "prepublish": "yarn build",
+    "test": "node --loader ts-node/esm.mjs --experimental-top-level-await test/*.ts"
   }
 }
