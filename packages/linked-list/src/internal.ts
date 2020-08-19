@@ -1,5 +1,5 @@
-export type Empty = undefined
-export type Cons<T> = readonly [T, Cons<T> | Empty]
+type Empty = undefined
+type Cons<T> = readonly [T, Cons<T> | Empty]
 export type LinkedList<T> = Cons<T> | Empty
 
 export type MapFn<T, R> = (
@@ -78,7 +78,7 @@ export function iterator<T, R>(
     [Symbol.iterator]: function () {
       return this
     },
-    next: function () {
+    next() {
       if (isEmpty(current)) {
         return { done: true, value: undefined }
       } else {

@@ -704,9 +704,15 @@ describe('sort()', () => {
     expect(sort(list)).toEqual(expected)
   })
 
-  test('the default compare function sorts undefined items at the end', () => {
-    const list = listOf(undefined, 1)
-    const expected = listOf(1, undefined)
+  test('the default compare function puts undefined at the end', () => {
+    const list = listOf(undefined, 'v')
+    const expected = listOf('v', undefined)
+    expect(sort(list)).toEqual(expected)
+  })
+
+  test('the default compare function keeps undefined at the end', () => {
+    const list = listOf('v', undefined)
+    const expected = listOf('v', undefined)
     expect(sort(list)).toEqual(expected)
   })
 

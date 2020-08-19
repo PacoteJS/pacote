@@ -1,7 +1,7 @@
 import {
   car,
   cdr,
-  Cons,
+  CompareFn,
   emptyList,
   isEmpty,
   iterator,
@@ -11,7 +11,6 @@ import {
   recursiveFind,
   recursiveReduce,
   ReduceFn,
-  CompareFn,
 } from './internal'
 
 export { isEmpty, cdr as rest } from './internal'
@@ -38,7 +37,7 @@ export function tail<T>(list: LinkedList<T>): T | undefined {
   return reduce<T, T | undefined>((_, value) => value, undefined, list)
 }
 
-export function prepend<T>(value: T, list: LinkedList<T>): Cons<T> {
+export function prepend<T>(value: T, list: LinkedList<T>): LinkedList<T> {
   return [value, list]
 }
 
@@ -233,6 +232,47 @@ export function remove<T>(index: number, list: LinkedList<T>): LinkedList<T> {
   return recursiveRemove(index, emptyList<T>(), list, 0)
 }
 
+function merge<T>(
+  compare: CompareFn<T>,
+  result: LinkedList<T>,
+  left: LinkedList<T>,
+  right: LinkedList<T>
+): LinkedList<T> {
+  return isEmpty(left) || isEmpty(right)
+    ? concat(concat(reverse(result), left), right)
+    : compare(car(left), car(right)) > 0
+    ? merge(compare, prepend(car(right), result), left, cdr(right))
+    : merge(compare, prepend(car(left), result), cdr(left), right)
+}
+
+function mergeSort<T>(
+  compare: CompareFn<T>,
+  list: LinkedList<T>
+): LinkedList<T> {
+  if (isEmpty(cdr(list))) {
+    return list
+  }
+
+  const size = length(list)
+  const mid = Math.floor(size / 2)
+
+  return merge(
+    compare,
+    listOf<T>(),
+    mergeSort(compare, slice(0, mid, list)),
+    mergeSort(compare, slice(mid, size, list))
+  )
+}
+
+function defaultCompare<T>(a: T, b: T): number {
+  if (a === undefined && b === undefined) return 0
+  if (a === undefined) return 1
+  if (b === undefined) return -1
+  if (String(a) < String(b)) return -1
+  if (String(a) > String(b)) return 1
+  return 0
+}
+
 export function sort<T>(list: LinkedList<T>): LinkedList<T>
 export function sort<T>(
   compare: CompareFn<T>,
@@ -245,7 +285,7 @@ export function sort<T>(
   const [compare, list] =
     typeof compareOrList === 'function'
       ? [compareOrList, listOrNothing]
-      : [undefined, compareOrList]
-  // TODO: implement merge sort
-  return listOf(...toArray(list).sort(compare))
+      : [defaultCompare, compareOrList]
+
+  return mergeSort(compare, list)
 }
