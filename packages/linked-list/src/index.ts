@@ -254,13 +254,13 @@ function mergeSort<T>(
   }
 
   const size = length(list)
-  const mid = Math.floor(size / 2)
+  const middle = Math.floor(size / 2)
 
   return merge(
     compare,
     listOf<T>(),
-    mergeSort(compare, slice(0, mid, list)),
-    mergeSort(compare, slice(mid, size, list))
+    mergeSort(compare, slice(0, middle, list)),
+    mergeSort(compare, slice(middle, size, list))
   )
 }
 

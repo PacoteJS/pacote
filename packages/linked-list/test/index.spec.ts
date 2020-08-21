@@ -716,18 +716,16 @@ describe('sort()', () => {
     expect(sort(list)).toEqual(expected)
   })
 
-  test('sort with compare function', () => {
+  test('sort with custom compare function', () => {
     const list = listOf(9, 80)
     const expected = listOf(9, 80)
-    const compareFn = jest.fn((a, b) => a - b)
-    expect(sort(compareFn, list)).toEqual(expected)
+    expect(sort((a, b) => a - b, list)).toEqual(expected)
   })
 
   test('sort stability', () => {
-    const compareFn = jest.fn(([a0], [b0]) => a0 - b0)
     const list = listOf([1, 1], [2, 3], [1, 2])
     const expected = listOf([1, 1], [1, 2], [2, 3])
-    expect(sort(compareFn, list)).toEqual(expected)
+    expect(sort(([a0], [b0]) => a0 - b0, list)).toEqual(expected)
   })
 
   test('sort preserves length', () => {
