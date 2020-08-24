@@ -1,19 +1,11 @@
 type Empty = undefined
-type Cons<T> = readonly [T, Cons<T> | Empty]
+type Cons<T> = readonly [value: T, next: Cons<T> | Empty]
 export type LinkedList<T> = Cons<T> | Empty
 
-export type MapFn<T, R> = (
-  value: T,
-  index: number,
-  collection: LinkedList<T>
-) => R
+type FnArgs<T> = [value: T, index: number, collection: LinkedList<T>]
+export type MapFn<T, R> = (...args: FnArgs<T>) => R
 export type PredicateFn<T> = MapFn<T, boolean>
-export type ReduceFn<T, R> = (
-  acc: R,
-  value: T,
-  index: number,
-  collection: LinkedList<T>
-) => R
+export type ReduceFn<T, R> = (acc: R, ...args: FnArgs<T>) => R
 
 export type CompareFn<T> = (a: T, b: T) => number
 
