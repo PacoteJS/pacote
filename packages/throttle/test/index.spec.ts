@@ -1,14 +1,13 @@
 import { throttle } from '../src/index'
 
 const tock = (() => {
-  let spy: jest.SpyInstance<number, []>
+  let spy: jest.SpyInstance<number, []> = jest.fn()
   let mockedTime = 0
 
   return {
     useFakeTime(time = 0) {
       mockedTime = time
-      // eslint-disable-next-line no-unused-expressions
-      spy?.mockRestore()
+      spy.mockRestore()
       spy = jest.spyOn(Date, 'now').mockReturnValue(mockedTime)
       jest.useFakeTimers()
     },
@@ -20,8 +19,7 @@ const tock = (() => {
     },
 
     useRealTime() {
-      // eslint-disable-next-line no-unused-expressions
-      spy?.mockRestore()
+      spy.mockRestore()
       jest.useRealTimers()
     },
   }
