@@ -38,6 +38,8 @@ import {
   string,
 } from 'fast-check'
 
+const [V8_VERSION_MAJOR] = process.versions.v8.split('.')
+
 const arbitraryArray = array(anything())
 
 describe('isEmpty()', () => {
@@ -746,12 +748,15 @@ describe('sort()', () => {
     )
   })
 
-  test('Array#sort comparison', () => {
-    assert(
-      property(arbitraryArray, (array) => {
-        const list = listOf(...array)
-        expect(sort(list)).toEqual(listOf(...array.sort()))
-      })
-    )
-  })
+  if (parseInt(V8_VERSION_MAJOR, 10) >= 7) {
+    test('Array#sort comparison (stable on V8 7.0+)', () => {
+      assert(
+        property(arbitraryArray, (array) => {
+          const list = listOf(...array)
+          const sortedItems = array.sort()
+          expect(sort(list)).toEqual(listOf(...sortedItems))
+        })
+      )
+    })
+  }
 })
