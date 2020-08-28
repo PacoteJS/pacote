@@ -1,3 +1,5 @@
+import * as O from '@pacote/option'
+import { None, Some, Option } from '@pacote/option'
 import {
   car,
   cdr,
@@ -25,16 +27,16 @@ export function length<T>(list: LinkedList<T>): number {
   return reduce((count) => count + 1, 0, list)
 }
 
-export function head<T>(list: LinkedList<T>): T | undefined {
-  return isEmpty(list) ? undefined : car(list)
+export function head<T>(list: LinkedList<T>): Option<T> {
+  return isEmpty(list) ? None : Some(car(list))
 }
 
 export function reverse<T>(list: LinkedList<T>): LinkedList<T> {
   return reduce((acc, value) => prepend(value, acc), emptyList(), list)
 }
 
-export function tail<T>(list: LinkedList<T>): T | undefined {
-  return reduce<T, T | undefined>((_, value) => value, undefined, list)
+export function tail<T>(list: LinkedList<T>): Option<T> {
+  return reduce<T, Option<T>>((_, value) => Some(value), None, list)
 }
 
 export function prepend<T>(value: T, list: LinkedList<T>): LinkedList<T> {
@@ -88,7 +90,7 @@ export function map<T, R>(
     reduce(
       (acc, value, index, collection) =>
         prepend(mapper(value, index, collection), acc),
-      emptyList<R>(),
+      emptyList(),
       list
     )
   )
@@ -102,41 +104,43 @@ export function filter<T>(
     reduce(
       (acc, value, index, collection) =>
         predicate(value, index, collection) ? prepend(value, acc) : acc,
-      emptyList<T>(),
+      emptyList(),
       list
     )
   )
 }
 
-export function indexOf<T>(value: T, list: LinkedList<T>): number {
-  return recursiveFind(
+export function indexOf<T>(value: T, list: LinkedList<T>): Option<number> {
+  return recursiveFind<T, Option<number>>(
     (current) => current === value,
-    (_, index) => index,
-    () => -1,
+    (_, index) => Some(index),
+    () => None,
     list,
     0
   )
 }
 
-export function lastIndexOf<T>(value: T, list: LinkedList<T>): number {
-  const lastIndex = recursiveFind(
-    (current) => current === value,
-    (_, index) => index,
-    () => -1,
-    reverse(list),
-    0
+export function lastIndexOf<T>(value: T, list: LinkedList<T>): Option<number> {
+  return O.map(
+    (lastIndex) => length(list) - lastIndex - 1,
+    recursiveFind<T, Option<number>>(
+      (current) => current === value,
+      (_, index) => Some(index),
+      () => None,
+      reverse(list),
+      0
+    )
   )
-  return lastIndex === -1 ? lastIndex : length(list) - lastIndex - 1
 }
 
 export function find<T>(
   predicate: PredicateFn<T>,
   list: LinkedList<T>
-): T | undefined {
-  return recursiveFind(
+): Option<T> {
+  return recursiveFind<T, Option<T>>(
     (current, index) => predicate(current, index, list),
-    (value) => value,
-    () => undefined,
+    Some,
+    () => None,
     list,
     0
   )
@@ -184,7 +188,7 @@ export function values<T>(list: LinkedList<T>): IterableIterator<T> {
   return iterator(list, (_, value) => value)
 }
 
-export function get<T>(index: number, list: LinkedList<T>): T | undefined {
+export function get<T>(index: number, list: LinkedList<T>): Option<T> {
   return find((_, idx) => idx === index, list)
 }
 
@@ -229,7 +233,7 @@ function recursiveRemove<T>(
 }
 
 export function remove<T>(index: number, list: LinkedList<T>): LinkedList<T> {
-  return recursiveRemove(index, emptyList<T>(), list, 0)
+  return recursiveRemove(index, emptyList(), list, 0)
 }
 
 function merge<T>(

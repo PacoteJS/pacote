@@ -34,15 +34,15 @@ otherwise.
 
 `length()` takes a linked list and returns the number of elements it contains.
 
-### `head<T>(list: LinkedList<T>): T | undefined`
+### `head<T>(list: LinkedList<T>): Option<T>`
 
-`head()` returns the first element of the linked list, or `undefined` if the
-linked list is empty.
+`head()` returns an `Option` with the first element of the linked list, or
+`None` if the linked list is empty.
 
-### `tail<T>(list: LinkedList<T>): LinkedList<T>`
+### `tail<T>(list: LinkedList<T>): Option<T>`
 
-`tail()` returns the final element in the linked list. If the linked list is
-empty, it returns `undefined`.
+`tail()` returns an `Option` with the final element in the linked list. If the
+linked list is empty, it returns `None`.
 
 ### `toArray<T>(list: LinkedList<T>): T[]`
 
@@ -90,7 +90,7 @@ values.
 
 ...
 
-### `find<T>(predicate: (element: T, index: number, collection: LinkedList<T>) => boolean, list: LinkedList<T>): T | undefined`
+### `find<T>(predicate: (element: T, index: number, collection: LinkedList<T>) => boolean, list: LinkedList<T>): Option<T>`
 
 ...
 
@@ -106,15 +106,15 @@ values.
 
 ...
 
-### `indexOf<T>(element: T, list: LinkedList<T>): number`
+### `indexOf<T>(element: T, list: LinkedList<T>): Option<number>`
 
 ...
 
-### `lastIndexOf<T>(element: T, list: LinkedList<T>): number`
+### `lastIndexOf<T>(element: T, list: LinkedList<T>): Option<number>`
 
 ...
 
-### `get<T>(index: number, list: LinkedList<T>): T | undefined`
+### `get<T>(index: number, list: LinkedList<T>): Option<T>`
 
 ...
 

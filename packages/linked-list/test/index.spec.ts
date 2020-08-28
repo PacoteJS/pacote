@@ -1,9 +1,11 @@
-import * as L from '../src/index'
 import * as fc from 'fast-check'
+import { Some, None } from '@pacote/option'
+import * as L from '../src/index'
 
 const [V8_VERSION_MAJOR] = process.versions.v8.split('.')
 
 const arbitraryArray = fc.array(fc.anything())
+const arbitraryNonEmptyArray = fc.array(fc.anything(), 1, 99)
 
 describe('isEmpty()', () => {
   test('new empty lists are empty', () => {
@@ -18,7 +20,7 @@ describe('isEmpty()', () => {
 })
 
 describe('length()', () => {
-  test('new lists have a length equal to the items originally passed', () => {
+  test('new lists have a length equal to the number of items originally passed', () => {
     fc.assert(
       fc.property(arbitraryArray, (items) => {
         const list = L.listOf(...items)
@@ -31,14 +33,14 @@ describe('length()', () => {
 describe('head()', () => {
   test('new empty lists have no head', () => {
     const list = L.listOf()
-    expect(L.head(list)).toBe(undefined)
+    expect(L.head(list)).toBe(None)
   })
 
-  test('new lists have the first item provided as their head', () => {
+  test('new non-empty lists have the first item provided as their head', () => {
     fc.assert(
-      fc.property(arbitraryArray, (items) => {
+      fc.property(arbitraryNonEmptyArray, (items) => {
         const list = L.listOf(...items)
-        expect(L.head(list)).toEqual(items[0])
+        expect(L.head(list)).toEqual(Some(items[0]))
       })
     )
   })
@@ -47,14 +49,15 @@ describe('head()', () => {
 describe('tail()', () => {
   test('new empty lists have no tail', () => {
     const list = L.listOf()
-    expect(L.tail(list)).toBe(undefined)
+    expect(L.tail(list)).toBe(None)
   })
 
-  test('new lists have the last item provided as their tail', () => {
+  test('new non-empty lists have the last item provided as their tail', () => {
     fc.assert(
-      fc.property(arbitraryArray, (items) => {
+      fc.property(arbitraryNonEmptyArray, (items) => {
+        const expectedValue = items[items.length - 1]
         const list = L.listOf(...items)
-        expect(L.tail(list)).toEqual(items[items.length - 1])
+        expect(L.tail(list)).toEqual(Some(expectedValue))
       })
     )
   })
@@ -88,18 +91,18 @@ describe('prepend()', () => {
 
   test('prepending to an empty list places the value at the head and the tail', () => {
     const list = L.prepend('value', L.listOf())
-    expect(L.head(list)).toEqual('value')
-    expect(L.tail(list)).toEqual('value')
+    expect(L.head(list)).toEqual(Some('value'))
+    expect(L.tail(list)).toEqual(Some('value'))
   })
 
   test('prepending to a list places the value at the head', () => {
     const list = L.prepend('head value', L.prepend('tail value', L.listOf()))
-    expect(L.head(list)).toEqual('head value')
+    expect(L.head(list)).toEqual(Some('head value'))
   })
 
   test('prepending to a list keeps the tail unchanged', () => {
     const list = L.prepend('head value', L.prepend('tail value', L.listOf()))
-    expect(L.tail(list)).toEqual('tail value')
+    expect(L.tail(list)).toEqual(Some('tail value'))
   })
 })
 
@@ -112,20 +115,20 @@ describe('append()', () => {
 
   test('appending to an empty list places the value at the head and the tail', () => {
     const list = L.append('value', L.listOf())
-    expect(L.head(list)).toEqual('value')
-    expect(L.tail(list)).toEqual('value')
+    expect(L.head(list)).toEqual(Some('value'))
+    expect(L.tail(list)).toEqual(Some('value'))
   })
 
   test('appending to a list preserves the head', () => {
     const list = L.append('tail value', L.append('head value', L.listOf()))
-    expect(L.head(list)).toEqual('head value')
+    expect(L.head(list)).toEqual(Some('head value'))
   })
 
   test('appending to a list places value at the tail', () => {
     fc.assert(
       fc.property(arbitraryArray, fc.anything(), (items, item) => {
         const original = L.listOf(...items)
-        expect(L.tail(L.append(item, original))).toEqual(item)
+        expect(L.tail(L.append(item, original))).toEqual(Some(item))
       })
     )
   })
@@ -303,27 +306,27 @@ describe('reduceRight()', () => {
 })
 
 describe('find()', () => {
-  test('returns undefined if the list is empty', () => {
+  test('returns None if the list is empty', () => {
     const emptyList = L.listOf()
-    expect(L.find(() => true, emptyList)).toEqual(undefined)
+    expect(L.find(() => true, emptyList)).toEqual(None)
   })
 
   test('returns the first item of the list when the predicate is true', () => {
     fc.assert(
-      fc.property(arbitraryArray, ([first, ...remaining]) => {
+      fc.property(arbitraryNonEmptyArray, ([first, ...remaining]) => {
         const list = L.listOf(first, ...remaining)
         const predicate = () => true
-        expect(L.find(predicate, list)).toEqual(first)
+        expect(L.find(predicate, list)).toEqual(Some(first))
       })
     )
   })
 
-  test('returns undefined when the predicate is false', () => {
+  test('returns None when the predicate is false', () => {
     fc.assert(
       fc.property(arbitraryArray, (items) => {
         const list = L.listOf(...items)
         const predicate = () => false
-        expect(L.find(predicate, list)).toEqual(undefined)
+        expect(L.find(predicate, list)).toEqual(None)
       })
     )
   })
@@ -338,7 +341,7 @@ describe('find()', () => {
     expect(predicate).toHaveBeenCalledWith(1, 0, list)
     expect(predicate).toHaveBeenCalledWith(2, 1, list)
 
-    expect(actual).toEqual(2)
+    expect(actual).toEqual(Some(2))
   })
 })
 
@@ -460,66 +463,67 @@ describe('values()', () => {
 })
 
 describe('indexOf()', () => {
-  test("returns -1 when the value can't be found", () => {
+  test("returns None when the value can't be found", () => {
     const list = L.listOf()
-    expect(L.indexOf('value', list)).toBe(-1)
+    expect(L.indexOf('value', list)).toEqual(None)
   })
 
   test('returns 0 when the value is found at the head', () => {
     const list = L.listOf('value')
-    expect(L.indexOf('value', list)).toBe(0)
+    expect(L.indexOf('value', list)).toEqual(Some(0))
   })
 
   test('returns the last index when the value is found at the tail', () => {
     const list = L.listOf('first', 'second', 'value')
-    expect(L.indexOf('value', list)).toBe(2)
+    expect(L.indexOf('value', list)).toEqual(Some(2))
   })
 
   test('returns the index of the value when found', () => {
     const list = L.listOf('first', 'value', 'value', 'third')
-    expect(L.indexOf('value', list)).toBe(1)
+    expect(L.indexOf('value', list)).toEqual(Some(1))
   })
 })
 
 describe('lastIndexOf()', () => {
-  test("returns -1 when the value can't be found", () => {
+  test("returns None when the value can't be found", () => {
     const list = L.listOf()
-    expect(L.lastIndexOf('value', list)).toBe(-1)
+    expect(L.lastIndexOf('value', list)).toEqual(None)
   })
 
   test('returns 0 when the value is found at the head', () => {
     const list = L.listOf('value')
-    expect(L.lastIndexOf('value', list)).toBe(0)
+    expect(L.lastIndexOf('value', list)).toEqual(Some(0))
   })
 
   test('returns the last index when the value is found at the tail', () => {
     const list = L.listOf('first', 'second', 'value')
-    expect(L.lastIndexOf('value', list)).toBe(2)
+    expect(L.lastIndexOf('value', list)).toEqual(Some(2))
   })
 
   test('returns the index of the first value from the right', () => {
     const list = L.listOf('first', 'value', 'value', 'third')
-    expect(L.lastIndexOf('value', list)).toBe(2)
+    expect(L.lastIndexOf('value', list)).toEqual(Some(2))
   })
 })
 
 describe('get()', () => {
-  test('returns undefined for negative indices', () => {
+  test('returns None for negative indices', () => {
     fc.assert(
       fc.property(fc.integer(-1), arbitraryArray, (index, array) => {
         const list = L.listOf(...array)
-        expect(L.get(index, list)).toEqual(undefined)
+        expect(L.get(index, list)).toEqual(None)
       })
     )
   })
 
+  test('returns None for out of bounds indices', () => {
+    const list = L.listOf(1, 2, 3)
+    expect(L.get(3, list)).toEqual(None)
+  })
+
   test('returns the value at index', () => {
-    fc.assert(
-      fc.property(arbitraryArray, fc.nat(), (array, index) => {
-        const list = L.listOf(...array)
-        expect(L.get(index, list)).toEqual(array[index])
-      })
-    )
+    const list = L.listOf(1, 2, 3)
+    expect(L.get(2, list)).toEqual(Some(3))
   })
 })
 
