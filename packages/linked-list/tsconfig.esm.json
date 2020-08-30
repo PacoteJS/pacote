@@ -6,5 +6,6 @@
     "outDir": "lib/esm",
     "declarationMap": false,
     "sourceMap": false
-  }
+  },
+  "references": [{ "path": "../option/tsconfig.esm.json" }]
 }
