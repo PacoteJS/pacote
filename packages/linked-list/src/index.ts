@@ -216,24 +216,11 @@ export function slice<T>(
     : sliceFromEnd(length(list) - end, sliceFromStart(start, list))
 }
 
-function recursiveRemove<T>(
-  index: number,
-  before: LinkedList<T>,
-  after: LinkedList<T>,
-  currentIndex: number
-): LinkedList<T> {
-  return isEmpty(after) || currentIndex >= index
-    ? reduce((acc, value) => prepend(value, acc), cdr(after), before)
-    : recursiveRemove(
-        index,
-        prepend(car(after), before),
-        cdr(after),
-        currentIndex + 1
-      )
-}
-
 export function remove<T>(index: number, list: LinkedList<T>): LinkedList<T> {
-  return recursiveRemove(index, emptyList(), list, 0)
+  return concat(
+    sliceFromEnd(length(list) - index, list),
+    sliceFromStart(index + 1, list)
+  )
 }
 
 function merge<T>(
