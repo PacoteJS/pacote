@@ -58,26 +58,3 @@ export function recursiveFind<T, R>(
     ? whenFound(car(current), index)
     : recursiveFind(predicate, whenFound, whenFinished, cdr(current), index + 1)
 }
-
-export function iterator<T, R>(
-  list: LinkedList<T>,
-  result: (key: number, value: T) => R
-): IterableIterator<R> {
-  let key = 0
-  let current = list
-
-  return {
-    [Symbol.iterator]: function () {
-      return this
-    },
-    next() {
-      if (isEmpty(current)) {
-        return { done: true, value: undefined }
-      } else {
-        const value = result(key++, car(current))
-        current = cdr(current)
-        return { done: false, value }
-      }
-    },
-  }
-}

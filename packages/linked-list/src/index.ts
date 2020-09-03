@@ -6,16 +6,17 @@ import {
   CompareFn,
   emptyList,
   isEmpty,
-  iterator,
   LinkedList,
   MapFn,
   PredicateFn,
   recursiveFind,
   recursiveReduce,
   ReduceFn,
-} from './internal'
+} from './core'
+import { defaultCompare } from './sort'
 
-export { isEmpty, cdr as rest } from './internal'
+export { isEmpty, cdr as rest } from './core'
+export { entries, keys, values } from './iterator'
 
 export function listOf<T>(...items: T[]): LinkedList<T> {
   return items
@@ -189,18 +190,6 @@ export function includes<T>(value: T, list: LinkedList<T>): boolean {
   return some((v) => v === value, list)
 }
 
-export function entries<T>(list: LinkedList<T>): IterableIterator<[number, T]> {
-  return iterator(list, (key, value) => [key, value])
-}
-
-export function keys<T>(list: LinkedList<T>): IterableIterator<number> {
-  return iterator(list, (key) => key)
-}
-
-export function values<T>(list: LinkedList<T>): IterableIterator<T> {
-  return iterator(list, (_, value) => value)
-}
-
 export function get<T>(index: number, list: LinkedList<T>): Option<T> {
   return find((_, idx) => idx === index, list)
 }
@@ -266,15 +255,6 @@ function mergeSort<T>(
     mergeSort(compare, slice(0, middle, list)),
     mergeSort(compare, slice(middle, size, list))
   )
-}
-
-function defaultCompare<T>(a: T, b: T): number {
-  if (a === undefined && b === undefined) return 0
-  if (a === undefined) return 1
-  if (b === undefined) return -1
-  if (String(a) < String(b)) return -1
-  if (String(a) > String(b)) return 1
-  return 0
 }
 
 export function sort<T>(list: LinkedList<T>): LinkedList<T>
