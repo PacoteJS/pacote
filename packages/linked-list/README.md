@@ -182,7 +182,7 @@ every environment).
 
 ## See also
 
-- [`@pacote/option`](../option/README.md)
+- [`@pacote/option`](../option/)
 
 ## License
 
