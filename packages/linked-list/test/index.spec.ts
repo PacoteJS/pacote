@@ -345,6 +345,46 @@ describe('find()', () => {
   })
 })
 
+describe('findIndex()', () => {
+  test('returns None if the list is empty', () => {
+    const emptyList = L.listOf()
+    expect(L.findIndex(() => true, emptyList)).toEqual(None)
+  })
+
+  test('returns the first index of the list when the predicate is true', () => {
+    fc.assert(
+      fc.property(arbitraryNonEmptyArray, (items) => {
+        const list = L.listOf(...items)
+        const predicate = () => true
+        expect(L.findIndex(predicate, list)).toEqual(Some(0))
+      })
+    )
+  })
+
+  test('returns None when the predicate is false', () => {
+    fc.assert(
+      fc.property(arbitraryArray, (items) => {
+        const list = L.listOf(...items)
+        const predicate = () => false
+        expect(L.findIndex(predicate, list)).toEqual(None)
+      })
+    )
+  })
+
+  test("calls the predicate function for every item in the list until it's satisfied", () => {
+    const list = L.listOf('a', 'b', 'c')
+    const predicate = jest.fn((i) => i === 'b')
+
+    const actual = L.findIndex(predicate, list)
+
+    expect(predicate).toHaveBeenCalledTimes(2)
+    expect(predicate).toHaveBeenCalledWith('a', 0, list)
+    expect(predicate).toHaveBeenCalledWith('b', 1, list)
+
+    expect(actual).toEqual(Some(1))
+  })
+})
+
 describe('entries()', () => {
   test('iterator is done for empty lists', () => {
     const list = L.listOf()

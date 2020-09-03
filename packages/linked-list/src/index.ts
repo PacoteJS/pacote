@@ -146,6 +146,19 @@ export function find<T>(
   )
 }
 
+export function findIndex<T>(
+  predicate: PredicateFn<T>,
+  list: LinkedList<T>
+): Option<number> {
+  return recursiveFind<T, Option<number>>(
+    (current, index) => predicate(current, index, list),
+    (_, index) => Some(index),
+    () => None,
+    list,
+    0
+  )
+}
+
 export function every<T>(
   predicate: PredicateFn<T>,
   list: LinkedList<T>
