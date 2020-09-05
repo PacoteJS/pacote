@@ -233,25 +233,59 @@ describe('map()', () => {
     expect(L.map((i) => i, list)).toEqual(list)
   })
 
-  test('calls the mapper function for every item in the list', () => {
+  test('calls the callback function for every item in the list', () => {
     fc.assert(
       fc.property(arbitraryArray, (items) => {
         const list = L.listOf(...items)
-        const mapper = jest.fn()
+        const callback = jest.fn()
 
-        L.map(mapper, list)
+        L.map(callback, list)
 
-        expect(mapper).toHaveBeenCalledTimes(items.length)
+        expect(callback).toHaveBeenCalledTimes(items.length)
         items.forEach((item, index) =>
-          expect(mapper).toHaveBeenCalledWith(item, index, list)
+          expect(callback).toHaveBeenCalledWith(item, index, list)
         )
       })
     )
   })
 
   test('creates a new list with the items of the list transformed', () => {
-    const mapper = (i: number) => i + 1
-    expect(L.map(mapper, L.listOf(1, 2, 3))).toEqual(L.listOf(2, 3, 4))
+    const callback = (i: number) => i + 1
+    expect(L.map(callback, L.listOf(1, 2, 3))).toEqual(L.listOf(2, 3, 4))
+  })
+})
+
+describe('flatMap()', () => {
+  test('returns an empty list unchanged', () => {
+    const list = L.listOf()
+    expect(L.flatMap((i) => L.listOf(i), list)).toEqual(list)
+  })
+
+  test('calls the callback function for every item in the list', () => {
+    fc.assert(
+      fc.property(arbitraryArray, (items) => {
+        const list = L.listOf(...items)
+        const callback = jest.fn()
+
+        L.flatMap(callback, list)
+
+        expect(callback).toHaveBeenCalledTimes(items.length)
+        items.forEach((item, index) =>
+          expect(callback).toHaveBeenCalledWith(item, index, list)
+        )
+      })
+    )
+  })
+
+  test('linked list results are flattened', () => {
+    const list = L.listOf(1, 2, 3)
+    expect(L.flatMap((i) => L.listOf(i), list)).toEqual(list)
+  })
+
+  test('linked list results are flattened in the right order', () => {
+    const list = L.listOf(1, 2, 3)
+    const expected = L.listOf(1.1, 1.2, 2.1, 2.2, 3.1, 3.2)
+    expect(L.flatMap((i) => L.listOf(i + 0.1, i + 0.2), list)).toEqual(expected)
   })
 })
 
@@ -261,16 +295,16 @@ describe('reduce()', () => {
     expect(L.reduce(() => Infinity, 0, list)).toEqual(0)
   })
 
-  test('calls the reducer function for every item in the list', () => {
+  test('calls the callback function for every item in the list', () => {
     const list = L.listOf(1, 2, 3)
-    const reducer = jest.fn((acc, i) => acc + i)
+    const callback = jest.fn((acc, i) => acc + i)
 
-    L.reduce(reducer, 0, list)
+    L.reduce(callback, 0, list)
 
-    expect(reducer).toHaveBeenCalledTimes(3)
-    expect(reducer).toHaveBeenCalledWith(0, 1, 0, list)
-    expect(reducer).toHaveBeenCalledWith(1, 2, 1, list)
-    expect(reducer).toHaveBeenCalledWith(3, 3, 2, list)
+    expect(callback).toHaveBeenCalledTimes(3)
+    expect(callback).toHaveBeenCalledWith(0, 1, 0, list)
+    expect(callback).toHaveBeenCalledWith(1, 2, 1, list)
+    expect(callback).toHaveBeenCalledWith(3, 3, 2, list)
   })
 
   test('reduces the items in the list to a result', () => {
@@ -286,16 +320,16 @@ describe('reduceRight()', () => {
     expect(L.reduceRight(() => Infinity, 0, list)).toEqual(0)
   })
 
-  test('calls the reducer function for every item in the list', () => {
+  test('calls the callback function for every item in the list', () => {
     const list = L.listOf(1, 2, 3)
-    const reducer = jest.fn((acc, i) => acc + i)
+    const callback = jest.fn((acc, i) => acc + i)
 
-    L.reduceRight(reducer, 0, list)
+    L.reduceRight(callback, 0, list)
 
-    expect(reducer).toHaveBeenCalledTimes(3)
-    expect(reducer).toHaveBeenCalledWith(0, 3, 2, list)
-    expect(reducer).toHaveBeenCalledWith(3, 2, 1, list)
-    expect(reducer).toHaveBeenCalledWith(5, 1, 0, list)
+    expect(callback).toHaveBeenCalledTimes(3)
+    expect(callback).toHaveBeenCalledWith(0, 3, 2, list)
+    expect(callback).toHaveBeenCalledWith(3, 2, 1, list)
+    expect(callback).toHaveBeenCalledWith(5, 1, 0, list)
   })
 
   test('reduces the items in the list to a result', () => {

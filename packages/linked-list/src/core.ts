@@ -4,10 +4,10 @@ type Empty = undefined
 type Cons<T> = readonly [value: T, next: Cons<T> | Empty]
 export type LinkedList<T> = Cons<T> | Empty
 
-type FunctionArgs<T> = [value: T, index: number, collection: LinkedList<T>]
-type MapFunction<T, R> = (...args: FunctionArgs<T>) => R
-export type PredicateFunction<T> = MapFunction<T, boolean>
-type ReduceFn<T, R> = (acc: R, ...args: FunctionArgs<T>) => R
+type CallbackArgs<T> = [value: T, index: number, collection: LinkedList<T>]
+type MapCallback<T, R> = (...args: CallbackArgs<T>) => R
+type ReduceCallback<T, R> = (acc: R, ...args: CallbackArgs<T>) => R
+export type PredicateFunction<T> = MapCallback<T, boolean>
 
 export function car<T>(cons: Cons<T>): T {
   return cons[0]
@@ -35,7 +35,7 @@ export function append<T>(value: T, list: LinkedList<T>): LinkedList<T> {
 
 function recursiveReduce<T, R>(
   acc: R,
-  reducer: ReduceFn<T, R>,
+  callback: ReduceCallback<T, R>,
   current: LinkedList<T>,
   step: number,
   index: number,
@@ -44,8 +44,8 @@ function recursiveReduce<T, R>(
   return isEmpty(current)
     ? acc
     : recursiveReduce(
-        reducer(acc, car(current), index, collection),
-        reducer,
+        callback(acc, car(current), index, collection),
+        callback,
         cdr(current),
         step,
         index + step,
@@ -54,30 +54,44 @@ function recursiveReduce<T, R>(
 }
 
 export function reduce<T, R>(
-  reducer: ReduceFn<T, R>,
+  callback: ReduceCallback<T, R>,
   initial: R,
   list: LinkedList<T>
 ): R {
-  return recursiveReduce(initial, reducer, list, 1, 0, list)
+  return recursiveReduce(initial, callback, list, 1, 0, list)
 }
 
 export function reduceRight<T, R>(
-  reducer: ReduceFn<T, R>,
+  callback: ReduceCallback<T, R>,
   initial: R,
   list: LinkedList<T>
 ): R {
   const lastIndex = length(list) - 1
-  return recursiveReduce(initial, reducer, reverse(list), -1, lastIndex, list)
+  return recursiveReduce(initial, callback, reverse(list), -1, lastIndex, list)
 }
 
 export function map<T, R>(
-  mapper: MapFunction<T, R>,
+  callback: MapCallback<T, R>,
   list: LinkedList<T>
 ): LinkedList<R> {
   return reverse(
     reduce(
       (acc, value, index, collection) =>
-        prepend(mapper(value, index, collection), acc),
+        prepend(callback(value, index, collection), acc),
+      emptyList(),
+      list
+    )
+  )
+}
+
+export function flatMap<T, R>(
+  callback: MapCallback<T, LinkedList<R>>,
+  list: LinkedList<T>
+): LinkedList<R> {
+  return reverse(
+    reduce(
+      (acc, value, index, collection) =>
+        concat(reverse(callback(value, index, collection)), acc),
       emptyList(),
       list
     )

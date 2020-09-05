@@ -75,25 +75,30 @@ the linked list is empty or has a single element, it returns an empty list.
 `predicate` function for each one, returning a new list containing only the items
 for which the `predicate` function yielded `true`.
 
-### `map<T, R>(mapper: (element: T, index: number, collection: LinkedList<T>) => R, list: LinkedList<T>): LinkedList<R>`
+### `map<T, R>(callback: (element: T, index: number, collection: LinkedList<T>) => R, list: LinkedList<T>): LinkedList<R>`
 
 `map()` iterates over all items in the provided list and evaluates each element
-through the `mapper` function, returning a new list containing the resulting
+through the `callback` function, returning a new list containing the resulting
 values.
 
-### `reduce<T, R>(reducer: (accumulator: R, element: T, index: number, collection: LinkedList<T>) => R, initial: R, list: LinkedList<T>): R`
+### `flatMap<T, R>(callback: (element: T, index: number, collection: LinkedList<T>) => LinkedList<R>, list: LinkedList<T>): LinkedList<R>`
 
-`reduce()` executes the provided `reducer` function on each element of the list,
-resulting in a single output value, which gets successively passed to the
-`reducer` function in the next execution.
+`flatMap()` iterates over all items in the provided list and evaluates each
+element through the `callback` function and flattening the result by one level.
 
-The first time the `reducer` function is executed, it receives the `initial`
+### `reduce<T, R>(callback: (accumulator: R, element: T, index: number, collection: LinkedList<T>) => R, initial: R, list: LinkedList<T>): R`
+
+`reduce()` executes the provided `callback` function on each element of the
+list, resulting in a single output value, which gets successively passed to the
+`callback` function in the next execution.
+
+The first time the `callback` function is executed, it receives the `initial`
 value.
 
-The result of the last execution of the `reducer` function is returned by
+The result of the last execution of the `callback` function is returned by
 `reduce()`.
 
-### `reduceRight<T, R>(reducer: (accumulator: R, element: T, index: number, collection: LinkedList<T>) => R, initial: R, list: LinkedList<T>): R`
+### `reduceRight<T, R>(callback: (accumulator: R, element: T, index: number, collection: LinkedList<T>) => R, initial: R, list: LinkedList<T>): R`
 
 `reduceRight()` works like `reduce()`, but the list is iterated starting at the
 tail.

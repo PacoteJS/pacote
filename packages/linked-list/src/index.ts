@@ -3,6 +3,7 @@ export {
   cdr as rest,
   concat,
   filter,
+  flatMap,
   head,
   isEmpty,
   length,
