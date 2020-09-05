@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.4](https://github.com/PacoteJS/pacote/compare/@pacote/computus@1.2.3...@pacote/computus@1.2.4) (2020-09-05)
+
+**Note:** Version bump only for package @pacote/computus
+
 ## [1.2.3](https://github.com/PacoteJS/pacote/compare/@pacote/computus@1.2.2...@pacote/computus@1.2.3) (2020-06-03)
 
 **Note:** Version bump only for package @pacote/computus

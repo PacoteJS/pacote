@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.2](https://github.com/PacoteJS/pacote/compare/@pacote/emitter@1.0.1...@pacote/emitter@1.0.2) (2020-09-05)
+
+**Note:** Version bump only for package @pacote/emitter
+
 ## [1.0.1](https://github.com/PacoteJS/pacote/compare/@pacote/emitter@1.0.0...@pacote/emitter@1.0.1) (2020-06-03)
 
 **Note:** Version bump only for package @pacote/emitter
