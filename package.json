@@ -38,9 +38,8 @@
   },
   "scripts": {
     "commit": "git-cz",
-    "lerna:bootstrap": "lerna bootstrap",
-    "lerna:link": "lerna link convert",
-    "lerna:publish": "lerna publish",
+    "bootstrap": "lerna link convert && lerna bootstrap",
+    "release": "lerna publish",
     "build": "lerna run build",
     "clean": "rimraf coverage packages/*/lib packages/*/tsconfig.tsbuildinfo",
     "plop": "plop",
