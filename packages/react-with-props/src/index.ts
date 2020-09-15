@@ -16,7 +16,7 @@ type InnerComponent<Props = any> =
   | keyof ReactHTML
   | keyof ReactSVG
 
-type Enhanced<P extends I, I> = Omit<P & { children?: ReactNode }, keyof I>
+type Enhanced<I, P extends I> = Omit<P & { children?: ReactNode }, keyof I>
 
 type InnerProps<
   Component extends InnerComponent<any>
@@ -49,7 +49,7 @@ export function withProps<
   InjectedProps extends Record<string, unknown>,
   ComponentProps extends InjectedProps,
   Component extends InnerComponent<ComponentProps>,
-  EnhancedProps = Enhanced<InnerProps<Component>, InjectedProps>
+  EnhancedProps = Enhanced<InjectedProps, InnerProps<Component>>
 >(
   injected: Injector<OuterProps, InjectedProps> | InjectedProps,
   BaseComponent: Component
@@ -75,7 +75,7 @@ export function withDefaultProps<
   InjectedProps extends Record<string, unknown>,
   ComponentProps extends InjectedProps,
   Component extends InnerComponent<ComponentProps>,
-  EnhancedProps = Enhanced<InnerProps<Component>, InjectedProps> &
+  EnhancedProps = Enhanced<InjectedProps, InnerProps<Component>> &
     Partial<InjectedProps>
 >(
   injectedProps: InjectedProps,
