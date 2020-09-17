@@ -32,10 +32,7 @@ test('matches action using action creator', () => {
   const testAction = createAction<{ age: number }>('@@TEST/MATCHER')
   const action = testAction({ age: 18 }) as any
   expect(isType(testAction, action)).toBe(true)
-
-  if (isType(testAction, action)) {
-    expect(action.payload.age).toBe(18)
-  }
+  expect(action.payload.age).toBe(18)
 })
 
 test('reducer has initial state', () => {
