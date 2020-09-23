@@ -12,7 +12,7 @@ export function createEmitter<E extends Events>(): Emitter<E> {
 
   return {
     on(name, fn) {
-      events[name] = events[name]?.concat(fn) || [fn]
+      events[name] = events[name]?.concat(fn) ?? [fn]
 
       return () => {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -20,7 +20,6 @@ export function createEmitter<E extends Events>(): Emitter<E> {
       }
     },
     emit(name, ...args) {
-      // eslint-disable-next-line no-unused-expressions
       events[name]?.forEach((fn) => fn(...args))
     },
   }
