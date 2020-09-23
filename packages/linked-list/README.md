@@ -150,6 +150,15 @@ if the `index` is out of bounds.
 
 `remove()` returns a new linked list with the element at `index` removed.
 
+### `take<T>(count: number, list: LinkedList<T>): LinkedList<T>`
+
+`take()` returns the first `count` elements of a list.
+
+### `drop<T>(count: number, list: LinkedList<T>): LinkedList<T>`
+
+`drop()` returns a list with the first `count` elements of the provided list
+removed.
+
 ### `slice<T>(start: number, end?: number, list: LinkedList<T>): LinkedList<T>`
 
 `slice()` returns a new linked list with a subset of elements between indices

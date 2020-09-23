@@ -1,11 +1,30 @@
-import { cdr, concat, length, LinkedList, reverse } from './core'
+import {
+  car,
+  cdr,
+  concat,
+  LinkedList,
+  reverse,
+  emptyList,
+  prepend,
+  isEmpty,
+} from './core'
 
-function sliceFromStart<T>(offset: number, list: LinkedList<T>): LinkedList<T> {
-  return offset > 0 ? sliceFromStart(offset - 1, cdr(list)) : list
+export function drop<T>(offset: number, list: LinkedList<T>): LinkedList<T> {
+  return offset > 0 ? drop(offset - 1, cdr(list)) : list
 }
 
-function sliceFromEnd<T>(offset: number, list: LinkedList<T>): LinkedList<T> {
-  return offset > 0 ? reverse(sliceFromStart(offset, reverse(list))) : list
+function recursiveTake<T>(
+  acc: LinkedList<T>,
+  offset: number,
+  list: LinkedList<T>
+): LinkedList<T> {
+  return offset > 0 && !isEmpty(list)
+    ? recursiveTake(prepend(car(list), acc), offset - 1, cdr(list))
+    : reverse(acc)
+}
+
+export function take<T>(offset: number, list: LinkedList<T>): LinkedList<T> {
+  return recursiveTake(emptyList(), offset, list)
 }
 
 export function slice<T>(start: number, list: LinkedList<T>): LinkedList<T>
@@ -19,14 +38,12 @@ export function slice<T>(
   end: number | LinkedList<T>,
   list?: LinkedList<T>
 ): LinkedList<T> {
+  const startOffset = start > 0 ? start : 0
   return typeof end !== 'number'
-    ? sliceFromStart(start, end)
-    : sliceFromEnd(length(list) - end, sliceFromStart(start, list))
+    ? drop(startOffset, end)
+    : take(end - startOffset, drop(startOffset, list))
 }
 
 export function remove<T>(index: number, list: LinkedList<T>): LinkedList<T> {
-  return concat(
-    sliceFromEnd(length(list) - index, list),
-    sliceFromStart(index + 1, list)
-  )
+  return concat(take(index, list), drop(index + 1, list))
 }

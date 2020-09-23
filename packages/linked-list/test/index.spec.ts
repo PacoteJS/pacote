@@ -1,6 +1,7 @@
 import * as fc from 'fast-check'
 import { Some, None } from '@pacote/option'
 import * as L from '../src/index'
+import { emptyList } from '../src/core'
 
 const [V8_VERSION_MAJOR] = process.versions.v8.split('.')
 
@@ -598,6 +599,60 @@ describe('get()', () => {
   test('returns the value at index', () => {
     const list = L.listOf(1, 2, 3)
     expect(L.get(2, list)).toEqual(Some(3))
+  })
+})
+
+describe('take()', () => {
+  test('returns an empty list for offsets lower than 1', () => {
+    const list = L.listOf(1, 2, 3)
+    expect(L.take(0, list)).toEqual(emptyList())
+  })
+
+  test('returns a number of items taken from the start of the list', () => {
+    const list = L.listOf(1, 2, 3)
+    const expected = L.listOf(1, 2)
+    const actual = L.take(2, list)
+    expect(actual).toEqual(expected)
+  })
+
+  test('returns all the items if more are taken than exist', () => {
+    const list = L.listOf(1, 2, 3)
+    const actual = L.take(4, list)
+    expect(actual).toEqual(list)
+  })
+
+  test('list of taken items is smaller or equal to the number requested', () => {
+    fc.assert(
+      fc.property(
+        fc.integer(1, Number.MAX_SAFE_INTEGER),
+        arbitraryArray,
+        (offset, array) => {
+          const list = L.listOf(...array)
+          const length = L.length(L.take(offset, list))
+          expect(length).toBeLessThanOrEqual(offset)
+        }
+      )
+    )
+  })
+})
+
+describe('drop()', () => {
+  test('removes everything for offsets equal to or higher than the list length', () => {
+    const list = L.listOf(1, 2, 3)
+    expect(L.drop(3, list)).toEqual(emptyList())
+  })
+
+  test('returns the original list if no items are dropped', () => {
+    const list = L.listOf(1, 2, 3)
+    const actual = L.drop(0, list)
+    expect(actual).toEqual(list)
+  })
+
+  test('removes the requested items from the start of the list', () => {
+    const list = L.listOf(1, 2, 3)
+    const expected = L.listOf(3)
+    const actual = L.drop(2, list)
+    expect(actual).toEqual(expected)
   })
 })
 

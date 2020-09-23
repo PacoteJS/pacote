@@ -26,5 +26,5 @@ export {
 } from './find'
 export { listOf, toArray } from './array'
 export { entries, keys, values } from './iterator'
-export { slice, remove } from './slice'
+export { slice, remove, drop, take } from './slice'
 export { sort } from './sort'
