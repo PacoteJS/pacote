@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/PacoteJS/pacote/compare/@pacote/linked-list@0.2.0...@pacote/linked-list@0.3.0) (2020-09-23)
+
+### Features
+
+- 🎸 adds `drop()` and `take()` functions ([2d0b8bb](https://github.com/PacoteJS/pacote/commit/2d0b8bb01992f713a2a52b412481e96ac0dd7585))
+
 # [0.2.0](https://github.com/PacoteJS/pacote/compare/@pacote/linked-list@0.1.0...@pacote/linked-list@0.2.0) (2020-09-11)
 
 ### Features
