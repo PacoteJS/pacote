@@ -1,4 +1,4 @@
-import { none, some } from 'fp-ts/lib/Option'
+import { None, Some } from '@pacote/option'
 import { iff } from '../src/index'
 
 describe(`when both consequent and alternative functions are provided`, () => {
@@ -24,11 +24,11 @@ describe(`when both consequent and alternative functions are provided`, () => {
 describe(`when only the consequent function is provided`, () => {
   test(`calls consequent when predicate is satisfied, yielding Some(type)`, () => {
     const actual = iff(true, () => 'consequent')
-    expect(actual).toEqual(some('consequent'))
+    expect(actual).toEqual(Some('consequent'))
   })
 
   test(`yields None when predicate fails and alternative is undefined`, () => {
     const actual = iff(false, () => 'consequent')
-    expect(actual).toEqual(none)
+    expect(actual).toEqual(None)
   })
 })

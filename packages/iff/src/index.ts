@@ -1,4 +1,4 @@
-import { Option, some, none } from 'fp-ts/lib/Option'
+import { Option, Some, None } from '@pacote/option'
 
 export function iff<T>(predicate: boolean, onConsequent: () => T): Option<T>
 export function iff<T>(
@@ -16,6 +16,6 @@ export function iff<T>(
       ? onConsequent()
       : onAlternative()
     : predicate
-    ? some(onConsequent())
-    : none
+    ? Some(onConsequent())
+    : None
 }

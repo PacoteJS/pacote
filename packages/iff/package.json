@@ -36,7 +36,7 @@
     "build:esm": "tsc -p ./tsconfig.esm.json",
     "prepublish": "yarn build"
   },
-  "peerDependencies": {
-    "fp-ts": "^2.0.0"
+  "dependencies": {
+    "@pacote/option": "file:../option"
   }
 }

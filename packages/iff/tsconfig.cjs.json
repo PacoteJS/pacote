@@ -6,5 +6,6 @@
     "outDir": "lib/cjs",
     "declarationMap": false,
     "sourceMap": false
-  }
+  },
+  "references": [{ "path": "../option/tsconfig.cjs.json" }]
 }

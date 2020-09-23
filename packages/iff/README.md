@@ -18,11 +18,27 @@ yarn add @pacote/iff
 ```typescript
 import { iff } from '@pacote/iff'
 
-iff(true, () => 1, () => 0)      // => 1
-iff(false, () => 1, () => 0)     // => 0
-iff(true, () => 1, () => 'zero') // type error, branches are not the same type
-iff(true, () => 1)               // => Some(1)
-iff(false, () => 1)              // => None
+iff(
+  true,
+  () => 1,
+  () => 0
+) // => 1
+
+iff(
+  false,
+  () => 1,
+  () => 0
+) // => 0
+
+iff(
+  true,
+  () => 1,
+  () => 'zero'
+) // type error, branches are not the same type
+
+iff(true, () => 1) // => Some(1)
+
+iff(false, () => 1) // => None
 ```
 
 ### `iff(predicate: boolean, onConsequent: () => T, onAlternative?: () => T): T`
@@ -38,6 +54,10 @@ _onConsequent_ and _onAlternative_ must be functions with the same return type.
 If _onAlternative_ is not provided or is nullable, `iff()` will always return
 an `Option<T>` data type: `Some<T>` if the predicate is `true`, or `None` if the
 predicate is `false`.
+
+## See also
+
+- [`@pacote/option`](../option/)
 
 ## License
 
