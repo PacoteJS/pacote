@@ -14,6 +14,8 @@ export {
   reverse,
   tail,
 } from './core'
+export { listOf, toArray } from './array'
+export { entries, keys, values } from './iterator'
 export {
   every,
   find,
@@ -23,8 +25,6 @@ export {
   indexOf,
   lastIndexOf,
   some,
-} from './find'
-export { listOf, toArray } from './array'
-export { entries, keys, values } from './iterator'
-export { slice, remove, drop, take } from './slice'
+} from './search'
+export { slice, remove, drop, take } from './sublists'
 export { sort } from './sort'

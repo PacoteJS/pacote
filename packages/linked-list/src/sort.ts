@@ -9,7 +9,7 @@ import {
   reverse,
   length,
 } from './core'
-import { slice } from './slice'
+import { drop, take } from './sublists'
 
 export type CompareFn<T> = (a: T, b: T) => number
 
@@ -43,14 +43,13 @@ function mergeSort<T>(
     return list
   }
 
-  const size = length(list)
-  const middle = Math.ceil(size / 2)
+  const middle = Math.ceil(length(list) / 2)
 
   return merge(
     compare,
     listOf<T>(),
-    mergeSort(compare, slice(0, middle, list)),
-    mergeSort(compare, slice(middle, size, list))
+    mergeSort(compare, take(middle, list)),
+    mergeSort(compare, drop(middle, list))
   )
 }
 
