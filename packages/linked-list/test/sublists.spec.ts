@@ -116,3 +116,27 @@ describe('slice()', () => {
     expect(L.slice(2, list)).toEqual(expected)
   })
 })
+
+describe('unique()', () => {
+  test('empty lists', () => {
+    const list = L.listOf()
+    expect(L.unique(list)).toEqual(list)
+  })
+
+  test('lists with different values', () => {
+    const list = L.listOf(1, 2, 3)
+    expect(L.unique(list)).toEqual(list)
+  })
+
+  test('lists with a single element repeated', () => {
+    const list = L.listOf(1, 1, 1)
+    const expected = L.listOf(1)
+    expect(L.unique(list)).toEqual(expected)
+  })
+
+  test('unique elements are returned in order', () => {
+    const list = L.listOf(1, 2, 1, 3)
+    const expected = L.listOf(1, 2, 3)
+    expect(L.unique(list)).toEqual(expected)
+  })
+})

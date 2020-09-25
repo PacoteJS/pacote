@@ -7,7 +7,9 @@ import {
   emptyList,
   prepend,
   isEmpty,
+  reduce,
 } from './core'
+import { includes } from './search'
 
 export function drop<T>(offset: number, list: LinkedList<T>): LinkedList<T> {
   return offset > 0 ? drop(offset - 1, cdr(list)) : list
@@ -46,4 +48,17 @@ export function slice<T>(
 
 export function remove<T>(index: number, list: LinkedList<T>): LinkedList<T> {
   return concat(take(index, list), drop(index + 1, list))
+}
+
+export function unique<T>(list: LinkedList<T>): LinkedList<T> {
+  return reverse(
+    reduce(
+      (uniqueValues, value) =>
+        includes(value, uniqueValues)
+          ? uniqueValues
+          : prepend(value, uniqueValues),
+      emptyList(),
+      list
+    )
+  )
 }

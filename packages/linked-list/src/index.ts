@@ -26,5 +26,5 @@ export {
   lastIndexOf,
   some,
 } from './search'
-export { slice, remove, drop, take } from './sublists'
+export { slice, remove, drop, take, unique } from './sublists'
 export { sort } from './sort'
