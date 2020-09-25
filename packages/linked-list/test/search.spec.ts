@@ -150,6 +150,28 @@ describe('get()', () => {
   })
 })
 
+describe('item()', () => {
+  test('returns None for empty lists', () => {
+    const list = L.listOf()
+    expect(L.item(0, list)).toEqual(None)
+  })
+
+  test('returns None for out of bounds indices', () => {
+    const list = L.listOf(1, 2, 3)
+    expect(L.item(3, list)).toEqual(None)
+  })
+
+  test('returns the value at index', () => {
+    const list = L.listOf(1, 2, 3)
+    expect(L.item(2, list)).toEqual(Some(3))
+  })
+
+  test('returns items from the end of the list for negative indices', () => {
+    const list = L.listOf(1, 2, 3)
+    expect(L.item(-1, list)).toEqual(Some(3))
+  })
+})
+
 describe('every()', () => {
   test('returns true for empty lists', () => {
     const list = L.listOf()

@@ -40,6 +40,10 @@ export function get<T>(index: number, list: LinkedList<T>): Option<T> {
   return find((_, idx) => idx === index, list)
 }
 
+export function item<T>(index: number, list: LinkedList<T>): Option<T> {
+  return get(index >= 0 ? index : length(list) + index, list)
+}
+
 export function every<T>(
   predicate: PredicateFunction<T>,
   list: LinkedList<T>

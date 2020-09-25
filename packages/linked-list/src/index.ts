@@ -22,6 +22,7 @@ export {
   findIndex,
   get,
   includes,
+  item,
   indexOf,
   lastIndexOf,
   some,
