@@ -148,6 +148,11 @@ describe('get()', () => {
     const list = L.listOf(1, 2, 3)
     expect(L.get(2, list)).toEqual(Some(3))
   })
+
+  test('truncates index to integer', () => {
+    const list = L.listOf(1, 2, 3)
+    expect(L.get(2.5, list)).toEqual(Some(3))
+  })
 })
 
 describe('item()', () => {
@@ -169,6 +174,12 @@ describe('item()', () => {
   test('returns items from the end of the list for negative indices', () => {
     const list = L.listOf(1, 2, 3)
     expect(L.item(-1, list)).toEqual(Some(3))
+  })
+
+  test('truncates index to integer', () => {
+    const list = L.listOf(1, 2, 3)
+    expect(L.item(2.5, list)).toEqual(Some(3))
+    expect(L.item(-1.5, list)).toEqual(Some(3))
   })
 })
 

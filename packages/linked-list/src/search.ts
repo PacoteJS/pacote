@@ -37,11 +37,13 @@ export function find<T>(
 }
 
 export function get<T>(index: number, list: LinkedList<T>): Option<T> {
-  return find((_, idx) => idx === index, list)
+  const intIndex = Math.trunc(index)
+  return find((_, idx) => idx === intIndex, list)
 }
 
 export function item<T>(index: number, list: LinkedList<T>): Option<T> {
-  return get(index >= 0 ? index : length(list) + index, list)
+  const intIndex = Math.trunc(index)
+  return get(intIndex >= 0 ? intIndex : length(list) + intIndex, list)
 }
 
 export function every<T>(
