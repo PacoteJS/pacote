@@ -23,5 +23,8 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     'import/export': 'off',
     'no-array-constructor': 'off',
+    '@typescript-eslint/no-array-constructor': 'error',
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-use-before-define': 'error',
   },
 }
