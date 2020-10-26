@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/PacoteJS/pacote/compare/@pacote/linked-list@0.3.0...@pacote/linked-list@0.4.0) (2020-10-26)
+
+### Bug Fixes
+
+- 🐛 cast indices to integers for `get()` and `item()` ([6cce8a9](https://github.com/PacoteJS/pacote/commit/6cce8a9f7009485a165abffa83481386590097f3))
+
+### Features
+
+- 🎸 adds `item()` function ([24936d6](https://github.com/PacoteJS/pacote/commit/24936d6d1f72ded81ddb65d9eb57d7682640a202))
+- 🎸 adds unique() function ([296ecde](https://github.com/PacoteJS/pacote/commit/296ecde9913dfef03b22300cffab407c12ac52be))
+
 # [0.3.0](https://github.com/PacoteJS/pacote/compare/@pacote/linked-list@0.2.0...@pacote/linked-list@0.3.0) (2020-09-23)
 
 ### Features
