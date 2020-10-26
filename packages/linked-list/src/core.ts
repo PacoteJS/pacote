@@ -34,17 +34,6 @@ export function prepend<T>(value: T, list: LinkedList<T>): LinkedList<T> {
   return [value, list]
 }
 
-export function append<T>(value: T, list: LinkedList<T>): LinkedList<T> {
-  return reverse(prepend(value, reverse(list)))
-}
-
-export function concat<T>(
-  front: LinkedList<T>,
-  back: LinkedList<T>
-): LinkedList<T> {
-  return reduce((acc, value) => prepend(value, acc), back, reverse(front))
-}
-
 function recursiveReduce<T, R>(
   acc: R,
   callback: ReduceCallback<T, R>,
@@ -71,6 +60,25 @@ export function reduce<T, R>(
   list: LinkedList<T>
 ): R {
   return recursiveReduce(initial, callback, list, Step.Increment, 0, list)
+}
+
+export function reverse<T>(list: LinkedList<T>): LinkedList<T> {
+  return reduce((acc, value) => prepend(value, acc), emptyList(), list)
+}
+
+export function concat<T>(
+  front: LinkedList<T>,
+  back: LinkedList<T>
+): LinkedList<T> {
+  return reduce((acc, value) => prepend(value, acc), back, reverse(front))
+}
+
+export function append<T>(value: T, list: LinkedList<T>): LinkedList<T> {
+  return reverse(prepend(value, reverse(list)))
+}
+
+export function length<T>(list: LinkedList<T>): number {
+  return reduce((count) => count + 1, 0, list)
 }
 
 export function reduceRight<T, R>(
@@ -129,14 +137,6 @@ export function filter<T>(
       list
     )
   )
-}
-
-export function reverse<T>(list: LinkedList<T>): LinkedList<T> {
-  return reduce((acc, value) => prepend(value, acc), emptyList(), list)
-}
-
-export function length<T>(list: LinkedList<T>): number {
-  return reduce((count) => count + 1, 0, list)
 }
 
 export function head<T>(list: LinkedList<T>): Option<T> {

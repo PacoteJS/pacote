@@ -4,7 +4,7 @@ import { Either, isLeft, isRight } from 'fp-ts/lib/Either'
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace jest {
-    interface Matchers<R, T> {
+    interface Matchers<R> {
       toBeEither(): R
     }
   }

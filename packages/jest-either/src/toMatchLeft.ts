@@ -8,7 +8,7 @@ import { printReceivedLeft } from './shared/print'
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace jest {
-    interface Matchers<R, T> {
+    interface Matchers<R> {
       toMatchLeft(expected: any): R
     }
   }
