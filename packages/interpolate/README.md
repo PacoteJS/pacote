@@ -1,6 +1,5 @@
 # @pacote/interpolate
 
-[![Build Status](https://travis-ci.org/PacoteJS/pacote.svg?branch=master)](https://travis-ci.org/PacoteJS/pacote)
 ![version](https://badgen.net/npm/v/@pacote/interpolate)
 ![minified](https://badgen.net/bundlephobia/min/@pacote/interpolate)
 ![minified + gzip](https://badgen.net/bundlephobia/minzip/@pacote/interpolate)

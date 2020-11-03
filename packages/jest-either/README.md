@@ -1,6 +1,5 @@
 # @pacote/jest-either
 
-[![Build Status](https://travis-ci.org/PacoteJS/pacote.svg?branch=master)](https://travis-ci.org/PacoteJS/pacote)
 ![version](https://badgen.net/npm/v/@pacote/jest-either)
 ![minified](https://badgen.net/bundlephobia/min/@pacote/jest-either)
 ![minified + gzip](https://badgen.net/bundlephobia/minzip/@pacote/jest-either)

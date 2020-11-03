@@ -1,6 +1,5 @@
 # @pacote/shuffle
 
-[![Build Status](https://travis-ci.org/PacoteJS/pacote.svg?branch=master)](https://travis-ci.org/PacoteJS/pacote)
 ![version](https://badgen.net/npm/v/@pacote/shuffle)
 ![minified](https://badgen.net/bundlephobia/min/@pacote/shuffle)
 ![minified + gzip](https://badgen.net/bundlephobia/minzip/@pacote/shuffle)

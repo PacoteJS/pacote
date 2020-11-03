@@ -1,6 +1,5 @@
 # @pacote/memoize
 
-[![Build Status](https://travis-ci.org/PacoteJS/pacote.svg?branch=master)](https://travis-ci.org/PacoteJS/pacote)
 ![version](https://badgen.net/npm/v/@pacote/memoize)
 ![minified](https://badgen.net/bundlephobia/min/@pacote/memoize)
 ![minified + gzip](https://badgen.net/bundlephobia/minzip/@pacote/memoize)
@@ -20,7 +19,7 @@ import { memoize } from '@pacote/memoize'
 
 const randomFunction = (prefix: string) => `${prefix}${Math.random()}`
 
-const memoizedFunction = memoize(prefix => `key_${prefix}`, randomFunction)
+const memoizedFunction = memoize((prefix) => `key_${prefix}`, randomFunction)
 
 memoizedFunction('foo') // 'foo' followed by randomly-generated number.
 memoizedFunction('foo') // Same result as previous call with 'foo'.

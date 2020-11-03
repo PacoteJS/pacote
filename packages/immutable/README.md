@@ -1,6 +1,5 @@
 # @pacote/immutable
 
-[![Build Status](https://travis-ci.org/PacoteJS/pacote.svg?branch=master)](https://travis-ci.org/PacoteJS/pacote)
 ![version](https://badgen.net/npm/v/@pacote/immutable)
 ![minified](https://badgen.net/bundlephobia/min/@pacote/immutable)
 ![minified + gzip](https://badgen.net/bundlephobia/minzip/@pacote/immutable)

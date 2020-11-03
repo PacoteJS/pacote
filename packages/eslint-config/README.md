@@ -1,6 +1,5 @@
 # @pacote/eslint-config
 
-[![Build Status](https://travis-ci.org/PacoteJS/pacote.svg?branch=master)](https://travis-ci.org/PacoteJS/pacote)
 ![version](https://badgen.net/npm/v/@pacote/eslint-config)
 ![minified](https://badgen.net/bundlephobia/min/@pacote/eslint-config)
 ![minified + gzip](https://badgen.net/bundlephobia/minzip/@pacote/eslint-config)

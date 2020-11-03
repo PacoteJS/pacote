@@ -2,7 +2,6 @@
 
 [![Redux Demo](https://badgen.net/badge/codesandbox/redux%20demo/yellow)](https://codesandbox.io/s/xv62o57r3z)
 [![React Hooks API Demo](https://badgen.net/badge/codesandbox/react%20hooks%20api%20demo/yellow)](https://codesandbox.io/s/2wx6n5zlj0)
-[![Build Status](https://travis-ci.org/PacoteJS/pacote.svg?branch=master)](https://travis-ci.org/PacoteJS/pacote)
 ![version](https://badgen.net/npm/v/@pacote/flux-actions)
 ![minified](https://badgen.net/bundlephobia/min/@pacote/flux-actions)
 ![minified + gzip](https://badgen.net/bundlephobia/minzip/@pacote/flux-actions)

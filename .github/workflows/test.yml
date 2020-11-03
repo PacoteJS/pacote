@@ -1,0 +1,28 @@
+name: Test
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-16.04
+    strategy:
+      matrix:
+        node: ['10', 'stable']
+    name: Run on Node ${{ matrix.node }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Bootstrap
+        run: |
+          yarn bootstrap
+          yarn build
+      - name: Install
+        run: yarn
+      - name: Test
+        run: yarn test:coverage
+      - name: Coverage
+        uses: codecov/codecov-action@v1

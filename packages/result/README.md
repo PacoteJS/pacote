@@ -1,6 +1,5 @@
 # @pacote/option
 
-[![Build Status](https://travis-ci.org/PacoteJS/pacote.svg?branch=master)](https://travis-ci.org/PacoteJS/pacote)
 ![version](https://badgen.net/npm/v/@pacote/result)
 ![minified](https://badgen.net/bundlephobia/min/@pacote/result)
 ![minified + gzip](https://badgen.net/bundlephobia/minzip/@pacote/result)

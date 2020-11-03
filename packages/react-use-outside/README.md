@@ -1,6 +1,5 @@
 # @pacote/react-use-outside
 
-[![Build Status](https://travis-ci.org/PacoteJS/pacote.svg?branch=master)](https://travis-ci.org/PacoteJS/pacote)
 ![version](https://badgen.net/npm/v/@pacote/react-use-outside)
 ![minified](https://badgen.net/bundlephobia/min/@pacote/react-use-outside)
 ![minified + gzip](https://badgen.net/bundlephobia/minzip/@pacote/react-use-outside)

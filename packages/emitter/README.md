@@ -1,6 +1,5 @@
 # @pacote/emitter
 
-[![Build Status](https://travis-ci.org/PacoteJS/pacote.svg?branch=master)](https://travis-ci.org/PacoteJS/pacote)
 ![version](https://badgen.net/npm/v/@pacote/emitter)
 ![minified](https://badgen.net/bundlephobia/min/@pacote/emitter)
 ![minified + gzip](https://badgen.net/bundlephobia/minzip/@pacote/emitter)
@@ -53,7 +52,7 @@ Fires the named event, triggering any subscribers previously bound to it using t
 ```typescript
 const emitter = createEmitter()
 
-emitter.on('greet', name => console.log(`Hello, ${name}!`))
+emitter.on('greet', (name) => console.log(`Hello, ${name}!`))
 
 emitter.emit('greet', 'TypeScript') // => 'Hello, TypeScript!'
 ```

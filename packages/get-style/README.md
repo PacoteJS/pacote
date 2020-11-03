@@ -1,6 +1,5 @@
 # @pacote/get-style
 
-[![Build Status](https://travis-ci.org/PacoteJS/pacote.svg?branch=master)](https://travis-ci.org/PacoteJS/pacote)
 ![version](https://badgen.net/npm/v/@pacote/get-style)
 ![minified](https://badgen.net/bundlephobia/min/@pacote/get-style)
 ![minified + gzip](https://badgen.net/bundlephobia/minzip/@pacote/get-style)

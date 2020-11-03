@@ -1,6 +1,5 @@
 # @pacote/ffetch
 
-[![Build Status](https://travis-ci.org/PacoteJS/pacote.svg?branch=master)](https://travis-ci.org/PacoteJS/pacote)
 ![version](https://badgen.net/npm/v/@pacote/ffetch)
 ![minified](https://badgen.net/bundlephobia/min/@pacote/ffetch)
 ![minified + gzip](https://badgen.net/bundlephobia/minzip/@pacote/ffetch)
@@ -57,11 +56,11 @@ const response = await ffetch('https://goblindegook.com/api/kittens/1')()
 // Handling success and failure responses separately:
 pipe(
   response,
-  map(body => {
+  map((body) => {
     /* handle successful response */
     return body
   }),
-  mapLeft(error => {
+  mapLeft((error) => {
     /* handle request failure */
     return error
   })
@@ -107,7 +106,7 @@ result, or parse binary responses:
 import { createFetch } from '@pacote/ffetch'
 
 const binaryFetch = createFetch({
-  parse: r => r.blob()
+  parse: (r) => r.blob(),
 })
 
 await binaryFetch('https://goblindegook.com/api/kittens/1')()
@@ -128,7 +127,7 @@ status codes but JSON content for other errors:
 import { createFetch } from '@pacote/ffetch'
 
 const customErrorHandlingFetch = createFetch({
-  parseLeft: r => (r.status >= 500 ? r.text() : r.json())
+  parseLeft: (r) => (r.status >= 500 ? r.text() : r.json()),
 })
 
 await customErrorHandlingFetch('https://goblindegook.com/api/kittens/1')()
