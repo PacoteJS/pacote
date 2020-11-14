@@ -1,6 +1,9 @@
 module.exports = {
   plugins: ['jest-dom'],
-  extends: ['plugin:jest-dom/recommended'],
+  extends: [
+    'plugin:jest-dom/recommended',
+    'plugin:testing-library/recommended',
+  ],
   overrides: [
     {
       files: ['__mocks__/**/*.js'],
