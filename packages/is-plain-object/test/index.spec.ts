@@ -77,6 +77,7 @@ test('Symbol is not a plain object', () => {
 
 test('RegExp is not a plain object', () => {
   expect(isPlainObject(/a/)).toBe(false)
+  // eslint-disable-next-line prefer-regex-literals
   expect(isPlainObject(RegExp(''))).toBe(false)
 })
 

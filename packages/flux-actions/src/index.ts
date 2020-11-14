@@ -46,11 +46,11 @@ function createReducer<S>(
   initialState: S,
   matches: readonly ReducerMatch<S>[]
 ): EnhancedReducer<S> {
-  const reducer: Reducer<S> = (currentState = initialState, action) =>
+  const reducer: Reducer<S> = (currentState, action) =>
     matches.reduce(
       (state, [creator, handler]) =>
         isType(creator, action) ? handler(state, action) : state,
-      currentState
+      currentState ?? initialState
     )
 
   return Object.assign<Reducer<S>, ReducerMethods<S>>(reducer, {
