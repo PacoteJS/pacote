@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.4](https://github.com/PacoteJS/pacote/compare/@pacote/immutable@1.2.3...@pacote/immutable@1.2.4) (2020-11-14)
+
+**Note:** Version bump only for package @pacote/immutable
+
 ## [1.2.3](https://github.com/PacoteJS/pacote/compare/@pacote/immutable@1.2.2...@pacote/immutable@1.2.3) (2020-09-05)
 
 **Note:** Version bump only for package @pacote/immutable

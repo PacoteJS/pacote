@@ -1,7 +1,7 @@
 {
   "name": "@pacote/error",
   "description": "Functional errors.",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "sideEffects": false,
   "license": "MIT",
   "author": {
