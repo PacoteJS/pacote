@@ -22,7 +22,7 @@
     "@typescript-eslint/eslint-plugin": "4.x",
     "eslint": ">= 6",
     "eslint-config-prettier": "6.x",
-    "eslint-config-standard": "15.x",
+    "eslint-config-standard": "16.x",
     "eslint-plugin-import": "2.x",
     "eslint-plugin-node": "11.x",
     "eslint-plugin-prettier": "3.x",
