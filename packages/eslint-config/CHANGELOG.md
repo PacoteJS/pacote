@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.1.0](https://github.com/PacoteJS/pacote/compare/@pacote/eslint-config@4.0.1...@pacote/eslint-config@4.1.0) (2020-11-21)
+
+### Features
+
+- 🎸 upgrade eslint-config-standard peer dependency ([60c2435](https://github.com/PacoteJS/pacote/commit/60c2435591e18751d41759b3dc88728dfc33e8f3))
+
 ## [4.0.1](https://github.com/PacoteJS/pacote/compare/@pacote/eslint-config@4.0.0...@pacote/eslint-config@4.0.1) (2020-11-14)
 
 **Note:** Version bump only for package @pacote/eslint-config
