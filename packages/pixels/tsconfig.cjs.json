@@ -3,9 +3,7 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es3",
-    "outDir": "lib/cjs",
-    "declarationMap": false,
-    "sourceMap": false
+    "outDir": "lib/cjs"
   },
   "references": [{ "path": "../get-style/tsconfig.cjs.json" }]
 }

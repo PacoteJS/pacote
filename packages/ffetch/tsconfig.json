@@ -3,6 +3,5 @@
   "compilerOptions": {
     "rootDir": "src"
   },
-  "references": [{ "path": "../error" }, { "path": "../jest-either" }],
-  "plugins": [{ "name": "typescript-workspace-plugin" }]
+  "references": [{ "path": "../error" }, { "path": "../jest-either" }]
 }

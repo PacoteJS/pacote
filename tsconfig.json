@@ -3,10 +3,10 @@
   "compilerOptions": {
     "composite": true,
     "declaration": true,
-    "declarationMap": true,
+    "declarationMap": false,
     "esModuleInterop": true,
     "target": "ES3",
-    "sourceMap": true,
+    "sourceMap": false,
     "lib": ["DOM", "DOM.Iterable", "ESNext", "ScriptHost"],
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
@@ -21,10 +21,10 @@
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "baseUrl": "./packages",
     "paths": {
-      "@pacote/*": ["./*/src"]
+      "@pacote/*": ["./packages/*/src"]
     }
   },
-  "exclude": ["node_modules", "packages/*/lib", "packages/*/test"]
+  "exclude": ["node_modules", "packages/*/lib", "packages/*/test"],
+  "plugins": [{ "name": "typescript-workspace-plugin" }]
 }

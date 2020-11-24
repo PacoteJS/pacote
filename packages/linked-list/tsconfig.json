@@ -5,6 +5,5 @@
     "rootDir": "src",
     "downlevelIteration": true
   },
-  "references": [{ "path": "../option" }],
-  "plugins": [{ "name": "typescript-workspace-plugin" }]
+  "references": [{ "path": "../option" }]
 }
