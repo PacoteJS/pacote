@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.1](https://github.com/PacoteJS/pacote/compare/@pacote/eslint-config@4.1.0...@pacote/eslint-config@4.1.1) (2020-11-27)
+
+### Bug Fixes
+
+- 🐛 eslint-plugin-standard is no longer required ([b1e3a99](https://github.com/PacoteJS/pacote/commit/b1e3a994704a0cbfaebde2fc245cab1d3f7438da))
+
 # [4.1.0](https://github.com/PacoteJS/pacote/compare/@pacote/eslint-config@4.0.1...@pacote/eslint-config@4.1.0) (2020-11-21)
 
 ### Features
