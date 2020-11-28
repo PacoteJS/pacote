@@ -4,10 +4,6 @@
     "rootDir": "src",
     "module": "ESNext",
     "target": "ESNext",
-    "outDir": "lib/esm",
-    "checkJs": false,
-    "declarationMap": false,
-    "sourceMap": false
-  },
-  "plugins": [{ "name": "typescript-workspace-plugin" }]
+    "outDir": "lib/esm"
+  }
 }
