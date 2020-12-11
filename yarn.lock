@@ -1536,13 +1536,13 @@
     "@types/node" ">= 8"
 
 "@pacote/computus@file:packages/computus":
-  version "1.2.5"
+  version "1.2.6"
 
 "@pacote/emitter@file:packages/emitter":
-  version "1.0.4"
+  version "1.0.5"
 
 "@pacote/error@file:packages/error":
-  version "2.1.5"
+  version "2.1.6"
 
 "@pacote/eslint-config-jest@file:packages/eslint-config-jest":
   version "1.2.0"
@@ -1551,73 +1551,73 @@
   version "1.1.1"
 
 "@pacote/eslint-config@file:packages/eslint-config":
-  version "4.1.0"
+  version "4.1.1"
 
 "@pacote/ffetch@file:packages/ffetch":
-  version "6.0.2"
+  version "6.0.3"
   dependencies:
-    "@pacote/error" "file:../../Library/Caches/Yarn/v6/npm-@pacote-ffetch-6.0.2-d9796e81-6fe4-42e8-8e6f-9f6a524e690e-1606244294951/node_modules/@pacote/error"
+    "@pacote/error" "file:packages/error"
 
 "@pacote/flux-actions@file:packages/flux-actions":
-  version "2.1.8"
+  version "2.1.9"
 
 "@pacote/get-style@file:packages/get-style":
-  version "1.1.4"
-
-"@pacote/iff@file:packages/iff":
-  version "2.0.1"
-  dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-iff-2.0.1-97c112e6-d998-44e1-8fe1-eab030773752-1606244294954/node_modules/@pacote/option"
-
-"@pacote/immutable@file:packages/immutable":
-  version "1.2.4"
-
-"@pacote/interpolate@file:packages/interpolate":
-  version "1.0.6"
-
-"@pacote/is-plain-object@file:packages/is-plain-object":
   version "1.1.5"
 
-"@pacote/jest-either@file:packages/jest-either":
-  version "4.0.7"
+"@pacote/iff@file:packages/iff":
+  version "2.0.2"
   dependencies:
-    "@pacote/is-plain-object" "file:../../Library/Caches/Yarn/v6/npm-@pacote-jest-either-4.0.7-8013c6dd-aa1e-4405-9413-7c1354c32137-1606244294963/node_modules/@pacote/is-plain-object"
+    "@pacote/option" "file:packages/option"
+
+"@pacote/immutable@file:packages/immutable":
+  version "1.2.5"
+
+"@pacote/interpolate@file:packages/interpolate":
+  version "1.0.7"
+
+"@pacote/is-plain-object@file:packages/is-plain-object":
+  version "1.1.6"
+
+"@pacote/jest-either@file:packages/jest-either":
+  version "4.0.8"
+  dependencies:
+    "@pacote/is-plain-object" "file:packages/is-plain-object"
     jest-diff "^26.0.1"
     jest-matcher-utils "^26.0.1"
     ramda "^0.27.0"
 
 "@pacote/linked-list@file:packages/linked-list":
-  version "0.4.1"
+  version "0.4.2"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-linked-list-0.4.1-f920e8ed-4aa1-40ca-8c9d-594719ed77bb-1606244294972/node_modules/@pacote/option"
+    "@pacote/option" "file:packages/option"
 
 "@pacote/memoize@file:packages/memoize":
-  version "1.1.4"
+  version "1.1.5"
 
 "@pacote/option@file:packages/option":
-  version "1.0.6"
-
-"@pacote/pixels@file:packages/pixels":
-  version "1.1.4"
-  dependencies:
-    "@pacote/get-style" "file:../../Library/Caches/Yarn/v6/npm-@pacote-pixels-1.1.4-53d3b7dd-3b75-4aec-906a-2ea308a6d2ff-1606244294975/node_modules/@pacote/get-style"
-
-"@pacote/react-use-outside@file:packages/react-use-outside":
-  version "1.1.6"
-
-"@pacote/react-with-props@file:packages/react-with-props":
-  version "1.1.8"
-
-"@pacote/result@file:packages/result":
-  version "1.0.6"
-  dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-result-1.0.6-4a4dbf4f-3ed7-45ce-ba39-4429d434e680-1606244294980/node_modules/@pacote/option"
-
-"@pacote/shuffle@file:packages/shuffle":
   version "1.0.7"
 
+"@pacote/pixels@file:packages/pixels":
+  version "1.1.5"
+  dependencies:
+    "@pacote/get-style" "file:packages/get-style"
+
+"@pacote/react-use-outside@file:packages/react-use-outside":
+  version "1.1.7"
+
+"@pacote/react-with-props@file:packages/react-with-props":
+  version "1.1.9"
+
+"@pacote/result@file:packages/result":
+  version "1.0.7"
+  dependencies:
+    "@pacote/option" "file:packages/option"
+
+"@pacote/shuffle@file:packages/shuffle":
+  version "1.0.8"
+
 "@pacote/throttle@file:packages/throttle":
-  version "1.0.5"
+  version "1.0.6"
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.1"
@@ -4842,9 +4842,9 @@ inherits@2, inherits@^2.0.1, inherits@^2.0.3, inherits@^2.0.4, inherits@~2.0.3:
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
 
 ini@^1.3.2, ini@^1.3.4:
-  version "1.3.5"
-  resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.5.tgz#eee25f56db1c9ec6085e0c22778083f596abf927"
-  integrity sha512-RZY5huIKCMRWDUqZlEi72f/lmXKMvuszcMBduliQ3nnWbx9X/ZBQO7DijMEYS9EhHBb2qacRUMtC7svLwe0lcw==
+  version "1.3.7"
+  resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.7.tgz#a09363e1911972ea16d7a8851005d84cf09a9a84"
+  integrity sha512-iKpRpXP+CrP2jyrxvg1kMUpXDyRUFDWurxbnVT1vQPx+Wz9uCYsMIqYuSBLV+PAaZG/d7kRLKRFc9oDMsH+mFQ==
 
 init-package-json@^1.10.3:
   version "1.10.3"
