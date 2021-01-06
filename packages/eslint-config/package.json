@@ -19,13 +19,13 @@
   },
   "main": "index.js",
   "peerDependencies": {
-    "@typescript-eslint/eslint-plugin": "4.x",
+    "@typescript-eslint/eslint-plugin": ">= 4",
     "eslint": ">= 6",
-    "eslint-config-prettier": "6.x",
-    "eslint-config-standard": "16.x",
-    "eslint-plugin-import": "2.x",
-    "eslint-plugin-node": "11.x",
-    "eslint-plugin-prettier": "3.x",
-    "eslint-plugin-promise": "4.x"
+    "eslint-config-prettier": ">= 6",
+    "eslint-config-standard": ">= 16",
+    "eslint-plugin-import": ">= 2",
+    "eslint-plugin-node": ">= 11",
+    "eslint-plugin-prettier": ">= 3",
+    "eslint-plugin-promise": ">= 4"
   }
 }
