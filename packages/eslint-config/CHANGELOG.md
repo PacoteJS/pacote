@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.2](https://github.com/PacoteJS/pacote/compare/@pacote/eslint-config@4.1.1...@pacote/eslint-config@4.1.2) (2021-01-08)
+
+### Bug Fixes
+
+- 🐛 set minimum peer dependency versions for linter config ([44e961f](https://github.com/PacoteJS/pacote/commit/44e961f138ce2f1a02dfebb03279ee3ad13ee805))
+
 ## [4.1.1](https://github.com/PacoteJS/pacote/compare/@pacote/eslint-config@4.1.0...@pacote/eslint-config@4.1.1) (2020-11-27)
 
 ### Bug Fixes
