@@ -36,7 +36,7 @@ of any `String`-serialisable value (i.e. an object which implements the
 
 Class instances may be serialised into JSON using `JSON.stringify()` for storage
 or for sending over the network. The JSON string can then be deserialised and
-fed back into the constructor to recreate the original bloom filter.
+fed back into the constructor to recreate the original Bloom filter.
 
 This class depends on [`xxhashjs`](https://www.npmjs.com/package/xxhashjs) for
 an implementation of the [fast XXH32 non-cryptographic hashing algorithm](https://cyan4973.github.io/xxHash/)
@@ -70,7 +70,7 @@ The `has()` method checks the filter for membership of the provided value.
 
 #### `BloomFilter.optimal(length: number, errorRate: number): Options`
 
-`optimal()` is a static method to calculate the optimal bloom filter `size` and
+`optimal()` is a static method to calculate the optimal Bloom filter `size` and
 `hashes` options based on the number of items in the filter (_n_) and the
 desired false positive error rate (_&epsilon;_).
 
