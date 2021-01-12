@@ -1,12 +1,6 @@
 import { elementIndexHasher } from './hash'
 import { optimal } from './optimal'
-
-interface Options {
-  readonly size: number
-  readonly hashes: number
-  readonly seed?: number
-  readonly filter?: Uint32Array
-}
+import { Options } from './options'
 
 export class CountingBloomFilter<T extends { toString(): string }> {
   readonly size: number
