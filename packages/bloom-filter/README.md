@@ -18,7 +18,7 @@ yarn add @pacote/bloom-filter
 ```typescript
 import { BloomFilter } from '@pacote/bloom-filter'
 
-const filter = new BloomFilter({ size: 10000, hashes: 20 })
+const filter = new BloomFilter({ size: 22056, hashes: 8 })
 
 filter.add('foo')
 filter.add('bar')
@@ -68,7 +68,7 @@ element is present.
 
 The `has()` method checks the filter for membership of the provided value.
 
-#### `BloomFilter.optimal(length: number, errorRate: number): Options`
+#### `BloomFilter.optimal(items: number, errorRate: number): Options`
 
 `optimal()` is a static method to calculate the optimal Bloom filter `size` and
 `hashes` options based on the number of items in the filter (_n_) and the
