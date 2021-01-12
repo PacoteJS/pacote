@@ -10,7 +10,7 @@ test('a Bloom filter is empty when created', () => {
   )
 })
 
-test('added elements can be found', () => {
+test('elements added to a Bloom filter can be found', () => {
   assert(
     property(string(), (element) => {
       const filter = new BloomFilter({ size: 68, hashes: 1 })
@@ -20,7 +20,7 @@ test('added elements can be found', () => {
   )
 })
 
-test('missing elements cannot be found', () => {
+test('elements missing from a Bloom filter cannot be found', () => {
   const filter = new BloomFilter({ size: 68, hashes: 1 })
   filter.add('foo')
   filter.add('bar')
@@ -31,7 +31,7 @@ test('requires at least one hash', () => {
   expect(() => new BloomFilter({ size: 34, hashes: 0 })).toThrow()
 })
 
-test('added elements can be found in filters deserialised from JSON', () => {
+test('elements added to a Bloom filter can be found in filters deserialised from JSON', () => {
   assert(
     property(string(), (element) => {
       const filter = new BloomFilter({ size: 34, hashes: 1 })
@@ -42,9 +42,4 @@ test('added elements can be found in filters deserialised from JSON', () => {
       expect(deserialisedFilter.has(element)).toBe(true)
     })
   )
-})
-
-test('calculate optimised size and hashes from length and error rate', () => {
-  const optimizedOptions = BloomFilter.optimal(2000, 0.005)
-  expect(optimizedOptions).toEqual({ size: 22056, hashes: 8 })
 })

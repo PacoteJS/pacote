@@ -4,7 +4,7 @@
 ![minified](https://badgen.net/bundlephobia/min/@pacote/bloom-filter)
 ![minified + gzip](https://badgen.net/bundlephobia/minzip/@pacote/bloom-filter)
 
-A bloom filter is a space-efficient probabilistic data structure that allows
+A Bloom filter is a space-efficient probabilistic data structure that allows
 testing whether an element belongs to a set.
 
 ## Installation
@@ -42,9 +42,7 @@ This class depends on [`xxhashjs`](https://www.npmjs.com/package/xxhashjs) for
 an implementation of the [fast XXH32 non-cryptographic hashing algorithm](https://cyan4973.github.io/xxHash/)
 to build and search the filter.
 
-#### Options
-
-The class constructor takes an options object with the following properties:
+The class constructor takes an `Options` object with the following properties:
 
 - `size` (required) determines the size of the filter in bits. The value is
   required and must not be negative.
@@ -59,20 +57,69 @@ The class constructor takes an options object with the following properties:
 - `filter` allows initialising the filter from an array of unsigned 32-bit
   integers.
 
-#### `add(element: T)`
+#### `add(element: T): void`
 
 The `add()` method mutates to filter to indicate that the provided serialisable
 element is present.
 
-#### `has(element: T)`
+#### `has(element: T): boolean`
 
-The `has()` method checks the filter for membership of the provided value.
+The `has()` method checks the filter for membership of the provided value. If
+`false`, it is guaranteed not to be present. Otherwise, there's the possibility
+of it being a false positive result.
 
-#### `BloomFilter.optimal(items: number, errorRate: number): Options`
+### `CountingBloomFilter<T extends { toString(): string }>`
 
-`optimal()` is a static method to calculate the optimal Bloom filter `size` and
-`hashes` options based on the number of items in the filter (_n_) and the
-desired false positive error rate (_&epsilon;_).
+`CountingBloomFilter` allows building a filter which may be used to test the
+membership of any `String`-serialisable value (i.e. an object which implements
+the `toString()` method). It's a generalisation of `BloomFilter` which counts
+the number of times an element was added to the set.
+
+Class instances may be serialised into JSON using `JSON.stringify()` for storage
+or for sending over the network. The JSON string can then be deserialised and
+fed back into the constructor to recreate the original Bloom filter.
+
+This class depends on [`xxhashjs`](https://www.npmjs.com/package/xxhashjs) for
+an implementation of the [fast XXH32 non-cryptographic hashing algorithm](https://cyan4973.github.io/xxHash/)
+to build and search the filter.
+
+The class constructor takes an `Options` object with the following properties:
+
+- `size` (required) determines the number of filter counters. The value is
+  required and must not be negative.
+
+- `hashes` (required) sets the number of distinct hashes that need to be
+  calculated. A higher number performs more slowly, but lowers the probability
+  of false positives occuring. The value is required and must be a positive
+  integer.
+
+- `seed` sets the seed for the hashing function. The default is `0x00c0ffee`.
+
+- `filter` allows initialising the filter from an array of unsigned 32-bit
+  integers.
+
+#### `add(element: T): void`
+
+The `add()` method mutates to filter and increments its counters to indicate
+an instance of the element was added.
+
+#### `remove(element: T): void`
+
+The `remove()` method mutates to filter and decrements its counters to indicate
+an instance of the element was removed.
+
+#### `has(element: T): number`
+
+The `has()` method checks the filter for membership of the provided element and
+returns the number of times it was added to the filter. If `0`, it is guaranteed
+not to be present. Otherwise, there's the possibility of it being a false
+positive result.
+
+### `optimal(items: number, errorRate: number): Options`
+
+`optimal()` calculates the optimal Bloom filter `size` and `hashes` options
+based on the number of items in the filter (_n_) and the desired false positive
+error rate (_&epsilon;_).
 
 The size of the filter, or _m_, is calculated with:
 
