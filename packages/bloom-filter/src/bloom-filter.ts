@@ -1,5 +1,4 @@
 import { elementIndexHasher } from './hash'
-import { optimal } from './optimal'
 import { Options } from './options'
 
 export class BloomFilter<T extends { toString(): string }> {
@@ -22,8 +21,6 @@ export class BloomFilter<T extends { toString(): string }> {
 
     this.elementIndices = elementIndexHasher(this.size, this.hashes, this.seed)
   }
-
-  static optimal = optimal
 
   add(element: T): void {
     this.elementIndices(element).forEach((index: number) => {

@@ -1,5 +1,4 @@
 import { elementIndexHasher } from './hash'
-import { optimal } from './optimal'
 import { Options } from './options'
 
 export class CountingBloomFilter<T extends { toString(): string }> {
@@ -21,8 +20,6 @@ export class CountingBloomFilter<T extends { toString(): string }> {
 
     this.indices = elementIndexHasher(this.size, this.hashes, this.seed)
   }
-
-  static optimal = optimal
 
   add(element: T): void {
     this.indices(element).forEach((index: number) => {
