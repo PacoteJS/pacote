@@ -72,6 +72,7 @@
     "@types/node": "^14.0.4",
     "@types/ramda": "^0.27.0",
     "@types/react": "^17.0.0",
+    "@types/xxhashjs": "^0.2.2",
     "@typescript-eslint/eslint-plugin": "^4.8.2",
     "@typescript-eslint/parser": "^4.8.2",
     "eslint": "^7.0.0",
@@ -107,6 +108,7 @@
   },
   "name": "pacote",
   "dependencies": {
+    "@pacote/bloom-filter": "file:packages/bloom-filter",
     "@pacote/computus": "file:packages/computus",
     "@pacote/emitter": "file:packages/emitter",
     "@pacote/error": "file:packages/error",
