@@ -125,15 +125,15 @@ positive result.
 
 The `optimal()` helper function calculates the optimal Bloom filter `size` and
 `hashes` options based on the number of items in the filter (_n_) and the
-desired false positive error rate (_&epsilon;_).
+desired false positive error rate (_ε_).
 
 The size of the filter, or _m_, is calculated with:
 
-{\displaystyle m=-{\frac {n\ln \varepsilon }{(\ln 2)^{2}}}}
+![](docs/optimal-size.svg)
 
 The number of hashes, or _k_, is determined by the formula:
 
-{\displaystyle k={\frac {m}{n}}\ln 2}
+![](docs/optimal-hashes.svg)
 
 ## Hashing algorithms
 
