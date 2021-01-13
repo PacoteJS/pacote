@@ -7,6 +7,15 @@
 A Bloom filter is a space-efficient probabilistic data structure that allows
 testing whether an element belongs to a set.
 
+Bloom filters relax result accuracy for this efficiency. With Bloom filters,
+false positive matches are possible, but false negatives are not. That is to
+say, while it can tell you with certainty when an element is not in a set, any
+positive responses indicate only a possibility.
+
+This false positive error rate can be lowered — but never completely eliminated
+— by increasing the size of the filter and/or the number of hashes computed for
+each element.
+
 ## Installation
 
 ```bash
@@ -30,13 +39,12 @@ filter.has('baz') // -> false
 
 ### `BloomFilter<T extends { toString(): string }>`
 
-`BloomFilter` allows building a filter which may be used to test the membership
-of any `String`-serialisable value (i.e. an object which implements the
+`BloomFilter` builds a data structure that may be used to test the membership of
+any `String`-serialisable value (i.e. an object which implements the
 `toString()` method).
 
-Class instances may be serialised into JSON using `JSON.stringify()` for storage
-or for sending over the network. The JSON string can then be deserialised and
-fed back into the constructor to recreate the original Bloom filter.
+Because a Bloom filter is so simple, it cannot handle removing elements. You may
+use a `CountingBloomFilter` for that.
 
 The class constructor takes an `Options` object with the following properties:
 
@@ -53,6 +61,10 @@ The class constructor takes an `Options` object with the following properties:
 - `filter` allows initialising the filter from an array of unsigned 32-bit
   integers.
 
+Class instances may be serialised into JSON using `JSON.stringify()` for storage
+or for sending over the network. The JSON string can then be deserialised and
+fed back into the constructor to recreate the original Bloom filter.
+
 #### `add(element: T): void`
 
 The `add()` method mutates to filter to indicate that the provided serialisable
@@ -66,14 +78,12 @@ of it being a false positive result.
 
 ### `CountingBloomFilter<T extends { toString(): string }>`
 
-`CountingBloomFilter` allows building a filter which may be used to test the
+`CountingBloomFilter` builds a data structure that may be used to test the
 membership of any `String`-serialisable value (i.e. an object which implements
-the `toString()` method). It's a generalisation of `BloomFilter` which counts
-the number of times an element was added to the set.
+the `toString()` method). It's a generalisation of `BloomFilter` that counts the
+number of times an element was added to the set.
 
-Class instances may be serialised into JSON using `JSON.stringify()` for storage
-or for sending over the network. The JSON string can then be deserialised and
-fed back into the constructor to recreate the original Bloom filter.
+Unlike the simpler `BloomFilter`, this class supports element removal.
 
 The class constructor takes an `Options` object with the following properties:
 
@@ -89,6 +99,10 @@ The class constructor takes an `Options` object with the following properties:
 
 - `filter` allows initialising the filter from an array of unsigned 32-bit
   integers.
+
+Class instances may be serialised into JSON using `JSON.stringify()` for storage
+or for sending over the network. The JSON string can then be deserialised and
+fed back into the constructor to recreate the original Bloom filter.
 
 #### `add(element: T): void`
 
@@ -109,9 +123,9 @@ positive result.
 
 ### `optimal(items: number, errorRate: number): Options`
 
-`optimal()` calculates the optimal Bloom filter `size` and `hashes` options
-based on the number of items in the filter (_n_) and the desired false positive
-error rate (_&epsilon;_).
+The `optimal()` helper function calculates the optimal Bloom filter `size` and
+`hashes` options based on the number of items in the filter (_n_) and the
+desired false positive error rate (_&epsilon;_).
 
 The size of the filter, or _m_, is calculated with:
 
