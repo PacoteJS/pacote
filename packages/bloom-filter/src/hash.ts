@@ -1,30 +1,15 @@
-import { h32 } from 'xxhashjs'
+import { h64 } from 'xxhashjs'
 
-export function elementIndexHasher<T extends { toString(): string }>(
-  size: number,
-  hashes: number,
-  seed: number
-) {
-  const h32s1 = h32(seed + 1)
-  const h32s2 = h32(seed + 2)
+export function hashLocations(size: number, hashes: number, seed: number) {
+  const h1 = h64(seed + 1)
+  const h2 = h64(seed + 2)
 
-  const h1 = (element: string) => h32s1.update(element).digest().toNumber()
-  const h2 = (element: string) => h32s2.update(element).digest().toNumber()
+  const enhancedDoubleHash = (data: string, size: number, i: number) =>
+    (h1.update(data).digest().toNumber() +
+      i * h2.update(data).digest().toNumber() +
+      i ** 3) %
+    size
 
-  function elementIndices(element: T, indices: number[], n: number): number[] {
-    if (indices.length === hashes) {
-      return indices
-    } else {
-      const elementString = element.toString()
-      const index = Math.abs((h1(elementString) + n * h2(elementString)) % size)
-
-      if (!indices.includes(index)) {
-        indices.push(index)
-      }
-
-      return elementIndices(element, indices, n + 1)
-    }
-  }
-
-  return (element: T) => elementIndices(element, [], 1)
+  return (data: string) =>
+    Array.from({ length: hashes }, (_, i) => enhancedDoubleHash(data, size, i))
 }

@@ -38,10 +38,6 @@ Class instances may be serialised into JSON using `JSON.stringify()` for storage
 or for sending over the network. The JSON string can then be deserialised and
 fed back into the constructor to recreate the original Bloom filter.
 
-This class depends on [`xxhashjs`](https://www.npmjs.com/package/xxhashjs) for
-an implementation of the [fast XXH32 non-cryptographic hashing algorithm](https://cyan4973.github.io/xxHash/)
-to build and search the filter.
-
 The class constructor takes an `Options` object with the following properties:
 
 - `size` (required) determines the size of the filter in bits. The value is
@@ -78,10 +74,6 @@ the number of times an element was added to the set.
 Class instances may be serialised into JSON using `JSON.stringify()` for storage
 or for sending over the network. The JSON string can then be deserialised and
 fed back into the constructor to recreate the original Bloom filter.
-
-This class depends on [`xxhashjs`](https://www.npmjs.com/package/xxhashjs) for
-an implementation of the [fast XXH32 non-cryptographic hashing algorithm](https://cyan4973.github.io/xxHash/)
-to build and search the filter.
 
 The class constructor takes an `Options` object with the following properties:
 
@@ -128,6 +120,12 @@ The size of the filter, or _m_, is calculated with:
 The number of hashes, or _k_, is determined by the formula:
 
 {\displaystyle k={\frac {m}{n}}\ln 2}
+
+## Hashing algorithms
+
+This class depends on [`xxhashjs`](https://www.npmjs.com/package/xxhashjs) for
+an implementation of the [fast XXH64 non-cryptographic hashing algorithm](https://cyan4973.github.io/xxHash/)
+to build and search the filter via enhanced double hashing.
 
 ## License
 

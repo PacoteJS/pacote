@@ -1,4 +1,4 @@
-import { elementIndexHasher } from './hash'
+import { hashLocations } from './hash'
 import { Options } from './options'
 
 export class CountingBloomFilter<T extends { toString(): string }> {
@@ -6,7 +6,7 @@ export class CountingBloomFilter<T extends { toString(): string }> {
   readonly hashes: number
   readonly seed: number
   readonly filter: Uint32Array
-  private indices: (element: T) => number[]
+  private getHashLocations: (element: string) => number[]
 
   constructor(options: Options) {
     if (options.hashes < 1) {
@@ -18,17 +18,17 @@ export class CountingBloomFilter<T extends { toString(): string }> {
     this.seed = options.seed ?? 0x00c0ffee
     this.filter = options.filter ?? new Uint32Array(this.size)
 
-    this.indices = elementIndexHasher(this.size, this.hashes, this.seed)
+    this.getHashLocations = hashLocations(this.size, this.hashes, this.seed)
   }
 
   add(element: T): void {
-    this.indices(element).forEach((index: number) => {
+    this.getHashLocations(element.toString()).forEach((index) => {
       this.filter[index] += 1
     })
   }
 
   remove(element: T): void {
-    this.indices(element).forEach((index: number) => {
+    this.getHashLocations(element.toString()).forEach((index) => {
       if (this.filter[index] > 0) {
         this.filter[index] -= 1
       }
@@ -37,7 +37,9 @@ export class CountingBloomFilter<T extends { toString(): string }> {
 
   has(element: T): number {
     return Math.min(
-      ...this.indices(element).map((index: number) => this.filter[index])
+      ...this.getHashLocations(element.toString()).map(
+        (index) => this.filter[index]
+      )
     )
   }
 }
