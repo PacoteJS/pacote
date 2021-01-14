@@ -117,9 +117,11 @@ an instance of the element was removed.
 #### `has(element: T): number`
 
 The `has()` method checks the filter for membership of the provided element and
-returns the number of times it was added to the filter. If `0`, it is guaranteed
-not to be present. Otherwise, there's the possibility of it being a false
-positive result.
+returns the possible number of times it was added to the filter.
+
+As with regular Bloom filters, there is a possibility of the result being a
+false positive, meaning the element may have been added fewer times than
+the returned value indicates.
 
 ### `optimal(items: number, errorRate: number): Options`
 
