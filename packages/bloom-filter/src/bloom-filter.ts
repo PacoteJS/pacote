@@ -10,8 +10,12 @@ export class BloomFilter<T extends { toString(): string }> {
   private getHashLocations: (element: string) => number[]
 
   constructor(options: Options) {
+    if (options.size < 1) {
+      throw Error('size must be greater than 0')
+    }
+
     if (options.hashes < 1) {
-      throw Error('BloomFilter requires at least one hash')
+      throw Error('number of hashes must be greater than 0')
     }
 
     this.size = options.size

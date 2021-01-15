@@ -60,6 +60,10 @@ test('elements missing from a counting Bloom filter cannot be found', () => {
   expect(filter.has('baz')).toBe(0)
 })
 
+test('counting Bloom filter size must be greater than 0', () => {
+  expect(() => new CountingBloomFilter({ size: 0, hashes: 1 })).toThrow()
+})
+
 test('counting Bloom filters require at least one hash', () => {
   expect(() => new CountingBloomFilter({ size: 34, hashes: 0 })).toThrow()
 })

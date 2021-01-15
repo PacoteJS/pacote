@@ -31,6 +31,10 @@ test('requires at least one hash', () => {
   expect(() => new BloomFilter({ size: 34, hashes: 0 })).toThrow()
 })
 
+test('cannot have size 0', () => {
+  expect(() => new BloomFilter({ size: 0, hashes: 1 })).toThrow()
+})
+
 test('elements added to a Bloom filter can be found in filters deserialised from JSON', () => {
   assert(
     property(string(), (element) => {
