@@ -32,7 +32,7 @@ bs.search('foo') // => [{ id: '1', text: 'foo' }])
 
 TODO
 
-#### Options
+#### Options
 
 TODO
 

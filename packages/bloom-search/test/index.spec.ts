@@ -113,7 +113,7 @@ test('document fields can be preprocessed', () => {
   const bs = new BloomSearch({
     errorRate: 0.001,
     fields: ['text'],
-    preprocess: (text) => text.replace(/-/g, ' '),
+    preprocess: (text) => String(text).replace(/-/g, ' '),
   })
 
   bs.add({ text: 'foo-bar' })

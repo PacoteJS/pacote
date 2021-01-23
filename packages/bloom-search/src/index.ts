@@ -1,22 +1,25 @@
 import { CountingBloomFilter, optimal } from '@pacote/bloom-filter'
 
-type Document = Record<string, string>
-type Result = Record<string, string>
+type Document = Record<string, unknown>
+type Result = Record<string, unknown>
 type DocumentTokens = Record<string, string[]>
+type Preprocess = (value: unknown, field?: string) => string
+type Stemmer = (token: string, language?: string) => string
+type Stopwords = (token: string, language?: string) => boolean
 
 interface Options {
-  errorRate: number
-  fields: string[] | Record<string, number>
-  summary?: string[]
-  index?: IndexedDocument[]
-  preprocess?(text: string, field?: string): string
-  stemmer?(token: string, language?: string): string
-  stopwords?(token: string, language?: string): boolean
+  readonly errorRate: number
+  readonly fields: string[] | Record<string, number>
+  readonly summary?: string[]
+  readonly index?: IndexedDocument[]
+  readonly preprocess?: Preprocess
+  readonly stemmer?: Stemmer
+  readonly stopwords?: Stopwords
 }
 
 interface IndexedDocument {
-  summary: Result
-  filter: CountingBloomFilter<string>
+  readonly summary: Result
+  readonly filter: CountingBloomFilter<string>
 }
 
 function repeat(times: number, fn: (...args: unknown[]) => void): void {
@@ -32,16 +35,13 @@ function nonEmpty(text: string): boolean {
 }
 
 export class BloomSearch {
-  public index: IndexedDocument[]
-  private errorRate: number
-  private fields: Record<string, number>
-  private summary: string[]
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private preprocess = (text: string, field?: string) => text
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private stemmer = (token: string, language?: string) => token
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private stopwords = (token: string, language?: string) => true
+  public readonly index: IndexedDocument[]
+  private readonly errorRate: number
+  private readonly fields: Record<string, number>
+  private readonly summary: string[]
+  private readonly preprocess: Preprocess = (text) => String(text)
+  private readonly stemmer: Stemmer = (token) => token
+  private readonly stopwords: Stopwords = () => true
 
   constructor(options: Options) {
     this.errorRate = options.errorRate
