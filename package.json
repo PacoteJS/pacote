@@ -109,6 +109,7 @@
   "name": "pacote",
   "dependencies": {
     "@pacote/bloom-filter": "file:packages/bloom-filter",
+    "@pacote/bloom-search": "file:packages/bloom-search",
     "@pacote/computus": "file:packages/computus",
     "@pacote/emitter": "file:packages/emitter",
     "@pacote/error": "file:packages/error",
