@@ -76,7 +76,21 @@ test('empty documents are not indexed', () => {
 
   bs.add({ text: '' })
 
-  expect(bs.search('query')).toEqual([])
+  expect(bs.search('')).toEqual([])
+})
+
+test('undefined fields are not indexed', () => {
+  const bs = new BloomSearch({
+    errorRate: 0.001,
+    fields: ['text'],
+    summary: ['id'],
+  })
+
+  bs.add({ id: 1, text: 'undefined' })
+  bs.add({ id: 2, text: undefined })
+  bs.add({ id: 3 })
+
+  expect(bs.search('undefined')).toEqual([{ id: 1 }])
 })
 
 test('tokens are passed through a language-aware stemmer', () => {
