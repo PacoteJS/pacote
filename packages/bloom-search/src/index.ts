@@ -8,17 +8,15 @@ type Preprocess<D extends Document, I extends keyof D> = (
 type Stopwords = (token: string, language?: string) => boolean
 type Stemmer = (token: string, language?: string) => string
 
-type Result<D extends Document, S extends keyof D> = D & Pick<D, S>
-
 interface IndexedDocument<D extends Document, S extends keyof D> {
-  readonly summary: Result<D, S>
+  readonly summary: Pick<D, S>
   readonly filter: CountingBloomFilter<string>
 }
 
 interface Options<D extends Document, S extends keyof D, I extends keyof D> {
   readonly errorRate: number
   readonly fields: I[] | Record<I, number>
-  readonly summary?: S[]
+  readonly summary: S[]
   readonly index?: IndexedDocument<D, S>[]
   readonly preprocess?: Preprocess<D, I>
   readonly stemmer?: Stemmer
@@ -39,19 +37,19 @@ const entries = <O extends Record<string, unknown>>(o: O) =>
   Object.entries(o) as [keyof O, O[keyof O]][]
 
 export class BloomSearch<
-  D extends Document,
-  S extends keyof D = keyof D,
-  I extends keyof D = keyof D
+  T extends Document,
+  S extends keyof T,
+  I extends keyof T
 > {
-  public readonly index: IndexedDocument<D, S>[]
+  public readonly index: IndexedDocument<T, S>[]
   public readonly errorRate: number
   public readonly fields: Record<I, number>
   public readonly summary: S[]
-  private readonly preprocess: Preprocess<D, I> = String
+  private readonly preprocess: Preprocess<T, I> = String
   private readonly stemmer: Stemmer = (token) => token
   private readonly stopwords: Stopwords = () => true
 
-  constructor(options: Options<D, S, I>) {
+  constructor(options: Options<T, S, I>) {
     this.errorRate = options.errorRate
     this.fields = Array.isArray(options.fields)
       ? options.fields.reduce(
@@ -59,7 +57,7 @@ export class BloomSearch<
           {} as Record<I, number>
         )
       : options.fields
-    this.summary = options.summary ?? []
+    this.summary = options.summary
     this.preprocess = options.preprocess ?? this.preprocess
     this.stemmer = options.stemmer ?? this.stemmer
     this.stopwords = options.stopwords ?? this.stopwords
@@ -70,7 +68,7 @@ export class BloomSearch<
       })) ?? []
   }
 
-  add(document: D, language?: string): void {
+  add<D extends T & Pick<T, I | S>>(document: D, language?: string): void {
     const tokens = keys(this.fields).reduce((acc, field) => {
       acc[field] = this.tokenizer(this.preprocess(document[field], field))
         .filter((token) => nonEmpty(token) && this.stopwords(token, language))
@@ -92,20 +90,18 @@ export class BloomSearch<
       tokens[field].forEach((token) => repeat(weight, () => filter.add(token)))
     )
 
-    const summaryFields = this.summary.length ? this.summary : keys(document)
-
-    const entry = summaryFields.reduce(
+    const entry = this.summary.reduce(
       (acc, name) => {
         acc.summary[name] = document[name]
         return acc
       },
-      { summary: {} as Result<D, S>, filter }
+      { summary: {} as Pick<T, S>, filter }
     )
 
     this.index.push(entry)
   }
 
-  search(terms: string, language?: string): Result<D, S>[] {
+  search(terms: string, language?: string): Pick<T, S>[] {
     return this.index
       .map(({ summary, filter }) => ({
         summary,

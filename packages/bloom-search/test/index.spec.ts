@@ -4,39 +4,13 @@ test('searching an empty index yields no results', () => {
   const bs = new BloomSearch({
     errorRate: 0.001,
     fields: ['text'],
+    summary: ['id'],
   })
 
   expect(bs.search('foo')).toEqual([])
 })
 
 test('searching for words in a field yields matching results', () => {
-  const bs = new BloomSearch({
-    errorRate: 0.001,
-    fields: ['text'],
-  })
-
-  bs.add({ id: 1, text: 'foo' })
-  bs.add({ id: 2, text: 'bar' })
-
-  expect(bs.search('foo')).toEqual([{ id: 1, text: 'foo' }])
-})
-
-test('searching for words in a field yields matching sorted by number of matches', () => {
-  const bs = new BloomSearch({
-    errorRate: 0.001,
-    fields: ['text'],
-  })
-
-  bs.add({ id: 1, text: 'foo' })
-  bs.add({ id: 2, text: 'foo foo' })
-
-  expect(bs.search('foo')).toEqual([
-    { id: 2, text: 'foo foo' },
-    { id: 1, text: 'foo' },
-  ])
-})
-
-test('search results return only fields in the summary list', () => {
   const bs = new BloomSearch({
     errorRate: 0.001,
     fields: ['text'],
@@ -49,12 +23,39 @@ test('search results return only fields in the summary list', () => {
   expect(bs.search('foo')).toEqual([{ id: 1 }])
 })
 
+test('searching for words in a field yields matching sorted by number of matches', () => {
+  const bs = new BloomSearch({
+    errorRate: 0.001,
+    fields: ['text'],
+    summary: ['id'],
+  })
+
+  bs.add({ id: 1, text: 'foo' })
+  bs.add({ id: 2, text: 'foo foo' })
+
+  expect(bs.search('foo')).toEqual([{ id: 2 }, { id: 1 }])
+})
+
+test('search results return only fields in the summary list', () => {
+  const bs = new BloomSearch({
+    errorRate: 0.001,
+    fields: ['text'],
+    summary: ['text'],
+  })
+
+  bs.add({ id: 1, text: 'foo' })
+  bs.add({ id: 2, text: 'bar' })
+
+  expect(bs.search('foo')).toEqual([{ text: 'foo' }])
+})
+
 test('stopwords are passed through a language-aware filter', () => {
   const stopwords = jest.fn((text) => text.length > 1)
 
   const bs = new BloomSearch({
     errorRate: 0.001,
     fields: ['text'],
+    summary: ['text'],
     stopwords,
   })
 
@@ -70,6 +71,7 @@ test('empty documents are not indexed', () => {
   const bs = new BloomSearch({
     errorRate: 0.001,
     fields: ['text'],
+    summary: ['text'],
   })
 
   bs.add({ text: '' })
@@ -83,6 +85,7 @@ test('tokens are passed through a language-aware stemmer', () => {
   const bs = new BloomSearch({
     errorRate: 0.001,
     fields: ['text'],
+    summary: ['text'],
     stemmer,
   })
 
@@ -100,6 +103,7 @@ test('document fields can be preprocessed for the index', () => {
   const bs = new BloomSearch({
     errorRate: 0.001,
     fields: ['text'],
+    summary: ['text'],
     preprocess,
   })
 
@@ -113,6 +117,7 @@ test('document fields can be preprocessed', () => {
   const bs = new BloomSearch({
     errorRate: 0.001,
     fields: ['text'],
+    summary: ['text'],
     preprocess: (text) => String(text).replace(/-/g, ' '),
   })
 
@@ -125,6 +130,7 @@ test('document fields can be weighed', () => {
   const bs = new BloomSearch({
     errorRate: 0.001,
     fields: { title: 2, body: 1 },
+    summary: ['title', 'body'],
   })
 
   bs.add({ title: 'bar', body: 'foo' })
@@ -140,6 +146,7 @@ test('index can be searched for multiple terms', () => {
   const bs = new BloomSearch({
     errorRate: 0.001,
     fields: ['text'],
+    summary: ['text'],
   })
 
   bs.add({ text: 'foo bar' })
@@ -155,6 +162,7 @@ test('search can be initialised with a deserialized index from another instance'
   const previous = new BloomSearch({
     errorRate: 0.001,
     fields: ['text'],
+    summary: ['text'],
   })
 
   previous.add({ text: 'foo' })
@@ -162,6 +170,7 @@ test('search can be initialised with a deserialized index from another instance'
   const bs2 = new BloomSearch({
     errorRate: 0.001,
     fields: ['text'],
+    summary: ['text'],
     index: JSON.parse(JSON.stringify(previous.index)),
   })
 

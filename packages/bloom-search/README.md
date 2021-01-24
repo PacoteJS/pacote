@@ -20,12 +20,13 @@ import { BloomSearch } from '@pacote/bloom-search'
 const bs = new BloomSearch({
   errorRate: 0.001,
   fields: ['text'],
+  summary: ['id'],
 })
 
-bs.add({ id: '1', text: 'foo' })
-bs.add({ id: '2', text: 'bar' })
+bs.add({ id: 1, text: 'foo' })
+bs.add({ id: 2, text: 'bar' })
 
-bs.search('foo') // => [{ id: '1', text: 'foo' }])
+bs.search('foo') // => [{ id: 1 }])
 ```
 
 ### `BloomSearch`
