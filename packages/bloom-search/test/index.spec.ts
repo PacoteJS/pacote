@@ -15,10 +15,10 @@ test('searching for words in a field yields matching results', () => {
     fields: ['text'],
   })
 
-  bs.add({ id: '1', text: 'foo' })
-  bs.add({ id: '2', text: 'bar' })
+  bs.add({ id: 1, text: 'foo' })
+  bs.add({ id: 2, text: 'bar' })
 
-  expect(bs.search('foo')).toEqual([{ id: '1', text: 'foo' }])
+  expect(bs.search('foo')).toEqual([{ id: 1, text: 'foo' }])
 })
 
 test('searching for words in a field yields matching sorted by number of matches', () => {
@@ -27,12 +27,12 @@ test('searching for words in a field yields matching sorted by number of matches
     fields: ['text'],
   })
 
-  bs.add({ id: '1', text: 'foo' })
-  bs.add({ id: '2', text: 'foo foo' })
+  bs.add({ id: 1, text: 'foo' })
+  bs.add({ id: 2, text: 'foo foo' })
 
   expect(bs.search('foo')).toEqual([
-    { id: '2', text: 'foo foo' },
-    { id: '1', text: 'foo' },
+    { id: 2, text: 'foo foo' },
+    { id: 1, text: 'foo' },
   ])
 })
 
@@ -43,10 +43,10 @@ test('search results return only fields in the summary list', () => {
     summary: ['id'],
   })
 
-  bs.add({ id: '1', text: 'foo' })
-  bs.add({ id: '2', text: 'bar' })
+  bs.add({ id: 1, text: 'foo' })
+  bs.add({ id: 2, text: 'bar' })
 
-  expect(bs.search('foo')).toEqual([{ id: '1' }])
+  expect(bs.search('foo')).toEqual([{ id: 1 }])
 })
 
 test('stopwords are passed through a language-aware filter', () => {

@@ -1,52 +1,63 @@
 import { CountingBloomFilter, optimal } from '@pacote/bloom-filter'
 
-type Document = Record<string, unknown>
-type Result = Record<string, unknown>
-type DocumentTokens = Record<string, string[]>
-type Preprocess = (value: unknown, field?: string) => string
-type Stemmer = (token: string, language?: string) => string
+type Document<V = unknown> = Record<string, V>
+type Preprocess<D extends Document, I extends keyof D> = (
+  value: D[I],
+  field?: I
+) => string
 type Stopwords = (token: string, language?: string) => boolean
+type Stemmer = (token: string, language?: string) => string
 
-interface Options {
+type Result<D extends Document, S extends keyof D> = D & Pick<D, S>
+
+interface IndexedDocument<D extends Document, S extends keyof D> {
+  readonly summary: Result<D, S>
+  readonly filter: CountingBloomFilter<string>
+}
+
+interface Options<D extends Document, S extends keyof D, I extends keyof D> {
   readonly errorRate: number
-  readonly fields: string[] | Record<string, number>
-  readonly summary?: string[]
-  readonly index?: IndexedDocument[]
-  readonly preprocess?: Preprocess
+  readonly fields: I[] | Record<I, number>
+  readonly summary?: S[]
+  readonly index?: IndexedDocument<D, S>[]
+  readonly preprocess?: Preprocess<D, I>
   readonly stemmer?: Stemmer
   readonly stopwords?: Stopwords
 }
 
-interface IndexedDocument {
-  readonly summary: Result
-  readonly filter: CountingBloomFilter<string>
-}
+const repeat = (times: number, fn: () => void) =>
+  Array(times).fill(null).forEach(fn)
 
-function repeat(times: number, fn: (...args: unknown[]) => void): void {
-  return Array(times).fill(null).forEach(fn)
-}
+const compare = (a: number, b: number) => (a === b ? 0 : a > b ? -1 : 1)
 
-function compare(a: number, b: number): -1 | 0 | 1 {
-  return a === b ? 0 : a > b ? -1 : 1
-}
+const nonEmpty = (text: string) => text.length > 0
 
-function nonEmpty(text: string): boolean {
-  return text.length > 0
-}
+const keys = <O extends Record<string, unknown>>(o: O) =>
+  Object.keys(o) as (keyof O)[]
 
-export class BloomSearch {
-  public readonly index: IndexedDocument[]
-  private readonly errorRate: number
-  private readonly fields: Record<string, number>
-  private readonly summary: string[]
-  private readonly preprocess: Preprocess = (text) => String(text)
+const entries = <O extends Record<string, unknown>>(o: O) =>
+  Object.entries(o) as [keyof O, O[keyof O]][]
+
+export class BloomSearch<
+  D extends Document,
+  S extends keyof D = keyof D,
+  I extends keyof D = keyof D
+> {
+  public readonly index: IndexedDocument<D, S>[]
+  public readonly errorRate: number
+  public readonly fields: Record<I, number>
+  public readonly summary: S[]
+  private readonly preprocess: Preprocess<D, I> = String
   private readonly stemmer: Stemmer = (token) => token
   private readonly stopwords: Stopwords = () => true
 
-  constructor(options: Options) {
+  constructor(options: Options<D, S, I>) {
     this.errorRate = options.errorRate
     this.fields = Array.isArray(options.fields)
-      ? options.fields.reduce((acc, field) => ({ ...acc, [field]: 1 }), {})
+      ? options.fields.reduce(
+          (acc, field) => ({ ...acc, [field]: 1 }),
+          {} as Record<I, number>
+        )
       : options.fields
     this.summary = options.summary ?? []
     this.preprocess = options.preprocess ?? this.preprocess
@@ -59,47 +70,42 @@ export class BloomSearch {
       })) ?? []
   }
 
-  add(document: Document, language?: string): void {
-    const tokens = Object.keys(this.fields).reduce<DocumentTokens>(
-      (acc, field) => {
-        acc[field] = this.tokenizer(this.preprocess(document[field], field))
-          .filter((token) => nonEmpty(token) && this.stopwords(token, language))
-          .map((token) => this.stemmer(token, language))
-        return acc
-      },
-      {}
-    )
+  add(document: D, language?: string): void {
+    const tokens = keys(this.fields).reduce((acc, field) => {
+      acc[field] = this.tokenizer(this.preprocess(document[field], field))
+        .filter((token) => nonEmpty(token) && this.stopwords(token, language))
+        .map((token) => this.stemmer(token, language))
+      return acc
+    }, {} as Record<I, string[]>)
 
-    const uniqTokens = new Set(Object.values(tokens).flat()).size
+    const uniqueTokens = new Set(Object.values(tokens).flat()).size
 
-    if (uniqTokens === 0) {
+    if (uniqueTokens === 0) {
       return
     }
 
-    const filter = new CountingBloomFilter(optimal(uniqTokens, this.errorRate))
+    const filter = new CountingBloomFilter(
+      optimal(uniqueTokens, this.errorRate)
+    )
 
-    Object.entries(this.fields).forEach(([field, weight]) => {
-      tokens[field].forEach((token) =>
-        repeat(weight as number, () => filter.add(token))
-      )
-    })
+    entries(this.fields).forEach(([field, weight]) =>
+      tokens[field].forEach((token) => repeat(weight, () => filter.add(token)))
+    )
 
-    const summaryFields = this.summary.length
-      ? this.summary
-      : Object.keys(document)
+    const summaryFields = this.summary.length ? this.summary : keys(document)
 
-    const entry = summaryFields.reduce<IndexedDocument>(
+    const entry = summaryFields.reduce(
       (acc, name) => {
         acc.summary[name] = document[name]
         return acc
       },
-      { summary: {}, filter }
+      { summary: {} as Result<D, S>, filter }
     )
 
     this.index.push(entry)
   }
 
-  search(terms: string, language?: string): Result[] {
+  search(terms: string, language?: string): Result<D, S>[] {
     return this.index
       .map(({ summary, filter }) => ({
         summary,
@@ -107,7 +113,8 @@ export class BloomSearch {
           .split(/\s/)
           .filter(nonEmpty)
           .reduce(
-            (acc, term) => acc + filter.has(this.stemmer(term, language)),
+            (matches, term) =>
+              matches + filter.has(this.stemmer(term, language)),
             0
           ),
       }))
