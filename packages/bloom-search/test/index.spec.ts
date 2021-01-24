@@ -172,21 +172,39 @@ test('index can be searched for multiple terms', () => {
   ])
 })
 
-test('search can be initialised with a deserialized index from another instance', () => {
-  const previous = new BloomSearch({
+test('index can be loaded from a deserialised instance', () => {
+  const options = {
     errorRate: 0.001,
     fields: ['text'],
     summary: ['text'],
-  })
+  }
+  const previous = new BloomSearch(options)
+  previous.add({ text: 'previous foo' })
+  const current = new BloomSearch(options)
 
-  previous.add({ text: 'foo' })
+  current.load(JSON.parse(JSON.stringify(previous.index)))
+  current.add({ text: 'additional foo' })
 
-  const bs2 = new BloomSearch({
+  expect(current.search('foo')).toEqual([
+    { text: 'previous foo' },
+    { text: 'additional foo' },
+  ])
+})
+
+test('loaded index replaces the instance index', () => {
+  const options = {
     errorRate: 0.001,
     fields: ['text'],
     summary: ['text'],
-    index: JSON.parse(JSON.stringify(previous.index)),
-  })
+  }
 
-  expect(bs2.search('foo')).toEqual([{ text: 'foo' }])
+  const previous = new BloomSearch(options)
+  previous.add({ text: 'previous' })
+
+  const current = new BloomSearch(options)
+  current.add({ text: 'replaced' })
+  current.load(JSON.parse(JSON.stringify(previous.index)))
+
+  expect(current.search('previous')).toEqual([{ text: 'previous' }])
+  expect(current.search('replaced')).toEqual([])
 })

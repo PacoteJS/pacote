@@ -7,7 +7,7 @@ type PreprocessFunction<Document, Field extends keyof Document> = (
 type StopwordsFunction = (token: string, language?: string) => boolean
 type StemmerFunction = (token: string, language?: string) => string
 
-type DocumentIndex<Document, SummaryField extends keyof Document> = {
+export type DocumentIndex<Document, SummaryField extends keyof Document> = {
   readonly summary: Pick<Document, SummaryField>
   readonly filter: CountingBloomFilter<string>
 }
@@ -32,10 +32,10 @@ export class BloomSearch<
   SummaryField extends keyof Document,
   IndexField extends keyof Document
 > {
+  public index: DocumentIndex<Document, SummaryField>[] = []
   public readonly errorRate: number
   public readonly fields: Record<IndexField, number>
   public readonly summary: SummaryField[]
-  public readonly index: DocumentIndex<Document, SummaryField>[]
   private readonly preprocess: PreprocessFunction<Document, IndexField>
   private readonly stemmer: StemmerFunction
   private readonly stopwords: StopwordsFunction
@@ -44,7 +44,6 @@ export class BloomSearch<
     errorRate: number
     fields: IndexField[] | Record<IndexField, number>
     summary: SummaryField[]
-    index?: DocumentIndex<Document, SummaryField>[]
     preprocess?: PreprocessFunction<Document, IndexField>
     stemmer?: StemmerFunction
     stopwords?: StopwordsFunction
@@ -60,11 +59,13 @@ export class BloomSearch<
     this.preprocess = options.preprocess ?? String
     this.stemmer = options.stemmer ?? ((token) => token)
     this.stopwords = options.stopwords ?? (() => true)
-    this.index =
-      options.index?.map((documentIndex) => ({
-        ...documentIndex,
-        filter: new CountingBloomFilter(documentIndex.filter),
-      })) ?? []
+  }
+
+  load(index: DocumentIndex<Document, SummaryField>[]): void {
+    this.index = index.map((documentIndex) => ({
+      ...documentIndex,
+      filter: new CountingBloomFilter(documentIndex.filter),
+    }))
   }
 
   add(document: Document, language?: string): void {

@@ -58,11 +58,6 @@ The class constructor takes an `Options` object with the following properties:
 - `summary` (`SummaryField[]`, required) determines which fields in the document
   can be stored in the index and returned as a search result.
 
-- `index` (`{ summary: Partial<Document>, filter: CountingBloomFilter<string> }[]`)
-  allows initialising `BloomSearch` from a filter from a different instance. Its
-  primary use case is to rehydrate the index from a static file or persisted
-  payload.
-
 - `preprocess` (`(text: unknown, field: IndexField) => string`) is a function to
   serialise each field as a `string` and optionally process it before indexing.
   For example, you can use this function to strip HTML from a field value. By
@@ -92,6 +87,18 @@ Each search term is run through the `stemmer` function to ensure terms are
 processed in the same way as the tokens previously added to the index's Bloom
 filters. To help choose the appropriate stemming algorithm, you may pass the
 `search()` method an optional `language` identifier.
+
+#### `BloomSearch.load(index: DocumentIndex<Document, SummaryField>[]): void`
+
+The `load()` method lets you replace the instance's index with an index from
+another instance. Its primary use case is to rehydrate the index from a static
+file or persisted payload.
+
+**NB:** Calling this method will not change any other attributes in the
+instance. It is up to developers to ensure that the instances were initialised
+with compatible options, in particular the `stemmer` function. Incompatible
+`stemmer` implementations may cause matches to not be found in the rehydrated
+index.
 
 ## License
 
