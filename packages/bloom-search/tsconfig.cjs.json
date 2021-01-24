@@ -4,5 +4,6 @@
     "module": "CommonJS",
     "target": "ES3",
     "outDir": "lib/cjs"
-  }
+  },
+  "references": [{ "path": "../bloom-filter/tsconfig.cjs.json" }]
 }

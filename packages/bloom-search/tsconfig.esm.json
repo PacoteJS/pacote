@@ -4,5 +4,6 @@
     "module": "ESNext",
     "target": "esnext",
     "outDir": "lib/esm"
-  }
+  },
+  "references": [{ "path": "../bloom-filter/tsconfig.esm.json" }]
 }
