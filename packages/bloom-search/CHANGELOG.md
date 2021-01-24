@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.1.0...@pacote/bloom-search@0.2.0) (2021-01-24)
+
+### Features
+
+- 🎸 `load()` method to rehydrate serialised indices ([38a6e4f](https://github.com/PacoteJS/pacote/commit/38a6e4fcedd06e6d27888c857fd27df532f40475))
+
+### BREAKING CHANGES
+
+- 🧨 index is no longer received by the constructor
+
 # 0.1.0 (2021-01-24)
 
 ### Bug Fixes
