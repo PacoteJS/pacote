@@ -1,14 +1,14 @@
 import { CountingBloomFilter, optimal } from '@pacote/bloom-filter'
 
-type PreprocessFunction<O, K extends keyof O> = (
-  value: O[K],
-  field: K
+type PreprocessFunction<Document, Field extends keyof Document> = (
+  value: Document[Field],
+  field: Field
 ) => string
 type StopwordsFunction = (token: string, language?: string) => boolean
 type StemmerFunction = (token: string, language?: string) => string
 
-interface DocumentIndex<Summary> {
-  readonly summary: Summary
+type DocumentIndex<Document, SummaryField extends keyof Document> = {
+  readonly summary: Pick<Document, SummaryField>
   readonly filter: CountingBloomFilter<string>
 }
 
@@ -35,7 +35,7 @@ export class BloomSearch<
   public readonly errorRate: number
   public readonly fields: Record<IndexField, number>
   public readonly summary: SummaryField[]
-  public readonly index: DocumentIndex<Pick<Document, SummaryField>>[]
+  public readonly index: DocumentIndex<Document, SummaryField>[]
   private readonly preprocess: PreprocessFunction<Document, IndexField>
   private readonly stemmer: StemmerFunction
   private readonly stopwords: StopwordsFunction
@@ -44,7 +44,7 @@ export class BloomSearch<
     errorRate: number
     fields: IndexField[] | Record<IndexField, number>
     summary: SummaryField[]
-    index?: DocumentIndex<Pick<Document, SummaryField>>[]
+    index?: DocumentIndex<Document, SummaryField>[]
     preprocess?: PreprocessFunction<Document, IndexField>
     stemmer?: StemmerFunction
     stopwords?: StopwordsFunction
