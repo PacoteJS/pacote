@@ -1,14 +1,13 @@
 import { CountingBloomFilter, optimal } from '@pacote/bloom-filter'
 
-type UnknownDocument = Record<string, unknown>
-type PreprocessFunction<
-  Document extends UnknownDocument,
-  IndexField extends keyof Document
-> = (value: Document[IndexField], field?: IndexField) => string
+type PreprocessFunction<O, K extends keyof O> = (
+  value: O[K],
+  field: K
+) => string
 type StopwordsFunction = (token: string, language?: string) => boolean
 type StemmerFunction = (token: string, language?: string) => string
 
-interface IndexedDocument<Summary> {
+interface DocumentIndex<Summary> {
   readonly summary: Summary
   readonly filter: CountingBloomFilter<string>
 }
@@ -20,54 +19,57 @@ const compare = (a: number, b: number) => (a === b ? 0 : a > b ? -1 : 1)
 
 const nonEmpty = (text: string) => text.length > 0
 
-const keys = <O extends UnknownDocument>(o: O) => Object.keys(o) as (keyof O)[]
+const keys = <O>(o: O) => Object.keys(o) as (keyof O)[]
 
-const entries = <O extends UnknownDocument>(o: O) =>
-  Object.entries(o) as [keyof O, O[keyof O]][]
+const entries = <O>(o: O) => Object.entries(o) as [keyof O, O[keyof O]][]
+
+interface Options<
+  Document,
+  SummaryField extends keyof Document,
+  IndexField extends keyof Document
+> {
+  errorRate: number
+  fields: IndexField[] | Record<IndexField, number>
+  summary: SummaryField[]
+  index?: DocumentIndex<Pick<Document, SummaryField>>[]
+  preprocess?: PreprocessFunction<Document, IndexField>
+  stemmer?: StemmerFunction
+  stopwords?: StopwordsFunction
+}
 
 export class BloomSearch<
-  Document extends UnknownDocument,
+  Document extends Record<string, unknown>,
   SummaryField extends keyof Document,
   IndexField extends keyof Document
 > {
   public readonly errorRate: number
   public readonly fields: Record<IndexField, number>
   public readonly summary: SummaryField[]
-  public readonly index: IndexedDocument<Pick<Document, SummaryField>>[]
-  private readonly preprocess: PreprocessFunction<Document, IndexField> = String
-  private readonly stemmer: StemmerFunction = (token) => token
-  private readonly stopwords: StopwordsFunction = () => true
+  public readonly index: DocumentIndex<Pick<Document, SummaryField>>[]
+  private readonly preprocess: PreprocessFunction<Document, IndexField>
+  private readonly stemmer: StemmerFunction
+  private readonly stopwords: StopwordsFunction
 
-  constructor(
-    options: Readonly<{
-      errorRate: number
-      fields: IndexField[] | Record<IndexField, number>
-      summary: SummaryField[]
-      index?: IndexedDocument<Pick<Document, SummaryField>>[]
-      preprocess?: PreprocessFunction<Document, IndexField>
-      stemmer?: StemmerFunction
-      stopwords?: StopwordsFunction
-    }>
-  ) {
+  constructor(options: Options<Document, SummaryField, IndexField>) {
     this.errorRate = options.errorRate
     this.fields = Array.isArray(options.fields)
-      ? options.fields.reduce(
-          (acc, field) => ({ ...acc, [field]: 1 }),
-          {} as Record<IndexField, number>
-        )
+      ? options.fields.reduce((acc, field) => {
+          acc[field] = 1
+          return acc
+        }, {} as Record<IndexField, number>)
       : options.fields
     this.summary = options.summary
-    this.preprocess = options.preprocess ?? this.preprocess
-    this.stemmer = options.stemmer ?? this.stemmer
-    this.stopwords = options.stopwords ?? this.stopwords
+    this.preprocess = options.preprocess ?? String
+    this.stemmer = options.stemmer ?? ((token) => token)
+    this.stopwords = options.stopwords ?? (() => true)
     this.index =
-      options.index?.map((indexedDocument) => ({
-        ...indexedDocument,
-        filter: new CountingBloomFilter(indexedDocument.filter),
+      options.index?.map((documentIndex) => ({
+        ...documentIndex,
+        filter: new CountingBloomFilter(documentIndex.filter),
       })) ?? []
   }
 
-  add<T extends Document>(document: T, language?: string): void {
+  add(document: Document, language?: string): void {
     const tokens = keys(this.fields).reduce((acc, field) => {
       if (document[field] !== undefined) {
         acc[field] = this.tokenizer(this.preprocess(document[field], field))
