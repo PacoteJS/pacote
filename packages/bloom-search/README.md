@@ -4,7 +4,20 @@
 ![minified](https://badgen.net/bundlephobia/min/@pacote/bloom-search)
 ![minified + gzip](https://badgen.net/bundlephobia/minzip/@pacote/bloom-search)
 
-Document search using Bloom filters.
+Document search using [Bloom filters](../bloom-filter/README.md).
+
+Bloom filters relax result accuracy for space efficiency. With Bloom filters,
+false positive matches are possible, but false negatives are not. That is to
+say, its responses are either a _certain miss_ or a _possible match_.
+
+This module was created to support basic full-text search on static sites where
+a backend-supported search feature isn't possible, and loading a complete index
+on the client is too expensive.
+
+With it, you can build a simple document search index that is smaller than
+inverted indices at the cost of occasionally returning matches for words that
+are not present in any document. This error rate can be adjusted to improve
+search quality.
 
 ## Installation
 
@@ -29,21 +42,56 @@ bs.add({ id: 2, text: 'bar' })
 bs.search('foo') // => [{ id: 1 }])
 ```
 
-### `BloomSearch`
+### `BloomSearch<Document, SummaryField, IndexField>`
 
-TODO
+`BloomSearch` builds a search index based on `CountingBloomFilter` which
+can be used to test the membership of search terms in a set of documents.
 
-#### Options
+The class constructor takes an `Options` object with the following properties:
 
-TODO
+- `errorRate` (`number`, required) determines the desired error rate. A lower
+  number yields more reliable results but makes the index larger.
+
+- `fields` (`IndexField[]`, required) determines which fields in the document
+  should be indexed.
+
+- `summary` (`SummaryField[]`, required) determines which fields in the document
+  can be stored in the index and returned as a search result.
+
+- `index` (`{ summary: Partial<Document>, filter: CountingBloomFilter<string> }[]`)
+  allows initialising `BloomSearch` from a filter from a different instance. Its
+  primary use case is to rehydrate the index from a static file or persisted
+  payload.
+
+- `preprocess` (`(text: unknown, field: IndexField) => string`) is a function to
+  serialise each field as a `string` and optionally process it before indexing.
+  For example, you can use this function to strip HTML from a field value. By
+  default, this class simply converts the field value into a `string`.
+
+- `stopwords` (`(token: string, language: string) => boolean`) filters tokens
+  so that words that are too short or too common may be excluded from the index.
+  By default, the class includes all tokens.
+
+- `stemmer` (`(token: string, language: string) => string`) allows developers to
+  plug in a custom stemming function. By default, this class does not change
+  text tokens.
 
 #### `BloomSearch.add(document: Document, language?: string): void`
 
-TODO
+The `add()` method indexes a single document. You may optionally pass it a
+`language` identifier which is fed back into the `stemmer` and `stopwords`
+filter to best decide how to handle these steps.
 
-#### `BloomSearch.search(terms: string, language?: string): Result[]`
+#### `BloomSearch.search(query: string, language?: string): Partial<Document>[]`
 
-TODO
+The `search()` method scans the document index and returns a list of documents
+summaries (with only the properties declared in the `summary` option) that
+possibly match one or more terms in the query.
+
+Each search term is run through the `stemmer` function to ensure terms are
+processed in the same way as the tokens previously added to the index's Bloom
+filters. To help choose the appropriate stemming algorithm, you may pass the
+`search()` method an optional `language` identifier.
 
 ## License
 

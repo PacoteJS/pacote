@@ -48,18 +48,19 @@ use a `CountingBloomFilter` for that.
 
 The class constructor takes an `Options` object with the following properties:
 
-- `size` (required) determines the size of the filter in bits. The value is
-  required and must not be negative.
+- `size` (`number`, required) determines the size of the filter in bits. The
+  value is required and must not be negative.
 
-- `hashes` (required) sets the number of distinct hashes that need to be
-  calculated. A higher number performs more slowly, but lowers the probability
-  of false positives occuring. The value is required and must be a positive
-  integer.
+- `hashes` (`number`, required) sets the number of distinct hashes that need to
+  be calculated. A higher number performs more slowly, but lowers the
+  probability of false positives occuring. The value is required and must be a
+  positive integer.
 
-- `seed` sets the seed for the hashing function. The default is `0x00c0ffee`.
+- `seed` (`number`) sets the seed for the hashing function. The default is
+  `0x00c0ffee`.
 
-- `filter` allows initialising the filter from an array of unsigned 32-bit
-  integers.
+- `filter` (`BloomFilter<T>`) allows initialising the filter from an array of
+  unsigned 32-bit integers.
 
 Class instances may be serialised into JSON using `JSON.stringify()` for storage
 or for sending over the network. The JSON string can then be deserialised and
@@ -87,18 +88,19 @@ Unlike the simpler `BloomFilter`, this class supports element removal.
 
 The class constructor takes an `Options` object with the following properties:
 
-- `size` (required) determines the number of filter counters. The value is
-  required and must not be negative.
+- `size` (`number`, required) determines the number of filter counters. The
+  value is required and must not be negative.
 
-- `hashes` (required) sets the number of distinct hashes that need to be
-  calculated. A higher number performs more slowly, but lowers the probability
-  of false positives occuring. The value is required and must be a positive
-  integer.
+- `hashes` (`number`, required) sets the number of distinct hashes that need to
+  be calculated. A higher number performs more slowly, but lowers the
+  probability of false positives occuring. The value is required and must be a
+  positive integer.
 
-- `seed` sets the seed for the hashing function. The default is `0x00c0ffee`.
+- `seed` (`number`) sets the seed for the hashing function. The default is
+  `0x00c0ffee`.
 
-- `filter` allows initialising the filter from an array of unsigned 32-bit
-  integers.
+- `filter` (`BloomFilter<T>`) allows initialising the filter from an array of
+  unsigned 32-bit integers.
 
 Class instances may be serialised into JSON using `JSON.stringify()` for storage
 or for sending over the network. The JSON string can then be deserialised and

@@ -12,8 +12,12 @@ interface DocumentIndex<Summary> {
   readonly filter: CountingBloomFilter<string>
 }
 
-const repeat = (times: number, fn: () => void) =>
-  Array(times).fill(null).forEach(fn)
+function repeat(times: number, fn: () => void) {
+  if (times > 0) {
+    fn()
+    repeat(times - 1, fn)
+  }
+}
 
 const compare = (a: number, b: number) => (a === b ? 0 : a > b ? -1 : 1)
 
