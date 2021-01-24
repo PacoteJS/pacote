@@ -23,20 +23,6 @@ const keys = <O>(o: O) => Object.keys(o) as (keyof O)[]
 
 const entries = <O>(o: O) => Object.entries(o) as [keyof O, O[keyof O]][]
 
-interface Options<
-  Document,
-  SummaryField extends keyof Document,
-  IndexField extends keyof Document
-> {
-  errorRate: number
-  fields: IndexField[] | Record<IndexField, number>
-  summary: SummaryField[]
-  index?: DocumentIndex<Pick<Document, SummaryField>>[]
-  preprocess?: PreprocessFunction<Document, IndexField>
-  stemmer?: StemmerFunction
-  stopwords?: StopwordsFunction
-}
-
 export class BloomSearch<
   Document extends Record<string, unknown>,
   SummaryField extends keyof Document,
@@ -50,7 +36,15 @@ export class BloomSearch<
   private readonly stemmer: StemmerFunction
   private readonly stopwords: StopwordsFunction
 
-  constructor(options: Options<Document, SummaryField, IndexField>) {
+  constructor(options: {
+    errorRate: number
+    fields: IndexField[] | Record<IndexField, number>
+    summary: SummaryField[]
+    index?: DocumentIndex<Pick<Document, SummaryField>>[]
+    preprocess?: PreprocessFunction<Document, IndexField>
+    stemmer?: StemmerFunction
+    stopwords?: StopwordsFunction
+  }) {
     this.errorRate = options.errorRate
     this.fields = Array.isArray(options.fields)
       ? options.fields.reduce((acc, field) => {
