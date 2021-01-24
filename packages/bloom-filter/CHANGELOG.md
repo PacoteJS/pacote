@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-filter@0.1.0...@pacote/bloom-filter@0.2.0) (2021-01-24)
+
+### Features
+
+- 🎸 filter size validation ([a2d1f64](https://github.com/PacoteJS/pacote/commit/a2d1f6417cce7349e897adc3b0e89e0875c7bc7b))
+
 # 0.1.0 (2021-01-14)
 
 ### Features
