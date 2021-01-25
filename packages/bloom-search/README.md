@@ -35,8 +35,8 @@ const bs = new BloomSearch({
   summary: ['id'],
 })
 
-bs.add({ id: 1, text: 'foo' })
-bs.add({ id: 2, text: 'bar' })
+bs.add('id1', { id: 1, text: 'foo' })
+bs.add('id2', { id: 2, text: 'bar' })
 
 bs.search('foo') // => [{ id: 1 }])
 ```
