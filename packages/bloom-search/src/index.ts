@@ -33,22 +33,21 @@ export class BloomSearch<
   IndexField extends keyof Document
 > {
   public index: DocumentIndex<Document, SummaryField>[] = []
-  public readonly errorRate: number
   public readonly fields: Record<IndexField, number>
   public readonly summary: SummaryField[]
+  public readonly errorRate: number
   private readonly preprocess: PreprocessFunction<Document, IndexField>
   private readonly stemmer: StemmerFunction
   private readonly stopwords: StopwordsFunction
 
   constructor(options: {
-    errorRate: number
     fields: IndexField[] | Record<IndexField, number>
     summary: SummaryField[]
+    errorRate?: number
     preprocess?: PreprocessFunction<Document, IndexField>
     stemmer?: StemmerFunction
     stopwords?: StopwordsFunction
   }) {
-    this.errorRate = options.errorRate
     this.fields = Array.isArray(options.fields)
       ? options.fields.reduce((acc, field) => {
           acc[field] = 1
@@ -56,6 +55,7 @@ export class BloomSearch<
         }, {} as Record<IndexField, number>)
       : options.fields
     this.summary = options.summary
+    this.errorRate = options.errorRate ?? 0.0001
     this.preprocess = options.preprocess ?? String
     this.stemmer = options.stemmer ?? ((token) => token)
     this.stopwords = options.stopwords ?? (() => true)

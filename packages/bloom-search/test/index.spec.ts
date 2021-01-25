@@ -2,7 +2,6 @@ import { BloomSearch } from '../src/index'
 
 test('searching an empty index yields no results', () => {
   const bs = new BloomSearch({
-    errorRate: 0.001,
     fields: ['text'],
     summary: ['id'],
   })
@@ -12,7 +11,7 @@ test('searching an empty index yields no results', () => {
 
 test('searching for words in a field yields matching results', () => {
   const bs = new BloomSearch({
-    errorRate: 0.001,
+    errorRate: 0.002,
     fields: ['text'],
     summary: ['id'],
   })
@@ -25,7 +24,6 @@ test('searching for words in a field yields matching results', () => {
 
 test('searching for words in a field yields matching sorted by number of matches', () => {
   const bs = new BloomSearch({
-    errorRate: 0.001,
     fields: ['text'],
     summary: ['id'],
   })
@@ -38,7 +36,6 @@ test('searching for words in a field yields matching sorted by number of matches
 
 test('search results return only fields in the summary list', () => {
   const bs = new BloomSearch({
-    errorRate: 0.001,
     fields: ['text'],
     summary: ['text'],
   })
@@ -53,7 +50,6 @@ test('stopwords are passed through a language-aware filter', () => {
   const stopwords = jest.fn((text) => text.length > 1)
 
   const bs = new BloomSearch({
-    errorRate: 0.001,
     fields: ['text'],
     summary: ['text'],
     stopwords,
@@ -69,7 +65,6 @@ test('stopwords are passed through a language-aware filter', () => {
 
 test('empty documents are not indexed', () => {
   const bs = new BloomSearch({
-    errorRate: 0.001,
     fields: ['text'],
     summary: ['text'],
   })
@@ -81,7 +76,6 @@ test('empty documents are not indexed', () => {
 
 test('undefined fields are not indexed', () => {
   const bs = new BloomSearch({
-    errorRate: 0.001,
     fields: ['text'],
     summary: ['id'],
   })
@@ -97,7 +91,6 @@ test('tokens are passed through a language-aware stemmer', () => {
   const stemmer = jest.fn((text) => text.substr(0, 3))
 
   const bs = new BloomSearch({
-    errorRate: 0.001,
     fields: ['text'],
     summary: ['text'],
     stemmer,
@@ -115,7 +108,6 @@ test('document fields can be preprocessed for the index', () => {
   const preprocess = jest.fn((text) => text.replace(/-/g, ' '))
 
   const bs = new BloomSearch({
-    errorRate: 0.001,
     fields: ['text'],
     summary: ['text'],
     preprocess,
@@ -129,7 +121,6 @@ test('document fields can be preprocessed for the index', () => {
 
 test('document fields can be preprocessed', () => {
   const bs = new BloomSearch({
-    errorRate: 0.001,
     fields: ['text'],
     summary: ['text'],
     preprocess: (text) => String(text).replace(/-/g, ' '),
@@ -142,7 +133,6 @@ test('document fields can be preprocessed', () => {
 
 test('document fields can be weighed', () => {
   const bs = new BloomSearch({
-    errorRate: 0.001,
     fields: { title: 2, body: 1 },
     summary: ['title', 'body'],
   })
@@ -158,7 +148,6 @@ test('document fields can be weighed', () => {
 
 test('index can be searched for multiple terms', () => {
   const bs = new BloomSearch({
-    errorRate: 0.001,
     fields: ['text'],
     summary: ['text'],
   })
@@ -174,7 +163,6 @@ test('index can be searched for multiple terms', () => {
 
 test('index can be loaded from a deserialised instance', () => {
   const options = {
-    errorRate: 0.001,
     fields: ['text'],
     summary: ['text'],
   }
@@ -193,7 +181,6 @@ test('index can be loaded from a deserialised instance', () => {
 
 test('loaded index replaces the instance index', () => {
   const options = {
-    errorRate: 0.001,
     fields: ['text'],
     summary: ['text'],
   }

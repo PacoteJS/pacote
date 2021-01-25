@@ -6,18 +6,18 @@
 
 Document search using [Bloom filters](../bloom-filter/README.md).
 
-Bloom filters relax result accuracy for space efficiency. With Bloom filters,
-false positive matches are possible, but false negatives are not. That is to
-say, its responses are either a _certain miss_ or a _possible match_.
-
 This module was created to support basic full-text search on static sites where
 a backend-supported search feature isn't possible, and loading a complete index
 on the client is too expensive.
 
-With it, you can build a simple document search index that is smaller than
-inverted indices at the cost of occasionally returning matches for words that
-are not present in any document. This error rate can be adjusted to improve
-search quality.
+Bloom filters are used because they trade result accuracy for space efficiency.
+With them, false positive matches are possible, but false negatives are not.
+That is to say, its responses are either a _certain miss_ or a _possible match_.
+
+They allow building a simple document search index that is smaller than inverted
+indices at the cost of occasionally returning matches for words that are not
+present in any document. This error rate can be adjusted to improve search
+quality.
 
 ## Installation
 
@@ -31,7 +31,6 @@ yarn add @pacote/bloom-search
 import { BloomSearch } from '@pacote/bloom-search'
 
 const bs = new BloomSearch({
-  errorRate: 0.001,
   fields: ['text'],
   summary: ['id'],
 })
@@ -49,14 +48,15 @@ can be used to test the membership of search terms in a set of documents.
 
 The class constructor takes an `Options` object with the following properties:
 
-- `errorRate` (`number`, required) determines the desired error rate. A lower
-  number yields more reliable results but makes the index larger.
-
 - `fields` (`IndexField[]`, required) determines which fields in the document
   should be indexed.
 
 - `summary` (`SummaryField[]`, required) determines which fields in the document
   can be stored in the index and returned as a search result.
+
+- `errorRate` (`number`) determines the desired error rate. A lower number
+  yields more reliable results but makes the index larger. The value defaults to
+  `0.0001` (or 0.01%).
 
 - `preprocess` (`(text: unknown, field: IndexField) => string`) is a function to
   serialise each field as a `string` and optionally process it before indexing.

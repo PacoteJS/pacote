@@ -6,7 +6,7 @@ export class CountingBloomFilter<T extends { toString(): string }> {
   readonly hashes: number
   readonly seed: number
   readonly filter: Uint32Array
-  private getHashLocations: (element: string) => number[]
+  private computeHashLocations: (element: string) => number[]
 
   constructor(options: Options) {
     if (options.size < 1) {
@@ -22,17 +22,17 @@ export class CountingBloomFilter<T extends { toString(): string }> {
     this.seed = options.seed ?? 0x00c0ffee
     this.filter = options.filter ?? new Uint32Array(this.size)
 
-    this.getHashLocations = hashLocations(this.size, this.hashes, this.seed)
+    this.computeHashLocations = hashLocations(this.size, this.hashes, this.seed)
   }
 
   add(element: T): void {
-    this.getHashLocations(element.toString()).forEach((index) => {
+    this.computeHashLocations(element.toString()).forEach((index) => {
       this.filter[index] += 1
     })
   }
 
   remove(element: T): void {
-    this.getHashLocations(element.toString()).forEach((index) => {
+    this.computeHashLocations(element.toString()).forEach((index) => {
       if (this.filter[index] > 0) {
         this.filter[index] -= 1
       }
@@ -41,7 +41,7 @@ export class CountingBloomFilter<T extends { toString(): string }> {
 
   has(element: T): number {
     return Math.min(
-      ...this.getHashLocations(element.toString()).map(
+      ...this.computeHashLocations(element.toString()).map(
         (index) => this.filter[index]
       )
     )
