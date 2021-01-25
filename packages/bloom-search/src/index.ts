@@ -89,7 +89,7 @@ export class BloomSearch<
     )
 
     entries(this.fields).forEach(([field, weight]) =>
-      tokens[field].forEach((token) =>
+      (tokens[field] || []).forEach((token) =>
         repeat(weight ?? 1, () => filter.add(token))
       )
     )
