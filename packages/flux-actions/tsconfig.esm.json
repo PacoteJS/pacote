@@ -2,7 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "module": "esnext",
-    "target": "esnext",
+    "target": "ES2019",
     "outDir": "lib/esm"
   },
   "references": [{ "path": "../is-plain-object/tsconfig.esm.json" }]
