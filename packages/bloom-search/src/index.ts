@@ -7,10 +7,16 @@ type PreprocessFunction<Document, Field extends keyof Document> = (
 type StopwordsFunction = (token: string, language?: string) => boolean
 type StemmerFunction = (token: string, language?: string) => string
 
-export type DocumentIndex<Document, SummaryField extends keyof Document> = {
-  readonly summary: Pick<Document, SummaryField>
-  readonly filter: CountingBloomFilter<string>
-}
+export type DocumentIndex<
+  Document,
+  SummaryField extends keyof Document
+> = Record<
+  string,
+  {
+    readonly summary: Pick<Document, SummaryField>
+    readonly filter: CountingBloomFilter<string>
+  }
+>
 
 function repeat(times: number, fn: () => void) {
   if (times > 0) {
@@ -32,7 +38,7 @@ export class BloomSearch<
   SummaryField extends keyof Document,
   IndexField extends keyof Document
 > {
-  public index: DocumentIndex<Document, SummaryField>[] = []
+  public index: DocumentIndex<Document, SummaryField> = {}
   public readonly fields: Record<IndexField, number>
   public readonly summary: SummaryField[]
   public readonly errorRate: number
@@ -61,14 +67,17 @@ export class BloomSearch<
     this.stopwords = options.stopwords ?? (() => true)
   }
 
-  load(index: DocumentIndex<Document, SummaryField>[]): void {
-    this.index = index.map((documentIndex) => ({
-      ...documentIndex,
-      filter: new CountingBloomFilter(documentIndex.filter),
-    }))
+  load(index: DocumentIndex<Document, SummaryField>): void {
+    this.index = entries(index).reduce((acc, [ref, entry]) => {
+      acc[ref] = {
+        summary: entry.summary,
+        filter: new CountingBloomFilter(entry.filter),
+      }
+      return acc
+    }, {} as DocumentIndex<Document, SummaryField>)
   }
 
-  add(document: Document, language?: string): void {
+  add(ref: string, document: Document, language?: string): void {
     const tokens = keys(this.fields).reduce((acc, field) => {
       if (document[field] !== undefined) {
         acc[field] = this.tokenizer(this.preprocess(document[field], field))
@@ -102,11 +111,15 @@ export class BloomSearch<
       { summary: {} as Pick<Document, SummaryField>, filter }
     )
 
-    this.index.push(entry)
+    this.index[ref] = entry
+  }
+
+  remove(ref: string): void {
+    delete this.index[ref]
   }
 
   search(terms: string, language?: string): Pick<Document, SummaryField>[] {
-    return this.index
+    return Object.values(this.index)
       .map(({ summary, filter }) => ({
         summary,
         matches: terms

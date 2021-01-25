@@ -16,8 +16,8 @@ test('searching for words in a field yields matching results', () => {
     summary: ['id'],
   })
 
-  bs.add({ id: 1, text: 'foo' })
-  bs.add({ id: 2, text: 'bar' })
+  bs.add('1', { id: 1, text: 'foo' })
+  bs.add('2', { id: 2, text: 'bar' })
 
   expect(bs.search('foo')).toEqual([{ id: 1 }])
 })
@@ -28,10 +28,37 @@ test('searching for words in a field yields matching sorted by number of matches
     summary: ['id'],
   })
 
-  bs.add({ id: 1, text: 'foo' })
-  bs.add({ id: 2, text: 'foo foo' })
+  bs.add('1', { id: 1, text: 'foo' })
+  bs.add('2', { id: 2, text: 'foo foo' })
 
   expect(bs.search('foo')).toEqual([{ id: 2 }, { id: 1 }])
+})
+
+test('document indices can be replaced', () => {
+  const bs = new BloomSearch({
+    errorRate: 0.002,
+    fields: ['text'],
+    summary: ['text'],
+  })
+
+  bs.add('ref', { text: 'foo' })
+  bs.add('ref', { text: 'bar' })
+
+  expect(bs.search('foo')).toEqual([])
+  expect(bs.search('bar')).toEqual([{ text: 'bar' }])
+})
+
+test('document indices can be removed', () => {
+  const bs = new BloomSearch({
+    errorRate: 0.002,
+    fields: ['text'],
+    summary: ['text'],
+  })
+
+  bs.add('1', { text: 'foo bar' })
+  bs.remove('1')
+
+  expect(bs.search('foo')).toEqual([])
 })
 
 test('search results return only fields in the summary list', () => {
@@ -40,8 +67,8 @@ test('search results return only fields in the summary list', () => {
     summary: ['text'],
   })
 
-  bs.add({ id: 1, text: 'foo' })
-  bs.add({ id: 2, text: 'bar' })
+  bs.add('1', { id: 1, text: 'foo' })
+  bs.add('2', { id: 2, text: 'bar' })
 
   expect(bs.search('foo')).toEqual([{ text: 'foo' }])
 })
@@ -55,7 +82,7 @@ test('stopwords are passed through a language-aware filter', () => {
     stopwords,
   })
 
-  bs.add({ text: 'a foo bar' }, 'en-US')
+  bs.add('1', { text: 'a foo bar' }, 'en-US')
 
   expect(stopwords).toHaveBeenCalledWith('a', 'en-US')
   expect(stopwords).toHaveBeenCalledWith('foo', 'en-US')
@@ -69,7 +96,7 @@ test('empty documents are not indexed', () => {
     summary: ['text'],
   })
 
-  bs.add({ text: '' })
+  bs.add('1', { text: '' })
 
   expect(bs.search('')).toEqual([])
 })
@@ -80,9 +107,9 @@ test('undefined fields are not indexed', () => {
     summary: ['id'],
   })
 
-  bs.add({ id: 1, text: 'undefined' })
-  bs.add({ id: 2, text: undefined })
-  bs.add({ id: 3 })
+  bs.add('1', { id: 1, text: 'undefined' })
+  bs.add('2', { id: 2, text: undefined })
+  bs.add('3', { id: 3 })
 
   expect(bs.search('undefined')).toEqual([{ id: 1 }])
 })
@@ -96,7 +123,7 @@ test('tokens are passed through a language-aware stemmer', () => {
     stemmer,
   })
 
-  bs.add({ text: 'foobar foobaz' }, 'en-US')
+  bs.add('1', { text: 'foobar foobaz' }, 'en-US')
 
   expect(stemmer).toHaveBeenCalledWith('foobar', 'en-US')
   expect(stemmer).toHaveBeenCalledWith('foobaz', 'en-US')
@@ -113,7 +140,7 @@ test('document fields can be preprocessed for the index', () => {
     preprocess,
   })
 
-  bs.add({ text: 'foo-bar' })
+  bs.add('1', { text: 'foo-bar' })
 
   expect(preprocess).toHaveBeenCalledWith('foo-bar', 'text')
   expect(bs.search('foo')).toEqual([{ text: 'foo-bar' }])
@@ -126,7 +153,7 @@ test('document fields can be preprocessed', () => {
     preprocess: (text) => String(text).replace(/-/g, ' '),
   })
 
-  bs.add({ text: 'foo-bar' })
+  bs.add('1', { text: 'foo-bar' })
 
   expect(bs.search('foo')).toEqual([{ text: 'foo-bar' }])
 })
@@ -137,8 +164,8 @@ test('document fields can be weighed', () => {
     summary: ['title', 'body'],
   })
 
-  bs.add({ title: 'bar', body: 'foo' })
-  bs.add({ title: 'foo', body: 'bar' })
+  bs.add('1', { title: 'bar', body: 'foo' })
+  bs.add('2', { title: 'foo', body: 'bar' })
 
   expect(bs.search('foo')).toEqual([
     { title: 'foo', body: 'bar' },
@@ -152,8 +179,8 @@ test('index can be searched for multiple terms', () => {
     summary: ['text'],
   })
 
-  bs.add({ text: 'foo bar' })
-  bs.add({ text: 'foo baz' })
+  bs.add('1', { text: 'foo bar' })
+  bs.add('2', { text: 'foo baz' })
 
   expect(bs.search('bar baz')).toEqual([
     { text: 'foo bar' },
@@ -167,11 +194,11 @@ test('index can be loaded from a deserialised instance', () => {
     summary: ['text'],
   }
   const previous = new BloomSearch(options)
-  previous.add({ text: 'previous foo' })
+  previous.add('1', { text: 'previous foo' })
   const current = new BloomSearch(options)
 
   current.load(JSON.parse(JSON.stringify(previous.index)))
-  current.add({ text: 'additional foo' })
+  current.add('2', { text: 'additional foo' })
 
   expect(current.search('foo')).toEqual([
     { text: 'previous foo' },
@@ -186,10 +213,10 @@ test('loaded index replaces the instance index', () => {
   }
 
   const previous = new BloomSearch(options)
-  previous.add({ text: 'previous' })
+  previous.add('1', { text: 'previous' })
 
   const current = new BloomSearch(options)
-  current.add({ text: 'replaced' })
+  current.add('2', { text: 'replaced' })
   current.load(JSON.parse(JSON.stringify(previous.index)))
 
   expect(current.search('previous')).toEqual([{ text: 'previous' }])

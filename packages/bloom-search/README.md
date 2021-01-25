@@ -71,11 +71,19 @@ The class constructor takes an `Options` object with the following properties:
   plug in a custom stemming function. By default, this class does not change
   text tokens.
 
-#### `BloomSearch.add(document: Document, language?: string): void`
+#### `BloomSearch.add(reference: string, document: Document, language?: string): void`
 
-The `add()` method indexes a single document. You may optionally pass it a
-`language` identifier which is fed back into the `stemmer` and `stopwords`
-filter to best decide how to handle these steps.
+The `add()` method indexes a single document with the provided unique
+`reference` identifier. Adding another document with the same `reference`
+replaces the index.
+
+You may optionally pass it a `language` identifier which is fed back into the
+`stemmer` and `stopwords` filter to best decide how to handle these steps.
+
+#### `BloomSearch.remove(reference: string): void`
+
+The `remove()` method removes the indexex document associated with the supplied
+`reference`.
 
 #### `BloomSearch.search(query: string, language?: string): Partial<Document>[]`
 
