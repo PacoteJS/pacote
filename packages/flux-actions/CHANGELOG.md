@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.10](https://github.com/PacoteJS/pacote/compare/@pacote/flux-actions@2.1.9...@pacote/flux-actions@2.1.10) (2021-01-25)
+
+### Bug Fixes
+
+- 🐛 export ES2019 to prevent common errors with Webpack ([fa8ce59](https://github.com/PacoteJS/pacote/commit/fa8ce59f925e1c888f9727291612490b30dd5842))
+
 ## [2.1.9](https://github.com/PacoteJS/pacote/compare/@pacote/flux-actions@2.1.8...@pacote/flux-actions@2.1.9) (2020-11-27)
 
 **Note:** Version bump only for package @pacote/flux-actions

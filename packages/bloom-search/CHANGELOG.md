@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.1](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.3.0...@pacote/bloom-search@0.3.1) (2021-01-25)
+
+### Bug Fixes
+
+- 🐛 export ES2019 to prevent common errors with Webpack ([fa8ce59](https://github.com/PacoteJS/pacote/commit/fa8ce59f925e1c888f9727291612490b30dd5842))
+- 🐛 prevent error iterating undefined token array ([905a020](https://github.com/PacoteJS/pacote/commit/905a0201cba1d73246692ff18ffcc9f65542a0f6))
+
 # [0.3.0](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.2.0...@pacote/bloom-search@0.3.0) (2021-01-25)
 
 ### Features

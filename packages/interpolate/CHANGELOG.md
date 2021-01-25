@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.8](https://github.com/PacoteJS/pacote/compare/@pacote/interpolate@1.0.7...@pacote/interpolate@1.0.8) (2021-01-25)
+
+### Bug Fixes
+
+- 🐛 export ES2019 to prevent common errors with Webpack ([fa8ce59](https://github.com/PacoteJS/pacote/commit/fa8ce59f925e1c888f9727291612490b30dd5842))
+
 ## [1.0.7](https://github.com/PacoteJS/pacote/compare/@pacote/interpolate@1.0.6...@pacote/interpolate@1.0.7) (2020-11-27)
 
 **Note:** Version bump only for package @pacote/interpolate
