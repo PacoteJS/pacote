@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.2.0...@pacote/bloom-search@0.3.0) (2021-01-25)
+
+### Features
+
+- 🎸 make errorRate default to 0.0001 ([5f17323](https://github.com/PacoteJS/pacote/commit/5f17323d7da4661be58426072f0f628292e1b77b))
+
 # [0.2.0](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.1.0...@pacote/bloom-search@0.2.0) (2021-01-24)
 
 ### Features
