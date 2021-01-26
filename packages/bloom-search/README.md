@@ -65,7 +65,7 @@ The class constructor takes an `Options` object with the following properties:
 
 - `stopwords` (`(token: string, language: string) => boolean`) filters tokens
   so that words that are too short or too common may be excluded from the index.
-  By default, the class includes all tokens.
+  By default, no stopwords are excluded.
 
 - `stemmer` (`(token: string, language: string) => string`) allows developers to
   plug in a custom stemming function. By default, this class does not change
@@ -82,7 +82,7 @@ You may optionally pass it a `language` identifier which is fed back into the
 
 #### `BloomSearch.remove(reference: string): void`
 
-The `remove()` method removes the indexex document associated with the supplied
+The `remove()` method removes the indexed document associated with the supplied
 `reference`.
 
 #### `BloomSearch.search(query: string, language?: string): Partial<Document>[]`
@@ -100,7 +100,7 @@ filters. To help choose the appropriate stemming algorithm, you may pass the
 
 The `load()` method lets you replace the instance's index with an index from
 another instance. Its primary use case is to rehydrate the index from a static
-file or persisted payload.
+file or payload.
 
 **NB:** Calling this method will not change any other attributes in the
 instance. It is up to developers to ensure that the instances were initialised
