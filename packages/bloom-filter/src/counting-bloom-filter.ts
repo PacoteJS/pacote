@@ -20,9 +20,7 @@ export class CountingBloomFilter<T extends { toString(): string }> {
     this.size = options.size
     this.hashes = options.hashes
     this.seed = options.seed ?? 0x00c0ffee
-    this.filter = options.filter
-      ? Uint32Array.from(options.filter)
-      : new Uint32Array(this.size)
+    this.filter = options.filter ?? new Uint32Array(this.size)
 
     this.computeHashLocations = hashLocations(this.size, this.hashes, this.seed)
   }
