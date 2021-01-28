@@ -4,7 +4,7 @@
 ![minified](https://badgen.net/bundlephobia/min/@pacote/bloom-search)
 ![minified + gzip](https://badgen.net/bundlephobia/minzip/@pacote/bloom-search)
 
-Document search using [Bloom filters](../bloom-filter/README.md).
+Document search using [Bloom filters](../bloom-filter/).
 
 This module was created to support basic full-text search on static sites where
 a backend-supported search feature isn't possible, and loading a complete index
