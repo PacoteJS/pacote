@@ -188,6 +188,33 @@ test('index can be searched for multiple terms', () => {
   ])
 })
 
+test('a +required term includes only results where it is found', () => {
+  const bs = new BloomSearch({
+    fields: ['text'],
+    summary: ['text'],
+  })
+
+  bs.add('1', { text: 'foo bar' })
+  bs.add('2', { text: 'foo baz' })
+
+  expect(bs.search('foo +bar')).toEqual([{ text: 'foo bar' }])
+})
+
+test('searches with a required term use matches from all terms', () => {
+  const bs = new BloomSearch({
+    fields: ['text'],
+    summary: ['text'],
+  })
+
+  bs.add('1', { text: 'foo bar' })
+  bs.add('2', { text: 'foo foo bar' })
+
+  expect(bs.search('foo +bar')).toEqual([
+    { text: 'foo foo bar' },
+    { text: 'foo bar' },
+  ])
+})
+
 test('index can be loaded from a deserialised instance', () => {
   const options = {
     fields: ['text'],

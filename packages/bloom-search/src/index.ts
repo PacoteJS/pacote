@@ -18,6 +18,11 @@ export type DocumentIndex<
   }
 >
 
+type SearchTokens = {
+  required: string[]
+  included: string[]
+}
+
 function repeat(times: number, fn: () => void) {
   if (times > 0) {
     fn()
@@ -32,6 +37,8 @@ const nonEmpty = (text: string) => text.length > 0
 const keys = <O>(o: O) => Object.keys(o) as (keyof O)[]
 
 const entries = <O>(o: O) => Object.entries(o) as [keyof O, O[keyof O]][]
+
+const removeOperator = (term: string) => term.replace(/^\+/, '')
 
 export class BloomSearch<
   Document extends Record<string, unknown>,
@@ -118,20 +125,18 @@ export class BloomSearch<
     delete this.index[ref]
   }
 
-  search(terms: string, language?: string): Pick<Document, SummaryField>[] {
+  search(query: string, language?: string): Pick<Document, SummaryField>[] {
+    const { required, included } = this.parseQuery(query, language)
+
     return Object.values(this.index)
       .map(({ summary, filter }) => ({
         summary,
-        matches: terms
-          .split(/\s/)
-          .filter(nonEmpty)
-          .reduce(
-            (matches, term) =>
-              matches + filter.has(this.stemmer(term, language)),
-            0
-          ),
+        matches: included.reduce((count, term) => count + filter.has(term), 0),
+        include:
+          required.length === 0 ||
+          required.some((term) => filter.has(term) > 0),
       }))
-      .filter(({ matches }) => matches > 0)
+      .filter(({ matches, include }) => matches > 0 && include)
       .sort((a, b) => compare(a.matches, b.matches))
       .map(({ summary }) => summary)
   }
@@ -140,5 +145,21 @@ export class BloomSearch<
     return text
       .split(/\s/)
       .map((token) => token.normalize('NFD').replace(/\W/gi, '').toLowerCase())
+  }
+
+  private parseQuery(query: string, language?: string): SearchTokens {
+    return query
+      .split(/\s/)
+      .filter(nonEmpty)
+      .reduce<SearchTokens>(
+        ({ required, included }, term) => {
+          const token = this.stemmer(removeOperator(term), language)
+          return {
+            required: term.startsWith('+') ? required.concat(token) : required,
+            included: included.concat(token),
+          }
+        },
+        { required: [], included: [] }
+      )
   }
 }

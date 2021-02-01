@@ -19,6 +19,11 @@ indices at the cost of occasionally returning matches for words that are not
 present in any document. This error rate can be adjusted to improve search
 quality.
 
+Due to the limitations inherent in Bloom filters, only full, individual words
+can be matched against indexed documents while searching. The absence of partial
+matching can be remedied through the use of a custom stemmer function, but more
+"advanced" features like phrase or suffix matching cannot be performed at all.
+
 ## Installation
 
 ```bash
@@ -35,10 +40,10 @@ const bs = new BloomSearch({
   summary: ['id'],
 })
 
-bs.add('id1', { id: 1, text: 'foo' })
-bs.add('id2', { id: 2, text: 'bar' })
+bs.add('id1', { id: 1, text: 'foo bar' })
+bs.add('id2', { id: 2, text: 'foo baz' })
 
-bs.search('foo') // => [{ id: 1 }])
+bs.search('foo +bar') // => [{ id: 1 }])
 ```
 
 ### `BloomSearch<Document, SummaryField, IndexField>`
@@ -91,10 +96,14 @@ The `search()` method scans the document index and returns a list of documents
 summaries (with only the properties declared in the `summary` option) that
 possibly match one or more terms in the query.
 
-Each search term is run through the `stemmer` function to ensure terms are
-processed in the same way as the tokens previously added to the index's Bloom
-filters. To help choose the appropriate stemming algorithm, you may pass the
-`search()` method an optional `language` identifier.
+The function matches individual words against each indexed document filter. You
+may prefix each word with the `+` operator to limit results to only those
+documents that probably contain that word.
+
+Each search term is run through the provided `stemmer` function to ensure terms
+are processed in the same way as the tokens previously added to the index's
+Bloom filters. To help choose the appropriate stemming algorithm, you may pass
+the `search()` method an optional `language` identifier.
 
 #### `BloomSearch.load(index: DocumentIndex<Document, SummaryField>[]): void`
 
