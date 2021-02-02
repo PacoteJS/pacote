@@ -132,6 +132,7 @@
     "@pacote/react-with-props": "file:packages/react-with-props",
     "@pacote/result": "file:packages/result",
     "@pacote/shuffle": "file:packages/shuffle",
-    "@pacote/throttle": "file:packages/throttle"
+    "@pacote/throttle": "file:packages/throttle",
+    "@pacote/windowed": "file:packages/windowed"
   }
 }

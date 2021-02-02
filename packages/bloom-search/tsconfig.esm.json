@@ -5,5 +5,8 @@
     "target": "ES2019",
     "outDir": "lib/esm"
   },
-  "references": [{ "path": "../bloom-filter/tsconfig.esm.json" }]
+  "references": [
+    { "path": "../bloom-filter/tsconfig.esm.json" },
+    { "path": "../windowed/tsconfig.esm.json" }
+  ]
 }
