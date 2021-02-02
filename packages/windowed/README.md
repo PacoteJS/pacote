@@ -18,11 +18,11 @@ yarn add @pacote/windowed
 ```typescript
 import { windowed } from '@pacote/windowed'
 
-const source = [1, 2, 3, 4]
+const array = [1, 2, 3, 4]
 
-windowed(2, source) // => [[1, 2], [2, 3], [3, 4]]
-windowed(3, source) // => [[1, 2, 3], [2, 3, 4]]
-windowed(2, 2, source) // => [[1, 2], [3, 4]]
+windowed(2, array)    // => [[1, 2], [2, 3], [3, 4]]
+windowed(3, array)    // => [[1, 2, 3], [2, 3, 4]]
+windowed(2, 2, array) // => [[1, 2], [3, 4]]
 ```
 
 ### `windowed<T>(size: number, step: number = 1, collection: T[]): T[][]`
