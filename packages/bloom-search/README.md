@@ -96,9 +96,9 @@ The `search()` method scans the document index and returns a list of documents
 summaries (with only the properties declared in the `summary` option) that
 possibly match one or more terms in the query.
 
-The function matches individual words against each indexed document filter. You
-may prefix each word with the `+` operator to limit results to only those
-documents that probably contain that word.
+The function matches individual words against the filter of each indexed
+document. You may prefix each word with the `+` operator to intersect results
+that (probably) contain the required word.
 
 Each search term is run through the provided `stemmer` function to ensure terms
 are processed in the same way as the tokens previously added to the index's

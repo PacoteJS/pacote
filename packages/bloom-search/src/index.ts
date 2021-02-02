@@ -126,19 +126,31 @@ export class BloomSearch<
   }
 
   search(query: string, language?: string): Pick<Document, SummaryField>[] {
-    const { required, included } = this.parseQuery(query, language)
+    const searchTokens = this.parseQuery(query, language)
 
-    return Object.values(this.index)
-      .map(({ summary, filter }) => ({
-        summary,
-        matches: included.reduce((count, term) => count + filter.has(term), 0),
-        include:
-          required.length === 0 ||
-          required.some((term) => filter.has(term) > 0),
+    const searchSpace =
+      searchTokens.required.length === 0
+        ? Object.keys(this.index)
+        : searchTokens.required.reduce(
+            (acc, token) => acc.filter((ref) => this.count(ref, token) > 0),
+            Object.keys(this.index)
+          )
+
+    return searchSpace
+      .map((ref) => ({
+        ref,
+        matches: searchTokens.included.reduce(
+          (count, token) => count + this.count(ref, token),
+          0
+        ),
       }))
-      .filter(({ matches, include }) => matches > 0 && include)
+      .filter(({ matches }) => matches > 0)
       .sort((a, b) => compare(a.matches, b.matches))
-      .map(({ summary }) => summary)
+      .map(({ ref }) => this.index[ref].summary)
+  }
+
+  private count(ref: string, token: string): number {
+    return this.index[ref].filter.has(token)
   }
 
   private tokenizer(text: string): string[] {

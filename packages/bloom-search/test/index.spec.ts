@@ -215,6 +215,18 @@ test('searches with a required term use matches from all terms', () => {
   ])
 })
 
+test('results from +required terms intersect each other', () => {
+  const bs = new BloomSearch({
+    fields: ['text'],
+    summary: ['text'],
+  })
+
+  bs.add('1', { text: 'foo bar' })
+  bs.add('2', { text: 'foo baz' })
+
+  expect(bs.search('+bar +baz')).toEqual([])
+})
+
 test('index can be loaded from a deserialised instance', () => {
   const options = {
     fields: ['text'],
