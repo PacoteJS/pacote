@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.1](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.5.0...@pacote/bloom-search@0.5.1) (2021-02-02)
+
+### Bug Fixes
+
+- 🐛 properly intersect required term search results ([12458c6](https://github.com/PacoteJS/pacote/commit/12458c6673c57ac549e0cce56d46581a2965c1b4))
+
 # [0.5.0](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.4.0...@pacote/bloom-search@0.5.0) (2021-02-01)
 
 ### Features
