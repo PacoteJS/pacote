@@ -1,7 +1,7 @@
 {
   "name": "@pacote/windowed",
   "description": "Returns a snapshot array of a window sliding along an array.",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "sideEffects": false,
   "license": "MIT",
   "author": {
@@ -9,7 +9,10 @@
     "email": "hello@goblindegook.com",
     "url": "https://goblindegook.com"
   },
-  "keywords": ["array", "window"],
+  "keywords": [
+    "array",
+    "window"
+  ],
   "repository": "github:PacoteJS/pacote",
   "bugs": {
     "url": "https://github.com/PacoteJS/pacote/issues"
