@@ -21,19 +21,14 @@ export function windowed<T>(size: number, step: number, collection: T[]): T[][]
 export function windowed<T>(
   size: number,
   stepOrCollection: number | T[],
-  collection: T[] = []
+  collectionOrNothing: T[] = []
 ): T[][] {
-  if (size <= 0) {
-    throw Error('size must be a positive integer')
-  }
+  const [step, collection] = Array.isArray(stepOrCollection)
+    ? [1, stepOrCollection]
+    : [stepOrCollection, collectionOrNothing]
 
-  if (Array.isArray(stepOrCollection)) {
-    return recursiveWindow([], stepOrCollection, size, 1)
-  } else {
-    if (stepOrCollection <= 0) {
-      throw Error('step must be a positive integer')
-    }
+  if (size <= 0) throw Error('size must be a positive integer')
+  if (step <= 0) throw Error('step must be a positive integer')
 
-    return recursiveWindow([], collection, size, stepOrCollection)
-  }
+  return recursiveWindow([], collection, size, step)
 }
