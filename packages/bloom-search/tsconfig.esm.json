@@ -7,6 +7,6 @@
   },
   "references": [
     { "path": "../bloom-filter/tsconfig.esm.json" },
-    { "path": "../windowed/tsconfig.esm.json" }
+    { "path": "../array/tsconfig.esm.json" }
   ]
 }

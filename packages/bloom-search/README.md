@@ -63,6 +63,12 @@ The class constructor takes an `Options` object with the following properties:
   yields more reliable results but makes the index larger. The value defaults to
   `0.0001` (or 0.01%).
 
+- `ngrams` (`number`) indexes n-grams beyound the single text tokens. A value of
+  `2` indexes digrams, a value of `3` indexes digrams and trigrams, and so
+  forth. This allows seaching the index for simple phrases (a phrase search is
+  entered "between quotes"). Indexing n-grams may dramatically increase the size
+  of the generated indices. Default value is `1` (no n-grams are indexed).
+
 - `preprocess` (`(text: unknown, field: IndexField) => string`) is a function to
   serialise each field as a `string` and optionally process it before indexing.
   For example, you can use this function to strip HTML from a field value. By
@@ -99,6 +105,11 @@ possibly match one or more terms in the query.
 The function matches individual words against the filter of each indexed
 document. You may prefix each word with the `+` operator to intersect results
 that (probably) contain the required word.
+
+If the `ngrams` option is greater than `1`, you are also able to search for
+exact phrases up to `ngrams` words typed between quotes (for example,
+`"this phrase"`). Only documents containing these words in that sequence are
+returned in the search results.
 
 Each search term is run through the provided `stemmer` function to ensure terms
 are processed in the same way as the tokens previously added to the index's

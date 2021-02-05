@@ -1,4 +1,7 @@
 import { CountingBloomFilter, optimal } from '@pacote/bloom-filter'
+import { range, windowed } from '@pacote/array'
+import { queryTerms } from './query'
+import { entries, keys, pick } from './object'
 
 type PreprocessFunction<Document, Field extends keyof Document> = (
   value: Document[Field],
@@ -32,13 +35,10 @@ function repeat(times: number, fn: () => void) {
 
 const compare = (a: number, b: number) => (a === b ? 0 : a > b ? -1 : 1)
 
-const nonEmpty = (text: string) => text.length > 0
-
-const keys = <O>(o: O) => Object.keys(o) as (keyof O)[]
-
-const entries = <O>(o: O) => Object.entries(o) as [keyof O, O[keyof O]][]
-
-const removeOperator = (term: string) => term.replace(/^\+/, '')
+const tokenizer = (text: string): string[] =>
+  text
+    .split(/\s/)
+    .map((token) => token.normalize('NFD').replace(/\W/gi, '').toLowerCase())
 
 export class BloomSearch<
   Document extends Record<string, unknown>,
@@ -49,6 +49,7 @@ export class BloomSearch<
   public readonly fields: Record<IndexField, number>
   public readonly summary: SummaryField[]
   public readonly errorRate: number
+  public readonly ngrams: number
   private readonly preprocess: PreprocessFunction<Document, IndexField>
   private readonly stemmer: StemmerFunction
   private readonly stopwords: StopwordsFunction
@@ -57,18 +58,20 @@ export class BloomSearch<
     fields: IndexField[] | Record<IndexField, number>
     summary: SummaryField[]
     errorRate?: number
+    ngrams?: number
     preprocess?: PreprocessFunction<Document, IndexField>
     stemmer?: StemmerFunction
     stopwords?: StopwordsFunction
   }) {
     this.fields = Array.isArray(options.fields)
-      ? options.fields.reduce((acc, field) => {
-          acc[field] = 1
-          return acc
+      ? options.fields.reduce((weight, field) => {
+          weight[field] = 1
+          return weight
         }, {} as Record<IndexField, number>)
       : options.fields
     this.summary = options.summary
     this.errorRate = options.errorRate ?? 0.0001
+    this.ngrams = options.ngrams ?? 1
     this.preprocess = options.preprocess ?? String
     this.stemmer = options.stemmer ?? ((token) => token)
     this.stopwords = options.stopwords ?? (() => true)
@@ -85,40 +88,40 @@ export class BloomSearch<
   }
 
   add(ref: string, document: Document, language?: string): void {
-    const tokens = keys(this.fields).reduce((acc, field) => {
+    const allTokens = keys(this.fields).reduce((tokens, field) => {
       if (document[field] !== undefined) {
-        acc[field] = this.tokenizer(this.preprocess(document[field], field))
-          .filter((token) => nonEmpty(token) && this.stopwords(token, language))
+        const fieldText = this.preprocess(document[field], field)
+        const fieldTokens = tokenizer(fieldText)
+
+        const unigrams = fieldTokens
+          .filter((token) => token.length && this.stopwords(token, language))
           .map((token) => this.stemmer(token, language))
+
+        const ngrams = range(2, this.ngrams + 1).map((i) =>
+          windowed(i, fieldTokens).map((ngram) => ngram.join(' '))
+        )
+
+        tokens[field] = unigrams.concat(...ngrams)
       }
-      return acc
+      return tokens
     }, {} as Record<IndexField, string[]>)
 
-    const uniqueTokens = new Set(Object.values(tokens).flat()).size
+    const uniqTokens = new Set(Object.values(allTokens).flat()).size
 
-    if (uniqueTokens === 0) {
+    if (uniqTokens === 0) {
       return
     }
 
-    const filter = new CountingBloomFilter(
-      optimal(uniqueTokens, this.errorRate)
-    )
+    const summary = pick(this.summary, document)
+    const filter = new CountingBloomFilter(optimal(uniqTokens, this.errorRate))
 
-    entries(this.fields).forEach(([field, weight]) =>
-      (tokens[field] || []).forEach((token) =>
-        repeat(weight ?? 1, () => filter.add(token))
+    entries(this.fields).forEach(([field, weight = 1]) =>
+      (allTokens[field] || []).forEach((token) =>
+        repeat(weight, () => filter.add(token))
       )
     )
 
-    const entry = this.summary.reduce(
-      (acc, name) => {
-        acc.summary[name] = document[name]
-        return acc
-      },
-      { summary: {} as Pick<Document, SummaryField>, filter }
-    )
-
-    this.index[ref] = entry
+    this.index[ref] = { summary, filter }
   }
 
   remove(ref: string): void {
@@ -132,7 +135,7 @@ export class BloomSearch<
       searchTokens.required.length === 0
         ? Object.keys(this.index)
         : searchTokens.required.reduce(
-            (acc, token) => acc.filter((ref) => this.count(ref, token) > 0),
+            (results, token) => results.filter((ref) => this.count(ref, token)),
             Object.keys(this.index)
           )
 
@@ -153,25 +156,18 @@ export class BloomSearch<
     return this.index[ref].filter.has(token)
   }
 
-  private tokenizer(text: string): string[] {
-    return text
-      .split(/\s/)
-      .map((token) => token.normalize('NFD').replace(/\W/gi, '').toLowerCase())
-  }
-
   private parseQuery(query: string, language?: string): SearchTokens {
-    return query
-      .split(/\s/)
-      .filter(nonEmpty)
-      .reduce<SearchTokens>(
-        ({ required, included }, term) => {
-          const token = this.stemmer(removeOperator(term), language)
-          return {
-            required: term.startsWith('+') ? required.concat(token) : required,
-            included: included.concat(token),
-          }
-        },
-        { required: [], included: [] }
-      )
+    return queryTerms(query).reduce<SearchTokens>(
+      ({ required, included }, [term, type]) => {
+        const token = type === 'phrase' ? term : this.stemmer(term, language)
+        return {
+          required: ['require', 'phrase'].includes(type)
+            ? required.concat(token)
+            : required,
+          included: included.concat(token),
+        }
+      },
+      { required: [], included: [] }
+    )
   }
 }

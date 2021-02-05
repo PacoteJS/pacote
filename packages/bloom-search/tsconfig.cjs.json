@@ -7,6 +7,6 @@
   },
   "references": [
     { "path": "../bloom-filter/tsconfig.cjs.json" },
-    { "path": "../windowed/tsconfig.cjs.json" }
+    { "path": "../array/tsconfig.cjs.json" }
   ]
 }

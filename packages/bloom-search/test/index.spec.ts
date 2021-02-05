@@ -188,76 +188,125 @@ test('index can be searched for multiple terms', () => {
   ])
 })
 
-test('a +required term includes only results where it is found', () => {
-  const bs = new BloomSearch({
-    fields: ['text'],
-    summary: ['text'],
+describe('+required term search', () => {
+  it('includes only results where the required term is found', () => {
+    const bs = new BloomSearch({
+      fields: ['text'],
+      summary: ['text'],
+    })
+
+    bs.add('1', { text: 'foo bar' })
+    bs.add('2', { text: 'foo baz' })
+
+    expect(bs.search('foo +bar')).toEqual([{ text: 'foo bar' }])
   })
 
-  bs.add('1', { text: 'foo bar' })
-  bs.add('2', { text: 'foo baz' })
+  it('sorts matches using counts of all terms', () => {
+    const bs = new BloomSearch({
+      fields: ['text'],
+      summary: ['text'],
+    })
 
-  expect(bs.search('foo +bar')).toEqual([{ text: 'foo bar' }])
-})
+    bs.add('1', { text: 'foo bar' })
+    bs.add('2', { text: 'foo foo bar' })
 
-test('searches with a required term use matches from all terms', () => {
-  const bs = new BloomSearch({
-    fields: ['text'],
-    summary: ['text'],
+    expect(bs.search('foo +bar')).toEqual([
+      { text: 'foo foo bar' },
+      { text: 'foo bar' },
+    ])
   })
 
-  bs.add('1', { text: 'foo bar' })
-  bs.add('2', { text: 'foo foo bar' })
+  it('intersects results', () => {
+    const bs = new BloomSearch({
+      fields: ['text'],
+      summary: ['text'],
+    })
 
-  expect(bs.search('foo +bar')).toEqual([
-    { text: 'foo foo bar' },
-    { text: 'foo bar' },
-  ])
+    bs.add('1', { text: 'foo bar' })
+    bs.add('2', { text: 'foo baz' })
+
+    expect(bs.search('+bar +baz')).toEqual([])
+  })
 })
 
-test('results from +required terms intersect each other', () => {
-  const bs = new BloomSearch({
-    fields: ['text'],
-    summary: ['text'],
+describe('serialised instance hydration', () => {
+  it('loads an index', () => {
+    const options = {
+      fields: ['text'],
+      summary: ['text'],
+    }
+    const previous = new BloomSearch(options)
+    previous.add('1', { text: 'previous foo' })
+    const current = new BloomSearch(options)
+
+    current.load(JSON.parse(JSON.stringify(previous.index)))
+    current.add('2', { text: 'additional foo' })
+
+    expect(current.search('foo')).toEqual([
+      { text: 'previous foo' },
+      { text: 'additional foo' },
+    ])
   })
 
-  bs.add('1', { text: 'foo bar' })
-  bs.add('2', { text: 'foo baz' })
+  it('replaces an index', () => {
+    const options = {
+      fields: ['text'],
+      summary: ['text'],
+    }
 
-  expect(bs.search('+bar +baz')).toEqual([])
+    const previous = new BloomSearch(options)
+    previous.add('1', { text: 'previous' })
+
+    const current = new BloomSearch(options)
+    current.add('2', { text: 'replaced' })
+    current.load(JSON.parse(JSON.stringify(previous.index)))
+
+    expect(current.search('previous')).toEqual([{ text: 'previous' }])
+    expect(current.search('replaced')).toEqual([])
+  })
 })
 
-test('index can be loaded from a deserialised instance', () => {
-  const options = {
-    fields: ['text'],
-    summary: ['text'],
-  }
-  const previous = new BloomSearch(options)
-  previous.add('1', { text: 'previous foo' })
-  const current = new BloomSearch(options)
+describe('ngram search', () => {
+  it('supports digram phrases', () => {
+    const bs = new BloomSearch({
+      fields: ['text'],
+      summary: ['text'],
+      ngrams: 2,
+    })
 
-  current.load(JSON.parse(JSON.stringify(previous.index)))
-  current.add('2', { text: 'additional foo' })
+    bs.add('1', { text: 'foo bar baz' })
+    bs.add('2', { text: 'foo baz bar' })
 
-  expect(current.search('foo')).toEqual([
-    { text: 'previous foo' },
-    { text: 'additional foo' },
-  ])
-})
+    expect(bs.search('"foo bar"')).toEqual([{ text: 'foo bar baz' }])
+  })
 
-test('loaded index replaces the instance index', () => {
-  const options = {
-    fields: ['text'],
-    summary: ['text'],
-  }
+  it('supports trigram phrases', () => {
+    const bs = new BloomSearch({
+      fields: ['text'],
+      summary: ['text'],
+      ngrams: 3,
+    })
 
-  const previous = new BloomSearch(options)
-  previous.add('1', { text: 'previous' })
+    bs.add('1', { text: 'foo bar bar bar' })
+    bs.add('2', { text: 'foo foo foo bar' })
 
-  const current = new BloomSearch(options)
-  current.add('2', { text: 'replaced' })
-  current.load(JSON.parse(JSON.stringify(previous.index)))
+    expect(bs.search('"foo bar bar"')).toEqual([{ text: 'foo bar bar bar' }])
+    expect(bs.search('"foo foo"')).toEqual([{ text: 'foo foo foo bar' }])
+  })
 
-  expect(current.search('previous')).toEqual([{ text: 'previous' }])
-  expect(current.search('replaced')).toEqual([])
+  it('allows lowercase matches', () => {
+    const bs = new BloomSearch({
+      fields: ['text'],
+      summary: ['text'],
+      ngrams: 2,
+    })
+
+    bs.add('1', { text: 'foo BAR' })
+    bs.add('2', { text: 'FOO bar' })
+
+    expect(bs.search('"fOo bAr"')).toEqual([
+      { text: 'foo BAR' },
+      { text: 'FOO bar' },
+    ])
+  })
 })

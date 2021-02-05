@@ -34,7 +34,7 @@
     "prepublish": "yarn build"
   },
   "dependencies": {
-    "@pacote/bloom-filter": "file:../bloom-filter",
-    "@pacote/windowed": "file:../windowed"
+    "@pacote/array": "file:../array",
+    "@pacote/bloom-filter": "file:../bloom-filter"
   }
 }
