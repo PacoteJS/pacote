@@ -1,0 +1,1 @@
+export { windowed } from './windowed'

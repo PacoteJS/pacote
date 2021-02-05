@@ -108,6 +108,7 @@
   },
   "name": "pacote",
   "dependencies": {
+    "@pacote/array": "file:packages/array",
     "@pacote/bloom-filter": "file:packages/bloom-filter",
     "@pacote/bloom-search": "file:packages/bloom-search",
     "@pacote/computus": "file:packages/computus",
