@@ -13,12 +13,13 @@ export function isPlainObject(o: unknown): o is Record<string, unknown> {
     !(o instanceof ArrayBuffer) &&
     !(o instanceof Float32Array) &&
     !(o instanceof Float64Array) &&
+    !(o instanceof Int8Array) &&
     !(o instanceof Int16Array) &&
     !(o instanceof Int32Array) &&
-    !(o instanceof Int8Array) &&
+    !(o instanceof Uint8Array) &&
     !(o instanceof Uint16Array) &&
     !(o instanceof Uint32Array) &&
-    !(o instanceof Uint8Array) &&
-    !(o instanceof Uint8ClampedArray)
+    !(o instanceof Uint8ClampedArray) &&
+    !(o instanceof BigUint64Array)
   )
 }
