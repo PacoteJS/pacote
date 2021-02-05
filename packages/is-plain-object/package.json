@@ -1,7 +1,7 @@
 {
   "name": "@pacote/is-plain-object",
   "description": "Checks whether the provided object is a plain JavaScript object.",
-  "version": "1.1.6",
+  "version": "1.2.0",
   "sideEffects": false,
   "license": "MIT",
   "author": {

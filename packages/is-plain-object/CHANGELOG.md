@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/PacoteJS/pacote/compare/@pacote/is-plain-object@1.1.6...@pacote/is-plain-object@1.2.0) (2021-02-05)
+
+### Features
+
+- 🎸 test for BigUint64Array ([4e52d2b](https://github.com/PacoteJS/pacote/commit/4e52d2b81534854eadc1ca11c021131bd704ab39))
+
 ## [1.1.6](https://github.com/PacoteJS/pacote/compare/@pacote/is-plain-object@1.1.5...@pacote/is-plain-object@1.1.6) (2020-11-27)
 
 **Note:** Version bump only for package @pacote/is-plain-object

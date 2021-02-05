@@ -1,7 +1,7 @@
 {
   "name": "@pacote/jest-either",
   "description": "Jest matcher for Either objects.",
-  "version": "4.0.8",
+  "version": "4.0.9",
   "sideEffects": false,
   "license": "MIT",
   "author": {
