@@ -63,11 +63,12 @@ The class constructor takes an `Options` object with the following properties:
   yields more reliable results but makes the index larger. The value defaults to
   `0.0001` (or 0.01%).
 
-- `ngrams` (`number`) indexes n-grams beyound the single text tokens. A value of
-  `2` indexes digrams, a value of `3` indexes digrams and trigrams, and so
+- `ngrams` (`number`) indexes _n_-grams beyond the single text tokens. A value
+  of `2` indexes digrams, a value of `3` indexes digrams and trigrams, and so
   forth. This allows seaching the index for simple phrases (a phrase search is
-  entered "between quotes"). Indexing n-grams may dramatically increase the size
-  of the generated indices. Default value is `1` (no n-grams are indexed).
+  entered "between quotes"). Indexing _n_-grams will increase the size of the
+  generated indices roughly by a factor of _n_. Default value is `1` (no
+  _n_-grams are indexed).
 
 - `preprocess` (`(text: unknown, field: IndexField) => string`) is a function to
   serialise each field as a `string` and optionally process it before indexing.
