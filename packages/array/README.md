@@ -12,6 +12,24 @@ Extra Array functions.
 yarn add @pacote/array
 ```
 
+## `range(start: number, end: number): number[]`
+
+`range()` returns an array of numbers between `start` and `end` (non inclusive).
+The function is only able to generate ascending ranges.
+
+### Usage
+
+```typescript
+import { range } from '@pacote/windowed'
+
+range(1, 4) // => [1, 2, 3]
+```
+
+### Arguments
+
+- `start`: the start of the range.
+- `end`: the end of the range (not included).
+
 ## `windowed<T>(size: number, step: number = 1, collection: T[]): T[][]`
 
 `windowed()` returns a snapshot array of a window of the provided `size` sliding
