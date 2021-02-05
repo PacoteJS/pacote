@@ -1,5 +1,5 @@
 import { assert, nat, property, string } from 'fast-check'
-import { range } from 'ramda'
+import { range } from '@pacote/array'
 import { CountingBloomFilter } from '../src/index'
 
 test('a counting Bloom filter is empty when created', () => {

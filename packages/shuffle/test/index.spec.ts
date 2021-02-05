@@ -1,5 +1,5 @@
 import { assert, property, integer } from 'fast-check'
-import { range } from 'ramda'
+import { range } from '@pacote/array'
 import { shuffle } from '../src/index'
 
 test('shuffling an array', () => {
