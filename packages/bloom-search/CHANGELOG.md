@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.5.2...@pacote/bloom-search@0.6.0) (2021-02-05)
+
+### Features
+
+- 🎸 n-gram indexing and phrase search (in quotes) ([505e87d](https://github.com/PacoteJS/pacote/commit/505e87dc3f482e3b9db6bec3f698cd6823228e9a))
+
 ## [0.5.2](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.5.1...@pacote/bloom-search@0.5.2) (2021-02-05)
 
 **Note:** Version bump only for package @pacote/bloom-search
