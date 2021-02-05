@@ -1,5 +1,5 @@
 import { CountingBloomFilter, optimal } from '@pacote/bloom-filter'
-import { range, windowed } from '@pacote/array'
+import { range, times, windowed } from '@pacote/array'
 import { queryTerms } from './query'
 import { entries, keys, pick } from './object'
 
@@ -24,13 +24,6 @@ export type DocumentIndex<
 type SearchTokens = {
   required: string[]
   included: string[]
-}
-
-function repeat(times: number, fn: () => void) {
-  if (times > 0) {
-    fn()
-    repeat(times - 1, fn)
-  }
 }
 
 const compare = (a: number, b: number) => (a === b ? 0 : a > b ? -1 : 1)
@@ -117,7 +110,7 @@ export class BloomSearch<
 
     entries(this.fields).forEach(([field, weight = 1]) =>
       (allTokens[field] || []).forEach((token) =>
-        repeat(weight, () => filter.add(token))
+        times(weight, () => filter.add(token))
       )
     )
 
