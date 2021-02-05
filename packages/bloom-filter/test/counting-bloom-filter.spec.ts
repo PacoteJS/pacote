@@ -1,5 +1,5 @@
 import { assert, nat, property, string } from 'fast-check'
-import { range } from '@pacote/array'
+import { times } from '@pacote/array'
 import { CountingBloomFilter } from '../src/index'
 
 test('a counting Bloom filter is empty when created', () => {
@@ -23,10 +23,10 @@ test('elements added to a counting Bloom filter can be found', () => {
 
 test('searching an element returns the number of times the element was added to the counting Bloom filter', () => {
   assert(
-    property(string(), nat(100), (element, times) => {
+    property(string(), nat(100), (element, n) => {
       const filter = new CountingBloomFilter({ size: 68, hashes: 1 })
-      range(0, times).forEach(() => filter.add(element))
-      expect(filter.has(element)).toBe(times)
+      times(n, () => filter.add(element))
+      expect(filter.has(element)).toBe(n)
     })
   )
 })

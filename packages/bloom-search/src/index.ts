@@ -90,11 +90,11 @@ export class BloomSearch<
           .filter((token) => token.length && this.stopwords(token, language))
           .map((token) => this.stemmer(token, language))
 
-        const ngrams = range(2, this.ngrams + 1).map((i) =>
-          windowed(i, fieldTokens).map((ngram) => ngram.join(' '))
-        )
+        const ngrams = range(2, this.ngrams + 1)
+          .map((i) => windowed(i, fieldTokens).map((ngram) => ngram.join(' ')))
+          .flat()
 
-        tokens[field] = unigrams.concat(...ngrams)
+        tokens[field] = unigrams.concat(ngrams)
       }
       return tokens
     }, {} as Record<IndexField, string[]>)

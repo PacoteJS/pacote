@@ -1,4 +1,4 @@
-import { assert, integer, property } from 'fast-check'
+import { assert, nat, property } from 'fast-check'
 import { times } from '../src/index'
 
 test('an empty array is returned when function is run 0 times', () => {
@@ -8,7 +8,7 @@ test('an empty array is returned when function is run 0 times', () => {
 
 test('no functions are called when run zero times', () => {
   assert(
-    property(integer(0, 1000), (n) => {
+    property(nat(100), (n) => {
       const fn = jest.fn()
       times(n, fn)
       expect(fn).toHaveBeenCalledTimes(n)
