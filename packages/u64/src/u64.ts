@@ -15,6 +15,6 @@ export function toNumber(value: U64): number {
 
 export const ZERO = fromNumber(0)
 
-export function clampChunks([v0, v1, v2, v3]: U64): U64 {
+export function clampBlocks([v0, v1, v2, v3]: U64): U64 {
   return [clamp(v0), clamp(v1), clamp(v2), clamp(v3)]
 }

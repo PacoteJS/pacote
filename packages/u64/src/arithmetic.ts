@@ -1,6 +1,6 @@
 import { shiftLeft, shiftRight } from './bitwise'
 import { equals, greaterThan, lessThan } from './comparison'
-import { clamp, clampChunks, overflow, U64, ZERO } from './u64'
+import { clamp, clampBlocks, overflow, U64, ZERO } from './u64'
 
 export function add(augend: U64, addend: U64): U64 {
   const r0 = augend[0] + addend[0]
@@ -8,7 +8,7 @@ export function add(augend: U64, addend: U64): U64 {
   const r2 = overflow(r1) + augend[2] + addend[2]
   const r3 = overflow(r2) + augend[3] + addend[3]
 
-  return clampChunks([r0, r1, r2, r3])
+  return clampBlocks([r0, r1, r2, r3])
 }
 
 export function negate(value: U64): U64 {
@@ -17,7 +17,7 @@ export function negate(value: U64): U64 {
   const r2 = clamp(~value[2]) + overflow(r1)
   const r3 = ~value[3] + overflow(r2)
 
-  return clampChunks([r0, r1, r2, r3])
+  return clampBlocks([r0, r1, r2, r3])
 }
 
 export function subtract(minuend: U64, subtrahend: U64): U64 {
@@ -42,7 +42,7 @@ export function multiply(multiplier: U64, multiplicand: U64): U64 {
   r3 = clamp(r3) + multiplier[2] * multiplicand[1]
   r3 = clamp(r3) + multiplier[3] * multiplicand[0]
 
-  return clampChunks([r0, r1, r2, r3])
+  return clampBlocks([r0, r1, r2, r3])
 }
 
 export function divide(dividend: U64, divisor: U64): U64 {

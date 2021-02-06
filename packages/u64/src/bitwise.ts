@@ -1,6 +1,6 @@
-import { clamp, clampChunks, overflow, U64 } from './u64'
+import { clamp, clampBlocks, overflow, U64 } from './u64'
 
-function softClampChunks([v0, v1, v2, v3]: U64): U64 {
+function softClampBlocks([v0, v1, v2, v3]: U64): U64 {
   return [clamp(v0), clamp(v1), clamp(v2), v3]
 }
 
@@ -39,8 +39,8 @@ function _shiftLeft(value: U64, bits: number): U64 {
 
 export function shiftLeft(value: U64, bits: number, overflow = false): U64 {
   return overflow
-    ? softClampChunks(_shiftLeft(value, bits))
-    : clampChunks(_shiftLeft(value, bits))
+    ? softClampBlocks(_shiftLeft(value, bits))
+    : clampBlocks(_shiftLeft(value, bits))
 }
 
 function _shiftRight(value: U64, bits: number): U64 {
@@ -73,7 +73,7 @@ function _shiftRight(value: U64, bits: number): U64 {
 }
 
 export function shiftRight(value: U64, bits: number): U64 {
-  return clampChunks(_shiftRight(value, bits))
+  return clampBlocks(_shiftRight(value, bits))
 }
 
 export function rotateLeft(value: U64, bits: number): U64 {
