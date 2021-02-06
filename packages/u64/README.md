@@ -6,17 +6,17 @@
 
 Unsigned 64-bit integers.
 
-While modern JavaScript environments support very large integers via the
-[`BigInt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt)
+This package exists because while modern JavaScript environments support very
+large integers via the [`BigInt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt)
 type, it is not available in older browsers and tooling doesn't always
 transpile `BigInt` operations into a backwards-compatible format.
 
-If you target ECMAScript 2020 or later, you do not need this package.
+If you target ECMAScript 2020 or later, you will probably not need this.
 
 The `U64` type provided by this package is represented as a tuple of four 16-bit
 integers. For example, the number 1 is `[1, 0, 0, 0]`. It is not an object class
-with built-in methods. Instead, the package provides functions to support
-commonly-used operations.
+with built-in methods. Instead of methods, the package provides functions to
+support commonly-used operations.
 
 ## Installation
 
@@ -148,7 +148,7 @@ non-negative. Equivalent to the numeric `>>>` operator.
 Coerces a `U64` value to `number`.
 
 Because JavaScript numbers are not 64-bit, precision may be lost when
-converting. Only numbers up to `Number.MAX_SAFE_INTEGER` (2^32, or 4294967296)
+converting. Only numbers with up to 32-bit precision (2^32, or 4294967296)
 can be safely converted into `number`.
 
 ### `toString(value: U64, radix?: number): string`
