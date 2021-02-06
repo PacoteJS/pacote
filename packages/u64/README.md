@@ -98,6 +98,18 @@ otherwise returns `false`.
 
 ## Binary bitwise functions
 
+### `and(a: U64, b: U64): U64`
+
+The bitwise AND function returns a `1` in each bit position for which the
+corresponding bits of both operands are `1`s. Equivalent to the numeric `&`
+operator.
+
+### `or(a: U64, b: U64): U64`
+
+The bitwise OR function returns a `1` in each bit position for which the
+corresponding bits of either operand are `1`s. Equivalent to the numeric `|`
+operator.
+
 ### `xor(a: U64, b: U64): U64`
 
 The bitwise XOR function returns a `1` in each bit position for which the
@@ -108,8 +120,13 @@ numeric `^` operator.
 
 ### `rotateLeft(value: U64, bits: number): U64`
 
-The left rotate function shifts the `value` the specified number of `bits` to
-the left. Bits shifted off to the left appear on the right.
+The left rotate function circularly shifts the `value` the specified number of
+`bits` to the left. Bits shifted off to the left appear on the right.
+
+### `rotateRight(value: U64, bits: number): U64`
+
+The right rotate function circularly shifts the `value` the specified number of
+`bits` to the right. Bits shifted off to the right appear on the left.
 
 ### `shiftLeft(value: U64, bits: number): U64`
 

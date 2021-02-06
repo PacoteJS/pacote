@@ -2,7 +2,15 @@ import { fromNumber, U64 } from './u64'
 import { fromString } from './string'
 
 export { toNumber, U64, ZERO } from './u64'
-export { xor, shiftLeft, shiftRight, rotateLeft } from './bitwise'
+export {
+  and,
+  or,
+  xor,
+  shiftLeft,
+  shiftRight,
+  rotateLeft,
+  rotateRight,
+} from './bitwise'
 export { equals, greaterThan, lessThan } from './comparison'
 export {
   add,
