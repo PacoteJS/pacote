@@ -6,7 +6,7 @@ describe('equals', () => {
     ['0', '1', false],
     ['4831838208', '8589934592', false],
     ['8589934592', '8589934592', true],
-  ])('%d == %d', (a, b, expected) => {
+  ])('%s == %s', (a, b, expected) => {
     expect(equals(from(a), from(b))).toBe(expected)
   })
 })
