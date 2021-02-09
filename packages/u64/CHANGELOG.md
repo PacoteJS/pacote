@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.1](https://github.com/PacoteJS/pacote/compare/@pacote/u64@0.1.0...@pacote/u64@0.1.1) (2021-02-09)
+
+### Bug Fixes
+
+- 🐛 issues with shiftLeft and shiftRight ([a030f3e](https://github.com/PacoteJS/pacote/commit/a030f3e88db5cac590076afbf594af77501320a4))
+
 # 0.1.0 (2021-02-06)
 
 ### Features
