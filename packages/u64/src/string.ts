@@ -18,6 +18,11 @@ export function fromString(value: string, radix: number): U64 {
   return result
 }
 
+const PADDING: Record<number, number | undefined> = {
+  2: 64,
+  16: 16,
+}
+
 export function toString(value: U64, radix = 10): string {
   const _radix = fromNumber(radix)
 
@@ -40,5 +45,5 @@ export function toString(value: U64, radix = 10): string {
     i--
   }
 
-  return res.join('')
+  return res.join('').padStart(PADDING[radix] ?? 0, '0')
 }
