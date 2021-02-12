@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.2](https://github.com/PacoteJS/pacote/compare/@pacote/u64@0.1.1...@pacote/u64@0.1.2) (2021-02-12)
+
+### Bug Fixes
+
+- 🐛 pad strings with radix 2 and 16 ([2fa4a03](https://github.com/PacoteJS/pacote/commit/2fa4a031d2fdcad84c781533ef9a73b25ae88b68))
+
 ## [0.1.1](https://github.com/PacoteJS/pacote/compare/@pacote/u64@0.1.0...@pacote/u64@0.1.1) (2021-02-09)
 
 ### Bug Fixes
