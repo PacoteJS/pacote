@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "esnext",
+    "outDir": "lib/esm"
+  },
+  "references": [{ "path": "../u64/tsconfig.esm.json" }]
+}
