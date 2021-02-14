@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1](https://github.com/PacoteJS/pacote/compare/@pacote/array@0.2.0...@pacote/array@0.2.1) (2021-02-14)
+
+
+### Bug Fixes
+
+* 🐛 change ESM compilation target to ES2019 ([5c30e8a](https://github.com/PacoteJS/pacote/commit/5c30e8a5da41e1c5c394cbb21f64d2a5256817ea))
+
+
+
+
+
 # [0.2.0](https://github.com/PacoteJS/pacote/compare/@pacote/array@0.1.0...@pacote/array@0.2.0) (2021-02-05)
 
 ### Features

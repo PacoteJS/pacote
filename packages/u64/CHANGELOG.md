@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.3](https://github.com/PacoteJS/pacote/compare/@pacote/u64@0.1.2...@pacote/u64@0.1.3) (2021-02-14)
+
+
+### Bug Fixes
+
+* 🐛 change ESM compilation target to ES2019 ([5c30e8a](https://github.com/PacoteJS/pacote/commit/5c30e8a5da41e1c5c394cbb21f64d2a5256817ea))
+
+
+
+
+
 ## [0.1.2](https://github.com/PacoteJS/pacote/compare/@pacote/u64@0.1.1...@pacote/u64@0.1.2) (2021-02-12)
 
 ### Bug Fixes
