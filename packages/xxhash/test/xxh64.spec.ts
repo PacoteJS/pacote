@@ -26,23 +26,20 @@ describe('XXHash64', () => {
     )
   })
 
-  const SEED_32 = 2654435761
-  // const SEED_64 = Buffer.from([0x9e, 0x37, 0x79, 0xb1, 0x85, 0xeb, 0xca, 0x8d])
-
   test.each([
     [0, 0, 'ef46db3751d8e999'],
-    [0, SEED_32, 'ac75fda2929b17ef'],
+    [0, 2654435761, 'ac75fda2929b17ef'],
     [1, 0, 'e934a84adb052768'],
-    [1, SEED_32, '5014607643a9b4c3'],
+    [1, 2654435761, '5014607643a9b4c3'],
     [4, 0, '9136a0dca57457ee'],
     [14, 0, '8282dcc4994e35c8'],
-    [14, SEED_32, 'c3bd6bf63deb6df0'],
-    /* FIXME */ [222, 0, 'b641ae8cb691c174'],
-    /* FIXME */ [222, SEED_32, '20cb8ab7ae10c14a'],
+    [14, 2654435761, 'c3bd6bf63deb6df0'],
+    [222, 0, 'b641ae8cb691c174'],
+    [222, 2654435761, '20cb8ab7ae10c14a'],
   ])('sanity buffer (length %d, seed %d)', (length, seed, expected) => {
-    const data = sanityBuffer.reduce((copy, value, offset) => {
-      copy[offset] = value
-      return copy
+    const data = sanityBuffer.reduce((clone, value, index) => {
+      clone[index] = value
+      return clone
     }, new Uint8Array(length))
 
     const actual = xxh64(seed).update(data.buffer).digest('hex')
