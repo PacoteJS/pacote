@@ -45,4 +45,11 @@ describe('XXHash64', () => {
     const actual = xxh64(seed).update(data.buffer).digest('hex')
     expect(actual).toBe(expected)
   })
+
+  test('hasher is reset after a digest', () => {
+    const hasher = xxh64(2654435761)
+    const h1 = hasher.update(sanityBuffer.toString()).digest('hex')
+    const h2 = hasher.update(sanityBuffer.toString()).digest('hex')
+    expect(h2).toBe(h1)
+  })
 })

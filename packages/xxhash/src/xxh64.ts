@@ -130,7 +130,7 @@ export function xxh64(seed: number | U64 = 0): XXHash {
     hash = add(hash, from(totalLength))
     hash = finalize(buffer, bufferSize, hash)
 
-    reset()
+    reset(_seed)
 
     return toString(hash, 16)
   }
