@@ -1,8 +1,7 @@
 import { xxh64 } from '@pacote/xxhash'
-import { from, toNumber } from '@pacote/u64'
 
 function toUint32(hex: string): number {
-  return toNumber(from(hex, 16))
+  return parseInt(hex.substr(8, 8), 16)
 }
 
 export function hashLocations(size: number, hashes: number, seed: number) {
