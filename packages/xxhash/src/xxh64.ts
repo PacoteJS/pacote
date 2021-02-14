@@ -19,7 +19,7 @@ const PRIME_4 = from('9650029242287828579')
 const PRIME_5 = from('2870177450012600261')
 
 interface XXHash {
-  reset(seed: number | U64): void
+  reset(seed?: number | U64): void
   digest(encoding: 'hex'): string
   update(input: string | ArrayBuffer): XXHash
 }
@@ -95,7 +95,7 @@ export function xxh64(seed: number | U64 = 0): XXHash {
   let bufferSize: number
   let buffer: Uint8Array
 
-  const reset = (seed: number | U64 = 0) => {
+  const reset = (seed: number | U64 = _seed) => {
     _seed = typeof seed === 'number' ? from(seed) : seed
     v1 = sum(_seed, PRIME_1, PRIME_2)
     v2 = add(_seed, PRIME_2)

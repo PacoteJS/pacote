@@ -52,4 +52,12 @@ describe('XXHash64', () => {
     const h2 = hasher.update(sanityBuffer.toString()).digest('hex')
     expect(h2).toBe(h1)
   })
+
+  test('manually resetting the hasher without a seed uses the original seed', () => {
+    const hasher = xxh64(2654435761)
+    const h1 = hasher.update(sanityBuffer.toString()).digest('hex')
+    hasher.reset()
+    const h2 = hasher.update(sanityBuffer.toString()).digest('hex')
+    expect(h2).toBe(h1)
+  })
 })
