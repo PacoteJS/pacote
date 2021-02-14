@@ -46,6 +46,22 @@ describe('XXHash64', () => {
     expect(actual).toBe(expected)
   })
 
+  test('hashing parts of a string', () => {
+    assert(
+      property(
+        nat(),
+        string({ maxLength: 256 }),
+        string({ maxLength: 256 }),
+        (seed, part1, part2) => {
+          const hasher = xxh64(seed)
+          const hashWhole = hasher.update(part1 + part2).digest('hex')
+          const hashChunked = hasher.update(part1).update(part2).digest('hex')
+          expect(hashChunked).toBe(hashWhole)
+        }
+      )
+    )
+  })
+
   test('hasher is reset after a digest', () => {
     const hasher = xxh64(2654435761)
     const h1 = hasher.update(sanityBuffer.toString()).digest('hex')
