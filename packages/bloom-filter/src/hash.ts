@@ -1,12 +1,17 @@
-import { h64 } from 'xxhashjs'
+import { xxh64 } from '@pacote/xxhash'
+import { from, toNumber } from '@pacote/u64'
+
+function toUint32(hex: string): number {
+  return toNumber(from(hex, 16))
+}
 
 export function hashLocations(size: number, hashes: number, seed: number) {
-  const h1 = h64(seed + 1)
-  const h2 = h64(seed + 2)
+  const h1 = xxh64(seed + 1)
+  const h2 = xxh64(seed + 2)
 
   const enhancedDoubleHash = (data: string, size: number, i: number) =>
-    (h1.update(data).digest().toNumber() +
-      i * h2.update(data).digest().toNumber() +
+    (toUint32(h1.update(data).digest('hex')) +
+      i * toUint32(h2.update(data).digest('hex')) +
       i ** 3) %
     size
 

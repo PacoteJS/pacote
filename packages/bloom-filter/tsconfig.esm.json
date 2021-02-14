@@ -4,5 +4,6 @@
     "module": "ESNext",
     "target": "ES2019",
     "outDir": "lib/esm"
-  }
+  },
+  "references": [{ "path": "../xxhash/tsconfig.esm.json" }]
 }

@@ -66,7 +66,6 @@
     "@types/node": "^14.0.4",
     "@types/ramda": "^0.27.0",
     "@types/react": "^17.0.0",
-    "@types/xxhashjs": "^0.2.2",
     "@typescript-eslint/eslint-plugin": "^4.8.2",
     "@typescript-eslint/parser": "^4.8.2",
     "eslint": "^7.0.0",
@@ -129,6 +128,7 @@
     "@pacote/result": "file:packages/result",
     "@pacote/shuffle": "file:packages/shuffle",
     "@pacote/throttle": "file:packages/throttle",
-    "@pacote/u64": "file:packages/u64"
+    "@pacote/u64": "file:packages/u64",
+    "@pacote/xxhash": "file:packages/xxhash"
   }
 }

@@ -33,6 +33,6 @@
     "prepublish": "yarn build"
   },
   "dependencies": {
-    "xxhashjs": "^0.2.2"
+    "@pacote/xxhash": "file:../xxhash"
   }
 }
