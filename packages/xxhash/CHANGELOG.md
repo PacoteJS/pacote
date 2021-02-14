@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/PacoteJS/pacote/compare/@pacote/xxhash@0.1.0...@pacote/xxhash@0.2.0) (2021-02-14)
+
+
+### Features
+
+* 🎸 reset hasher without a seed ([418cb52](https://github.com/PacoteJS/pacote/commit/418cb52e4666036ffb6208d917f5dcbd19f726a4))
+
+
+
+
+
 # 0.1.0 (2021-02-14)
 
 
