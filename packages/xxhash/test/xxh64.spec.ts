@@ -10,7 +10,7 @@ describe('XXHash64', () => {
     expect(h2).toBe(h1)
   })
 
-  test('compare to XXH64 reference implementation', () => {
+  test('XXH64 reference implementation comparison', () => {
     assert(
       property(
         nat(),
@@ -46,7 +46,7 @@ describe('XXHash64', () => {
     expect(actual).toBe(expected)
   })
 
-  test('hashing parts of a string', () => {
+  test('chunked updates', () => {
     assert(
       property(
         nat(),
@@ -62,14 +62,14 @@ describe('XXHash64', () => {
     )
   })
 
-  test('hasher is reset after a digest', () => {
+  test('hasher is reset after digest', () => {
     const hasher = xxh64(2654435761)
     const h1 = hasher.update(sanityBuffer.toString()).digest('hex')
     const h2 = hasher.update(sanityBuffer.toString()).digest('hex')
     expect(h2).toBe(h1)
   })
 
-  test('manually resetting the hasher without a seed uses the original seed', () => {
+  test('resetting the hasher without a seed uses the original seed', () => {
     const hasher = xxh64(2654435761)
     const h1 = hasher.update(sanityBuffer.toString()).digest('hex')
     hasher.reset()
