@@ -1541,15 +1541,15 @@
     "@types/node" ">= 8"
 
 "@pacote/array@file:packages/array":
-  version "0.2.0"
+  version "0.2.1"
 
 "@pacote/bloom-filter@file:packages/bloom-filter":
-  version "0.3.2"
+  version "0.3.5"
   dependencies:
     "@pacote/xxhash" "file:packages/xxhash"
 
 "@pacote/bloom-search@file:packages/bloom-search":
-  version "0.6.0"
+  version "0.6.3"
   dependencies:
     "@pacote/array" "file:packages/array"
     "@pacote/bloom-filter" "file:packages/bloom-filter"
@@ -1584,7 +1584,7 @@
   version "1.1.6"
 
 "@pacote/iff@file:packages/iff":
-  version "2.0.2"
+  version "2.0.3"
   dependencies:
     "@pacote/option" "file:packages/option"
 
@@ -1606,7 +1606,7 @@
     ramda "^0.27.0"
 
 "@pacote/linked-list@file:packages/linked-list":
-  version "0.4.3"
+  version "0.4.4"
   dependencies:
     "@pacote/option" "file:packages/option"
 
@@ -1614,7 +1614,7 @@
   version "1.1.5"
 
 "@pacote/option@file:packages/option":
-  version "1.0.7"
+  version "1.0.8"
 
 "@pacote/pixels@file:packages/pixels":
   version "1.1.6"
@@ -1628,7 +1628,7 @@
   version "1.1.9"
 
 "@pacote/result@file:packages/result":
-  version "1.0.7"
+  version "1.0.8"
   dependencies:
     "@pacote/option" "file:packages/option"
 
@@ -1639,10 +1639,10 @@
   version "1.0.6"
 
 "@pacote/u64@file:packages/u64":
-  version "0.1.2"
+  version "0.1.3"
 
 "@pacote/xxhash@file:packages/xxhash":
-  version "0.0.0"
+  version "0.2.1"
   dependencies:
     "@pacote/u64" "file:packages/u64"
 
@@ -3960,9 +3960,9 @@ extsprintf@^1.2.0:
   integrity sha1-4mifjzVvrWLMplo6kcXfX5VRaS8=
 
 fast-check@^2.0.0:
-  version "2.12.1"
-  resolved "https://registry.yarnpkg.com/fast-check/-/fast-check-2.12.1.tgz"
-  integrity sha512-zXCxkvFVlVWbBVky+TPaD1H+g6SC4R7IQYZ5gcxU3lUKHyrOFiLXtWy+xHVDmm9bv+3NJbSzOmeVvhgpnjR7Sw==
+  version "2.13.0"
+  resolved "https://registry.yarnpkg.com/fast-check/-/fast-check-2.13.0.tgz#92a50a6a39b58760d4b0b52b12f98f28a9f020f6"
+  integrity sha512-IOfzKm/SCA+jpUEgAfqAuxHYPmgtmpnnwljQmYPRGrqYczcTKApXKHza/SNxFxYkecWfZilYa0DJdBvqz1bcSw==
   dependencies:
     pure-rand "^4.1.1"
 
