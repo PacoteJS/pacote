@@ -3,6 +3,13 @@ import { XXHash64 } from 'xxhash-addon'
 import { sanityBuffer } from './sanity'
 import { xxh64 } from '../src/index'
 
+function clonedSlice(buffer: Buffer, length: number): Uint8Array {
+  return buffer.reduce((clone, value, index) => {
+    clone[index] = value
+    return clone
+  }, new Uint8Array(length))
+}
+
 describe('XXHash64', () => {
   test('default seed value is 0', () => {
     const h1 = xxh64().update(sanityBuffer.toString()).digest('hex')
@@ -37,10 +44,7 @@ describe('XXHash64', () => {
     [222, 0, 'b641ae8cb691c174'],
     [222, 2654435761, '20cb8ab7ae10c14a'],
   ])('sanity buffer (length %d, seed %d)', (length, seed, expected) => {
-    const data = sanityBuffer.reduce((clone, value, index) => {
-      clone[index] = value
-      return clone
-    }, new Uint8Array(length))
+    const data = clonedSlice(sanityBuffer, length)
 
     const actual = xxh64(seed).update(data.buffer).digest('hex')
     expect(actual).toBe(expected)
@@ -48,17 +52,14 @@ describe('XXHash64', () => {
 
   test('chunked updates', () => {
     assert(
-      property(
-        nat(),
-        string({ maxLength: 256 }),
-        string({ maxLength: 256 }),
-        (seed, part1, part2) => {
-          const hasher = xxh64(seed)
-          const hashWhole = hasher.update(part1 + part2).digest('hex')
-          const hashChunked = hasher.update(part1).update(part2).digest('hex')
-          expect(hashChunked).toBe(hashWhole)
-        }
-      )
+      property(nat(), string({ maxLength: 256 }), (seed, data) => {
+        const hashFromWhole = xxh64(seed).update(data).digest('hex')
+        const hashFromChunks = data
+          .split('')
+          .reduce((hasher, element) => hasher.update(element), xxh64(seed))
+          .digest('hex')
+        expect(hashFromChunks).toBe(hashFromWhole)
+      })
     )
   })
 

@@ -24,19 +24,19 @@ interface XXHash {
   update(input: string | ArrayBuffer): XXHash
 }
 
-function read64(memory: Uint8Array, pointer: number): U64 {
+function readUint64LE(buffer: Uint8Array, index: number): U64 {
   return [
-    (memory[pointer + 1] << 8) | memory[pointer + 0],
-    (memory[pointer + 3] << 8) | memory[pointer + 2],
-    (memory[pointer + 5] << 8) | memory[pointer + 4],
-    (memory[pointer + 7] << 8) | memory[pointer + 6],
+    (buffer[index + 1] << 8) | buffer[index + 0],
+    (buffer[index + 3] << 8) | buffer[index + 2],
+    (buffer[index + 5] << 8) | buffer[index + 4],
+    (buffer[index + 7] << 8) | buffer[index + 6],
   ]
 }
 
-function read32(memory: Uint8Array, pointer: number): U64 {
+function readUint32LE(buffer: Uint8Array, index: number): U64 {
   return [
-    (memory[pointer + 1] << 8) | memory[pointer + 0],
-    (memory[pointer + 3] << 8) | memory[pointer + 2],
+    (buffer[index + 1] << 8) | buffer[index + 0],
+    (buffer[index + 3] << 8) | buffer[index + 2],
     0,
     0,
   ]
@@ -61,25 +61,25 @@ function avalanche(hash: U64): U64 {
 }
 
 function finalize(buffer: Uint8Array, length: number, hash: U64): U64 {
-  let pointer = 0
+  let index = 0
   let _hash = hash
 
-  while (pointer <= length - 8) {
-    const k1 = round(ZERO, read64(buffer, pointer))
+  while (index <= length - 8) {
+    const k1 = round(ZERO, readUint64LE(buffer, index))
     _hash = add(PRIME_4, multiply(PRIME_1, rotateLeft(xor(_hash, k1), 27)))
-    pointer += 8
+    index += 8
   }
 
-  while (pointer <= length - 4) {
-    const k1 = multiply(PRIME_1, read32(buffer, pointer))
+  while (index <= length - 4) {
+    const k1 = multiply(PRIME_1, readUint32LE(buffer, index))
     _hash = add(PRIME_3, multiply(PRIME_2, rotateLeft(xor(_hash, k1), 23)))
-    pointer += 4
+    index += 4
   }
 
-  while (pointer < length) {
-    const k1 = multiply(PRIME_5, [buffer[pointer], 0, 0, 0])
+  while (index < length) {
+    const k1 = multiply(PRIME_5, [buffer[index], 0, 0, 0])
     _hash = multiply(PRIME_1, rotateLeft(xor(_hash, k1), 11))
-    pointer += 1
+    index += 1
   }
 
   return avalanche(_hash)
@@ -108,6 +108,7 @@ export function xxh64(seed: number | U64 = 0): XXHash {
 
   reset(seed)
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const digest = (encoding: 'hex') => {
     let hash: U64
 
@@ -128,6 +129,7 @@ export function xxh64(seed: number | U64 = 0): XXHash {
     }
 
     hash = add(hash, from(totalLength))
+
     hash = finalize(buffer, bufferSize, hash)
 
     reset(_seed)
@@ -139,7 +141,7 @@ export function xxh64(seed: number | U64 = 0): XXHash {
     const input =
       typeof data === 'string' ? toUTF8Array(data) : new Uint8Array(data)
 
-    let pointer = 0
+    let index = 0
     const length = input.length
 
     totalLength += length
@@ -156,30 +158,30 @@ export function xxh64(seed: number | U64 = 0): XXHash {
 
     if (bufferSize > 0) {
       buffer.set(input.subarray(0, 32 - bufferSize), bufferSize)
-      v1 = round(v1, read64(buffer, 0))
-      v2 = round(v2, read64(buffer, 8))
-      v3 = round(v3, read64(buffer, 16))
-      v4 = round(v4, read64(buffer, 24))
-      pointer += 32 - bufferSize
+      v1 = round(v1, readUint64LE(buffer, 0))
+      v2 = round(v2, readUint64LE(buffer, 8))
+      v3 = round(v3, readUint64LE(buffer, 16))
+      v4 = round(v4, readUint64LE(buffer, 24))
+      index += 32 - bufferSize
       bufferSize = 0
     }
 
-    if (pointer <= length - 32) {
+    if (index <= length - 32) {
       do {
-        v1 = round(v1, read64(input, pointer))
-        pointer += 8
-        v2 = round(v2, read64(input, pointer))
-        pointer += 8
-        v3 = round(v3, read64(input, pointer))
-        pointer += 8
-        v4 = round(v4, read64(input, pointer))
-        pointer += 8
-      } while (pointer <= length - 32)
+        v1 = round(v1, readUint64LE(input, index))
+        index += 8
+        v2 = round(v2, readUint64LE(input, index))
+        index += 8
+        v3 = round(v3, readUint64LE(input, index))
+        index += 8
+        v4 = round(v4, readUint64LE(input, index))
+        index += 8
+      } while (index <= length - 32)
     }
 
-    if (pointer < length) {
-      buffer.set(input.subarray(pointer, length), bufferSize)
-      bufferSize = length - pointer
+    if (index < length) {
+      buffer.set(input.subarray(index, length), bufferSize)
+      bufferSize = length - index
     }
 
     return { digest, reset, update }
