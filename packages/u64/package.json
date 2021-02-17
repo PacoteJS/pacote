@@ -1,6 +1,6 @@
 {
   "name": "@pacote/u64",
-  "description": "Unsigned 64 bit integers.",
+  "description": "Unsigned 64-bit integers.",
   "version": "0.1.3",
   "sideEffects": false,
   "license": "MIT",
