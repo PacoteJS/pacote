@@ -13,7 +13,7 @@ import {
 const arb32Bits = () => array(nat(1), { maxLength: 32 }).map((a) => a.join(''))
 
 describe('and', () => {
-  it('consistent with numeric bitwise and', () => {
+  it('is consistent with numeric bitwise and', () => {
     assert(
       property(nat(), nat(), (a, b) => {
         expect(and(from(a), from(b))).toEqual(from(a & b))
@@ -23,7 +23,7 @@ describe('and', () => {
 })
 
 describe('or', () => {
-  it('consistent with numeric bitwise or', () => {
+  it('is consistent with numeric bitwise or', () => {
     assert(
       property(nat(), nat(), (a, b) => {
         expect(or(from(a), from(b))).toEqual(from(a | b))
@@ -33,7 +33,7 @@ describe('or', () => {
 })
 
 describe('xor', () => {
-  it('consistent with numeric bitwise xor', () => {
+  it('is consistent with numeric bitwise xor', () => {
     assert(
       property(nat(), nat(), (a, b) => {
         expect(xor(from(a), from(b))).toEqual(from(a ^ b))
@@ -75,25 +75,57 @@ describe('shift right', () => {
 
 describe('rotate left', () => {
   it.each([
-    ['1', 0, '1'],
     ['0', 1, '0'],
     ['1', 2, '4'],
     ['1', 16, '65536'],
-    ['4294967295', 32, '4294967295'],
   ])('rotates %s left by %d bits', (value, bits, expected) => {
     expect(rotateLeft(from(value), bits)).toEqual(from(expected))
+  })
+
+  it('rotates 0 bits to return the same number', () => {
+    assert(
+      property(arb32Bits(), (value) => {
+        const u32 = from(value, 2)
+        expect(rotateLeft(u32, 0)).toEqual(u32)
+      })
+    )
+  })
+
+  it('rotates 32 bits to return the same number', () => {
+    assert(
+      property(arb32Bits(), (value) => {
+        const u32 = from(value, 2)
+        expect(rotateLeft(u32, 32)).toEqual(u32)
+      })
+    )
   })
 })
 
 describe('rotate right', () => {
   it.each([
-    ['1', 0, '1'],
     ['0', 1, '0'],
     ['4', 2, '1'],
     ['65536', 16, '1'],
-    ['4294967295', 32, '4294967295'],
   ])('rotates %s right by %d bits', (value, bits, expected) => {
     expect(rotateRight(from(value), bits)).toEqual(from(expected))
+  })
+
+  it('rotates 0 bits to return the same number', () => {
+    assert(
+      property(arb32Bits(), (value) => {
+        const u32 = from(value, 2)
+        expect(rotateRight(u32, 0)).toEqual(u32)
+      })
+    )
+  })
+
+  it('rotates 32 bits to return the same number', () => {
+    assert(
+      property(arb32Bits(), (value) => {
+        const u32 = from(value, 2)
+        expect(rotateRight(u32, 32)).toEqual(u32)
+      })
+    )
   })
 })
 
