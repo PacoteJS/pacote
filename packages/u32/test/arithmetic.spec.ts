@@ -102,13 +102,18 @@ describe('division', () => {
     expect(() => divide(from(1), ZERO)).toThrowError('division by zero')
   })
 
+  it('is consistent with numeric division', () => {
+    assert(
+      property(nat(), integer({ min: 1 }), (a, b) => {
+        expect(divide(from(a), from(b))).toEqual(from(Math.floor(a / b)))
+      })
+    )
+  })
+
   it.each([
-    ['2', '1', '2'],
+    ['0', '1', '0'],
     ['2', '2', '1'],
-    ['2', '3', '0'],
-    ['3', '2', '1'],
-    ['4', '2', '2'],
-  ])('%s / %s', (a, b, expected) => {
+  ])('%s % %s', (a, b, expected) => {
     expect(divide(from(a), from(b))).toEqual(from(expected))
   })
 })
@@ -118,11 +123,17 @@ describe('remainder', () => {
     expect(() => remainder(from(1), ZERO)).toThrowError('division by zero')
   })
 
+  it('is consistent with numeric remainder', () => {
+    assert(
+      property(nat(), integer({ min: 1 }), (a, b) => {
+        expect(remainder(from(a), from(b))).toEqual(from(Math.floor(a % b)))
+      })
+    )
+  })
+
   it.each([
-    ['2', '1', '0'],
+    ['0', '1', '0'],
     ['2', '2', '0'],
-    ['2', '3', '2'],
-    ['3', '2', '1'],
   ])('%s % %s', (a, b, expected) => {
     expect(remainder(from(a), from(b))).toEqual(from(expected))
   })
