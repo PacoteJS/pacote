@@ -6,20 +6,14 @@ export {
   and,
   or,
   xor,
+  negate,
   shiftLeft,
   shiftRight,
   rotateLeft,
   rotateRight,
 } from './bitwise'
 export { equals, greaterThan, lessThan } from './comparison'
-export {
-  add,
-  subtract,
-  multiply,
-  divide,
-  remainder,
-  negate,
-} from './arithmetic'
+export { add, subtract, multiply, divide, remainder } from './arithmetic'
 export { toString } from './string'
 
 export function from(value: number): U32
