@@ -25,6 +25,5 @@
       "@pacote/*": ["./packages/*/src"]
     }
   },
-  "exclude": ["node_modules", "packages/*/lib", "packages/*/test"],
-  "plugins": [{ "name": "typescript-workspace-plugin" }]
+  "exclude": ["node_modules", "packages/*/lib", "packages/*/test"]
 }
