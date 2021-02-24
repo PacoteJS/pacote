@@ -21,7 +21,7 @@
   "peerDependencies": {
     "@typescript-eslint/eslint-plugin": ">= 4",
     "eslint": ">= 6",
-    "eslint-config-prettier": ">= 6",
+    "eslint-config-prettier": ">= 8",
     "eslint-config-standard": ">= 16",
     "eslint-plugin-import": ">= 2",
     "eslint-plugin-node": ">= 11",
