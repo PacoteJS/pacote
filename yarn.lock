@@ -339,10 +339,10 @@
     resolve-global "1.0.0"
     yargs "^15.1.0"
 
-"@commitlint/config-conventional@^11.0.0":
-  version "11.0.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/config-conventional/-/config-conventional-11.0.0.tgz#3fa300a1b639273946de3c3f15e1cda518333422"
-  integrity sha512-SNDRsb5gLuDd2PL83yCOQX6pE7gevC79UPFx+GLbLfw6jGnnbO9/tlL76MLD8MOViqGbo7ZicjChO9Gn+7tHhA==
+"@commitlint/config-conventional@^12.0.0":
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/@commitlint/config-conventional/-/config-conventional-12.0.0.tgz#3244957b87b92dc2f4feb46059cdeb950783198f"
+  integrity sha512-zjTeCBlHEP0syW6QedRSxOiafYeuOol9vIXZ89uhKMhyejaKxdAnS3SBMN4fYiSFChsZEl+VshJeZDtUFkCd7Q==
   dependencies:
     conventional-changelog-conventionalcommits "^4.3.1"
 
@@ -1571,15 +1571,15 @@
   version "0.2.1"
 
 "@pacote/bloom-filter@file:packages/bloom-filter":
-  version "0.3.5"
+  version "0.3.6"
   dependencies:
-    "@pacote/xxhash" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-filter-0.3.5-aa97ea36-54b5-4042-875d-37af52cfa654-1614214093193/node_modules/@pacote/xxhash"
+    "@pacote/xxhash" "file:packages/xxhash"
 
 "@pacote/bloom-search@file:packages/bloom-search":
-  version "0.6.3"
+  version "0.6.4"
   dependencies:
-    "@pacote/array" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-search-0.6.3-4e10f16f-a195-4699-b2e7-ba1b12a9c91d-1614214093197/node_modules/@pacote/array"
-    "@pacote/bloom-filter" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-search-0.6.3-4e10f16f-a195-4699-b2e7-ba1b12a9c91d-1614214093197/node_modules/@pacote/bloom-filter"
+    "@pacote/array" "file:packages/array"
+    "@pacote/bloom-filter" "file:packages/bloom-filter"
 
 "@pacote/computus@file:packages/computus":
   version "1.2.6"
@@ -1594,15 +1594,15 @@
   version "1.2.1"
 
 "@pacote/eslint-config-react@file:packages/eslint-config-react":
-  version "1.1.2"
+  version "2.0.0"
 
 "@pacote/eslint-config@file:packages/eslint-config":
-  version "4.1.2"
+  version "5.0.0"
 
 "@pacote/ffetch@file:packages/ffetch":
   version "6.0.3"
   dependencies:
-    "@pacote/error" "file:../../Library/Caches/Yarn/v6/npm-@pacote-ffetch-6.0.3-7e463786-a663-4c31-987c-7f213bfa88c4-1614214093205/node_modules/@pacote/error"
+    "@pacote/error" "file:packages/error"
 
 "@pacote/flux-actions@file:packages/flux-actions":
   version "2.1.10"
@@ -1613,7 +1613,7 @@
 "@pacote/iff@file:packages/iff":
   version "2.0.3"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-iff-2.0.3-c4e63f33-eb71-4fef-9f61-c6728136344e-1614214093209/node_modules/@pacote/option"
+    "@pacote/option" "file:packages/option"
 
 "@pacote/immutable@file:packages/immutable":
   version "1.2.5"
@@ -1627,7 +1627,7 @@
 "@pacote/jest-either@file:packages/jest-either":
   version "4.0.9"
   dependencies:
-    "@pacote/is-plain-object" "file:../../Library/Caches/Yarn/v6/npm-@pacote-jest-either-4.0.9-d999f381-45c6-49b8-a286-94e8cc757013-1614214093215/node_modules/@pacote/is-plain-object"
+    "@pacote/is-plain-object" "file:packages/is-plain-object"
     jest-diff "^26.0.1"
     jest-matcher-utils "^26.0.1"
     ramda "^0.27.0"
@@ -1635,7 +1635,7 @@
 "@pacote/linked-list@file:packages/linked-list":
   version "0.4.4"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-linked-list-0.4.4-df89671a-6935-437a-9aeb-9994e445f139-1614214093250/node_modules/@pacote/option"
+    "@pacote/option" "file:packages/option"
 
 "@pacote/memoize@file:packages/memoize":
   version "1.1.5"
@@ -1646,7 +1646,7 @@
 "@pacote/pixels@file:packages/pixels":
   version "1.1.6"
   dependencies:
-    "@pacote/get-style" "file:../../Library/Caches/Yarn/v6/npm-@pacote-pixels-1.1.6-d3cbae55-8490-45f8-a546-662e02eada5c-1614214093255/node_modules/@pacote/get-style"
+    "@pacote/get-style" "file:packages/get-style"
 
 "@pacote/react-use-outside@file:packages/react-use-outside":
   version "1.1.7"
@@ -1657,7 +1657,7 @@
 "@pacote/result@file:packages/result":
   version "1.0.8"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-result-1.0.8-d8a44dd6-cb72-42f1-994c-7e07dc24993f-1614214093259/node_modules/@pacote/option"
+    "@pacote/option" "file:packages/option"
 
 "@pacote/shuffle@file:packages/shuffle":
   version "1.0.9"
@@ -1666,15 +1666,15 @@
   version "1.0.6"
 
 "@pacote/u32@file:packages/u32":
-  version "0.1.3"
+  version "0.2.0"
 
 "@pacote/u64@file:packages/u64":
-  version "0.1.3"
+  version "0.1.4"
 
 "@pacote/xxhash@file:packages/xxhash":
-  version "0.2.1"
+  version "0.2.2"
   dependencies:
-    "@pacote/u64" "file:../../Library/Caches/Yarn/v6/npm-@pacote-xxhash-0.2.1-9d813982-5aa0-4e8c-a5d8-9f92b404c105-1614214093194/node_modules/@pacote/u64"
+    "@pacote/u64" "file:packages/u64"
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.2"
