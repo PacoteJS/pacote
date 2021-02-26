@@ -10,7 +10,7 @@ import {
   xor,
   ZERO,
 } from '@pacote/u64'
-import { toUTF8Array } from './utf8'
+import { encode } from './utf8'
 
 const PRIME_1 = from('11400714785074694791')
 const PRIME_2 = from('14029467366897019727')
@@ -18,10 +18,10 @@ const PRIME_3 = from('1609587929392839161')
 const PRIME_4 = from('9650029242287828579')
 const PRIME_5 = from('2870177450012600261')
 
-interface XXHash {
-  reset(seed?: number | U64): void
+interface XXHash<T> {
+  reset(seed?: number | T): void
   digest(encoding: 'hex'): string
-  update(input: string | ArrayBuffer): XXHash
+  update(input: string | ArrayBuffer): XXHash<T>
 }
 
 function readUint64LE(buffer: Uint8Array, index: number): U64 {
@@ -85,7 +85,7 @@ function finalize(buffer: Uint8Array, length: number, hash: U64): U64 {
   return avalanche(_hash)
 }
 
-export function xxh64(seed: number | U64 = 0): XXHash {
+export function xxh64(seed: number | U64 = 0): XXHash<U64> {
   let _seed: U64
   let v1: U64
   let v2: U64
@@ -138,8 +138,7 @@ export function xxh64(seed: number | U64 = 0): XXHash {
   }
 
   const update = (data: string | ArrayBuffer) => {
-    const input =
-      typeof data === 'string' ? toUTF8Array(data) : new Uint8Array(data)
+    const input = typeof data === 'string' ? encode(data) : new Uint8Array(data)
 
     let index = 0
     const length = input.length

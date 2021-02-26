@@ -1,7 +1,7 @@
-export function toUTF8Array(data: string): Uint8Array {
+export function encode(string: string): Uint8Array {
   const utf8 = []
-  for (let i = 0; i < data.length; i++) {
-    let charCode = data.charCodeAt(i)
+  for (let i = 0; i < string.length; i++) {
+    let charCode = string.charCodeAt(i)
     if (charCode < 0x80) {
       utf8.push(charCode)
     } else if (charCode < 0x800) {
@@ -15,7 +15,7 @@ export function toUTF8Array(data: string): Uint8Array {
     } else {
       i++
       charCode =
-        0x10000 + (((charCode & 0x3ff) << 10) | (data.charCodeAt(i) & 0x3ff))
+        0x10000 + (((charCode & 0x3ff) << 10) | (string.charCodeAt(i) & 0x3ff))
       utf8.push(
         0xf0 | (charCode >> 18),
         0x80 | ((charCode >> 12) & 0x3f),
