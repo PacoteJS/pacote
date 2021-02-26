@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0](https://github.com/PacoteJS/pacote/compare/@pacote/eslint-config@4.1.2...@pacote/eslint-config@5.0.0) (2021-02-26)
+
+### chore
+
+- 🤖 upgrade to eslint-config-prettier v8 ([2b564db](https://github.com/PacoteJS/pacote/commit/2b564db7e44fbe2cd6d7cb637d4587c53181486f))
+
+### BREAKING CHANGES
+
+- 🧨 requires eslint-config-prettier v8 and a potential configuration change
+
 ## [4.1.2](https://github.com/PacoteJS/pacote/compare/@pacote/eslint-config@4.1.1...@pacote/eslint-config@4.1.2) (2021-01-08)
 
 ### Bug Fixes
