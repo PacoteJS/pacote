@@ -1572,13 +1572,13 @@
 "@pacote/bloom-filter@file:packages/bloom-filter":
   version "0.3.6"
   dependencies:
-    "@pacote/xxhash" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-filter-0.3.6-a9428d9f-984e-4d1c-ae87-9a0d8485ee9c-1614612183765/node_modules/@pacote/xxhash"
+    "@pacote/xxhash" "file:packages/xxhash"
 
 "@pacote/bloom-search@file:packages/bloom-search":
   version "0.6.4"
   dependencies:
-    "@pacote/array" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-search-0.6.4-097ce9fe-9505-439e-8c52-623260d4defb-1614612183769/node_modules/@pacote/array"
-    "@pacote/bloom-filter" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-search-0.6.4-097ce9fe-9505-439e-8c52-623260d4defb-1614612183769/node_modules/@pacote/bloom-filter"
+    "@pacote/array" "file:packages/array"
+    "@pacote/bloom-filter" "file:packages/bloom-filter"
 
 "@pacote/computus@file:packages/computus":
   version "1.2.6"
@@ -1601,7 +1601,7 @@
 "@pacote/ffetch@file:packages/ffetch":
   version "6.0.3"
   dependencies:
-    "@pacote/error" "file:../../Library/Caches/Yarn/v6/npm-@pacote-ffetch-6.0.3-55931756-0935-4ede-aa39-c63f9b13c8bf-1614612183784/node_modules/@pacote/error"
+    "@pacote/error" "file:packages/error"
 
 "@pacote/flux-actions@file:packages/flux-actions":
   version "2.1.10"
@@ -1612,7 +1612,7 @@
 "@pacote/iff@file:packages/iff":
   version "2.0.3"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-iff-2.0.3-9cd49f0a-adae-4674-8e05-23fd2d3a03b0-1614612183788/node_modules/@pacote/option"
+    "@pacote/option" "file:packages/option"
 
 "@pacote/immutable@file:packages/immutable":
   version "1.2.5"
@@ -1626,7 +1626,7 @@
 "@pacote/jest-either@file:packages/jest-either":
   version "4.0.9"
   dependencies:
-    "@pacote/is-plain-object" "file:../../Library/Caches/Yarn/v6/npm-@pacote-jest-either-4.0.9-969d5048-3faf-4606-89df-a05d64200e5a-1614612183795/node_modules/@pacote/is-plain-object"
+    "@pacote/is-plain-object" "file:packages/is-plain-object"
     jest-diff "^26.0.1"
     jest-matcher-utils "^26.0.1"
     ramda "^0.27.0"
@@ -1634,7 +1634,7 @@
 "@pacote/linked-list@file:packages/linked-list":
   version "0.4.4"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-linked-list-0.4.4-5c1e0eb4-c116-4274-b462-2d5f3c6cd538-1614612183809/node_modules/@pacote/option"
+    "@pacote/option" "file:packages/option"
 
 "@pacote/memoize@file:packages/memoize":
   version "1.1.5"
@@ -1645,7 +1645,7 @@
 "@pacote/pixels@file:packages/pixels":
   version "1.1.6"
   dependencies:
-    "@pacote/get-style" "file:../../Library/Caches/Yarn/v6/npm-@pacote-pixels-1.1.6-f98d572d-19cb-4e13-a7cd-972da4ac26f8-1614612183813/node_modules/@pacote/get-style"
+    "@pacote/get-style" "file:packages/get-style"
 
 "@pacote/react-use-outside@file:packages/react-use-outside":
   version "1.1.7"
@@ -1656,7 +1656,7 @@
 "@pacote/result@file:packages/result":
   version "1.0.8"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-result-1.0.8-e91ad99f-8020-4abc-a845-77f6c700244e-1614612183818/node_modules/@pacote/option"
+    "@pacote/option" "file:packages/option"
 
 "@pacote/shuffle@file:packages/shuffle":
   version "1.0.9"
@@ -1673,7 +1673,7 @@
 "@pacote/xxhash@file:packages/xxhash":
   version "0.2.2"
   dependencies:
-    "@pacote/u64" "file:../../Library/Caches/Yarn/v6/npm-@pacote-xxhash-0.2.2-b64bfad6-cbc4-4bac-9914-5ee2eb84fec9-1614612183767/node_modules/@pacote/u64"
+    "@pacote/u64" "file:packages/u64"
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.2"
@@ -4782,9 +4782,9 @@ humanize-ms@^1.2.1:
     ms "^2.0.0"
 
 husky@^5.1.2:
-  version "5.1.2"
-  resolved "https://registry.yarnpkg.com/husky/-/husky-5.1.2.tgz#dc6a1f68640455d8d98c28875e073087f86c5081"
-  integrity sha512-lilaRYeDXcAOj8DuRnN9IxUyEMVbYg9rK7yVNkPB5V4hCvxIUxpMeiv9K2h77CE0HzjCnk1Br0oWe1IghXngDQ==
+  version "5.1.3"
+  resolved "https://registry.yarnpkg.com/husky/-/husky-5.1.3.tgz#1a0645a4fe3ffc006c4d0d8bd0bcb4c98787cc9d"
+  integrity sha512-fbNJ+Gz5wx2LIBtMweJNY1D7Uc8p1XERi5KNRMccwfQA+rXlxWNSdUxswo0gT8XqxywTIw7Ywm/F4v/O35RdMg==
 
 iconv-lite@0.4.24, iconv-lite@^0.4.24:
   version "0.4.24"
