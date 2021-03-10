@@ -15,10 +15,12 @@
     "jsx": "react",
     "allowJs": false,
     "strict": true,
+    "strictNullChecks": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
+    "noPropertyAccessFromIndexSignature": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "paths": {
