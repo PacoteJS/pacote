@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.7](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-filter@0.3.6...@pacote/bloom-filter@0.3.7) (2021-03-10)
+
+### Bug Fixes
+
+- 🐛 performance improvement calculating hashes ([79b4e7e](https://github.com/PacoteJS/pacote/commit/79b4e7edd86425442b0a099d0cfeae8af2ac4a07))
+
 ## [0.3.6](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-filter@0.3.5...@pacote/bloom-filter@0.3.6) (2021-02-26)
 
 **Note:** Version bump only for package @pacote/bloom-filter
