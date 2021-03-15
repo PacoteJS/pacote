@@ -1,11 +1,11 @@
-type PipedResult<T> = {
-  then<R>(fn: (value: T) => R): PipedResult<R>
+type PipeFunctor<T> = {
+  map<R>(fn: (value: T) => R): PipeFunctor<R>
   readonly value: T
 }
 
-export function pipe<T>(value: T): PipedResult<T> {
+export function pipe<T>(value: T): PipeFunctor<T> {
   return {
-    then: (fn) => pipe(fn(value)),
+    map: (fn) => pipe(fn(value)),
     value,
   }
 }

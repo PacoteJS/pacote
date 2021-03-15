@@ -23,16 +23,16 @@ const exclaim = (text: string) => text + '!'
 
 exclaim(capitalize(doubleSay('hello'))) // => 'Hello, hello!'
 
-pipe('hello').then(doubleSay).then(capitalize).then(exclaim).value // => 'Hello, hello!'
+pipe('hello').map(doubleSay).map(capitalize).map(exclaim).value // => 'Hello, hello!'
 ```
 
-### `pipe<T>(value: T): PipedResult<T>`
+### `pipe<T>(value: T): PipeFunctor<T>`
 
-`pipe()` takes a value of type `T` and returns a `PipedResult<T>` object. This
-contains the input value in the `value` property and a `then` method.
+`pipe()` takes a value of type `T` and returns a `PipeFunctor<T>` object. This
+contains the input value in the `value` property and a `map` method.
 
-The `then()` method accepts a `T` to `R` function, returning a `PipedResult<R>`,
-which allows you to chain another `then()` call or inspect the result by
+The `map()` method accepts a `T` to `R` function, returning a `PipeFunctor<R>`,
+which allows you to chain another `map()` call or inspect the result by
 accessing `value`.
 
 ## License
