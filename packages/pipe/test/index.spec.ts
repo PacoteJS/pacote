@@ -1,11 +1,11 @@
-import { anything, assert, property } from 'fast-check'
+import { anything, assert, func, property } from 'fast-check'
 import { pipe } from '../src/index'
 
 test('pipe takes any value', () => {
   assert(
     property(anything(), (value) => {
       const result = pipe(value)
-      expect(result.value).toBe(value)
+      expect(result.value).toEqual(value)
     })
   )
 })
@@ -27,4 +27,29 @@ test('map multiple functions in succession', () => {
   const result = pipe('hello').map(doubleSay).map(capitalize).map(exclaim)
 
   expect(result.value).toBe('Hello, hello!')
+})
+
+describe('functor laws', () => {
+  test('identity', () => {
+    assert(
+      property(anything(), (value) => {
+        expect(pipe(value).map((i) => i).value).toEqual(value)
+      })
+    )
+  })
+
+  test('composition', () => {
+    assert(
+      property(
+        func(anything()),
+        func(anything()),
+        anything(),
+        (f, g, value) => {
+          expect(pipe(value).map((x) => g(f(x))).value).toEqual(
+            pipe(value).map(f).map(g).value
+          )
+        }
+      )
+    )
+  })
 })

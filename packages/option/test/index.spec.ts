@@ -1,5 +1,4 @@
-import fc from 'fast-check'
-import { equals } from 'ramda'
+import { assert, property, anything, func } from 'fast-check'
 import * as O from '../src/index'
 
 describe('isSome()', () => {
@@ -152,10 +151,9 @@ describe('fold()', () => {
 
 describe('monad laws', () => {
   test('left identity', () => {
-    fc.assert(
-      fc.property(fc.func(fc.anything()), fc.anything(), (fn, value) => {
-        return equals(
-          O.flatMap((x) => O.Some(fn(x)), O.Some(value)),
+    assert(
+      property(func(anything()), anything(), (fn, value) => {
+        expect(O.flatMap((x) => O.Some(fn(x)), O.Some(value))).toEqual(
           O.Some(fn(value))
         )
       })
@@ -163,27 +161,26 @@ describe('monad laws', () => {
   })
 
   test('right identity', () => {
-    fc.assert(
-      fc.property(fc.anything(), (value) => {
-        return equals(O.flatMap(O.Some, O.Some(value)), O.Some(value))
+    assert(
+      property(anything(), (value) => {
+        expect(O.flatMap(O.Some, O.Some(value))).toEqual(O.Some(value))
       })
     )
   })
 
   test('associativity', () => {
-    fc.assert(
-      fc.property(
-        fc.func(fc.anything()),
-        fc.func(fc.anything()),
-        fc.anything(),
+    assert(
+      property(
+        func(anything()),
+        func(anything()),
+        anything(),
         (f, g, value) => {
-          return equals(
+          expect(
             O.flatMap(
               (x) => O.Some(g(x)),
               O.flatMap((x) => O.Some(f(x)), O.Some(value))
-            ),
-            O.flatMap((x) => O.Some(g(f(x))), O.Some(value))
-          )
+            )
+          ).toEqual(O.flatMap((x) => O.Some(g(f(x))), O.Some(value)))
         }
       )
     )
