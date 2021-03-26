@@ -4,7 +4,11 @@
 ![minified](https://badgen.net/bundlephobia/min/@pacote/pipe)
 ![minified + gzip](https://badgen.net/bundlephobia/minzip/@pacote/pipe)
 
-Chain function calls with right-composition, improving readability when chaining several functions together.
+Chain function calls with right-composition, improving readability when chaining
+multiple functions together.
+
+The point of this module is not brevity or performance, but being able to
+declare a sequence of functions left-to-right in the order they are applied.
 
 ## Installation
 
@@ -23,17 +27,47 @@ const exclaim = (text: string) => text + '!'
 
 exclaim(capitalize(doubleSay('hello'))) // => 'Hello, hello!'
 
-pipe('hello').map(doubleSay).map(capitalize).map(exclaim).value // => 'Hello, hello!'
+pipe('hello').then(doubleSay).then(capitalize).then(exclaim).value // => 'Hello, hello!'
 ```
 
-### `pipe<T>(value: T): PipeFunctor<T>`
+### `pipe<A0>(arg: A0): PipeFunctor<A0>`
 
-`pipe()` takes a value of type `T` and returns a `PipeFunctor<T>` object. This
-contains the input value in the `value` property and a `map` method.
+`pipe()` allows you to pass a value into a sequence of functions chained
+left-to-right.
 
-The `map()` method accepts a `T` to `R` function, returning a `PipeFunctor<R>`,
-which allows you to chain another `map()` call or inspect the result by
-accessing `value`.
+It takes an argument of type `A0` and returns a `PipeFunctor<A0>` object.
+This contains the input argument in the `value` property and a `then` method.
+
+Each call of the `then()` method takes a `(An) => An+1` function, returning a
+`PipeFunctor<An+1>`, which allows you to chain yet another function or inspect
+the result by accessing `value`.
+
+Given three functions `f`, `g`, and `h`, the following lines are equivalent:
+
+```typescript
+const result = h(g(f(x)))
+
+const result = pipe(x).then(f).then(g).then(h).value
+```
+
+### `flow<A0, A1>(initialFn: (arg: A0) => A1): FlowFunctor<A0, A1>`
+
+`flow()` lets you chain functions left-to-right in a point-free manner.
+
+It takes a function of the type `(A0) => A1` and returns a
+`FlowFunctor<A0, A1>` function. This is a clone of the passed function plus a
+`then` method.
+
+Each call of the `then()` method maps a `(An) => An+1` function, returning a
+`FlowFunctor<A0, An+1>`, which allows you to chain yet another function.
+
+Given three functions `f`, `g`, and `h`, the following lines are equivalent:
+
+```typescript
+const fn = (x) => h(g(f(x)))
+
+const fn = flow(f).then(g).then(h)
+```
 
 ## License
 
