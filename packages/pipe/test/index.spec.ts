@@ -6,7 +6,7 @@ describe('pipe', () => {
     assert(
       property(anything(), (value) => {
         const result = pipe(value)
-        expect(result.value).toEqual(value)
+        expect(result).toEqual(value)
       })
     )
   })
@@ -15,9 +15,9 @@ describe('pipe', () => {
     const value = 2
     const double = (i: number) => i * 2
 
-    const result = pipe(value).then(double)
+    const result = pipe(value, double)
 
-    expect(result.value).toBe(4)
+    expect(result).toBe(4)
   })
 
   it('maps multiple functions in succession', () => {
@@ -25,16 +25,16 @@ describe('pipe', () => {
     const capitalize = (s: string) => s[0].toUpperCase() + s.substring(1)
     const exclaim = (s: string) => s + '!'
 
-    const result = pipe('hello').then(doubleSay).then(capitalize).then(exclaim)
+    const result = pipe('hello', doubleSay, capitalize, exclaim)
 
-    expect(result.value).toBe('Hello, hello!')
+    expect(result).toBe('Hello, hello!')
   })
 
   describe('functor laws', () => {
     test('identity', () => {
       assert(
         property(anything(), (value) => {
-          expect(pipe(value).then((i) => i).value).toEqual(value)
+          expect(pipe(value, (i) => i)).toEqual(value)
         })
       )
     })
@@ -46,7 +46,7 @@ describe('pipe', () => {
           func(anything()),
           anything(),
           (f, g, value) => {
-            expect(pipe(value).then(f).then(g).value).toEqual(g(f(value)))
+            expect(pipe(value, f, g)).toEqual(g(f(value)))
           }
         )
       )
@@ -69,7 +69,7 @@ describe('flow', () => {
     const capitalize = (s: string) => s[0].toUpperCase() + s.substring(1)
     const exclaim = (s: string) => s + '!'
 
-    const fn = flow(doubleSay).then(capitalize).then(exclaim)
+    const fn = flow(doubleSay, capitalize, exclaim)
 
     expect(fn('hello')).toBe('Hello, hello!')
   })
