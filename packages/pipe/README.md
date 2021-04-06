@@ -40,7 +40,13 @@ output of the last function is finally returned.
 Given three functions `f`, `g`, and `h`:
 
 ```typescript
-const result = pipe(x, f, g, h) // equivalent to h(g(f(x)))
+const result = pipe(x, f, g, h)
+```
+
+is equivalent to:
+
+```typescript
+const result = h(g(f(x)))
 ```
 
 ### `flow(...fns: readonly Function[]): Function`
@@ -54,7 +60,13 @@ output after the initial value is chained through the intervening functions.
 Given three functions `f`, `g`, and `h`:
 
 ```typescript
-const fn = flow(f, g, h) // equivalent to (x) => h(g(f(x)))
+const fn = flow(f, g, h)
+```
+
+is equivalent to:
+
+```typescript
+const fn = (x) => h(g(f(x)))
 ```
 
 ## License
