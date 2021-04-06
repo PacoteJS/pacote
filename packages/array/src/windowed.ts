@@ -1,11 +1,19 @@
-export function windowed<T>(size: number, array: T[]): T[][]
-export function windowed<T>(size: number, step: number, array: T[]): T[][]
+function isReadonlyArray<T>(array: any): array is readonly T[] {
+  return Array.isArray(array)
+}
+
+export function windowed<T>(size: number, array: readonly T[]): T[][]
 export function windowed<T>(
   size: number,
-  stepOrArray: number | T[],
-  arrayOrNothing: T[] = []
+  step: number,
+  array: readonly T[]
+): T[][]
+export function windowed<T>(
+  size: number,
+  stepOrArray: number | readonly T[],
+  arrayOrNothing: readonly T[] = []
 ): T[][] {
-  const [step, array] = Array.isArray(stepOrArray)
+  const [step, array] = isReadonlyArray(stepOrArray)
     ? [1, stepOrArray]
     : [stepOrArray, arrayOrNothing]
 
@@ -13,7 +21,7 @@ export function windowed<T>(
   if (step <= 0) throw Error('step must be a positive integer')
 
   if (array.length === 0) return []
-  if (array.length <= size) return [array]
+  if (array.length <= size) return [[...array]]
 
   const indexLimit = array.length - size
   const snapshots = []
