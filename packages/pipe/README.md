@@ -4,8 +4,8 @@
 ![minified](https://badgen.net/bundlephobia/min/@pacote/pipe)
 ![minified + gzip](https://badgen.net/bundlephobia/minzip/@pacote/pipe)
 
-Chain function calls with right-composition, improving readability by declaring
-a sequence of functions left-to-right in the order they are applied.
+Compose function calls, improving readability by declaring a sequence of
+functions left-to-right in the order they are applied.
 
 ## Installation
 
