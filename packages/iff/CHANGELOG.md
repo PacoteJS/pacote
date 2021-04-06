@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.4](https://github.com/PacoteJS/pacote/compare/@pacote/iff@2.0.3...@pacote/iff@2.0.4) (2021-04-06)
+
+**Note:** Version bump only for package @pacote/iff
+
+
+
+
+
 ## [2.0.3](https://github.com/PacoteJS/pacote/compare/@pacote/iff@2.0.2...@pacote/iff@2.0.3) (2021-02-14)
 
 

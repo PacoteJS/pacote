@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.9](https://github.com/PacoteJS/pacote/compare/@pacote/result@1.0.8...@pacote/result@1.0.9) (2021-04-06)
+
+**Note:** Version bump only for package @pacote/result
+
+
+
+
+
 ## [1.0.8](https://github.com/PacoteJS/pacote/compare/@pacote/result@1.0.7...@pacote/result@1.0.8) (2021-02-14)
 
 
