@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/PacoteJS/pacote/compare/@pacote/array@0.2.1...@pacote/array@0.3.0) (2021-04-06)
+
+
+### Features
+
+* 🎸 allow immutable arrays in windowed() ([f106a11](https://github.com/PacoteJS/pacote/commit/f106a11a9a290b2b0473dd1842060a885c61a428))
+
+
+
+
+
 ## [0.2.1](https://github.com/PacoteJS/pacote/compare/@pacote/array@0.2.0...@pacote/array@0.2.1) (2021-02-14)
 
 
