@@ -99,3 +99,9 @@ export function and<T, E, U>(
 export function ofNullable<T, E>(error: E, value: T): Result<T, E> {
   return value == null ? Err(error) : Ok(value)
 }
+
+export function ofPromise<T, E extends Error>(
+  promise: Promise<T>
+): Promise<Result<T, E>> {
+  return promise.then(Ok).catch(Err)
+}

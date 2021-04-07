@@ -46,6 +46,15 @@ map(n => n + 1, divide(4, 0)) // => Err('division by zero')
 Creates a new instance of `Result` based on the value being passed. If `null` or
 `undefined`, it returns `Err(error)`. Otherwise, it returns `Ok(value)`.
 
+### `ofPromise<T, Error>(promise: Promise<T>): Promise<Result<T, Error>>`
+
+Creates a new instance of `Promise<Result<T, Error>>` based on whether the
+provided promise resolves or not.
+
+If it resolves, a `Promise` of `Ok` with the resolved value is returned.
+Otherwise, a `Promise` of `Err` with the rejection error is returned. In either
+case, the newly returned promise will always resolve.
+
 ### `isOk<T, E>(value: Result<T, E>): boolean`
 
 Returns `true` if the passed result is `Ok`. Otherwise, it returns `false`.

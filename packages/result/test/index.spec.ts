@@ -16,6 +16,18 @@ describe('ofNullable()', () => {
   })
 })
 
+describe('ofPromise()', () => {
+  test('creates Err(E) for rejected promises', async () => {
+    const error = Error('rejected')
+    expect(R.ofPromise(Promise.reject(error))).resolves.toEqual(R.Err(error))
+  })
+
+  test('returns Ok(T) for resolved promises', async () => {
+    const value = 'resolved'
+    expect(R.ofPromise(Promise.resolve(value))).resolves.toEqual(R.Ok(value))
+  })
+})
+
 describe('isOk()', () => {
   test('returns false on Err', () => {
     expect(R.isOk(R.Err('error'))).toBe(false)
