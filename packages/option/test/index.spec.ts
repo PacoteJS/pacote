@@ -35,6 +35,20 @@ describe('ofNullable()', () => {
   })
 })
 
+describe('tryCatch()', () => {
+  test('creates None from thrown exceptions', () => {
+    expect(
+      O.tryCatch(() => {
+        throw Error()
+      })
+    ).toEqual(O.None)
+  })
+
+  test('returns Some(T) from successfully executed functions', () => {
+    expect(O.tryCatch(() => 'test')).toEqual(O.Some('test'))
+  })
+})
+
 describe('contains()', () => {
   test('returns true if wrapped value is the same', () => {
     expect(O.contains('test', O.Some('test'))).toBe(true)

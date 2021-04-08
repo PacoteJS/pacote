@@ -25,6 +25,14 @@ export function ofNullable<T>(value?: T | null): Option<T> {
   return value == null ? None : Some(value)
 }
 
+export function tryCatch<T>(fn: () => T): Option<T> {
+  try {
+    return Some(fn())
+  } catch {
+    return None
+  }
+}
+
 export function isSome<T>(option: Option<T>): option is Some<T> {
   return option.type === T_SOME
 }

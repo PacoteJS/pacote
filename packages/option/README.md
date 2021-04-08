@@ -41,6 +41,12 @@ map(n => n + 1, divide(4, 0)) // => None
 
 ## Functions
 
+### `tryCatch<T>(fn: () => T): Option<T>`
+
+Creates a new instance of `Option` based on a function call. If the function
+throws an error, it returns `None`. Otherwise, it returns the result value in a
+`Some`.
+
 ### `ofNullable<T>(value?: T | null): Option<T>`
 
 Creates a new instance of `Option` based on the value being passed. If `null` or
