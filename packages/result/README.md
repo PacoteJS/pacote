@@ -41,6 +41,14 @@ map(n => n + 1, divide(4, 0)) // => Err('division by zero')
 
 ## Functions
 
+### `tryCatch<T, Error>(fn: () => T): Result<T, Error>`
+
+Creates a new instance of `Result<T, Error>` based on the result of a function
+`fn` that might throw an exception.
+
+If an exception is thrown, an `Err` with the thrown error is returned.
+Otherwise, an `Ok` with the result of calling `fn`.
+
 ### `ofNullable<T, E>(error: E, value: T): Result<T, E>`
 
 Creates a new instance of `Result` based on the value being passed. If `null` or

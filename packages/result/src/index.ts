@@ -105,3 +105,11 @@ export function ofPromise<T, E extends Error>(
 ): Promise<Result<T, E>> {
   return promise.then(Ok).catch(Err)
 }
+
+export function tryCatch<T, E extends Error>(fn: () => T): Result<T, E> {
+  try {
+    return Ok(fn())
+  } catch (error) {
+    return Err(error)
+  }
+}

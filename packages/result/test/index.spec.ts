@@ -16,6 +16,22 @@ describe('ofNullable()', () => {
   })
 })
 
+describe('tryCatch()', () => {
+  test('creates an Err() from thrown errors', () => {
+    const error = Error('rejected')
+    expect(
+      R.tryCatch(() => {
+        throw error
+      })
+    ).toEqual(R.Err(error))
+  })
+
+  test('creates an Ok() from a return value', () => {
+    const value = 'success'
+    expect(R.tryCatch(() => value)).toEqual(R.Ok(value))
+  })
+})
+
 describe('ofPromise()', () => {
   test('creates Err(E) for rejected promises', async () => {
     const error = Error('rejected')
