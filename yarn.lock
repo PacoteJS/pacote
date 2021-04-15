@@ -1613,13 +1613,13 @@
 "@pacote/bloom-filter@file:packages/bloom-filter":
   version "0.3.7"
   dependencies:
-    "@pacote/xxhash" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-filter-0.3.7-c4d3e401-37b2-44ad-8ae9-6a54058ea9a9-1618526212581/node_modules/@pacote/xxhash"
+    "@pacote/xxhash" "file:packages/xxhash"
 
 "@pacote/bloom-search@file:packages/bloom-search":
   version "0.6.6"
   dependencies:
-    "@pacote/array" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-search-0.6.6-489895cd-e0b4-4b48-846e-38e2b91db960-1618526212585/node_modules/@pacote/array"
-    "@pacote/bloom-filter" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-search-0.6.6-489895cd-e0b4-4b48-846e-38e2b91db960-1618526212585/node_modules/@pacote/bloom-filter"
+    "@pacote/array" "file:packages/array"
+    "@pacote/bloom-filter" "file:packages/bloom-filter"
 
 "@pacote/computus@file:packages/computus":
   version "1.2.6"
@@ -1642,7 +1642,7 @@
 "@pacote/ffetch@file:packages/ffetch":
   version "6.0.3"
   dependencies:
-    "@pacote/error" "file:../../Library/Caches/Yarn/v6/npm-@pacote-ffetch-6.0.3-c67a8721-e7f3-446d-88a1-e62b464b9a9a-1618526212596/node_modules/@pacote/error"
+    "@pacote/error" "file:packages/error"
 
 "@pacote/flux-actions@file:packages/flux-actions":
   version "2.1.10"
@@ -1653,7 +1653,7 @@
 "@pacote/iff@file:packages/iff":
   version "2.0.4"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-iff-2.0.4-965f9584-2fea-4ad3-a7b1-93e159ef5a79-1618526212600/node_modules/@pacote/option"
+    "@pacote/option" "file:packages/option"
 
 "@pacote/immutable@file:packages/immutable":
   version "1.2.5"
@@ -1667,7 +1667,7 @@
 "@pacote/jest-either@file:packages/jest-either":
   version "4.0.9"
   dependencies:
-    "@pacote/is-plain-object" "file:../../Library/Caches/Yarn/v6/npm-@pacote-jest-either-4.0.9-ef2b49e2-03f7-4440-b649-ceed59f9f01d-1618526212606/node_modules/@pacote/is-plain-object"
+    "@pacote/is-plain-object" "file:packages/is-plain-object"
     jest-diff "^26.0.1"
     jest-matcher-utils "^26.0.1"
     ramda "^0.27.0"
@@ -1675,7 +1675,7 @@
 "@pacote/linked-list@file:packages/linked-list":
   version "0.4.5"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-linked-list-0.4.5-7e2f9766-a738-4e7e-810a-f63118b9b3fa-1618526212621/node_modules/@pacote/option"
+    "@pacote/option" "file:packages/option"
 
 "@pacote/memoize@file:packages/memoize":
   version "1.1.5"
@@ -1686,7 +1686,7 @@
 "@pacote/pixels@file:packages/pixels":
   version "1.1.6"
   dependencies:
-    "@pacote/get-style" "file:../../Library/Caches/Yarn/v6/npm-@pacote-pixels-1.1.6-21901c85-ff8b-43d1-9665-27943c181041-1618526212624/node_modules/@pacote/get-style"
+    "@pacote/get-style" "file:packages/get-style"
 
 "@pacote/react-use-outside@file:packages/react-use-outside":
   version "1.1.7"
@@ -1697,7 +1697,7 @@
 "@pacote/result@file:packages/result":
   version "1.0.9"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-result-1.0.9-87642932-4a3f-4458-b2d1-d87adc02499c-1618526212628/node_modules/@pacote/option"
+    "@pacote/option" "file:packages/option"
 
 "@pacote/shuffle@file:packages/shuffle":
   version "1.0.9"
@@ -1714,7 +1714,7 @@
 "@pacote/xxhash@file:packages/xxhash":
   version "0.2.2"
   dependencies:
-    "@pacote/u64" "file:../../Library/Caches/Yarn/v6/npm-@pacote-xxhash-0.2.2-c849014e-39dc-40a2-8a5e-e917aef185db-1618526212583/node_modules/@pacote/u64"
+    "@pacote/u64" "file:packages/u64"
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.2"
@@ -8773,9 +8773,9 @@ typedarray@^0.0.6:
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
 typescript@^4.0.2:
-  version "4.2.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.2.3.tgz#39062d8019912d43726298f09493d598048c1ce3"
-  integrity sha512-qOcYwxaByStAWrBf4x0fibwZvMRG+r4cQoTjbPtUlrWjBHbmCAww1i448U0GJ+3cNNEtebDteo/cHOR3xJ4wEw==
+  version "4.2.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.2.4.tgz#8610b59747de028fda898a8aef0e103f156d0961"
+  integrity sha512-V+evlYHZnQkaz8TRBuxTA92yZBPotr5H+WhQ7bD3hZUndx5tGOa1fuCgeSjxAzM1RiN5IzvadIXTVefuuwZCRg==
 
 uglify-js@^3.1.4:
   version "3.13.2"
