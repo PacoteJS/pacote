@@ -21,6 +21,6 @@
   "peerDependencies": {
     "eslint": ">= 6",
     "eslint-plugin-jest-dom": ">= 3",
-    "eslint-plugin-testing-library": ">= 3"
+    "eslint-plugin-testing-library": ">= 4"
   }
 }
