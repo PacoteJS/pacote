@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "src"
+  },
+  "references": [
+    { "path": "../option/tsconfig.json" },
+    { "path": "../pipe/tsconfig.json" },
+    { "path": "../result/tsconfig.json" }
+  ]
+}
