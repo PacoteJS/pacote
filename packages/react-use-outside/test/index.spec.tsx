@@ -30,8 +30,8 @@ test.each<
   ['mouseover', fireEvent.mouseOver],
 ])('handler is called on %s outside', (type, fireFunction) => {
   const handler = jest.fn()
-  const { getByText } = renderTestComponent(type, handler)
-  fireFunction(getByText('Outside'))
+  const screen = renderTestComponent(type, handler)
+  fireFunction(screen.getByText('Outside'))
   expect(handler).toHaveBeenCalled()
 })
 
@@ -46,15 +46,15 @@ test.each<
   ['mouseover', fireEvent.mouseOver],
 ])('handler is not called on %s inside', (type, fireFunction) => {
   const handler = jest.fn()
-  const { getByText } = renderTestComponent(type, handler)
-  fireFunction(getByText('Inside'))
+  const screen = renderTestComponent(type, handler)
+  fireFunction(screen.getByText('Inside'))
   expect(handler).not.toHaveBeenCalled()
 })
 
 test('handler is called for multiple event types', () => {
   const handler = jest.fn()
-  const { getByText } = renderTestComponent(['click', 'touchend'], handler)
-  fireEvent.click(getByText('Outside'))
-  fireEvent.touchEnd(getByText('Outside'))
+  const screen = renderTestComponent(['click', 'touchend'], handler)
+  fireEvent.click(screen.getByText('Outside'))
+  fireEvent.touchEnd(screen.getByText('Outside'))
   expect(handler).toHaveBeenCalledTimes(2)
 })
