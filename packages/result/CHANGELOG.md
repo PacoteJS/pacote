@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/PacoteJS/pacote/compare/@pacote/result@1.0.9...@pacote/result@1.1.0) (2021-04-15)
+
+
+### Features
+
+* 🎸 `ofPromise` function ([b9aa515](https://github.com/PacoteJS/pacote/commit/b9aa515b9207207f8f7f7f2c0d099819689796ba))
+* 🎸 `tryCatch()` to convert thrown errors into `Result` ([eaa5789](https://github.com/PacoteJS/pacote/commit/eaa5789becbac94762845a1da40919b479595823))
+
+
+
+
+
 ## [1.0.9](https://github.com/PacoteJS/pacote/compare/@pacote/result@1.0.8...@pacote/result@1.0.9) (2021-04-06)
 
 **Note:** Version bump only for package @pacote/result

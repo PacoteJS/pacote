@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/PacoteJS/pacote/compare/@pacote/eslint-config-jest@1.2.1...@pacote/eslint-config-jest@2.0.0) (2021-04-15)
+
+
+### chore
+
+* 🤖 upgrade eslint-plugin-testing-library to v4 ([5ec4c52](https://github.com/PacoteJS/pacote/commit/5ec4c5269bf3dd1e5bbbed34c46f2d76c8dd9f7f))
+
+
+### BREAKING CHANGES
+
+* 🧨 eslint-plugin-testing-library has breaking changes, check the release
+notes
+
+
+
+
+
 ## [1.2.1](https://github.com/PacoteJS/pacote/compare/@pacote/eslint-config-jest@1.2.0...@pacote/eslint-config-jest@1.2.1) (2021-01-08)
 
 ### Bug Fixes
