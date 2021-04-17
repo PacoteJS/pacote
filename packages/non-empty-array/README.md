@@ -10,7 +10,7 @@ The module consumes and returns plain JavaScript arrays, but is typed to prevent
 the TypeScript compiler from handling arrays that might be empty.
 
 One instance where non-empty arrays are useful is when combined with
-`[@pacote/result](../result/)` to create a `Validation` data type that
+[`@pacote/result`](../result/) to create a `Validation` data type that
 accumulates multiple errors as `Result<T, NonEmptyArray<Error>>`. This is
 because a failing computation _must_ have at least one error.
 
