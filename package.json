@@ -115,6 +115,7 @@
     "@pacote/jest-either": "file:packages/jest-either",
     "@pacote/linked-list": "file:packages/linked-list",
     "@pacote/memoize": "file:packages/memoize",
+    "@pacote/non-empty-array": "file:packages/non-empty-array",
     "@pacote/option": "file:packages/option",
     "@pacote/pipe": "file:packages/pipe",
     "@pacote/pixels": "file:packages/pixels",
