@@ -1,6 +1,6 @@
 import { anything, Arbitrary, array, assert, property, tuple } from 'fast-check'
 import { Some, None } from '@pacote/option'
-import { fromElements, fromArray, concat, isNotEmptyArray } from '../src/index'
+import { fromElements, fromArray, concat, isNonEmptyArray } from '../src/index'
 
 describe('fromElements()', () => {
   it('creates non-empty array from a single element', () => {
@@ -22,17 +22,17 @@ describe('fromArray()', () => {
   })
 })
 
-describe('isNonEmpty()', () => {
+describe('isNonEmptyArray()', () => {
   it('is true when the value is a non-empty array', () => {
-    expect(isNotEmptyArray([1])).toBe(true)
+    expect(isNonEmptyArray([1])).toBe(true)
   })
 
   it('is false when the value is an empty array', () => {
-    expect(isNotEmptyArray([])).toBe(false)
+    expect(isNonEmptyArray([])).toBe(false)
   })
 
   it('is false when the value is not an array', () => {
-    expect(isNotEmptyArray(undefined)).toBe(false)
+    expect(isNonEmptyArray(undefined)).toBe(false)
   })
 })
 

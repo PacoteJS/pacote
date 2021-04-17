@@ -47,9 +47,9 @@ At least one argument is required.
 typesafe manner, returning `Some(array)` if it is not empty. If it's empty, it
 returns `None`.
 
-### `isNotEmptyArray<T>(value: any): value is NonEmptyArray<T>`
+### `isNonEmptyArray<T>(value: any): value is NonEmptyArray<T>`
 
-`isNotEmptyArray()` returns `true` if the passed value is an array that is not
+`isNonEmptyArray()` returns `true` if the passed value is an array that is not
 empty. Otherwise, it returns `false`.
 
 ### `concat<T>(before: readonly T[], after: NonEmptyArray<T>): NonEmptyArray<T>`

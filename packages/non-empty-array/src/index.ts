@@ -8,7 +8,7 @@ function isNotEmpty<T>(value: readonly T[]): value is NonEmptyArray<T> {
   return value.length > 0
 }
 
-export function isNotEmptyArray<T>(value: any): value is NonEmptyArray<T> {
+export function isNonEmptyArray<T>(value: any): value is NonEmptyArray<T> {
   return Array.isArray(value) && isNotEmpty(value)
 }
 
