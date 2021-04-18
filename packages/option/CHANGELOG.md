@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/PacoteJS/pacote/compare/@pacote/option@1.1.0...@pacote/option@2.0.0) (2021-04-18)
+
+
+### Features
+
+* 🎸 curry option argument ([5984cdf](https://github.com/PacoteJS/pacote/commit/5984cdf945887c74351c4aa84b13e2cb5ffa79d6))
+
+
+### BREAKING CHANGES
+
+* 🧨 The final `Option` argument in functions with an arity of 2 or more is
+now curried.
+
+
+
+
+
 # [1.1.0](https://github.com/PacoteJS/pacote/compare/@pacote/option@1.0.9...@pacote/option@1.1.0) (2021-04-15)
 
 

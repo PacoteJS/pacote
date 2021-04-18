@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.7](https://github.com/PacoteJS/pacote/compare/@pacote/linked-list@0.4.6...@pacote/linked-list@0.4.7) (2021-04-18)
+
+**Note:** Version bump only for package @pacote/linked-list
+
+
+
+
+
 ## [0.4.6](https://github.com/PacoteJS/pacote/compare/@pacote/linked-list@0.4.5...@pacote/linked-list@0.4.6) (2021-04-15)
 
 **Note:** Version bump only for package @pacote/linked-list

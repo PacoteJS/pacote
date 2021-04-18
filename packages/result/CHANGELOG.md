@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/PacoteJS/pacote/compare/@pacote/result@1.1.0...@pacote/result@2.0.0) (2021-04-18)
+
+
+### Features
+
+* 🎸 the final result argument is now curried ([8a9179e](https://github.com/PacoteJS/pacote/commit/8a9179e21976164801b4da0b39aefb38251bc61e))
+
+
+### BREAKING CHANGES
+
+* 🧨 The final `Result` argument in functions with an arity of 2 or more is
+now curried.
+
+
+
+
+
 # [1.1.0](https://github.com/PacoteJS/pacote/compare/@pacote/result@1.0.9...@pacote/result@1.1.0) (2021-04-15)
 
 
