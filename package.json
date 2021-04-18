@@ -126,6 +126,7 @@
     "@pacote/throttle": "file:packages/throttle",
     "@pacote/u32": "file:packages/u32",
     "@pacote/u64": "file:packages/u64",
+    "@pacote/validation": "file:packages/validation",
     "@pacote/xxhash": "file:packages/xxhash"
   }
 }
