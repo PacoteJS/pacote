@@ -1,4 +1,5 @@
 import { Result, fold, Ok, Err } from '@pacote/result'
+import { pipe } from '@pacote/pipe'
 import { createAction, reducerFromState } from '../src/index'
 
 test('complex payloads', () => {
@@ -14,10 +15,12 @@ test('complex payloads', () => {
   const reducer = reducerFromState<State>({ year: 1985 }).on(
     changeYear,
     (s, a) =>
-      fold(
-        (year) => ({ year }),
-        (error) => ({ ...s, error }),
-        a.payload
+      pipe(
+        a.payload,
+        fold(
+          (year) => ({ year }),
+          (error) => ({ ...s, error })
+        )
       )
   )
 
