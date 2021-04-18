@@ -86,11 +86,11 @@ describe('err()', () => {
 
 describe('getOrElse()', () => {
   test('returns the wrapped value on Ok', () => {
-    expect(R.getOrElse(() => 'default', R.Ok('ok'))).toBe('ok')
+    expect(R.getOrElse(() => 'default')(R.Ok('ok'))).toBe('ok')
   })
 
   test('evaluates the function and returns its result on Err', () => {
-    expect(R.getOrElse((err) => 'default: ' + err, R.Err('error'))).toBe(
+    expect(R.getOrElse((err) => 'default: ' + err)(R.Err('error'))).toBe(
       'default: error'
     )
   })
@@ -99,36 +99,36 @@ describe('getOrElse()', () => {
 describe('map()', () => {
   test('leaves Err unchanged', () => {
     expect(
-      R.map<string, string, number>((s) => s.length, R.Err('error'))
+      R.map<string, string, number>((s) => s.length)(R.Err('error'))
     ).toEqual(R.Err('error'))
   })
 
   test('maps Ok result', () => {
-    expect(R.map((s) => s.length, R.Ok('ok'))).toEqual(R.Ok(2))
+    expect(R.map((s: string) => s.length)(R.Ok('ok'))).toEqual(R.Ok(2))
   })
 })
 
 describe('mapErr()', () => {
   test('leaves Ok unchanged', () => {
-    expect(
-      R.mapErr<string, string, number>((s) => s.length, R.Ok('ok'))
-    ).toEqual(R.Ok('ok'))
+    expect(R.mapErr((s: string) => s.length)(R.Ok('ok'))).toEqual(R.Ok('ok'))
   })
 
   test('maps Err result', () => {
-    expect(R.mapErr((s) => s.length, R.Err('error'))).toEqual(R.Err(5))
+    expect(R.mapErr((s: string) => s.length)(R.Err('error'))).toEqual(R.Err(5))
   })
 })
 
 describe('flatMap()', () => {
   test('leaves Err unchanged', () => {
     expect(
-      R.flatMap<string, string, number>((s) => R.Ok(s.length), R.Err('error'))
+      R.flatMap<string, string, number>((s) => R.Ok(s.length))(R.Err('error'))
     ).toEqual(R.Err('error'))
   })
 
   test('maps Ok result', () => {
-    expect(R.flatMap((s) => R.Ok(s.length), R.Ok('ok'))).toEqual(R.Ok(2))
+    expect(R.flatMap((s: string) => R.Ok(s.length))(R.Ok('ok'))).toEqual(
+      R.Ok(2)
+    )
   })
 })
 
@@ -151,9 +151,8 @@ describe('fold()', () => {
     expect(
       R.fold(
         (t) => `Ok(${t})`,
-        (e) => `Err(${e})`,
-        R.Err(0)
-      )
+        (e) => `Err(${e})`
+      )(R.Err(0))
     ).toEqual('Err(0)')
   })
 
@@ -161,22 +160,21 @@ describe('fold()', () => {
     expect(
       R.fold(
         (t) => `Ok(${t})`,
-        (e) => `Err(${e})`,
-        R.Ok(1)
-      )
+        (e) => `Err(${e})`
+      )(R.Ok(1))
     ).toEqual('Ok(1)')
   })
 })
 
 describe('or()', () => {
   test('returns result if result is Ok', () => {
-    expect(R.or(R.Ok(100), R.Ok(2))).toEqual(R.Ok(2))
-    expect(R.or(R.Err('late error'), R.Ok(2))).toEqual(R.Ok(2))
+    expect(R.or(R.Ok(100))(R.Ok(2))).toEqual(R.Ok(2))
+    expect(R.or<number, string>(R.Err('late error'))(R.Ok(2))).toEqual(R.Ok(2))
   })
 
   test('returns alternative if result is Err', () => {
-    expect(R.or(R.Ok(2), R.Err('early error'))).toEqual(R.Ok(2))
-    expect(R.or(R.Err('late error'), R.Err('early error'))).toEqual(
+    expect(R.or<number, string>(R.Ok(2))(R.Err('early error'))).toEqual(R.Ok(2))
+    expect(R.or(R.Err('late error'))(R.Err('early error'))).toEqual(
       R.Err('late error')
     )
   })
@@ -184,17 +182,17 @@ describe('or()', () => {
 
 describe('and()', () => {
   test('returns alternative if result is Ok', () => {
-    expect(R.and(R.Ok('ok'), R.Ok(2))).toEqual(R.Ok('ok'))
-    expect(R.and(R.Err('late error'), R.Ok(2))).toEqual(R.Err('late error'))
+    expect(R.and(R.Ok('ok'))(R.Ok(2))).toEqual(R.Ok('ok'))
+    expect(R.and(R.Err('late error'))(R.Ok(2))).toEqual(R.Err('late error'))
   })
 
   test('returns result if result is Err', () => {
-    expect(R.and(R.Err('late error'), R.Err('early error'))).toEqual(
+    expect(R.and(R.Err('late error'))(R.Err('early error'))).toEqual(
       R.Err('early error')
     )
-    expect(R.and(R.Ok('ok'), R.Err('early error'))).toEqual(
-      R.Err('early error')
-    )
+    expect(
+      R.and<string, string, string>(R.Ok('ok'))(R.Err('early error'))
+    ).toEqual(R.Err('early error'))
   })
 })
 
@@ -202,7 +200,7 @@ describe('monad laws', () => {
   test('left identity', () => {
     assert(
       property(func(anything()), anything(), (fn, value) => {
-        expect(R.flatMap((x) => R.Ok(fn(x)), R.Ok(value))).toEqual(
+        expect(R.flatMap((x) => R.Ok(fn(x)))(R.Ok(value))).toEqual(
           R.Ok(fn(value))
         )
       })
@@ -212,7 +210,7 @@ describe('monad laws', () => {
   test('right identity', () => {
     assert(
       property(anything(), (value) => {
-        expect(R.flatMap(R.Ok, R.Ok(value))).toEqual(R.Ok(value))
+        expect(R.flatMap(R.Ok)(R.Ok(value))).toEqual(R.Ok(value))
       })
     )
   })
@@ -225,11 +223,10 @@ describe('monad laws', () => {
         anything(),
         (f, g, value) => {
           expect(
-            R.flatMap(
-              (x) => R.Ok(g(x)),
-              R.flatMap((x) => R.Ok(f(x)), R.Ok(value))
+            R.flatMap((x) => R.Ok(g(x)))(
+              R.flatMap((x) => R.Ok(f(x)))(R.Ok(value))
             )
-          ).toEqual(R.flatMap((x) => R.Ok(g(f(x))), R.Ok(value)))
+          ).toEqual(R.flatMap((x) => R.Ok(g(f(x))))(R.Ok(value)))
         }
       )
     )
