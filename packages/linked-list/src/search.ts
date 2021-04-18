@@ -87,8 +87,7 @@ export function indexOf<T>(value: T, list: LinkedList<T>): Option<number> {
 }
 
 export function lastIndexOf<T>(value: T, list: LinkedList<T>): Option<number> {
-  return map(
-    (lastIndex) => length(list) - lastIndex - 1,
+  return map((lastIndex: number) => length(list) - lastIndex - 1)(
     recursiveFind<T, Option<number>>(
       (current) => current === value,
       (_, index) => Some(index),
