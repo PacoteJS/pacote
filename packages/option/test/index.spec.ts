@@ -52,15 +52,15 @@ describe('tryCatch()', () => {
 
 describe('contains()', () => {
   test('returns true if wrapped value is the same', () => {
-    expect(O.contains('test')(O.Some('test'))).toBe(true)
+    expect(pipe(O.Some('test'), O.contains('test'))).toBe(true)
   })
 
   test('returns false if wrapped value is not the same', () => {
-    expect(O.contains('different')(O.Some('test'))).toBe(false)
+    expect(pipe(O.Some('test'), O.contains('different'))).toBe(false)
   })
 
   test('returns false on None', () => {
-    expect(O.contains('test')(O.None)).toBe(false)
+    expect(pipe(O.None, O.contains('test'))).toBe(false)
   })
 })
 
@@ -76,33 +76,61 @@ describe('flatten()', () => {
 
 describe('getOrElse()', () => {
   test('returns the wrapped value on Some', () => {
-    expect(O.getOrElse(() => 'default')(O.None)).toBe('default')
+    expect(
+      pipe(
+        O.None,
+        O.getOrElse(() => 'default')
+      )
+    ).toBe('default')
   })
 
   test('evaluates the function and returns its result on None', () => {
-    expect(O.getOrElse(() => 0)(O.Some(1))).toBe(1)
+    expect(
+      pipe(
+        O.Some(1),
+        O.getOrElse(() => 0)
+      )
+    ).toBe(1)
   })
 })
 
 describe('map()', () => {
   test('maps None to None', () => {
-    expect(O.map((x: number) => x + 1)(O.None)).toEqual(O.None)
+    expect(
+      pipe(
+        O.None,
+        O.map((x: number) => x + 1)
+      )
+    ).toEqual(O.None)
   })
 
   test('maps Some using the provided function', () => {
-    expect(O.map((x: number) => x + 1)(O.Some(1))).toEqual(O.Some(2))
+    expect(
+      pipe(
+        O.Some(1),
+        O.map((x: number) => x + 1)
+      )
+    ).toEqual(O.Some(2))
   })
 })
 
 describe('flatMap()', () => {
   test('binds None to None', () => {
-    expect(O.flatMap((x: number) => O.Some(`${x + 1}`))(O.None)).toEqual(O.None)
+    expect(
+      pipe(
+        O.None,
+        O.flatMap((x: number) => O.Some(x + 1))
+      )
+    ).toEqual(O.None)
   })
 
   test('binds Some using the provided function', () => {
-    expect(O.flatMap((x: number) => O.Some(`${x + 1}`))(O.Some(1))).toEqual(
-      O.Some('2')
-    )
+    expect(
+      pipe(
+        O.Some(1),
+        O.flatMap((x) => O.Some(x + 1))
+      )
+    ).toEqual(O.Some(2))
   })
 })
 
@@ -110,54 +138,62 @@ describe('filter()', () => {
   const isEven = (n: number) => n % 2 === 0
 
   test('returns option if predicate is true', () => {
-    expect(O.filter(isEven)(O.Some(4))).toEqual(O.Some(4))
+    expect(pipe(O.Some(4), O.filter(isEven))).toEqual(O.Some(4))
   })
 
   test('returns None if predicate is true', () => {
-    expect(O.filter(isEven)(O.Some(3))).toEqual(O.None)
+    expect(pipe(O.Some(3), O.filter(isEven))).toEqual(O.None)
   })
 
   test('returns None if option is None', () => {
-    expect(O.filter(isEven)(O.None)).toEqual(O.None)
+    expect(pipe(O.None, O.filter(isEven))).toEqual(O.None)
   })
 })
 
 describe('or()', () => {
   test('returns option if O.Some(T)', () => {
-    expect(O.or(O.Some('alt'))(O.Some('option'))).toEqual(O.Some('option'))
+    expect(pipe(O.Some('option'), O.or(O.Some('alt')))).toEqual(
+      O.Some('option')
+    )
   })
 
   test('returns alternative if None', () => {
-    expect(O.or(O.Some('alt'))(O.None)).toEqual(O.Some('alt'))
+    expect(pipe(O.None, O.or(O.Some('alt')))).toEqual(O.Some('alt'))
   })
 })
 
 describe('and()', () => {
   test('returns alternative if O.Some(T)', () => {
-    expect(O.and(O.Some('alt'))(O.Some('option'))).toEqual(O.Some('alt'))
+    expect(pipe(O.Some('option'), O.and(O.Some('alt')))).toEqual(O.Some('alt'))
   })
 
   test('returns None if None', () => {
-    expect(O.and(O.Some('alt'))(O.None)).toEqual(O.None)
+    expect(pipe(O.None, O.and(O.Some('alt')))).toEqual(O.None)
   })
 })
 
 describe('fold()', () => {
   test('applies mapping function to None', () => {
     expect(
-      O.fold<string, number>(
-        (s) => s.length,
-        () => 0
-      )(O.None)
+      pipe(
+        O.None,
+        O.fold(
+          (s: string) => s.length,
+          () => 0
+        )
+      )
     ).toEqual(0)
   })
 
   test('applies mapping function to O.Some(T)', () => {
     expect(
-      O.fold(
-        (s: string) => s.length,
-        () => 0
-      )(O.Some('test'))
+      pipe(
+        O.Some('test'),
+        O.fold(
+          (s) => s.length,
+          () => 0
+        )
+      )
     ).toEqual(4)
   })
 })
@@ -166,9 +202,12 @@ describe('monad laws', () => {
   test('left identity', () => {
     assert(
       property(func(anything()), anything(), (fn, value) => {
-        expect(O.flatMap((x) => O.Some(fn(x)))(O.Some(value))).toEqual(
-          O.Some(fn(value))
-        )
+        expect(
+          pipe(
+            O.Some(value),
+            O.flatMap((x) => O.Some(fn(x)))
+          )
+        ).toEqual(O.Some(fn(value)))
       })
     )
   })
@@ -176,7 +215,7 @@ describe('monad laws', () => {
   test('right identity', () => {
     assert(
       property(anything(), (value) => {
-        expect(O.flatMap(O.Some)(O.Some(value))).toEqual(O.Some(value))
+        expect(pipe(O.Some(value), O.flatMap(O.Some))).toEqual(O.Some(value))
       })
     )
   })
@@ -189,10 +228,17 @@ describe('monad laws', () => {
         anything(),
         (f, g, value) => {
           expect(
-            O.flatMap((x) => O.Some(g(x)))(
-              O.flatMap((x) => O.Some(f(x)))(O.Some(value))
+            pipe(
+              O.Some(value),
+              O.flatMap((x) => O.Some(f(x))),
+              O.flatMap((x) => O.Some(g(x)))
             )
-          ).toEqual(O.flatMap((x) => O.Some(g(f(x))))(O.Some(value)))
+          ).toEqual(
+            pipe(
+              O.Some(value),
+              O.flatMap((x) => O.Some(g(f(x))))
+            )
+          )
         }
       )
     )

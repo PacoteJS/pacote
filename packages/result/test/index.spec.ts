@@ -1,4 +1,5 @@
 import { assert, property, anything, func } from 'fast-check'
+import { pipe } from '@pacote/pipe'
 import * as O from '@pacote/option'
 import * as R from '../src/index'
 
@@ -99,36 +100,60 @@ describe('getOrElse()', () => {
 describe('map()', () => {
   test('leaves Err unchanged', () => {
     expect(
-      R.map<string, string, number>((s) => s.length)(R.Err('error'))
+      pipe(
+        R.Err('error'),
+        R.map((s: string) => s.length)
+      )
     ).toEqual(R.Err('error'))
   })
 
   test('maps Ok result', () => {
-    expect(R.map((s: string) => s.length)(R.Ok('ok'))).toEqual(R.Ok(2))
+    expect(
+      pipe(
+        R.Ok('ok'),
+        R.map((s) => s.length)
+      )
+    ).toEqual(R.Ok(2))
   })
 })
 
 describe('mapErr()', () => {
   test('leaves Ok unchanged', () => {
-    expect(R.mapErr((s: string) => s.length)(R.Ok('ok'))).toEqual(R.Ok('ok'))
+    expect(
+      pipe(
+        R.Ok('ok'),
+        R.mapErr((s: string) => s.length)
+      )
+    ).toEqual(R.Ok('ok'))
   })
 
   test('maps Err result', () => {
-    expect(R.mapErr((s: string) => s.length)(R.Err('error'))).toEqual(R.Err(5))
+    expect(
+      pipe(
+        R.Err('error'),
+        R.mapErr((s) => s.length)
+      )
+    ).toEqual(R.Err(5))
   })
 })
 
 describe('flatMap()', () => {
   test('leaves Err unchanged', () => {
     expect(
-      R.flatMap<string, string, number>((s) => R.Ok(s.length))(R.Err('error'))
+      pipe(
+        R.Err('error'),
+        R.flatMap<string, string, number>((s) => R.Ok(s.length))
+      )
     ).toEqual(R.Err('error'))
   })
 
   test('maps Ok result', () => {
-    expect(R.flatMap((s: string) => R.Ok(s.length))(R.Ok('ok'))).toEqual(
-      R.Ok(2)
-    )
+    expect(
+      pipe(
+        R.Ok('ok'),
+        R.flatMap((s) => R.Ok(s.length))
+      )
+    ).toEqual(R.Ok(2))
   })
 })
 
@@ -200,9 +225,12 @@ describe('monad laws', () => {
   test('left identity', () => {
     assert(
       property(func(anything()), anything(), (fn, value) => {
-        expect(R.flatMap((x) => R.Ok(fn(x)))(R.Ok(value))).toEqual(
-          R.Ok(fn(value))
-        )
+        expect(
+          pipe(
+            R.Ok(value),
+            R.flatMap((x) => R.Ok(fn(x)))
+          )
+        ).toEqual(R.Ok(fn(value)))
       })
     )
   })
@@ -210,7 +238,7 @@ describe('monad laws', () => {
   test('right identity', () => {
     assert(
       property(anything(), (value) => {
-        expect(R.flatMap(R.Ok)(R.Ok(value))).toEqual(R.Ok(value))
+        expect(pipe(R.Ok(value), R.flatMap(R.Ok))).toEqual(R.Ok(value))
       })
     )
   })
@@ -223,10 +251,17 @@ describe('monad laws', () => {
         anything(),
         (f, g, value) => {
           expect(
-            R.flatMap((x) => R.Ok(g(x)))(
-              R.flatMap((x) => R.Ok(f(x)))(R.Ok(value))
+            pipe(
+              R.Ok(value),
+              R.flatMap((x) => R.Ok(f(x))),
+              R.flatMap((x) => R.Ok(g(x)))
             )
-          ).toEqual(R.flatMap((x) => R.Ok(g(f(x))))(R.Ok(value)))
+          ).toEqual(
+            pipe(
+              R.Ok(value),
+              R.flatMap((x) => R.Ok(g(f(x))))
+            )
+          )
         }
       )
     )

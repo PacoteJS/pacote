@@ -1,9 +1,11 @@
 import { Err, Ok } from '@pacote/result'
-import { validation, lift } from '../src/index'
+import { lift, validation } from '../src/index'
 
-test('lift() transforms Result functions into Validation functions', () => {
-  const error = lift<number, string>(() => Err('test'))
-  expect(error(0)).toEqual(Err(['test']))
+describe('lift()', () => {
+  it('transforms Result functions into Validation functions', () => {
+    const error = lift<number, string>(() => Err('test'))
+    expect(error(0)).toEqual(Err(['test']))
+  })
 })
 
 describe('validation()', () => {
@@ -15,7 +17,7 @@ describe('validation()', () => {
     value.match(/[0-9]/) ? Ok(value) : Err('no digits')
   )
 
-  it('composes validators and returns a success when no checks fail', () => {
+  it('composes validators and returns a success when all checks pass', () => {
     const validate = validation(hasLetter, hasDigit)
     expect(validate('0a')).toEqual(Ok('0a'))
   })
