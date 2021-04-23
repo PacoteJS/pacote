@@ -12,6 +12,25 @@ Extra Array functions.
 yarn add @pacote/array
 ```
 
+## `associate<T, K, V>(transform: (value: T) => [K, V], array: readonly T[]): Record<K, V>`
+
+`associate()` creates a new `Record` from an `array` of arbitrary values,
+passing each through a `transform` function to obtain tuples of the target
+`Record`'s keys and values.
+
+### Usage
+
+```typescript
+import { associate } from '@pacote/array'
+
+associate((s) => [s, s.length], ['abc', 'd']) // => { 'abc': 3, 'd': 1 }
+```
+
+### Arguments
+
+- `transform`: the transformation function.
+- `array`: the array to transform into a `Record`.
+
 ## `range(start: number, end: number): number[]`
 
 `range()` returns an array of numbers between `start` and `end` (non inclusive).
@@ -20,7 +39,7 @@ The function is only able to generate ascending ranges.
 ### Usage
 
 ```typescript
-import { range } from '@pacote/windowed'
+import { range } from '@pacote/array'
 
 range(1, 4) // => [1, 2, 3]
 ```
@@ -43,7 +62,7 @@ Inspired by Kotlin's [`windowed`](https://kotlinlang.org/api/latest/jvm/stdlib/k
 ### Usage
 
 ```typescript
-import { windowed } from '@pacote/windowed'
+import { windowed } from '@pacote/array'
 
 const array = [1, 2, 3, 4]
 
