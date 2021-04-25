@@ -121,6 +121,7 @@
     "@pacote/pixels": "file:packages/pixels",
     "@pacote/react-use-outside": "file:packages/react-use-outside",
     "@pacote/react-with-props": "file:packages/react-with-props",
+    "@pacote/request": "file:packages/request",
     "@pacote/result": "file:packages/result",
     "@pacote/shuffle": "file:packages/shuffle",
     "@pacote/throttle": "file:packages/throttle",

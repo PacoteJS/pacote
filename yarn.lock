@@ -1520,13 +1520,13 @@
 "@pacote/bloom-filter@file:packages/bloom-filter":
   version "0.3.7"
   dependencies:
-    "@pacote/xxhash" "file:packages/xxhash"
+    "@pacote/xxhash" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-filter-0.3.7-83c50995-33e3-4f60-90b9-3db380b85b0a-1619887686325/node_modules/@pacote/xxhash"
 
 "@pacote/bloom-search@file:packages/bloom-search":
   version "0.6.9"
   dependencies:
-    "@pacote/array" "file:packages/array"
-    "@pacote/bloom-filter" "file:packages/bloom-filter"
+    "@pacote/array" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-search-0.6.9-9b42ca15-c0d9-452c-8fd0-f9cd8bc5631f-1619887686327/node_modules/@pacote/array"
+    "@pacote/bloom-filter" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-search-0.6.9-9b42ca15-c0d9-452c-8fd0-f9cd8bc5631f-1619887686327/node_modules/@pacote/bloom-filter"
 
 "@pacote/computus@file:packages/computus":
   version "1.2.6"
@@ -1549,7 +1549,7 @@
 "@pacote/ffetch@file:packages/ffetch":
   version "6.0.3"
   dependencies:
-    "@pacote/error" "file:packages/error"
+    "@pacote/error" "file:../../Library/Caches/Yarn/v6/npm-@pacote-ffetch-6.0.3-099aac14-d582-4824-a836-97cc85a70f73-1619887686331/node_modules/@pacote/error"
 
 "@pacote/flux-actions@file:packages/flux-actions":
   version "2.1.11"
@@ -1560,7 +1560,7 @@
 "@pacote/iff@file:packages/iff":
   version "2.0.7"
   dependencies:
-    "@pacote/option" "file:packages/option"
+    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-iff-2.0.7-b224eea3-8db5-4b9a-8107-2938eee590a2-1619887686332/node_modules/@pacote/option"
 
 "@pacote/immutable@file:packages/immutable":
   version "1.2.5"
@@ -1574,7 +1574,7 @@
 "@pacote/jest-either@file:packages/jest-either":
   version "4.0.9"
   dependencies:
-    "@pacote/is-plain-object" "file:packages/is-plain-object"
+    "@pacote/is-plain-object" "file:../../Library/Caches/Yarn/v6/npm-@pacote-jest-either-4.0.9-1f7580ed-f598-43f0-a0cd-48381ac768bf-1619887686334/node_modules/@pacote/is-plain-object"
     jest-diff "^26.0.1"
     jest-matcher-utils "^26.0.1"
     ramda "^0.27.0"
@@ -1582,7 +1582,7 @@
 "@pacote/linked-list@file:packages/linked-list":
   version "0.4.8"
   dependencies:
-    "@pacote/option" "file:packages/option"
+    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-linked-list-0.4.8-25c1b645-647d-4fad-a65d-e107cab1a279-1619887686340/node_modules/@pacote/option"
 
 "@pacote/memoize@file:packages/memoize":
   version "1.1.5"
@@ -1590,7 +1590,7 @@
 "@pacote/non-empty-array@file:packages/non-empty-array":
   version "0.2.2"
   dependencies:
-    "@pacote/option" "file:packages/option"
+    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-non-empty-array-0.2.2-4865a3c2-6eea-497e-96c9-87506b2828c8-1619887686341/node_modules/@pacote/option"
 
 "@pacote/option@file:packages/option":
   version "2.0.1"
@@ -1601,7 +1601,7 @@
 "@pacote/pixels@file:packages/pixels":
   version "1.1.6"
   dependencies:
-    "@pacote/get-style" "file:packages/get-style"
+    "@pacote/get-style" "file:../../Library/Caches/Yarn/v6/npm-@pacote-pixels-1.1.6-2e1e1ace-6430-4dd9-aa0b-1206823b6556-1619887686343/node_modules/@pacote/get-style"
 
 "@pacote/react-use-outside@file:packages/react-use-outside":
   version "1.1.8"
@@ -1609,10 +1609,18 @@
 "@pacote/react-with-props@file:packages/react-with-props":
   version "1.1.9"
 
+"@pacote/request@file:packages/request":
+  version "0.0.0"
+  dependencies:
+    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-request-0.0.0-382f91e5-781a-4ef0-82e0-ac02aa598001-1619887686344/node_modules/@pacote/option"
+    "@pacote/pipe" "file:../../Library/Caches/Yarn/v6/npm-@pacote-request-0.0.0-382f91e5-781a-4ef0-82e0-ac02aa598001-1619887686344/node_modules/@pacote/pipe"
+    "@pacote/result" "file:../../Library/Caches/Yarn/v6/npm-@pacote-request-0.0.0-382f91e5-781a-4ef0-82e0-ac02aa598001-1619887686344/node_modules/@pacote/result"
+    query-string "^7.0.0"
+
 "@pacote/result@file:packages/result":
   version "2.1.0"
   dependencies:
-    "@pacote/option" "file:packages/option"
+    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-result-2.1.0-c21a9e15-c7ae-4bd6-85ae-4948c3632a67-1619887686346/node_modules/@pacote/option"
 
 "@pacote/shuffle@file:packages/shuffle":
   version "1.0.9"
@@ -1629,14 +1637,14 @@
 "@pacote/validation@file:packages/validation":
   version "0.1.2"
   dependencies:
-    "@pacote/non-empty-array" "file:packages/non-empty-array"
-    "@pacote/pipe" "file:packages/pipe"
-    "@pacote/result" "file:packages/result"
+    "@pacote/non-empty-array" "file:../../Library/Caches/Yarn/v6/npm-@pacote-validation-0.1.2-cf6ace2f-97a8-4519-85e4-ea97d7f9d9e1-1619887686348/node_modules/@pacote/non-empty-array"
+    "@pacote/pipe" "file:../../Library/Caches/Yarn/v6/npm-@pacote-validation-0.1.2-cf6ace2f-97a8-4519-85e4-ea97d7f9d9e1-1619887686348/node_modules/@pacote/pipe"
+    "@pacote/result" "file:../../Library/Caches/Yarn/v6/npm-@pacote-validation-0.1.2-cf6ace2f-97a8-4519-85e4-ea97d7f9d9e1-1619887686348/node_modules/@pacote/result"
 
 "@pacote/xxhash@file:packages/xxhash":
   version "0.2.2"
   dependencies:
-    "@pacote/u64" "file:packages/u64"
+    "@pacote/u64" "file:../../Library/Caches/Yarn/v6/npm-@pacote-xxhash-0.2.2-a2e32521-c7a8-4823-a48d-760179a81df6-1619887686326/node_modules/@pacote/u64"
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.3"
@@ -7278,6 +7286,16 @@ query-string@^6.13.8:
   version "6.14.1"
   resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.14.1.tgz#7ac2dca46da7f309449ba0f86b1fd28255b0c86a"
   integrity sha512-XDxAeVmpfu1/6IjyT/gXHOl+S0vQ9owggJ30hhWKdHAsNPOcasn5o9BW0eejZqL2e4vMjhAxoW3jVHcD6mbcYw==
+  dependencies:
+    decode-uri-component "^0.2.0"
+    filter-obj "^1.1.0"
+    split-on-first "^1.0.0"
+    strict-uri-encode "^2.0.0"
+
+query-string@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-7.0.0.tgz#aaad2c8d5c6a6d0c6afada877fecbd56af79e609"
+  integrity sha512-Iy7moLybliR5ZgrK/1R3vjrXq03S13Vz4Rbm5Jg3EFq1LUmQppto0qtXz4vqZ386MSRjZgnTSZ9QC+NZOSd/XA==
   dependencies:
     decode-uri-component "^0.2.0"
     filter-obj "^1.1.0"

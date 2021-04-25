@@ -1,6 +1,6 @@
 import { ofNullable, Option } from '@pacote/option'
+import { map } from '@pacote/result'
 import { RequestInfo } from './request'
-import { mapC } from './result'
 
 const requestHeader = (name: string, value: string) => ({
   headers,
@@ -10,7 +10,7 @@ const requestHeader = (name: string, value: string) => ({
 }
 
 const responseHeader = (name: string) =>
-  mapC<Response, Error, Option<string>>(({ headers }) =>
+  map<Response, Error, Option<string>>(({ headers }) =>
     ofNullable(headers.get(name))
   )
 

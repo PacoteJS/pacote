@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/await-async-utils */
 import 'whatwg-fetch'
 import nock from 'nock'
 import { pipe } from '@pacote/pipe'

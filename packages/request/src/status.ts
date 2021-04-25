@@ -1,8 +1,8 @@
-import { mapC } from './result'
+import { map } from '@pacote/result'
 
 const property = <O, P extends keyof O>(name: P) => (response: O) =>
   response[name]
 
-export const status = mapC<Response, Error, number>(property('status'))
+export const status = map<Response, Error, number>(property('status'))
 
-export const statusText = mapC<Response, Error, string>(property('statusText'))
+export const statusText = map<Response, Error, string>(property('statusText'))
