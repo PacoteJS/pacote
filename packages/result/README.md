@@ -1,4 +1,4 @@
-# @pacote/option
+# @pacote/result
 
 ![version](https://badgen.net/npm/v/@pacote/result)
 ![minified](https://badgen.net/bundlephobia/min/@pacote/result)
