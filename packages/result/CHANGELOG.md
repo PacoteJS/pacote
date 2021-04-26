@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/PacoteJS/pacote/compare/@pacote/result@2.0.1...@pacote/result@2.1.0) (2021-04-26)
+
+
+### Features
+
+* 🎸 add bimap() ([2b5fae5](https://github.com/PacoteJS/pacote/commit/2b5fae5fe3e23279f284e80c890d47546a955f3f))
+
+
+
+
+
 ## [2.0.1](https://github.com/PacoteJS/pacote/compare/@pacote/result@2.0.0...@pacote/result@2.0.1) (2021-04-23)
 
 **Note:** Version bump only for package @pacote/result

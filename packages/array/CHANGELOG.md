@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1](https://github.com/PacoteJS/pacote/compare/@pacote/array@0.4.0...@pacote/array@0.4.1) (2021-04-26)
+
+
+### Bug Fixes
+
+* 🐛 return type Record<K, V> without Partial ([48a61ef](https://github.com/PacoteJS/pacote/commit/48a61efd8be2b591f279474f06347e8d8e7be747))
+
+
+
+
+
 # [0.4.0](https://github.com/PacoteJS/pacote/compare/@pacote/array@0.3.1...@pacote/array@0.4.0) (2021-04-23)
 
 
