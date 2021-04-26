@@ -71,7 +71,7 @@ Returns `true` if the passed result is `Ok`. Otherwise, it returns `false`.
 
 Returns `true` if the passed result is `Err`. Otherwise, it returns `false`.
 
-### `getOrElse<T, E>(fn: (err: E) => T, result: Result<T, E>): T`
+### `getOrElse<T, E>(fn: (err: E) => T): (result: Result<T, E>) => T`
 
 Returns the value contained in the result. If the result is `Err`, it evaluates
 the provided function for an alternative.
@@ -90,17 +90,22 @@ Evaluates the result and returns an `Option` that is:
 - `None` if the result is `Ok`, or
 - `Some` wrapping the result error if it's `Err`.
 
-### `map<T, E, U>(fn: (value: T) => U, result: Result<T, E>): Result<U, E>`
+### `map<T, E, U>(fn: (value: T) => U): (result: Result<T, E>) => Result<U, E>`
 
 Maps a `Result<T, E>` to `Result<U, E>` by applying a function to the contained
 value.
 
-### `mapErr<T, E, F>(fn: (value: E) => F, result: Result<T, E>): Result<T, F>`
+### `mapErr<T, E, F>(fn: (value: E) => F): (result: Result<T, E>) => Result<T, F>`
 
 Maps a `Result<T, E>` to `Result<T, F>` by applying a function to the contained
 error.
 
-### `flatMap<T, E, U>(fn: (value: T) => Result<U, E>, result: Result<T, E>): Result<U, E>`
+### `bimap<T, E, U, F>(onOk: (ok: T) => R, onErr: (err: E) => R): (result: Result<T, E>) => Result<U, F>`
+
+Maps a `Result<T, E>` to `Result<U, F>` by applying a pair of functions over
+each of the possible results.
+
+### `flatMap<T, E, U>(fn: (value: T) => Result<U, E>): (result: Result<T, E>) => Result<U, E>`
 
 Calls `fn` if the result is `Ok`, otherwise returns the `Err` value.
 
@@ -108,16 +113,16 @@ Calls `fn` if the result is `Ok`, otherwise returns the `Err` value.
 
 Converts `Result<Result<T, E>, E>` to `Result<T, E>`.
 
-### `fold<T, E, R>(onOk: (ok: T) => R, onErr: (err: E) => R, result: Result<T, E>): R`
+### `fold<T, E, R>(onOk: (ok: T) => R, onErr: (err: E) => R): (result: Result<T, E>) => R`
 
 Applies the `onOk` function to the value contained in `Ok`, otherwise it
 computes a default using `onErr` if it is an error.
 
-### `or<T, E>(alternative: Result<T, E>, result: Result<T, E>): Result<T, E>`
+### `or<T, E>(alternative: Result<T, E>): (result: Result<T, E>) => Result<T, E>`
 
 Returns the result if it is `Ok`, otherwise returns the alternative.
 
-### `and<T, E, U>(alternative: Result<U, E>, result: Result<T, E>): Result<U, E>`
+### `and<T, E, U>(alternative: Result<U, E>): (result: Result<T, E>) => Result<U, E>`
 
 Returns the result if it is `Err`, otherwise returns the alternative.
 
