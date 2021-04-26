@@ -16,13 +16,14 @@ yarn add @pacote/result
 
 ```typescript
 import { Ok, Err, map } from '@pacote/result'
+import { pipe } from '@pacote/pipe'
 
 function divide(numerator: number, denominator: number): Option<number> {
   return denominator === 0 : Err('division by zero') ? Ok(numerator / denominator)
 }
 
-map(n => n + 1, divide(4, 2)) // => Ok(3)
-map(n => n + 1, divide(4, 0)) // => Err('division by zero')
+pipe(divide(4, 2), map(n => n + 1)) // => Ok(3)
+pipe(divide(4, 0), map(n => n + 1)) // => Err('division by zero')
 ```
 
 ## Type
