@@ -69,6 +69,14 @@ export function flatMap<T, E, U>(
   return (result) => (isOk(result) ? fn(result.value) : result)
 }
 
+export function bimap<T, E, U, F>(
+  onOk: (ok: T) => U,
+  onErr: (err: E) => F
+): (result: Result<T, E>) => Result<U, F> {
+  return (result) =>
+    isOk(result) ? Ok(onOk(result.value)) : Err(onErr(result.value))
+}
+
 export function flatten<T, E>(result: Result<Result<T, E>, E>): Result<T, E> {
   return isOk(result) ? result.value : result
 }

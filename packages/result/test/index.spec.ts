@@ -137,6 +137,32 @@ describe('mapErr()', () => {
   })
 })
 
+describe('bimap()', () => {
+  test('applies mapping function to Err(E)', () => {
+    expect(
+      pipe(
+        R.Err(0),
+        R.bimap(
+          () => 0,
+          (e) => e + 1
+        )
+      )
+    ).toEqual(R.Err(1))
+  })
+
+  test('applies mapping function to Ok(T)', () => {
+    expect(
+      pipe(
+        R.Ok(1),
+        R.bimap(
+          (t) => t + 1,
+          () => 0
+        )
+      )
+    ).toEqual(R.Ok(2))
+  })
+})
+
 describe('flatMap()', () => {
   test('leaves Err unchanged', () => {
     expect(
@@ -147,7 +173,7 @@ describe('flatMap()', () => {
     ).toEqual(R.Err('error'))
   })
 
-  test('maps Ok result', () => {
+  test('chains Ok result', () => {
     expect(
       pipe(
         R.Ok('ok'),
@@ -174,19 +200,25 @@ describe('flatten()', () => {
 describe('fold()', () => {
   test('applies mapping function to Err(E)', () => {
     expect(
-      R.fold(
-        (t) => `Ok(${t})`,
-        (e) => `Err(${e})`
-      )(R.Err(0))
+      pipe(
+        R.Err(0),
+        R.fold(
+          (t) => `Ok(${t})`,
+          (e) => `Err(${e})`
+        )
+      )
     ).toEqual('Err(0)')
   })
 
   test('applies mapping function to Ok(T)', () => {
     expect(
-      R.fold(
-        (t) => `Ok(${t})`,
-        (e) => `Err(${e})`
-      )(R.Ok(1))
+      pipe(
+        R.Ok(1),
+        R.fold(
+          (t) => `Ok(${t})`,
+          (e) => `Err(${e})`
+        )
+      )
     ).toEqual('Ok(1)')
   })
 })
@@ -207,16 +239,18 @@ describe('or()', () => {
 
 describe('and()', () => {
   test('returns alternative if result is Ok', () => {
-    expect(R.and(R.Ok('ok'))(R.Ok(2))).toEqual(R.Ok('ok'))
-    expect(R.and(R.Err('late error'))(R.Ok(2))).toEqual(R.Err('late error'))
+    expect(pipe(R.Ok(2), R.and(R.Ok('ok')))).toEqual(R.Ok('ok'))
+    expect(pipe(R.Ok(2), R.and(R.Err('late error')))).toEqual(
+      R.Err('late error')
+    )
   })
 
   test('returns result if result is Err', () => {
-    expect(R.and(R.Err('late error'))(R.Err('early error'))).toEqual(
+    expect(pipe(R.Err('early error'), R.and(R.Err('late error')))).toEqual(
       R.Err('early error')
     )
     expect(
-      R.and<string, string, string>(R.Ok('ok'))(R.Err('early error'))
+      pipe(R.Err('early error'), R.and<string, string, string>(R.Ok('ok')))
     ).toEqual(R.Err('early error'))
   })
 })
