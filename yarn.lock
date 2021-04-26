@@ -1515,7 +1515,7 @@
     "@octokit/openapi-types" "^6.0.0"
 
 "@pacote/array@file:packages/array":
-  version "0.3.1"
+  version "0.4.0"
 
 "@pacote/bloom-filter@file:packages/bloom-filter":
   version "0.3.7"
@@ -1523,7 +1523,7 @@
     "@pacote/xxhash" "file:packages/xxhash"
 
 "@pacote/bloom-search@file:packages/bloom-search":
-  version "0.6.7"
+  version "0.6.8"
   dependencies:
     "@pacote/array" "file:packages/array"
     "@pacote/bloom-filter" "file:packages/bloom-filter"
@@ -1558,7 +1558,7 @@
   version "1.1.6"
 
 "@pacote/iff@file:packages/iff":
-  version "2.0.6"
+  version "2.0.7"
   dependencies:
     "@pacote/option" "file:packages/option"
 
@@ -1580,7 +1580,7 @@
     ramda "^0.27.0"
 
 "@pacote/linked-list@file:packages/linked-list":
-  version "0.4.7"
+  version "0.4.8"
   dependencies:
     "@pacote/option" "file:packages/option"
 
@@ -1588,12 +1588,12 @@
   version "1.1.5"
 
 "@pacote/non-empty-array@file:packages/non-empty-array":
-  version "0.2.1"
+  version "0.2.2"
   dependencies:
     "@pacote/option" "file:packages/option"
 
 "@pacote/option@file:packages/option":
-  version "2.0.0"
+  version "2.0.1"
 
 "@pacote/pipe@file:packages/pipe":
   version "0.1.0"
@@ -1610,7 +1610,7 @@
   version "1.1.9"
 
 "@pacote/result@file:packages/result":
-  version "2.0.0"
+  version "2.0.1"
   dependencies:
     "@pacote/option" "file:packages/option"
 
@@ -1627,7 +1627,7 @@
   version "0.1.4"
 
 "@pacote/validation@file:packages/validation":
-  version "0.1.0"
+  version "0.1.1"
   dependencies:
     "@pacote/non-empty-array" "file:packages/non-empty-array"
     "@pacote/pipe" "file:packages/pipe"
@@ -3438,9 +3438,9 @@ escodegen@^2.0.0:
     source-map "~0.6.1"
 
 eslint-config-prettier@^8.0.0:
-  version "8.2.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.2.0.tgz#78de77d63bca8e9e59dae75a614b5299925bb7b3"
-  integrity sha512-dWV9EVeSo2qodOPi1iBYU/x6F6diHv8uujxbxr77xExs3zTAlNXvVZKiyLsQGNz7yPV2K49JY5WjPzNIuDc2Bw==
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.3.0.tgz#f7471b20b6fe8a9a9254cc684454202886a2dd7a"
+  integrity sha512-BgZuLUSeKzvlL/VUjx/Yb787VQ26RU3gGjA3iiFvdsp/2bMfVIWUVP7tjxtjS0e+HP409cPlPvNkQloz8C91ew==
 
 eslint-config-standard@^16.0.1:
   version "16.0.2"
