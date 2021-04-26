@@ -1515,7 +1515,7 @@
     "@octokit/openapi-types" "^6.0.0"
 
 "@pacote/array@file:packages/array":
-  version "0.3.1"
+  version "0.4.0"
 
 "@pacote/bloom-filter@file:packages/bloom-filter":
   version "0.3.7"
@@ -1523,7 +1523,7 @@
     "@pacote/xxhash" "file:packages/xxhash"
 
 "@pacote/bloom-search@file:packages/bloom-search":
-  version "0.6.7"
+  version "0.6.8"
   dependencies:
     "@pacote/array" "file:packages/array"
     "@pacote/bloom-filter" "file:packages/bloom-filter"
@@ -1558,7 +1558,7 @@
   version "1.1.6"
 
 "@pacote/iff@file:packages/iff":
-  version "2.0.6"
+  version "2.0.7"
   dependencies:
     "@pacote/option" "file:packages/option"
 
@@ -1580,7 +1580,7 @@
     ramda "^0.27.0"
 
 "@pacote/linked-list@file:packages/linked-list":
-  version "0.4.7"
+  version "0.4.8"
   dependencies:
     "@pacote/option" "file:packages/option"
 
@@ -1588,12 +1588,12 @@
   version "1.1.5"
 
 "@pacote/non-empty-array@file:packages/non-empty-array":
-  version "0.2.1"
+  version "0.2.2"
   dependencies:
     "@pacote/option" "file:packages/option"
 
 "@pacote/option@file:packages/option":
-  version "2.0.0"
+  version "2.0.1"
 
 "@pacote/pipe@file:packages/pipe":
   version "0.1.0"
@@ -1610,7 +1610,7 @@
   version "1.1.9"
 
 "@pacote/result@file:packages/result":
-  version "2.0.0"
+  version "2.0.1"
   dependencies:
     "@pacote/option" "file:packages/option"
 
@@ -1627,7 +1627,7 @@
   version "0.1.4"
 
 "@pacote/validation@file:packages/validation":
-  version "0.1.0"
+  version "0.1.1"
   dependencies:
     "@pacote/non-empty-array" "file:packages/non-empty-array"
     "@pacote/pipe" "file:packages/pipe"
@@ -3596,9 +3596,9 @@ eslint-visitor-keys@^2.0.0:
   integrity sha512-QudtT6av5WXels9WjIM7qz1XD1cWGvX4gGXvp/zBn9nXG02D0utdU3Em2m/QjTnrsk6bBjmCygl3rmj118msQQ==
 
 eslint@^7.21.0:
-  version "7.24.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.24.0.tgz#2e44fa62d93892bfdb100521f17345ba54b8513a"
-  integrity sha512-k9gaHeHiFmGCDQ2rEfvULlSLruz6tgfA8DEn+rY9/oYPFFTlz55mM/Q/Rij1b2Y42jwZiK3lXvNTw6w6TXzcKQ==
+  version "7.25.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.25.0.tgz#1309e4404d94e676e3e831b3a3ad2b050031eb67"
+  integrity sha512-TVpSovpvCNpLURIScDRB6g5CYu/ZFq9GfX2hLNIV4dSBKxIWojeDODvYl3t0k0VtMxYeR8OXPCFE5+oHMlGfhw==
   dependencies:
     "@babel/code-frame" "7.12.11"
     "@eslint/eslintrc" "^0.4.0"
