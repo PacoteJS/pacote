@@ -1515,7 +1515,7 @@
     "@octokit/openapi-types" "^6.0.0"
 
 "@pacote/array@file:packages/array":
-  version "0.3.1"
+  version "0.4.0"
 
 "@pacote/bloom-filter@file:packages/bloom-filter":
   version "0.3.7"
@@ -1523,7 +1523,7 @@
     "@pacote/xxhash" "file:packages/xxhash"
 
 "@pacote/bloom-search@file:packages/bloom-search":
-  version "0.6.7"
+  version "0.6.8"
   dependencies:
     "@pacote/array" "file:packages/array"
     "@pacote/bloom-filter" "file:packages/bloom-filter"
@@ -1558,7 +1558,7 @@
   version "1.1.6"
 
 "@pacote/iff@file:packages/iff":
-  version "2.0.6"
+  version "2.0.7"
   dependencies:
     "@pacote/option" "file:packages/option"
 
@@ -1580,7 +1580,7 @@
     ramda "^0.27.0"
 
 "@pacote/linked-list@file:packages/linked-list":
-  version "0.4.7"
+  version "0.4.8"
   dependencies:
     "@pacote/option" "file:packages/option"
 
@@ -1588,12 +1588,12 @@
   version "1.1.5"
 
 "@pacote/non-empty-array@file:packages/non-empty-array":
-  version "0.2.1"
+  version "0.2.2"
   dependencies:
     "@pacote/option" "file:packages/option"
 
 "@pacote/option@file:packages/option":
-  version "2.0.0"
+  version "2.0.1"
 
 "@pacote/pipe@file:packages/pipe":
   version "0.1.0"
@@ -1610,7 +1610,7 @@
   version "1.1.9"
 
 "@pacote/result@file:packages/result":
-  version "2.0.0"
+  version "2.0.1"
   dependencies:
     "@pacote/option" "file:packages/option"
 
@@ -1627,7 +1627,7 @@
   version "0.1.4"
 
 "@pacote/validation@file:packages/validation":
-  version "0.1.0"
+  version "0.1.1"
   dependencies:
     "@pacote/non-empty-array" "file:packages/non-empty-array"
     "@pacote/pipe" "file:packages/pipe"
@@ -3491,9 +3491,9 @@ eslint-plugin-import@^2.20.0:
     tsconfig-paths "^3.9.0"
 
 eslint-plugin-jest-dom@^3.3.0:
-  version "3.8.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jest-dom/-/eslint-plugin-jest-dom-3.8.0.tgz#3f31591829dd5024ede4629b9268bc976b75fa43"
-  integrity sha512-TsBK1RSG8mXCJaOce+gcNLU8ORl5yx111/HnsTTL70qwfb1AtbcqGtpz2OvfI/Q23baMtWDVy4L1KHgJk0B1XQ==
+  version "3.8.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jest-dom/-/eslint-plugin-jest-dom-3.8.1.tgz#699691b4de4df572bfdf544db37f576d33eddc62"
+  integrity sha512-Qcx1XTy4VCJPOkCynRIzPl67az3pj8EJgfRZYGIBxbp4nxtulWFRzWrkD7nNag5JWAWiujgJS44SCjNyFzl1fQ==
   dependencies:
     "@babel/runtime" "^7.9.6"
     "@testing-library/dom" "^7.28.1"
