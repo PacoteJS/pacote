@@ -1515,7 +1515,7 @@
     "@octokit/openapi-types" "^6.0.0"
 
 "@pacote/array@file:packages/array":
-  version "0.4.0"
+  version "0.4.1"
 
 "@pacote/bloom-filter@file:packages/bloom-filter":
   version "0.3.7"
@@ -1523,7 +1523,7 @@
     "@pacote/xxhash" "file:packages/xxhash"
 
 "@pacote/bloom-search@file:packages/bloom-search":
-  version "0.6.8"
+  version "0.6.9"
   dependencies:
     "@pacote/array" "file:packages/array"
     "@pacote/bloom-filter" "file:packages/bloom-filter"
@@ -1610,7 +1610,7 @@
   version "1.1.9"
 
 "@pacote/result@file:packages/result":
-  version "2.0.1"
+  version "2.1.0"
   dependencies:
     "@pacote/option" "file:packages/option"
 
@@ -1627,7 +1627,7 @@
   version "0.1.4"
 
 "@pacote/validation@file:packages/validation":
-  version "0.1.1"
+  version "0.1.2"
   dependencies:
     "@pacote/non-empty-array" "file:packages/non-empty-array"
     "@pacote/pipe" "file:packages/pipe"
@@ -1772,9 +1772,9 @@
     "@types/istanbul-lib-report" "*"
 
 "@types/jest@^26.0.0":
-  version "26.0.22"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.22.tgz#8308a1debdf1b807aa47be2838acdcd91e88fbe6"
-  integrity sha512-eeWwWjlqxvBxc4oQdkueW5OF/gtfSceKk4OnOAGlUSwS/liBRtZppbJuz1YkgbrbfGOoeBHun9fOvXnjNwrSOw==
+  version "26.0.23"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.23.tgz#a1b7eab3c503b80451d019efb588ec63522ee4e7"
+  integrity sha512-ZHLmWMJ9jJ9PTiT58juykZpL7KjwJywFN3Rr2pTSkyQfydf/rk22yS7W8p5DaVUMQ2BQC7oYiU3FjbTM/mYrOA==
   dependencies:
     jest-diff "^26.0.0"
     pretty-format "^26.0.0"
