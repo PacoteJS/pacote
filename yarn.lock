@@ -1515,7 +1515,7 @@
     "@octokit/openapi-types" "^6.0.0"
 
 "@pacote/array@file:packages/array":
-  version "0.4.0"
+  version "0.4.1"
 
 "@pacote/bloom-filter@file:packages/bloom-filter":
   version "0.3.7"
@@ -1523,7 +1523,7 @@
     "@pacote/xxhash" "file:packages/xxhash"
 
 "@pacote/bloom-search@file:packages/bloom-search":
-  version "0.6.8"
+  version "0.6.9"
   dependencies:
     "@pacote/array" "file:packages/array"
     "@pacote/bloom-filter" "file:packages/bloom-filter"
@@ -1610,7 +1610,7 @@
   version "1.1.9"
 
 "@pacote/result@file:packages/result":
-  version "2.0.1"
+  version "2.1.0"
   dependencies:
     "@pacote/option" "file:packages/option"
 
@@ -1627,7 +1627,7 @@
   version "0.1.4"
 
 "@pacote/validation@file:packages/validation":
-  version "0.1.1"
+  version "0.1.2"
   dependencies:
     "@pacote/non-empty-array" "file:packages/non-empty-array"
     "@pacote/pipe" "file:packages/pipe"
@@ -1841,9 +1841,9 @@
     ts-toolbelt "^6.15.1"
 
 "@types/react@^17.0.0":
-  version "17.0.3"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.3.tgz#ba6e215368501ac3826951eef2904574c262cc79"
-  integrity sha512-wYOUxIgs2HZZ0ACNiIayItyluADNbONl7kt8lkLjVK8IitMH5QMyAh75Fwhmo37r1m7L2JaFj03sIfxBVDvRAg==
+  version "17.0.4"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.4.tgz#a67c6f7a460d2660e950d9ccc1c2f18525c28220"
+  integrity sha512-onz2BqScSFMoTRdJUZUDD/7xrusM8hBA2Fktk2qgaTYPCgPvWnDEgkrOs8hhPUf2jfcIXkJ5yK6VfYormJS3Jw==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
