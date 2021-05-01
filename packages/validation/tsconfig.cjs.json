@@ -3,8 +3,10 @@
   "compilerOptions": {
     "module": "CommonJS",
     "target": "ES3",
+    "rootDir": "src",
     "outDir": "lib/cjs"
   },
+  "include": ["src"],
   "references": [
     { "path": "../non-empty-array/tsconfig.cjs.json" },
     { "path": "../pipe/tsconfig.cjs.json" },

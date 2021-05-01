@@ -3,10 +3,9 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es3",
+    "rootDir": "src",
     "outDir": "lib/cjs"
   },
-  "references": [
-    { "path": "../error/tsconfig.cjs.json" },
-    { "path": "../jest-either/tsconfig.cjs.json" }
-  ]
+  "include": ["src"],
+  "references": [{ "path": "../error/tsconfig.cjs.json" }]
 }

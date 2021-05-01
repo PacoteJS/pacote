@@ -3,10 +3,9 @@
   "compilerOptions": {
     "module": "esnext",
     "target": "esnext",
+    "rootDir": "src",
     "outDir": "lib/esm"
   },
-  "references": [
-    { "path": "../error/tsconfig.esm.json" },
-    { "path": "../jest-either/tsconfig.esm.json" }
-  ]
+  "include": ["src"],
+  "references": [{ "path": "../error/tsconfig.esm.json" }]
 }

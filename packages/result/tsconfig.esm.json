@@ -3,7 +3,12 @@
   "compilerOptions": {
     "module": "ESNext",
     "target": "ES2019",
+    "rootDir": "src",
     "outDir": "lib/esm"
   },
-  "references": [{ "path": "../option/tsconfig.esm.json" }]
+  "include": ["src"],
+  "references": [
+    { "path": "../option/tsconfig.esm.json" },
+    { "path": "../pipe/tsconfig.esm.json" }
+  ]
 }

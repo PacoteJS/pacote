@@ -3,6 +3,8 @@
   "compilerOptions": {
     "module": "CommonJS",
     "target": "ES3",
+    "rootDir": "src",
     "outDir": "lib/cjs"
-  }
+  },
+  "include": ["src"]
 }

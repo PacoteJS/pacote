@@ -1,8 +1,9 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "rootDir": "src"
+    "rootDir": "."
   },
+  "exclude": ["lib"],
   "references": [
     { "path": "../non-empty-array" },
     { "path": "../pipe" },

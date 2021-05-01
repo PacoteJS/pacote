@@ -2,8 +2,9 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "checkJs": false,
-    "rootDir": "src",
+    "rootDir": ".",
     "downlevelIteration": true
   },
+  "exclude": ["lib"],
   "references": [{ "path": "../option" }]
 }

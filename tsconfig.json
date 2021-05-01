@@ -23,9 +23,9 @@
     "noPropertyAccessFromIndexSignature": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
+    "baseUrl": ".",
     "paths": {
       "@pacote/*": ["./packages/*/src"]
     }
-  },
-  "exclude": ["node_modules", "packages/*/lib", "packages/*/test"]
+  }
 }

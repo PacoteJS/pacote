@@ -1,7 +1,8 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "rootDir": "src"
+    "rootDir": "."
   },
-  "references": [{ "path": "../option" }]
+  "exclude": ["lib"],
+  "references": [{ "path": "../option" }, { "path": "../pipe" }]
 }
