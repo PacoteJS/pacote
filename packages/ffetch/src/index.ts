@@ -1,4 +1,4 @@
-import { pipe } from 'fp-ts/lib/pipeable'
+import { pipe } from 'fp-ts/function'
 import { tryCatch, left, TaskEither, chain, chainW } from 'fp-ts/lib/TaskEither'
 import { StatusError, NetworkError, FetchError, ParserError } from './errors'
 
