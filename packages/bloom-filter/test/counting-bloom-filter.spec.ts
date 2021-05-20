@@ -7,7 +7,8 @@ test('a counting Bloom filter is empty when created', () => {
     property(string(), (text) => {
       const filter = new CountingBloomFilter({ size: 34, hashes: 1 })
       expect(filter.has(text)).toBe(0)
-    })
+    }),
+    { numRuns: 10 }
   )
 })
 
@@ -17,7 +18,8 @@ test('elements added to a counting Bloom filter can be found', () => {
       const filter = new CountingBloomFilter({ size: 68, hashes: 1 })
       filter.add(element)
       expect(filter.has(element)).toBe(1)
-    })
+    }),
+    { numRuns: 10 }
   )
 })
 
@@ -27,7 +29,8 @@ test('searching an element returns the number of times the element was added to 
       const filter = new CountingBloomFilter({ size: 68, hashes: 1 })
       times(n, () => filter.add(element))
       expect(filter.has(element)).toBe(n)
-    })
+    }),
+    { numRuns: 10 }
   )
 })
 
@@ -39,7 +42,8 @@ test('elements can be removed from the counting Bloom filter', () => {
       filter.add(element)
       filter.remove(element)
       expect(filter.has(element)).toBe(1)
-    })
+    }),
+    { numRuns: 10 }
   )
 })
 
@@ -49,7 +53,8 @@ test('removing elements from a counting Bloom filter does not decrement the coun
       const filter = new CountingBloomFilter({ size: 68, hashes: 1 })
       filter.remove(element)
       expect(filter.has(element)).toBe(0)
-    })
+    }),
+    { numRuns: 10 }
   )
 })
 
@@ -77,6 +82,7 @@ test('elements added to a counting Bloom filter can be found in filters deserial
         JSON.parse(JSON.stringify(filter))
       )
       expect(deserialisedFilter.has(element)).toBe(1)
-    })
+    }),
+    { numRuns: 10 }
   )
 })
