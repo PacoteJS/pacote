@@ -10,16 +10,14 @@ type PreprocessFunction<Document, Field extends keyof Document> = (
 type StopwordsFunction = (token: string, language?: string) => boolean
 type StemmerFunction = (token: string, language?: string) => string
 
-export type DocumentIndex<
-  Document,
-  SummaryField extends keyof Document
-> = Record<
-  string,
-  {
-    readonly summary: Pick<Document, SummaryField>
-    readonly filter: CountingBloomFilter<string>
-  }
->
+export type DocumentIndex<Document, SummaryField extends keyof Document> =
+  Record<
+    string,
+    {
+      readonly summary: Pick<Document, SummaryField>
+      readonly filter: CountingBloomFilter<string>
+    }
+  >
 
 type SearchTokens = {
   required: string[]

@@ -18,19 +18,18 @@ type InnerComponent<Props = any> =
 
 type Enhanced<I, P extends I> = Omit<P & { children?: ReactNode }, keyof I>
 
-type InnerProps<
-  Component extends InnerComponent<any>
-> = Component extends keyof ReactHTML
-  ? ReactHTML[Component] extends DetailedHTMLFactory<infer HTMLProps, any>
-    ? HTMLProps
-    : Component extends keyof ReactSVG
-    ? ReactSVG[Component] extends DOMFactory<infer SVGProps, SVGElement>
-      ? SVGProps
+type InnerProps<Component extends InnerComponent<any>> =
+  Component extends keyof ReactHTML
+    ? ReactHTML[Component] extends DetailedHTMLFactory<infer HTMLProps, any>
+      ? HTMLProps
+      : Component extends keyof ReactSVG
+      ? ReactSVG[Component] extends DOMFactory<infer SVGProps, SVGElement>
+        ? SVGProps
+        : never
       : never
-    : never
-  : Component extends ComponentType<infer Props>
-  ? Props
-  : any
+    : Component extends ComponentType<infer Props>
+    ? Props
+    : any
 
 function getDisplayName(Component: InnerComponent<any>): string {
   return typeof Component === 'string'

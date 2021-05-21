@@ -10,8 +10,10 @@ export function lift<T, E>(
   return (value) => pipe(check(value), mapErr(fromElements))
 }
 
-const prepend = <E>(before: readonly E[]) => (after: NonEmptyArray<E>) =>
-  concat(before, after)
+const prepend =
+  <E>(before: readonly E[]) =>
+  (after: NonEmptyArray<E>) =>
+    concat(before, after)
 
 const getErr = <E>(result: Validation<unknown, E>) =>
   isErr(result) ? result.value : []
