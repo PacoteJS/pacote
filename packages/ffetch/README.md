@@ -47,7 +47,7 @@ without resorting to (sometimes nested) `try ... catch` constructs. For example:
 
 ```typescript
 import { ffetch } from '@pacote/ffetch'
-import { pipe } from 'fp-ts/lib/pipeable'
+import { pipe } from 'fp-ts/function'
 import { map, mapLeft, getOrElse } from 'fp-ts/lib/Either'
 
 // Perform the request:
