@@ -1,6 +1,6 @@
 import { Either, fold } from 'fp-ts/lib/Either'
-import { pipe } from 'fp-ts/lib/pipeable'
-import diff from 'jest-diff'
+import { pipe } from 'fp-ts/function'
+import { diff } from 'jest-diff'
 import { printExpected, printReceived } from 'jest-matcher-utils'
 
 export function printReceivedLeft(actual: Either<any, any>): string {

@@ -1540,77 +1540,21 @@
 "@pacote/bloom-filter@file:packages/bloom-filter":
   version "0.3.7"
   dependencies:
-    "@pacote/xxhash" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-filter-0.3.7-c38392fe-fc06-4596-9635-c646418b1946-1621962774212/node_modules/@pacote/xxhash"
-
-"@pacote/bloom-search@file:packages/bloom-search":
-  version "0.6.9"
-  dependencies:
-    "@pacote/array" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-search-0.6.9-7d92bf03-1ba8-4db8-b34f-6fd86b35e0ed-1621962774213/node_modules/@pacote/array"
-    "@pacote/bloom-filter" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-search-0.6.9-7d92bf03-1ba8-4db8-b34f-6fd86b35e0ed-1621962774213/node_modules/@pacote/bloom-filter"
-
-"@pacote/computus@file:packages/computus":
-  version "1.2.6"
-
-"@pacote/emitter@file:packages/emitter":
-  version "1.0.6"
+    "@pacote/xxhash" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-filter-0.3.7-f9d14196-be91-4661-a7cd-4054772d2a55-1621962913377/node_modules/@pacote/xxhash"
 
 "@pacote/error@file:packages/error":
   version "2.1.6"
 
-"@pacote/eslint-config-jest@file:packages/eslint-config-jest":
-  version "2.0.0"
-
-"@pacote/eslint-config-react@file:packages/eslint-config-react":
-  version "2.0.0"
-
-"@pacote/eslint-config@file:packages/eslint-config":
-  version "5.0.0"
-
-"@pacote/ffetch@file:packages/ffetch":
-  version "6.0.3"
-  dependencies:
-    "@pacote/error" "file:../../Library/Caches/Yarn/v6/npm-@pacote-ffetch-6.0.3-f44b80ba-5b88-4666-a6e8-055302dabca9-1621962774217/node_modules/@pacote/error"
-
-"@pacote/flux-actions@file:packages/flux-actions":
-  version "2.1.11"
-
 "@pacote/get-style@file:packages/get-style":
   version "1.1.6"
-
-"@pacote/iff@file:packages/iff":
-  version "2.0.7"
-  dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-iff-2.0.7-5fc99987-2975-4a50-ac76-019e70219b05-1621962774219/node_modules/@pacote/option"
-
-"@pacote/immutable@file:packages/immutable":
-  version "1.2.5"
-
-"@pacote/interpolate@file:packages/interpolate":
-  version "1.0.8"
 
 "@pacote/is-plain-object@file:packages/is-plain-object":
   version "1.2.0"
 
-"@pacote/jest-either@file:packages/jest-either":
-  version "4.0.9"
-  dependencies:
-    "@pacote/is-plain-object" "file:../../Library/Caches/Yarn/v6/npm-@pacote-jest-either-4.0.9-1bb4b519-ca6a-49ee-9ca3-3feb1251d1d4-1621962774221/node_modules/@pacote/is-plain-object"
-    jest-diff "^26.0.1"
-    jest-matcher-utils "^26.0.1"
-    ramda "^0.27.0"
-
-"@pacote/linked-list@file:packages/linked-list":
-  version "0.4.8"
-  dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-linked-list-0.4.8-38585dca-9c9f-402b-afca-44dad6bedbec-1621962774226/node_modules/@pacote/option"
-
-"@pacote/memoize@file:packages/memoize":
-  version "1.1.5"
-
 "@pacote/non-empty-array@file:packages/non-empty-array":
   version "0.2.2"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-non-empty-array-0.2.2-77dc0f7d-79db-424a-8f56-b89ed37f6490-1621962774227/node_modules/@pacote/option"
+    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-non-empty-array-0.2.2-5db3b255-071a-4d73-bc96-162499e88a28-1621962913376/node_modules/@pacote/option"
 
 "@pacote/option@file:packages/option":
   version "2.0.1"
@@ -1618,45 +1562,18 @@
 "@pacote/pipe@file:packages/pipe":
   version "0.1.0"
 
-"@pacote/pixels@file:packages/pixels":
-  version "1.1.6"
-  dependencies:
-    "@pacote/get-style" "file:../../Library/Caches/Yarn/v6/npm-@pacote-pixels-1.1.6-d794e8b1-fc6d-4d23-9640-86e6f402d19f-1621962774228/node_modules/@pacote/get-style"
-
-"@pacote/react-use-outside@file:packages/react-use-outside":
-  version "1.1.8"
-
-"@pacote/react-with-props@file:packages/react-with-props":
-  version "1.1.9"
-
 "@pacote/result@file:packages/result":
   version "2.1.0"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-result-2.1.0-24d80f6c-3b4c-49ab-b33e-36a8f31d6456-1621962774230/node_modules/@pacote/option"
-
-"@pacote/shuffle@file:packages/shuffle":
-  version "1.0.9"
-
-"@pacote/throttle@file:packages/throttle":
-  version "1.0.6"
-
-"@pacote/u32@file:packages/u32":
-  version "0.2.0"
+    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-result-2.1.0-02cecc74-fe52-4933-9ab2-55e62c1fafd4-1621962913377/node_modules/@pacote/option"
 
 "@pacote/u64@file:packages/u64":
   version "0.1.4"
 
-"@pacote/validation@file:packages/validation":
-  version "0.1.2"
-  dependencies:
-    "@pacote/non-empty-array" "file:../../Library/Caches/Yarn/v6/npm-@pacote-validation-0.1.2-631e2be3-b080-41b8-9889-4a8d35e0a292-1621962774232/node_modules/@pacote/non-empty-array"
-    "@pacote/pipe" "file:../../Library/Caches/Yarn/v6/npm-@pacote-validation-0.1.2-631e2be3-b080-41b8-9889-4a8d35e0a292-1621962774232/node_modules/@pacote/pipe"
-    "@pacote/result" "file:../../Library/Caches/Yarn/v6/npm-@pacote-validation-0.1.2-631e2be3-b080-41b8-9889-4a8d35e0a292-1621962774232/node_modules/@pacote/result"
-
 "@pacote/xxhash@file:packages/xxhash":
   version "0.2.2"
   dependencies:
-    "@pacote/u64" "file:../../Library/Caches/Yarn/v6/npm-@pacote-xxhash-0.2.2-21ad703a-b7b3-42d5-9ae2-4adb222adc7c-1621962774212/node_modules/@pacote/u64"
+    "@pacote/u64" "file:../../Library/Caches/Yarn/v6/npm-@pacote-xxhash-0.2.2-dfde4799-3007-4d68-a4ea-fa0c91ebbd76-1621962913376/node_modules/@pacote/u64"
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.3"
@@ -5145,7 +5062,7 @@ jest-config@^27.0.1:
     micromatch "^4.0.4"
     pretty-format "^27.0.1"
 
-jest-diff@^26.0.0, jest-diff@^26.0.1, jest-diff@^26.6.2:
+jest-diff@^26.0.0:
   version "26.6.2"
   resolved "https://registry.yarnpkg.com/jest-diff/-/jest-diff-26.6.2.tgz#1aa7468b52c3a68d7d5c5fdcdfcd5e49bd164394"
   integrity sha512-6m+9Z3Gv9wN0WFVasqjCL/06+EFCMTqDEUl/b87HYK2rAPTyfz4ZIuSlPhY51PIQRWx5TaxeF1qmXKe9gfN3sA==
@@ -5269,16 +5186,6 @@ jest-leak-detector@^27.0.1:
   dependencies:
     jest-get-type "^27.0.1"
     pretty-format "^27.0.1"
-
-jest-matcher-utils@^26.0.1:
-  version "26.6.2"
-  resolved "https://registry.yarnpkg.com/jest-matcher-utils/-/jest-matcher-utils-26.6.2.tgz#8e6fd6e863c8b2d31ac6472eeb237bc595e53e7a"
-  integrity sha512-llnc8vQgYcNqDrqRDXWwMr9i7rS5XFiCwvh6DTP7Jqa2mqpcCBBlpCbn+trkG0KNhPu/h8rzyBkriOtBstvWhw==
-  dependencies:
-    chalk "^4.0.0"
-    jest-diff "^26.6.2"
-    jest-get-type "^26.3.0"
-    pretty-format "^26.6.2"
 
 jest-matcher-utils@^27.0.1:
   version "27.0.1"
