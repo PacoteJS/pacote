@@ -1540,21 +1540,77 @@
 "@pacote/bloom-filter@file:packages/bloom-filter":
   version "0.3.7"
   dependencies:
-    "@pacote/xxhash" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-filter-0.3.7-f9d14196-be91-4661-a7cd-4054772d2a55-1621962913377/node_modules/@pacote/xxhash"
+    "@pacote/xxhash" "file:packages/xxhash"
+
+"@pacote/bloom-search@file:packages/bloom-search":
+  version "0.6.9"
+  dependencies:
+    "@pacote/array" "file:packages/array"
+    "@pacote/bloom-filter" "file:packages/bloom-filter"
+
+"@pacote/computus@file:packages/computus":
+  version "1.2.6"
+
+"@pacote/emitter@file:packages/emitter":
+  version "1.0.6"
 
 "@pacote/error@file:packages/error":
   version "2.1.6"
 
+"@pacote/eslint-config-jest@file:packages/eslint-config-jest":
+  version "2.0.0"
+
+"@pacote/eslint-config-react@file:packages/eslint-config-react":
+  version "2.0.0"
+
+"@pacote/eslint-config@file:packages/eslint-config":
+  version "5.0.0"
+
+"@pacote/ffetch@file:packages/ffetch":
+  version "6.0.3"
+  dependencies:
+    "@pacote/error" "file:packages/error"
+
+"@pacote/flux-actions@file:packages/flux-actions":
+  version "2.1.11"
+
 "@pacote/get-style@file:packages/get-style":
   version "1.1.6"
+
+"@pacote/iff@file:packages/iff":
+  version "2.0.7"
+  dependencies:
+    "@pacote/option" "file:packages/option"
+
+"@pacote/immutable@file:packages/immutable":
+  version "1.2.5"
+
+"@pacote/interpolate@file:packages/interpolate":
+  version "1.0.8"
 
 "@pacote/is-plain-object@file:packages/is-plain-object":
   version "1.2.0"
 
+"@pacote/jest-either@file:packages/jest-either":
+  version "4.0.9"
+  dependencies:
+    "@pacote/is-plain-object" "file:packages/is-plain-object"
+    jest-diff "^27.0.1"
+    jest-matcher-utils "^27.0.1"
+    ramda "^0.27.0"
+
+"@pacote/linked-list@file:packages/linked-list":
+  version "0.4.8"
+  dependencies:
+    "@pacote/option" "file:packages/option"
+
+"@pacote/memoize@file:packages/memoize":
+  version "1.1.5"
+
 "@pacote/non-empty-array@file:packages/non-empty-array":
   version "0.2.2"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-non-empty-array-0.2.2-5db3b255-071a-4d73-bc96-162499e88a28-1621962913376/node_modules/@pacote/option"
+    "@pacote/option" "file:packages/option"
 
 "@pacote/option@file:packages/option":
   version "2.0.1"
@@ -1562,18 +1618,45 @@
 "@pacote/pipe@file:packages/pipe":
   version "0.1.0"
 
+"@pacote/pixels@file:packages/pixels":
+  version "1.1.6"
+  dependencies:
+    "@pacote/get-style" "file:packages/get-style"
+
+"@pacote/react-use-outside@file:packages/react-use-outside":
+  version "1.1.8"
+
+"@pacote/react-with-props@file:packages/react-with-props":
+  version "1.1.9"
+
 "@pacote/result@file:packages/result":
   version "2.1.0"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-result-2.1.0-02cecc74-fe52-4933-9ab2-55e62c1fafd4-1621962913377/node_modules/@pacote/option"
+    "@pacote/option" "file:packages/option"
+
+"@pacote/shuffle@file:packages/shuffle":
+  version "1.0.9"
+
+"@pacote/throttle@file:packages/throttle":
+  version "1.0.6"
+
+"@pacote/u32@file:packages/u32":
+  version "0.2.0"
 
 "@pacote/u64@file:packages/u64":
   version "0.1.4"
 
+"@pacote/validation@file:packages/validation":
+  version "0.1.2"
+  dependencies:
+    "@pacote/non-empty-array" "file:packages/non-empty-array"
+    "@pacote/pipe" "file:packages/pipe"
+    "@pacote/result" "file:packages/result"
+
 "@pacote/xxhash@file:packages/xxhash":
   version "0.2.2"
   dependencies:
-    "@pacote/u64" "file:../../Library/Caches/Yarn/v6/npm-@pacote-xxhash-0.2.2-dfde4799-3007-4d68-a4ea-fa0c91ebbd76-1621962913376/node_modules/@pacote/u64"
+    "@pacote/u64" "file:packages/u64"
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.3"
@@ -1847,9 +1930,9 @@
     ts-toolbelt "^6.15.1"
 
 "@types/react@^17.0.0":
-  version "17.0.7"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.7.tgz#5f2ca73d8baee8c286e96c95df557799ac0d1996"
-  integrity sha512-lBc3fY20hRFQ/pXQT2XdtmpJeXZnRH8N+WPnEzEfPTzuKmaJTA7k/xGWHBaPvKceKpbf0ZnMlLWY/0sFZ5rfkw==
+  version "17.0.8"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.8.tgz#fe76e3ba0fbb5602704110fd1e3035cf394778e3"
+  integrity sha512-3sx4c0PbXujrYAKwXxNONXUtRp9C+hE2di0IuxFyf5BELD+B+AXL8G7QrmSKhVwKZDbv0igiAjQAMhXj8Yg3aw==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
