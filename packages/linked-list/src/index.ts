@@ -17,6 +17,7 @@ export {
 export { listOf, toArray } from './array'
 export { entries, keys, values } from './iterator'
 export {
+  at,
   every,
   find,
   findIndex,

@@ -155,31 +155,31 @@ describe('get()', () => {
   })
 })
 
-describe('item()', () => {
+describe('at()', () => {
   test('returns None for empty lists', () => {
     const list = L.listOf()
-    expect(L.item(0, list)).toEqual(None)
+    expect(L.at(0, list)).toEqual(None)
   })
 
   test('returns None for out of bounds indices', () => {
     const list = L.listOf(1, 2, 3)
-    expect(L.item(3, list)).toEqual(None)
+    expect(L.at(3, list)).toEqual(None)
   })
 
   test('returns the value at index', () => {
     const list = L.listOf(1, 2, 3)
-    expect(L.item(2, list)).toEqual(Some(3))
+    expect(L.at(2, list)).toEqual(Some(3))
   })
 
   test('returns items from the end of the list for negative indices', () => {
     const list = L.listOf(1, 2, 3)
-    expect(L.item(-1, list)).toEqual(Some(3))
+    expect(L.at(-1, list)).toEqual(Some(3))
   })
 
   test('truncates index to integer', () => {
     const list = L.listOf(1, 2, 3)
-    expect(L.item(2.5, list)).toEqual(Some(3))
-    expect(L.item(-1.5, list)).toEqual(Some(3))
+    expect(L.at(2.5, list)).toEqual(Some(3))
+    expect(L.at(-1.5, list)).toEqual(Some(3))
   })
 })
 

@@ -131,9 +131,9 @@ found, it returns `None`.
 `get()` returns an `Option` with the element at the provided `index`, or `None`
 if the `index` is out of bounds.
 
-#### `item<T>(index: number, list: LinkedList<T>): Option<T>`
+#### `at<T>(index: number, list: LinkedList<T>): Option<T>`
 
-`item()` behaves like `get()`, except when a negative `index` is
+`at()` behaves like `get()`, except when a negative `index` is
 provided, in which case it returns an `Option` with the element at the
 provided `index` starting from the end of the list.
 

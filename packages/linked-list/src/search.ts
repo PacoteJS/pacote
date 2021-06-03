@@ -1,4 +1,5 @@
 import { None, Option, Some, map } from '@pacote/option'
+import { item } from '.'
 import {
   car,
   cdr,
@@ -41,9 +42,16 @@ export function get<T>(index: number, list: LinkedList<T>): Option<T> {
   return find((_, idx) => idx === intIndex, list)
 }
 
-export function item<T>(index: number, list: LinkedList<T>): Option<T> {
+export function at<T>(index: number, list: LinkedList<T>): Option<T> {
   const intIndex = Math.trunc(index)
   return get(intIndex >= 0 ? intIndex : length(list) + intIndex, list)
+}
+
+/**
+ * @deprecated Use `at()`.
+ */
+export function item<T>(index: number, list: LinkedList<T>): Option<T> {
+  return at(index, list)
 }
 
 export function every<T>(
