@@ -13,4 +13,10 @@ declare module 'xxhash-addon' {
     hash(buffer: Buffer): XXHash64
     toString(encoding?: Encoding): string
   }
+
+  export class XXHash3 {
+    constructor(seed: number)
+    hash(buffer: Buffer): XXHash3
+    toString(encoding?: Encoding): string
+  }
 }

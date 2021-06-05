@@ -10,6 +10,7 @@ import {
   xor,
   ZERO,
 } from '@pacote/u64'
+import { XXHash } from './interface'
 import { encode } from './utf8'
 
 const PRIME_1 = from('11400714785074694791')
@@ -17,12 +18,6 @@ const PRIME_2 = from('14029467366897019727')
 const PRIME_3 = from('1609587929392839161')
 const PRIME_4 = from('9650029242287828579')
 const PRIME_5 = from('2870177450012600261')
-
-interface XXHash<T> {
-  reset(seed?: number | T): void
-  digest(encoding: 'hex'): string
-  update(input: string | ArrayBuffer): XXHash<T>
-}
 
 function readUint64LE(buffer: Uint8Array, index: number): U64 {
   return [
