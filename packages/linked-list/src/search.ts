@@ -1,5 +1,4 @@
 import { None, Option, Some, map } from '@pacote/option'
-import { item } from '.'
 import {
   car,
   cdr,
