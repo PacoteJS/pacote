@@ -5326,17 +5326,7 @@ jest-leak-detector@^27.0.2:
     jest-get-type "^27.0.1"
     pretty-format "^27.0.2"
 
-jest-matcher-utils@^27.0.1:
-  version "27.0.1"
-  resolved "https://registry.yarnpkg.com/jest-matcher-utils/-/jest-matcher-utils-27.0.1.tgz#7a01330786e370f152b0b0159f827293b6322909"
-  integrity sha512-NauNU+olKhPzLlsRnTOYFGk/MK5QFYl9ZzkrtfsY4eCq4SB3Bcl03UL44VdnlN5S/uFn4H2jwvRY1y6nSDTX3g==
-  dependencies:
-    chalk "^4.0.0"
-    jest-diff "^27.0.1"
-    jest-get-type "^27.0.1"
-    pretty-format "^27.0.1"
-
-jest-matcher-utils@^27.0.2:
+jest-matcher-utils@^27.0.1, jest-matcher-utils@^27.0.2:
   version "27.0.2"
   resolved "https://registry.yarnpkg.com/jest-matcher-utils/-/jest-matcher-utils-27.0.2.tgz#f14c060605a95a466cdc759acc546c6f4cbfc4f0"
   integrity sha512-Qczi5xnTNjkhcIB0Yy75Txt+Ez51xdhOxsukN7awzq2auZQGPHcQrJ623PZj0ECDEMOk2soxWx05EXdXGd1CbA==
@@ -7251,7 +7241,7 @@ pretty-format@^26.0.0, pretty-format@^26.6.2:
     ansi-styles "^4.0.0"
     react-is "^17.0.1"
 
-pretty-format@^27.0.1, pretty-format@^27.0.2:
+pretty-format@^27.0.2:
   version "27.0.2"
   resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-27.0.2.tgz#9283ff8c4f581b186b2d4da461617143dca478a4"
   integrity sha512-mXKbbBPnYTG7Yra9qFBtqj+IXcsvxsvOBco3QHxtxTl+hHKq6QdzMZ+q0CtL4ORHZgwGImRr2XZUX2EWzORxig==
