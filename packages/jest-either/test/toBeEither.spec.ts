@@ -1,5 +1,5 @@
 import { left, right } from 'fp-ts/lib/Either'
-import matchers from '../src'
+import matchers from '../src/index'
 
 expect.extend(matchers)
 

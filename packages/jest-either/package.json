@@ -2,6 +2,9 @@
   "name": "@pacote/jest-either",
   "description": "Jest matcher for Either objects.",
   "version": "4.0.9",
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+  },
   "sideEffects": false,
   "license": "MIT",
   "author": {
@@ -24,17 +27,14 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
-  "typings": "lib/esm/index.d.ts",
+  "module": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "directories": {
     "lib": "lib",
     "test": "test"
   },
   "scripts": {
-    "build": "yarn build:esm && yarn build:cjs",
-    "build:cjs": "tsc -p ./tsconfig.cjs.json",
-    "build:esm": "tsc -p ./tsconfig.esm.json",
+    "build": "tsc",
     "prepublish": "yarn build"
   },
   "dependencies": {
