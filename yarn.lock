@@ -1748,9 +1748,9 @@
     "@swc/core-win32-x64-msvc" "^1.2.58"
 
 "@swc/jest@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@swc/jest/-/jest-0.1.2.tgz#5195f2439c60430dff661b4a7b5c904483791eb7"
-  integrity sha512-14ju3wkSsTeKFivYzH222j4/y5UQWY5Wk9fOvPit6wyuZNyo4fP6AVYWwVzogmqQNe06IMs+aPJGQ3FbErRZjQ==
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@swc/jest/-/jest-0.1.4.tgz#1ae41e23b99efe80fcf92897cc803d979b2d8e4a"
+  integrity sha512-QOPGFrkCvg290V7VLpi8gEfEjNL/vo0RANFBa6kEKGtvRDzqyW1oNJqYYu4Pr5FnrO/qmMIt8LODz4SR63BPWA==
   dependencies:
     "@swc/core" "^1.2.30"
 
