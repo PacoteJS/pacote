@@ -1,5 +1,5 @@
 export class BaseError extends Error {
-  public readonly message: string
+  public override readonly message: string
 
   public constructor(message = '') {
     super(message)
