@@ -1,7 +1,7 @@
 {
   "name": "@pacote/eslint-config-jest",
   "description": "Shareable ESLint configuration for Jest.",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "sideEffects": false,
   "license": "MIT",
   "author": {
@@ -20,8 +20,8 @@
   "main": "index.js",
   "peerDependencies": {
     "eslint": ">= 6",
-    "eslint-plugin-jest-dom": ">= 3",
     "eslint-plugin-jest": ">= 24",
+    "eslint-plugin-jest-dom": ">= 3",
     "eslint-plugin-testing-library": ">= 4"
   }
 }

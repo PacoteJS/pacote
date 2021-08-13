@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.4](https://github.com/PacoteJS/pacote/compare/@pacote/ffetch@6.0.3...@pacote/ffetch@6.0.4) (2021-08-13)
+
+
+### Bug Fixes
+
+* 🐛 update fp-ts pipe import location ([089ace9](https://github.com/PacoteJS/pacote/commit/089ace98405b962debf594d4a2678b21a32e17b3))
+
+
+
+
+
 ## [6.0.3](https://github.com/PacoteJS/pacote/compare/@pacote/ffetch@6.0.2...@pacote/ffetch@6.0.3) (2020-11-27)
 
 **Note:** Version bump only for package @pacote/ffetch

@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0](https://github.com/PacoteJS/pacote/compare/@pacote/jest-either@4.0.9...@pacote/jest-either@5.0.0) (2021-08-13)
+
+
+### chore
+
+* 🤖 upgrade dependencies to Jest 27 ([ec02d73](https://github.com/PacoteJS/pacote/commit/ec02d73ac0bb143822ce9025ab061e5f2fb92e8c))
+
+
+### Features
+
+* 🎸 jest-either is now an ESM only module ([6a53510](https://github.com/PacoteJS/pacote/commit/6a53510bc7e63938fbf510066eed739da321b371))
+
+
+### BREAKING CHANGES
+
+* 🧨 jest-either is now provided only as an ESM module. CommonJS-style
+require() no longer work.
+* 🧨 Depends on Jest 27+.
+
+
+
+
+
 ## [4.0.9](https://github.com/PacoteJS/pacote/compare/@pacote/jest-either@4.0.8...@pacote/jest-either@4.0.9) (2021-02-05)
 
 **Note:** Version bump only for package @pacote/jest-either

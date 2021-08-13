@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/PacoteJS/pacote/compare/@pacote/linked-list@0.4.8...@pacote/linked-list@0.5.0) (2021-08-13)
+
+
+### Features
+
+* 🎸 adds at() for consistency with Array method proposal ([0fe27e4](https://github.com/PacoteJS/pacote/commit/0fe27e4b17e23bbcf43afff7c2a50a1d82af7166))
+
+
+
+
+
 ## [0.4.8](https://github.com/PacoteJS/pacote/compare/@pacote/linked-list@0.4.7...@pacote/linked-list@0.4.8) (2021-04-23)
 
 **Note:** Version bump only for package @pacote/linked-list

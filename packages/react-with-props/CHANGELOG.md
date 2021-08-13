@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.10](https://github.com/PacoteJS/pacote/compare/@pacote/react-with-props@1.1.9...@pacote/react-with-props@1.1.10) (2021-08-13)
+
+**Note:** Version bump only for package @pacote/react-with-props
+
+
+
+
+
 ## [1.1.9](https://github.com/PacoteJS/pacote/compare/@pacote/react-with-props@1.1.8...@pacote/react-with-props@1.1.9) (2020-11-27)
 
 **Note:** Version bump only for package @pacote/react-with-props

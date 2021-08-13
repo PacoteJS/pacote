@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://github.com/PacoteJS/pacote/compare/@pacote/eslint-config-jest@2.0.0...@pacote/eslint-config-jest@3.0.0) (2021-08-13)
+
+
+### Features
+
+* 🎸 use eslint-plugin-jest ([eee62f5](https://github.com/PacoteJS/pacote/commit/eee62f5db4baef0e3f38128ed52c2205950b0e3b))
+
+
+### BREAKING CHANGES
+
+* 🧨 Introduces new linter rules from eslint-plugin-jest.
+
+
+
+
+
 # [2.0.0](https://github.com/PacoteJS/pacote/compare/@pacote/eslint-config-jest@1.2.1...@pacote/eslint-config-jest@2.0.0) (2021-04-15)
 
 
