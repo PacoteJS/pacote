@@ -9,7 +9,7 @@ Shareable ESLint configuration for Jest.
 ## Installation
 
 ```bash
-yarn add --dev @pacote/eslint-config-jest eslint
+yarn add --dev @pacote/eslint-config-jest eslint eslint-plugin-jest-dom eslint-plugin-jest eslint-plugin-testing-library
 ```
 
 ## Usage
