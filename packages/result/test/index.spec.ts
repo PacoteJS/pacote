@@ -36,12 +36,16 @@ describe('tryCatch()', () => {
 describe('ofPromise()', () => {
   test('creates Err(E) for rejected promises', async () => {
     const error = Error('rejected')
-    expect(R.ofPromise(Promise.reject(error))).resolves.toEqual(R.Err(error))
+    await expect(R.ofPromise(Promise.reject(error))).resolves.toEqual(
+      R.Err(error)
+    )
   })
 
   test('returns Ok(T) for resolved promises', async () => {
     const value = 'resolved'
-    expect(R.ofPromise(Promise.resolve(value))).resolves.toEqual(R.Ok(value))
+    await expect(R.ofPromise(Promise.resolve(value))).resolves.toEqual(
+      R.Ok(value)
+    )
   })
 })
 
