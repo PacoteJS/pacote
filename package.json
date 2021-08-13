@@ -1,4 +1,5 @@
 {
+  "name": "pacote",
   "description": "Monorepo for the @pacote organisation.",
   "repository": "https://github.com/PacoteJS/pacote",
   "bugs": {
@@ -93,7 +94,6 @@
     "whatwg-fetch": "^3.6.2",
     "xxhash-addon": "^1.3.0"
   },
-  "name": "pacote",
   "dependencies": {
     "@pacote/array": "file:packages/array",
     "@pacote/bloom-filter": "file:packages/bloom-filter",
