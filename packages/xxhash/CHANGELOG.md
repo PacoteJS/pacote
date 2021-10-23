@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.4](https://github.com/PacoteJS/pacote/compare/@pacote/xxhash@0.2.3...@pacote/xxhash@0.2.4) (2021-10-23)
+
+**Note:** Version bump only for package @pacote/xxhash
+
+
+
+
+
 ## [0.2.3](https://github.com/PacoteJS/pacote/compare/@pacote/xxhash@0.2.2...@pacote/xxhash@0.2.3) (2021-08-13)
 
 **Note:** Version bump only for package @pacote/xxhash
