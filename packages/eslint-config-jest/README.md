@@ -22,6 +22,21 @@ Include the configuration in your project's `.eslintrc` file:
 }
 ```
 
+## Testing Library
+
+Because many Testing Library packages exist, linting rules are not included in
+shareable configuration and should be imported manually. For example:
+
+```json
+{
+  "extends": [
+    "@pacote/eslint-config-jest",
+    "plugin:testing-library/dom",
+    "plugin:testing-library/react"
+  ]
+}
+```
+
 ## License
 
 MIT © [Luís Rodrigues](https://goblindegook.com).

@@ -1,10 +1,6 @@
 module.exports = {
   plugins: ['jest', 'jest-dom'],
-  extends: [
-    'plugin:jest/recommended',
-    'plugin:jest-dom/recommended',
-    'plugin:testing-library/dom',
-  ],
+  extends: ['plugin:jest/recommended', 'plugin:jest-dom/recommended'],
   rules: {
     'jest/no-disabled-tests': 'warn',
     'jest/no-focused-tests': 'error',

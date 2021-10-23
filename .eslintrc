@@ -3,5 +3,7 @@
     "@pacote/eslint-config",
     "@pacote/eslint-config-jest",
     "@pacote/eslint-config-react"
+    // "plugin:testing-library/dom",
+    // "plugin:testing-library/react",
   ]
 }
