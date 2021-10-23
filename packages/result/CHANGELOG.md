@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.2](https://github.com/PacoteJS/pacote/compare/@pacote/result@2.1.1...@pacote/result@2.1.2) (2021-10-23)
+
+
+### Bug Fixes
+
+* 🐛 `tryCatch` handled error type is `unknown` ([869f9d0](https://github.com/PacoteJS/pacote/commit/869f9d024770b208e0f1ca0d82a16964f7f95d90))
+
+
+
+
+
 ## [2.1.1](https://github.com/PacoteJS/pacote/compare/@pacote/result@2.1.0...@pacote/result@2.1.1) (2021-08-13)
 
 **Note:** Version bump only for package @pacote/result
