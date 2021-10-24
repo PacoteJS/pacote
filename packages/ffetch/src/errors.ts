@@ -5,7 +5,7 @@ type ErrorCauses = Error | BaseError | readonly (Error | BaseError)[]
 export class StatusError<T> extends BaseError {
   public readonly status: number
 
-  public readonly body?: T | string
+  public readonly body: T | string | undefined
 
   public constructor(status: number, message?: string, body?: T | string) {
     super(message)

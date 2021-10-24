@@ -25,6 +25,8 @@
     "noUnusedParameters": false,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
+    "useUnknownInCatchVariables": true,
+    "exactOptionalPropertyTypes": true,
     "baseUrl": ".",
     "paths": {
       "@pacote/*": ["./packages/*/src"]
