@@ -1,7 +1,7 @@
 {
   "name": "@pacote/bloom-search",
   "description": "Document search using Bloom filters.",
-  "version": "0.6.11",
+  "version": "0.7.0",
   "sideEffects": false,
   "license": "MIT",
   "author": {

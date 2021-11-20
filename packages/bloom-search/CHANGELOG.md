@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.6.11...@pacote/bloom-search@0.7.0) (2021-11-20)
+
+
+### Features
+
+* 🎸 pass document to preprocess function ([523cd2b](https://github.com/PacoteJS/pacote/commit/523cd2b38cd93403310c609977e4d56b86abe7b6))
+
+
+
+
+
 ## [0.6.11](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.6.10...@pacote/bloom-search@0.6.11) (2021-10-23)
 
 **Note:** Version bump only for package @pacote/bloom-search
