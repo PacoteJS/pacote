@@ -5,7 +5,8 @@ import { entries, keys, pick } from './object'
 
 type PreprocessFunction<Document, Field extends keyof Document> = (
   value: Document[Field],
-  field: Field
+  field: Field,
+  document: Document
 ) => string
 type StopwordsFunction = (token: string, language?: string) => boolean
 type StemmerFunction = (token: string, language?: string) => string
@@ -35,8 +36,8 @@ const tokenizer = (text: string): string[] =>
 
 export class BloomSearch<
   Document extends Record<string, unknown>,
-  SummaryField extends keyof Document,
-  IndexField extends keyof Document
+  SummaryField extends keyof Document = keyof Document,
+  IndexField extends keyof Document = keyof Document
 > {
   public index: DocumentIndex<Document, SummaryField> = {}
   public readonly fields: Record<IndexField, number>
@@ -83,7 +84,7 @@ export class BloomSearch<
   add(ref: string, document: Document, language?: string): void {
     const allTokens = keys(this.fields).reduce((tokens, field) => {
       if (document[field] !== undefined) {
-        const fieldText = this.preprocess(document[field], field)
+        const fieldText = this.preprocess(document[field], field, document)
         const fieldTokens = tokenizer(fieldText)
 
         const unigrams = fieldTokens

@@ -142,20 +142,22 @@ test('document fields can be preprocessed for the index', () => {
 
   bs.add('1', { text: 'foo-bar' })
 
-  expect(preprocess).toHaveBeenCalledWith('foo-bar', 'text')
+  expect(preprocess).toHaveBeenCalledWith('foo-bar', 'text', {
+    text: 'foo-bar',
+  })
   expect(bs.search('foo')).toEqual([{ text: 'foo-bar' }])
 })
 
 test('document fields can be preprocessed', () => {
-  const bs = new BloomSearch({
+  const bs = new BloomSearch<Record<string, string>>({
     fields: ['text'],
     summary: ['text'],
-    preprocess: (text) => String(text).replace(/-/g, ' '),
+    preprocess: (text) => text.replace(/:/g, ' '),
   })
 
-  bs.add('1', { text: 'foo-bar' })
+  bs.add('1', { text: 'foo:bar' })
 
-  expect(bs.search('foo')).toEqual([{ text: 'foo-bar' }])
+  expect(bs.search('foo')).toEqual([{ text: 'foo:bar' }])
 })
 
 test('document fields can be weighed', () => {
