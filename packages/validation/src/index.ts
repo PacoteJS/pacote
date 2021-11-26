@@ -24,7 +24,7 @@ const tupleSequence = <T, E>(results: readonly Validation<T, E>[]) =>
   )
 
 export function validation<T, E>(
-  ...checks: ((value: T) => Validation<T, E>)[]
+  ...checks: readonly ((value: T) => Validation<T, E>)[]
 ): (value: T) => Validation<T, E> {
   return (value) => tupleSequence(checks.map((check) => check(value)))
 }
