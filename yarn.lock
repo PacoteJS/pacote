@@ -1590,13 +1590,13 @@
 "@pacote/bloom-filter@file:packages/bloom-filter":
   version "0.3.9"
   dependencies:
-    "@pacote/xxhash" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-filter-0.3.9-89cf85c7-272c-4513-974f-7963d27f8d5c-1637947221458/node_modules/@pacote/xxhash"
+    "@pacote/xxhash" "file:packages/xxhash"
 
 "@pacote/bloom-search@file:packages/bloom-search":
   version "0.7.0"
   dependencies:
-    "@pacote/array" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-search-0.7.0-9e5c50a1-b050-4401-b0d1-384415fb4e8a-1637947221459/node_modules/@pacote/array"
-    "@pacote/bloom-filter" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-search-0.7.0-9e5c50a1-b050-4401-b0d1-384415fb4e8a-1637947221459/node_modules/@pacote/bloom-filter"
+    "@pacote/array" "file:packages/array"
+    "@pacote/bloom-filter" "file:packages/bloom-filter"
 
 "@pacote/computus@file:packages/computus":
   version "1.2.7"
@@ -1619,7 +1619,7 @@
 "@pacote/ffetch@file:packages/ffetch":
   version "6.0.5"
   dependencies:
-    "@pacote/error" "file:../../Library/Caches/Yarn/v6/npm-@pacote-ffetch-6.0.5-e31175e4-ade3-41bb-bf04-becff4494b0f-1637947221463/node_modules/@pacote/error"
+    "@pacote/error" "file:packages/error"
 
 "@pacote/flux-actions@file:packages/flux-actions":
   version "2.1.12"
@@ -1630,7 +1630,7 @@
 "@pacote/iff@file:packages/iff":
   version "2.0.8"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-iff-2.0.8-cc8474df-2c3e-48c3-bdca-4f747496e5a1-1637947221465/node_modules/@pacote/option"
+    "@pacote/option" "file:packages/option"
 
 "@pacote/immutable@file:packages/immutable":
   version "1.2.6"
@@ -1644,7 +1644,7 @@
 "@pacote/jest-either@file:packages/jest-either":
   version "5.0.0"
   dependencies:
-    "@pacote/is-plain-object" "file:../../Library/Caches/Yarn/v6/npm-@pacote-jest-either-5.0.0-321d76a9-c8d2-4ec0-b1ee-3b4ced348ffa-1637947221467/node_modules/@pacote/is-plain-object"
+    "@pacote/is-plain-object" "file:packages/is-plain-object"
     jest-diff "^27.0.1"
     jest-matcher-utils "^27.0.1"
     ramda "^0.27.0"
@@ -1652,7 +1652,7 @@
 "@pacote/linked-list@file:packages/linked-list":
   version "0.5.0"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-linked-list-0.5.0-6e08f049-e6c9-4960-b8bf-2318da659659-1637947221471/node_modules/@pacote/option"
+    "@pacote/option" "file:packages/option"
 
 "@pacote/memoize@file:packages/memoize":
   version "1.1.6"
@@ -1660,7 +1660,7 @@
 "@pacote/non-empty-array@file:packages/non-empty-array":
   version "0.2.3"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-non-empty-array-0.2.3-8955e145-2ea0-4620-8b8b-b5e7626efc97-1637947221472/node_modules/@pacote/option"
+    "@pacote/option" "file:packages/option"
 
 "@pacote/option@file:packages/option":
   version "2.0.2"
@@ -1671,7 +1671,7 @@
 "@pacote/pixels@file:packages/pixels":
   version "1.1.7"
   dependencies:
-    "@pacote/get-style" "file:../../Library/Caches/Yarn/v6/npm-@pacote-pixels-1.1.7-48f95eba-1769-4768-ba06-81dea2e88b5f-1637947221474/node_modules/@pacote/get-style"
+    "@pacote/get-style" "file:packages/get-style"
 
 "@pacote/react-use-outside@file:packages/react-use-outside":
   version "1.1.9"
@@ -1682,7 +1682,7 @@
 "@pacote/result@file:packages/result":
   version "2.1.2"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-result-2.1.2-a599f383-1155-4835-8667-eb6836e8a895-1637947221476/node_modules/@pacote/option"
+    "@pacote/option" "file:packages/option"
 
 "@pacote/shuffle@file:packages/shuffle":
   version "1.0.10"
@@ -1699,14 +1699,14 @@
 "@pacote/validation@file:packages/validation":
   version "0.1.4"
   dependencies:
-    "@pacote/non-empty-array" "file:../../Library/Caches/Yarn/v6/npm-@pacote-validation-0.1.4-ef39f35c-aea8-4e94-8b7e-5d5ccaf2d04b-1637947221478/node_modules/@pacote/non-empty-array"
-    "@pacote/pipe" "file:../../Library/Caches/Yarn/v6/npm-@pacote-validation-0.1.4-ef39f35c-aea8-4e94-8b7e-5d5ccaf2d04b-1637947221478/node_modules/@pacote/pipe"
-    "@pacote/result" "file:../../Library/Caches/Yarn/v6/npm-@pacote-validation-0.1.4-ef39f35c-aea8-4e94-8b7e-5d5ccaf2d04b-1637947221478/node_modules/@pacote/result"
+    "@pacote/non-empty-array" "file:packages/non-empty-array"
+    "@pacote/pipe" "file:packages/pipe"
+    "@pacote/result" "file:packages/result"
 
 "@pacote/xxhash@file:packages/xxhash":
   version "0.2.4"
   dependencies:
-    "@pacote/u64" "file:../../Library/Caches/Yarn/v6/npm-@pacote-xxhash-0.2.4-67f40a07-639b-42a6-a8e1-9ab38747d55e-1637947221458/node_modules/@pacote/u64"
+    "@pacote/u64" "file:packages/u64"
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.3"
@@ -2005,9 +2005,9 @@
   integrity sha512-rZ5drC/jWjrArrS8BR6SIr4cWpW09RNTYt9AMZo3Jwwif+iacXAqgVjm0B0Bv/S1jhDXKHqRVNCbACkJ89RAnQ==
 
 "@types/ramda@^0.27.0":
-  version "0.27.52"
-  resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.27.52.tgz#867c41c24563e610f6ee27e7ae278772729bb88e"
-  integrity sha512-7wB3lv+fk4acUc8o2518OgzngeKDC+QQk7hdBoQF8sKoieorG8LxNaDMmr/hT7SALSYRXr/nHkrGu+rBACvGUA==
+  version "0.27.54"
+  resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.27.54.tgz#8406b3a71f53806ae44b503b22307a8d7c6ad2cb"
+  integrity sha512-vm/FH3MGPBLFzpN1lrF/L6PtQ4saKSagzhfVGvPkw65XeZn8kLg8rarCo1MYkqQRgMcneuWDwNpVjEjZRUhEyA==
   dependencies:
     ts-toolbelt "^6.15.1"
 
