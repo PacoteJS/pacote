@@ -3,10 +3,10 @@ const pkg = require('./package.json')
 
 const data = {
   repository: pkg.repository,
-  year: new Date().getFullYear()
+  year: new Date().getFullYear(),
 }
 
-module.exports = plop => {
+module.exports = (plop) => {
   plop.setGenerator('basic', {
     description: 'Basic package.',
     prompts: [
@@ -14,59 +14,59 @@ module.exports = plop => {
         type: 'input',
         name: 'name',
         message: 'Package name:',
-        validate: value => (/.+/.test(value) ? true : 'Required.')
+        validate: (value) => (/.+/.test(value) ? true : 'Required.'),
       },
       {
         type: 'input',
         name: 'description',
-        message: 'Package description:'
+        message: 'Package description:',
       },
       {
         type: 'input',
         name: 'authorName',
         message: 'Author name:',
-        default: pkg.author.name
+        default: pkg.author.name,
       },
       {
         type: 'input',
         name: 'authorEmail',
         message: 'Author email:',
-        default: pkg.author.email
+        default: pkg.author.email,
       },
       {
         type: 'input',
         name: 'authorUrl',
         message: 'Author URL:',
-        default: pkg.author.url
-      }
+        default: pkg.author.url,
+      },
     ],
     actions: [
       {
         type: 'add',
         path: 'packages/{{ name }}/LICENSE',
         templateFile: 'templates/LICENSE.hbs',
-        data
+        data,
       },
       {
         type: 'add',
         path: 'packages/{{ name }}/.npmignore',
-        templateFile: 'templates/npmignore.hbs'
+        templateFile: 'templates/npmignore.hbs',
       },
       {
         type: 'addMany',
         destination: 'packages/{{ name }}',
         base: 'templates',
         templateFiles: '**/tsconfig.*.hbs',
-        data
+        data,
       },
       {
         type: 'addMany',
         destination: 'packages/{{ name }}',
         base: 'templates/basic',
         templateFiles: '**/*.*.hbs',
-        data
-      }
-    ]
+        data,
+      },
+    ],
   })
 
   plop.setGenerator('react', {
@@ -76,58 +76,58 @@ module.exports = plop => {
         type: 'input',
         name: 'name',
         message: 'Package name:',
-        validate: value => (/.+/.test(value) ? true : 'Required.')
+        validate: (value) => (/.+/.test(value) ? true : 'Required.'),
       },
       {
         type: 'input',
         name: 'description',
-        message: 'Package description:'
+        message: 'Package description:',
       },
       {
         type: 'input',
         name: 'authorName',
         message: 'Author name:',
-        default: pkg.author.name
+        default: pkg.author.name,
       },
       {
         type: 'input',
         name: 'authorEmail',
         message: 'Author email:',
-        default: pkg.author.email
+        default: pkg.author.email,
       },
       {
         type: 'input',
         name: 'authorUrl',
         message: 'Author URL:',
-        default: pkg.author.url
-      }
+        default: pkg.author.url,
+      },
     ],
     actions: [
       {
         type: 'add',
         path: 'packages/{{ name }}/LICENSE',
         templateFile: 'templates/LICENSE.hbs',
-        data
+        data,
       },
       {
         type: 'add',
         path: 'packages/{{ name }}/.npmignore',
-        templateFile: 'templates/npmignore.hbs'
+        templateFile: 'templates/npmignore.hbs',
       },
       {
         type: 'addMany',
         destination: 'packages/{{ name }}',
         base: 'templates',
         templateFiles: '**/tsconfig.*.hbs',
-        data
+        data,
       },
       {
         type: 'addMany',
         destination: 'packages/{{ name }}',
         base: 'templates/react',
         templateFiles: '**/*.*.hbs',
-        data
-      }
-    ]
+        data,
+      },
+    ],
   })
 }
