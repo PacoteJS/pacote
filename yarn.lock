@@ -1590,13 +1590,13 @@
 "@pacote/bloom-filter@file:packages/bloom-filter":
   version "0.3.9"
   dependencies:
-    "@pacote/xxhash" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-filter-0.3.9-7912cd7e-6fcb-4ad8-ad79-fcd47a968327-1638454362540/node_modules/@pacote/xxhash"
+    "@pacote/xxhash" "file:packages/xxhash"
 
 "@pacote/bloom-search@file:packages/bloom-search":
   version "0.7.0"
   dependencies:
-    "@pacote/array" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-search-0.7.0-1ed26961-f16d-4bae-8e77-72d25dd31422-1638454362542/node_modules/@pacote/array"
-    "@pacote/bloom-filter" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-search-0.7.0-1ed26961-f16d-4bae-8e77-72d25dd31422-1638454362542/node_modules/@pacote/bloom-filter"
+    "@pacote/array" "file:packages/array"
+    "@pacote/bloom-filter" "file:packages/bloom-filter"
 
 "@pacote/computus@file:packages/computus":
   version "1.2.7"
@@ -1619,7 +1619,7 @@
 "@pacote/ffetch@file:packages/ffetch":
   version "6.0.5"
   dependencies:
-    "@pacote/error" "file:../../Library/Caches/Yarn/v6/npm-@pacote-ffetch-6.0.5-b874421e-aab8-46c7-9ad6-af35cf6ed23b-1638454362546/node_modules/@pacote/error"
+    "@pacote/error" "file:packages/error"
 
 "@pacote/flux-actions@file:packages/flux-actions":
   version "2.1.12"
@@ -1630,7 +1630,7 @@
 "@pacote/iff@file:packages/iff":
   version "2.0.8"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-iff-2.0.8-74fd2d99-c06c-433f-9aed-fb3ee210b00c-1638454362547/node_modules/@pacote/option"
+    "@pacote/option" "file:packages/option"
 
 "@pacote/immutable@file:packages/immutable":
   version "1.2.6"
@@ -1644,7 +1644,7 @@
 "@pacote/jest-either@file:packages/jest-either":
   version "5.0.0"
   dependencies:
-    "@pacote/is-plain-object" "file:../../Library/Caches/Yarn/v6/npm-@pacote-jest-either-5.0.0-bb5e8867-166a-4e7d-b1e1-6186523d2ed0-1638454362550/node_modules/@pacote/is-plain-object"
+    "@pacote/is-plain-object" "file:packages/is-plain-object"
     jest-diff "^27.0.1"
     jest-matcher-utils "^27.0.1"
     ramda "^0.27.0"
@@ -1652,7 +1652,7 @@
 "@pacote/linked-list@file:packages/linked-list":
   version "0.5.0"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-linked-list-0.5.0-c05e3020-6b8c-4f6d-8dd6-72e93d3cd9c8-1638454362555/node_modules/@pacote/option"
+    "@pacote/option" "file:packages/option"
 
 "@pacote/memoize@file:packages/memoize":
   version "1.1.6"
@@ -1660,7 +1660,7 @@
 "@pacote/non-empty-array@file:packages/non-empty-array":
   version "0.2.3"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-non-empty-array-0.2.3-8f381302-472c-47ab-a1e1-d2ea1db1016d-1638454362557/node_modules/@pacote/option"
+    "@pacote/option" "file:packages/option"
 
 "@pacote/option@file:packages/option":
   version "2.0.2"
@@ -1671,7 +1671,7 @@
 "@pacote/pixels@file:packages/pixels":
   version "1.1.7"
   dependencies:
-    "@pacote/get-style" "file:../../Library/Caches/Yarn/v6/npm-@pacote-pixels-1.1.7-0eb344a7-67e2-4b98-b3ac-1e34493be12a-1638454362558/node_modules/@pacote/get-style"
+    "@pacote/get-style" "file:packages/get-style"
 
 "@pacote/react-use-outside@file:packages/react-use-outside":
   version "1.1.9"
@@ -1682,7 +1682,7 @@
 "@pacote/result@file:packages/result":
   version "2.1.2"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-result-2.1.2-86a0e208-eedb-4808-9eec-6e6ca3869f26-1638454362560/node_modules/@pacote/option"
+    "@pacote/option" "file:packages/option"
 
 "@pacote/shuffle@file:packages/shuffle":
   version "1.0.10"
@@ -1699,14 +1699,14 @@
 "@pacote/validation@file:packages/validation":
   version "0.1.4"
   dependencies:
-    "@pacote/non-empty-array" "file:../../Library/Caches/Yarn/v6/npm-@pacote-validation-0.1.4-dc3e4c06-f90d-4cb4-8098-593ac36d6dab-1638454362562/node_modules/@pacote/non-empty-array"
-    "@pacote/pipe" "file:../../Library/Caches/Yarn/v6/npm-@pacote-validation-0.1.4-dc3e4c06-f90d-4cb4-8098-593ac36d6dab-1638454362562/node_modules/@pacote/pipe"
-    "@pacote/result" "file:../../Library/Caches/Yarn/v6/npm-@pacote-validation-0.1.4-dc3e4c06-f90d-4cb4-8098-593ac36d6dab-1638454362562/node_modules/@pacote/result"
+    "@pacote/non-empty-array" "file:packages/non-empty-array"
+    "@pacote/pipe" "file:packages/pipe"
+    "@pacote/result" "file:packages/result"
 
 "@pacote/xxhash@file:packages/xxhash":
   version "0.2.4"
   dependencies:
-    "@pacote/u64" "file:../../Library/Caches/Yarn/v6/npm-@pacote-xxhash-0.2.4-1b4022a6-e550-4e9b-9725-6b25df1fbb36-1638454362541/node_modules/@pacote/u64"
+    "@pacote/u64" "file:packages/u64"
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.3"
@@ -2784,6 +2784,20 @@ cli-spinners@^2.5.0, cli-spinners@^2.6.0:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/cli-spinners/-/cli-spinners-2.6.1.tgz#adc954ebe281c37a6319bfa401e6dd2488ffb70d"
   integrity sha512-x/5fWmGMnbKQAaNwN+UZlV79qBLM9JFnJuJ03gIi5whrob0xV0ofNVHy9DhwGdsMJQc2OKv0oGmLzvaqvAVv+g==
+
+cli-testing-library@^1.0.0-alpha.10:
+  version "1.0.0-alpha.10"
+  resolved "https://registry.yarnpkg.com/cli-testing-library/-/cli-testing-library-1.0.0-alpha.10.tgz#97a5689a37d2a57c5c964575e491a7dd41d98b0b"
+  integrity sha512-hO1oZPOf3qxSi5V2x+5eXpQlI8akbRAwRdR3kyIWzyDms5jNoLL85//mYQGRPwrlbXlQz+YkH0ZxcHeS0wx1Pw==
+  dependencies:
+    "@babel/code-frame" "^7.10.4"
+    "@babel/runtime" "^7.12.5"
+    chalk "^4.1.0"
+    lz-string "^1.4.4"
+    pretty-format "^27.0.2"
+    strip-ansi "^6.0.1"
+    strip-final-newline "^2.0.0"
+    tree-kill "^1.2.2"
 
 cli-truncate@^2.1.0:
   version "2.1.0"
@@ -6824,12 +6838,13 @@ pkg-dir@^4.2.0:
     find-up "^4.0.0"
 
 plop@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/plop/-/plop-3.0.1.tgz#be7475e018477cfccd6da2ba3405bf9a9c81f2d3"
-  integrity sha512-8flhJgatVhe2gySDXvP1Rey7j4UCsoNihGvAVZ5GOE6gA9FGZG+zYFEyQQgT1RbfL5VI0mYaHxkt8RNQSNw2bQ==
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/plop/-/plop-3.0.2.tgz#babd613c0efc0a650b3325a9917fa325f088e044"
+  integrity sha512-jP9JPwISnwd+wQvVv4JbCWI1JoNvwSATneVvXtsuDf3dQdr4m1C/OEpPhHt6h0mB1i0CJ+nsVHqzcCNgxRvTEA==
   dependencies:
     "@types/liftoff" "^4.0.0"
     chalk "^5.0.0"
+    cli-testing-library "^1.0.0-alpha.10"
     interpret "^2.2.0"
     liftoff "^4.0.0"
     minimist "^1.2.5"
@@ -7984,6 +7999,11 @@ tr46@~0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/tr46/-/tr46-0.0.3.tgz#8184fd347dac9cdc185992f3a6622e14b9d9ab6a"
   integrity sha1-gYT9NH2snNwYWZLzpmIuFLnZq2o=
+
+tree-kill@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/tree-kill/-/tree-kill-1.2.2.tgz#4ca09a9092c88b73a7cdc5e8a01b507b0790a0cc"
+  integrity sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==
 
 trim-newlines@^3.0.0:
   version "3.0.1"
