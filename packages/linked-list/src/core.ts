@@ -9,11 +9,6 @@ type MapCallback<T, R> = (...args: CallbackArgs<T>) => R
 type ReduceCallback<T, R> = (acc: R, ...args: CallbackArgs<T>) => R
 export type PredicateFunction<T> = MapCallback<T, boolean>
 
-enum Step {
-  Increment = 1,
-  Decrement = -1,
-}
-
 export function car<T>(cons: Cons<T>): T {
   return cons[0]
 }
@@ -38,7 +33,7 @@ function recursiveReduce<T, R>(
   acc: R,
   callback: ReduceCallback<T, R>,
   current: LinkedList<T>,
-  step: Step,
+  step: -1 | 1,
   index: number,
   collection: LinkedList<T>
 ): R {
@@ -59,7 +54,7 @@ export function reduce<T, R>(
   initial: R,
   list: LinkedList<T>
 ): R {
-  return recursiveReduce(initial, callback, list, Step.Increment, 0, list)
+  return recursiveReduce(initial, callback, list, 1, 0, list)
 }
 
 export function reverse<T>(list: LinkedList<T>): LinkedList<T> {
@@ -87,14 +82,7 @@ export function reduceRight<T, R>(
   list: LinkedList<T>
 ): R {
   const lastIndex = length(list) - 1
-  return recursiveReduce(
-    initial,
-    callback,
-    reverse(list),
-    Step.Decrement,
-    lastIndex,
-    list
-  )
+  return recursiveReduce(initial, callback, reverse(list), -1, lastIndex, list)
 }
 
 export function map<T, R>(
