@@ -115,7 +115,7 @@ test('undefined fields are not indexed', () => {
 })
 
 test('tokens are passed through a language-aware stemmer', () => {
-  const stemmer = jest.fn((text) => text.substr(0, 3))
+  const stemmer = jest.fn((text) => text.substring(0, 3))
 
   const bs = new BloomSearch({
     fields: ['text'],
