@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.1](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.7.0...@pacote/bloom-search@0.7.1) (2022-05-19)
+
+
+### Bug Fixes
+
+* 🐛 drop usage of deprecated substr() method ([5221f1c](https://github.com/PacoteJS/pacote/commit/5221f1c4406cb9e208812edc4ad88bd60b1c5ab5))
+
+
+
+
+
 # [0.7.0](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.6.11...@pacote/bloom-search@0.7.0) (2021-11-20)
 
 

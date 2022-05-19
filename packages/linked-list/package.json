@@ -1,7 +1,7 @@
 {
   "name": "@pacote/linked-list",
   "description": "Immutable linked lists.",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "sideEffects": false,
   "license": "MIT",
   "author": {

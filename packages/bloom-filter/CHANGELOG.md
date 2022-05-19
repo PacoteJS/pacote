@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.10](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-filter@0.3.9...@pacote/bloom-filter@0.3.10) (2022-05-19)
+
+
+### Bug Fixes
+
+* 🐛 drop usage of deprecated substr() method ([5221f1c](https://github.com/PacoteJS/pacote/commit/5221f1c4406cb9e208812edc4ad88bd60b1c5ab5))
+
+
+
+
+
 ## [0.3.9](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-filter@0.3.8...@pacote/bloom-filter@0.3.9) (2021-10-23)
 
 **Note:** Version bump only for package @pacote/bloom-filter

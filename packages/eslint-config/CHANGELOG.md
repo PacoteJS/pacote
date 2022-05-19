@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.0.0](https://github.com/PacoteJS/pacote/compare/@pacote/eslint-config@5.0.0...@pacote/eslint-config@6.0.0) (2022-05-19)
+
+
+### Features
+
+* 🎸 upgraded eslint rules ([0badc20](https://github.com/PacoteJS/pacote/commit/0badc200182cf17d296bb5227465efd3549a8b75))
+
+
+### BREAKING CHANGES
+
+* 🧨 Due to changes in eslint-config-standard, eslint-config-n is required
+instead of eslint-config-node.
+
+
+
+
+
 # [5.0.0](https://github.com/PacoteJS/pacote/compare/@pacote/eslint-config@4.1.2...@pacote/eslint-config@5.0.0) (2021-02-26)
 
 ### chore
