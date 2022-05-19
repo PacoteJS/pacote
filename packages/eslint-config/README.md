@@ -9,7 +9,7 @@ Shareable ESLint configuration.
 ## Installation
 
 ```bash
-yarn add --dev @pacote/eslint-config eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-config-prettier eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-prettier eslint-plugin-promise
+yarn add --dev @pacote/eslint-config eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-config-prettier eslint-config-standard eslint-plugin-import eslint-plugin-n eslint-plugin-prettier eslint-plugin-promise
 ```
 
 ## Usage

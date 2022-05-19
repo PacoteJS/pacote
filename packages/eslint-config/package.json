@@ -24,7 +24,7 @@
     "eslint-config-prettier": ">= 8",
     "eslint-config-standard": ">= 16",
     "eslint-plugin-import": ">= 2",
-    "eslint-plugin-node": ">= 11",
+    "eslint-plugin-n": ">= 15",
     "eslint-plugin-prettier": ">= 3",
     "eslint-plugin-promise": ">= 4"
   }
