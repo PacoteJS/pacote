@@ -24,8 +24,10 @@
         "@swc/jest"
       ]
     },
-    "testURL": "http://localhost",
     "testEnvironment": "jsdom",
+    "testEnvironmentOptions": {
+      "url": "http://localhost"
+    },
     "moduleNameMapper": {
       "@pacote/(.+)$": "<rootDir>packages/$1/src"
     }
@@ -81,7 +83,8 @@
     "fp-ts": "^2.12.1",
     "git-cz": "^4.9.0",
     "husky": "^8.0.1",
-    "jest": "^27.0.1",
+    "jest": "^28.1.0",
+    "jest-environment-jsdom": "^28.1.0",
     "lerna": "^4.0.0",
     "lint-staged": "^12.1.2",
     "nock": "^13.0.9",
