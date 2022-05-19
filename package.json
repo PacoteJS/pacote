@@ -55,7 +55,7 @@
     ]
   },
   "devDependencies": {
-    "@commitlint/cli": "^16.0.1",
+    "@commitlint/cli": "^17.0.0",
     "@commitlint/config-conventional": "^16.0.0",
     "@swc/core": "^1.2.186",
     "@swc/jest": "^0.2.21",
