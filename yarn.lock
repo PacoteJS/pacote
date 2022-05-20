@@ -1815,7 +1815,7 @@
   dependencies:
     "@pacote/is-plain-object" "file:packages/is-plain-object"
     jest-diff "^27.0.1"
-    jest-matcher-utils "^27.0.1"
+    jest-matcher-utils "^28.1.0"
     ramda "^0.28.0"
 
 "@pacote/linked-list@file:packages/linked-list":
@@ -5515,7 +5515,7 @@ jest-leak-detector@^28.1.0:
     jest-get-type "^28.0.2"
     pretty-format "^28.1.0"
 
-jest-matcher-utils@^27.0.0, jest-matcher-utils@^27.0.1:
+jest-matcher-utils@^27.0.0:
   version "27.5.1"
   resolved "https://registry.yarnpkg.com/jest-matcher-utils/-/jest-matcher-utils-27.5.1.tgz#9c0cdbda8245bc22d2331729d1091308b40cf8ab"
   integrity sha512-z2uTx/T6LBaCoNWNFWwChLBKYxTMcGBRjAt+2SbP929/Fflb9aa5LGma654Rz8z9HLxsrUaYzxE9T/EFIL/PAw==
