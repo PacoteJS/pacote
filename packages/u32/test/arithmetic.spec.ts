@@ -90,9 +90,13 @@ describe('multiplication', () => {
 describe('subtraction', () => {
   it('consistent with numeric subtraction', () => {
     assert(
-      property(integer(1000, 10000), integer(1, 1000), (a, b) => {
-        expect(subtract(from(a), from(b))).toEqual(from(a - b))
-      })
+      property(
+        integer({ min: 1000, max: 10000 }),
+        integer({ min: 1, max: 1000 }),
+        (a, b) => {
+          expect(subtract(from(a), from(b))).toEqual(from(a - b))
+        }
+      )
     )
   })
 })

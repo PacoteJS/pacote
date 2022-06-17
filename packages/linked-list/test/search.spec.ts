@@ -3,7 +3,10 @@ import { Some, None } from '@pacote/option'
 import * as L from '../src/index'
 
 const arbitraryArray = fc.array(fc.anything())
-const arbitraryNonEmptyArray = fc.array(fc.anything(), 1, 99)
+const arbitraryNonEmptyArray = fc.array(fc.anything(), {
+  minLength: 1,
+  maxLength: 99,
+})
 
 describe('find()', () => {
   test('returns None if the list is empty', () => {
@@ -132,7 +135,7 @@ describe('lastIndexOf()', () => {
 describe('get()', () => {
   test('returns None for negative indices', () => {
     fc.assert(
-      fc.property(fc.integer(-1), arbitraryArray, (index, array) => {
+      fc.property(fc.integer({ max: -1 }), arbitraryArray, (index, array) => {
         const list = L.listOf(...array)
         expect(L.get(index, list)).toEqual(None)
       })

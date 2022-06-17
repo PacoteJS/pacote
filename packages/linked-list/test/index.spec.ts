@@ -3,7 +3,10 @@ import { Some, None } from '@pacote/option'
 import * as L from '../src/index'
 
 const arbitraryArray = fc.array(fc.anything())
-const arbitraryNonEmptyArray = fc.array(fc.anything(), 1, 99)
+const arbitraryNonEmptyArray = fc.array(fc.anything(), {
+  minLength: 1,
+  maxLength: 99,
+})
 
 describe('isEmpty()', () => {
   test('new empty lists are empty', () => {

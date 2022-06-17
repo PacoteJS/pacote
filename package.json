@@ -79,7 +79,7 @@
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.0.0",
     "eslint-plugin-testing-library": "^5.0.0",
-    "fast-check": "^2.25.0",
+    "fast-check": "^3.0.0",
     "fp-ts": "^2.12.1",
     "git-cz": "^4.9.0",
     "husky": "^8.0.1",

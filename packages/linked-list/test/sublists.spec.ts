@@ -25,7 +25,7 @@ describe('take()', () => {
   test('list of taken items is smaller or equal to the number requested', () => {
     fc.assert(
       fc.property(
-        fc.integer(1, Number.MAX_SAFE_INTEGER),
+        fc.integer({ min: 1, max: Number.MAX_SAFE_INTEGER }),
         arbitraryArray,
         (offset, array) => {
           const list = L.listOf(...array)
