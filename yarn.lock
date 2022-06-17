@@ -422,15 +422,16 @@
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
 "@commitlint/cli@^17.0.0":
-  version "17.0.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-17.0.0.tgz#6c86c6b0eba4ba1204a19833c3c962b623f35518"
-  integrity sha512-Np6slCdVVG1XwMvwbZrXIzS1INPAD5QmN4L6al04AmCd4nAPU63gxgxC5Mz0Fmx7va23Uvb0S7yEFV1JPhvPUQ==
+  version "17.0.2"
+  resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-17.0.2.tgz#57c925fb5f09b8e4a83448d94db291ddf7aa58ee"
+  integrity sha512-Axe89Js0YzGGd4gxo3JLlF7yIdjOVpG1LbOorGc6PfYF+drBh14PvarSDLzyd2TNqdylUCq9wb9/A88ZjIdyhA==
   dependencies:
     "@commitlint/format" "^17.0.0"
     "@commitlint/lint" "^17.0.0"
     "@commitlint/load" "^17.0.0"
     "@commitlint/read" "^17.0.0"
     "@commitlint/types" "^17.0.0"
+    execa "^5.0.0"
     lodash "^4.17.19"
     resolve-from "5.0.0"
     resolve-global "1.0.0"
@@ -4139,10 +4140,10 @@ extsprintf@^1.2.0:
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.4.1.tgz#8d172c064867f235c0c84a596806d279bf4bcc07"
   integrity sha512-Wrk35e8ydCKDj/ArClo1VrPVmN8zph5V4AtHwIuHhvMXsKf73UT3BOD+azBIW+3wOJ4FhEH7zyaJCFvChjYvMA==
 
-fast-check@^2.25.0:
-  version "2.25.0"
-  resolved "https://registry.yarnpkg.com/fast-check/-/fast-check-2.25.0.tgz#5146601851bf3be0953bd17eb2b7d547936c6561"
-  integrity sha512-wRUT2KD2lAmT75WNIJIHECawoUUMHM0I5jrlLXGtGeqmPL8jl/EldUDjY1VCp6fDY8yflyfUeIOsOBrIbIiArg==
+fast-check@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/fast-check/-/fast-check-3.0.0.tgz#6ea28d584e9ffebd7ecd0f06c163cd6af593ecfd"
+  integrity sha512-uujtrFJEQQqnIMO52ARwzPcuV4omiL1OJBUBLE9WnNFeu0A97sREXDOmCIHY+Z6KLVcemUf09rWr0q0Xy/Y/Ew==
   dependencies:
     pure-rand "^5.0.1"
 
@@ -7162,9 +7163,9 @@ pkg-dir@^4.2.0:
     find-up "^4.0.0"
 
 plop@^3.0.1:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/plop/-/plop-3.1.0.tgz#a2a36146afc2d5baaf0069f442d5029cdfd070fd"
-  integrity sha512-bkKZ5X7V2hjH1ha5x8eX2mzyxM/sR166icNdQAbuAK5L4iHTT7fNKjV7VOpF3hBWtRNnzBoctjC3hC5syX5iYg==
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/plop/-/plop-3.1.1.tgz#7d86d16f829bd509cc76e2a0ff1c67ebf8d22067"
+  integrity sha512-NuctKmuNUACXBQn25bBr5oj/75nHxdKGwjA/+b7cVoj1sp+gTVqcc8eAr4QcNJgMPsZWRJBN2kMkgmsqbqV9gg==
   dependencies:
     "@types/liftoff" "^4.0.0"
     chalk "^5.0.1"
