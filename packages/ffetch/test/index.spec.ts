@@ -1,35 +1,44 @@
 import 'whatwg-fetch'
-import nock from 'nock'
 import matchers from '@pacote/jest-either'
 import { ffetch, createFetch } from '../src'
+import { rest } from 'msw'
+import { setupServer } from 'msw/node'
 import { NetworkError, StatusError, ParserError } from '../src/errors'
 
 expect.extend(matchers)
 
 const url = 'http://localhost'
 
-afterEach(nock.cleanAll)
+const server = setupServer()
+
+beforeAll(() => {
+  server.listen()
+})
+
+afterEach(() => {
+  server.resetHandlers()
+})
+
+afterAll(() => {
+  server.close()
+})
 
 test('successful JSON responses', async () => {
   const body = { foo: 'bar' }
-  nock(url).get('/').reply(200, body, {
-    'content-type': 'application/json; charset=utf-8',
-  })
+  server.use(rest.get('/', (_, res, ctx) => res(ctx.json(body))))
   const actual = await ffetch(url)()
   expect(actual).toEqualRight(body)
 })
 
 test('successful plain text responses', async () => {
   const body = '<plain text>'
-  nock(url).get('/').reply(200, body, {
-    'content-type': 'text/plain',
-  })
+  server.use(rest.get('/', (_, res, ctx) => res(ctx.text(body))))
   const actual = await ffetch(url)()
   expect(actual).toEqualRight(body)
 })
 
 test('connection errors', async () => {
-  nock(url).get('/').replyWithError('')
+  server.use(rest.get('/', (_, res) => res.networkError('')))
   const actual = await ffetch(url)()
   expect(actual).toEqualLeft(
     new NetworkError('Network request failed', [
@@ -41,9 +50,9 @@ test('connection errors', async () => {
 test('status code errors', async () => {
   const status = 500
   const body = { foo: 'bar' }
-  nock(url).get('/').reply(status, body, {
-    'content-type': 'application/json; charset=utf-8',
-  })
+  server.use(
+    rest.get('/', (_, res, ctx) => res(ctx.status(status), ctx.json(body)))
+  )
   const actual = await ffetch(url)()
   expect(actual).toEqualLeft(
     new StatusError(status, 'Internal Server Error', body)
@@ -51,9 +60,14 @@ test('status code errors', async () => {
 })
 
 test('invalid response body', async () => {
-  nock(url).get('/').reply(200, '<not json>', {
-    'content-type': 'application/json; charset=utf-8',
-  })
+  server.use(
+    rest.get('/', (_, res, ctx) =>
+      res(
+        ctx.set('content-type', 'application/json; charset=utf-8'),
+        ctx.body('<not json>')
+      )
+    )
+  )
   const actual = await ffetch(url)()
   expect(actual).toEqualLeft(
     new ParserError('Could not parse response', [
@@ -65,9 +79,9 @@ test('invalid response body', async () => {
 test('plain text body for status errors', async () => {
   const status = 404
   const body = '<ok>'
-  nock(url).get('/').reply(status, body, {
-    'content-type': 'text/plain',
-  })
+  server.use(
+    rest.get('/', (_, res, ctx) => res(ctx.status(status), ctx.text(body)))
+  )
   const actual = await ffetch(url)()
   expect(actual).toEqualLeft(new StatusError(status, 'Not Found', body))
 })
@@ -75,9 +89,15 @@ test('plain text body for status errors', async () => {
 test('invalid JSON body for status errors', async () => {
   const status = 400
   const body = '<not json>'
-  nock(url).get('/').reply(status, body, {
-    'content-type': 'application/json; charset=utf-8',
-  })
+  server.use(
+    rest.get('/', (_, res, ctx) =>
+      res(
+        ctx.status(status),
+        ctx.set('content-type', 'application/json; charset=utf-8'),
+        ctx.body(body)
+      )
+    )
+  )
   const actual = await ffetch(url)()
   expect(actual).toEqualLeft(new StatusError(status, 'Bad Request', body))
 })
@@ -85,8 +105,7 @@ test('invalid JSON body for status errors', async () => {
 test('custom body parser success', async () => {
   const status = 201
   const expected = `Received a response with status code ${status}.`
-  nock(url).get('/').reply(status, '')
-
+  server.use(rest.get('/', (_, res, ctx) => res(ctx.status(status))))
   const customFetch = createFetch({
     parse: async () => Promise.resolve(expected),
   })
@@ -98,8 +117,7 @@ test('custom body parser success', async () => {
 
 test('custom parser error', async () => {
   const error = new Error('custom parser error')
-  nock(url).get('/').reply(200, '')
-
+  server.use(rest.get('/', (_, res) => res()))
   const customFetch = createFetch({
     parse: async () => Promise.reject(error),
   })
@@ -114,8 +132,9 @@ test('custom parser error', async () => {
 test('custom error parser success', async () => {
   const status = 500
   const body = `Received a response with status code ${status}.`
-  nock(url).get('/').reply(status, '')
-
+  server.use(
+    rest.get('/', (_, res, ctx) => res(ctx.status(status), ctx.text(body)))
+  )
   const customFetch = createFetch({
     parseLeft: async () => Promise.resolve(body),
   })
@@ -130,8 +149,7 @@ test('custom error parser success', async () => {
 test('custom error parser failure', async () => {
   const status = 500
   const error = new Error('custom error parser failure')
-  nock(url).get('/').reply(status, '')
-
+  server.use(rest.get('/', (_, res, ctx) => res(ctx.status(status))))
   const customFetch = createFetch({
     parseLeft: async () => Promise.reject(error),
   })
