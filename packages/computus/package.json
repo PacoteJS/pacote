@@ -1,7 +1,7 @@
 {
   "name": "@pacote/computus",
   "description": "Determine the calendar date of the Easter holiday.",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "sideEffects": false,
   "license": "MIT",
   "author": {

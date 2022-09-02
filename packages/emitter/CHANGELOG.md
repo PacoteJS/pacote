@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.9](https://github.com/PacoteJS/pacote/compare/@pacote/emitter@1.0.8...@pacote/emitter@1.0.9) (2022-09-02)
+
+
+### Bug Fixes
+
+* 🐛 Fix typing issue ([7b433f5](https://github.com/PacoteJS/pacote/commit/7b433f5a50bc9462f13db945e7a458af76eeadd2))
+
+
+
+
+
 ## [1.0.8](https://github.com/PacoteJS/pacote/compare/@pacote/emitter@1.0.7...@pacote/emitter@1.0.8) (2022-09-02)
 
 **Note:** Version bump only for package @pacote/emitter

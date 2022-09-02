@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.12](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-filter@0.3.11...@pacote/bloom-filter@0.3.12) (2022-09-02)
+
+
+### Bug Fixes
+
+* 🐛 Fix typing issue ([7b433f5](https://github.com/PacoteJS/pacote/commit/7b433f5a50bc9462f13db945e7a458af76eeadd2))
+
+
+
+
+
 ## [0.3.11](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-filter@0.3.10...@pacote/bloom-filter@0.3.11) (2022-09-02)
 
 **Note:** Version bump only for package @pacote/bloom-filter

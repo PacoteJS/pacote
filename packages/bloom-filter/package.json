@@ -1,7 +1,7 @@
 {
   "name": "@pacote/bloom-filter",
   "description": "Space-efficient probabilistic data structures.",
-  "version": "0.3.11",
+  "version": "0.3.12",
   "sideEffects": false,
   "license": "MIT",
   "author": {
@@ -33,7 +33,7 @@
     "prepublish": "yarn build"
   },
   "dependencies": {
-    "@pacote/xxhash": "^0.2.5"
+    "@pacote/xxhash": "^0.2.6"
   },
   "gitHead": "bd3b251fc01a599034b03175c0cfab2d946f2f7f"
 }

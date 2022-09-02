@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.9](https://github.com/PacoteJS/pacote/compare/@pacote/computus@1.2.8...@pacote/computus@1.2.9) (2022-09-02)
+
+
+### Bug Fixes
+
+* 🐛 Fix typing issue ([7b433f5](https://github.com/PacoteJS/pacote/commit/7b433f5a50bc9462f13db945e7a458af76eeadd2))
+
+
+
+
+
 ## [1.2.8](https://github.com/PacoteJS/pacote/compare/@pacote/computus@1.2.7...@pacote/computus@1.2.8) (2022-09-02)
 
 **Note:** Version bump only for package @pacote/computus

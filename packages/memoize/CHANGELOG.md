@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.8](https://github.com/PacoteJS/pacote/compare/@pacote/memoize@1.1.7...@pacote/memoize@1.1.8) (2022-09-02)
+
+
+### Bug Fixes
+
+* 🐛 Fix typing issue ([7b433f5](https://github.com/PacoteJS/pacote/commit/7b433f5a50bc9462f13db945e7a458af76eeadd2))
+
+
+
+
+
 ## [1.1.7](https://github.com/PacoteJS/pacote/compare/@pacote/memoize@1.1.6...@pacote/memoize@1.1.7) (2022-09-02)
 
 **Note:** Version bump only for package @pacote/memoize

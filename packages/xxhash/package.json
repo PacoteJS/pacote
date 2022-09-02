@@ -1,7 +1,7 @@
 {
   "name": "@pacote/xxhash",
   "description": "Fast non-cryptographic hashing algorithm.",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "sideEffects": false,
   "license": "MIT",
   "author": {
@@ -31,7 +31,7 @@
     "prepublish": "yarn build"
   },
   "dependencies": {
-    "@pacote/u64": "^0.1.7"
+    "@pacote/u64": "^0.1.8"
   },
   "gitHead": "bd3b251fc01a599034b03175c0cfab2d946f2f7f"
 }

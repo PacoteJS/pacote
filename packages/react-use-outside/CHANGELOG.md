@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.11](https://github.com/PacoteJS/pacote/compare/@pacote/react-use-outside@1.1.10...@pacote/react-use-outside@1.1.11) (2022-09-02)
+
+
+### Bug Fixes
+
+* 🐛 Fix typing issue ([7b433f5](https://github.com/PacoteJS/pacote/commit/7b433f5a50bc9462f13db945e7a458af76eeadd2))
+
+
+
+
+
 ## [1.1.10](https://github.com/PacoteJS/pacote/compare/@pacote/react-use-outside@1.1.9...@pacote/react-use-outside@1.1.10) (2022-09-02)
 
 

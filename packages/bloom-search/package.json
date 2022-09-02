@@ -1,7 +1,7 @@
 {
   "name": "@pacote/bloom-search",
   "description": "Document search using Bloom filters.",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "sideEffects": false,
   "license": "MIT",
   "author": {
@@ -34,8 +34,8 @@
     "prepublish": "yarn build"
   },
   "dependencies": {
-    "@pacote/array": "^0.4.3",
-    "@pacote/bloom-filter": "^0.3.11"
+    "@pacote/array": "^0.4.4",
+    "@pacote/bloom-filter": "^0.3.12"
   },
   "gitHead": "bd3b251fc01a599034b03175c0cfab2d946f2f7f"
 }
