@@ -34,6 +34,7 @@
     "prepublish": "yarn build"
   },
   "dependencies": {
-    "@pacote/option": "file:../option"
-  }
+    "@pacote/option": "^2.0.2"
+  },
+  "gitHead": "bd3b251fc01a599034b03175c0cfab2d946f2f7f"
 }
