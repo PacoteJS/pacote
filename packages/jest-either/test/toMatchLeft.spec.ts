@@ -17,17 +17,15 @@ describe('.toMatchLeft()', () => {
   })
 
   test('fails when spec does not match the object on the left', () => {
-    expect(() =>
-      expect(left({ a: 1, b: 2 })).toMatchLeft({ a: 2 })
-    ).toThrowError()
+    expect(() => expect(left({ a: 1, b: 2 })).toMatchLeft({ a: 2 })).toThrow()
   })
 
   test('fails when object is a right', () => {
-    expect(() => expect(right({ a: 1 })).toMatchLeft({ a: 1 })).toThrowError()
+    expect(() => expect(right({ a: 1 })).toMatchLeft({ a: 1 })).toThrow()
   })
 
   test('fails when regular expression does not match a string on the left', () => {
-    expect(() => expect(left('aa')).toMatchLeft(/b/)).toThrowError()
+    expect(() => expect(left('aa')).toMatchLeft(/b/)).toThrow()
   })
 })
 
@@ -47,16 +45,14 @@ describe('.not.toMatchLeft()', () => {
   test('fails when spec deeply matches the object on the left', () => {
     expect(() =>
       expect(left({ a: 1, b: { c: 2, d: 3 } })).not.toMatchLeft({ b: { c: 2 } })
-    ).toThrowError()
+    ).toThrow()
   })
 
   test('fails when spec matches the object on the left', () => {
-    expect(() =>
-      expect(left({ a: 1 })).not.toMatchLeft({ a: 1 })
-    ).toThrowError()
+    expect(() => expect(left({ a: 1 })).not.toMatchLeft({ a: 1 })).toThrow()
   })
 
   test('fails when regular expression matches a string on the left', () => {
-    expect(() => expect(left('aa')).not.toMatchLeft(/a/)).toThrowError()
+    expect(() => expect(left('aa')).not.toMatchLeft(/a/)).toThrow()
   })
 })

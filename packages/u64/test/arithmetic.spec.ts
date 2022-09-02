@@ -103,7 +103,7 @@ describe('subtraction', () => {
 
 describe('division', () => {
   it('throws error on division by 0', () => {
-    expect(() => divide(from(1), ZERO)).toThrowError('division by zero')
+    expect(() => divide(from(1), ZERO)).toThrow('division by zero')
   })
 
   it.each([
@@ -119,7 +119,7 @@ describe('division', () => {
 
 describe('remainder', () => {
   it('throws error on division by 0', () => {
-    expect(() => remainder(from(1), ZERO)).toThrowError('division by zero')
+    expect(() => remainder(from(1), ZERO)).toThrow('division by zero')
   })
 
   it.each([

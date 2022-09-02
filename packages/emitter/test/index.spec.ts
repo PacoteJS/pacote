@@ -59,5 +59,5 @@ test(`passing event parameters`, () => {
 
 test(`no errors emitting unsubscribed events`, () => {
   const emitter = createEmitter()
-  expect(() => emitter.emit('test')).not.toThrowError()
+  expect(() => emitter.emit('test')).not.toThrow()
 })

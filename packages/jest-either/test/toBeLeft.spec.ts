@@ -9,7 +9,7 @@ describe('.toBeLeft()', () => {
   })
 
   test('fails when object is a right', () => {
-    expect(() => expect(right(true)).toBeLeft()).toThrowError()
+    expect(() => expect(right(true)).toBeLeft()).toThrow()
   })
 })
 
@@ -19,6 +19,6 @@ describe('.not.toBeLeft()', () => {
   })
 
   test('fails when object is a left', () => {
-    expect(() => expect(left(false)).not.toBeLeft()).toThrowError()
+    expect(() => expect(left(false)).not.toBeLeft()).toThrow()
   })
 })
