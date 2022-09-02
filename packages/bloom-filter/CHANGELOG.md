@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.11](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-filter@0.3.10...@pacote/bloom-filter@0.3.11) (2022-09-02)
+
+**Note:** Version bump only for package @pacote/bloom-filter
+
+
+
+
+
 ## [0.3.10](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-filter@0.3.9...@pacote/bloom-filter@0.3.10) (2022-05-19)
 
 

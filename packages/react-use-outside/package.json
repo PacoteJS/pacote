@@ -1,7 +1,7 @@
 {
   "name": "@pacote/react-use-outside",
   "description": "React hook to capture mouse or touch events outside a component.",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "sideEffects": false,
   "license": "MIT",
   "author": {

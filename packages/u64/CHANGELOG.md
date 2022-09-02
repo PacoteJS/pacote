@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.7](https://github.com/PacoteJS/pacote/compare/@pacote/u64@0.1.6...@pacote/u64@0.1.7) (2022-09-02)
+
+**Note:** Version bump only for package @pacote/u64
+
+
+
+
+
 ## [0.1.6](https://github.com/PacoteJS/pacote/compare/@pacote/u64@0.1.5...@pacote/u64@0.1.6) (2021-10-23)
 
 **Note:** Version bump only for package @pacote/u64

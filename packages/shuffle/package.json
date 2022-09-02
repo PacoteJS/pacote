@@ -1,7 +1,7 @@
 {
   "name": "@pacote/shuffle",
   "description": "An implementation of the Durstenfeld algorithm for shuffling collections.",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "sideEffects": false,
   "license": "MIT",
   "author": {

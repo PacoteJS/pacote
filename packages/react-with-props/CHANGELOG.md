@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.11](https://github.com/PacoteJS/pacote/compare/@pacote/react-with-props@1.1.10...@pacote/react-with-props@1.1.11) (2022-09-02)
+
+
+### Bug Fixes
+
+* 🐛 support for React 18 ([ee146d6](https://github.com/PacoteJS/pacote/commit/ee146d6aa8b63ee68f91b027fd21015f43299686))
+
+
+
+
+
 ## [1.1.10](https://github.com/PacoteJS/pacote/compare/@pacote/react-with-props@1.1.9...@pacote/react-with-props@1.1.10) (2021-08-13)
 
 **Note:** Version bump only for package @pacote/react-with-props
