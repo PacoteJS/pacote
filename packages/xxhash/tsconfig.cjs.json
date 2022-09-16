@@ -2,7 +2,9 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "module": "CommonJS",
-    "target": "ES3",
+    "moduleResolution": "Node",
+    "lib": ["ES6", "DOM"],
+    "target": "ES6",
     "rootDir": "src",
     "outDir": "lib/cjs"
   },

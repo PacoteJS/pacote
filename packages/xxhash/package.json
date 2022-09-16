@@ -18,8 +18,20 @@
     "access": "public"
   },
   "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
+  "module": "lib/esm/index.mjs",
   "typings": "lib/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./lib/esm/index.d.ts",
+        "default": "./lib/esm/index.mjs"
+      },
+      "require": {
+        "types": "./lib/cjs/index.d.ts",
+        "default": "./lib/cjs/index.js"
+      }
+    }
+  },
   "directories": {
     "lib": "lib",
     "test": "test"
