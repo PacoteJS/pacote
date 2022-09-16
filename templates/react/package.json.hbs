@@ -18,8 +18,20 @@
     "access": "public"
   },
   "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
+  "module": "lib/esm/index.mjs",
   "typings": "lib/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./lib/esm/index.d.ts",
+        "default": "./lib/esm/index.mjs"
+      },
+      "require": {
+        "types": "./lib/cjs/index.d.ts",
+        "default": "./lib/cjs/index.js"
+      }
+    }
+  },
   "directories": {
     "lib": "lib",
     "test": "test"
@@ -27,7 +39,7 @@
   "scripts": {
     "build": "yarn build:esm && yarn build:cjs",
     "build:cjs": "tsc -p ./tsconfig.cjs.json",
-    "build:esm": "tsc -p ./tsconfig.esm.json",
+    "build:esm": "tsc -p ./tsconfig.esm.json && mv ./lib/esm/index.js ./lib/esm/index.mjs",
     "prepublish": "yarn build"
   },
   "peerDependencies": {

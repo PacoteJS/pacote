@@ -5,7 +5,7 @@
     "declaration": true,
     "declarationMap": false,
     "esModuleInterop": true,
-    "target": "ES3",
+    "target": "ES6",
     "sourceMap": false,
     "lib": ["DOM", "DOM.Iterable", "ESNext", "ScriptHost"],
     "skipLibCheck": true,
