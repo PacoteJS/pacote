@@ -1,8 +1,6 @@
 import * as fc from 'fast-check'
 import * as L from '../src/index'
 
-const [V8_VERSION_MAJOR] = process.versions.v8.split('.')
-
 describe('sort()', () => {
   test('empty lists are already sorted', () => {
     const list = L.listOf()
@@ -70,28 +68,25 @@ describe('sort()', () => {
     )
   })
 
-  if (parseInt(V8_VERSION_MAJOR, 10) >= 7) {
-    test('Array#sort comparison (stable on V8 7.0+)', () => {
-      fc.assert(
-        fc.property(
-          fc.array(
-            fc.anything({
-              values: [
-                fc.string(),
-                fc.integer(),
-                fc.float(),
-                fc.boolean(),
-                fc.constantFrom(null, undefined),
-              ],
-            })
-          ),
-          (array) => {
-            const list = L.listOf(...array)
-            const sortedItems = array.sort()
-            expect(L.sort(list)).toEqual(L.listOf(...sortedItems))
-          }
-        )
+  test('Array#sort comparison (stable on V8 7.0+)', () => {
+    fc.assert(
+      fc.property(
+        fc.array(
+          fc.anything({
+            values: [
+              fc.string(),
+              fc.integer(),
+              fc.float(),
+              fc.boolean(),
+              fc.constantFrom(null, undefined),
+            ],
+          })
+        ),
+        (array) => {
+          const list = L.listOf(...array)
+          expect(L.sort(list)).toEqual(L.listOf(...array.sort()))
+        }
       )
-    })
-  }
+    )
+  })
 })
