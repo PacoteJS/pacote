@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - name: Install Lerna
-        run: npm i -g lerna@5.5.1
+        run: npm i -g lerna@6.0.3
       - name: Bootstrap
         run: |
           yarn bootstrap
