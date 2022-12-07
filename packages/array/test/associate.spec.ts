@@ -13,6 +13,7 @@ test('duplicate keys are overwritten', () => {
   expect(associate((i) => ['same', i], ['a', 'b'])).toEqual({ same: 'b' })
 })
 
+// eslint-disable-next-line jest/no-disabled-tests
 test.skip('inverse of Object.entries', () => {
   assert(
     property(object(), (o) => {
