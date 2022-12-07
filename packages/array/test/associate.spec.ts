@@ -13,7 +13,7 @@ test('duplicate keys are overwritten', () => {
   expect(associate((i) => ['same', i], ['a', 'b'])).toEqual({ same: 'b' })
 })
 
-test('inverse of Object.entries', () => {
+test.skip('inverse of Object.entries', () => {
   assert(
     property(object(), (o) => {
       expect(associate((i) => i, Object.entries(o))).toEqual(o)
