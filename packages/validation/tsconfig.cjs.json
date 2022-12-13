@@ -9,7 +9,6 @@
   "include": ["src"],
   "references": [
     { "path": "../non-empty-array/tsconfig.cjs.json" },
-    { "path": "../pipe/tsconfig.cjs.json" },
     { "path": "../result/tsconfig.cjs.json" }
   ]
 }

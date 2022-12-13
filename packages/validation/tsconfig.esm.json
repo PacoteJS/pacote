@@ -9,7 +9,6 @@
   "include": ["src"],
   "references": [
     { "path": "../non-empty-array/tsconfig.esm.json" },
-    { "path": "../pipe/tsconfig.esm.json" },
     { "path": "../result/tsconfig.esm.json" }
   ]
 }

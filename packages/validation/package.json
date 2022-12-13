@@ -32,7 +32,6 @@
   },
   "dependencies": {
     "@pacote/non-empty-array": "file:../non-empty-array",
-    "@pacote/pipe": "file:../pipe",
     "@pacote/result": "file:../result"
   }
 }

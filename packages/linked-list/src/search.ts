@@ -9,18 +9,22 @@ import {
   reverse,
 } from './core'
 
+const fnFalse = () => false
+const fnTrue = () => true
+const fnNone = () => None
+
 function recursiveFind<T, R>(
   predicate: (value: T, index: number) => boolean,
-  whenFound: (current: T, index: number) => R,
-  whenFinished: () => R,
+  onFound: (current: T, index: number) => R,
+  onFinished: () => R,
   current: LinkedList<T>,
   index: number
 ): R {
   return isEmpty(current)
-    ? whenFinished()
+    ? onFinished()
     : predicate(car(current), index)
-    ? whenFound(car(current), index)
-    : recursiveFind(predicate, whenFound, whenFinished, cdr(current), index + 1)
+    ? onFound(car(current), index)
+    : recursiveFind(predicate, onFound, onFinished, cdr(current), index + 1)
 }
 
 export function find<T>(
@@ -30,7 +34,7 @@ export function find<T>(
   return recursiveFind<T, Option<T>>(
     (current, index) => predicate(current, index, list),
     Some,
-    () => None,
+    fnNone,
     list,
     0
   )
@@ -59,8 +63,8 @@ export function every<T>(
 ): boolean {
   return recursiveFind(
     (current, index) => !predicate(current, index, list),
-    () => false,
-    () => true,
+    fnFalse,
+    fnTrue,
     list,
     0
   )
@@ -72,8 +76,8 @@ export function some<T>(
 ): boolean {
   return recursiveFind(
     (current, index) => predicate(current, index, list),
-    () => true,
-    () => false,
+    fnTrue,
+    fnFalse,
     list,
     0
   )
@@ -87,18 +91,19 @@ export function indexOf<T>(value: T, list: LinkedList<T>): Option<number> {
   return recursiveFind<T, Option<number>>(
     (current) => current === value,
     (_, index) => Some(index),
-    () => None,
+    fnNone,
     list,
     0
   )
 }
 
 export function lastIndexOf<T>(value: T, list: LinkedList<T>): Option<number> {
-  return map((lastIndex: number) => length(list) - lastIndex - 1)(
+  return map(
+    (lastIndex: number) => length(list) - lastIndex - 1,
     recursiveFind<T, Option<number>>(
       (current) => current === value,
       (_, index) => Some(index),
-      () => None,
+      fnNone,
       reverse(list),
       0
     )
@@ -112,7 +117,7 @@ export function findIndex<T>(
   return recursiveFind<T, Option<number>>(
     (current, index) => predicate(current, index, list),
     (_, index) => Some(index),
-    () => None,
+    fnNone,
     list,
     0
   )
