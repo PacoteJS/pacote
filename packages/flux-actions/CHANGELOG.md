@@ -3,21 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.13](https://github.com/PacoteJS/pacote/compare/@pacote/flux-actions@2.1.12...@pacote/flux-actions@2.1.13) (2022-12-13)
+
+**Note:** Version bump only for package @pacote/flux-actions
+
 ## [2.1.12](https://github.com/PacoteJS/pacote/compare/@pacote/flux-actions@2.1.11...@pacote/flux-actions@2.1.12) (2021-08-13)
 
 **Note:** Version bump only for package @pacote/flux-actions
 
-
-
-
-
 ## [2.1.11](https://github.com/PacoteJS/pacote/compare/@pacote/flux-actions@2.1.10...@pacote/flux-actions@2.1.11) (2021-04-18)
 
 **Note:** Version bump only for package @pacote/flux-actions
-
-
-
-
 
 ## [2.1.10](https://github.com/PacoteJS/pacote/compare/@pacote/flux-actions@2.1.9...@pacote/flux-actions@2.1.10) (2021-01-25)
 

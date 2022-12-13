@@ -3,56 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [2.0.8](https://github.com/PacoteJS/pacote/compare/@pacote/iff@2.0.7...@pacote/iff@2.0.8) (2021-08-13)
+## [2.0.9](https://github.com/PacoteJS/pacote/compare/@pacote/iff@2.0.8...@pacote/iff@2.0.9) (2022-12-13)
 
 **Note:** Version bump only for package @pacote/iff
 
+## [2.0.8](https://github.com/PacoteJS/pacote/compare/@pacote/iff@2.0.7...@pacote/iff@2.0.8) (2021-08-13)
 
-
-
+**Note:** Version bump only for package @pacote/iff
 
 ## [2.0.7](https://github.com/PacoteJS/pacote/compare/@pacote/iff@2.0.6...@pacote/iff@2.0.7) (2021-04-23)
 
 **Note:** Version bump only for package @pacote/iff
 
-
-
-
-
 ## [2.0.6](https://github.com/PacoteJS/pacote/compare/@pacote/iff@2.0.5...@pacote/iff@2.0.6) (2021-04-18)
 
 **Note:** Version bump only for package @pacote/iff
-
-
-
-
 
 ## [2.0.5](https://github.com/PacoteJS/pacote/compare/@pacote/iff@2.0.4...@pacote/iff@2.0.5) (2021-04-15)
 
 **Note:** Version bump only for package @pacote/iff
 
-
-
-
-
 ## [2.0.4](https://github.com/PacoteJS/pacote/compare/@pacote/iff@2.0.3...@pacote/iff@2.0.4) (2021-04-06)
 
 **Note:** Version bump only for package @pacote/iff
 
-
-
-
-
 ## [2.0.3](https://github.com/PacoteJS/pacote/compare/@pacote/iff@2.0.2...@pacote/iff@2.0.3) (2021-02-14)
-
 
 ### Bug Fixes
 
-* 🐛 change ESM compilation target to ES2019 ([5c30e8a](https://github.com/PacoteJS/pacote/commit/5c30e8a5da41e1c5c394cbb21f64d2a5256817ea))
-
-
-
-
+- 🐛 change ESM compilation target to ES2019 ([5c30e8a](https://github.com/PacoteJS/pacote/commit/5c30e8a5da41e1c5c394cbb21f64d2a5256817ea))
 
 ## [2.0.2](https://github.com/PacoteJS/pacote/compare/@pacote/iff@2.0.1...@pacote/iff@2.0.2) (2020-11-27)
 

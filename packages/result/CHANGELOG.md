@@ -3,91 +3,64 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [2.1.2](https://github.com/PacoteJS/pacote/compare/@pacote/result@2.1.1...@pacote/result@2.1.2) (2021-10-23)
+# [3.0.0](https://github.com/PacoteJS/pacote/compare/@pacote/result@2.1.2...@pacote/result@3.0.0) (2022-12-13)
 
+### Features
+
+- 🎸 no currying to better fit the approved pipeline syntax ([75e7e22](https://github.com/PacoteJS/pacote/commit/75e7e228d418b4f39ac6cdad3ce55f6f42899832))
+
+### BREAKING CHANGES
+
+- 🧨 Switching back to no partial function being returned as it fits the
+  approved ECMAScript Hack-style pipeline syntax better.
+
+## [2.1.2](https://github.com/PacoteJS/pacote/compare/@pacote/result@2.1.1...@pacote/result@2.1.2) (2021-10-23)
 
 ### Bug Fixes
 
-* 🐛 `tryCatch` handled error type is `unknown` ([869f9d0](https://github.com/PacoteJS/pacote/commit/869f9d024770b208e0f1ca0d82a16964f7f95d90))
-
-
-
-
+- 🐛 `tryCatch` handled error type is `unknown` ([869f9d0](https://github.com/PacoteJS/pacote/commit/869f9d024770b208e0f1ca0d82a16964f7f95d90))
 
 ## [2.1.1](https://github.com/PacoteJS/pacote/compare/@pacote/result@2.1.0...@pacote/result@2.1.1) (2021-08-13)
 
 **Note:** Version bump only for package @pacote/result
 
-
-
-
-
 # [2.1.0](https://github.com/PacoteJS/pacote/compare/@pacote/result@2.0.1...@pacote/result@2.1.0) (2021-04-26)
-
 
 ### Features
 
-* 🎸 add bimap() ([2b5fae5](https://github.com/PacoteJS/pacote/commit/2b5fae5fe3e23279f284e80c890d47546a955f3f))
-
-
-
-
+- 🎸 add bimap() ([2b5fae5](https://github.com/PacoteJS/pacote/commit/2b5fae5fe3e23279f284e80c890d47546a955f3f))
 
 ## [2.0.1](https://github.com/PacoteJS/pacote/compare/@pacote/result@2.0.0...@pacote/result@2.0.1) (2021-04-23)
 
 **Note:** Version bump only for package @pacote/result
 
-
-
-
-
 # [2.0.0](https://github.com/PacoteJS/pacote/compare/@pacote/result@1.1.0...@pacote/result@2.0.0) (2021-04-18)
-
 
 ### Features
 
-* 🎸 the final result argument is now curried ([8a9179e](https://github.com/PacoteJS/pacote/commit/8a9179e21976164801b4da0b39aefb38251bc61e))
-
+- 🎸 the final result argument is now curried ([8a9179e](https://github.com/PacoteJS/pacote/commit/8a9179e21976164801b4da0b39aefb38251bc61e))
 
 ### BREAKING CHANGES
 
-* 🧨 The final `Result` argument in functions with an arity of 2 or more is
-now curried.
-
-
-
-
+- 🧨 The final `Result` argument in functions with an arity of 2 or more is
+  now curried.
 
 # [1.1.0](https://github.com/PacoteJS/pacote/compare/@pacote/result@1.0.9...@pacote/result@1.1.0) (2021-04-15)
 
-
 ### Features
 
-* 🎸 `ofPromise` function ([b9aa515](https://github.com/PacoteJS/pacote/commit/b9aa515b9207207f8f7f7f2c0d099819689796ba))
-* 🎸 `tryCatch()` to convert thrown errors into `Result` ([eaa5789](https://github.com/PacoteJS/pacote/commit/eaa5789becbac94762845a1da40919b479595823))
-
-
-
-
+- 🎸 `ofPromise` function ([b9aa515](https://github.com/PacoteJS/pacote/commit/b9aa515b9207207f8f7f7f2c0d099819689796ba))
+- 🎸 `tryCatch()` to convert thrown errors into `Result` ([eaa5789](https://github.com/PacoteJS/pacote/commit/eaa5789becbac94762845a1da40919b479595823))
 
 ## [1.0.9](https://github.com/PacoteJS/pacote/compare/@pacote/result@1.0.8...@pacote/result@1.0.9) (2021-04-06)
 
 **Note:** Version bump only for package @pacote/result
 
-
-
-
-
 ## [1.0.8](https://github.com/PacoteJS/pacote/compare/@pacote/result@1.0.7...@pacote/result@1.0.8) (2021-02-14)
-
 
 ### Bug Fixes
 
-* 🐛 change ESM compilation target to ES2019 ([5c30e8a](https://github.com/PacoteJS/pacote/commit/5c30e8a5da41e1c5c394cbb21f64d2a5256817ea))
-
-
-
-
+- 🐛 change ESM compilation target to ES2019 ([5c30e8a](https://github.com/PacoteJS/pacote/commit/5c30e8a5da41e1c5c394cbb21f64d2a5256817ea))
 
 ## [1.0.7](https://github.com/PacoteJS/pacote/compare/@pacote/result@1.0.6...@pacote/result@1.0.7) (2020-11-27)
 

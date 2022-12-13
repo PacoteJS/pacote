@@ -1,7 +1,7 @@
 {
   "name": "@pacote/linked-list",
   "description": "Immutable linked lists.",
-  "version": "0.5.3",
+  "version": "0.6.0",
   "sideEffects": false,
   "license": "MIT",
   "author": {
@@ -34,7 +34,7 @@
     "prepublish": "yarn build"
   },
   "dependencies": {
-    "@pacote/option": "^2.0.2"
+    "@pacote/option": "^3.0.0"
   },
   "gitHead": "bd3b251fc01a599034b03175c0cfab2d946f2f7f"
 }

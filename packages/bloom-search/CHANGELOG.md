@@ -3,94 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.7.3](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.7.2...@pacote/bloom-search@0.7.3) (2022-09-02)
+## [0.7.4](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.7.3...@pacote/bloom-search@0.7.4) (2022-12-13)
 
+**Note:** Version bump only for package @pacote/bloom-search
+
+## [0.7.3](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.7.2...@pacote/bloom-search@0.7.3) (2022-09-02)
 
 ### Bug Fixes
 
-* 🐛 Fix typing issue ([7b433f5](https://github.com/PacoteJS/pacote/commit/7b433f5a50bc9462f13db945e7a458af76eeadd2))
-
-
-
-
+- 🐛 Fix typing issue ([7b433f5](https://github.com/PacoteJS/pacote/commit/7b433f5a50bc9462f13db945e7a458af76eeadd2))
 
 ## [0.7.2](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.7.1...@pacote/bloom-search@0.7.2) (2022-09-02)
 
 **Note:** Version bump only for package @pacote/bloom-search
 
-
-
-
-
 ## [0.7.1](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.7.0...@pacote/bloom-search@0.7.1) (2022-05-19)
-
 
 ### Bug Fixes
 
-* 🐛 drop usage of deprecated substr() method ([5221f1c](https://github.com/PacoteJS/pacote/commit/5221f1c4406cb9e208812edc4ad88bd60b1c5ab5))
-
-
-
-
+- 🐛 drop usage of deprecated substr() method ([5221f1c](https://github.com/PacoteJS/pacote/commit/5221f1c4406cb9e208812edc4ad88bd60b1c5ab5))
 
 # [0.7.0](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.6.11...@pacote/bloom-search@0.7.0) (2021-11-20)
 
-
 ### Features
 
-* 🎸 pass document to preprocess function ([523cd2b](https://github.com/PacoteJS/pacote/commit/523cd2b38cd93403310c609977e4d56b86abe7b6))
-
-
-
-
+- 🎸 pass document to preprocess function ([523cd2b](https://github.com/PacoteJS/pacote/commit/523cd2b38cd93403310c609977e4d56b86abe7b6))
 
 ## [0.6.11](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.6.10...@pacote/bloom-search@0.6.11) (2021-10-23)
 
 **Note:** Version bump only for package @pacote/bloom-search
 
-
-
-
-
 ## [0.6.10](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.6.9...@pacote/bloom-search@0.6.10) (2021-08-13)
 
 **Note:** Version bump only for package @pacote/bloom-search
-
-
-
-
 
 ## [0.6.9](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.6.8...@pacote/bloom-search@0.6.9) (2021-04-26)
 
 **Note:** Version bump only for package @pacote/bloom-search
 
-
-
-
-
 ## [0.6.8](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.6.7...@pacote/bloom-search@0.6.8) (2021-04-23)
 
 **Note:** Version bump only for package @pacote/bloom-search
-
-
-
-
 
 ## [0.6.7](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.6.6...@pacote/bloom-search@0.6.7) (2021-04-15)
 
 **Note:** Version bump only for package @pacote/bloom-search
 
-
-
-
-
 ## [0.6.6](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.6.5...@pacote/bloom-search@0.6.6) (2021-04-06)
 
 **Note:** Version bump only for package @pacote/bloom-search
-
-
-
-
 
 ## [0.6.5](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.6.4...@pacote/bloom-search@0.6.5) (2021-03-10)
 

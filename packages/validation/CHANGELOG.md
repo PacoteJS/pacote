@@ -3,49 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/PacoteJS/pacote/compare/@pacote/validation@0.1.5...@pacote/validation@0.2.0) (2022-12-13)
+
+### Features
+
+- 🎸 upgrade option and result dependencies ([b33b581](https://github.com/PacoteJS/pacote/commit/b33b581943a00fe9c800b3177e9496360d27b244))
+
 ## [0.1.5](https://github.com/PacoteJS/pacote/compare/@pacote/validation@0.1.4...@pacote/validation@0.1.5) (2022-05-19)
 
 **Note:** Version bump only for package @pacote/validation
-
-
-
-
 
 ## [0.1.4](https://github.com/PacoteJS/pacote/compare/@pacote/validation@0.1.3...@pacote/validation@0.1.4) (2021-10-23)
 
 **Note:** Version bump only for package @pacote/validation
 
-
-
-
-
 ## [0.1.3](https://github.com/PacoteJS/pacote/compare/@pacote/validation@0.1.2...@pacote/validation@0.1.3) (2021-08-13)
 
 **Note:** Version bump only for package @pacote/validation
-
-
-
-
 
 ## [0.1.2](https://github.com/PacoteJS/pacote/compare/@pacote/validation@0.1.1...@pacote/validation@0.1.2) (2021-04-26)
 
 **Note:** Version bump only for package @pacote/validation
 
-
-
-
-
 ## [0.1.1](https://github.com/PacoteJS/pacote/compare/@pacote/validation@0.1.0...@pacote/validation@0.1.1) (2021-04-23)
 
 **Note:** Version bump only for package @pacote/validation
 
-
-
-
-
 # 0.1.0 (2021-04-18)
-
 
 ### Features
 
-* 🎸 Validation to combine the errors of multiple Results ([aaba056](https://github.com/PacoteJS/pacote/commit/aaba05631eda58b68dd8f831636dd4c2ccdba8ff))
+- 🎸 Validation to combine the errors of multiple Results ([aaba056](https://github.com/PacoteJS/pacote/commit/aaba05631eda58b68dd8f831636dd4c2ccdba8ff))
