@@ -16,14 +16,13 @@ yarn add @pacote/option
 
 ```typescript
 import { None, Some, map } from '@pacote/option'
-import { pipe } from '@pacote/pipe'
 
 function divide(numerator: number, denominator: number): Option<number> {
   return denominator === 0 : None ? Some(numerator / denominator)
 }
 
-pipe(divide(4, 2), map(n => n + 1)) // => Some(3)
-pipe(divide(4, 0), map(n => n + 1)) // => None
+map(n => n + 1, divide(4, 2)) // => Some(3)
+map(n => n + 1, divide(4, 0)) // => None
 ```
 
 ## Type
@@ -61,7 +60,7 @@ Returns `true` if the passed option is a `Some`. Otherwise, it returns `false`.
 
 Returns `true` if the passed option is a `None`. Otherwise, it returns `false`.
 
-### `contains<T>(match: T): (option: Option<T>) => boolean`
+### `contains<T>(match: T, option: Option<T>): boolean`
 
 Returns `true` if the `Some` value is the same as `match`. Otherwise, it returns
 `false`.
@@ -70,26 +69,26 @@ Returns `true` if the `Some` value is the same as `match`. Otherwise, it returns
 
 Converts `Option<Option<T>>` to `Option<T>`.
 
-### `getOrElse<T>(onNone: () => T): (option: Option<T>) => T`
+### `getOrElse<T>(onNone: () => T, option: Option<T>): T`
 
 Returns the value contained in the option. If the option is `None`, it evaluates
 the provided function for an alternative.
 
-### `map<T, U>(fn: (value: T) => U): (option: Option<T>) => Option<U>`
+### `map<T, U>(fn: (value: T) => U, option: Option<T>): Option<U>`
 
 Maps an `Option<T>` to `Option<U>` by applying a function to a contained value.
 
-### `flatMap<T, U>(fn: (value: T) => Option<U>): (option: Option<T>) => Option<U>`
+### `flatMap<T, U>(fn: (value: T) => Option<U>, option: Option<T>): Option<U>`
 
 Returns `None` if the option is `None`, otherwise calls the function with the
 wrapped value and returns the result.
 
-### `fold<T, U>(onSome: (value: T) => U, onNone: () => U): (option: Option<T>) => U`
+### `fold<T, U>(onSome: (value: T) => U, onNone: () => U, option: Option<T>): U`
 
 Applies the `onSome` function to the contained value, otherwise it computes a
 default using `onNone`.
 
-### `filter<T>(predicate: (value: T) => boolean): (option: Option<T>) => Option<T>`
+### `filter<T>(predicate: (value: T) => boolean, option: Option<T>): Option<T>`
 
 Returns `None` if the option is `None`, otherwise calls `predicate` with the
 wrapped value and returns:
@@ -97,11 +96,11 @@ wrapped value and returns:
 - `Some(T)` if `predicate` returns `true`, and
 - `None` if `predicate` returns `false`.
 
-### `or<T>(alternative: Option<T>): (option: Option<T>) => Option<T>`
+### `or<T>(alternative: Option<T>, option: Option<T>): Option<T>`
 
 Returns the option if it contains a value, otherwise returns the alternative.
 
-### `and<T>(alternative: Option<T>): (option: Option<T>) => Option<T>`
+### `and<T>(alternative: Option<T>, option: Option<T>): Option<T>`
 
 Returns `None` if the option is `None`, otherwise returns the alternative.
 

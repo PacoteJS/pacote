@@ -41,51 +41,48 @@ export function isNone<T>(option: Option<T>): option is None {
   return option.type === T_NONE
 }
 
-export function contains<T>(match: T): (option: Option<T>) => boolean {
-  return (option) => isSome(option) && option.value === match
+export function contains<T>(match: T, option: Option<T>): boolean {
+  return isSome(option) && option.value === match
 }
 
 export function flatten<T>(option: Option<Option<T>>): Option<T> {
   return isSome(option) ? option.value : None
 }
 
-export function getOrElse<T>(fn: () => T): (option: Option<T>) => T {
-  return (option) => (isSome(option) ? option.value : fn())
+export function getOrElse<T>(fn: () => T, option: Option<T>): T {
+  return isSome(option) ? option.value : fn()
 }
 
-export function map<T, U>(
-  fn: (value: T) => U
-): (option: Option<T>) => Option<U> {
-  return (option) => (isSome(option) ? Some(fn(option.value)) : None)
+export function map<T, U>(fn: (value: T) => U, option: Option<T>): Option<U> {
+  return isSome(option) ? Some(fn(option.value)) : None
 }
 
 export function flatMap<T, U>(
-  fn: (value: T) => Option<U>
-): (option: Option<T>) => Option<U> {
-  return (option) => (isSome(option) ? fn(option.value) : None)
+  fn: (value: T) => Option<U>,
+  option: Option<T>
+): Option<U> {
+  return isSome(option) ? fn(option.value) : None
 }
 
 export function filter<T>(
-  fn: (value: T) => boolean
-): (option: Option<T>) => Option<T> {
-  return (option) => (isSome(option) && fn(option.value) ? option : None)
+  fn: (value: T) => boolean,
+  option: Option<T>
+): Option<T> {
+  return isSome(option) && fn(option.value) ? option : None
 }
 
-export function or<T>(
-  alternative: Option<T>
-): (option: Option<T>) => Option<T> {
-  return (option) => (isSome(option) ? option : alternative)
+export function or<T>(alternative: Option<T>, option: Option<T>): Option<T> {
+  return isSome(option) ? option : alternative
 }
 
-export function and<T>(
-  alternative: Option<T>
-): (option: Option<T>) => Option<T> {
-  return (option) => (isSome(option) ? alternative : None)
+export function and<T>(alternative: Option<T>, option: Option<T>): Option<T> {
+  return isSome(option) ? alternative : None
 }
 
 export function fold<T, U>(
   onSome: (value: T) => U,
-  onNone: () => U
-): (option: Option<T>) => U {
-  return (option) => (isSome(option) ? onSome(option.value) : onNone())
+  onNone: () => U,
+  option: Option<T>
+): U {
+  return isSome(option) ? onSome(option.value) : onNone()
 }

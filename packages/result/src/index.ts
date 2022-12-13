@@ -52,29 +52,32 @@ export function getOrElse<T, E>(
 }
 
 export function map<T, E, U>(
-  fn: (value: T) => U
-): (result: Result<T, E>) => Result<U, E> {
-  return (result) => (isOk(result) ? Ok(fn(result.value)) : result)
+  fn: (value: T) => U,
+  result: Result<T, E>
+): Result<U, E> {
+  return isOk(result) ? Ok(fn(result.value)) : result
 }
 
 export function mapErr<T, E, F>(
-  fn: (value: E) => F
-): (result: Result<T, E>) => Result<T, F> {
-  return (result) => (isErr(result) ? Err(fn(result.value)) : result)
+  fn: (value: E) => F,
+  result: Result<T, E>
+): Result<T, F> {
+  return isErr(result) ? Err(fn(result.value)) : result
 }
 
 export function flatMap<T, E, U>(
-  fn: (value: T) => Result<U, E>
-): (result: Result<T, E>) => Result<U, E> {
-  return (result) => (isOk(result) ? fn(result.value) : result)
+  fn: (value: T) => Result<U, E>,
+  result: Result<T, E>
+): Result<U, E> {
+  return isOk(result) ? fn(result.value) : result
 }
 
 export function bimap<T, E, U, F>(
   onOk: (ok: T) => U,
-  onErr: (err: E) => F
-): (result: Result<T, E>) => Result<U, F> {
-  return (result) =>
-    isOk(result) ? Ok(onOk(result.value)) : Err(onErr(result.value))
+  onErr: (err: E) => F,
+  result: Result<T, E>
+): Result<U, F> {
+  return isOk(result) ? Ok(onOk(result.value)) : Err(onErr(result.value))
 }
 
 export function flatten<T, E>(result: Result<Result<T, E>, E>): Result<T, E> {
@@ -83,21 +86,24 @@ export function flatten<T, E>(result: Result<Result<T, E>, E>): Result<T, E> {
 
 export function fold<T, E, R>(
   onOk: (ok: T) => R,
-  onErr: (err: E) => R
-): (result: Result<T, E>) => R {
-  return (result) => (isOk(result) ? onOk(result.value) : onErr(result.value))
+  onErr: (err: E) => R,
+  result: Result<T, E>
+): R {
+  return isOk(result) ? onOk(result.value) : onErr(result.value)
 }
 
 export function or<T, E>(
-  alternative: Result<T, E>
-): (result: Result<T, E>) => Result<T, E> {
-  return (result) => (isOk(result) ? result : alternative)
+  alternative: Result<T, E>,
+  result: Result<T, E>
+): Result<T, E> {
+  return isOk(result) ? result : alternative
 }
 
 export function and<T, E, U>(
-  alternative: Result<U, E>
-): (result: Result<T, E>) => Result<U, E> {
-  return (result) => (isOk(result) ? alternative : result)
+  alternative: Result<U, E>,
+  result: Result<T, E>
+): Result<U, E> {
+  return isOk(result) ? alternative : result
 }
 
 export function ofNullable<T, E>(error: E, value: T): Result<T, E> {
