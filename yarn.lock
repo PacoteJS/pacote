@@ -1313,7 +1313,7 @@
 "@pacote/iff@file:packages/iff":
   version "2.0.9"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-iff-2.0.9-8c64f3b3-618f-4a00-8b6d-ded6506132fe-1678983658979/node_modules/@pacote/option"
+    "@pacote/option" "file:packages/option"
 
 "@pacote/immutable@file:packages/immutable":
   version "1.2.6"
@@ -1343,7 +1343,7 @@
 "@pacote/non-empty-array@file:packages/non-empty-array":
   version "0.2.4"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-non-empty-array-0.2.4-5b36852a-85a3-4024-a63c-5f4b983bdc42-1678983658986/node_modules/@pacote/option"
+    "@pacote/option" "file:packages/option"
 
 "@pacote/option@file:packages/option":
   version "3.0.0"
@@ -1354,7 +1354,7 @@
 "@pacote/pixels@file:packages/pixels":
   version "1.1.7"
   dependencies:
-    "@pacote/get-style" "file:../../Library/Caches/Yarn/v6/npm-@pacote-pixels-1.1.7-e92c10d3-9ad5-403a-9fbb-7242256dfe54-1678983658987/node_modules/@pacote/get-style"
+    "@pacote/get-style" "file:packages/get-style"
 
 "@pacote/react-use-outside@file:packages/react-use-outside":
   version "1.1.11"
@@ -1365,7 +1365,7 @@
 "@pacote/result@file:packages/result":
   version "3.0.0"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-result-3.0.0-51bfadc1-8e76-4521-b899-fbd2b7cb2980-1678983658988/node_modules/@pacote/option"
+    "@pacote/option" "file:packages/option"
 
 "@pacote/shuffle@file:packages/shuffle":
   version "1.0.12"
@@ -1382,8 +1382,8 @@
 "@pacote/validation@file:packages/validation":
   version "0.2.0"
   dependencies:
-    "@pacote/non-empty-array" "file:../../Library/Caches/Yarn/v6/npm-@pacote-validation-0.2.0-407b086f-c82c-44b9-a0c1-8d5f5350f61d-1678983658996/node_modules/@pacote/non-empty-array"
-    "@pacote/result" "file:../../Library/Caches/Yarn/v6/npm-@pacote-validation-0.2.0-407b086f-c82c-44b9-a0c1-8d5f5350f61d-1678983658996/node_modules/@pacote/result"
+    "@pacote/non-empty-array" "file:packages/non-empty-array"
+    "@pacote/result" "file:packages/result"
 
 "@pacote/xxhash@file:packages/xxhash":
   version "0.2.6"
@@ -8473,10 +8473,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.4.tgz#a2a3d2756c079abda241d75f149df9d561091e78"
   integrity sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==
 
-typescript@^4.9.5:
-  version "4.9.5"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.5.tgz#095979f9bcc0d09da324d58d03ce8f8374cbe65a"
-  integrity sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==
+typescript@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.0.2.tgz#891e1a90c5189d8506af64b9ef929fca99ba1ee5"
+  integrity sha512-wVORMBGO/FAs/++blGNeAVdbNKtIh1rbBL2EyQ1+J9lClJ93KiiKe8PmFIVdXhHcyv44SL9oglmfeSsndo0jRw==
 
 uglify-js@^3.1.4:
   version "3.17.4"
