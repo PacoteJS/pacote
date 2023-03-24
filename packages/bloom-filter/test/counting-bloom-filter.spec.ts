@@ -86,3 +86,14 @@ test('elements added to a counting Bloom filter can be found in filters deserial
     { numRuns: 10 }
   )
 })
+
+test('serialization', () => {
+  const filter = new CountingBloomFilter({ size: 5, hashes: 1 })
+  const serialised = JSON.stringify(filter)
+  expect(JSON.parse(serialised)).toEqual({
+    filter: [0, 0, 0, 0, 0],
+    hashes: 1,
+    seed: 12648430,
+    size: 5,
+  })
+})

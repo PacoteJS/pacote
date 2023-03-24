@@ -47,3 +47,14 @@ test('elements added to a Bloom filter can be found in filters deserialised from
     })
   )
 })
+
+test('serialization', () => {
+  const filter = new BloomFilter({ size: 64, hashes: 1 })
+  const serialised = JSON.stringify(filter)
+  expect(JSON.parse(serialised)).toEqual({
+    filter: [0, 0],
+    hashes: 1,
+    seed: 12648430,
+    size: 64,
+  })
+})

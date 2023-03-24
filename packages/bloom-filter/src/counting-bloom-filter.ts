@@ -46,4 +46,20 @@ export class CountingBloomFilter<T extends { toString(): string }> {
       )
     )
   }
+
+  toJSON(): SerialisedCountingBloomFilter {
+    return {
+      filter: Array.from(this.filter),
+      hashes: this.hashes,
+      seed: this.seed,
+      size: this.size,
+    }
+  }
+}
+
+type SerialisedCountingBloomFilter = {
+  readonly size: number
+  readonly hashes: number
+  readonly seed: number
+  readonly filter: number[]
 }

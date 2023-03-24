@@ -39,4 +39,20 @@ export class BloomFilter<T extends { toString(): string }> {
       return this.filter[i] & (1 << (index - i * 32))
     })
   }
+
+  toJSON(): SerialisedBloomFilter {
+    return {
+      filter: Array.from(this.filter),
+      hashes: this.hashes,
+      seed: this.seed,
+      size: this.size,
+    }
+  }
+}
+
+type SerialisedBloomFilter = {
+  readonly size: number
+  readonly hashes: number
+  readonly seed: number
+  readonly filter: number[]
 }

@@ -231,6 +231,33 @@ describe('+required term search', () => {
   })
 })
 
+describe('serialisation', () => {
+  it('serialises an instance', () => {
+    const options = {
+      fields: ['text'],
+      summary: ['text'],
+    }
+    const bs = new BloomSearch(options)
+    bs.add('1', { text: 'foo' })
+
+    const serialised = JSON.stringify(bs.index)
+
+    expect(JSON.parse(serialised)).toEqual({
+      '1': {
+        filter: {
+          filter: [0, 0, 0, 2, 0, 0, 0, 1, 0, 2, 0, 0, 0, 6, 0, 0, 0, 2, 0, 1],
+          hashes: 14,
+          seed: 12648430,
+          size: 20,
+        },
+        summary: {
+          text: 'foo',
+        },
+      },
+    })
+  })
+})
+
 describe('serialised instance hydration', () => {
   it('loads an index', () => {
     const options = {
