@@ -1,7 +1,7 @@
 {
   "name": "@pacote/jest-either",
   "description": "Jest matcher for Either objects.",
-  "version": "5.0.3",
+  "version": "5.0.4",
   "type": "module",
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"

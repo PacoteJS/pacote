@@ -3,40 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.2.6](https://github.com/PacoteJS/pacote/compare/@pacote/xxhash@0.2.5...@pacote/xxhash@0.2.6) (2022-09-02)
-
+## [0.2.7](https://github.com/PacoteJS/pacote/compare/@pacote/xxhash@0.2.6...@pacote/xxhash@0.2.7) (2023-03-24)
 
 ### Bug Fixes
 
-* 🐛 Fix typing issue ([7b433f5](https://github.com/PacoteJS/pacote/commit/7b433f5a50bc9462f13db945e7a458af76eeadd2))
+- 🐛 correct [@pacote](https://github.com/pacote) dependencies ([6e0d9b9](https://github.com/PacoteJS/pacote/commit/6e0d9b92bd30b6a5dacb79173787904d621706d0))
 
+## [0.2.6](https://github.com/PacoteJS/pacote/compare/@pacote/xxhash@0.2.5...@pacote/xxhash@0.2.6) (2022-09-02)
 
+### Bug Fixes
 
-
+- 🐛 Fix typing issue ([7b433f5](https://github.com/PacoteJS/pacote/commit/7b433f5a50bc9462f13db945e7a458af76eeadd2))
 
 ## [0.2.5](https://github.com/PacoteJS/pacote/compare/@pacote/xxhash@0.2.4...@pacote/xxhash@0.2.5) (2022-09-02)
 
 **Note:** Version bump only for package @pacote/xxhash
 
-
-
-
-
 ## [0.2.4](https://github.com/PacoteJS/pacote/compare/@pacote/xxhash@0.2.3...@pacote/xxhash@0.2.4) (2021-10-23)
 
 **Note:** Version bump only for package @pacote/xxhash
 
-
-
-
-
 ## [0.2.3](https://github.com/PacoteJS/pacote/compare/@pacote/xxhash@0.2.2...@pacote/xxhash@0.2.3) (2021-08-13)
 
 **Note:** Version bump only for package @pacote/xxhash
-
-
-
-
 
 ## [0.2.2](https://github.com/PacoteJS/pacote/compare/@pacote/xxhash@0.2.1...@pacote/xxhash@0.2.2) (2021-02-26)
 

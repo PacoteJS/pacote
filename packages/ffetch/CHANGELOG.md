@@ -3,43 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [6.0.7](https://github.com/PacoteJS/pacote/compare/@pacote/ffetch@6.0.6...@pacote/ffetch@6.0.7) (2022-09-02)
-
+## [6.0.8](https://github.com/PacoteJS/pacote/compare/@pacote/ffetch@6.0.7...@pacote/ffetch@6.0.8) (2023-03-24)
 
 ### Bug Fixes
 
-* 🐛 Fix typing issue ([7b433f5](https://github.com/PacoteJS/pacote/commit/7b433f5a50bc9462f13db945e7a458af76eeadd2))
+- 🐛 correct [@pacote](https://github.com/pacote) dependencies ([6e0d9b9](https://github.com/PacoteJS/pacote/commit/6e0d9b92bd30b6a5dacb79173787904d621706d0))
 
+## [6.0.7](https://github.com/PacoteJS/pacote/compare/@pacote/ffetch@6.0.6...@pacote/ffetch@6.0.7) (2022-09-02)
 
+### Bug Fixes
 
-
+- 🐛 Fix typing issue ([7b433f5](https://github.com/PacoteJS/pacote/commit/7b433f5a50bc9462f13db945e7a458af76eeadd2))
 
 ## [6.0.6](https://github.com/PacoteJS/pacote/compare/@pacote/ffetch@6.0.5...@pacote/ffetch@6.0.6) (2022-09-02)
 
 **Note:** Version bump only for package @pacote/ffetch
 
-
-
-
-
 ## [6.0.5](https://github.com/PacoteJS/pacote/compare/@pacote/ffetch@6.0.4...@pacote/ffetch@6.0.5) (2021-11-20)
 
 **Note:** Version bump only for package @pacote/ffetch
 
-
-
-
-
 ## [6.0.4](https://github.com/PacoteJS/pacote/compare/@pacote/ffetch@6.0.3...@pacote/ffetch@6.0.4) (2021-08-13)
-
 
 ### Bug Fixes
 
-* 🐛 update fp-ts pipe import location ([089ace9](https://github.com/PacoteJS/pacote/commit/089ace98405b962debf594d4a2678b21a32e17b3))
-
-
-
-
+- 🐛 update fp-ts pipe import location ([089ace9](https://github.com/PacoteJS/pacote/commit/089ace98405b962debf594d4a2678b21a32e17b3))
 
 ## [6.0.3](https://github.com/PacoteJS/pacote/compare/@pacote/ffetch@6.0.2...@pacote/ffetch@6.0.3) (2020-11-27)
 

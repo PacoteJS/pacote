@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-filter@0.4.0...@pacote/bloom-filter@0.4.1) (2023-03-24)
+
+### Bug Fixes
+
+- 🐛 correct [@pacote](https://github.com/pacote) dependencies ([6e0d9b9](https://github.com/PacoteJS/pacote/commit/6e0d9b92bd30b6a5dacb79173787904d621706d0))
+
 # [0.4.0](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-filter@0.3.12...@pacote/bloom-filter@0.4.0) (2023-03-24)
 
 ### Features
