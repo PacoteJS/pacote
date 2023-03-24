@@ -34,8 +34,8 @@
     "prepublish": "yarn build"
   },
   "dependencies": {
-    "@pacote/array": "^0.4.5",
-    "@pacote/bloom-filter": "^0.8.0"
+    "@pacote/array": "file:../array",
+    "@pacote/bloom-filter": "file:../bloom-filter"
   },
   "gitHead": "bd3b251fc01a599034b03175c0cfab2d946f2f7f"
 }

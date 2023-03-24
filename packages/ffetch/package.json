@@ -41,7 +41,7 @@
     "fp-ts": "^2.6.0"
   },
   "dependencies": {
-    "@pacote/error": "^2.1.7"
+    "@pacote/error": "file:../error"
   },
   "gitHead": "bd3b251fc01a599034b03175c0cfab2d946f2f7f"
 }

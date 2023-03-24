@@ -39,7 +39,7 @@
     "prepublish": "yarn build"
   },
   "dependencies": {
-    "@pacote/is-plain-object": "^1.2.1",
+    "@pacote/is-plain-object": "file:../is-plain-object",
     "jest-diff": "^29.0.1",
     "jest-matcher-utils": "^29.0.1",
     "ramda": "^0.28.0"
