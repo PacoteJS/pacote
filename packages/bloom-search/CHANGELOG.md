@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.7.4...@pacote/bloom-search@0.8.0) (2023-03-24)
+
+### Features
+
+- 🎸 more concise serialisation of Bloom filter arrays ([f23eadb](https://github.com/PacoteJS/pacote/commit/f23eadb9860862e6c51682d357dcbe8f3d6c3d87))
+
+### BREAKING CHANGES
+
+- 🧨 changes how Bloom filter arrays are serialised with the JSON.stringify()
+  function
+
 ## [0.7.4](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.7.3...@pacote/bloom-search@0.7.4) (2022-12-13)
 
 **Note:** Version bump only for package @pacote/bloom-search
