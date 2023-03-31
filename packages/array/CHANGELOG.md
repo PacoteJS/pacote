@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/PacoteJS/pacote/compare/@pacote/array@0.4.5...@pacote/array@0.5.0) (2023-03-31)
+
+### Features
+
+- 🎸 retry function ([5aa9e60](https://github.com/PacoteJS/pacote/commit/5aa9e60250770e3f140de2f2d6958aebc90c2894))
+
 ## [0.4.5](https://github.com/PacoteJS/pacote/compare/@pacote/array@0.4.4...@pacote/array@0.4.5) (2022-12-13)
 
 **Note:** Version bump only for package @pacote/array
