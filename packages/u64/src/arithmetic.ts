@@ -2,6 +2,16 @@ import { shiftLeft, shiftRight } from './bitwise'
 import { equals, greaterThan, lessThan } from './comparison'
 import { clamp, clampBlocks, overflow, U64, ZERO } from './u64'
 
+/**
+ * Adds two `U64` values. Equivalent to the numeric `+` operator.
+ *
+ * @param augend - Augend.
+ * @param addend - Addend.
+ *
+ * @returns The sum of both values.
+ *
+ * @category Arithmetic
+ */
 export function add(augend: U64, addend: U64): U64 {
   const r0 = augend[0] + addend[0]
   const r1 = overflow(r0) + augend[1] + addend[1]
@@ -11,6 +21,16 @@ export function add(augend: U64, addend: U64): U64 {
   return clampBlocks([r0, r1, r2, r3])
 }
 
+/**
+ * Negates the supplied `U64` value. Equivalent to the numeric unary `-`
+ * operator.
+ *
+ * @param value - Value to negate.
+ *
+ * @returns Negated value.
+ *
+ * @category Arithmetic
+ */
 export function negate(value: U64): U64 {
   const r0 = clamp(~value[0]) + 1
   const r1 = clamp(~value[1]) + overflow(r0)
@@ -20,10 +40,30 @@ export function negate(value: U64): U64 {
   return clampBlocks([r0, r1, r2, r3])
 }
 
+/**
+ * Subtracts two `U64` values. Equivalent to the numeric `-` operator.
+ *
+ * @param minuend     - Minuend.
+ * @param subtrahend  - Subtrahend.
+ *
+ * @returns The total of the second value subtracted from the first.
+ *
+ * @category Arithmetic
+ */
 export function subtract(minuend: U64, subtrahend: U64): U64 {
   return add(minuend, negate(subtrahend))
 }
 
+/**
+ * Multiplies two `U64` values. Equivalent to the numeric `*` operator.
+ *
+ * @param multiplier    - Multiplier.
+ * @param multiplicand  - Multiplicand.
+ *
+ * @returns The product of the two values.
+ *
+ * @category Arithmetic
+ */
 export function multiply(multiplier: U64, multiplicand: U64): U64 {
   const r0 = multiplier[0] * multiplicand[0]
 
@@ -45,6 +85,17 @@ export function multiply(multiplier: U64, multiplicand: U64): U64 {
   return clampBlocks([r0, r1, r2, r3])
 }
 
+/**
+ * Divides two `U64` values. Since these are integers, this operation will round
+ * towards zero (which is to say, it will not return any fractional digits).
+ *
+ * @param dividend  - Dividend.
+ * @param divisor   - Divisor.
+ *
+ * @returns The first value divided by the second, rounded towards zero.
+ *
+ * @category Arithmetic
+ */
 export function divide(dividend: U64, divisor: U64): U64 {
   if (divisor[1] === 0 && divisor[2] === 0 && divisor[3] === 0) {
     if (divisor[0] === 0) throw Error('division by zero')
@@ -108,6 +159,17 @@ export function divide(dividend: U64, divisor: U64): U64 {
   return result
 }
 
+/**
+ * The remainder of the division of two `U64` values. Equivalent to the
+ * numeric `%` operator.
+ *
+ * @param dividend  - Dividend.
+ * @param divisor   - Divisor.
+ *
+ * @returns The remainder of the division of the two values.
+ *
+ * @category Arithmetic
+ */
 export function remainder(dividend: U64, divisor: U64): U64 {
   if (divisor[1] === 0 && divisor[2] === 0 && divisor[3] === 0) {
     if (divisor[0] === 0) throw Error('division by zero')

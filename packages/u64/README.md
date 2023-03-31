@@ -24,7 +24,7 @@ support commonly-used operations.
 yarn add @pacote/u64
 ```
 
-## Usage
+## Example
 
 ```typescript
 import { add, from, toString } from '@pacote/u64'
@@ -33,51 +33,6 @@ const result = add(from('1609587929392839161'), from('9650029242287828579'))
 
 toString(result) // -> '11259617171680667740'
 ```
-
-## Constants
-
-### `ZERO`
-
-Represents the zero value, or `[0, 0, 0, 0]`.
-
-## Creation functions
-
-### `from(value: number): U64`
-
-Creates a new `U64` from a number.
-
-### `from(value: string, radix?: number): U64`
-
-Creates a new `U64` from a numeric string in any base. If not provided, `radix`
-defaults to `10`.
-
-## Arithmetic functions
-
-### `add(augend: U64, addend: U64): U64`
-
-Adds two `U64` values. Equivalent to the numeric `+` operator.
-
-### `subtract(minuend: U64, subtrahend: U64): U64`
-
-Subtracts two `U64` values. Equivalent to the numeric `-` operator.
-
-### `multiply(multiplier: U64, multiplicand: U64): U64`
-
-Multiplies two `U64` values. Equivalent to the numeric `*` operator.
-
-### `divide(dividend: U64, divisor: U64): U64`
-
-Divides two `U64` values. Since these are integers, this operation will round
-towards zero (which is to say, it will not return any fractional digits).
-
-### `remainder(dividend: U64, divisor: U64): U64`
-
-The remainder of the division of two `U64` values. Equivalent to the numeric `%`
-operator.
-
-### `negate(value: U64): U64`
-
-Negates the supplied `value`.
 
 ## Comparison functions
 

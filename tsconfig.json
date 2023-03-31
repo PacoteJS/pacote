@@ -6,7 +6,7 @@
     "declarationMap": false,
     "esModuleInterop": true,
     "target": "ES5",
-    "sourceMap": false,
+    "sourceMap": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext", "ScriptHost"],
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,

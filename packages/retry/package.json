@@ -31,6 +31,7 @@
     "prepublish": "yarn build"
   },
   "typedoc": {
-    "entryPoint": "./src/index.ts"
+    "entryPoint": "./src/index.ts",
+    "tsconfig": "tsconfig.esm.json"
   }
 }

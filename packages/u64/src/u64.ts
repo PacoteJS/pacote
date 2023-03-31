@@ -11,6 +11,11 @@ export function toNumber(value: U64): number {
   return value[1] * 2 ** 16 + value[0]
 }
 
+/**
+ * Represents the zero value, or `[0, 0, 0, 0]`.
+ * @readonly
+ * @group Constants
+ */
 export const ZERO = fromNumber(0)
 
 export function clampBlocks([v0, v1, v2, v3]: U64): U64 {

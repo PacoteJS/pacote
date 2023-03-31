@@ -37,5 +37,9 @@
   },
   "dependencies": {
     "@pacote/get-style": "file:../get-style"
+  },
+  "typedoc": {
+    "entryPoint": "./src/index.ts",
+    "tsconfig": "tsconfig.esm.json"
   }
 }
