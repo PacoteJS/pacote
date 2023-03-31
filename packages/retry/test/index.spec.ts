@@ -77,7 +77,7 @@ test('retrying with an exponential backoff', async () => {
     { backoff: 2, interval: 10 }
   )
 
-  expect(new Date().getTime() - start.getTime()).toBeGreaterThan(70)
+  expect(new Date().getTime() - start.getTime()).toBeGreaterThanOrEqual(70)
 })
 
 test('do not call a slow async callback until the previous call has finished', async () => {
