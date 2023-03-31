@@ -1,7 +1,7 @@
 {
-  "name": "@pacote/array",
-  "description": "Extra Array functions.",
-  "version": "0.4.5",
+  "name": "@pacote/retry",
+  "description": "Asynchronous retry handler with timeout and exponential backoff support.",
+  "version": "0.0.0",
   "sideEffects": false,
   "license": "MIT",
   "author": {
@@ -32,6 +32,5 @@
   },
   "typedoc": {
     "entryPoint": "./src/index.ts"
-  },
-  "gitHead": "bd3b251fc01a599034b03175c0cfab2d946f2f7f"
+  }
 }

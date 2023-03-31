@@ -5,7 +5,7 @@
     "declaration": true,
     "declarationMap": false,
     "esModuleInterop": true,
-    "target": "ES3",
+    "target": "ES5",
     "sourceMap": false,
     "lib": ["DOM", "DOM.Iterable", "ESNext", "ScriptHost"],
     "skipLibCheck": true,
@@ -27,6 +27,7 @@
     "resolveJsonModule": true,
     "useUnknownInCatchVariables": true,
     "exactOptionalPropertyTypes": true,
+    "stripInternal": true,
     "baseUrl": ".",
     "paths": {
       "@pacote/*": ["./packages/*/src"]

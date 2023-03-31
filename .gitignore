@@ -66,3 +66,5 @@ tsconfig*.tsbuildinfo
 
 # Operating system files
 .DS_Store
+
+docs/

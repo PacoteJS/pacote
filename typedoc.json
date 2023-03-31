@@ -1,0 +1,6 @@
+{
+  "entryPointStrategy": "packages",
+  "entryPoints": ["packages/array", "packages/retry"],
+  "excludePrivate": true,
+  "out": "docs"
+}
