@@ -12,6 +12,10 @@ Extra Array functions.
 yarn add @pacote/array
 ```
 
+## Documentation
+
+API documentation for [`@pacote/array`](https://pacotejs.github.io/pacote/modules/_pacote_array.html).
+
 ## License
 
 MIT © [Luís Rodrigues](https://goblindegook.com).

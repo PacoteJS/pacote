@@ -12,6 +12,10 @@ Asynchronous retry handler with timeout and exponential backoff support.
 yarn add @pacote/retry
 ```
 
+## Documentation
+
+API documentation for [`@pacote/retry`](https://pacotejs.github.io/pacote/modules/_pacote_retry.html).
+
 ## License
 
 MIT © [Luís Rodrigues](https://goblindegook.com).
