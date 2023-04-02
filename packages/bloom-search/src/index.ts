@@ -17,7 +17,14 @@ export type DocumentIndex<
 > = Record<
   string,
   {
+    /**
+     * Summary fields for the document. These are preserved as-is.
+     */
     readonly summary: Pick<Document, SummaryField>
+    /**
+     * Counting Bloom filter for the document. All words added to the filter are
+     * searchable but not retrievable.
+     */
     readonly filter: CountingBloomFilter<string>
   }
 >
@@ -34,20 +41,81 @@ const tokenizer = (text: string): string[] =>
     .split(/\s/)
     .map((token) => token.normalize('NFD').replace(/\W/gi, '').toLowerCase())
 
+/**
+ * Encapsulates search functionality based on counting Bloom filters.
+ */
 export class BloomSearch<
   Document extends Record<string, unknown>,
   SummaryField extends keyof Document = keyof Document,
   IndexField extends keyof Document = keyof Document
 > {
+  /**
+   * Collection containing document summaries and counting Bloom filters used to
+   * search, with document shorthand reference identifier used as keys.
+   */
   public index: DocumentIndex<Document, SummaryField> = {}
+  /**
+   * A record containing the name of all indexable fields and their relative
+   * weight used to rank search results.
+   */
   public readonly fields: Record<IndexField, number>
+  /**
+   * Aan array with the names of fields to preserve as summary, and which are
+   * returned as search results for the matching documents. It is recommended to
+   * keep only fields necessary to identify a document (e.g. title, URL, short
+   * description) to keep space requirements down.
+   */
   public readonly summary: SummaryField[]
+  /**
+   * Error rate used for all counting Bloom filters.
+   */
   public readonly errorRate: number
+  /**
+   * The _n_-grams to store in the index. Defaults to `1` (no _n_-grams).
+   */
   public readonly ngrams: number
   private readonly preprocess: PreprocessFunction<Document, IndexField>
   private readonly stemmer: StemmerFunction
   private readonly stopwords: StopwordsFunction
 
+  /**
+   * Creates a new Bloom search instance based on counting Bloom filters, which
+   * can be used to add documents and test the membership of search terms in the
+   * added set.
+   *
+   * @param options             - Bloom search options.
+   * @param options.fields      - The fields to index, provided as an array or
+   *                              as a record of field keys and weight values.
+   * @param options.summary     - Determines which fields in the document can be
+   *                              stored in the index and returned as a search
+   *                              result.
+   * @param options.errorRate   - Determines the desired error rate. A lower
+   *                              number yields more reliable results but makes
+   *                              the index larger. The value defaults to
+   *                              `0.0001` (or 0.01%).
+   * @param options.ngrams      - Indexes _n_-grams beyond the single text
+   *                              tokens. A value of `2` indexes digrams, a
+   *                              value of `3` indexes digrams and trigrams, and
+   *                              so forth. This allows seaching the index for
+   *                              simple phrases (a phrase search is entered
+   *                              "between quotes"). Indexing _n_-grams will
+   *                              increase the size of the generated indices
+   *                              roughly by a factor of _n_. Default value is
+   *                              `1` (no _n_-grams are indexed).
+   * @param options.preprocess  - Preprocessing function, executed before all
+   *                              others. The function serialises each field as
+   *                              a `string` and optionally process it before
+   *                              indexing. For example, you might use this
+   *                              function to strip HTML from a field value. By
+   *                              default, this class simply converts the field
+   *                              value into a `string`.
+   * @param options.stopwords   - Filters tokens so that words that are too
+   *                              short or too common may be excluded from the
+   *                              index. By default, no stopwords are excluded.
+   * @param options.stemmer     - Allows plugging in a custom stemming function.
+   *                              By default, this class does not change text
+   *                              tokens.
+   */
   constructor(options: {
     fields: IndexField[] | Record<IndexField, number>
     summary: SummaryField[]
@@ -71,6 +139,18 @@ export class BloomSearch<
     this.stopwords = options.stopwords ?? (() => true)
   }
 
+  /**
+   * Replaces the instance's index with an index from another instance. Its
+   * primary use case is to rehydrate the index from a static file or payload.
+   *
+   * **NB:** Calling this method will not change any other attributes in the
+   * instance. It is up to developers to ensure that the instances were
+   * initialised with compatible options, in particular the `stemmer`
+   * function. Incompatible `stemmer` implementations may cause matches to
+   * not be found in the rehydrated index.
+   *
+   * @param index Replacement index.
+   */
   load(index: DocumentIndex<Document, SummaryField>): void {
     this.index = entries(index).reduce((acc, [ref, entry]) => {
       acc[ref] = {
@@ -81,6 +161,17 @@ export class BloomSearch<
     }, {} as DocumentIndex<Document, SummaryField>)
   }
 
+  /**
+   * Indexes a single document with its unique reference identifier.
+   *
+   * @param ref         - A unique reference identifier for the document. Adding
+   *                      another document with the same reference replaces the
+   *                      document on the search index.
+   * @param document    - The document to index.
+   * @param [language]  - Language identifier which is fed back into the
+   *                      `stemmer` and `stopwords` callback functions to help
+   *                      decide how to handle these steps.
+   */
   add(ref: string, document: Document, language?: string): void {
     const allTokens = keys(this.fields).reduce((tokens, field) => {
       if (document[field] !== undefined) {
@@ -118,10 +209,44 @@ export class BloomSearch<
     this.index[ref] = { summary, filter }
   }
 
+  /**
+   * Removes an indexed document.
+   *
+   * @param ref - Reference identifier of the document to remove.
+   */
   remove(ref: string): void {
     delete this.index[ref]
   }
 
+  /**
+   * Scans the document index and returns a list of documents summaries (with
+   * only the properties declared in the `summary` option) that possibly match
+   * one or more terms in the query.
+   *
+   * Each search term is run through the provided `stemmer` function to ensure
+   * terms are processed in the same way as the tokens previously added to the
+   * index's Bloom filters.
+   *
+   * @param query       - Terms to search.
+   *
+   * Individual words are matched against the filter of
+   * each indexed document. You may prefix each word with
+   * the `+` operator to intersect results that (probably)
+   * contain the required word.
+   *
+   * If the `ngrams` option is greater than `1`, you are also able to search for
+   * exact phrases up to `ngrams` words typed between quotes (for example,
+   * `"this phrase"`). Only documents containing these words in that sequence
+   * are returned in the search results.
+   *
+   * @param [language]  - Language identifier for the search terms. This is
+   *                      used only to help choose the appropriate stemming
+   *                      algorithm, search results will not filtered by
+   *                      language.
+   *
+   * @returns Ordered list of document summaries, sorted by probable search
+   *          term frequency.
+   */
   search(query: string, language?: string): Pick<Document, SummaryField>[] {
     const searchTokens = this.parseQuery(query, language)
 
