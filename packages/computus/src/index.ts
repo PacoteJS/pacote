@@ -2,6 +2,24 @@ function integerDivision(dividend: number, divider: number): number {
   return Math.floor(dividend / divider)
 }
 
+/**
+ * This function takes a year and returns a `Date` object with the Gregorian
+ * calendar Easter day on that year at midnight.
+ *
+ * The function uses a version of the Meeus/Jones/Butcher algorithm published
+ * by _New Scientist_ on 30 March 1961.
+ *
+ * @example
+ * ```typescript
+ * import { gregorian } from '@pacote/computus'
+ *
+ * gregorian(2020) // .toLocaleDateString() => '4/12/2020'
+ * ```
+ *
+ * @param year Year.
+ *
+ * @returns Easter date for the provided year.
+ */
 export function gregorian(year: number): Date {
   const a = year % 19
   const b = integerDivision(year, 100)
@@ -20,6 +38,26 @@ export function gregorian(year: number): Date {
   return new Date(year, n - 1, p)
 }
 
+/**
+ * This function takes a year and returns a `Date` object with the Eastern
+ * Orthodox Easter day on that year at midnight. Please note that this date
+ * is returned for the Gregorian calendar, 13 days (as of 1900 through 2099)
+ * after the Julian date.
+ *
+ * The function implements the Jean Meeus algorithm from his book
+ * _Astronomical Algorithms_ (1991).
+ *
+ * @example
+ * ```typescript
+ * import { julian } from '@pacote/computus'
+ *
+ * julian(2020) // .toLocaleDateString() => '4/19/2020'
+ * ```
+ *
+ * @param year Year.
+ *
+ * @returns Easter date for the provided year.
+ */
 export function julian(year: number): Date {
   const a = year % 4
   const b = year % 7
