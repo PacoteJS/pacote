@@ -1,11 +1,11 @@
 const T_NONE = Symbol('None')
 const T_SOME = Symbol('Some')
 
-interface None {
+export interface None {
   readonly type: typeof T_NONE
 }
 
-interface Some<T> {
+export interface Some<T> {
   readonly type: typeof T_SOME
   readonly value: T
 }
