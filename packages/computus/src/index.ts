@@ -56,7 +56,7 @@ export function gregorian(year: number): Date {
  *
  * @param year Year.
  *
- * @returns Easter date for the provided year.
+ * @returns Eastern Orthodox Easter date for the provided year.
  */
 export function julian(year: number): Date {
   const a = year % 4
