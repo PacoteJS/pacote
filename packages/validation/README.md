@@ -13,7 +13,7 @@ errors.
 yarn add @pacote/validation
 ```
 
-## Usage
+## Example
 
 ```typescript
 import { validation, lift } from '@pacote/validation'

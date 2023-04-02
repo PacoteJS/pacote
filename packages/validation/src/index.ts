@@ -3,6 +3,9 @@ import { Result, isErr, and, mapErr } from '@pacote/result'
 
 /**
  * Validation data type.
+ *
+ * @typeParam T Validated value type.
+ * @typeParam E Validation error type.
  */
 export type Validation<T, E> = Result<T, NonEmptyArray<E>>
 
