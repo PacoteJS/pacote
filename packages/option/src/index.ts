@@ -1,15 +1,28 @@
 const T_NONE = Symbol('None')
 const T_SOME = Symbol('Some')
 
+/**
+ * No value `Option` type.
+ */
 export interface None {
   readonly type: typeof T_NONE
 }
 
+/**
+ * `Option` type wrapping a value of type `T`.
+ *
+ * @typeParam T Wrapped value type.
+ */
 export interface Some<T> {
   readonly type: typeof T_SOME
   readonly value: T
 }
 
+/**
+ * `Option<T>` type, which is a union of `None` and `Some<T>`.
+ *
+ * @typeParam T Wrapped value type.
+ */
 export type Option<T> = None | Some<T>
 
 /**
