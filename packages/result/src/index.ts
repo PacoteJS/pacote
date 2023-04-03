@@ -3,12 +3,12 @@ import { Some, None, Option } from '@pacote/option'
 const T_OK = Symbol('Ok')
 const T_ERR = Symbol('Err')
 
-interface Ok<T> {
+export interface Ok<T> {
   readonly type: typeof T_OK
   readonly value: T
 }
 
-interface Err<E> {
+export interface Err<E> {
   readonly type: typeof T_ERR
   readonly value: E
 }
