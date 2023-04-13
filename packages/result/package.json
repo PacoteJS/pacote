@@ -37,9 +37,5 @@
   },
   "dependencies": {
     "@pacote/option": "file:../option"
-  },
-  "typedoc": {
-    "entryPoint": "./src/index.ts",
-    "tsconfig": "tsconfig.esm.json"
   }
 }

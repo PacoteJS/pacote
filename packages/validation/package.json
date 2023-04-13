@@ -33,9 +33,5 @@
   "dependencies": {
     "@pacote/non-empty-array": "file:../non-empty-array",
     "@pacote/result": "file:../result"
-  },
-  "typedoc": {
-    "entryPoint": "./src/index.ts",
-    "tsconfig": "tsconfig.esm.json"
   }
 }

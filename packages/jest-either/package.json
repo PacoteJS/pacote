@@ -47,9 +47,5 @@
   "peerDependencies": {
     "fp-ts": "^2.0.0"
   },
-  "typedoc": {
-    "entryPoint": "./src/index.ts",
-    "tsconfig": "tsconfig.json"
-  },
   "gitHead": "bd3b251fc01a599034b03175c0cfab2d946f2f7f"
 }

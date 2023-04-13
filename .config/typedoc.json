@@ -1,6 +1,6 @@
 {
   "entryPoints": [
-    "../packages/array",
+    "../packages/array/src/index.ts",
     "../packages/bloom-filter",
     "../packages/bloom-search",
     "../packages/computus",
