@@ -1,4 +1,5 @@
 {
+  "name": "Pacote",
   "entryPoints": [
     "./packages/array/src/index.ts",
     "./packages/bloom-filter",
@@ -31,12 +32,12 @@
     "./packages/xxhash"
   ],
   "entryPointStrategy": "packages",
+  "out": "./docs",
+  "navigationLinks": {},
+  "sidebarLinks": {},
   "excludePrivate": true,
   "excludeExternals": true,
   "githubPages": true,
-  "navigationLinks": {},
-  "out": "./docs",
   "pretty": true,
-  "sidebarLinks": {},
   "skipErrorChecking": true
 }
