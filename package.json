@@ -127,6 +127,7 @@
     "@pacote/react-use-outside": "file:packages/react-use-outside",
     "@pacote/react-with-props": "file:packages/react-with-props",
     "@pacote/result": "file:packages/result",
+    "@pacote/retry": "file:packages/retry",
     "@pacote/shuffle": "file:packages/shuffle",
     "@pacote/throttle": "file:packages/throttle",
     "@pacote/u32": "file:packages/u32",
