@@ -249,34 +249,25 @@ export class BloomSearch<
    *          term frequency.
    */
   search(query: string, language?: string): Pick<Document, SummaryField>[] {
-    const searchTokens = this.parseQuery(query, language)
+    const tokens = this.parseQuery(query, language)
 
-    const searchSpace =
-      searchTokens.required.length === 0
-        ? Object.keys(this.index)
-        : searchTokens.required.reduce(
-            (results, token) => results.filter((ref) => this.count(ref, token)),
-            Object.keys(this.index)
-          )
-
-    return searchSpace
-      .filter((ref) =>
-        searchTokens.excluded.every((token) => this.count(ref, token) === 0)
+    return Object.values(this.index)
+      .filter((document) =>
+        tokens.required.every((token) => document.filter.has(token) > 0)
       )
-      .map((ref) => ({
-        ref,
-        matches: searchTokens.included.reduce(
-          (count, token) => count + this.count(ref, token),
+      .filter((document) =>
+        tokens.excluded.every((token) => document.filter.has(token) === 0)
+      )
+      .map((document) => ({
+        document,
+        matches: tokens.included.reduce(
+          (count, token) => count + document.filter.has(token),
           0
         ),
       }))
       .filter(({ matches }) => matches > 0)
       .sort((a, b) => compare(a.matches, b.matches))
-      .map(({ ref }) => this.index[ref].summary)
-  }
-
-  private count(ref: string, token: string): number {
-    return this.index[ref].filter.has(token)
+      .map(({ document }) => document.summary)
   }
 
   private parseQuery(query: string, language?: string): SearchTokens {
