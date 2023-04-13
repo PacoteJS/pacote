@@ -32,6 +32,7 @@ export type DocumentIndex<
 type SearchTokens = {
   required: string[]
   included: string[]
+  excluded: string[]
 }
 
 const compare = (a: number, b: number) => (a === b ? 0 : a > b ? -1 : 1)
@@ -229,10 +230,10 @@ export class BloomSearch<
    *
    * @param query       - Terms to search.
    *
-   * Individual words are matched against the filter of
-   * each indexed document. You may prefix each word with
-   * the `+` operator to intersect results that (probably)
-   * contain the required word.
+   * Individual words are matched against the filter of each indexed document.
+   * You may prefix each word with the `+` operator to intersect results that
+   * (probably) contain the required word, or use the `-` operator to exclude
+   * results containing the word.
    *
    * If the `ngrams` option is greater than `1`, you are also able to search for
    * exact phrases up to `ngrams` words typed between quotes (for example,
@@ -259,6 +260,9 @@ export class BloomSearch<
           )
 
     return searchSpace
+      .filter((ref) =>
+        searchTokens.excluded.every((token) => this.count(ref, token) === 0)
+      )
       .map((ref) => ({
         ref,
         matches: searchTokens.included.reduce(
@@ -277,16 +281,17 @@ export class BloomSearch<
 
   private parseQuery(query: string, language?: string): SearchTokens {
     return queryTerms(query).reduce<SearchTokens>(
-      ({ required, included }, [term, type]) => {
+      ({ required, included, excluded }, [term, type]) => {
         const token = type === 'phrase' ? term : this.stemmer(term, language)
         return {
           required: ['require', 'phrase'].includes(type)
             ? required.concat(token)
             : required,
-          included: included.concat(token),
+          included: type !== 'exclude' ? included.concat(token) : included,
+          excluded: type === 'exclude' ? excluded.concat(token) : excluded,
         }
       },
-      { required: [], included: [] }
+      { required: [], included: [], excluded: [] }
     )
   }
 }

@@ -231,6 +231,20 @@ describe('+required term search', () => {
   })
 })
 
+describe('-excluded term search', () => {
+  it('hides results where the excluded term is found', () => {
+    const bs = new BloomSearch({
+      fields: ['text'],
+      summary: ['text'],
+    })
+
+    bs.add('1', { text: 'foo bar' })
+    bs.add('2', { text: 'foo baz' })
+
+    expect(bs.search('foo -bar')).toEqual([{ text: 'foo baz' }])
+  })
+})
+
 describe('serialisation', () => {
   it('serialises an instance', () => {
     const options = {

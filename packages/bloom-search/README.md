@@ -46,6 +46,7 @@ bs.add('id1', { id: 1, text: 'foo bar' })
 bs.add('id2', { id: 2, text: 'foo baz' })
 
 bs.search('foo +bar') // => [{ id: 1 }])
+bs.search('foo -bar') // => [{ id: 2 }])
 ```
 
 ## License
