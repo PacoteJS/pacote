@@ -3,13 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/PacoteJS/pacote/compare/@pacote/pixels@1.1.7...@pacote/pixels@2.0.0) (2023-04-13)
+
+### chore
+
+- 🤖 CommonJS packages now build with ES5 compatibility ([c0147ae](https://github.com/PacoteJS/pacote/commit/c0147aeffb81322ea59174a3961b10cfb3bf81e5))
+
+### BREAKING CHANGES
+
+- 🧨 CommonJS packages now build with ES5 compatibility as a minimum. ES3 is
+  no longer supported.
+
 ## [1.1.7](https://github.com/PacoteJS/pacote/compare/@pacote/pixels@1.1.6...@pacote/pixels@1.1.7) (2021-08-13)
 
 **Note:** Version bump only for package @pacote/pixels
-
-
-
-
 
 ## [1.1.6](https://github.com/PacoteJS/pacote/compare/@pacote/pixels@1.1.5...@pacote/pixels@1.1.6) (2021-01-25)
 

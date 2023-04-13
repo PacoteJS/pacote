@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.9.2...@pacote/bloom-search@0.10.0) (2023-04-13)
+
+### chore
+
+- 🤖 CommonJS packages now build with ES5 compatibility ([c0147ae](https://github.com/PacoteJS/pacote/commit/c0147aeffb81322ea59174a3961b10cfb3bf81e5))
+
+### Features
+
+- 🎸 exclude search results using the - operator ([4ef08d9](https://github.com/PacoteJS/pacote/commit/4ef08d9734228391053f8e10566a40532cf967a4))
+
+### BREAKING CHANGES
+
+- 🧨 CommonJS packages now build with ES5 compatibility as a minimum. ES3 is
+  no longer supported.
+
 ## [0.9.2](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.9.1...@pacote/bloom-search@0.9.2) (2023-03-31)
 
 **Note:** Version bump only for package @pacote/bloom-search

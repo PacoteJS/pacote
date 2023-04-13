@@ -3,32 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.0.12](https://github.com/PacoteJS/pacote/compare/@pacote/shuffle@1.0.11...@pacote/shuffle@1.0.12) (2022-09-02)
+# [2.0.0](https://github.com/PacoteJS/pacote/compare/@pacote/shuffle@1.0.12...@pacote/shuffle@2.0.0) (2023-04-13)
 
+### chore
+
+- 🤖 CommonJS packages now build with ES5 compatibility ([c0147ae](https://github.com/PacoteJS/pacote/commit/c0147aeffb81322ea59174a3961b10cfb3bf81e5))
+
+### BREAKING CHANGES
+
+- 🧨 CommonJS packages now build with ES5 compatibility as a minimum. ES3 is
+  no longer supported.
+
+## [1.0.12](https://github.com/PacoteJS/pacote/compare/@pacote/shuffle@1.0.11...@pacote/shuffle@1.0.12) (2022-09-02)
 
 ### Bug Fixes
 
-* 🐛 Fix typing issue ([7b433f5](https://github.com/PacoteJS/pacote/commit/7b433f5a50bc9462f13db945e7a458af76eeadd2))
-
-
-
-
+- 🐛 Fix typing issue ([7b433f5](https://github.com/PacoteJS/pacote/commit/7b433f5a50bc9462f13db945e7a458af76eeadd2))
 
 ## [1.0.11](https://github.com/PacoteJS/pacote/compare/@pacote/shuffle@1.0.10...@pacote/shuffle@1.0.11) (2022-09-02)
 
 **Note:** Version bump only for package @pacote/shuffle
 
-
-
-
-
 ## [1.0.10](https://github.com/PacoteJS/pacote/compare/@pacote/shuffle@1.0.9...@pacote/shuffle@1.0.10) (2021-08-13)
 
 **Note:** Version bump only for package @pacote/shuffle
-
-
-
-
 
 ## [1.0.9](https://github.com/PacoteJS/pacote/compare/@pacote/shuffle@1.0.8...@pacote/shuffle@1.0.9) (2021-02-05)
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://github.com/PacoteJS/pacote/compare/@pacote/iff@2.0.9...@pacote/iff@3.0.0) (2023-04-13)
+
+### chore
+
+- 🤖 CommonJS packages now build with ES5 compatibility ([c0147ae](https://github.com/PacoteJS/pacote/commit/c0147aeffb81322ea59174a3961b10cfb3bf81e5))
+
+### BREAKING CHANGES
+
+- 🧨 CommonJS packages now build with ES5 compatibility as a minimum. ES3 is
+  no longer supported.
+
 ## [2.0.9](https://github.com/PacoteJS/pacote/compare/@pacote/iff@2.0.8...@pacote/iff@2.0.9) (2022-12-13)
 
 **Note:** Version bump only for package @pacote/iff

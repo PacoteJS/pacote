@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://github.com/PacoteJS/pacote/compare/@pacote/flux-actions@2.1.13...@pacote/flux-actions@3.0.0) (2023-04-13)
+
+### chore
+
+- 🤖 CommonJS packages now build with ES5 compatibility ([c0147ae](https://github.com/PacoteJS/pacote/commit/c0147aeffb81322ea59174a3961b10cfb3bf81e5))
+
+### BREAKING CHANGES
+
+- 🧨 CommonJS packages now build with ES5 compatibility as a minimum. ES3 is
+  no longer supported.
+
 ## [2.1.13](https://github.com/PacoteJS/pacote/compare/@pacote/flux-actions@2.1.12...@pacote/flux-actions@2.1.13) (2022-12-13)
 
 **Note:** Version bump only for package @pacote/flux-actions

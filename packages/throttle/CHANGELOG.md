@@ -3,13 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/PacoteJS/pacote/compare/@pacote/throttle@1.0.7...@pacote/throttle@2.0.0) (2023-04-13)
+
+### chore
+
+- 🤖 CommonJS packages now build with ES5 compatibility ([c0147ae](https://github.com/PacoteJS/pacote/commit/c0147aeffb81322ea59174a3961b10cfb3bf81e5))
+
+### BREAKING CHANGES
+
+- 🧨 CommonJS packages now build with ES5 compatibility as a minimum. ES3 is
+  no longer supported.
+
 ## [1.0.7](https://github.com/PacoteJS/pacote/compare/@pacote/throttle@1.0.6...@pacote/throttle@1.0.7) (2021-08-13)
 
 **Note:** Version bump only for package @pacote/throttle
-
-
-
-
 
 ## [1.0.6](https://github.com/PacoteJS/pacote/compare/@pacote/throttle@1.0.5...@pacote/throttle@1.0.6) (2020-11-27)
 
