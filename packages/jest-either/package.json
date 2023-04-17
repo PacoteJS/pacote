@@ -42,7 +42,7 @@
     "@pacote/is-plain-object": "file:../is-plain-object",
     "jest-diff": "^29.0.1",
     "jest-matcher-utils": "^29.0.1",
-    "ramda": "^0.28.0"
+    "ramda": "^0.29.0"
   },
   "peerDependencies": {
     "fp-ts": "^2.0.0"
