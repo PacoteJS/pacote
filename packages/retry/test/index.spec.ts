@@ -57,11 +57,11 @@ test('retrying until there is a timeout', async () => {
       () => {
         throw new Error()
       },
-      { interval: 10, timeout: 20 }
+      { interval: 10, timeout: 50 }
     )
   ).rejects.toBeInstanceOf(Error)
 
-  expect(new Date().getTime() - start.getTime()).toBeGreaterThanOrEqual(20)
+  expect(new Date().getTime() - start.getTime()).toBeGreaterThanOrEqual(50)
 })
 
 test('retrying with an exponential backoff', async () => {
