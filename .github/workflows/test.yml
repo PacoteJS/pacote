@@ -16,14 +16,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
-      - name: Install Lerna
-        run: npm i -g lerna@6.0.3
+      - name: Install dependencies
+        run: yarn
       - name: Bootstrap
         run: |
           yarn bootstrap
           yarn build
-      - name: Install dependencies
-        run: yarn
       - name: Test
         run: yarn test:coverage
       - name: Coverage
