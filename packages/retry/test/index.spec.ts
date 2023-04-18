@@ -43,10 +43,10 @@ test('retrying with an interval', async () => {
         throw Error()
       }
     },
-    { interval: 10 }
+    { interval: 50 }
   )
 
-  expect(new Date().getTime() - start.getTime()).toBeGreaterThanOrEqual(10)
+  expect(new Date().getTime() - start.getTime()).toBeGreaterThanOrEqual(50)
 })
 
 test('retrying until there is a timeout', async () => {
