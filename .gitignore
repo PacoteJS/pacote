@@ -68,3 +68,5 @@ tsconfig*.tsbuildinfo
 .DS_Store
 
 docs/
+
+.idea/
