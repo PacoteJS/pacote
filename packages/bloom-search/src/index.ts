@@ -252,11 +252,10 @@ export class BloomSearch<
     const tokens = this.parseQuery(query, language)
 
     return Object.values(this.index)
-      .filter((document) =>
-        tokens.required.every((token) => document.filter.has(token) > 0)
-      )
-      .filter((document) =>
-        tokens.excluded.every((token) => document.filter.has(token) === 0)
+      .filter(
+        (document) =>
+          tokens.excluded.every((token) => document.filter.has(token) === 0) &&
+          tokens.required.every((token) => document.filter.has(token) > 0)
       )
       .map((document) => ({
         document,
