@@ -3,49 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [3.0.1](https://github.com/PacoteJS/pacote/compare/@pacote/eslint-config-jest@3.0.0...@pacote/eslint-config-jest@3.0.1) (2021-10-23)
+## [3.0.2](https://github.com/PacoteJS/pacote/compare/@pacote/eslint-config-jest@3.0.1...@pacote/eslint-config-jest@3.0.2) (2023-04-22)
 
+**Note:** Version bump only for package @pacote/eslint-config-jest
+
+## [3.0.1](https://github.com/PacoteJS/pacote/compare/@pacote/eslint-config-jest@3.0.0...@pacote/eslint-config-jest@3.0.1) (2021-10-23)
 
 ### Bug Fixes
 
-* 🐛 testing-library plugin no longer included in config ([563ae9e](https://github.com/PacoteJS/pacote/commit/563ae9ea5eb6222488762668ef3e9a0873e90ae5))
-
-
-
-
+- 🐛 testing-library plugin no longer included in config ([563ae9e](https://github.com/PacoteJS/pacote/commit/563ae9ea5eb6222488762668ef3e9a0873e90ae5))
 
 # [3.0.0](https://github.com/PacoteJS/pacote/compare/@pacote/eslint-config-jest@2.0.0...@pacote/eslint-config-jest@3.0.0) (2021-08-13)
 
-
 ### Features
 
-* 🎸 use eslint-plugin-jest ([eee62f5](https://github.com/PacoteJS/pacote/commit/eee62f5db4baef0e3f38128ed52c2205950b0e3b))
-
+- 🎸 use eslint-plugin-jest ([eee62f5](https://github.com/PacoteJS/pacote/commit/eee62f5db4baef0e3f38128ed52c2205950b0e3b))
 
 ### BREAKING CHANGES
 
-* 🧨 Introduces new linter rules from eslint-plugin-jest.
-
-
-
-
+- 🧨 Introduces new linter rules from eslint-plugin-jest.
 
 # [2.0.0](https://github.com/PacoteJS/pacote/compare/@pacote/eslint-config-jest@1.2.1...@pacote/eslint-config-jest@2.0.0) (2021-04-15)
 
-
 ### chore
 
-* 🤖 upgrade eslint-plugin-testing-library to v4 ([5ec4c52](https://github.com/PacoteJS/pacote/commit/5ec4c5269bf3dd1e5bbbed34c46f2d76c8dd9f7f))
-
+- 🤖 upgrade eslint-plugin-testing-library to v4 ([5ec4c52](https://github.com/PacoteJS/pacote/commit/5ec4c5269bf3dd1e5bbbed34c46f2d76c8dd9f7f))
 
 ### BREAKING CHANGES
 
-* 🧨 eslint-plugin-testing-library has breaking changes, check the release
-notes
-
-
-
-
+- 🧨 eslint-plugin-testing-library has breaking changes, check the release
+  notes
 
 ## [1.2.1](https://github.com/PacoteJS/pacote/compare/@pacote/eslint-config-jest@1.2.0...@pacote/eslint-config-jest@1.2.1) (2021-01-08)
 

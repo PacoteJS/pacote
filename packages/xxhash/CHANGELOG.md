@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.1](https://github.com/PacoteJS/pacote/compare/@pacote/xxhash@0.3.0...@pacote/xxhash@0.3.1) (2023-04-22)
+
+**Note:** Version bump only for package @pacote/xxhash
+
 # [0.3.0](https://github.com/PacoteJS/pacote/compare/@pacote/xxhash@0.2.7...@pacote/xxhash@0.3.0) (2023-04-13)
 
 ### chore

@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/PacoteJS/pacote/compare/@pacote/memoize@2.0.0...@pacote/memoize@2.0.1) (2023-04-22)
+
+**Note:** Version bump only for package @pacote/memoize
+
 # [2.0.0](https://github.com/PacoteJS/pacote/compare/@pacote/memoize@1.1.8...@pacote/memoize@2.0.0) (2023-04-13)
 
 ### chore

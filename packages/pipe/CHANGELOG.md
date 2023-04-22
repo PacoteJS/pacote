@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1](https://github.com/PacoteJS/pacote/compare/@pacote/pipe@0.2.0...@pacote/pipe@0.2.1) (2023-04-22)
+
+**Note:** Version bump only for package @pacote/pipe
+
 # [0.2.0](https://github.com/PacoteJS/pacote/compare/@pacote/pipe@0.1.1...@pacote/pipe@0.2.0) (2023-04-13)
 
 ### chore

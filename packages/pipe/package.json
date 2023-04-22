@@ -1,7 +1,7 @@
 {
   "name": "@pacote/pipe",
   "description": "Chain function calls with right-composition, improving readability when chaining several functions together.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "sideEffects": false,
   "license": "MIT",
   "author": {

@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1](https://github.com/PacoteJS/pacote/compare/@pacote/iff@3.0.0...@pacote/iff@3.0.1) (2023-04-22)
+
+**Note:** Version bump only for package @pacote/iff
+
 # [3.0.0](https://github.com/PacoteJS/pacote/compare/@pacote/iff@2.0.9...@pacote/iff@3.0.0) (2023-04-13)
 
 ### chore
