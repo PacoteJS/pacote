@@ -1242,64 +1242,64 @@
   integrity sha512-Aq58f5HiWdyDlFffbbSjAlv596h/cOnt2DO1w3DOC7OJ5EHs0hd/nycJfiu9RJbT6Yk6F1knnRRXNSpxoIVZ9Q==
 
 "@pacote/array@file:packages/array":
-  version "0.6.0"
+  version "0.6.1"
 
 "@pacote/bloom-filter@file:packages/bloom-filter":
-  version "0.5.0"
+  version "0.5.1"
   dependencies:
     "@pacote/xxhash" "file:packages/xxhash"
 
 "@pacote/bloom-search@file:packages/bloom-search":
-  version "0.10.0"
+  version "0.10.1"
   dependencies:
     "@pacote/array" "file:packages/array"
     "@pacote/bloom-filter" "file:packages/bloom-filter"
 
 "@pacote/computus@file:packages/computus":
-  version "2.0.0"
+  version "2.0.1"
 
 "@pacote/emitter@file:packages/emitter":
-  version "2.0.0"
+  version "2.0.1"
 
 "@pacote/error@file:packages/error":
-  version "3.0.0"
-
-"@pacote/eslint-config-jest@file:packages/eslint-config-jest":
   version "3.0.1"
 
+"@pacote/eslint-config-jest@file:packages/eslint-config-jest":
+  version "3.0.2"
+
 "@pacote/eslint-config-react@file:packages/eslint-config-react":
-  version "2.0.0"
+  version "2.0.1"
 
 "@pacote/eslint-config@file:packages/eslint-config":
-  version "6.0.0"
+  version "6.0.1"
 
 "@pacote/ffetch@file:packages/ffetch":
-  version "7.0.0"
+  version "7.0.1"
   dependencies:
     "@pacote/error" "file:packages/error"
 
 "@pacote/flux-actions@file:packages/flux-actions":
-  version "3.0.0"
+  version "3.0.1"
 
 "@pacote/get-style@file:packages/get-style":
-  version "2.0.0"
+  version "2.0.1"
 
 "@pacote/iff@file:packages/iff":
-  version "3.0.0"
+  version "3.0.1"
   dependencies:
     "@pacote/option" "file:packages/option"
 
 "@pacote/immutable@file:packages/immutable":
-  version "2.0.0"
+  version "2.0.1"
 
 "@pacote/interpolate@file:packages/interpolate":
-  version "2.0.0"
+  version "2.0.1"
 
 "@pacote/is-plain-object@file:packages/is-plain-object":
-  version "2.0.0"
+  version "2.0.1"
 
 "@pacote/jest-either@file:packages/jest-either":
-  version "5.0.5"
+  version "5.0.6"
   dependencies:
     "@pacote/is-plain-object" "file:packages/is-plain-object"
     jest-diff "^29.0.1"
@@ -1307,63 +1307,63 @@
     ramda "^0.29.0"
 
 "@pacote/linked-list@file:packages/linked-list":
-  version "0.7.0"
+  version "0.7.1"
   dependencies:
     "@pacote/option" "file:packages/option"
 
 "@pacote/memoize@file:packages/memoize":
-  version "2.0.0"
+  version "2.0.1"
 
 "@pacote/non-empty-array@file:packages/non-empty-array":
-  version "0.3.0"
+  version "0.3.1"
   dependencies:
     "@pacote/option" "file:packages/option"
 
 "@pacote/option@file:packages/option":
-  version "4.0.0"
+  version "4.0.1"
 
 "@pacote/pipe@file:packages/pipe":
-  version "0.2.0"
+  version "0.2.1"
 
 "@pacote/pixels@file:packages/pixels":
-  version "2.0.0"
+  version "2.0.1"
   dependencies:
     "@pacote/get-style" "file:packages/get-style"
 
 "@pacote/react-use-outside@file:packages/react-use-outside":
-  version "2.0.0"
+  version "2.0.1"
 
 "@pacote/react-with-props@file:packages/react-with-props":
-  version "2.0.0"
+  version "2.0.1"
 
 "@pacote/result@file:packages/result":
-  version "4.0.0"
+  version "4.0.1"
   dependencies:
     "@pacote/option" "file:packages/option"
 
 "@pacote/retry@file:packages/retry":
-  version "0.2.0"
+  version "0.2.1"
 
 "@pacote/shuffle@file:packages/shuffle":
-  version "2.0.0"
+  version "2.0.1"
 
 "@pacote/throttle@file:packages/throttle":
-  version "2.0.0"
+  version "2.0.1"
 
 "@pacote/u32@file:packages/u32":
-  version "0.3.0"
+  version "0.3.1"
 
 "@pacote/u64@file:packages/u64":
-  version "0.2.0"
+  version "0.2.1"
 
 "@pacote/validation@file:packages/validation":
-  version "0.3.0"
+  version "0.3.1"
   dependencies:
     "@pacote/non-empty-array" "file:packages/non-empty-array"
     "@pacote/result" "file:packages/result"
 
 "@pacote/xxhash@file:packages/xxhash":
-  version "0.3.0"
+  version "0.3.1"
   dependencies:
     "@pacote/u64" "file:packages/u64"
 
@@ -3769,9 +3769,9 @@ external-editor@^3.0.3:
     tmp "^0.0.33"
 
 fast-check@^3.1.2:
-  version "3.8.0"
-  resolved "https://registry.yarnpkg.com/fast-check/-/fast-check-3.8.0.tgz#43a6367db76c2bc1a1976e9898e1e6a4acfbac26"
-  integrity sha512-Mz6k/+bton0iMXdIaqG/ow81oUCYxIDtmGUvf1Q/9O5QhiLI6T9JaCNEr4Y6LfMOpY/jBUfo8hK+3qd5sGfTfw==
+  version "3.8.1"
+  resolved "https://registry.yarnpkg.com/fast-check/-/fast-check-3.8.1.tgz#804db0496e16bd0c4a27d3cba23bb2114b512ba3"
+  integrity sha512-WRll9CUIz6jWKgByFlHT2M/1BY3F7lewKl5BBIz5VHAy7B8y5iklK9rVm922kx+0x1hJqdkffuTs008xfIgytQ==
   dependencies:
     pure-rand "^6.0.0"
 
