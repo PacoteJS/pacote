@@ -169,39 +169,6 @@ provided `predicate` function, otherwise it returns `false`.
 `includes()` returns `true` is the provided `element` exists in the list,
 otherwise it returns false.
 
-### Sublist functions
-
-#### `filter<T>(predicate: (element: T, index: number, collection: LinkedList<T>) => boolean, list: LinkedList<T>): LinkedList<T>`
-
-`filter()` iterates over all items in the provided list and evaluates the
-`predicate` function for each one, returning a new list containing only
-the items for which the `predicate` function yielded `true`.
-
-#### `remove<T>(index: number, list: LinkedList<T>): LinkedList<T>`
-
-`remove()` returns a new linked list with the element at `index` removed.
-
-#### `take<T>(count: number, list: LinkedList<T>): LinkedList<T>`
-
-`take()` returns the first `count` elements of a list.
-
-#### `drop<T>(count: number, list: LinkedList<T>): LinkedList<T>`
-
-`drop()` returns a list with the first `count` elements of the provided
-list removed.
-
-#### `slice<T>(start: number, end?: number, list: LinkedList<T>): LinkedList<T>`
-
-`slice()` returns a new linked list with a subset of elements between
-indices `start` (inclusive) and `end` (non-inclusive). If `end` is
-omitted, the function returns a slice between `start` and the end of the
-list.
-
-#### `unique<T>(list: LinkedList<T>): LinkedList<T>`
-
-`unique()` returns a new linked list with a subset of elements from the provided
-`list` that are unique.
-
 ### Iterator functions
 
 #### `entries<T>(list: LinkedList<T>): IterableIterator<[number, T]>`

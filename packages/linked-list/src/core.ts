@@ -113,6 +113,19 @@ export function flatMap<T, R>(
   )
 }
 
+/**
+ * Iterate over all items in the provided list and evaluates a predicate
+ * function for each one, returning a new list containing only filtered
+ * items.
+ *
+ * @param predicate Predicate function that receives each item. If the function
+ *                  returns `true`, the item is included in the filtered list.
+ * @param list      Linked list.
+ *
+ * @returns A new list containing only the filtered items.
+ *
+ * @category Sublist
+ */
 export function filter<T>(
   predicate: PredicateFunction<T>,
   list: LinkedList<T>
