@@ -169,23 +169,6 @@ provided `predicate` function, otherwise it returns `false`.
 `includes()` returns `true` is the provided `element` exists in the list,
 otherwise it returns false.
 
-### Iterator functions
-
-#### `entries<T>(list: LinkedList<T>): IterableIterator<[number, T]>`
-
-`entries()` returns a new [iterator object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)
-that contains the key/value pairs for each index in the list.
-
-#### `keys<T>(list: LinkedList<T>): IterableIterator<number>`
-
-`keys()` returns a new [iterator object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)
-that contains the values for each index in the list.
-
-#### `values<T>(list: LinkedList<T>): IterableIterator<T>`
-
-`values()` returns a new [iterator object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)
-that contains the values of each element in the list.
-
 ## See also
 
 - [`@pacote/option`](../option/)
