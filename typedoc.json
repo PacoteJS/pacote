@@ -1,7 +1,7 @@
 {
   "name": "Pacote",
   "entryPoints": [
-    "./packages/array/src/index.ts",
+    "./packages/array",
     "./packages/bloom-filter",
     "./packages/bloom-search",
     "./packages/computus",
@@ -15,6 +15,7 @@
     "./packages/interpolate",
     "./packages/is-plain-object",
     "./packages/jest-either",
+    "./packages/linked-list",
     "./packages/memoize",
     "./packages/non-empty-array",
     "./packages/option",
