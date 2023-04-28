@@ -1,7 +1,7 @@
 {
   "name": "@pacote/bloom-filter",
   "description": "Space-efficient probabilistic data structures.",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "sideEffects": false,
   "license": "MIT",
   "author": {
