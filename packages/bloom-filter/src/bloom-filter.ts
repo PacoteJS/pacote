@@ -1,3 +1,4 @@
+import { memoize } from '@pacote/memoize'
 import { hashLocations } from './hash'
 import { Options } from './options'
 
@@ -23,7 +24,10 @@ export class BloomFilter<T extends { toString(): string }> {
     this.seed = options.seed ?? 0x00c0ffee
     this.filter = options.filter ?? new Uint32Array(Math.ceil(this.size / 32))
 
-    this.computeHashLocations = hashLocations(this.size, this.hashes, this.seed)
+    this.computeHashLocations = memoize(
+      (i) => i,
+      hashLocations(this.size, this.hashes, this.seed)
+    )
   }
 
   add(element: T): void {

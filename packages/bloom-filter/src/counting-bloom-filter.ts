@@ -1,3 +1,4 @@
+import { memoize } from '@pacote/memoize'
 import { hashLocations } from './hash'
 import { Options } from './options'
 
@@ -22,7 +23,10 @@ export class CountingBloomFilter<T extends { toString(): string }> {
     this.seed = options.seed ?? 0x00c0ffee
     this.filter = options.filter ?? new Uint32Array(this.size)
 
-    this.computeHashLocations = hashLocations(this.size, this.hashes, this.seed)
+    this.computeHashLocations = memoize(
+      (i) => i,
+      hashLocations(this.size, this.hashes, this.seed)
+    )
   }
 
   add(element: T): void {
