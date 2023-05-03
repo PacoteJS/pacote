@@ -70,6 +70,14 @@ function mergeSort<T>(
  *
  * @returns A new sorted list.
  *
+ * @example
+ *
+ * ```typescript
+ * import { listOf, sort } from '@pacote/linked-list'
+ *
+ * sort(listOf(3, 2, 1)) // => [1, [2, [3, undefined]]]
+ * ```
+ *
  * @category Transformation
  */
 export function sort<T>(list: LinkedList<T>): LinkedList<T>
