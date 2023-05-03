@@ -32,27 +32,9 @@ otherwise.</p>
 <code>None</code> if the linked list is empty.</p>
 <a id="md:taillttgtlist-linkedlistlttgt-optionlttgt" class="tsd-anchor"></a><h4><a href="#md:taillttgtlist-linkedlistlttgt-optionlttgt"><code>tail&lt;T&gt;(list: LinkedList&lt;T&gt;): Option&lt;T&gt;</code></a></h4><p><code>tail()</code> returns an <code>Option</code> with the final element in the linked list. If the
 linked list is empty, it returns <code>None</code>.</p>
-<a id="md:prependlttgtelement-t-list-linkedlistlttgt-linkedlistlttgt" class="tsd-anchor"></a><h4><a href="#md:prependlttgtelement-t-list-linkedlistlttgt-linkedlistlttgt"><code>prepend&lt;T&gt;(element: T, list: LinkedList&lt;T&gt;): LinkedList&lt;T&gt;</code></a></h4><p><code>prepend()</code> adds a new element at the head of the linked list.</p>
 <a id="md:appendlttgtelement-t-list-linkedlistlttgt-linkedlistlttgt" class="tsd-anchor"></a><h4><a href="#md:appendlttgtelement-t-list-linkedlistlttgt-linkedlistlttgt"><code>append&lt;T&gt;(element: T, list: LinkedList&lt;T&gt;): LinkedList&lt;T&gt;</code></a></h4><p><code>append()</code> adds a new element at the tail of the linked list.</p>
 <a id="md:concatlttgtbefore-linkedlistlttgt-after-linkedlistlttgt-linkedlistlttgt" class="tsd-anchor"></a><h4><a href="#md:concatlttgtbefore-linkedlistlttgt-after-linkedlistlttgt-linkedlistlttgt"><code>concat&lt;T&gt;(before: LinkedList&lt;T&gt;, after: LinkedList&lt;T&gt;): LinkedList&lt;T&gt;</code></a></h4><p><code>concat()</code> combines two linked lists.</p>
-<a id="md:restlttgtlist-linkedlistlttgt-linkedlistlttgt" class="tsd-anchor"></a><h4><a href="#md:restlttgtlist-linkedlistlttgt-linkedlistlttgt"><code>rest&lt;T&gt;(list: LinkedList&lt;T&gt;): LinkedList&lt;T&gt;</code></a></h4><p><code>rest()</code> returns all the elements of the linked list beyond the head element. If
-the linked list is empty or has a single element, it returns an empty list.</p>
 <a id="md:conversion-functions" class="tsd-anchor"></a><h3><a href="#md:conversion-functions">Conversion functions</a></h3><a id="md:toarraylttgtlist-linkedlistlttgt-t" class="tsd-anchor"></a><h4><a href="#md:toarraylttgtlist-linkedlistlttgt-t"><code>toArray&lt;T&gt;(list: LinkedList&lt;T&gt;): T[]</code></a></h4><p><code>toArray()</code> turns a linked list into its equivalent array representation.</p>
-<a id="md:transformation-functions" class="tsd-anchor"></a><h3><a href="#md:transformation-functions">Transformation functions</a></h3><a id="md:reverselttgtlist-linkedlistlttgt-linkedlistlttgt" class="tsd-anchor"></a><h4><a href="#md:reverselttgtlist-linkedlistlttgt-linkedlistlttgt"><code>reverse&lt;T&gt;(list: LinkedList&lt;T&gt;): LinkedList&lt;T&gt;</code></a></h4><p><code>reverse()</code> inverts the order of the elements in the provided linked list.</p>
-<a id="md:mapltt-rgtcallback-element-t-index-number-collection-linkedlistlttgt-gt-r-list-linkedlistlttgt-linkedlistltrgt" class="tsd-anchor"></a><h4><a href="#md:mapltt-rgtcallback-element-t-index-number-collection-linkedlistlttgt-gt-r-list-linkedlistlttgt-linkedlistltrgt"><code>map&lt;T, R&gt;(callback: (element: T, index: number, collection: LinkedList&lt;T&gt;) =&gt; R, list: LinkedList&lt;T&gt;): LinkedList&lt;R&gt;</code></a></h4><p><code>map()</code> iterates over all items in the provided list and evaluates each element
-through the <code>callback</code> function, returning a new list containing the resulting
-values.</p>
-<a id="md:flatmapltt-rgtcallback-element-t-index-number-collection-linkedlistlttgt-gt-linkedlistltrgt-list-linkedlistlttgt-linkedlistltrgt" class="tsd-anchor"></a><h4><a href="#md:flatmapltt-rgtcallback-element-t-index-number-collection-linkedlistlttgt-gt-linkedlistltrgt-list-linkedlistlttgt-linkedlistltrgt"><code>flatMap&lt;T, R&gt;(callback: (element: T, index: number, collection: LinkedList&lt;T&gt;) =&gt; LinkedList&lt;R&gt;, list: LinkedList&lt;T&gt;): LinkedList&lt;R&gt;</code></a></h4><p><code>flatMap()</code> iterates over all items in the provided list and evaluates each
-element through the <code>callback</code> function and flattening the result by one level.</p>
-<a id="md:sortlttgtcomparator-a-t-b-t-gt-number-list-linkedlistlttgt-linkedlistlttgt" class="tsd-anchor"></a><h4><a href="#md:sortlttgtcomparator-a-t-b-t-gt-number-list-linkedlistlttgt-linkedlistlttgt"><code>sort&lt;T&gt;(comparator?: (a: T, b: T) =&gt; number, list: LinkedList&lt;T&gt;): LinkedList&lt;T&gt;</code></a></h4><p><code>sort()</code> returns a new list with the elements in the provided <code>list</code> in order.
-The default sort order is ascending, built upon converting the elements into
-strings, but can be overriden with a custom <code>comparator</code> function.</p>
-<p>The function implements the merge sort algorithm, with <em>O(n log n)</em> time
-complexity and <em>O(n)</em> space complexity.</p>
-<p><code>sort()</code> attempts to replicate the specified behaviour of the
-<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort"><code>Array.prototype.sort()</code></a>
-method (although bear in mind that <code>Array.prototype.sort()</code> is not stable in
-every environment).</p>
 <a id="md:folding-functions" class="tsd-anchor"></a><h3><a href="#md:folding-functions">Folding functions</a></h3><a id="md:reduceltt-rgtcallback-accumulator-r-element-t-index-number-collection-linkedlistlttgt-gt-r-initial-r-list-linkedlistlttgt-r" class="tsd-anchor"></a><h4><a href="#md:reduceltt-rgtcallback-accumulator-r-element-t-index-number-collection-linkedlistlttgt-gt-r-initial-r-list-linkedlistlttgt-r"><code>reduce&lt;T, R&gt;(callback: (accumulator: R, element: T, index: number, collection: LinkedList&lt;T&gt;) =&gt; R, initial: R, list: LinkedList&lt;T&gt;): R</code></a></h4><p><code>reduce()</code> executes the provided <code>callback</code> function on each element of
 the list, resulting in a single output value, which gets successively
 passed to the <code>callback</code> function in the next execution.</p>
@@ -62,15 +44,7 @@ passed to the <code>callback</code> function in the next execution.</p>
 by <code>reduce()</code>.</p>
 <a id="md:reducerightltt-rgtcallback-accumulator-r-element-t-index-number-collection-linkedlistlttgt-gt-r-initial-r-list-linkedlistlttgt-r" class="tsd-anchor"></a><h4><a href="#md:reducerightltt-rgtcallback-accumulator-r-element-t-index-number-collection-linkedlistlttgt-gt-r-initial-r-list-linkedlistlttgt-r"><code>reduceRight&lt;T, R&gt;(callback: (accumulator: R, element: T, index: number, collection: LinkedList&lt;T&gt;) =&gt; R, initial: R, list: LinkedList&lt;T&gt;): R</code></a></h4><p><code>reduceRight()</code> works like <code>reduce()</code>, but the list is iterated starting
 at the tail.</p>
-<a id="md:searching-functions" class="tsd-anchor"></a><h3><a href="#md:searching-functions">Searching functions</a></h3><a id="md:findlttgtpredicate-element-t-index-number-collection-linkedlistlttgt-gt-boolean-list-linkedlistlttgt-optionlttgt" class="tsd-anchor"></a><h4><a href="#md:findlttgtpredicate-element-t-index-number-collection-linkedlistlttgt-gt-boolean-list-linkedlistlttgt-optionlttgt"><code>find&lt;T&gt;(predicate: (element: T, index: number, collection: LinkedList&lt;T&gt;) =&gt; boolean, list: LinkedList&lt;T&gt;): Option&lt;T&gt;</code></a></h4><p><code>find()</code> returns an <code>Option</code> with the first element in the list that
-satisfies the provided <code>predicate</code> function. If the element cannot be
-found, it returns <code>None</code>.</p>
-<a id="md:getlttgtindex-number-list-linkedlistlttgt-optionlttgt" class="tsd-anchor"></a><h4><a href="#md:getlttgtindex-number-list-linkedlistlttgt-optionlttgt"><code>get&lt;T&gt;(index: number, list: LinkedList&lt;T&gt;): Option&lt;T&gt;</code></a></h4><p><code>get()</code> returns an <code>Option</code> with the element at the provided <code>index</code>, or <code>None</code>
-if the <code>index</code> is out of bounds.</p>
-<a id="md:atlttgtindex-number-list-linkedlistlttgt-optionlttgt" class="tsd-anchor"></a><h4><a href="#md:atlttgtindex-number-list-linkedlistlttgt-optionlttgt"><code>at&lt;T&gt;(index: number, list: LinkedList&lt;T&gt;): Option&lt;T&gt;</code></a></h4><p><code>at()</code> behaves like <code>get()</code>, except when a negative <code>index</code> is
-provided, in which case it returns an <code>Option</code> with the element at the
-provided <code>index</code> starting from the end of the list.</p>
-<a id="md:findindexlttgtpredicate-element-t-index-number-collection-linkedlistlttgt-gt-boolean-list-linkedlistlttgt-optionltnumbergt" class="tsd-anchor"></a><h4><a href="#md:findindexlttgtpredicate-element-t-index-number-collection-linkedlistlttgt-gt-boolean-list-linkedlistlttgt-optionltnumbergt"><code>findIndex&lt;T&gt;(predicate: (element: T, index: number, collection: LinkedList&lt;T&gt;) =&gt; boolean, list: LinkedList&lt;T&gt;): Option&lt;number&gt;</code></a></h4><p><code>findIndex()</code> returns an <code>Option</code> with index of first element in the
+<a id="md:searching-functions" class="tsd-anchor"></a><h3><a href="#md:searching-functions">Searching functions</a></h3><a id="md:findindexlttgtpredicate-element-t-index-number-collection-linkedlistlttgt-gt-boolean-list-linkedlistlttgt-optionltnumbergt" class="tsd-anchor"></a><h4><a href="#md:findindexlttgtpredicate-element-t-index-number-collection-linkedlistlttgt-gt-boolean-list-linkedlistlttgt-optionltnumbergt"><code>findIndex&lt;T&gt;(predicate: (element: T, index: number, collection: LinkedList&lt;T&gt;) =&gt; boolean, list: LinkedList&lt;T&gt;): Option&lt;number&gt;</code></a></h4><p><code>findIndex()</code> returns an <code>Option</code> with index of first element in the
 list that satisfies the provided <code>predicate</code> function. If the element
 cannot be found, it returns <code>None</code>.</p>
 <a id="md:indexoflttgtelement-t-list-linkedlistlttgt-optionltnumbergt" class="tsd-anchor"></a><h4><a href="#md:indexoflttgtelement-t-list-linkedlistlttgt-optionltnumbergt"><code>indexOf&lt;T&gt;(element: T, list: LinkedList&lt;T&gt;): Option&lt;number&gt;</code></a></h4><p><code>indexOf()</code> returns an <code>Option</code> with the first index at which a given element
@@ -78,12 +52,6 @@ can be found in the list, or <code>None</code> if it is not present.</p>
 <a id="md:lastindexoflttgtelement-t-list-linkedlistlttgt-optionltnumbergt" class="tsd-anchor"></a><h4><a href="#md:lastindexoflttgtelement-t-list-linkedlistlttgt-optionltnumbergt"><code>lastIndexOf&lt;T&gt;(element: T, list: LinkedList&lt;T&gt;): Option&lt;number&gt;</code></a></h4><p><code>lastIndexOf()</code> returns an <code>Option</code> with the first index at which a given
 element can be found in the list, or <code>None</code> if it is not present. The list is
 searched backwards.</p>
-<a id="md:everylttgtpredicate-element-t-index-number-collection-linkedlistlttgt-gt-boolean-list-linkedlistlttgt-boolean" class="tsd-anchor"></a><h4><a href="#md:everylttgtpredicate-element-t-index-number-collection-linkedlistlttgt-gt-boolean-list-linkedlistlttgt-boolean"><code>every&lt;T&gt;(predicate: (element: T, index: number, collection: LinkedList&lt;T&gt;) =&gt; boolean, list: LinkedList&lt;T&gt;): boolean</code></a></h4><p><code>every()</code> returns <code>true</code> is all the elements in the list satisfy the
-provided <code>predicate</code> function, otherwise it returns <code>false</code>.</p>
-<a id="md:somelttgtpredicate-element-t-index-number-collection-linkedlistlttgt-gt-boolean-list-linkedlistlttgt-boolean" class="tsd-anchor"></a><h4><a href="#md:somelttgtpredicate-element-t-index-number-collection-linkedlistlttgt-gt-boolean-list-linkedlistlttgt-boolean"><code>some&lt;T&gt;(predicate: (element: T, index: number, collection: LinkedList&lt;T&gt;) =&gt; boolean, list: LinkedList&lt;T&gt;): boolean</code></a></h4><p><code>some()</code> returns <code>true</code> is at least one element in the list satisfies the
-provided <code>predicate</code> function, otherwise it returns <code>false</code>.</p>
-<a id="md:includeslttgtelement-t-list-linkedlistlttgt-boolean" class="tsd-anchor"></a><h4><a href="#md:includeslttgtelement-t-list-linkedlistlttgt-boolean"><code>includes&lt;T&gt;(element: T, list: LinkedList&lt;T&gt;): boolean</code></a></h4><p><code>includes()</code> returns <code>true</code> is the provided <code>element</code> exists in the list,
-otherwise it returns false.</p>
 <a id="md:see-also" class="tsd-anchor"></a><h2><a href="#md:see-also">See also</a></h2><ul>
 <li><a href="../option/"><code>@pacote/option</code></a></li>
 </ul>
@@ -101,31 +69,30 @@ otherwise it returns false.</p>
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading">Functions - Other</h3>
 <div class="tsd-index-list"><a href="../functions/_pacote_linked_list.append.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>append</span></a>
-<a href="../functions/_pacote_linked_list.at.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>at</span></a>
 <a href="../functions/_pacote_linked_list.concat.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>concat</span></a>
-<a href="../functions/_pacote_linked_list.every.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>every</span></a>
-<a href="../functions/_pacote_linked_list.find.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>find</span></a>
 <a href="../functions/_pacote_linked_list.findIndex.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>find<wbr/>Index</span></a>
-<a href="../functions/_pacote_linked_list.flatMap.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>flat<wbr/>Map</span></a>
-<a href="../functions/_pacote_linked_list.get.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>get</span></a>
 <a href="../functions/_pacote_linked_list.head.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>head</span></a>
-<a href="../functions/_pacote_linked_list.includes.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>includes</span></a>
 <a href="../functions/_pacote_linked_list.indexOf.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>index<wbr/>Of</span></a>
 <a href="../functions/_pacote_linked_list.isEmpty.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>is<wbr/>Empty</span></a>
 <a href="../functions/_pacote_linked_list.item.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>item</span></a>
 <a href="../functions/_pacote_linked_list.lastIndexOf.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>last<wbr/>Index<wbr/>Of</span></a>
 <a href="../functions/_pacote_linked_list.length.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>length</span></a>
 <a href="../functions/_pacote_linked_list.listOf.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>list<wbr/>Of</span></a>
-<a href="../functions/_pacote_linked_list.map.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>map</span></a>
 <a href="../functions/_pacote_linked_list.prepend.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>prepend</span></a>
 <a href="../functions/_pacote_linked_list.reduce.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>reduce</span></a>
 <a href="../functions/_pacote_linked_list.reduceRight.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>reduce<wbr/>Right</span></a>
 <a href="../functions/_pacote_linked_list.rest.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>rest</span></a>
-<a href="../functions/_pacote_linked_list.reverse.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>reverse</span></a>
-<a href="../functions/_pacote_linked_list.some.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>some</span></a>
-<a href="../functions/_pacote_linked_list.sort.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>sort</span></a>
 <a href="../functions/_pacote_linked_list.tail.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>tail</span></a>
 <a href="../functions/_pacote_linked_list.toArray.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>to<wbr/>Array</span></a>
+</div></section>
+<section class="tsd-index-section">
+<h3 class="tsd-index-heading">Functions - Searching</h3>
+<div class="tsd-index-list"><a href="../functions/_pacote_linked_list.at.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>at</span></a>
+<a href="../functions/_pacote_linked_list.every.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>every</span></a>
+<a href="../functions/_pacote_linked_list.find.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>find</span></a>
+<a href="../functions/_pacote_linked_list.get.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>get</span></a>
+<a href="../functions/_pacote_linked_list.includes.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>includes</span></a>
+<a href="../functions/_pacote_linked_list.some.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>some</span></a>
 </div></section>
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading">Functions - Sublist</h3>
@@ -135,6 +102,13 @@ otherwise it returns false.</p>
 <a href="../functions/_pacote_linked_list.slice.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>slice</span></a>
 <a href="../functions/_pacote_linked_list.take.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>take</span></a>
 <a href="../functions/_pacote_linked_list.unique.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>unique</span></a>
+</div></section>
+<section class="tsd-index-section">
+<h3 class="tsd-index-heading">Functions - Transformation</h3>
+<div class="tsd-index-list"><a href="../functions/_pacote_linked_list.flatMap.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>flat<wbr/>Map</span></a>
+<a href="../functions/_pacote_linked_list.map.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>map</span></a>
+<a href="../functions/_pacote_linked_list.reverse.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>reverse</span></a>
+<a href="../functions/_pacote_linked_list.sort.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-64-path"></use><use href="#icon-64-text"></use></svg><span>sort</span></a>
 </div></section></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
@@ -170,21 +144,12 @@ otherwise it returns false.</p>
 <li><a href="#md:lengthlttgtlist-linkedlistlttgt-number"><span>length&lt;<wbr/>T&gt;(list: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;): number</span></a></li>
 <li><a href="#md:headlttgtlist-linkedlistlttgt-optionlttgt"><span>head&lt;<wbr/>T&gt;(list: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;): <wbr/>Option&lt;<wbr/>T&gt;</span></a></li>
 <li><a href="#md:taillttgtlist-linkedlistlttgt-optionlttgt"><span>tail&lt;<wbr/>T&gt;(list: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;): <wbr/>Option&lt;<wbr/>T&gt;</span></a></li>
-<li><a href="#md:prependlttgtelement-t-list-linkedlistlttgt-linkedlistlttgt"><span>prepend&lt;<wbr/>T&gt;(element: <wbr/>T, list: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;): <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;</span></a></li>
 <li><a href="#md:appendlttgtelement-t-list-linkedlistlttgt-linkedlistlttgt"><span>append&lt;<wbr/>T&gt;(element: <wbr/>T, list: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;): <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;</span></a></li>
-<li><a href="#md:concatlttgtbefore-linkedlistlttgt-after-linkedlistlttgt-linkedlistlttgt"><span>concat&lt;<wbr/>T&gt;(before: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;, after: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;): <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;</span></a></li>
-<li><a href="#md:restlttgtlist-linkedlistlttgt-linkedlistlttgt"><span>rest&lt;<wbr/>T&gt;(list: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;): <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;</span></a></li></ul></li>
+<li><a href="#md:concatlttgtbefore-linkedlistlttgt-after-linkedlistlttgt-linkedlistlttgt"><span>concat&lt;<wbr/>T&gt;(before: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;, after: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;): <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;</span></a></li></ul></li>
 <li><a href="#md:conversion-functions"><span>Conversion functions</span></a></li>
 <li>
 <ul>
 <li><a href="#md:toarraylttgtlist-linkedlistlttgt-t"><span>to<wbr/>Array&lt;<wbr/>T&gt;(list: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;): <wbr/>T[]</span></a></li></ul></li>
-<li><a href="#md:transformation-functions"><span>Transformation functions</span></a></li>
-<li>
-<ul>
-<li><a href="#md:reverselttgtlist-linkedlistlttgt-linkedlistlttgt"><span>reverse&lt;<wbr/>T&gt;(list: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;): <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;</span></a></li>
-<li><a href="#md:mapltt-rgtcallback-element-t-index-number-collection-linkedlistlttgt-gt-r-list-linkedlistlttgt-linkedlistltrgt"><span>map&lt;<wbr/>T, <wbr/>R&gt;(callback: (element: <wbr/>T, index: number, collection: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;) =&gt; <wbr/>R, list: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;): <wbr/>Linked<wbr/>List&lt;<wbr/>R&gt;</span></a></li>
-<li><a href="#md:flatmapltt-rgtcallback-element-t-index-number-collection-linkedlistlttgt-gt-linkedlistltrgt-list-linkedlistlttgt-linkedlistltrgt"><span>flat<wbr/>Map&lt;<wbr/>T, <wbr/>R&gt;(callback: (element: <wbr/>T, index: number, collection: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;) =&gt; <wbr/>Linked<wbr/>List&lt;<wbr/>R&gt;, list: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;): <wbr/>Linked<wbr/>List&lt;<wbr/>R&gt;</span></a></li>
-<li><a href="#md:sortlttgtcomparator-a-t-b-t-gt-number-list-linkedlistlttgt-linkedlistlttgt"><span>sort&lt;<wbr/>T&gt;(comparator?: (a: <wbr/>T, b: <wbr/>T) =&gt; number, list: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;): <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;</span></a></li></ul></li>
 <li><a href="#md:folding-functions"><span>Folding functions</span></a></li>
 <li>
 <ul>
@@ -193,15 +158,9 @@ otherwise it returns false.</p>
 <li><a href="#md:searching-functions"><span>Searching functions</span></a></li>
 <li>
 <ul>
-<li><a href="#md:findlttgtpredicate-element-t-index-number-collection-linkedlistlttgt-gt-boolean-list-linkedlistlttgt-optionlttgt"><span>find&lt;<wbr/>T&gt;(predicate: (element: <wbr/>T, index: number, collection: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;) =&gt; boolean, list: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;): <wbr/>Option&lt;<wbr/>T&gt;</span></a></li>
-<li><a href="#md:getlttgtindex-number-list-linkedlistlttgt-optionlttgt"><span>get&lt;<wbr/>T&gt;(index: number, list: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;): <wbr/>Option&lt;<wbr/>T&gt;</span></a></li>
-<li><a href="#md:atlttgtindex-number-list-linkedlistlttgt-optionlttgt"><span>at&lt;<wbr/>T&gt;(index: number, list: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;): <wbr/>Option&lt;<wbr/>T&gt;</span></a></li>
 <li><a href="#md:findindexlttgtpredicate-element-t-index-number-collection-linkedlistlttgt-gt-boolean-list-linkedlistlttgt-optionltnumbergt"><span>find<wbr/>Index&lt;<wbr/>T&gt;(predicate: (element: <wbr/>T, index: number, collection: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;) =&gt; boolean, list: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;): <wbr/>Option&lt;number&gt;</span></a></li>
 <li><a href="#md:indexoflttgtelement-t-list-linkedlistlttgt-optionltnumbergt"><span>index<wbr/>Of&lt;<wbr/>T&gt;(element: <wbr/>T, list: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;): <wbr/>Option&lt;number&gt;</span></a></li>
-<li><a href="#md:lastindexoflttgtelement-t-list-linkedlistlttgt-optionltnumbergt"><span>last<wbr/>Index<wbr/>Of&lt;<wbr/>T&gt;(element: <wbr/>T, list: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;): <wbr/>Option&lt;number&gt;</span></a></li>
-<li><a href="#md:everylttgtpredicate-element-t-index-number-collection-linkedlistlttgt-gt-boolean-list-linkedlistlttgt-boolean"><span>every&lt;<wbr/>T&gt;(predicate: (element: <wbr/>T, index: number, collection: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;) =&gt; boolean, list: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;): boolean</span></a></li>
-<li><a href="#md:somelttgtpredicate-element-t-index-number-collection-linkedlistlttgt-gt-boolean-list-linkedlistlttgt-boolean"><span>some&lt;<wbr/>T&gt;(predicate: (element: <wbr/>T, index: number, collection: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;) =&gt; boolean, list: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;): boolean</span></a></li>
-<li><a href="#md:includeslttgtelement-t-list-linkedlistlttgt-boolean"><span>includes&lt;<wbr/>T&gt;(element: <wbr/>T, list: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;): boolean</span></a></li></ul></li></ul></li>
+<li><a href="#md:lastindexoflttgtelement-t-list-linkedlistlttgt-optionltnumbergt"><span>last<wbr/>Index<wbr/>Of&lt;<wbr/>T&gt;(element: <wbr/>T, list: <wbr/>Linked<wbr/>List&lt;<wbr/>T&gt;): <wbr/>Option&lt;number&gt;</span></a></li></ul></li></ul></li>
 <li><a href="#md:see-also"><span>See also</span></a></li>
 <li><a href="#md:license"><span>License</span></a></li></ul></li></ul></li></ul></div></details></div>
 <div class="site-menu">
