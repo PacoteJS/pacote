@@ -30,6 +30,13 @@ export function emptyList<T>(): LinkedList<T> {
   return undefined
 }
 
+/**
+ * Check whether a list is empty.
+ *
+ * @param list Linked list.
+ *
+ * @returns `true` if the provided linked list is empty, `false` otherwise.
+ */
 export function isEmpty(list: any): list is Empty {
   return list === undefined
 }
@@ -66,6 +73,24 @@ function recursiveReduce<T, R>(
       )
 }
 
+/**
+ * Executes the provided callback function on each element of
+ * the list, resulting in a single output value, which gets successively
+ * passed to the callback function in the next execution.
+ *
+ * The first time the callback function is executed, it receives the
+ * `initial` value.
+ *
+ * The result of the last execution of the callback function is returned.
+ *
+ * @param callback Callback function.
+ * @param initial  Initial value.
+ * @param list     Linked list.
+ *
+ * @returns Result of the last execution of the callback.
+ *
+ * @category Folding
+ */
 export function reduce<T, R>(
   callback: ReduceCallback<T, R>,
   initial: R,
@@ -87,6 +112,14 @@ export function reverse<T>(list: LinkedList<T>): LinkedList<T> {
   return reduce((acc, value) => prepend(value, acc), emptyList(), list)
 }
 
+/**
+ * Combine two linked lists.
+ *
+ * @param front Linked list at the front.
+ * @param back  Linked list at the back.
+ *
+ * @returns A new linked list with the two provided lists concatenated.
+ */
 export function concat<T>(
   front: LinkedList<T>,
   back: LinkedList<T>
@@ -94,14 +127,40 @@ export function concat<T>(
   return reduce((acc, value) => prepend(value, acc), back, reverse(front))
 }
 
+/**
+ * Add an element to the tail of the provided list.
+ *
+ * @param value Value to append.
+ * @param list  Linked list.
+ *
+ * @returns New linked list with the element appended to the end.
+ */
 export function append<T>(value: T, list: LinkedList<T>): LinkedList<T> {
   return reverse(prepend(value, reverse(list)))
 }
 
+/**
+ * Count the number of elements in a list.
+ *
+ * @param list Linked list.
+ *
+ * @returns Number of list elements.
+ */
 export function length<T>(list: LinkedList<T>): number {
   return reduce((count) => count + 1, 0, list)
 }
 
+/**
+ * Works like `reduce()`, but the list is iterated starting at the tail.
+ *
+ * @param callback Callback function.
+ * @param initial  Initial value.
+ * @param list     Linked list.
+ *
+ * @returns Result of the last execution of the callback.
+ *
+ * @category Folding
+ */
 export function reduceRight<T, R>(
   callback: ReduceCallback<T, R>,
   initial: R,
@@ -190,10 +249,26 @@ export function filter<T>(
   )
 }
 
+/**
+ * Get the first element of the provided list.
+ *
+ * @param list Linked list.
+ *
+ * @returns `Option` with the first element of the linked list, or
+ *          `None` if the linked list is empty.
+ */
 export function head<T>(list: LinkedList<T>): Option<T> {
   return isEmpty(list) ? None : Some(car(list))
 }
 
+/**
+ * Get the last element of the provided list.
+ *
+ * @param list Linked list.
+ *
+ * @returns `Option` with the final element in the linked list. If the
+ *          linked list is empty, it returns `None`.
+ */
 export function tail<T>(list: LinkedList<T>): Option<T> {
   return reduce<T, Option<T>>((_, value) => Some(value), None, list)
 }

@@ -156,6 +156,17 @@ export function includes<T>(value: T, list: LinkedList<T>): boolean {
   return some((v) => v === value, list)
 }
 
+/**
+ * Returns an `Option` with the first index at which a given element can be
+ * found in the list, or `None` if it is not present.
+ *
+ * @param value Element to search.
+ * @param list  Linked list.
+ *
+ * @returns First index of the list element matching the provided value.
+ *
+ * @category Searching
+ */
 export function indexOf<T>(value: T, list: LinkedList<T>): Option<number> {
   return recursiveFind<T, Option<number>>(
     (current) => current === value,
@@ -166,6 +177,18 @@ export function indexOf<T>(value: T, list: LinkedList<T>): Option<number> {
   )
 }
 
+/**
+ * Returns an `Option` with the last index at which a given element can be
+ * found in the list, or `None` if it is not present. The list is
+ * searched backwards.
+ *
+ * @param value Element to search.
+ * @param list  Linked list.
+ *
+ * @returns Last index of the list element matching the provided value.
+ *
+ * @category Searching
+ */
 export function lastIndexOf<T>(value: T, list: LinkedList<T>): Option<number> {
   return map(
     (lastIndex: number) => length(list) - lastIndex - 1,
@@ -179,6 +202,18 @@ export function lastIndexOf<T>(value: T, list: LinkedList<T>): Option<number> {
   )
 }
 
+/**
+ * Returns an `Option` with index of first element in the list that satisfies
+ * the provided predicate function. If the element cannot be found, it
+ * returns `None`.
+ *
+ * @param predicate Predicate function.
+ * @param list      Linked list.
+ *
+ * @returns First index of the list element satisfied by the predicate.
+ *
+ * @category Searching
+ */
 export function findIndex<T>(
   predicate: PredicateFunction<T>,
   list: LinkedList<T>
