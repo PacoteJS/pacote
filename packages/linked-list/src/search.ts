@@ -27,6 +27,19 @@ function recursiveFind<T, R>(
     : recursiveFind(predicate, onFound, onFinished, cdr(current), index + 1)
 }
 
+/**
+ * Return an `Option` with the first element in the list that satisfies the
+ * provided `predicate` function. If the element cannot be found, it returns
+ * `None`.
+ *
+ * @param predicate Predicate function.
+ * @param list      Linked list.
+ *
+ * @returns `Option` with the first element in the list that satisfies the
+ *          predicate function or `None`.
+ *
+ * @category Searching
+ */
 export function find<T>(
   predicate: PredicateFunction<T>,
   list: LinkedList<T>
@@ -40,11 +53,34 @@ export function find<T>(
   )
 }
 
+/**
+ * Return an `Option` with the element at the provided index, or `None`
+ * if the index is out of bounds.
+ *
+ * @param index Element index.
+ * @param list  Linked list.
+ *
+ * @returns `Option` with the element at the provided index or `None`.
+ *
+ * @category Searching
+ */
 export function get<T>(index: number, list: LinkedList<T>): Option<T> {
   const intIndex = Math.trunc(index)
   return find((_, idx) => idx === intIndex, list)
 }
 
+/**
+ * Behaves like `get()`, except when a negative index is provided, in
+ * which case it returns an `Option` with the element at the provided index
+ * starting from the end of the list.
+ *
+ * @param index Element index.
+ * @param list  Linked list.
+ *
+ * @returns `Option` with the element at the provided index or `None`.
+ *
+ * @category Searching
+ */
 export function at<T>(index: number, list: LinkedList<T>): Option<T> {
   const intIndex = Math.trunc(index)
   return get(intIndex >= 0 ? intIndex : length(list) + intIndex, list)
@@ -57,6 +93,17 @@ export function item<T>(index: number, list: LinkedList<T>): Option<T> {
   return at(index, list)
 }
 
+/**
+ * Returns `true` if all the elements in the list satisfy the provided
+ * predicate function, otherwise it returns `false`.
+ *
+ * @param predicate Predicate function.
+ * @param list      Linked list.
+ *
+ * @returns Whether all the elements satisfy the predicate function.
+ *
+ * @category Searching
+ */
 export function every<T>(
   predicate: PredicateFunction<T>,
   list: LinkedList<T>
@@ -70,6 +117,17 @@ export function every<T>(
   )
 }
 
+/**
+ * Returns `true` if at least one element in the list satisfies the provided
+ * predicate function, otherwise it returns `false`.
+ *
+ * @param predicate Predicate function.
+ * @param list      Linked list.
+ *
+ * @returns Whether some of the elements satisfy the predicate function.
+ *
+ * @category Searching
+ */
 export function some<T>(
   predicate: PredicateFunction<T>,
   list: LinkedList<T>
@@ -83,6 +141,17 @@ export function some<T>(
   )
 }
 
+/**
+ * Returns `true` is the provided element exists in the list, otherwise it
+ * returns `false`.
+ *
+ * @param value Value to search.
+ * @param list  Linked list.
+ *
+ * @returns Whether the element exists in the list.
+ *
+ * @category Searching
+ */
 export function includes<T>(value: T, list: LinkedList<T>): boolean {
   return some((v) => v === value, list)
 }

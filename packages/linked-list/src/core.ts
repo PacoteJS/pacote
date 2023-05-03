@@ -13,7 +13,16 @@ export function car<T>(cons: Cons<T>): T {
   return cons[0]
 }
 
-export function cdr<T>(cons: Cons<T> | Empty): Cons<T> | Empty {
+/**
+ * Return all the elements of the linked list beyond the head element.
+ * If the linked list is empty or has a single element, it returns an empty
+ * list.
+ *
+ * @param list Linked list.
+ *
+ * @returns The rest of the list.
+ */
+export function cdr<T>(cons: LinkedList<T>): LinkedList<T> {
   return cons?.[1]
 }
 
@@ -25,6 +34,14 @@ export function isEmpty(list: any): list is Empty {
   return list === undefined
 }
 
+/**
+ * Add a new element at the head of the linked list.
+ *
+ * @param value Element to add.
+ * @param list  Linked list.
+ *
+ * @returns A new list with the element added at the head.
+ */
 export function prepend<T>(value: T, list: LinkedList<T>): LinkedList<T> {
   return [value, list]
 }
@@ -57,6 +74,15 @@ export function reduce<T, R>(
   return recursiveReduce(initial, callback, list, 1, 0, list)
 }
 
+/**
+ * Invert the order of the elements in the provided linked list.
+ *
+ * @param list Linked list.
+ *
+ * @returns A new reversed list.
+ *
+ * @category Transformation
+ */
 export function reverse<T>(list: LinkedList<T>): LinkedList<T> {
   return reduce((acc, value) => prepend(value, acc), emptyList(), list)
 }
@@ -85,6 +111,18 @@ export function reduceRight<T, R>(
   return recursiveReduce(initial, callback, reverse(list), -1, lastIndex, list)
 }
 
+/**
+ * Iterate over all items in the provided list and evaluates each element
+ * through a callback function, returning a new list containing the resulting
+ * values.
+ *
+ * @param callback Function that receives and transforms each item.
+ * @param list     Linked list.
+ *
+ * @returns A new list containing the mapped items.
+ *
+ * @category Transformation
+ */
 export function map<T, R>(
   callback: MapCallback<T, R>,
   list: LinkedList<T>
@@ -99,6 +137,18 @@ export function map<T, R>(
   )
 }
 
+/**
+ * Iterate over all items in the provided list and evaluates each
+ * element through a callback function and flattening the result by one
+ * level.
+ *
+ * @param callback Function that receives and transforms each item.
+ * @param list     Linked list.
+ *
+ * @returns A new list containing the flatmapped items.
+ *
+ * @category Transformation
+ */
 export function flatMap<T, R>(
   callback: MapCallback<T, LinkedList<R>>,
   list: LinkedList<T>

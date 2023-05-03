@@ -53,7 +53,45 @@ function mergeSort<T>(
   )
 }
 
+/**
+ * Returns a new list with the elements in the provided list in order.
+ * The default sort order is ascending, built upon converting the elements
+ * into strings.
+ *
+ * The function implements the merge sort algorithm, with _O(n log n)_ time
+ * complexity and _O(n)_ space complexity.
+ *
+ * `sort()` attempts to replicate the specified behaviour of the
+ * [`Array.prototype.sort()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
+ * method (although bear in mind that `Array.prototype.sort()` is not stable
+ * in every environment).
+ *
+ * @param list Linked list.
+ *
+ * @returns A new sorted list.
+ *
+ * @category Transformation
+ */
 export function sort<T>(list: LinkedList<T>): LinkedList<T>
+/**
+ * Returns a new list with the elements in the provided list in order.
+ * The sort order is determined by a custom comparator function.
+ *
+ * The function implements the merge sort algorithm, with _O(n log n)_ time
+ * complexity and _O(n)_ space complexity.
+ *
+ * `sort()` attempts to replicate the specified behaviour of the
+ * [`Array.prototype.sort()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
+ * method (although bear in mind that `Array.prototype.sort()` is not stable
+ * in every environment).
+ *
+ * @param compare Comparator function.
+ * @param list    Linked list.
+ *
+ * @returns A new sorted list.
+ *
+ * @category Transformation
+ */
 export function sort<T>(
   compare: CompareFn<T>,
   list: LinkedList<T>
