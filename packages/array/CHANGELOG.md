@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/PacoteJS/pacote/compare/@pacote/array@0.6.1...@pacote/array@0.7.0) (2023-05-11)
+
+### Features
+
+- 🎸 unique function ([4f6cfd8](https://github.com/PacoteJS/pacote/commit/4f6cfd835171ef9aa00120662a4631ca3498419c))
+
 ## [0.6.1](https://github.com/PacoteJS/pacote/compare/@pacote/array@0.6.0...@pacote/array@0.6.1) (2023-04-22)
 
 **Note:** Version bump only for package @pacote/array
