@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.10.3...@pacote/bloom-search@0.11.0) (2023-05-13)
+
+### Features
+
+- 🎸 allow customising the tokenizer function ([12b398c](https://github.com/PacoteJS/pacote/commit/12b398ca92bdc60d468dbf9e0ae102f2a017a97b))
+
 ## [0.10.3](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.10.2...@pacote/bloom-search@0.10.3) (2023-05-11)
 
 **Note:** Version bump only for package @pacote/bloom-search
