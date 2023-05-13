@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.12.0](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.11.0...@pacote/bloom-search@0.12.0) (2023-05-13)
+
+### Features
+
+- 🎸 default tokenizer now splits words at hyphens ([47f2d5f](https://github.com/PacoteJS/pacote/commit/47f2d5f04efaa302623e7eb74e4e74723d4cd08d))
+
+### BREAKING CHANGES
+
+- 🧨 Changes to the behaviour of the default tokenizer. Plug-in a custom
+  tokenizer to replicate the previous behaviour.
+
 # [0.11.0](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.10.3...@pacote/bloom-search@0.11.0) (2023-05-13)
 
 ### Features
