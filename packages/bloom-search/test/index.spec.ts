@@ -30,8 +30,9 @@ test('searching for words in a field yields matching sorted by number of matches
 
   bs.add('1', { id: 1, text: 'foo' })
   bs.add('2', { id: 2, text: 'foo foo' })
+  bs.add('3', { id: 3, text: 'foo foo-foo' })
 
-  expect(bs.search('foo')).toEqual([{ id: 2 }, { id: 1 }])
+  expect(bs.search('foo')).toEqual([{ id: 3 }, { id: 2 }, { id: 1 }])
 })
 
 test('document indices can be replaced', () => {
@@ -123,11 +124,12 @@ test('tokens are passed through a language-aware stemmer', () => {
     stemmer,
   })
 
-  bs.add('1', { text: 'foobar foobaz' }, 'en-US')
+  bs.add('1', { text: 'foobar foobaz foöbán' }, 'en-US')
 
   expect(stemmer).toHaveBeenCalledWith('foobar', 'en-US')
   expect(stemmer).toHaveBeenCalledWith('foobaz', 'en-US')
-  expect(bs.search('foo', 'en-GB')).toEqual([{ text: 'foobar foobaz' }])
+  expect(stemmer).toHaveBeenCalledWith('fooban', 'en-US')
+  expect(bs.search('foo', 'en-GB')).toEqual([{ text: 'foobar foobaz foöbán' }])
   expect(stemmer).toHaveBeenCalledWith('foo', 'en-GB')
 })
 

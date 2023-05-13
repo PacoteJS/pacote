@@ -40,8 +40,10 @@ const compare = (a: number, b: number) => (a === b ? 0 : a > b ? -1 : 1)
 
 const defaultTokenizer = (text: string): string[] =>
   text
-    .split(/\s/)
-    .map((token) => token.normalize('NFD').replace(/\W/gi, '').toLowerCase())
+    .normalize('NFD')
+    .toLowerCase()
+    .split(/[\s-]+/)
+    .map((token) => token.replace(/\W/gi, ''))
 
 /**
  * Encapsulates search functionality based on counting Bloom filters.
@@ -119,9 +121,9 @@ export class BloomSearch<
    *                              By default, this class does not change text
    *                              tokens.
    * @param options.tokenizer   - Allows a custom tokenizer function. By default
-   *                              content is split at every white space and
-   *                              non-word (A-Z, 0-9, and _) characters are
-   *                              removed.
+   *                              content is transformed to lowercase, split
+   *                              at every whitespace of hyphen, and non-word
+   *                              (A-Z, 0-9, and _) characters replaced.
    */
   constructor(options: {
     fields: IndexField[] | Record<IndexField, number>
