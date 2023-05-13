@@ -131,6 +131,21 @@ test('tokens are passed through a language-aware stemmer', () => {
   expect(stemmer).toHaveBeenCalledWith('foo', 'en-GB')
 })
 
+test('tokens can be generated with a custom tokenizer', () => {
+  const tokenizer = jest.fn((text) => text.split('-'))
+
+  const bs = new BloomSearch({
+    fields: ['text'],
+    summary: ['text'],
+    tokenizer,
+  })
+
+  bs.add('1', { text: 'foo-bar' }, 'en-US')
+
+  expect(tokenizer).toHaveBeenCalledWith('foo-bar', 'en-US')
+  expect(bs.search('foo', 'en-GB')).toEqual([{ text: 'foo-bar' }])
+})
+
 test('document fields can be preprocessed for the index', () => {
   const preprocess = jest.fn((text) => text.replace(/-/g, ' '))
 

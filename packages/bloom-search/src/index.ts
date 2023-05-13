@@ -10,6 +10,7 @@ type PreprocessFunction<Document, Field extends keyof Document> = (
 ) => string
 type StopwordsFunction = (token: string, language?: string) => boolean
 type StemmerFunction = (token: string, language?: string) => string
+type TokenizerFunction = (token: string, language?: string) => string[]
 
 export type DocumentIndex<
   Document,
@@ -37,7 +38,7 @@ type SearchTokens = {
 
 const compare = (a: number, b: number) => (a === b ? 0 : a > b ? -1 : 1)
 
-const tokenizer = (text: string): string[] =>
+const defaultTokenizer = (text: string): string[] =>
   text
     .split(/\s/)
     .map((token) => token.normalize('NFD').replace(/\W/gi, '').toLowerCase())
@@ -78,6 +79,7 @@ export class BloomSearch<
   private readonly preprocess: PreprocessFunction<Document, IndexField>
   private readonly stemmer: StemmerFunction
   private readonly stopwords: StopwordsFunction
+  private readonly tokenizer: TokenizerFunction
 
   /**
    * Creates a new Bloom search instance based on counting Bloom filters, which
@@ -116,6 +118,10 @@ export class BloomSearch<
    * @param options.stemmer     - Allows plugging in a custom stemming function.
    *                              By default, this class does not change text
    *                              tokens.
+   * @param options.tokenizer   - Allows a custom tokenizer function. By default
+   *                              content is split at every white space and
+   *                              non-word (A-Z, 0-9, and _) characters are
+   *                              removed.
    */
   constructor(options: {
     fields: IndexField[] | Record<IndexField, number>
@@ -125,6 +131,7 @@ export class BloomSearch<
     preprocess?: PreprocessFunction<Document, IndexField>
     stemmer?: StemmerFunction
     stopwords?: StopwordsFunction
+    tokenizer?: TokenizerFunction
   }) {
     this.fields = Array.isArray(options.fields)
       ? options.fields.reduce((weight, field) => {
@@ -138,6 +145,7 @@ export class BloomSearch<
     this.preprocess = options.preprocess ?? String
     this.stemmer = options.stemmer ?? ((token) => token)
     this.stopwords = options.stopwords ?? (() => true)
+    this.tokenizer = options.tokenizer ?? defaultTokenizer
   }
 
   /**
@@ -177,7 +185,7 @@ export class BloomSearch<
     const allTokens = keys(this.fields).reduce((tokens, field) => {
       if (document[field] !== undefined) {
         const fieldText = this.preprocess(document[field], field, document)
-        const fieldTokens = tokenizer(fieldText)
+        const fieldTokens = this.tokenizer(fieldText, language)
 
         const unigrams = fieldTokens
           .filter((token) => token.length && this.stopwords(token, language))
