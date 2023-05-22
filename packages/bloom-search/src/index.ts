@@ -2,6 +2,7 @@ import { CountingBloomFilter, optimal } from '@pacote/bloom-filter'
 import { range, times, windowed } from '@pacote/array'
 import { queryTerms } from './query'
 import { entries, keys, pick } from './object'
+import { countIdf } from './tf-idf'
 
 type PreprocessFunction<Document, Field extends keyof Document> = (
   value: Document[Field],
@@ -34,6 +35,15 @@ type SearchTokens = {
   required: string[]
   included: string[]
   excluded: string[]
+}
+
+type Result<Document, SummaryField extends keyof Document> = {
+  document: {
+    readonly summary: Pick<Document, SummaryField>
+    readonly filter: CountingBloomFilter<string>
+  }
+  matches: Record<string, number>
+  score: number
 }
 
 const compare = (a: number, b: number) => (a === b ? 0 : a > b ? -1 : 1)
@@ -260,6 +270,7 @@ export class BloomSearch<
    */
   search(query: string, language?: string): Pick<Document, SummaryField>[] {
     const tokens = this.parseQuery(query, language)
+    const totalDocuments = keys(this.index).length
 
     return Object.values(this.index)
       .filter(
@@ -267,15 +278,34 @@ export class BloomSearch<
           tokens.excluded.every((token) => document.filter.has(token) === 0) &&
           tokens.required.every((token) => document.filter.has(token) > 0)
       )
-      .map((document) => ({
-        document,
-        matches: tokens.included.reduce(
-          (count, token) => count + document.filter.has(token),
-          0
-        ),
-      }))
-      .filter(({ matches }) => matches > 0)
-      .sort((a, b) => compare(a.matches, b.matches))
+      .map((document) => {
+        const matches: Record<string, number> = {}
+        let hasMatches = false
+        tokens.included.forEach((token) => {
+          const found = document.filter.has(token)
+          matches[token] = found
+          hasMatches = hasMatches || found > 0
+        })
+        return {
+          document,
+          matches,
+          hasMatches,
+        }
+      })
+      .filter(({ hasMatches }) => hasMatches)
+      .reduce<Result<Document, SummaryField>[]>(
+        (all, result, _, results) =>
+          all.concat({
+            ...result,
+            score: countIdf(
+              result.matches,
+              results.map(({ matches }) => matches),
+              totalDocuments
+            ),
+          }),
+        []
+      )
+      .sort((a, b) => compare(a.score, b.score))
       .map(({ document }) => document.summary)
   }
 

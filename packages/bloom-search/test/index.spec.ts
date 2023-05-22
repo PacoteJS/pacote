@@ -22,17 +22,42 @@ test('searching for words in a field yields matching results', () => {
   expect(bs.search('foo')).toEqual([{ id: 1 }])
 })
 
-test('searching for words in a field yields matching sorted by number of matches', () => {
-  const bs = new BloomSearch({
-    fields: ['text'],
-    summary: ['id'],
+describe('ranking', () => {
+  test('searching for words in a field yields matching sorted by number of matches', () => {
+    const bs = new BloomSearch({
+      fields: ['text'],
+      summary: ['id'],
+    })
+
+    bs.add('1', { id: 1, text: 'foo' })
+    bs.add('2', { id: 2, text: 'foo-foo' })
+
+    expect(bs.search('foo')).toEqual([{ id: 2 }, { id: 1 }])
   })
 
-  bs.add('1', { id: 1, text: 'foo' })
-  bs.add('2', { id: 2, text: 'foo foo' })
-  bs.add('3', { id: 3, text: 'foo foo-foo' })
+  test('ranking is proportional to the term frequency in all documents', () => {
+    const bs = new BloomSearch({
+      fields: ['text'],
+      summary: ['id'],
+    })
 
-  expect(bs.search('foo')).toEqual([{ id: 3 }, { id: 2 }, { id: 1 }])
+    bs.add('1', { id: 1, text: 'a brown fox and a brown dog' })
+    bs.add('2', { id: 2, text: 'a brown cow' })
+
+    expect(bs.search('brown cow')).toEqual([{ id: 2 }, { id: 1 }])
+  })
+
+  test('document fields can be boosted', () => {
+    const bs = new BloomSearch({
+      fields: { title: 2, body: 1 },
+      summary: ['title'],
+    })
+
+    bs.add('1', { title: 'bar', body: 'foo' })
+    bs.add('2', { title: 'foo', body: 'bar' })
+
+    expect(bs.search('foo')).toEqual([{ title: 'foo' }, { title: 'bar' }])
+  })
 })
 
 test('document indices can be replaced', () => {
@@ -175,21 +200,6 @@ test('document fields can be preprocessed', () => {
   bs.add('1', { text: 'foo:bar' })
 
   expect(bs.search('foo')).toEqual([{ text: 'foo:bar' }])
-})
-
-test('document fields can be weighed', () => {
-  const bs = new BloomSearch({
-    fields: { title: 2, body: 1 },
-    summary: ['title', 'body'],
-  })
-
-  bs.add('1', { title: 'bar', body: 'foo' })
-  bs.add('2', { title: 'foo', body: 'bar' })
-
-  expect(bs.search('foo')).toEqual([
-    { title: 'foo', body: 'bar' },
-    { title: 'bar', body: 'foo' },
-  ])
 })
 
 test('index can be searched for multiple terms', () => {
