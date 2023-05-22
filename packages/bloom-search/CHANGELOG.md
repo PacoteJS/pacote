@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.13.0](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.12.0...@pacote/bloom-search@0.13.0) (2023-05-22)
+
+### Features
+
+- 🎸 rank results using tf-idf (count-idf) ([5d87cc5](https://github.com/PacoteJS/pacote/commit/5d87cc52a870185803bcac78d158adbbd9b98993))
+
 # [0.12.0](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.11.0...@pacote/bloom-search@0.12.0) (2023-05-13)
 
 ### Features
