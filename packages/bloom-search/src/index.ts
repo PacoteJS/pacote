@@ -38,12 +38,8 @@ type SearchTokens = {
 }
 
 type Result<Document, SummaryField extends keyof Document> = {
-  document: {
-    readonly summary: Pick<Document, SummaryField>
-    readonly filter: CountingBloomFilter<string>
-  }
-  matches: Record<string, number>
-  score: number
+  readonly summary: Pick<Document, SummaryField>
+  readonly score: number
 }
 
 const compare = (a: number, b: number) => (a === b ? 0 : a > b ? -1 : 1)
@@ -74,7 +70,7 @@ export class BloomSearch<
    */
   public readonly fields: Record<IndexField, number>
   /**
-   * Aan array with the names of fields to preserve as summary, and which are
+   * An array with the names of fields to preserve as summary, and which are
    * returned as search results for the matching documents. It is recommended to
    * keep only fields necessary to identify a document (e.g. title, URL, short
    * description) to keep space requirements down.
@@ -280,19 +276,17 @@ export class BloomSearch<
       )
       .map((document) => {
         const matches: Record<string, number> = {}
-        let hasMatches = false
         tokens.included.forEach((token) => {
-          const found = document.filter.has(token)
-          matches[token] = found
-          hasMatches = hasMatches || found > 0
+          matches[token] = document.filter.has(token)
         })
-        return {
-          document,
-          matches,
-          hasMatches,
-        }
+        return { summary: document.summary, matches }
       })
-      .filter(({ hasMatches }) => hasMatches)
+      .filter(({ matches }) =>
+        Object.values(matches).reduce(
+          (hasMatches, match) => hasMatches || match > 0,
+          false
+        )
+      )
       .reduce<Result<Document, SummaryField>[]>(
         (all, result, _, results) =>
           all.concat({
@@ -306,7 +300,7 @@ export class BloomSearch<
         []
       )
       .sort((a, b) => compare(a.score, b.score))
-      .map(({ document }) => document.summary)
+      .map(({ summary }) => summary)
   }
 
   private parseQuery(query: string, language?: string): SearchTokens {
