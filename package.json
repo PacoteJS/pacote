@@ -33,7 +33,6 @@
     }
   },
   "scripts": {
-    "bootstrap": "lerna link convert && lerna bootstrap",
     "build": "lerna run build",
     "clean": "rimraf coverage packages/*/lib packages/*/tsconfig.tsbuildinfo",
     "commit": "git-cz",
