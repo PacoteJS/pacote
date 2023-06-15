@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.2](https://github.com/PacoteJS/pacote/compare/@pacote/memoize@2.0.1...@pacote/memoize@2.0.2) (2023-06-15)
+
+### Performance Improvements
+
+- ⚡️ use Map for memoize cache ([407ea26](https://github.com/PacoteJS/pacote/commit/407ea2666283d23255a82b5563c64cccf1b31805))
+
 ## [2.0.1](https://github.com/PacoteJS/pacote/compare/@pacote/memoize@2.0.0...@pacote/memoize@2.0.1) (2023-04-22)
 
 **Note:** Version bump only for package @pacote/memoize
