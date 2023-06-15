@@ -3,8 +3,6 @@ import { range, times, windowed } from '@pacote/array'
 import { queryTerms } from './query'
 import { entries, keys, pick } from './object'
 import { countIdf } from './tf-idf'
-import { xxh64 } from '@pacote/xxhash'
-import { memoize } from '@pacote/memoize'
 
 type PreprocessFunction<Document, Field extends keyof Document> = (
   value: Document[Field],
@@ -93,7 +91,6 @@ export class BloomSearch<
   private readonly stemmer: StemmerFunction
   private readonly stopwords: StopwordsFunction
   private readonly tokenizer: TokenizerFunction
-  private readonly hash: (i: number, token: string) => number
 
   /**
    * Creates a new Bloom search instance based on Bloom filters, which can be
@@ -169,19 +166,6 @@ export class BloomSearch<
     this.stopwords = options.stopwords ?? (() => true)
     this.tokenizer = options.tokenizer ?? defaultTokenizer
     this.seed = options.seed ?? 0x00c0ffee
-
-    const h1 = xxh64(this.seed + 1)
-    const h2 = xxh64(this.seed + 2)
-    const toUint32 = (hex: string) => parseInt(hex.substring(8, 16), 16)
-
-    this.hash = memoize(
-      (i: number, data: string) => String(i) + ':' + data,
-      (i: number, data: string): number => {
-        const d1 = toUint32(h1.update(data).digest('hex'))
-        const d2 = toUint32(h2.update(data).digest('hex'))
-        return d1 + i * d2 + i ** 3
-      }
-    )
   }
 
   /**
@@ -198,13 +182,12 @@ export class BloomSearch<
    */
   load(index: DocumentIndex<Document, SummaryField>): void {
     this.index = entries(index).reduce((acc, [ref, entry]) => {
-      const options = { ...entry.filter, hash: this.hash }
       acc[ref] = {
         summary: entry.summary,
         filter:
           this.signature === 'compact'
-            ? new BloomFilter(options)
-            : new CountingBloomFilter(options),
+            ? new BloomFilter({ ...entry.filter })
+            : new CountingBloomFilter({ ...entry.filter }),
       }
       return acc
     }, {} as DocumentIndex<Document, SummaryField>)
@@ -246,7 +229,7 @@ export class BloomSearch<
       return
     }
 
-    const options = { ...optimal(uniqTokens, this.errorRate), hash: this.hash }
+    const options = { ...optimal(uniqTokens, this.errorRate), seed: this.seed }
     const filter =
       this.signature === 'compact'
         ? new BloomFilter(options)
