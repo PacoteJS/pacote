@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.2](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.15.1...@pacote/bloom-search@0.15.2) (2023-06-15)
+
+### Bug Fixes
+
+- 🐛 use custom seed, remove slow memoization ([848b508](https://github.com/PacoteJS/pacote/commit/848b508e77b08a4ebc9e24da09a076061eebb15a))
+
 ## [0.15.1](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.15.0...@pacote/bloom-search@0.15.1) (2023-06-15)
 
 **Note:** Version bump only for package @pacote/bloom-search
