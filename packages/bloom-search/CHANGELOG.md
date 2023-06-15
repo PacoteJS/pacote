@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.14.0](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.13.0...@pacote/bloom-search@0.14.0) (2023-06-15)
+
+### Features
+
+- 🎸 compact signature option to use classic Bloom filters ([17a3bc7](https://github.com/PacoteJS/pacote/commit/17a3bc7ffd66e9cce42a3e135303de8cac10097d))
+
 # [0.13.0](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.12.0...@pacote/bloom-search@0.13.0) (2023-05-22)
 
 ### Features
