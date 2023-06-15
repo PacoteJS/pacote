@@ -283,23 +283,43 @@ describe('serialisation', () => {
     const serialised = JSON.stringify(bs.index)
 
     expect(JSON.parse(serialised)).toEqual({
-      version: 1,
-      documents: {
-        '1': {
-          signatures: {
-            1: {
-              filter: [664200],
-              hashes: 14,
-              seed: 12648430,
-              size: 20,
-            },
-          },
-          summary: {
-            text: 'foo',
-          },
+      '1': {
+        filter: {
+          filter: [0, 0, 0, 2, 0, 0, 0, 1, 0, 2, 0, 0, 0, 6, 0, 0, 0, 2, 0, 1],
+          hashes: 14,
+          seed: 12648430,
+          size: 20,
+        },
+        summary: {
+          text: 'foo',
         },
       },
     })
+  })
+})
+
+it('serialises a compact signature', () => {
+  const bs = new BloomSearch({
+    fields: ['text'],
+    summary: ['text'],
+    signature: 'compact',
+  })
+  bs.add('1', { text: 'foo' })
+
+  const serialised = JSON.stringify(bs.index)
+
+  expect(JSON.parse(serialised)).toEqual({
+    '1': {
+      filter: {
+        filter: [664200],
+        hashes: 14,
+        seed: 12648430,
+        size: 20,
+      },
+      summary: {
+        text: 'foo',
+      },
+    },
   })
 })
 

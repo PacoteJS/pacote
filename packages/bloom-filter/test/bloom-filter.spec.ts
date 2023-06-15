@@ -1,6 +1,5 @@
 import { assert, property, string } from 'fast-check'
 import { BloomFilter } from '../src/index'
-import { xxh64 } from '@pacote/xxhash'
 
 test('a Bloom filter is empty when created', () => {
   assert(
@@ -15,25 +14,6 @@ test('elements added to a Bloom filter can be found', () => {
   assert(
     property(string(), (element) => {
       const filter = new BloomFilter({ size: 68, hashes: 1 })
-      filter.add(element)
-      expect(filter.has(element)).toBe(true)
-    })
-  )
-})
-
-test('elements added to a Bloom filter can be found using provided hash functions', () => {
-  const h1 = xxh64(1)
-  const h2 = xxh64(2)
-
-  const hash = (i: number, data: string): number => {
-    const d1 = parseInt(h1.update(data).digest('hex').substring(8, 16), 16)
-    const d2 = parseInt(h2.update(data).digest('hex').substring(8, 16), 16)
-    return d1 + i * d2 + i ** 3
-  }
-
-  assert(
-    property(string(), (element) => {
-      const filter = new BloomFilter({ size: 68, hashes: 1, hash })
       filter.add(element)
       expect(filter.has(element)).toBe(true)
     })
