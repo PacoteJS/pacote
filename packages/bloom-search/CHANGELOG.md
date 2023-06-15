@@ -3,21 +3,6 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.0.0-alpha.0](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.14.0...@pacote/bloom-search@1.0.0-alpha.0) (2023-06-15)
-
-### Features
-
-- 🎸 Bloom filters accept a hash function ([ddeb39f](https://github.com/PacoteJS/pacote/commit/ddeb39fe69c8321b3711e4846c4fad9dff1bc6e9))
-
-### Performance Improvements
-
-- ⚡️ memoize Bloom search hash function ([56326b0](https://github.com/PacoteJS/pacote/commit/56326b03c7246f6643d1dbba7a4afa9d8aebbe26))
-
-### BREAKING CHANGES
-
-- 🧨 Serialised Bloom search indices are no longer compatible with previous
-  versions. Schema version validation has been introduced.
-
 # [0.14.0](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.13.0...@pacote/bloom-search@0.14.0) (2023-06-15)
 
 ### Features
