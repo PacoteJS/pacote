@@ -4,5 +4,10 @@
     "rootDir": "."
   },
   "exclude": ["lib"],
-  "references": [{ "path": "../bloom-filter" }, { "path": "../array" }]
+  "references": [
+    { "path": "../array" },
+    { "path": "../bloom-filter" },
+    { "path": "../memoize" },
+    { "path": "../xxhash" }
+  ]
 }

@@ -3,6 +3,8 @@ import { range, times, windowed } from '@pacote/array'
 import { queryTerms } from './query'
 import { entries, keys, pick } from './object'
 import { countIdf } from './tf-idf'
+import { xxh64 } from '@pacote/xxhash'
+import { memoize } from '@pacote/memoize'
 
 type PreprocessFunction<Document, Field extends keyof Document> = (
   value: Document[Field],
@@ -85,11 +87,13 @@ export class BloomSearch<
    * The _n_-grams to store in the index. Defaults to `1` (no _n_-grams).
    */
   public readonly ngrams: number
+  public readonly seed: number
   public readonly signature: 'counting' | 'compact'
   private readonly preprocess: PreprocessFunction<Document, IndexField>
   private readonly stemmer: StemmerFunction
   private readonly stopwords: StopwordsFunction
   private readonly tokenizer: TokenizerFunction
+  private readonly hash: (i: number, token: string) => number
 
   /**
    * Creates a new Bloom search instance based on Bloom filters, which can be
@@ -106,9 +110,6 @@ export class BloomSearch<
    *                              number yields more reliable results but makes
    *                              the index larger. The value defaults to
    *                              `0.0001` (or 0.01%).
-   * @param options.signature   - Determines the type of document signature to
-   *                              use, 'counting' or 'binary'. Defaults to
-   *                              'counting'.
    * @param options.ngrams      - Indexes _n_-grams beyond the single text
    *                              tokens. A value of `2` indexes digrams, a
    *                              value of `3` indexes digrams and trigrams, and
@@ -118,6 +119,11 @@ export class BloomSearch<
    *                              increase the size of the generated indices
    *                              roughly by a factor of _n_. Default value is
    *                              `1` (no _n_-grams are indexed).
+   * @param options.seed        - Hash seed to use in Bloom Filters, defaults to
+   *                              `0x00c0ffee`.
+   * @param options.signature   - Determines the type of document signature to
+   *                              use, 'counting' or 'binary'. Defaults to
+   *                              'counting'.
    * @param options.preprocess  - Preprocessing function, executed before all
    *                              others. The function serialises each field as
    *                              a `string` and optionally process it before
@@ -141,6 +147,7 @@ export class BloomSearch<
     summary: SummaryField[]
     errorRate?: number
     ngrams?: number
+    seed?: number
     signature?: 'counting' | 'compact'
     preprocess?: PreprocessFunction<Document, IndexField>
     stemmer?: StemmerFunction
@@ -161,6 +168,20 @@ export class BloomSearch<
     this.stemmer = options.stemmer ?? ((token) => token)
     this.stopwords = options.stopwords ?? (() => true)
     this.tokenizer = options.tokenizer ?? defaultTokenizer
+    this.seed = options.seed ?? 0x00c0ffee
+
+    const h1 = xxh64(this.seed + 1)
+    const h2 = xxh64(this.seed + 2)
+    const toUint32 = (hex: string) => parseInt(hex.substring(8, 16), 16)
+
+    this.hash = memoize(
+      (i: number, data: string) => String(i) + ':' + data,
+      (i: number, data: string): number => {
+        const d1 = toUint32(h1.update(data).digest('hex'))
+        const d2 = toUint32(h2.update(data).digest('hex'))
+        return d1 + i * d2 + i ** 3
+      }
+    )
   }
 
   /**
@@ -177,12 +198,13 @@ export class BloomSearch<
    */
   load(index: DocumentIndex<Document, SummaryField>): void {
     this.index = entries(index).reduce((acc, [ref, entry]) => {
+      const options = { ...entry.filter, hash: this.hash }
       acc[ref] = {
         summary: entry.summary,
         filter:
           this.signature === 'compact'
-            ? new BloomFilter(entry.filter)
-            : new CountingBloomFilter(entry.filter),
+            ? new BloomFilter(options)
+            : new CountingBloomFilter(options),
       }
       return acc
     }, {} as DocumentIndex<Document, SummaryField>)
@@ -224,11 +246,11 @@ export class BloomSearch<
       return
     }
 
-    const summary = pick(this.summary, document)
+    const options = { ...optimal(uniqTokens, this.errorRate), hash: this.hash }
     const filter =
       this.signature === 'compact'
-        ? new BloomFilter(optimal(uniqTokens, this.errorRate))
-        : new CountingBloomFilter(optimal(uniqTokens, this.errorRate))
+        ? new BloomFilter(options)
+        : new CountingBloomFilter(options)
 
     entries(this.fields).forEach(([field, weight = 1]) =>
       (allTokens[field] || []).forEach((token) =>
@@ -236,7 +258,7 @@ export class BloomSearch<
       )
     )
 
-    this.index[ref] = { summary, filter }
+    this.index[ref] = { summary: pick(this.summary, document), filter }
   }
 
   /**
