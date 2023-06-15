@@ -17,7 +17,7 @@
 <li><a href="_pacote_bloom_search.BloomSearch.html">BloomSearch</a></li></ul>
 <h1>Class BloomSearch&lt;Document, SummaryField, IndexField&gt;</h1></div>
 <section class="tsd-panel tsd-comment">
-<div class="tsd-comment tsd-typography"><p>Encapsulates search functionality based on counting Bloom filters.</p>
+<div class="tsd-comment tsd-typography"><p>Encapsulates search functionality based on Bloom filters.</p>
 </div>
 <div class="tsd-comment tsd-typography"></div></section> 
 <section class="tsd-panel">
@@ -34,7 +34,7 @@
 <ul class="tsd-hierarchy">
 <li><span class="target">BloomSearch</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/dc93165/packages/bloom-search/src/index.ts#L57">index.ts:57</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/2f212ec/packages/bloom-search/src/index.ts#L57">index.ts:57</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -50,6 +50,7 @@
 <a href="_pacote_bloom_search.BloomSearch.html#fields" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>fields</span></a>
 <a href="_pacote_bloom_search.BloomSearch.html#index" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>index</span></a>
 <a href="_pacote_bloom_search.BloomSearch.html#ngrams" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>ngrams</span></a>
+<a href="_pacote_bloom_search.BloomSearch.html#signature" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>signature</span></a>
 <a href="_pacote_bloom_search.BloomSearch.html#summary" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>summary</span></a>
 </div></section>
 <section class="tsd-index-section">
@@ -66,9 +67,9 @@
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="constructor.new_BloomSearch"><span class="tsd-kind-constructor-signature">new <wbr/>Bloom<wbr/>Search</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">Document</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">SummaryField</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">IndexField</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">options</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_pacote_bloom_search.BloomSearch.html" class="tsd-signature-type tsd-kind-class">BloomSearch</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">Document</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">SummaryField</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">IndexField</span><span class="tsd-signature-symbol">&gt;</span><a href="#constructor.new_BloomSearch" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Creates a new Bloom search instance based on counting Bloom filters, which
-can be used to add documents and test the membership of search terms in the
-added set.</p>
+<div class="tsd-comment tsd-typography"><p>Creates a new Bloom search instance based on Bloom filters, which can be
+used to add documents and test the membership of search terms in the added
+set.</p>
 </div>
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
@@ -83,7 +84,7 @@ added set.</p>
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">options</span>: <span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">errorRate</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">fields</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">IndexField</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-type-parameter">IndexField</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">ngrams</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">preprocess</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type ">PreprocessFunction</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">Document</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">IndexField</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">stemmer</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type ">StemmerFunction</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">stopwords</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type ">StopwordsFunction</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">summary</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-type-parameter">SummaryField</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">tokenizer</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type ">TokenizerFunction</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span></h5>
+<h5><span class="tsd-kind-parameter">options</span>: <span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">errorRate</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">fields</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">IndexField</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-type-parameter">IndexField</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">ngrams</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">preprocess</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type ">PreprocessFunction</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">Document</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">IndexField</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">signature</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">&quot;counting&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;compact&quot;</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">stemmer</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type ">StemmerFunction</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">stopwords</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type ">StopwordsFunction</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">summary</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-type-parameter">SummaryField</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">tokenizer</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type ">TokenizerFunction</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span></h5>
 <div class="tsd-comment tsd-typography"><p>Bloom search options.</p>
 </div>
 <div class="tsd-comment tsd-typography"></div>
@@ -127,6 +128,13 @@ added set.</p>
 </div>
 <div class="tsd-comment tsd-typography"></div></li>
 <li class="tsd-parameter">
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-property">signature</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">&quot;counting&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;compact&quot;</span></h5>
+<div class="tsd-comment tsd-typography"><p>Determines the type of document signature to
+                             use, &#39;counting&#39; or &#39;binary&#39;. Defaults to
+                             &#39;counting&#39;.</p>
+</div>
+<div class="tsd-comment tsd-typography"></div></li>
+<li class="tsd-parameter">
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-property">stemmer</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type ">StemmerFunction</span></h5>
 <div class="tsd-comment tsd-typography"><p>Allows plugging in a custom stemming function.
                              By default, this class does not change text
@@ -158,17 +166,17 @@ added set.</p>
 <h4 class="tsd-returns-title">Returns <a href="_pacote_bloom_search.BloomSearch.html" class="tsd-signature-type tsd-kind-class">BloomSearch</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">Document</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">SummaryField</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">IndexField</span><span class="tsd-signature-symbol">&gt;</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/dc93165/packages/bloom-search/src/index.ts#L134">index.ts:134</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/2f212ec/packages/bloom-search/src/index.ts#L139">index.ts:139</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
 <section class="tsd-panel tsd-member"><a id="errorRate" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagReadonly">Readonly</code> <span>error<wbr/>Rate</span><a href="#errorRate" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">error<wbr/>Rate</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-<div class="tsd-comment tsd-typography"><p>Error rate used for all counting Bloom filters.</p>
+<div class="tsd-comment tsd-typography"><p>Error rate used in all Bloom filters to generate document signatures.</p>
 </div>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/dc93165/packages/bloom-search/src/index.ts#L82">index.ts:82</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/2f212ec/packages/bloom-search/src/index.ts#L83">index.ts:83</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="fields" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagReadonly">Readonly</code> <span>fields</span><a href="#fields" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">fields</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">IndexField</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></div>
@@ -177,16 +185,16 @@ weight used to rank search results.</p>
 </div>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/dc93165/packages/bloom-search/src/index.ts#L71">index.ts:71</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/2f212ec/packages/bloom-search/src/index.ts#L72">index.ts:72</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="index" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>index</span><a href="#index" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">index</span><span class="tsd-signature-symbol">:</span> <a href="../types/_pacote_bloom_search.DocumentIndex.html" class="tsd-signature-type tsd-kind-type-alias">DocumentIndex</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">Document</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">SummaryField</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = {}</span></div>
-<div class="tsd-comment tsd-typography"><p>Collection containing document summaries and counting Bloom filters used to
-search, with document shorthand reference identifier used as keys.</p>
+<div class="tsd-comment tsd-typography"><p>Collection containing document summaries and Bloom filter signatures used
+to search, with document shorthand reference identifier used as keys.</p>
 </div>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/dc93165/packages/bloom-search/src/index.ts#L66">index.ts:66</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/2f212ec/packages/bloom-search/src/index.ts#L66">index.ts:66</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="ngrams" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagReadonly">Readonly</code> <span>ngrams</span><a href="#ngrams" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">ngrams</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
@@ -194,7 +202,12 @@ search, with document shorthand reference identifier used as keys.</p>
 </div>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/dc93165/packages/bloom-search/src/index.ts#L86">index.ts:86</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/2f212ec/packages/bloom-search/src/index.ts#L87">index.ts:87</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member"><a id="signature" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagReadonly">Readonly</code> <span>signature</span><a href="#signature" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">signature</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;counting&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;compact&quot;</span></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/2f212ec/packages/bloom-search/src/index.ts#L88">index.ts:88</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="summary" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagReadonly">Readonly</code> <span>summary</span><a href="#summary" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">summary</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-type-parameter">SummaryField</span><span class="tsd-signature-symbol">[]</span></div>
@@ -205,7 +218,7 @@ description) to keep space requirements down.</p>
 </div>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/dc93165/packages/bloom-search/src/index.ts#L78">index.ts:78</a></li></ul></aside></section></section>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/2f212ec/packages/bloom-search/src/index.ts#L79">index.ts:79</a></li></ul></aside></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Methods</h2>
 <section class="tsd-panel tsd-member"><a id="add" class="tsd-anchor"></a>
@@ -240,7 +253,7 @@ description) to keep space requirements down.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/dc93165/packages/bloom-search/src/index.ts#L192">index.ts:192</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/2f212ec/packages/bloom-search/src/index.ts#L202">index.ts:202</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="load" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>load</span><a href="#load" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -265,7 +278,7 @@ not be found in the rehydrated index.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/dc93165/packages/bloom-search/src/index.ts#L171">index.ts:171</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/2f212ec/packages/bloom-search/src/index.ts#L178">index.ts:178</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="remove" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>remove</span><a href="#remove" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -284,7 +297,7 @@ not be found in the rehydrated index.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/dc93165/packages/bloom-search/src/index.ts#L234">index.ts:234</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/2f212ec/packages/bloom-search/src/index.ts#L247">index.ts:247</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="search" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>search</span><a href="#search" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -295,7 +308,7 @@ only the properties declared in the <code>summary</code> option) that possibly m
 one or more terms in the query.</p>
 <p>Each search term is run through the provided <code>stemmer</code> function to ensure
 terms are processed in the same way as the tokens previously added to the
-index&#39;s Bloom filters.</p>
+index&#39;s signature.</p>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -303,7 +316,7 @@ index&#39;s Bloom filters.</p>
 <li>
 <h5><span class="tsd-kind-parameter">query</span>: <span class="tsd-signature-type">string</span></h5>
 <div class="tsd-comment tsd-typography"><p>Terms to search.</p>
-<p>Individual words are matched against the filter of each indexed document.
+<p>Individual words are matched against the signature of each indexed document.
 You may prefix each word with the <code>+</code> operator to intersect results that
 (probably) contain the required word, or use the <code>-</code> operator to exclude
 results containing the word.</p>
@@ -326,7 +339,7 @@ are returned in the search results.</p>
 
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/dc93165/packages/bloom-search/src/index.ts#L267">index.ts:267</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/2f212ec/packages/bloom-search/src/index.ts#L280">index.ts:280</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -349,6 +362,7 @@ are returned in the search results.</p>
 <li><a href="#fields" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>fields</span></a></li>
 <li><a href="#index" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>index</span></a></li>
 <li><a href="#ngrams" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>ngrams</span></a></li>
+<li><a href="#signature" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>signature</span></a></li>
 <li><a href="#summary" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>summary</span></a></li>
 <li><a href="#add" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>add</span></a></li>
 <li><a href="#load" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>load</span></a></li>
