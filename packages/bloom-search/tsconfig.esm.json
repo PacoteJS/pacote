@@ -9,6 +9,7 @@
   "include": ["src"],
   "references": [
     { "path": "../bloom-filter/tsconfig.esm.json" },
-    { "path": "../array/tsconfig.esm.json" }
+    { "path": "../array/tsconfig.esm.json" },
+    { "path": "../xxhash/tsconfig.esm.json" }
   ]
 }

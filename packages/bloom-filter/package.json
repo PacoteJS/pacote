@@ -33,7 +33,7 @@
     "prepublish": "yarn build"
   },
   "dependencies": {
-    "@pacote/memoize": "file:../memoize",
+    "@pacote/array": "file:../array",
     "@pacote/xxhash": "file:../xxhash"
   },
   "gitHead": "bd3b251fc01a599034b03175c0cfab2d946f2f7f"

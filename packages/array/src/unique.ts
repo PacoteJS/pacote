@@ -1,3 +1,3 @@
 export function unique<T>(array: T[]): T[] {
-  return [...new Set(array)]
+  return Array.from(new Set(array))
 }

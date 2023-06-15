@@ -4,5 +4,5 @@
     "rootDir": "."
   },
   "exclude": ["lib"],
-  "references": [{ "path": "../memoize" }, { "path": "../xxhash" }]
+  "references": [{ "path": "../array" }, { "path": "../xxhash" }]
 }
