@@ -7,7 +7,6 @@
   "references": [
     { "path": "../bloom-filter" },
     { "path": "../array" },
-    { "path": "../memoize" },
     { "path": "../xxhash" }
   ]
 }
