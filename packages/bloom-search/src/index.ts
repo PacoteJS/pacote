@@ -1,4 +1,4 @@
-import { CountingBloomFilter, optimal } from '@pacote/bloom-filter'
+import { BloomFilter, CountingBloomFilter, optimal } from '@pacote/bloom-filter'
 import { range, times, windowed } from '@pacote/array'
 import { queryTerms } from './query'
 import { entries, keys, pick } from './object'
@@ -24,10 +24,10 @@ export type DocumentIndex<
      */
     readonly summary: Pick<Document, SummaryField>
     /**
-     * Counting Bloom filter for the document. All words added to the filter are
-     * searchable but not retrievable.
+     * Bloom filter signature for the document. All words added to the signature
+     * are searchable but not retrievable.
      */
-    readonly filter: CountingBloomFilter<string>
+    readonly filter: BloomFilter<string> | CountingBloomFilter<string>
   }
 >
 
@@ -52,7 +52,7 @@ const defaultTokenizer = (text: string): string[] =>
     .map((token) => token.replace(/\W/gi, ''))
 
 /**
- * Encapsulates search functionality based on counting Bloom filters.
+ * Encapsulates search functionality based on Bloom filters.
  */
 export class BloomSearch<
   Document extends Record<string, unknown>,
@@ -60,10 +60,11 @@ export class BloomSearch<
   IndexField extends keyof Document = keyof Document
 > {
   /**
-   * Collection containing document summaries and counting Bloom filters used to
-   * search, with document shorthand reference identifier used as keys.
+   * Collection containing document summaries and Bloom filter signatures used
+   * to search, with document shorthand reference identifier used as keys.
    */
   public index: DocumentIndex<Document, SummaryField> = {}
+
   /**
    * A record containing the name of all indexable fields and their relative
    * weight used to rank search results.
@@ -77,22 +78,23 @@ export class BloomSearch<
    */
   public readonly summary: SummaryField[]
   /**
-   * Error rate used for all counting Bloom filters.
+   * Error rate used in all Bloom filters to generate document signatures.
    */
   public readonly errorRate: number
   /**
    * The _n_-grams to store in the index. Defaults to `1` (no _n_-grams).
    */
   public readonly ngrams: number
+  public readonly signature: 'counting' | 'compact'
   private readonly preprocess: PreprocessFunction<Document, IndexField>
   private readonly stemmer: StemmerFunction
   private readonly stopwords: StopwordsFunction
   private readonly tokenizer: TokenizerFunction
 
   /**
-   * Creates a new Bloom search instance based on counting Bloom filters, which
-   * can be used to add documents and test the membership of search terms in the
-   * added set.
+   * Creates a new Bloom search instance based on Bloom filters, which can be
+   * used to add documents and test the membership of search terms in the added
+   * set.
    *
    * @param options             - Bloom search options.
    * @param options.fields      - The fields to index, provided as an array or
@@ -104,6 +106,9 @@ export class BloomSearch<
    *                              number yields more reliable results but makes
    *                              the index larger. The value defaults to
    *                              `0.0001` (or 0.01%).
+   * @param options.signature   - Determines the type of document signature to
+   *                              use, 'counting' or 'binary'. Defaults to
+   *                              'counting'.
    * @param options.ngrams      - Indexes _n_-grams beyond the single text
    *                              tokens. A value of `2` indexes digrams, a
    *                              value of `3` indexes digrams and trigrams, and
@@ -136,6 +141,7 @@ export class BloomSearch<
     summary: SummaryField[]
     errorRate?: number
     ngrams?: number
+    signature?: 'counting' | 'compact'
     preprocess?: PreprocessFunction<Document, IndexField>
     stemmer?: StemmerFunction
     stopwords?: StopwordsFunction
@@ -150,6 +156,7 @@ export class BloomSearch<
     this.summary = options.summary
     this.errorRate = options.errorRate ?? 0.0001
     this.ngrams = options.ngrams ?? 1
+    this.signature = options.signature ?? 'counting'
     this.preprocess = options.preprocess ?? String
     this.stemmer = options.stemmer ?? ((token) => token)
     this.stopwords = options.stopwords ?? (() => true)
@@ -172,7 +179,10 @@ export class BloomSearch<
     this.index = entries(index).reduce((acc, [ref, entry]) => {
       acc[ref] = {
         summary: entry.summary,
-        filter: new CountingBloomFilter(entry.filter),
+        filter:
+          this.signature === 'compact'
+            ? new BloomFilter(entry.filter)
+            : new CountingBloomFilter(entry.filter),
       }
       return acc
     }, {} as DocumentIndex<Document, SummaryField>)
@@ -215,7 +225,10 @@ export class BloomSearch<
     }
 
     const summary = pick(this.summary, document)
-    const filter = new CountingBloomFilter(optimal(uniqTokens, this.errorRate))
+    const filter =
+      this.signature === 'compact'
+        ? new BloomFilter(optimal(uniqTokens, this.errorRate))
+        : new CountingBloomFilter(optimal(uniqTokens, this.errorRate))
 
     entries(this.fields).forEach(([field, weight = 1]) =>
       (allTokens[field] || []).forEach((token) =>
@@ -242,11 +255,11 @@ export class BloomSearch<
    *
    * Each search term is run through the provided `stemmer` function to ensure
    * terms are processed in the same way as the tokens previously added to the
-   * index's Bloom filters.
+   * index's signature.
    *
    * @param query       - Terms to search.
    *
-   * Individual words are matched against the filter of each indexed document.
+   * Individual words are matched against the signature of each indexed document.
    * You may prefix each word with the `+` operator to intersect results that
    * (probably) contain the required word, or use the `-` operator to exclude
    * results containing the word.
@@ -272,12 +285,14 @@ export class BloomSearch<
       .filter(
         (document) =>
           tokens.excluded.every((token) => document.filter.has(token) === 0) &&
-          tokens.required.every((token) => document.filter.has(token) > 0)
+          tokens.required.every(
+            (token) => Number(document.filter.has(token)) > 0
+          )
       )
       .map((document) => {
         const matches: Record<string, number> = {}
         tokens.included.forEach((token) => {
-          matches[token] = document.filter.has(token)
+          matches[token] = Number(document.filter.has(token))
         })
         return { summary: document.summary, matches }
       })
