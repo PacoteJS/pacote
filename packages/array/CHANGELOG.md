@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.0](https://github.com/PacoteJS/pacote/compare/@pacote/array@0.7.0...@pacote/array@1.0.0-alpha.0) (2023-06-15)
+
+### Features
+
+- 🎸 Bloom filters accept a hash function ([ddeb39f](https://github.com/PacoteJS/pacote/commit/ddeb39fe69c8321b3711e4846c4fad9dff1bc6e9))
+
+### BREAKING CHANGES
+
+- 🧨 Serialised Bloom search indices are no longer compatible with previous
+  versions. Schema version validation has been introduced.
+
 # [0.7.0](https://github.com/PacoteJS/pacote/compare/@pacote/array@0.6.1...@pacote/array@0.7.0) (2023-05-11)
 
 ### Features
