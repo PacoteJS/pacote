@@ -1,5 +1,5 @@
-import { memoize } from '@pacote/memoize'
-import { hashLocations } from './hash'
+import { range } from '@pacote/array'
+import { defaultHash } from './hash'
 import { Options } from './options'
 
 export class CountingBloomFilter<T extends { toString(): string }> {
@@ -7,7 +7,7 @@ export class CountingBloomFilter<T extends { toString(): string }> {
   readonly hashes: number
   readonly seed: number
   readonly filter: Uint32Array
-  private computeHashLocations: (element: string) => number[]
+  private hash: (i: number, element: string) => number
 
   constructor(options: Options) {
     if (options.size < 1) {
@@ -22,32 +22,31 @@ export class CountingBloomFilter<T extends { toString(): string }> {
     this.hashes = options.hashes
     this.seed = options.seed ?? 0x00c0ffee
     this.filter = options.filter ?? new Uint32Array(this.size)
-
-    this.computeHashLocations = memoize(
-      (i) => i,
-      hashLocations(this.size, this.hashes, this.seed)
-    )
+    this.hash = options.hash ?? defaultHash(this.seed)
   }
 
   add(element: T): void {
-    this.computeHashLocations(element.toString()).forEach((index) => {
-      this.filter[index] += 1
+    range(0, this.hashes).forEach((i) => {
+      const position = this.hashPosition(i, element)
+      this.filter[position] += 1
     })
   }
 
   remove(element: T): void {
-    this.computeHashLocations(element.toString()).forEach((index) => {
-      if (this.filter[index] > 0) {
-        this.filter[index] -= 1
+    range(0, this.hashes).forEach((i) => {
+      const position = this.hashPosition(i, element)
+      if (this.filter[position] > 0) {
+        this.filter[position] -= 1
       }
     })
   }
 
   has(element: T): number {
     return Math.min(
-      ...this.computeHashLocations(element.toString()).map(
-        (index) => this.filter[index]
-      )
+      ...range(0, this.hashes).map((i) => {
+        const position = this.hashPosition(i, element)
+        return this.filter[position]
+      })
     )
   }
 
@@ -58,6 +57,10 @@ export class CountingBloomFilter<T extends { toString(): string }> {
       seed: this.seed,
       size: this.size,
     }
+  }
+
+  private hashPosition(i: number, element: T): number {
+    return this.hash(i, element.toString()) % this.size
   }
 }
 

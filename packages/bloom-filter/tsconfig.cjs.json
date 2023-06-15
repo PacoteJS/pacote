@@ -8,6 +8,7 @@
   },
   "include": ["src"],
   "references": [
+    { "path": "../array/tsconfig.cjs.json" },
     { "path": "../memoize/tsconfig.cjs.json" },
     { "path": "../xxhash/tsconfig.cjs.json" }
   ]

@@ -8,6 +8,7 @@
   },
   "include": ["src"],
   "references": [
+    { "path": "../array/tsconfig.esm.json" },
     { "path": "../memoize/tsconfig.esm.json" },
     { "path": "../xxhash/tsconfig.esm.json" }
   ]
