@@ -1,20 +1,12 @@
 type Fn<A extends any[], R> = (...args: A) => R
 
-interface Cache<R> {
-  [key: string]: R
-}
-
 function createCache<R>() {
-  const cache: Cache<R> = {}
+  const cache = new Map<string, R>()
 
   return {
-    has: (key: string) => Object.hasOwnProperty.call(cache, key),
-
-    get: (key: string) => cache[key],
-
-    set: (key: string, value: R) => {
-      cache[key] = value
-    },
+    has: (key: string) => cache.has(key),
+    get: (key: string) => cache.get(key),
+    set: (key: string, value: R) => cache.set(key, value),
   }
 }
 
@@ -31,6 +23,7 @@ export function memoize<A extends any[], R>(
       cache.set(key, fn(...args))
     }
 
-    return cache.get(key)
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return cache.get(key)!
   }
 }
