@@ -4,7 +4,7 @@ import { queryTerms } from './query'
 import { entries, keys, pick } from './object'
 import { countIdf } from './tf-idf'
 import { xxh64 } from '@pacote/xxhash'
-import { toUint32 } from 'packages/bloom-filter/src/hash'
+import { memoize } from '@pacote/memoize'
 
 type PreprocessFunction<Document, Field extends keyof Document> = (
   value: Document[Field],
@@ -167,11 +167,14 @@ export class BloomSearch<
     const h2 = xxh64(this.seed + 2)
     const toUint32 = (hex: string) => parseInt(hex.substring(8, 16), 16)
 
-    this.hash = (i: number, data: string): number => {
-      const d1 = toUint32(h1.update(data).digest('hex'))
-      const d2 = toUint32(h2.update(data).digest('hex'))
-      return d1 + i * d2 + i ** 3
-    }
+    this.hash = memoize(
+      (i: number, data: string) => String(i) + ':' + data,
+      (i: number, data: string): number => {
+        const d1 = toUint32(h1.update(data).digest('hex'))
+        const d2 = toUint32(h2.update(data).digest('hex'))
+        return d1 + i * d2 + i ** 3
+      }
+    )
   }
 
   /**
