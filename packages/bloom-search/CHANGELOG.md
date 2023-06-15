@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.15.0](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@1.0.0-alpha.0...@pacote/bloom-search@0.15.0) (2023-06-15)
+
+### Features
+
+- 🎸 configurable seed for Bloom filters, hashing perf ([447944c](https://github.com/PacoteJS/pacote/commit/447944c66dcddfb0b472ebe31fe823328424f72e))
+
+### Reverts
+
+- Revert "feat: 🎸 Bloom filters accept a hash function" ([e96328b](https://github.com/PacoteJS/pacote/commit/e96328bd0773e565b8176b0ba380c0d13bd649dc))
+- Revert "perf: ⚡️ memoize Bloom search hash function" ([ead2cf7](https://github.com/PacoteJS/pacote/commit/ead2cf73a98f2f33b45b76881f7d37a97c03e585))
+- Revert "chore(release): publish" ([7f358be](https://github.com/PacoteJS/pacote/commit/7f358be82b8df583c598635d87f169164c3f1d56))
+
 # [0.14.0](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.13.0...@pacote/bloom-search@0.14.0) (2023-06-15)
 
 ### Features

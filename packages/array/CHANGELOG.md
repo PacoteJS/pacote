@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.1](https://github.com/PacoteJS/pacote/compare/@pacote/array@1.0.0-alpha.0...@pacote/array@0.7.1) (2023-06-15)
+
+### Reverts
+
+- Revert "feat: 🎸 Bloom filters accept a hash function" ([e96328b](https://github.com/PacoteJS/pacote/commit/e96328bd0773e565b8176b0ba380c0d13bd649dc))
+- Revert "chore(release): publish" ([7f358be](https://github.com/PacoteJS/pacote/commit/7f358be82b8df583c598635d87f169164c3f1d56))
+
 # [0.7.0](https://github.com/PacoteJS/pacote/compare/@pacote/array@0.6.1...@pacote/array@0.7.0) (2023-05-11)
 
 ### Features
