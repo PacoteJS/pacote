@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.15.3...@pacote/bloom-search@0.16.0) (2023-06-17)
+
+### Features
+
+- 🎸 search index space efficiency by using classic filters ([8c9d8ec](https://github.com/PacoteJS/pacote/commit/8c9d8ecd0e6c89166f695bfe565e51542d3718e0))
+
+### BREAKING CHANGES
+
+- 🧨 Due to the changes, serialised instances are no longer compatible with
+  previous versions of Bloom search.
+
 ## [0.15.3](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.15.2...@pacote/bloom-search@0.15.3) (2023-06-15)
 
 ### Performance Improvements
