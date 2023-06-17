@@ -217,6 +217,24 @@ test('index can be searched for multiple terms', () => {
   ])
 })
 
+test('minSize prevents false positives in small documents', () => {
+  const bs = new BloomSearch({
+    fields: { id: 0, content: 1 },
+    summary: ['id'],
+    errorRate: 0.0001,
+    minSize: 16,
+  })
+
+  bs.add('1', {
+    id: '1',
+    content: `realized what aroused greatest apprehension disquiet fossilized
+    existence signs without meaning rather astonishing experience nothing can
+    entirely divested emanation meaning michal ajvaz other city`,
+  })
+
+  expect(bs.search('ab')).toEqual([])
+})
+
 describe('+required term search', () => {
   it('includes only results where the required term is found', () => {
     const bs = new BloomSearch({

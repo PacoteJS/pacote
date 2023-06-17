@@ -6,14 +6,14 @@ import { countIdf } from './tf-idf'
 import { xxh64 } from '@pacote/xxhash'
 import { memoize } from '@pacote/memoize'
 
-type PreprocessFunction<Document, Field extends keyof Document> = (
+export type PreprocessFunction<Document, Field extends keyof Document> = (
   value: Document[Field],
   field: Field,
   document: Document
 ) => string
-type StopwordsFunction = (token: string, language?: string) => boolean
-type StemmerFunction = (token: string, language?: string) => string
-type TokenizerFunction = (token: string, language?: string) => string[]
+export type StopwordsFunction = (token: string, language?: string) => boolean
+export type StemmerFunction = (token: string, language?: string) => string
+export type TokenizerFunction = (token: string, language?: string) => string[]
 
 export type IndexedDocument<Document, SummaryField extends keyof Document> = {
   /**
@@ -21,8 +21,8 @@ export type IndexedDocument<Document, SummaryField extends keyof Document> = {
    */
   readonly summary: Pick<Document, SummaryField>
   /**
-   * Bloom filter signatures for the document grouped by word frequency. All
-   * words added to the signature are searchable but not retrievable.
+   * Bloom filter signatures for the document grouped by word frequency. Any
+   * words added to a signature are searchable but not retrievable.
    */
   readonly signatures: Record<number, BloomFilter<string>>
 }
@@ -30,6 +30,76 @@ export type IndexedDocument<Document, SummaryField extends keyof Document> = {
 export type Index<Document, SummaryField extends keyof Document> = {
   version: number
   documents: Record<string, IndexedDocument<Document, SummaryField>>
+}
+
+export type Options<
+  Document extends Record<string, unknown>,
+  SummaryField extends keyof Document = keyof Document,
+  IndexField extends keyof Document = keyof Document
+> = {
+  /**
+   * The fields to index, provided as an array or as a record of field keys and
+   * weight values.
+   */
+  fields: IndexField[] | Record<IndexField, number>
+  /**
+   * Determines which fields in the document can be stored in the index and
+   * returned as a search result.
+   */
+  summary: SummaryField[]
+  /**
+   * Determines the desired error rate. A lower number yields more reliable
+   * results but makes the index larger. The value defaults to `0.0001` (or
+   * 0.01%).
+   */
+  errorRate?: number
+  /**
+   * Minimum Bloom filter size, used to reduce false positives when dealing with
+   * small documents with sparse term frequency distribution. The default value
+   * is `0`.
+   */
+  minSize?: number
+  /**
+   * Indexes _n_-grams beyond the single text tokens. A value of `2` indexes
+   * digrams, a value of `3` indexes digrams and trigrams, and so forth. This
+   * allows seaching the index for simple phrases (a phrase search is entered
+   * "between quotes"). Indexing _n_-grams will increase the size of the
+   * generated indices roughly by a factor of _n_. Default value is `1` (no
+   * _n_-grams are indexed).
+   */
+  ngrams?: number
+  /**
+   * Hash seed to use in Bloom Filters, defaults to `0x00c0ffee`.
+   */
+  seed?: number
+  /**
+   * Optimises storage by grouping indexed terms into buckets according to term
+   * frequency in a document. Defaults to `[1, 2, 3, 4, 8, 16, 32, 64]`.
+   */
+  termFrequencyBuckets?: number[]
+  /**
+   * Preprocessing function, executed before all others. The function serialises
+   * each field as a `string` and optionally process it before indexing. For
+   * example, you might use this function to strip HTML from a field value. By
+   * default, this class simply converts the field value into a `string`.
+   */
+  preprocess?: PreprocessFunction<Document, IndexField>
+  /**
+   * Allows plugging in a custom stemming function. By default, this class does
+   * not change text tokens.
+   */
+  stemmer?: StemmerFunction
+  /**
+   * Filters tokens so that words that are too short or too common may be
+   * excluded from the index. By default, no stopwords are excluded.
+   */
+  stopwords?: StopwordsFunction
+  /**
+   * Allows a custom tokenizer function. By default content is transformed to
+   * lowercase, split at every whitespace of hyphen, and non-word (`A-Z`, `0-9`,
+   * and `_`) characters replaced.
+   */
+  tokenizer?: TokenizerFunction
 }
 
 type SearchTokens = {
@@ -71,6 +141,7 @@ export class BloomSearch<
    * weight used to rank search results.
    */
   public readonly fields: Record<IndexField, number>
+
   /**
    * An array with the names of fields to preserve as summary, and which are
    * returned as search results for the matching documents. It is recommended to
@@ -78,15 +149,32 @@ export class BloomSearch<
    * description) to keep space requirements down.
    */
   public readonly summary: SummaryField[]
+
   /**
    * Error rate used in all Bloom filters to generate document signatures.
    */
   public readonly errorRate: number
+
+  /**
+   * Minimum Bloom filter size, used to reduce false positives when dealing with
+   * small documents with sparse term frequency distribution.
+   */
+  public readonly minSize: number
+
   /**
    * The _n_-grams to store in the index. Defaults to `1` (no _n_-grams).
    */
   public readonly ngrams: number
+
+  /**
+   * Hash seed to use in Bloom Filters, defaults to `0x00c0ffee`.
+   */
   public readonly seed: number
+
+  /**
+   * Optimises storage by grouping indexed terms into buckets according to term
+   * frequency in a document.
+   */
   public readonly termFrequencyBuckets: number[]
   private readonly preprocess: PreprocessFunction<Document, IndexField>
   private readonly stemmer: StemmerFunction
@@ -99,60 +187,9 @@ export class BloomSearch<
    * used to add documents and test the membership of search terms in the added
    * set.
    *
-   * @param options             - Bloom search options.
-   * @param options.fields      - The fields to index, provided as an array or
-   *                              as a record of field keys and weight values.
-   * @param options.summary     - Determines which fields in the document can be
-   *                              stored in the index and returned as a search
-   *                              result.
-   * @param options.errorRate   - Determines the desired error rate. A lower
-   *                              number yields more reliable results but makes
-   *                              the index larger. The value defaults to
-   *                              `0.0001` (or 0.01%).
-   * @param options.ngrams      - Indexes _n_-grams beyond the single text
-   *                              tokens. A value of `2` indexes digrams, a
-   *                              value of `3` indexes digrams and trigrams, and
-   *                              so forth. This allows seaching the index for
-   *                              simple phrases (a phrase search is entered
-   *                              "between quotes"). Indexing _n_-grams will
-   *                              increase the size of the generated indices
-   *                              roughly by a factor of _n_. Default value is
-   *                              `1` (no _n_-grams are indexed).
-   * @param options.seed        - Hash seed to use in Bloom Filters, defaults to
-   *                              `0x00c0ffee`.
-   * @param options.preprocess  - Preprocessing function, executed before all
-   *                              others. The function serialises each field as
-   *                              a `string` and optionally process it before
-   *                              indexing. For example, you might use this
-   *                              function to strip HTML from a field value. By
-   *                              default, this class simply converts the field
-   *                              value into a `string`.
-   * @param options.stopwords   - Filters tokens so that words that are too
-   *                              short or too common may be excluded from the
-   *                              index. By default, no stopwords are excluded.
-   * @param options.stemmer     - Allows plugging in a custom stemming function.
-   *                              By default, this class does not change text
-   *                              tokens.
-   * @param options.termFrequencyBuckets - Optimises storage by grouping indexed
-   *                                       terms into buckets according to
-   *                                       term frequency in a document.
-   * @param options.tokenizer   - Allows a custom tokenizer function. By default
-   *                              content is transformed to lowercase, split
-   *                              at every whitespace of hyphen, and non-word
-   *                              (A-Z, 0-9, and _) characters replaced.
+   * @param options Bloom search options.
    */
-  constructor(options: {
-    fields: IndexField[] | Record<IndexField, number>
-    summary: SummaryField[]
-    errorRate?: number
-    ngrams?: number
-    seed?: number
-    termFrequencyBuckets?: number[]
-    preprocess?: PreprocessFunction<Document, IndexField>
-    stemmer?: StemmerFunction
-    stopwords?: StopwordsFunction
-    tokenizer?: TokenizerFunction
-  }) {
+  constructor(options: Options<Document, SummaryField, IndexField>) {
     this.fields = Array.isArray(options.fields)
       ? options.fields.reduce((weight, field) => {
           weight[field] = 1
@@ -162,6 +199,7 @@ export class BloomSearch<
     this.summary = options.summary
     this.errorRate = options.errorRate ?? 0.0001
     this.ngrams = options.ngrams ?? 1
+    this.minSize = options.minSize ?? 0
     this.termFrequencyBuckets = options.termFrequencyBuckets ?? [
       1, 2, 3, 4, 8, 16, 32, 64,
     ]
@@ -262,27 +300,32 @@ export class BloomSearch<
       return
     }
 
-    const tokenFrequencies: Record<string, number> = {}
+    const frequency: Record<string, number> = {}
 
     entries(this.fields).forEach(([field, weight = 1]) =>
       (tokensByField[field] || []).forEach((token) => {
-        tokenFrequencies[token] = (tokenFrequencies[token] ?? 0) + weight
+        frequency[token] = (frequency[token] ?? 0) + weight
       })
     )
 
-    const tokensByFrequency = Array.from(uniqueTokens).reduce((acc, token) => {
+    const tokensByFrequency = Array.from(uniqueTokens).reduce<
+      Record<number, string[]>
+    >((tokens, token) => {
       const frequencyBucket =
         this.termFrequencyBuckets.findLast(
-          (limit) => tokenFrequencies[token] >= limit
+          (limit) => frequency[token] >= limit
         ) ?? 0
-      acc[frequencyBucket] = (acc[frequencyBucket] ?? []).concat(token)
-      return acc
-    }, {} as Record<number, string[]>)
+      if (!tokens[frequencyBucket]) {
+        tokens[frequencyBucket] = []
+      }
+      tokens[frequencyBucket].push(token)
+      return tokens
+    }, {})
 
     const signatures = entries(tokensByFrequency).reduce(
       (acc, [frequencyBucket, tokens]) => {
         acc[frequencyBucket] = new BloomFilter({
-          ...optimal(tokens.length, this.errorRate),
+          ...optimal(Math.max(this.minSize, tokens.length), this.errorRate),
           seed: this.seed,
           hash: this.hash,
         })
@@ -364,7 +407,7 @@ export class BloomSearch<
         )
       )
       .reduce<Result<Document, SummaryField>[]>((all, result, _, results) => {
-        return all.concat({
+        all.push({
           ...result,
           score: countIdf(
             result.matches,
@@ -372,6 +415,7 @@ export class BloomSearch<
             totalDocuments
           ),
         })
+        return all
       }, [])
       .sort((a, b) => compare(a.score, b.score))
       .map(({ summary }) => summary)
