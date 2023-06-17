@@ -272,23 +272,24 @@ export class BloomSearch<
 
     const tokensByFrequency = Array.from(uniqueTokens).reduce((acc, token) => {
       const frequencyBucket =
-        1 +
-        this.termFrequencyBuckets.findLastIndex(
+        this.termFrequencyBuckets.findLast(
           (limit) => tokenFrequencies[token] >= limit
-        )
+        ) ?? 0
       acc[frequencyBucket] = (acc[frequencyBucket] ?? []).concat(token)
       return acc
     }, {} as Record<number, string[]>)
 
+    console.log(tokensByFrequency)
+
     const signatures = entries(tokensByFrequency).reduce(
-      (acc, [frequencyBucketIdx, tokens]) => {
-        acc[frequencyBucketIdx] = new BloomFilter({
+      (acc, [frequencyBucket, tokens]) => {
+        acc[frequencyBucket] = new BloomFilter({
           ...optimal(tokens.length, this.errorRate),
           seed: this.seed,
           hash: this.hash,
         })
         tokens.forEach((token) => {
-          acc[frequencyBucketIdx].add(token)
+          acc[frequencyBucket].add(token)
         })
         return acc
       },
