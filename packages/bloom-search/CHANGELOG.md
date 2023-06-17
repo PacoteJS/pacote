@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.1](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.16.0...@pacote/bloom-search@0.16.1) (2023-06-17)
+
+### Bug Fixes
+
+- 🐛 use frequency for the bucket key instead of the index ([c8f3a68](https://github.com/PacoteJS/pacote/commit/c8f3a681bc8027f7fd6c8e751bacf368711dbed5))
+
 # [0.16.0](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.15.3...@pacote/bloom-search@0.16.0) (2023-06-17)
 
 ### Features
