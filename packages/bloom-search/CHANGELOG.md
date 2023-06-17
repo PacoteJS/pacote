@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.2](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.16.1...@pacote/bloom-search@0.16.2) (2023-06-17)
+
+### Bug Fixes
+
+- 🐛 remove console.log ([bfb09c5](https://github.com/PacoteJS/pacote/commit/bfb09c5076ce0477f9a00bc1b77ac240f8e4da9c))
+
 ## [0.16.1](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.16.0...@pacote/bloom-search@0.16.1) (2023-06-17)
 
 ### Bug Fixes
