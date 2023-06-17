@@ -26,6 +26,9 @@ partial matching can be remedied through the use of a custom stemmer
 function, but more "advanced" features like suffix matching cannot be
 performed at all.
 
+See a [how several client-side search engines compare against Bloom
+Search](https://goblindegook.github.io/bloom-search-poc/).
+
 ## Installation
 
 ```bash

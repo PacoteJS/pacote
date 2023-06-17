@@ -279,8 +279,6 @@ export class BloomSearch<
       return acc
     }, {} as Record<number, string[]>)
 
-    console.log(tokensByFrequency)
-
     const signatures = entries(tokensByFrequency).reduce(
       (acc, [frequencyBucket, tokens]) => {
         acc[frequencyBucket] = new BloomFilter({
