@@ -5,11 +5,8 @@ function idfSmooth(
   frequencies: Record<string, number>[],
   totalDocuments: number
 ): number {
-  const idfWeight = frequencies.reduce(
-    (total, frequency) => total + (frequency[term] > 0 ? 1 : 0),
-    1
-  )
-  return 1 + Math.log(totalDocuments / idfWeight)
+  const nt = 1 + frequencies.filter((frequency) => frequency[term] > 0).length
+  return 1 + Math.log(totalDocuments / nt)
 }
 
 export function countIdf(
@@ -17,9 +14,8 @@ export function countIdf(
   documentTermFrequencies: Record<string, number>[],
   totalDocuments: number
 ): number {
-  return entries(termFrequencies).reduce<number>(
-    (tfidf, [term, tf]) =>
-      tfidf + tf * idfSmooth(term, documentTermFrequencies, totalDocuments),
-    0
-  )
+  return entries(termFrequencies).reduce<number>((tfidf, [term, tf]) => {
+    const idf = idfSmooth(term, documentTermFrequencies, totalDocuments)
+    return tfidf + tf * idf
+  }, 0)
 }

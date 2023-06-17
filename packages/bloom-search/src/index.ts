@@ -1,5 +1,5 @@
-import { BloomFilter, CountingBloomFilter, optimal } from '@pacote/bloom-filter'
-import { range, times, windowed } from '@pacote/array'
+import { BloomFilter, optimal } from '@pacote/bloom-filter'
+import { range, unique, windowed } from '@pacote/array'
 import { queryTerms } from './query'
 import { entries, keys, pick } from './object'
 import { countIdf } from './tf-idf'
@@ -15,23 +15,22 @@ type StopwordsFunction = (token: string, language?: string) => boolean
 type StemmerFunction = (token: string, language?: string) => string
 type TokenizerFunction = (token: string, language?: string) => string[]
 
-export type DocumentIndex<
-  Document,
-  SummaryField extends keyof Document
-> = Record<
-  string,
-  {
-    /**
-     * Summary fields for the document. These are preserved as-is.
-     */
-    readonly summary: Pick<Document, SummaryField>
-    /**
-     * Bloom filter signature for the document. All words added to the signature
-     * are searchable but not retrievable.
-     */
-    readonly filter: BloomFilter<string> | CountingBloomFilter<string>
-  }
->
+export type IndexedDocument<Document, SummaryField extends keyof Document> = {
+  /**
+   * Summary fields for the document. These are preserved as-is.
+   */
+  readonly summary: Pick<Document, SummaryField>
+  /**
+   * Bloom filter signatures for the document grouped by word frequency. All
+   * words added to the signature are searchable but not retrievable.
+   */
+  readonly signatures: Record<number, BloomFilter<string>>
+}
+
+export type Index<Document, SummaryField extends keyof Document> = {
+  version: number
+  documents: Record<string, IndexedDocument<Document, SummaryField>>
+}
 
 type SearchTokens = {
   required: string[]
@@ -65,7 +64,7 @@ export class BloomSearch<
    * Collection containing document summaries and Bloom filter signatures used
    * to search, with document shorthand reference identifier used as keys.
    */
-  public index: DocumentIndex<Document, SummaryField> = {}
+  public index: Index<Document, SummaryField> = { version: 1, documents: {} }
 
   /**
    * A record containing the name of all indexable fields and their relative
@@ -88,7 +87,7 @@ export class BloomSearch<
    */
   public readonly ngrams: number
   public readonly seed: number
-  public readonly signature: 'counting' | 'compact'
+  public readonly termFrequencyBuckets: number[]
   private readonly preprocess: PreprocessFunction<Document, IndexField>
   private readonly stemmer: StemmerFunction
   private readonly stopwords: StopwordsFunction
@@ -121,9 +120,6 @@ export class BloomSearch<
    *                              `1` (no _n_-grams are indexed).
    * @param options.seed        - Hash seed to use in Bloom Filters, defaults to
    *                              `0x00c0ffee`.
-   * @param options.signature   - Determines the type of document signature to
-   *                              use, 'counting' or 'binary'. Defaults to
-   *                              'counting'.
    * @param options.preprocess  - Preprocessing function, executed before all
    *                              others. The function serialises each field as
    *                              a `string` and optionally process it before
@@ -137,6 +133,9 @@ export class BloomSearch<
    * @param options.stemmer     - Allows plugging in a custom stemming function.
    *                              By default, this class does not change text
    *                              tokens.
+   * @param options.termFrequencyBuckets - Optimises storage by grouping indexed
+   *                                       terms into buckets according to
+   *                                       term frequency in a document.
    * @param options.tokenizer   - Allows a custom tokenizer function. By default
    *                              content is transformed to lowercase, split
    *                              at every whitespace of hyphen, and non-word
@@ -148,7 +147,7 @@ export class BloomSearch<
     errorRate?: number
     ngrams?: number
     seed?: number
-    signature?: 'counting' | 'compact'
+    termFrequencyBuckets?: number[]
     preprocess?: PreprocessFunction<Document, IndexField>
     stemmer?: StemmerFunction
     stopwords?: StopwordsFunction
@@ -163,7 +162,9 @@ export class BloomSearch<
     this.summary = options.summary
     this.errorRate = options.errorRate ?? 0.0001
     this.ngrams = options.ngrams ?? 1
-    this.signature = options.signature ?? 'counting'
+    this.termFrequencyBuckets = options.termFrequencyBuckets ?? [
+      1, 2, 3, 4, 8, 16, 32, 64,
+    ]
     this.preprocess = options.preprocess ?? String
     this.stemmer = options.stemmer ?? ((token) => token)
     this.stopwords = options.stopwords ?? (() => true)
@@ -197,18 +198,32 @@ export class BloomSearch<
    *
    * @param index Replacement index.
    */
-  load(index: DocumentIndex<Document, SummaryField>): void {
-    this.index = entries(index).reduce((acc, [ref, entry]) => {
-      const options = { ...entry.filter, hash: this.hash }
-      acc[ref] = {
-        summary: entry.summary,
-        filter:
-          this.signature === 'compact'
-            ? new BloomFilter(options)
-            : new CountingBloomFilter(options),
-      }
-      return acc
-    }, {} as DocumentIndex<Document, SummaryField>)
+  load(index: Index<Document, SummaryField>): void {
+    if (index.version !== this.index.version) {
+      throw new Error(
+        `incompatible index schema version ${index.version}, expected ${this.index.version}`
+      )
+    }
+
+    this.index.documents = entries(index.documents).reduce(
+      (acc, [ref, entry]) => {
+        acc[ref] = {
+          summary: entry.summary,
+          signatures: entries(entry.signatures).reduce(
+            (signatures, [frequency, signature]) => {
+              signatures[frequency] = new BloomFilter({
+                ...signature,
+                hash: this.hash,
+              })
+              return signatures
+            },
+            {} as Record<number, BloomFilter<string>>
+          ),
+        }
+        return acc
+      },
+      {} as Record<string, IndexedDocument<Document, SummaryField>>
+    )
   }
 
   /**
@@ -223,7 +238,7 @@ export class BloomSearch<
    *                      decide how to handle these steps.
    */
   add(ref: string, document: Document, language?: string): void {
-    const allTokens = keys(this.fields).reduce((tokens, field) => {
+    const tokensByField = keys(this.fields).reduce((tokens, field) => {
       if (document[field] !== undefined) {
         const fieldText = this.preprocess(document[field], field, document)
         const fieldTokens = this.tokenizer(fieldText, language)
@@ -241,25 +256,49 @@ export class BloomSearch<
       return tokens
     }, {} as Record<IndexField, string[]>)
 
-    const uniqTokens = new Set(Object.values(allTokens).flat()).size
+    const uniqueTokens = unique(Object.values<string[]>(tokensByField).flat())
 
-    if (uniqTokens === 0) {
+    if (uniqueTokens.length === 0) {
       return
     }
 
-    const options = { ...optimal(uniqTokens, this.errorRate), hash: this.hash }
-    const filter =
-      this.signature === 'compact'
-        ? new BloomFilter(options)
-        : new CountingBloomFilter(options)
+    const tokenFrequencies: Record<string, number> = {}
 
     entries(this.fields).forEach(([field, weight = 1]) =>
-      (allTokens[field] || []).forEach((token) =>
-        times(weight, () => filter.add(token))
-      )
+      (tokensByField[field] || []).forEach((token) => {
+        tokenFrequencies[token] = (tokenFrequencies[token] ?? 0) + weight
+      })
     )
 
-    this.index[ref] = { summary: pick(this.summary, document), filter }
+    const tokensByFrequency = Array.from(uniqueTokens).reduce((acc, token) => {
+      const frequencyBucket =
+        1 +
+        this.termFrequencyBuckets.findLastIndex(
+          (limit) => tokenFrequencies[token] >= limit
+        )
+      acc[frequencyBucket] = (acc[frequencyBucket] ?? []).concat(token)
+      return acc
+    }, {} as Record<number, string[]>)
+
+    const signatures = entries(tokensByFrequency).reduce(
+      (acc, [frequencyBucketIdx, tokens]) => {
+        acc[frequencyBucketIdx] = new BloomFilter({
+          ...optimal(tokens.length, this.errorRate),
+          seed: this.seed,
+          hash: this.hash,
+        })
+        tokens.forEach((token) => {
+          acc[frequencyBucketIdx].add(token)
+        })
+        return acc
+      },
+      {} as Record<number, BloomFilter<string>>
+    )
+
+    this.index.documents[ref] = {
+      summary: pick(this.summary, document),
+      signatures,
+    }
   }
 
   /**
@@ -268,7 +307,7 @@ export class BloomSearch<
    * @param ref - Reference identifier of the document to remove.
    */
   remove(ref: string): void {
-    delete this.index[ref]
+    delete this.index.documents[ref]
   }
 
   /**
@@ -302,20 +341,20 @@ export class BloomSearch<
    */
   search(query: string, language?: string): Pick<Document, SummaryField>[] {
     const tokens = this.parseQuery(query, language)
-    const totalDocuments = keys(this.index).length
+    const totalDocuments = keys(this.index.documents).length
 
-    return Object.values(this.index)
+    return Object.values<IndexedDocument<Document, SummaryField>>(
+      this.index.documents
+    )
       .filter(
         (document) =>
-          tokens.excluded.every((token) => document.filter.has(token) === 0) &&
-          tokens.required.every(
-            (token) => Number(document.filter.has(token)) > 0
-          )
+          tokens.excluded.every((token) => !this.hasToken(document, token)) &&
+          tokens.required.every((token) => this.hasToken(document, token))
       )
       .map((document) => {
         const matches: Record<string, number> = {}
         tokens.included.forEach((token) => {
-          matches[token] = Number(document.filter.has(token))
+          matches[token] = this.frequency(document, token)
         })
         return { summary: document.summary, matches }
       })
@@ -325,20 +364,38 @@ export class BloomSearch<
           false
         )
       )
-      .reduce<Result<Document, SummaryField>[]>(
-        (all, result, _, results) =>
-          all.concat({
-            ...result,
-            score: countIdf(
-              result.matches,
-              results.map(({ matches }) => matches),
-              totalDocuments
-            ),
-          }),
-        []
-      )
+      .reduce<Result<Document, SummaryField>[]>((all, result, _, results) => {
+        return all.concat({
+          ...result,
+          score: countIdf(
+            result.matches,
+            results.map(({ matches }) => matches),
+            totalDocuments
+          ),
+        })
+      }, [])
       .sort((a, b) => compare(a.score, b.score))
       .map(({ summary }) => summary)
+  }
+
+  private hasToken(
+    document: IndexedDocument<Document, SummaryField>,
+    token: string
+  ): boolean {
+    return Object.values(document.signatures).some((signature) =>
+      signature.has(token)
+    )
+  }
+
+  private frequency(
+    document: IndexedDocument<Document, SummaryField>,
+    token: string
+  ): number {
+    return Number(
+      entries(document.signatures).find(([, signature]) =>
+        signature.has(token)
+      )?.[0] ?? 0
+    )
   }
 
   private parseQuery(query: string, language?: string): SearchTokens {
