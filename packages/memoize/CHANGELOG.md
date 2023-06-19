@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/PacoteJS/pacote/compare/@pacote/memoize@2.0.2...@pacote/memoize@2.1.0) (2023-06-19)
+
+### Features
+
+- 🎸 clear() method and support for LRU caching ([be9cc4d](https://github.com/PacoteJS/pacote/commit/be9cc4d29f26eb4c0c8ef752183da21209947f01))
+
 ## [2.0.2](https://github.com/PacoteJS/pacote/compare/@pacote/memoize@2.0.1...@pacote/memoize@2.0.2) (2023-06-15)
 
 ### Performance Improvements
