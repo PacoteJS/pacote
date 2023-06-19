@@ -15,3 +15,26 @@ test('memoize caches function calls', () => {
   const memoizedFn = memoize(() => '_', randomFn)
   expect(memoizedFn()).toEqual(memoizedFn())
 })
+
+test('clear memoize cache', () => {
+  const mockFn = jest.fn()
+  const memoizedFn = memoize(() => '_', mockFn)
+
+  memoizedFn()
+  memoizedFn.clear()
+  memoizedFn()
+
+  expect(mockFn).toHaveBeenCalledTimes(2)
+})
+
+test('evict LRU calls', () => {
+  const mockFn = jest.fn()
+  const memoizedFn = memoize((n) => n, mockFn, { capacity: 1 })
+
+  memoizedFn(1)
+  memoizedFn(2)
+  memoizedFn(1)
+
+  expect(mockFn).toHaveBeenCalledTimes(3)
+  expect(mockFn).toHaveBeenLastCalledWith(1)
+})

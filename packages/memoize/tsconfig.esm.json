@@ -6,5 +6,6 @@
     "rootDir": "src",
     "outDir": "lib/esm"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "references": [{ "path": "../lru-cache/tsconfig.esm.json" }]
 }

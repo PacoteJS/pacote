@@ -34,5 +34,8 @@
     "build:esm": "tsc -p ./tsconfig.esm.json",
     "prepublish": "yarn build"
   },
-  "gitHead": "bd3b251fc01a599034b03175c0cfab2d946f2f7f"
+  "gitHead": "bd3b251fc01a599034b03175c0cfab2d946f2f7f",
+  "dependencies": {
+    "@pacote/lru-cache": "file:../lru-cache"
+  }
 }

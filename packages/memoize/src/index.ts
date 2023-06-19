@@ -1,22 +1,25 @@
-type Fn<A extends any[], R> = (...args: A) => R
+import { LRUCache } from '@pacote/lru-cache'
 
-function createCache<R>() {
-  const cache = new Map<string, R>()
-
-  return {
-    has: (key: string) => cache.has(key),
-    get: (key: string) => cache.get(key),
-    set: (key: string, value: R) => cache.set(key, value),
-  }
+export type Options = {
+  capacity?: number
 }
 
-export function memoize<A extends any[], R>(
-  cacheKeyFn: Fn<A, string>,
-  fn: Fn<A, R>
-): Fn<A, R> {
-  const cache = createCache<R>()
+type Fn<A extends any[], R> = (...args: A) => R
 
-  return (...args) => {
+type MemoizedFn<A extends any[], R> = Fn<A, R> & {
+  clear(): void
+}
+
+export function memoize<A extends any[], K, V>(
+  cacheKeyFn: Fn<A, K>,
+  fn: Fn<A, V>,
+  options: Options = {}
+): MemoizedFn<A, V> {
+  const cache = options.capacity
+    ? new LRUCache<K, V>(options.capacity)
+    : new Map<K, V>()
+
+  const memoizedFn: Fn<A, V> = (...args: A) => {
     const key = cacheKeyFn(...args)
 
     if (!cache.has(key)) {
@@ -26,4 +29,10 @@ export function memoize<A extends any[], R>(
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     return cache.get(key)!
   }
+
+  return Object.assign(memoizedFn, {
+    clear: () => {
+      return cache.clear()
+    },
+  })
 }
