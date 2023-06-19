@@ -54,9 +54,9 @@ export type Options<
    */
   errorRate?: number
   /**
-   * Minimum Bloom filter size, used to reduce false positives when dealing with
-   * small documents with sparse term frequency distribution. The default value
-   * is `0`.
+   * Minimum term cardinality used to calculate the Bloom filter size. This can
+   * be used to reduce false positives when dealing with small documents with
+   * sparse term frequency distribution. The default value is `0`.
    */
   minSize?: number
   /**
@@ -156,8 +156,9 @@ export class BloomSearch<
   public readonly errorRate: number
 
   /**
-   * Minimum Bloom filter size, used to reduce false positives when dealing with
-   * small documents with sparse term frequency distribution.
+   * Minimum term cardinality used to calculate the Bloom filter size. This can
+   * be used to reduce false positives when dealing with small documents with
+   * sparse term frequency distribution.
    */
   public readonly minSize: number
 
