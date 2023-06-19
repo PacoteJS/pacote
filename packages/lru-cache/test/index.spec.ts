@@ -1,7 +1,7 @@
 import { LRUCache } from '../src/index'
 
 describe('set', () => {
-  it('evicts least-recently updated key', () => {
+  it('evicts least-recently used key', () => {
     const cache = new LRUCache(1)
 
     cache.set('evicted', 'will be removed')
@@ -11,7 +11,7 @@ describe('set', () => {
     expect(cache.get('stored')).toBe('ok')
   })
 
-  it('prevents eviction of accessed key', () => {
+  it('prevents eviction of used key', () => {
     const cache = new LRUCache(2)
 
     cache.set('stored', 'ok')
@@ -24,7 +24,7 @@ describe('set', () => {
   })
 })
 
-test('get prevents eviction of accessed key', () => {
+test('get prevents eviction of used key', () => {
   const cache = new LRUCache(2)
 
   cache.set('stored', 'ok')
@@ -75,4 +75,10 @@ test('clear', () => {
   cache.delete('delete')
 
   expect(cache.get('delete')).toBe(undefined)
+})
+
+test.each([-1, 0, 0.5, Infinity, NaN])('invalid capacity', (capacity) => {
+  expect(() => new LRUCache(capacity)).toThrow(
+    'Capacity must be a positive integer'
+  )
 })

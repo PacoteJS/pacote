@@ -1,5 +1,5 @@
 /**
- * Implements a Least-Recently Updated cache based on a `Map`.
+ * Implements a Least-Recently Used cache based on a `Map`.
  *
  * @example
  * ```typescript
@@ -26,9 +26,13 @@ export class LRUCache<K, V> {
    * Creates a new instance of the LRU cache.
    *
    * @param capacity  Cache capacity. Any items added over this limit will evict
-   *                  the least-recently updated item in cache.
+   *                  the least-recently used item in cache.
    */
   constructor(capacity: number) {
+    if (!Number.isInteger(capacity) || capacity <= 0) {
+      throw new Error('Capacity must be a positive integer')
+    }
+
     this.capacity = capacity
     this.keys = new Array<K>(capacity)
     this.values = new Array<V>(capacity)
