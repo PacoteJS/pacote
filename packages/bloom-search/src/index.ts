@@ -5,6 +5,7 @@ import { entries, keys, pick } from './object'
 import { countIdf } from './tf-idf'
 import { xxh64 } from '@pacote/xxhash'
 import { memoize } from '@pacote/memoize'
+import { findLast } from './array'
 
 export type PreprocessFunction<Document, Field extends keyof Document> = (
   value: Document[Field],
@@ -313,7 +314,8 @@ export class BloomSearch<
       Record<number, string[]>
     >((tokens, token) => {
       const frequencyBucket =
-        this.termFrequencyBuckets.findLast(
+        findLast(
+          this.termFrequencyBuckets,
           (limit) => frequency[token] >= limit
         ) ?? 0
       if (!tokens[frequencyBucket]) {
