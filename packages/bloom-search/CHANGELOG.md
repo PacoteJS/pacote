@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.17.2](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.17.1...@pacote/bloom-search@0.17.2) (2023-06-20)
+
+### Bug Fixes
+
+- 🐛 compatibility with Node 16 ([0630651](https://github.com/PacoteJS/pacote/commit/0630651bdcaca4516adaf96d9b56e0b02150d5ac))
+
 ## [0.17.1](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.17.0...@pacote/bloom-search@0.17.1) (2023-06-19)
 
 **Note:** Version bump only for package @pacote/bloom-search
