@@ -245,25 +245,23 @@ export class BloomSearch<
       )
     }
 
-    this.index.documents = entries(index.documents).reduce(
-      (acc, [ref, entry]) => {
-        acc[ref] = {
-          summary: entry.summary,
-          signatures: entries(entry.signatures).reduce(
-            (signatures, [frequency, signature]) => {
-              signatures[frequency] = new BloomFilter({
-                ...signature,
-                hash: this.hash,
-              })
-              return signatures
-            },
-            {} as Record<number, BloomFilter<string>>
-          ),
-        }
-        return acc
-      },
-      {} as Record<string, IndexedDocument<Document, SummaryField>>
-    )
+    this.index.documents = entries(index.documents).reduce<
+      Record<string, IndexedDocument<Document, SummaryField>>
+    >((acc, [ref, entry]) => {
+      acc[ref] = {
+        summary: entry.summary,
+        signatures: entries(entry.signatures).reduce<
+          Record<number, BloomFilter<string>>
+        >((signatures, [frequency, signature]) => {
+          signatures[frequency] = new BloomFilter({
+            ...signature,
+            hash: this.hash,
+          })
+          return signatures
+        }, {}),
+      }
+      return acc
+    }, {})
   }
 
   /**
@@ -325,20 +323,19 @@ export class BloomSearch<
       return tokens
     }, {})
 
-    const signatures = entries(tokensByFrequency).reduce(
-      (acc, [frequencyBucket, tokens]) => {
-        acc[frequencyBucket] = new BloomFilter({
-          ...optimal(Math.max(this.minSize, tokens.length), this.errorRate),
-          seed: this.seed,
-          hash: this.hash,
-        })
-        tokens.forEach((token) => {
-          acc[frequencyBucket].add(token)
-        })
-        return acc
-      },
-      {} as Record<number, BloomFilter<string>>
-    )
+    const signatures = entries(tokensByFrequency).reduce<
+      Record<number, BloomFilter<string>>
+    >((acc, [frequencyBucket, tokens]) => {
+      acc[frequencyBucket] = new BloomFilter({
+        ...optimal(Math.max(this.minSize, tokens.length), this.errorRate),
+        seed: this.seed,
+        hash: this.hash,
+      })
+      tokens.forEach((token) => {
+        acc[frequencyBucket].add(token)
+      })
+      return acc
+    }, {})
 
     this.index.documents[ref] = {
       summary: pick(this.summary, document),
@@ -398,9 +395,9 @@ export class BloomSearch<
       )
       .map((document) => {
         const matches: Record<string, number> = {}
-        tokens.included.forEach((token) => {
-          matches[token] = this.frequency(document, token)
-        })
+        for (const token of tokens.included) {
+          matches[token] = this.hasToken(document, token)
+        }
         return { summary: document.summary, matches }
       })
       .filter(({ matches }) =>
@@ -427,20 +424,11 @@ export class BloomSearch<
   private hasToken(
     document: IndexedDocument<Document, SummaryField>,
     token: string
-  ): boolean {
-    return Object.values(document.signatures).some((signature) =>
-      signature.has(token)
-    )
-  }
-
-  private frequency(
-    document: IndexedDocument<Document, SummaryField>,
-    token: string
   ): number {
     return Number(
-      entries(document.signatures).find(([, signature]) =>
-        signature.has(token)
-      )?.[0] ?? 0
+      keys(document.signatures).find((frequency) =>
+        document.signatures[frequency].has(token)
+      ) ?? 0
     )
   }
 

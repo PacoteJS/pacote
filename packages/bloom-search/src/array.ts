@@ -9,8 +9,7 @@ export function findLast<T>(
   let k = array.length - 1
   while (k >= 0) {
     const v = array[k]
-    const result = predicate(v)
-    if (result) {
+    if (predicate(v)) {
       return v
     }
     k--
