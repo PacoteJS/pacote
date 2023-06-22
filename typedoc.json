@@ -16,6 +16,7 @@
     "./packages/is-plain-object",
     "./packages/jest-either",
     "./packages/linked-list",
+    "./packages/lru-cache",
     "./packages/memoize",
     "./packages/non-empty-array",
     "./packages/option",
