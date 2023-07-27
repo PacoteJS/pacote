@@ -1,8 +1,6 @@
 import { Option, Some, None } from '@pacote/option'
 
-export interface NonEmptyArray<T> extends ReadonlyArray<T> {
-  0: T
-}
+export type NonEmptyArray<T> = [T, ...T[]]
 
 function isNotEmpty<T>(value: readonly T[]): value is NonEmptyArray<T> {
   return value.length > 0
