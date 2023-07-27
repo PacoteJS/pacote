@@ -38,7 +38,7 @@ function getDisplayName(Component: InnerComponent<any>): string {
 }
 
 function isInjector<OuterProps, InjectedProps>(
-  injector: any
+  injector: any,
 ): injector is Injector<OuterProps, InjectedProps> {
   return typeof injector === 'function'
 }
@@ -48,13 +48,13 @@ export function withProps<
   InjectedProps extends Record<string, unknown>,
   ComponentProps extends InjectedProps,
   Component extends InnerComponent<ComponentProps>,
-  EnhancedProps = Enhanced<InjectedProps, InnerProps<Component>>
+  EnhancedProps = Enhanced<InjectedProps, InnerProps<Component>>,
 >(
   injected: Injector<OuterProps, InjectedProps> | InjectedProps,
-  BaseComponent: Component
+  BaseComponent: Component,
 ): ComponentType<OuterProps & EnhancedProps> {
   const EnhancedComponent: FunctionComponent<OuterProps & EnhancedProps> = (
-    props
+    props,
   ) =>
     createElement(
       BaseComponent,
@@ -63,8 +63,8 @@ export function withProps<
         props,
         isInjector<OuterProps, InjectedProps>(injected)
           ? injected(props)
-          : injected
-      )
+          : injected,
+      ),
     )
   EnhancedComponent.displayName = `WithProps(${getDisplayName(BaseComponent)})`
   return EnhancedComponent
@@ -75,10 +75,10 @@ export function withDefaultProps<
   ComponentProps extends InjectedProps,
   Component extends InnerComponent<ComponentProps>,
   EnhancedProps = Enhanced<InjectedProps, InnerProps<Component>> &
-    Partial<InjectedProps>
+    Partial<InjectedProps>,
 >(
   injectedProps: InjectedProps,
-  BaseComponent: Component
+  BaseComponent: Component,
 ): ComponentType<EnhancedProps> {
   const EnhancedComponent: FunctionComponent<EnhancedProps> = (props) =>
     createElement(
@@ -86,11 +86,11 @@ export function withDefaultProps<
       Object.assign<ComponentProps, InjectedProps, EnhancedProps>(
         {} as any,
         injectedProps,
-        props
-      )
+        props,
+      ),
     )
   EnhancedComponent.displayName = `WithDefaultProps(${getDisplayName(
-    BaseComponent
+    BaseComponent,
   )})`
   return EnhancedComponent
 }

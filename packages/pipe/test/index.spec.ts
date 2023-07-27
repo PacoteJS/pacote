@@ -7,7 +7,7 @@ describe('pipe', () => {
       property(anything(), (value) => {
         const result = pipe(value)
         expect(result).toEqual(value)
-      })
+      }),
     )
   })
 
@@ -35,7 +35,7 @@ describe('pipe', () => {
       assert(
         property(anything(), (value) => {
           expect(pipe(value, (i) => i)).toEqual(value)
-        })
+        }),
       )
     })
 
@@ -47,8 +47,8 @@ describe('pipe', () => {
           anything(),
           (f, g, value) => {
             expect(pipe(value, f, g)).toEqual(g(f(value)))
-          }
-        )
+          },
+        ),
       )
     })
   })

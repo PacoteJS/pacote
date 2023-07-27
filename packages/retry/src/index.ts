@@ -39,7 +39,7 @@ export type RetryOptions = {
  */
 export async function retry<T>(
   callback: () => T | Promise<T>,
-  options: RetryOptions = {}
+  options: RetryOptions = {},
 ): Promise<T> {
   return new Promise((resolve, reject) => {
     let intervalId: number | NodeJS.Timer

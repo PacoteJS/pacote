@@ -8,7 +8,7 @@ interface Cancellable {
 
 export function throttle<A extends any[]>(
   fn: (...args: A) => any,
-  delay = 0
+  delay = 0,
 ): Throttled<A> & Cancellable {
   let lastCalled = 0
   let timer: NodeJS.Timeout

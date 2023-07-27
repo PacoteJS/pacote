@@ -166,7 +166,7 @@ export function map<T, U>(fn: (value: T) => U, option: Option<T>): Option<U> {
  */
 export function flatMap<T, U>(
   fn: (value: T) => Option<U>,
-  option: Option<T>
+  option: Option<T>,
 ): Option<U> {
   return isSome(option) ? fn(option.value) : None
 }
@@ -183,7 +183,7 @@ export function flatMap<T, U>(
  */
 export function filter<T>(
   fn: (value: T) => boolean,
-  option: Option<T>
+  option: Option<T>,
 ): Option<T> {
   return isSome(option) && fn(option.value) ? option : None
 }
@@ -228,7 +228,7 @@ export function and<T>(alternative: Option<T>, option: Option<T>): Option<T> {
 export function fold<T, U>(
   onSome: (value: T) => U,
   onNone: () => U,
-  option: Option<T>
+  option: Option<T>,
 ): U {
   return isSome(option) ? onSome(option.value) : onNone()
 }

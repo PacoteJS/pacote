@@ -31,12 +31,12 @@ describe('withProps()', () => {
     const { container: actual } = render(
       <Wrapped>
         <span>Test</span>
-      </Wrapped>
+      </Wrapped>,
     )
     const { container: expected } = render(
       <Test>
         <span>Test</span>
-      </Test>
+      </Test>,
     )
     expect(actual).toEqual(expected)
   })
@@ -94,12 +94,12 @@ describe('withProps()', () => {
     const { container: actual } = render(
       <Wrapped>
         <span>Test</span>
-      </Wrapped>
+      </Wrapped>,
     )
     const { container: expected } = render(
       <div>
         <span>Test</span>
-      </div>
+      </div>,
     )
     expect(actual).toEqual(expected)
   })
@@ -162,12 +162,12 @@ describe('withDefaultProps()', () => {
     const { container: actual } = render(
       <Wrapped>
         <span>Test</span>
-      </Wrapped>
+      </Wrapped>,
     )
     const { container: expected } = render(
       <Test>
         <span>Test</span>
-      </Test>
+      </Test>,
     )
     expect(actual).toEqual(expected)
   })
@@ -241,12 +241,12 @@ describe('withDefaultProps()', () => {
     const { container: actual } = render(
       <Wrapped>
         <span>Test</span>
-      </Wrapped>
+      </Wrapped>,
     )
     const { container: expected } = render(
       <div>
         <span>Test</span>
-      </div>
+      </div>,
     )
     expect(actual).toEqual(expected)
   })

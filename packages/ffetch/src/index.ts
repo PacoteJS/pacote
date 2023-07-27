@@ -4,13 +4,13 @@ import { StatusError, NetworkError, FetchError, ParserError } from './errors'
 
 type Fetch<E, T> = (
   input: Request | string,
-  init?: RequestInit
+  init?: RequestInit,
 ) => TaskEither<FetchError<E | string>, T | string>
 
 interface FetchOptions<E, T> {
   readonly fetch: (
     input: Request | string,
-    init?: RequestInit
+    init?: RequestInit,
   ) => Promise<Response>
   readonly parse: (r: Response) => Promise<T>
   readonly parseLeft: (r: Response) => Promise<E>
@@ -31,17 +31,17 @@ async function parseLeft<E>(response: Response): Promise<E | string> {
 
 function handleSuccess<T>(
   parseFn: (r: Response) => Promise<T>,
-  response: Response
+  response: Response,
 ): TaskEither<ParserError, T | string> {
   return tryCatch(
     async () => parseFn(response),
-    (error) => new ParserError('Could not parse response', error as Error)
+    (error) => new ParserError('Could not parse response', error as Error),
   )
 }
 
 function handleFailure<E>(
   parseFn: (r: Response) => Promise<E>,
-  response: Response
+  response: Response,
 ): TaskEither<StatusError<E> | ParserError, never> {
   const statusError = (body?: E) =>
     new StatusError(response.status, response.statusText, body)
@@ -53,14 +53,14 @@ function handleFailure<E>(
         new ParserError('Could not parse error response', [
           statusError(),
           error as Error,
-        ])
+        ]),
     ),
-    chainW(left)
+    chainW(left),
   )
 }
 
 export function createFetch<E, T>(
-  options?: Partial<FetchOptions<E, T>>
+  options?: Partial<FetchOptions<E, T>>,
 ): Fetch<E, T> {
   const o: FetchOptions<E | string, T | string> = {
     fetch: window.fetch,
@@ -73,13 +73,13 @@ export function createFetch<E, T>(
     pipe(
       tryCatch(
         async () => o.fetch(input, init),
-        (error) => new NetworkError('Network request failed', error as Error)
+        (error) => new NetworkError('Network request failed', error as Error),
       ),
       chain((response) =>
         response.ok
           ? handleSuccess(o.parse, response)
-          : handleFailure(o.parseLeft, response)
-      )
+          : handleFailure(o.parseLeft, response),
+      ),
     )
 }
 

@@ -44,7 +44,9 @@ describe('.not.toMatchLeft()', () => {
 
   test('fails when spec deeply matches the object on the left', () => {
     expect(() =>
-      expect(left({ a: 1, b: { c: 2, d: 3 } })).not.toMatchLeft({ b: { c: 2 } })
+      expect(left({ a: 1, b: { c: 2, d: 3 } })).not.toMatchLeft({
+        b: { c: 2 },
+      }),
     ).toThrow()
   })
 

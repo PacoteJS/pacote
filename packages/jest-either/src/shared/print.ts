@@ -8,8 +8,8 @@ export function printReceivedLeft(actual: Either<any, any>): string {
     actual,
     fold(
       (left) => `Received left:` + '\n' + `  ${printReceived(left)}`,
-      () => `Received right.`
-    )
+      () => `Received right.`,
+    ),
   )
 }
 
@@ -18,14 +18,14 @@ export function printReceivedRight(actual: Either<any, any>): string {
     actual,
     fold(
       () => `Received left.`,
-      (right) => `Received right:` + '\n' + `  ${printReceived(right)}`
-    )
+      (right) => `Received right:` + '\n' + `  ${printReceived(right)}`,
+    ),
   )
 }
 
 export function diffReceivedLeft(
   actual: Either<any, any>,
-  expected: any
+  expected: any,
 ): string {
   return pipe(
     actual,
@@ -43,14 +43,14 @@ export function diffReceivedLeft(
         'Expected Either to equal left:\n' +
         `  ${printExpected(expected)}` +
         '\n\n' +
-        printReceivedLeft(actual)
-    )
+        printReceivedLeft(actual),
+    ),
   )
 }
 
 export function diffReceivedRight(
   actual: Either<any, any>,
-  expected: any
+  expected: any,
 ): string {
   return pipe(
     actual,
@@ -68,7 +68,7 @@ export function diffReceivedRight(
               `  ${printExpected(expected)}` +
               '\n\n' +
               printReceivedRight(actual)
-      }
-    )
+      },
+    ),
   )
 }

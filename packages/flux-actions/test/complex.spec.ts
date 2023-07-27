@@ -17,8 +17,8 @@ test('complex payloads', () => {
       fold(
         (year) => ({ year }),
         (error) => ({ ...s, error }),
-        a.payload
-      )
+        a.payload,
+      ),
   )
 
   expect(reducer(undefined, changeYear(Ok(1955)))) //

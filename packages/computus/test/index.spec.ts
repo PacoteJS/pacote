@@ -10,9 +10,9 @@ describe('Gregorian calendar Easter', () => {
     assert(
       property(integer({ min: 1583, max: 65536 }), (year) => {
         expect(gregorian(year).getTime()).toBeGreaterThanOrEqual(
-          new Date(year, 2, 22).getTime()
+          new Date(year, 2, 22).getTime(),
         )
-      })
+      }),
     )
   })
 
@@ -20,9 +20,9 @@ describe('Gregorian calendar Easter', () => {
     assert(
       property(integer({ min: 1583, max: 65536 }), (year) => {
         expect(gregorian(year).getTime()).toBeLessThanOrEqual(
-          new Date(year, 3, 25).getTime()
+          new Date(year, 3, 25).getTime(),
         )
-      })
+      }),
     )
   })
 
@@ -30,7 +30,7 @@ describe('Gregorian calendar Easter', () => {
     assert(
       property(integer({ min: 1583, max: 65536 }), (year) => {
         expect(gregorian(year).getDay()).toBe(0)
-      })
+      }),
     )
   })
 })
@@ -60,7 +60,7 @@ describe('Julian calendar Easter', () => {
     assert(
       property(integer({ min: 1900, max: 2099 }), (year) => {
         expect(julian(year).getDay()).toBe(0)
-      })
+      }),
     )
   })
 })

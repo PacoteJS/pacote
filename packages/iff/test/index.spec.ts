@@ -6,7 +6,7 @@ describe(`when both consequent and alternative functions are provided`, () => {
     const actual = iff(
       true,
       () => 'consequent',
-      () => 'alternative'
+      () => 'alternative',
     )
     expect(actual).toBe('consequent')
   })
@@ -15,7 +15,7 @@ describe(`when both consequent and alternative functions are provided`, () => {
     const actual = iff(
       false,
       () => 'consequent',
-      () => 'alternative'
+      () => 'alternative',
     )
     expect(actual).toBe('alternative')
   })

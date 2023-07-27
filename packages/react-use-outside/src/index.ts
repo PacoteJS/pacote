@@ -4,7 +4,7 @@ type EventType = keyof DocumentEventMap
 
 export function useOutside<E extends HTMLElement>(
   type: EventType | EventType[],
-  handler: EventListener
+  handler: EventListener,
 ): RefObject<E> {
   const inside = useRef<E>(null)
 

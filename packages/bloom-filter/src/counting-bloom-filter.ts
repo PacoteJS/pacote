@@ -46,7 +46,7 @@ export class CountingBloomFilter<T extends { toString(): string }> {
       ...range(0, this.hashes).map((i) => {
         const position = this.hashPosition(i, element)
         return this.filter[position]
-      })
+      }),
     )
   }
 

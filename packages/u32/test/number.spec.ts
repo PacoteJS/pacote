@@ -15,6 +15,6 @@ test('converts U32 values to and from integers', () => {
   assert(
     property(nat(), (value) => {
       expect(toNumber(from(value))).toEqual(value)
-    })
+    }),
   )
 })

@@ -18,7 +18,7 @@ function recursiveFind<T, R>(
   onFound: (current: T, index: number) => R,
   onFinished: () => R,
   current: LinkedList<T>,
-  index: number
+  index: number,
 ): R {
   return isEmpty(current)
     ? onFinished()
@@ -42,14 +42,14 @@ function recursiveFind<T, R>(
  */
 export function find<T>(
   predicate: PredicateFunction<T>,
-  list: LinkedList<T>
+  list: LinkedList<T>,
 ): Option<T> {
   return recursiveFind<T, Option<T>>(
     (current, index) => predicate(current, index, list),
     Some,
     fnNone,
     list,
-    0
+    0,
   )
 }
 
@@ -106,14 +106,14 @@ export function item<T>(index: number, list: LinkedList<T>): Option<T> {
  */
 export function every<T>(
   predicate: PredicateFunction<T>,
-  list: LinkedList<T>
+  list: LinkedList<T>,
 ): boolean {
   return recursiveFind(
     (current, index) => !predicate(current, index, list),
     fnFalse,
     fnTrue,
     list,
-    0
+    0,
   )
 }
 
@@ -130,14 +130,14 @@ export function every<T>(
  */
 export function some<T>(
   predicate: PredicateFunction<T>,
-  list: LinkedList<T>
+  list: LinkedList<T>,
 ): boolean {
   return recursiveFind(
     (current, index) => predicate(current, index, list),
     fnTrue,
     fnFalse,
     list,
-    0
+    0,
   )
 }
 
@@ -173,7 +173,7 @@ export function indexOf<T>(value: T, list: LinkedList<T>): Option<number> {
     (_, index) => Some(index),
     fnNone,
     list,
-    0
+    0,
   )
 }
 
@@ -197,8 +197,8 @@ export function lastIndexOf<T>(value: T, list: LinkedList<T>): Option<number> {
       (_, index) => Some(index),
       fnNone,
       reverse(list),
-      0
-    )
+      0,
+    ),
   )
 }
 
@@ -216,13 +216,13 @@ export function lastIndexOf<T>(value: T, list: LinkedList<T>): Option<number> {
  */
 export function findIndex<T>(
   predicate: PredicateFunction<T>,
-  list: LinkedList<T>
+  list: LinkedList<T>,
 ): Option<number> {
   return recursiveFind<T, Option<number>>(
     (current, index) => predicate(current, index, list),
     (_, index) => Some(index),
     fnNone,
     list,
-    0
+    0,
   )
 }

@@ -36,12 +36,12 @@ export function windowed<T>(size: number, array: readonly T[]): T[][]
 export function windowed<T>(
   size: number,
   step: number,
-  array: readonly T[]
+  array: readonly T[],
 ): T[][]
 export function windowed<T>(
   size: number,
   stepOrArray: number | readonly T[],
-  arrayOrNothing: readonly T[] = []
+  arrayOrNothing: readonly T[] = [],
 ): T[][] {
   const [step, array] = isReadonlyArray(stepOrArray)
     ? [1, stepOrArray]

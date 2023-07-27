@@ -6,7 +6,7 @@ test('memoize calls the original function', () => {
     property(func<[string], any>(anything()), string(), (fn, s) => {
       const memoizedFn = memoize((i) => i, fn)
       expect(memoizedFn(s)).toEqual(fn(s))
-    })
+    }),
   )
 })
 

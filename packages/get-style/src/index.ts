@@ -1,6 +1,6 @@
 export function getStyle(
   element: HTMLElement,
-  property: keyof CSSStyleDeclaration
+  property: keyof CSSStyleDeclaration,
 ): string {
   const view = element.ownerDocument?.defaultView || window
   const style = view.getComputedStyle(element)

@@ -8,7 +8,7 @@ export interface AsymmetricMatcher {
 }
 
 export function isAsymmetricMatcher(
-  matcher: any
+  matcher: any,
 ): matcher is AsymmetricMatcher {
   return typeof matcher.asymmetricMatch === 'function'
 }
@@ -20,14 +20,14 @@ export const matchString = (s: RegExp) => (o: any) => s.test(o)
 
 export function leftPredicate(
   actual: Either<any, any>,
-  predicate: (left: any) => boolean
+  predicate: (left: any) => boolean,
 ): boolean {
   return pipe(actual, fold(predicate, F))
 }
 
 export function rightPredicate(
   actual: Either<any, any>,
-  predicate: (right: any) => boolean
+  predicate: (right: any) => boolean,
 ): boolean {
   return pipe(actual, fold(F, predicate))
 }

@@ -18,6 +18,6 @@ test.skip('inverse of Object.entries', () => {
   assert(
     property(object(), (o) => {
       expect(associate((i) => i, Object.entries(o))).toEqual(o)
-    })
+    }),
   )
 })

@@ -29,6 +29,6 @@ export function toArray<T>(list: LinkedList<T>): T[] {
       return acc
     },
     [],
-    list
+    list,
   )
 }

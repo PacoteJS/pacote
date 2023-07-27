@@ -36,7 +36,7 @@ const failMessage =
 
 export function toEqualRight<R>(
   actual: Either<any, R>,
-  expected: R | AsymmetricMatcher
+  expected: R | AsymmetricMatcher,
 ) {
   const predicate = isAsymmetricMatcher(expected)
     ? expected.asymmetricMatch.bind(expected)

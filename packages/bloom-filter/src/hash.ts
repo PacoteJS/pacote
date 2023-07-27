@@ -15,6 +15,6 @@ export function defaultHash(seed: number) {
       const d1 = toUint32(h1.update(data).digest('hex'))
       const d2 = toUint32(h2.update(data).digest('hex'))
       return d1 + i * d2 + i ** 3
-    }
+    },
   )
 }

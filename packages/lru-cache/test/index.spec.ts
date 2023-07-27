@@ -79,6 +79,6 @@ test('clear', () => {
 
 test.each([-1, 0, 0.5, Infinity, NaN])('invalid capacity', (capacity) => {
   expect(() => new LRUCache(capacity)).toThrow(
-    'Capacity must be a positive integer'
+    'Capacity must be a positive integer',
   )
 })

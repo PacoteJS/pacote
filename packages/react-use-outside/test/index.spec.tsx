@@ -4,7 +4,7 @@ import { useOutside } from '../src'
 
 function renderTestComponent(
   type: keyof DocumentEventMap | (keyof DocumentEventMap)[],
-  handler: EventListener
+  handler: EventListener,
 ) {
   const Test = () => {
     const ref = useOutside<HTMLDivElement>(type, handler)
@@ -22,7 +22,7 @@ function renderTestComponent(
 test.each<
   [
     keyof DocumentEventMap,
-    (element: Element | Window, options?: Record<string, unknown>) => boolean
+    (element: Element | Window, options?: Record<string, unknown>) => boolean,
   ]
 >([
   ['click', fireEvent.click],
@@ -38,7 +38,7 @@ test.each<
 test.each<
   [
     keyof DocumentEventMap,
-    (element: Element | Window, options?: Record<string, unknown>) => boolean
+    (element: Element | Window, options?: Record<string, unknown>) => boolean,
   ]
 >([
   ['click', fireEvent.click],

@@ -2,7 +2,7 @@ import { car, cdr, isEmpty, LinkedList } from './core'
 
 function iterator<T, R>(
   list: LinkedList<T>,
-  result: (key: number, value: T) => R
+  result: (key: number, value: T) => R,
 ): IterableIterator<R> {
   let key = 0
   let current = list

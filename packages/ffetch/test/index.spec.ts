@@ -43,7 +43,7 @@ test('connection errors', async () => {
   expect(actual).toEqualLeft(
     new NetworkError('Network request failed', [
       new TypeError('Network request failed'),
-    ])
+    ]),
   )
 })
 
@@ -51,11 +51,11 @@ test('status code errors', async () => {
   const status = 500
   const body = { foo: 'bar' }
   server.use(
-    rest.get('/', (_, res, ctx) => res(ctx.status(status), ctx.json(body)))
+    rest.get('/', (_, res, ctx) => res(ctx.status(status), ctx.json(body))),
   )
   const actual = await ffetch(url)()
   expect(actual).toEqualLeft(
-    new StatusError(status, 'Internal Server Error', body)
+    new StatusError(status, 'Internal Server Error', body),
   )
 })
 
@@ -64,15 +64,15 @@ test('invalid response body', async () => {
     rest.get('/', (_, res, ctx) =>
       res(
         ctx.set('content-type', 'application/json; charset=utf-8'),
-        ctx.body('<not json>')
-      )
-    )
+        ctx.body('<not json>'),
+      ),
+    ),
   )
   const actual = await ffetch(url)()
   expect(actual).toEqualLeft(
     new ParserError('Could not parse response', [
       new Error('Unexpected token < in JSON at position 0'),
-    ])
+    ]),
   )
 })
 
@@ -80,7 +80,7 @@ test('plain text body for status errors', async () => {
   const status = 404
   const body = '<ok>'
   server.use(
-    rest.get('/', (_, res, ctx) => res(ctx.status(status), ctx.text(body)))
+    rest.get('/', (_, res, ctx) => res(ctx.status(status), ctx.text(body))),
   )
   const actual = await ffetch(url)()
   expect(actual).toEqualLeft(new StatusError(status, 'Not Found', body))
@@ -94,9 +94,9 @@ test('invalid JSON body for status errors', async () => {
       res(
         ctx.status(status),
         ctx.set('content-type', 'application/json; charset=utf-8'),
-        ctx.body(body)
-      )
-    )
+        ctx.body(body),
+      ),
+    ),
   )
   const actual = await ffetch(url)()
   expect(actual).toEqualLeft(new StatusError(status, 'Bad Request', body))
@@ -125,7 +125,7 @@ test('custom parser error', async () => {
   const actual = await customFetch(url)()
 
   expect(actual).toEqualLeft(
-    new ParserError('Could not parse response', [error])
+    new ParserError('Could not parse response', [error]),
   )
 })
 
@@ -133,7 +133,7 @@ test('custom error parser success', async () => {
   const status = 500
   const body = `Received a response with status code ${status}.`
   server.use(
-    rest.get('/', (_, res, ctx) => res(ctx.status(status), ctx.text(body)))
+    rest.get('/', (_, res, ctx) => res(ctx.status(status), ctx.text(body))),
   )
   const customFetch = createFetch({
     parseLeft: async () => Promise.resolve(body),
@@ -142,7 +142,7 @@ test('custom error parser success', async () => {
   const actual = await customFetch(url)()
 
   expect(actual).toEqualLeft(
-    new StatusError(status, 'Internal Server Error', body)
+    new StatusError(status, 'Internal Server Error', body),
   )
 })
 
@@ -160,7 +160,7 @@ test('custom error parser failure', async () => {
     new ParserError('Could not parse error response', [
       new StatusError(status, 'Internal Server Error'),
       error,
-    ])
+    ]),
   )
 })
 

@@ -40,7 +40,7 @@ describe('tryCatch()', () => {
     expect(
       O.tryCatch(() => {
         throw Error()
-      })
+      }),
     ).toEqual(O.None)
   })
 
@@ -145,8 +145,8 @@ describe('fold()', () => {
       O.fold(
         (s: string) => s.length,
         () => 0,
-        O.None
-      )
+        O.None,
+      ),
     ).toEqual(0)
   })
 
@@ -155,8 +155,8 @@ describe('fold()', () => {
       O.fold(
         (s) => s.length,
         () => 0,
-        O.Some('test')
-      )
+        O.Some('test'),
+      ),
     ).toEqual(4)
   })
 })
@@ -166,9 +166,9 @@ describe('monad laws', () => {
     assert(
       property(func(anything()), anything(), (fn, value) => {
         expect(O.flatMap((x) => O.Some(fn(x)), O.Some(value))).toEqual(
-          O.Some(fn(value))
+          O.Some(fn(value)),
         )
-      })
+      }),
     )
   })
 
@@ -176,7 +176,7 @@ describe('monad laws', () => {
     assert(
       property(anything(), (value) => {
         expect(O.flatMap(O.Some, O.Some(value))).toEqual(O.Some(value))
-      })
+      }),
     )
   })
 
@@ -190,11 +190,11 @@ describe('monad laws', () => {
           expect(
             O.flatMap(
               (x) => O.Some(g(x)),
-              O.flatMap((x) => O.Some(f(x)), O.Some(value))
-            )
+              O.flatMap((x) => O.Some(f(x)), O.Some(value)),
+            ),
           ).toEqual(O.flatMap((x) => O.Some(g(f(x))), O.Some(value)))
-        }
-      )
+        },
+      ),
     )
   })
 })

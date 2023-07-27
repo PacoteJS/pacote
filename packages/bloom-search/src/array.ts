@@ -1,6 +1,6 @@
 export function findLast<T>(
   array: T[],
-  predicate: (value: T) => boolean
+  predicate: (value: T) => boolean,
 ): T | undefined {
   if (typeof array.findLast === 'function') {
     return array.findLast(predicate)

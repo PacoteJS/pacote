@@ -13,6 +13,6 @@ test('shuffling preserves collection items', () => {
       const items = range(0, length)
       const shuffled = shuffle(items)
       expect(shuffled.sort()).toEqual(items.sort())
-    })
+    }),
   )
 })

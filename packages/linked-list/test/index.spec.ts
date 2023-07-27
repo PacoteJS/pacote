@@ -26,7 +26,7 @@ describe('length()', () => {
       fc.property(arbitraryArray, (items) => {
         const list = L.listOf(...items)
         expect(L.length(list)).toEqual(items.length)
-      })
+      }),
     )
   })
 })
@@ -42,7 +42,7 @@ describe('head()', () => {
       fc.property(arbitraryNonEmptyArray, (items) => {
         const list = L.listOf(...items)
         expect(L.head(list)).toEqual(Some(items[0]))
-      })
+      }),
     )
   })
 })
@@ -59,7 +59,7 @@ describe('tail()', () => {
         const expectedValue = items[items.length - 1]
         const list = L.listOf(...items)
         expect(L.tail(list)).toEqual(Some(expectedValue))
-      })
+      }),
     )
   })
 })
@@ -71,7 +71,7 @@ describe('prepend()', () => {
         const original = L.listOf(...items)
         const prepended = L.prepend('before', original)
         expect(L.length(prepended)).toEqual(L.length(original) + 1)
-      })
+      }),
     )
   })
 
@@ -115,7 +115,7 @@ describe('append()', () => {
       fc.property(arbitraryArray, fc.anything(), (items, item) => {
         const original = L.listOf(...items)
         expect(L.tail(L.append(item, original))).toEqual(Some(item))
-      })
+      }),
     )
   })
 })
@@ -125,7 +125,7 @@ describe('reverse()', () => {
     fc.assert(
       fc.property(arbitraryArray, (a) => {
         expect(L.reverse(L.listOf(...a))).toEqual(L.listOf(...a.reverse()))
-      })
+      }),
     )
   })
 
@@ -134,7 +134,7 @@ describe('reverse()', () => {
       fc.property(arbitraryArray, (a) => {
         const list = L.listOf(...a)
         expect(L.reverse(L.reverse(list))).toEqual(list)
-      })
+      }),
     )
   })
 })
@@ -145,7 +145,7 @@ describe('concat()', () => {
       fc.property(arbitraryArray, (items) => {
         const list = L.listOf(...items)
         expect(L.concat(list, L.listOf())).toEqual(list)
-      })
+      }),
     )
   })
 
@@ -153,9 +153,9 @@ describe('concat()', () => {
     fc.assert(
       fc.property(arbitraryArray, arbitraryArray, (a, b) => {
         expect(L.concat(L.listOf(...a), L.listOf(...b))).toEqual(
-          L.listOf(...a, ...b)
+          L.listOf(...a, ...b),
         )
-      })
+      }),
     )
   })
 })
@@ -165,7 +165,7 @@ describe('rest()', () => {
     fc.assert(
       fc.property(arbitraryArray, ([h, ...r]) => {
         expect(L.rest(L.listOf(h, ...r))).toEqual(L.listOf(...r))
-      })
+      }),
     )
   })
 })
@@ -186,9 +186,9 @@ describe('filter()', () => {
 
         expect(predicate).toHaveBeenCalledTimes(items.length)
         items.forEach((item, index) =>
-          expect(predicate).toHaveBeenCalledWith(item, index, list)
+          expect(predicate).toHaveBeenCalledWith(item, index, list),
         )
-      })
+      }),
     )
   })
 
@@ -198,7 +198,7 @@ describe('filter()', () => {
         const list = L.listOf(...items)
         const predicate = () => true
         expect(L.filter(predicate, list)).toEqual(list)
-      })
+      }),
     )
   })
 
@@ -208,7 +208,7 @@ describe('filter()', () => {
         const list = L.listOf(...items)
         const predicate = () => false
         expect(L.filter(predicate, list)).toEqual(L.listOf())
-      })
+      }),
     )
   })
 })
@@ -229,9 +229,9 @@ describe('map()', () => {
 
         expect(callback).toHaveBeenCalledTimes(items.length)
         items.forEach((item, index) =>
-          expect(callback).toHaveBeenCalledWith(item, index, list)
+          expect(callback).toHaveBeenCalledWith(item, index, list),
         )
-      })
+      }),
     )
   })
 
@@ -257,9 +257,9 @@ describe('flatMap()', () => {
 
         expect(callback).toHaveBeenCalledTimes(items.length)
         items.forEach((item, index) =>
-          expect(callback).toHaveBeenCalledWith(item, index, list)
+          expect(callback).toHaveBeenCalledWith(item, index, list),
         )
-      })
+      }),
     )
   })
 

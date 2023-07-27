@@ -82,15 +82,15 @@ export function fromElements<T>(
  */
 export function concat<T>(
   before: readonly T[],
-  after: NonEmptyArray<T>
+  after: NonEmptyArray<T>,
 ): NonEmptyArray<T>
 export function concat<T>(
   before: NonEmptyArray<T>,
-  after: readonly T[]
+  after: readonly T[],
 ): NonEmptyArray<T>
 export function concat<T>(
   before: readonly T[],
-  after: readonly T[]
+  after: readonly T[],
 ): readonly T[] {
   return before.concat(after)
 }

@@ -112,7 +112,7 @@ export function xxh64(seed: number | U64 = 0): XXHash<U64> {
         rotateLeft(v1, 1),
         rotateLeft(v2, 7),
         rotateLeft(v3, 12),
-        rotateLeft(v4, 18)
+        rotateLeft(v4, 18),
       )
 
       hash = mergeRound(hash, v1)

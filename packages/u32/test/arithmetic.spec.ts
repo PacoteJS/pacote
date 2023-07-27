@@ -14,7 +14,7 @@ describe('addition', () => {
     assert(
       property(nat().map(from), nat().map(from), (a, b) => {
         expect(add(a, b)).toEqual(add(b, a))
-      })
+      }),
     )
   })
 
@@ -22,7 +22,7 @@ describe('addition', () => {
     assert(
       property(nat().map(from), nat().map(from), nat().map(from), (a, b, c) => {
         expect(add(a, add(b, c))).toEqual(add(add(a, b), c))
-      })
+      }),
     )
   })
 
@@ -30,7 +30,7 @@ describe('addition', () => {
     assert(
       property(nat().map(from), (value) => {
         expect(add(value, from(0))).toEqual(value)
-      })
+      }),
     )
   })
 
@@ -38,7 +38,7 @@ describe('addition', () => {
     assert(
       property(nat(), nat(), (a, b) => {
         expect(add(from(a), from(b))).toEqual(from(a + b))
-      })
+      }),
     )
   })
 })
@@ -48,7 +48,7 @@ describe('multiplication', () => {
     assert(
       property(nat().map(from), nat().map(from), (a, b) => {
         expect(multiply(a, b)).toEqual(multiply(b, a))
-      })
+      }),
     )
   })
 
@@ -56,7 +56,7 @@ describe('multiplication', () => {
     assert(
       property(nat().map(from), nat().map(from), nat().map(from), (a, b, c) => {
         expect(multiply(a, multiply(b, c))).toEqual(multiply(multiply(a, b), c))
-      })
+      }),
     )
   })
 
@@ -64,9 +64,9 @@ describe('multiplication', () => {
     assert(
       property(nat().map(from), nat().map(from), nat().map(from), (a, b, c) => {
         expect(multiply(a, add(b, c))).toEqual(
-          add(multiply(a, b), multiply(a, c))
+          add(multiply(a, b), multiply(a, c)),
         )
-      })
+      }),
     )
   })
 
@@ -74,7 +74,7 @@ describe('multiplication', () => {
     assert(
       property(nat().map(from), (value) => {
         expect(multiply(value, from(1))).toEqual(value)
-      })
+      }),
     )
   })
 
@@ -82,7 +82,7 @@ describe('multiplication', () => {
     assert(
       property(nat().map(from), (value) => {
         expect(multiply(value, ZERO)).toEqual(ZERO)
-      })
+      }),
     )
   })
 })
@@ -95,8 +95,8 @@ describe('subtraction', () => {
         integer({ min: 1, max: 1000 }),
         (a, b) => {
           expect(subtract(from(a), from(b))).toEqual(from(a - b))
-        }
-      )
+        },
+      ),
     )
   })
 })
@@ -110,7 +110,7 @@ describe('division', () => {
     assert(
       property(nat(), integer({ min: 1 }), (a, b) => {
         expect(divide(from(a), from(b))).toEqual(from(Math.floor(a / b)))
-      })
+      }),
     )
   })
 
@@ -131,7 +131,7 @@ describe('remainder', () => {
     assert(
       property(nat(), integer({ min: 1 }), (a, b) => {
         expect(remainder(from(a), from(b))).toEqual(from(Math.floor(a % b)))
-      })
+      }),
     )
   })
 

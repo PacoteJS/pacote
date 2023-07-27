@@ -37,11 +37,11 @@ const failMessage =
 export function toMatchLeft(actual: Either<string, any>, expected: RegExp): any
 export function toMatchLeft<L>(
   actual: Either<L, any>,
-  expected: Partial<L>
+  expected: Partial<L>,
 ): any
 export function toMatchLeft<L>(
   actual: Either<L, any>,
-  expected: RegExp | Partial<L>
+  expected: RegExp | Partial<L>,
 ) {
   const predicate =
     expected instanceof RegExp ? matchString(expected) : matchObject(expected)

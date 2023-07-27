@@ -26,7 +26,7 @@ function merge<T>(
   compare: CompareFn<T>,
   result: LinkedList<T>,
   left: LinkedList<T>,
-  right: LinkedList<T>
+  right: LinkedList<T>,
 ): LinkedList<T> {
   return isEmpty(left) || isEmpty(right)
     ? concat(reverse(result), concat(left, right))
@@ -37,7 +37,7 @@ function merge<T>(
 
 function mergeSort<T>(
   compare: CompareFn<T>,
-  list: LinkedList<T>
+  list: LinkedList<T>,
 ): LinkedList<T> {
   if (isEmpty(cdr(list))) {
     return list
@@ -49,7 +49,7 @@ function mergeSort<T>(
     compare,
     listOf<T>(),
     mergeSort(compare, take(middle, list)),
-    mergeSort(compare, drop(middle, list))
+    mergeSort(compare, drop(middle, list)),
   )
 }
 
@@ -102,11 +102,11 @@ export function sort<T>(list: LinkedList<T>): LinkedList<T>
  */
 export function sort<T>(
   compare: CompareFn<T>,
-  list: LinkedList<T>
+  list: LinkedList<T>,
 ): LinkedList<T>
 export function sort<T>(
   compareOrList: LinkedList<T> | CompareFn<T>,
-  listOrNothing?: LinkedList<T>
+  listOrNothing?: LinkedList<T>,
 ): LinkedList<T> {
   const [compare, list] =
     typeof compareOrList === 'function'

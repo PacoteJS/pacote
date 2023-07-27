@@ -28,7 +28,7 @@ export function drop<T>(offset: number, list: LinkedList<T>): LinkedList<T> {
 function recursiveTake<T>(
   acc: LinkedList<T>,
   offset: number,
-  list: LinkedList<T>
+  list: LinkedList<T>,
 ): LinkedList<T> {
   return offset > 0 && !isEmpty(list)
     ? recursiveTake(prepend(car(list), acc), offset - 1, cdr(list))
@@ -78,12 +78,12 @@ export function slice<T>(start: number, list: LinkedList<T>): LinkedList<T>
 export function slice<T>(
   start: number,
   end: number,
-  list: LinkedList<T>
+  list: LinkedList<T>,
 ): LinkedList<T>
 export function slice<T>(
   start: number,
   end: number | LinkedList<T>,
-  list?: LinkedList<T>
+  list?: LinkedList<T>,
 ): LinkedList<T> {
   const startOffset = start > 0 ? start : 0
   return typeof end !== 'number'
@@ -122,7 +122,7 @@ export function unique<T>(list: LinkedList<T>): LinkedList<T> {
           ? uniqueValues
           : prepend(value, uniqueValues),
       emptyList(),
-      list
-    )
+      list,
+    ),
   )
 }

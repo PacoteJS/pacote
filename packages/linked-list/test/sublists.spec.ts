@@ -31,8 +31,8 @@ describe('take()', () => {
           const list = L.listOf(...array)
           const length = L.length(L.take(offset, list))
           expect(length).toBeLessThanOrEqual(offset)
-        }
-      )
+        },
+      ),
     )
   })
 })

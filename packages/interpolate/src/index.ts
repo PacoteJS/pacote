@@ -2,7 +2,7 @@ type ReplaceMap<T> = { [placeholder: string]: T } | T[]
 
 export function interpolate(
   template: string,
-  pattern: RegExp | string = /{{([\s\S]+?)}}/
+  pattern: RegExp | string = /{{([\s\S]+?)}}/,
 ) {
   const regexp = RegExp(pattern, 'g')
 

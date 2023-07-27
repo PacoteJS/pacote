@@ -20,7 +20,7 @@ describe('find()', () => {
         const list = L.listOf(first, ...remaining)
         const predicate = () => true
         expect(L.find(predicate, list)).toEqual(Some(first))
-      })
+      }),
     )
   })
 
@@ -30,7 +30,7 @@ describe('find()', () => {
         const list = L.listOf(...items)
         const predicate = () => false
         expect(L.find(predicate, list)).toEqual(None)
-      })
+      }),
     )
   })
 
@@ -60,7 +60,7 @@ describe('findIndex()', () => {
         const list = L.listOf(...items)
         const predicate = () => true
         expect(L.findIndex(predicate, list)).toEqual(Some(0))
-      })
+      }),
     )
   })
 
@@ -70,7 +70,7 @@ describe('findIndex()', () => {
         const list = L.listOf(...items)
         const predicate = () => false
         expect(L.findIndex(predicate, list)).toEqual(None)
-      })
+      }),
     )
   })
 
@@ -138,7 +138,7 @@ describe('get()', () => {
       fc.property(fc.integer({ max: -1 }), arbitraryArray, (index, array) => {
         const list = L.listOf(...array)
         expect(L.get(index, list)).toEqual(None)
-      })
+      }),
     )
   })
 

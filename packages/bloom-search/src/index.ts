@@ -10,7 +10,7 @@ import { findLast } from './array'
 export type PreprocessFunction<Document, Field extends keyof Document> = (
   value: Document[Field],
   field: Field,
-  document: Document
+  document: Document,
 ) => string
 export type StopwordsFunction = (token: string, language?: string) => boolean
 export type StemmerFunction = (token: string, language?: string) => string
@@ -36,7 +36,7 @@ export type Index<Document, SummaryField extends keyof Document> = {
 export type Options<
   Document extends Record<string, unknown>,
   SummaryField extends keyof Document = keyof Document,
-  IndexField extends keyof Document = keyof Document
+  IndexField extends keyof Document = keyof Document,
 > = {
   /**
    * The fields to index, provided as an array or as a record of field keys and
@@ -129,7 +129,7 @@ const defaultTokenizer = (text: string): string[] =>
 export class BloomSearch<
   Document extends Record<string, unknown>,
   SummaryField extends keyof Document = keyof Document,
-  IndexField extends keyof Document = keyof Document
+  IndexField extends keyof Document = keyof Document,
 > {
   /**
    * Collection containing document summaries and Bloom filter signatures used
@@ -193,10 +193,13 @@ export class BloomSearch<
    */
   constructor(options: Options<Document, SummaryField, IndexField>) {
     this.fields = Array.isArray(options.fields)
-      ? options.fields.reduce((weight, field) => {
-          weight[field] = 1
-          return weight
-        }, {} as Record<IndexField, number>)
+      ? options.fields.reduce(
+          (weight, field) => {
+            weight[field] = 1
+            return weight
+          },
+          {} as Record<IndexField, number>,
+        )
       : options.fields
     this.summary = options.summary
     this.errorRate = options.errorRate ?? 0.0001
@@ -215,12 +218,12 @@ export class BloomSearch<
 
     const x1 = xxh64(this.seed + 1)
     const h1 = memoize(String, (data) =>
-      toUint32(x1.update(data).digest('hex'))
+      toUint32(x1.update(data).digest('hex')),
     )
 
     const x2 = xxh64(this.seed + 2)
     const h2 = memoize(String, (data) =>
-      toUint32(x2.update(data).digest('hex'))
+      toUint32(x2.update(data).digest('hex')),
     )
 
     this.hash = (i, data) => h1(data) + i * h2(data) + i ** 3
@@ -241,7 +244,7 @@ export class BloomSearch<
   load(index: Index<Document, SummaryField>): void {
     if (index.version !== this.index.version) {
       throw new Error(
-        `incompatible index schema version ${index.version}, expected ${this.index.version}`
+        `incompatible index schema version ${index.version}, expected ${this.index.version}`,
       )
     }
 
@@ -276,23 +279,28 @@ export class BloomSearch<
    *                      decide how to handle these steps.
    */
   add(ref: string, document: Document, language?: string): void {
-    const tokensByField = keys(this.fields).reduce((tokens, field) => {
-      if (document[field] !== undefined) {
-        const fieldText = this.preprocess(document[field], field, document)
-        const fieldTokens = this.tokenizer(fieldText, language)
+    const tokensByField = keys(this.fields).reduce(
+      (tokens, field) => {
+        if (document[field] !== undefined) {
+          const fieldText = this.preprocess(document[field], field, document)
+          const fieldTokens = this.tokenizer(fieldText, language)
 
-        const unigrams = fieldTokens
-          .filter((token) => token.length && this.stopwords(token, language))
-          .map((token) => this.stemmer(token, language))
+          const unigrams = fieldTokens
+            .filter((token) => token.length && this.stopwords(token, language))
+            .map((token) => this.stemmer(token, language))
 
-        const ngrams = range(2, this.ngrams + 1)
-          .map((i) => windowed(i, fieldTokens).map((ngram) => ngram.join(' ')))
-          .flat()
+          const ngrams = range(2, this.ngrams + 1)
+            .map((i) =>
+              windowed(i, fieldTokens).map((ngram) => ngram.join(' ')),
+            )
+            .flat()
 
-        tokens[field] = unigrams.concat(ngrams)
-      }
-      return tokens
-    }, {} as Record<IndexField, string[]>)
+          tokens[field] = unigrams.concat(ngrams)
+        }
+        return tokens
+      },
+      {} as Record<IndexField, string[]>,
+    )
 
     const uniqueTokens = unique(Object.values<string[]>(tokensByField).flat())
 
@@ -305,7 +313,7 @@ export class BloomSearch<
     entries(this.fields).forEach(([field, weight = 1]) =>
       (tokensByField[field] || []).forEach((token) => {
         frequency[token] = (frequency[token] ?? 0) + weight
-      })
+      }),
     )
 
     const tokensByFrequency = Array.from(uniqueTokens).reduce<
@@ -314,7 +322,7 @@ export class BloomSearch<
       const frequencyBucket =
         findLast(
           this.termFrequencyBuckets,
-          (limit) => frequency[token] >= limit
+          (limit) => frequency[token] >= limit,
         ) ?? 0
       if (!tokens[frequencyBucket]) {
         tokens[frequencyBucket] = []
@@ -386,12 +394,12 @@ export class BloomSearch<
     const totalDocuments = keys(this.index.documents).length
 
     return Object.values<IndexedDocument<Document, SummaryField>>(
-      this.index.documents
+      this.index.documents,
     )
       .filter(
         (document) =>
           tokens.excluded.every((token) => !this.hasToken(document, token)) &&
-          tokens.required.every((token) => this.hasToken(document, token))
+          tokens.required.every((token) => this.hasToken(document, token)),
       )
       .map((document) => {
         const matches: Record<string, number> = {}
@@ -403,8 +411,8 @@ export class BloomSearch<
       .filter(({ matches }) =>
         Object.values(matches).reduce(
           (hasMatches, match) => hasMatches || match > 0,
-          false
-        )
+          false,
+        ),
       )
       .reduce<Result<Document, SummaryField>[]>((all, result, _, results) => {
         all.push({
@@ -412,7 +420,7 @@ export class BloomSearch<
           score: countIdf(
             result.matches,
             results.map(({ matches }) => matches),
-            totalDocuments
+            totalDocuments,
           ),
         })
         return all
@@ -423,12 +431,12 @@ export class BloomSearch<
 
   private hasToken(
     document: IndexedDocument<Document, SummaryField>,
-    token: string
+    token: string,
   ): number {
     return Number(
       keys(document.signatures).find((frequency) =>
-        document.signatures[frequency].has(token)
-      ) ?? 0
+        document.signatures[frequency].has(token),
+      ) ?? 0,
     )
   }
 
@@ -444,7 +452,7 @@ export class BloomSearch<
           excluded: type === 'exclude' ? excluded.concat(token) : excluded,
         }
       },
-      { required: [], included: [], excluded: [] }
+      { required: [], included: [], excluded: [] },
     )
   }
 }

@@ -32,7 +32,7 @@ export class ComplexError extends BaseError {
 
   public constructor(
     message = '',
-    causes: Error | BaseError | readonly (Error | BaseError)[] = []
+    causes: Error | BaseError | readonly (Error | BaseError)[] = [],
   ) {
     super(message)
     ComplexError.imprint(this)
@@ -40,7 +40,7 @@ export class ComplexError extends BaseError {
   }
 
   public static fromErrors(
-    errors: readonly (Error | BaseError)[]
+    errors: readonly (Error | BaseError)[],
   ): ComplexError {
     return new this(undefined, errors)
   }

@@ -14,7 +14,7 @@ test('Plain objects are plain objects', () => {
   assert(
     property(object(), (o) => {
       expect(isPlainObject(o)).toBe(true)
-    })
+    }),
   )
 })
 
@@ -22,7 +22,7 @@ test('Proxy is a plain object', () => {
   assert(
     property(object(), (o) => {
       expect(isPlainObject(new Proxy(o, {}))).toBe(true)
-    })
+    }),
   )
 })
 
@@ -43,7 +43,7 @@ test('A string is not a plain object', () => {
   assert(
     property(string(), (s) => {
       expect(isPlainObject(s)).toBe(false)
-    })
+    }),
   )
 })
 
@@ -51,7 +51,7 @@ test('A number is not a plain object', () => {
   assert(
     property(float(), (f) => {
       expect(isPlainObject(f)).toBe(false)
-    })
+    }),
   )
 })
 
@@ -59,7 +59,7 @@ test('A function is not a plain object', () => {
   assert(
     property(func(anything()), (f) => {
       expect(isPlainObject(f)).toBe(false)
-    })
+    }),
   )
 })
 
@@ -67,7 +67,7 @@ test('An array is not a plain object', () => {
   assert(
     property(array(anything()), (a) => {
       expect(isPlainObject(a)).toBe(false)
-    })
+    }),
   )
 })
 

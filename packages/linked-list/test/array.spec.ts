@@ -12,8 +12,8 @@ describe('toArray()', () => {
 
     fc.assert(
       fc.property(arbitraryArray, (items) =>
-        expect(L.toArray(L.listOf(...items))).toEqual(items)
-      )
+        expect(L.toArray(L.listOf(...items))).toEqual(items),
+      ),
     )
   })
 })

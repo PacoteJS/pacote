@@ -39,7 +39,7 @@ describe('isNonEmptyArray()', () => {
 describe('semigroup laws', () => {
   function arbitraryNonEmptyArray<T>(arb: Arbitrary<T>) {
     return tuple(arb, array(arb)).map(([first, rest]) =>
-      fromElements(first, ...rest)
+      fromElements(first, ...rest),
     )
   }
 
@@ -51,8 +51,8 @@ describe('semigroup laws', () => {
         arbitraryNonEmptyArray(anything()),
         (a, b, c) => {
           expect(concat(concat(a, b), c)).toEqual(concat(a, concat(b, c)))
-        }
-      )
+        },
+      ),
     )
   })
 })

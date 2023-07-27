@@ -4,12 +4,12 @@ export function iff<T>(predicate: boolean, onConsequent: () => T): Option<T>
 export function iff<T>(
   predicate: boolean,
   onConsequent: () => T,
-  onAlternative: () => T
+  onAlternative: () => T,
 ): T
 export function iff<T>(
   predicate: boolean,
   onConsequent: () => T,
-  onAlternative?: () => T
+  onAlternative?: () => T,
 ): T | Option<T> {
   return onAlternative
     ? predicate

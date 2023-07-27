@@ -28,8 +28,8 @@ describe('XXHash64', () => {
             .toString('hex')
           const hash = xxh64(seed).update(data).digest('hex')
           expect(hash).toBe(referenceHash)
-        }
-      )
+        },
+      ),
     )
   })
 
@@ -59,7 +59,7 @@ describe('XXHash64', () => {
           .reduce((hasher, element) => hasher.update(element), xxh64(seed))
           .digest('hex')
         expect(hashFromChunks).toBe(hashFromWhole)
-      })
+      }),
     )
   })
 

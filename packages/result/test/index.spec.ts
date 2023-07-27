@@ -22,7 +22,7 @@ describe('tryCatch()', () => {
     expect(
       R.tryCatch(() => {
         throw error
-      })
+      }),
     ).toEqual(R.Err(error))
   })
 
@@ -36,14 +36,14 @@ describe('ofPromise()', () => {
   test('creates Err(E) for rejected promises', async () => {
     const error = Error('rejected')
     await expect(R.ofPromise(Promise.reject(error))).resolves.toEqual(
-      R.Err(error)
+      R.Err(error),
     )
   })
 
   test('returns Ok(T) for resolved promises', async () => {
     const value = 'resolved'
     await expect(R.ofPromise(Promise.resolve(value))).resolves.toEqual(
-      R.Ok(value)
+      R.Ok(value),
     )
   })
 })
@@ -95,7 +95,7 @@ describe('getOrElse()', () => {
 
   test('evaluates the function and returns its result on Err', () => {
     expect(R.getOrElse((err) => 'default: ' + err)(R.Err('error'))).toBe(
-      'default: error'
+      'default: error',
     )
   })
 })
@@ -103,7 +103,7 @@ describe('getOrElse()', () => {
 describe('map()', () => {
   test('leaves Err unchanged', () => {
     expect(R.map((s: string) => s.length, R.Err('error'))).toEqual(
-      R.Err('error')
+      R.Err('error'),
     )
   })
 
@@ -128,8 +128,8 @@ describe('bimap()', () => {
       R.bimap(
         () => 0,
         (e) => e + 1,
-        R.Err(0)
-      )
+        R.Err(0),
+      ),
     ).toEqual(R.Err(1))
   })
 
@@ -138,8 +138,8 @@ describe('bimap()', () => {
       R.bimap(
         (t) => t + 1,
         () => 0,
-        R.Ok(1)
-      )
+        R.Ok(1),
+      ),
     ).toEqual(R.Ok(2))
   })
 })
@@ -147,7 +147,7 @@ describe('bimap()', () => {
 describe('flatMap()', () => {
   test('leaves Err unchanged', () => {
     expect(
-      R.flatMap<string, string, number>((s) => R.Ok(s.length), R.Err('error'))
+      R.flatMap<string, string, number>((s) => R.Ok(s.length), R.Err('error')),
     ).toEqual(R.Err('error'))
   })
 
@@ -176,8 +176,8 @@ describe('fold()', () => {
       R.fold(
         (t) => `Ok(${t})`,
         (e) => `Err(${e})`,
-        R.Err(0)
-      )
+        R.Err(0),
+      ),
     ).toEqual('Err(0)')
   })
 
@@ -186,8 +186,8 @@ describe('fold()', () => {
       R.fold(
         (t) => `Ok(${t})`,
         (e) => `Err(${e})`,
-        R.Ok(1)
-      )
+        R.Ok(1),
+      ),
     ).toEqual('Ok(1)')
   })
 })
@@ -201,7 +201,7 @@ describe('or()', () => {
   test('returns alternative if result is Err', () => {
     expect(R.or(R.Ok(2), R.Err('early error'))).toEqual(R.Ok(2))
     expect(R.or(R.Err('late error'), R.Err('early error'))).toEqual(
-      R.Err('late error')
+      R.Err('late error'),
     )
   })
 })
@@ -214,10 +214,10 @@ describe('and()', () => {
 
   test('returns result if result is Err', () => {
     expect(R.and(R.Err('late error'), R.Err('early error'))).toEqual(
-      R.Err('early error')
+      R.Err('early error'),
     )
     expect(
-      R.and<string, string, string>(R.Ok('ok'), R.Err('early error'))
+      R.and<string, string, string>(R.Ok('ok'), R.Err('early error')),
     ).toEqual(R.Err('early error'))
   })
 })
@@ -227,9 +227,9 @@ describe('monad laws', () => {
     assert(
       property(func(anything()), anything(), (fn, value) => {
         expect(R.flatMap((x) => R.Ok(fn(x)), R.Ok(value))).toEqual(
-          R.Ok(fn(value))
+          R.Ok(fn(value)),
         )
-      })
+      }),
     )
   })
 
@@ -237,7 +237,7 @@ describe('monad laws', () => {
     assert(
       property(anything(), (value) => {
         expect(R.flatMap(R.Ok, R.Ok(value))).toEqual(R.Ok(value))
-      })
+      }),
     )
   })
 
@@ -251,11 +251,11 @@ describe('monad laws', () => {
           expect(
             R.flatMap(
               (x) => R.Ok(g(x)),
-              R.flatMap((x) => R.Ok(f(x)), R.Ok(value))
-            )
+              R.flatMap((x) => R.Ok(f(x)), R.Ok(value)),
+            ),
           ).toEqual(R.flatMap((x) => R.Ok(g(f(x))), R.Ok(value)))
-        }
-      )
+        },
+      ),
     )
   })
 })

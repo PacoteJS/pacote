@@ -17,7 +17,7 @@ describe('and', () => {
     assert(
       property(nat(), nat(), (a, b) => {
         expect(and(from(a), from(b))).toEqual(from(a & b))
-      })
+      }),
     )
   })
 })
@@ -27,7 +27,7 @@ describe('or', () => {
     assert(
       property(nat(), nat(), (a, b) => {
         expect(or(from(a), from(b))).toEqual(from(a | b))
-      })
+      }),
     )
   })
 })
@@ -37,7 +37,7 @@ describe('xor', () => {
     assert(
       property(nat(), nat(), (a, b) => {
         expect(xor(from(a), from(b))).toEqual(from(a ^ b))
-      })
+      }),
     )
   })
 })
@@ -87,7 +87,7 @@ describe('rotate left', () => {
       property(arb32Bits(), (value) => {
         const u32 = from(value, 2)
         expect(rotateLeft(u32, 0)).toEqual(u32)
-      })
+      }),
     )
   })
 
@@ -96,7 +96,7 @@ describe('rotate left', () => {
       property(arb32Bits(), (value) => {
         const u32 = from(value, 2)
         expect(rotateLeft(u32, 32)).toEqual(u32)
-      })
+      }),
     )
   })
 })
@@ -115,7 +115,7 @@ describe('rotate right', () => {
       property(arb32Bits(), (value) => {
         const u32 = from(value, 2)
         expect(rotateRight(u32, 0)).toEqual(u32)
-      })
+      }),
     )
   })
 
@@ -124,7 +124,7 @@ describe('rotate right', () => {
       property(arb32Bits(), (value) => {
         const u32 = from(value, 2)
         expect(rotateRight(u32, 32)).toEqual(u32)
-      })
+      }),
     )
   })
 })
@@ -134,6 +134,6 @@ it('rotate left and rotate left are inverse functions', () => {
     property(arb32Bits(), nat(32), (value, bits) => {
       const u32 = from(value, 2)
       expect(rotateLeft(rotateRight(u32, bits), bits)).toEqual(u32)
-    })
+    }),
   )
 })

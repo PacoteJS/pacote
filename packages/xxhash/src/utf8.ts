@@ -10,7 +10,7 @@ export function encode(string: string): Uint8Array {
       utf8.push(
         0xe0 | (charCode >> 12),
         0x80 | ((charCode >> 6) & 0x3f),
-        0x80 | (charCode & 0x3f)
+        0x80 | (charCode & 0x3f),
       )
     } else {
       i++
@@ -20,7 +20,7 @@ export function encode(string: string): Uint8Array {
         0xf0 | (charCode >> 18),
         0x80 | ((charCode >> 12) & 0x3f),
         0x80 | ((charCode >> 6) & 0x3f),
-        0x80 | (charCode & 0x3f)
+        0x80 | (charCode & 0x3f),
       )
     }
   }

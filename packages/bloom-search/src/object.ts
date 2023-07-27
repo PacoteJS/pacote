@@ -7,10 +7,13 @@ export const entries = <O extends AnyRecord>(o: O) =>
 
 export function pick<
   UnknownRecord extends AnyRecord,
-  PickedKey extends keyof UnknownRecord
+  PickedKey extends keyof UnknownRecord,
 >(keys: PickedKey[], obj: UnknownRecord): Pick<UnknownRecord, PickedKey> {
-  return keys.reduce((picked, name) => {
-    picked[name] = obj[name]
-    return picked
-  }, {} as Pick<UnknownRecord, PickedKey>)
+  return keys.reduce(
+    (picked, name) => {
+      picked[name] = obj[name]
+      return picked
+    },
+    {} as Pick<UnknownRecord, PickedKey>,
+  )
 }

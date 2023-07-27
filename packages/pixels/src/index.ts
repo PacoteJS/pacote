@@ -61,7 +61,7 @@ export function pixels(length: string, element?: HTMLElement | null): number {
         (value *
           Math.min(
             view.innerWidth || root.clientWidth,
-            view.innerHeight || root.clientHeight
+            view.innerHeight || root.clientHeight,
           )) /
         100
       )
@@ -71,7 +71,7 @@ export function pixels(length: string, element?: HTMLElement | null): number {
         (value *
           Math.max(
             view.innerWidth || root.clientWidth,
-            view.innerHeight || root.clientHeight
+            view.innerHeight || root.clientHeight,
           )) /
         100
       )

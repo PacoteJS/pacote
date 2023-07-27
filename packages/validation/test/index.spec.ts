@@ -9,12 +9,12 @@ describe('lift()', () => {
 })
 
 describe('validation()', () => {
-  const hasLetter = lift((value: string) =>
-    value.match(/[a-z]/i) ? Ok(value) : Err('no letters')
+  const hasLetter = lift((value) =>
+    String(value).match(/[a-z]/i) ? Ok(value) : Err('no letters'),
   )
 
-  const hasDigit = lift((value: string) =>
-    value.match(/[0-9]/) ? Ok(value) : Err('no digits')
+  const hasDigit = lift((value) =>
+    String(value).match(/[0-9]/) ? Ok(value) : Err('no digits'),
   )
 
   it('composes validators and returns a success when all checks pass', () => {

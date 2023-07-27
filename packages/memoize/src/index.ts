@@ -13,7 +13,7 @@ type MemoizedFn<A extends any[], R> = Fn<A, R> & {
 export function memoize<A extends any[], K, V>(
   cacheKeyFn: Fn<A, K>,
   fn: Fn<A, V>,
-  options: Options = {}
+  options: Options = {},
 ): MemoizedFn<A, V> {
   const cache = options.capacity
     ? new LRUCache<K, V>(options.capacity)

@@ -27,7 +27,7 @@ test('rejecting with the latest error after retrying a maximum number of times',
     () => {
       throw new Error(`called ${++calls} times`)
     },
-    { retries: 2 }
+    { retries: 2 },
   )
 
   await expect(result).rejects.toEqual(new Error('called 3 times'))
@@ -43,7 +43,7 @@ test('retrying with an interval', async () => {
         throw Error()
       }
     },
-    { interval: 50 }
+    { interval: 50 },
   )
 
   expect(new Date().getTime() - start.getTime()).toBeGreaterThanOrEqual(50)
@@ -57,8 +57,8 @@ test('retrying until there is a timeout', async () => {
       () => {
         throw new Error()
       },
-      { interval: 10, timeout: 50 }
-    )
+      { interval: 10, timeout: 50 },
+    ),
   ).rejects.toBeInstanceOf(Error)
 
   expect(new Date().getTime() - start.getTime()).toBeGreaterThanOrEqual(50)
@@ -74,7 +74,7 @@ test('retrying with an exponential backoff', async () => {
         throw Error()
       }
     },
-    { backoff: 2, interval: 10 }
+    { backoff: 2, interval: 10 },
   )
 
   expect(new Date().getTime() - start.getTime()).toBeGreaterThanOrEqual(70)
@@ -88,7 +88,7 @@ test('do not call a slow async callback until the previous call has finished', a
       calls++
       return new Promise((resolve) => setTimeout(resolve, 10))
     },
-    { interval: 1 }
+    { interval: 1 },
   )
 
   expect(calls).toBe(1)

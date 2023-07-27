@@ -17,7 +17,7 @@ describe('and', () => {
     assert(
       property(nat(), nat(), (a, b) => {
         expect(and(from(a), from(b))).toEqual(from(a & b))
-      })
+      }),
     )
   })
 })
@@ -27,7 +27,7 @@ describe('or', () => {
     assert(
       property(nat(), nat(), (a, b) => {
         expect(or(from(a), from(b))).toEqual(from(a | b))
-      })
+      }),
     )
   })
 })
@@ -37,7 +37,7 @@ describe('xor', () => {
     assert(
       property(nat(), nat(), (a, b) => {
         expect(xor(from(a), from(b))).toEqual(from(a ^ b))
-      })
+      }),
     )
   })
 })
@@ -114,6 +114,6 @@ it('rotate left and rotate left are inverse functions', () => {
     property(arb64Bits(), nat(64), (value, bits) => {
       const u64 = from(value, 2)
       expect(rotateLeft(rotateRight(u64, bits), bits)).toEqual(u64)
-    })
+    }),
   )
 })

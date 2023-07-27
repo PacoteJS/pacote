@@ -31,12 +31,12 @@ test('the window slides with the provided step', () => {
 
 test('size must be a positive integer', () => {
   expect(() => windowed(0, [1, 2, 3])).toThrow(
-    Error('size must be a positive integer')
+    Error('size must be a positive integer'),
   )
 })
 
 test('step must be a positive integer', () => {
   expect(() => windowed(2, 0, [1, 2, 3])).toThrow(
-    Error('step must be a positive integer')
+    Error('step must be a positive integer'),
   )
 })

@@ -9,7 +9,7 @@ type Compose5<A, B, C, D, E, F> = readonly [
   Fn<B, C>,
   Fn<C, D>,
   Fn<D, E>,
-  Fn<E, F>
+  Fn<E, F>,
 ]
 type Compose6<A, B, C, D, E, F, G> = readonly [
   Fn<A, B>,
@@ -17,7 +17,7 @@ type Compose6<A, B, C, D, E, F, G> = readonly [
   Fn<C, D>,
   Fn<D, E>,
   Fn<E, F>,
-  Fn<F, G>
+  Fn<F, G>,
 ]
 type Compose7<A, B, C, D, E, F, G, H> = readonly [
   Fn<A, B>,
@@ -26,7 +26,7 @@ type Compose7<A, B, C, D, E, F, G, H> = readonly [
   Fn<D, E>,
   Fn<E, F>,
   Fn<F, G>,
-  Fn<G, H>
+  Fn<G, H>,
 ]
 type Compose8<A, B, C, D, E, F, G, H, I> = readonly [
   Fn<A, B>,
@@ -36,7 +36,7 @@ type Compose8<A, B, C, D, E, F, G, H, I> = readonly [
   Fn<E, F>,
   Fn<F, G>,
   Fn<G, H>,
-  Fn<H, I>
+  Fn<H, I>,
 ]
 
 export function pipe<A>(initial: A): A

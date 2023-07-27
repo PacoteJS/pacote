@@ -46,13 +46,13 @@ describe('.not.toMatchRight()', () => {
     expect(() =>
       expect(right({ a: 1, b: { c: 2, d: 3 } })).not.toMatchRight({
         b: { c: 2 },
-      })
+      }),
     ).toThrow()
   })
 
   test('fails when spec matches the object on the right', () => {
     expect(() =>
-      expect(right({ a: 1, b: 2 })).not.toMatchRight({ a: 1 })
+      expect(right({ a: 1, b: 2 })).not.toMatchRight({ a: 1 }),
     ).toThrow()
   })
 

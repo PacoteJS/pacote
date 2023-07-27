@@ -12,7 +12,7 @@ test('no functions are called when run zero times', () => {
       const fn = jest.fn()
       times(n, fn)
       expect(fn).toHaveBeenCalledTimes(n)
-    })
+    }),
   )
 })
 

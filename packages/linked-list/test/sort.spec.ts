@@ -55,7 +55,7 @@ describe('sort()', () => {
       fc.property(fc.array(fc.string()), (strings) => {
         const list = L.listOf(...strings)
         expect(L.length(L.sort(list))).toEqual(L.length(list))
-      })
+      }),
     )
   })
 
@@ -64,7 +64,7 @@ describe('sort()', () => {
       fc.property(fc.array(fc.string()), (strings) => {
         const list = L.listOf(...strings)
         expect(L.sort(L.sort(list))).toEqual(L.sort(list))
-      })
+      }),
     )
   })
 
@@ -81,13 +81,13 @@ describe('sort()', () => {
               fc.boolean(),
               fc.constantFrom(null, undefined),
             ],
-          })
+          }),
         ),
         (array) => {
           const list = L.listOf(...array)
           expect(L.sort(list)).toEqual(L.listOf(...array.sort()))
-        }
-      )
+        },
+      ),
     )
   })
 })

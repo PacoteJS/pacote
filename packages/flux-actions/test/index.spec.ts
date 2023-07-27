@@ -6,7 +6,7 @@ test('creates an action creator', () => {
     property(string(), (type) => {
       const testAction = createAction(type)
       expect(testAction()).toEqual({ type })
-    })
+    }),
   )
 })
 
@@ -15,7 +15,7 @@ test('creates an action creator that takes a payload', () => {
     property(string(), anything(), (type, payload) => {
       const testAction = createAction<any>(type)
       expect(testAction(payload)).toEqual({ type, payload })
-    })
+    }),
   )
 })
 
@@ -24,7 +24,7 @@ test('creates an action creator that takes payload and metadata', () => {
     property(string(), anything(), anything(), (type, payload, meta) => {
       const testAction = createAction<any, any>(type)
       expect(testAction(payload, meta)).toEqual({ type, payload, meta })
-    })
+    }),
   )
 })
 

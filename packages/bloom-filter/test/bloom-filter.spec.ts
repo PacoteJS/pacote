@@ -7,7 +7,7 @@ test('a Bloom filter is empty when created', () => {
     property(string(), (text) => {
       const filter = new BloomFilter({ size: 34, hashes: 1 })
       expect(filter.has(text)).toBe(false)
-    })
+    }),
   )
 })
 
@@ -17,7 +17,7 @@ test('elements added to a Bloom filter can be found', () => {
       const filter = new BloomFilter({ size: 68, hashes: 1 })
       filter.add(element)
       expect(filter.has(element)).toBe(true)
-    })
+    }),
   )
 })
 
@@ -36,7 +36,7 @@ test('elements added to a Bloom filter can be found using provided hash function
       const filter = new BloomFilter({ size: 68, hashes: 1, hash })
       filter.add(element)
       expect(filter.has(element)).toBe(true)
-    })
+    }),
   )
 })
 
@@ -61,10 +61,10 @@ test('elements added to a Bloom filter can be found in filters deserialised from
       const filter = new BloomFilter({ size: 34, hashes: 1 })
       filter.add(element)
       const deserialisedFilter = new BloomFilter(
-        JSON.parse(JSON.stringify(filter))
+        JSON.parse(JSON.stringify(filter)),
       )
       expect(deserialisedFilter.has(element)).toBe(true)
-    })
+    }),
   )
 })
 
