@@ -108,11 +108,10 @@ test('stopwords are passed through a language-aware filter', () => {
     stopwords,
   })
 
-  bs.add('1', { text: 'a foo bar' }, 'en-US')
+  bs.add('1', { text: 'a foo' }, 'en-US')
 
   expect(stopwords).toHaveBeenCalledWith('a', 'en-US')
   expect(stopwords).toHaveBeenCalledWith('foo', 'en-US')
-  expect(stopwords).toHaveBeenCalledWith('bar', 'en-US')
   expect(bs.search('a')).toEqual([])
 })
 

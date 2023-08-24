@@ -279,30 +279,25 @@ export class BloomSearch<
    *                      decide how to handle these steps.
    */
   add(ref: string, document: Document, language?: string): void {
-    const tokensByField = keys(this.fields).reduce(
-      (tokens, field) => {
-        if (document[field] !== undefined) {
-          const fieldText = this.preprocess(document[field], field, document)
-          const fieldTokens = this.tokenizer(fieldText, language)
+    const tokensByField = keys(this.fields).reduce((tokens, field) => {
+      if (document[field] !== undefined) {
+        const fieldText = this.preprocess(document[field], field, document)
+        const fieldTokens = this.tokenizer(fieldText, language)
 
-          const unigrams = fieldTokens
-            .filter((token) => token.length && this.stopwords(token, language))
-            .map((token) => this.stemmer(token, language))
+        const unigrams = fieldTokens
+          .filter((token) => token.length && this.stopwords(token, language))
+          .map((token) => this.stemmer(token, language))
 
-          const ngrams = range(2, this.ngrams + 1)
-            .map((i) =>
-              windowed(i, fieldTokens).map((ngram) => ngram.join(' ')),
-            )
-            .flat()
+        const ngrams = range(2, this.ngrams + 1)
+          .map((i) => windowed(i, fieldTokens).map((ngram) => ngram.join(' ')))
+          .flat()
 
-          tokens[field] = unigrams.concat(ngrams)
-        }
-        return tokens
-      },
-      {} as Record<IndexField, string[]>,
-    )
+        tokens.set(field, unigrams.concat(ngrams))
+      }
+      return tokens
+    }, new Map<IndexField, string[]>())
 
-    const uniqueTokens = unique(Object.values<string[]>(tokensByField).flat())
+    const uniqueTokens = unique(Array.from(tokensByField.values()).flat())
 
     if (uniqueTokens.length === 0) {
       return
@@ -311,7 +306,7 @@ export class BloomSearch<
     const frequency: Record<string, number> = {}
 
     entries(this.fields).forEach(([field, weight = 1]) =>
-      (tokensByField[field] || []).forEach((token) => {
+      (tokensByField.get(field) ?? []).forEach((token) => {
         frequency[token] = (frequency[token] ?? 0) + weight
       }),
     )
@@ -408,12 +403,7 @@ export class BloomSearch<
         }
         return { summary: document.summary, matches }
       })
-      .filter(({ matches }) =>
-        Object.values(matches).reduce(
-          (hasMatches, match) => hasMatches || match > 0,
-          false,
-        ),
-      )
+      .filter(({ matches }) => Object.values(matches).some((match) => match))
       .reduce<Result<Document, SummaryField>[]>((all, result, _, results) => {
         all.push({
           ...result,
@@ -433,10 +423,10 @@ export class BloomSearch<
     document: IndexedDocument<Document, SummaryField>,
     token: string,
   ): number {
-    return Number(
+    return (
       keys(document.signatures).find((frequency) =>
         document.signatures[frequency].has(token),
-      ) ?? 0,
+      ) ?? 0
     )
   }
 
