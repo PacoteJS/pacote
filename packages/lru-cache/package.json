@@ -1,7 +1,7 @@
 {
   "name": "@pacote/lru-cache",
   "description": "Least-recently used cache.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "sideEffects": false,
   "license": "MIT",
   "author": {

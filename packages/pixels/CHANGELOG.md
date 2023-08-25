@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.2](https://github.com/PacoteJS/pacote/compare/@pacote/pixels@2.0.1...@pacote/pixels@2.0.2) (2023-08-25)
+
+**Note:** Version bump only for package @pacote/pixels
+
+
+
+
+
 ## [2.0.1](https://github.com/PacoteJS/pacote/compare/@pacote/pixels@2.0.0...@pacote/pixels@2.0.1) (2023-04-22)
 
 **Note:** Version bump only for package @pacote/pixels
