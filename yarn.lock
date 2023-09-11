@@ -3847,9 +3847,9 @@ external-editor@^3.0.3:
     tmp "^0.0.33"
 
 fast-check@^3.1.2:
-  version "3.11.0"
-  resolved "https://registry.yarnpkg.com/fast-check/-/fast-check-3.11.0.tgz#bb3f7877c5ba7940b17f983afc412e4241b5aaee"
-  integrity sha512-H2tctb7AGfFQfz+DEr3UWhJ3s47LXsGp5g3jeJr5tHjnf4xUvpArIqiwcDmL2EXiv+auLHIpF5MqaIpIKvpxiA==
+  version "3.13.0"
+  resolved "https://registry.yarnpkg.com/fast-check/-/fast-check-3.13.0.tgz#1099a36fd945fb06f6e68e261c91fa8c70c29802"
+  integrity sha512-m6+3gZ/yTiCWTuV/1e/UuPPjyyyHdQ5gu0pMd84C6705VTDjAgAE6nqFT5jhgegFllCJ95yOzBpqvJSs2DZAxQ==
   dependencies:
     pure-rand "^6.0.0"
 
