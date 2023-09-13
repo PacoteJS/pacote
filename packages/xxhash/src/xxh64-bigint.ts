@@ -80,9 +80,9 @@ function finalize(buffer: Uint8Array, length: number, hash: bigint): bigint {
  * @example
  *
  * ```typescript
- * import { xxh64 } from '@pacote/xxhash'
+ * import { xxh64BigInt } from '@pacote/xxhash'
  *
- * const hasher = xxh64(2654435761)
+ * const hasher = xxh64BigInt(2654435761)
  *
  * hasher.update('data').digest('hex') // => '5014607643a9b4c3'
  * ```
