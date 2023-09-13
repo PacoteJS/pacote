@@ -98,7 +98,7 @@ export function xxh64BigInt(seed: number | bigint = 0): XXHash<bigint> {
   let buffer: Uint8Array
 
   const reset = (seed: number | bigint = _seed) => {
-    _seed = typeof seed === 'number' ? BigInt(seed) : seed
+    _seed = asUint64(typeof seed === 'number' ? BigInt(seed) : seed)
     v1 = _seed + PRIME_1 + PRIME_2
     v2 = _seed + PRIME_2
     v3 = _seed
