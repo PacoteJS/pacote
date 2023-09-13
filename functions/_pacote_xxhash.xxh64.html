@@ -18,7 +18,7 @@
 <h1>Function xxh64</h1></div>
 <section class="tsd-panel">
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="xxh64"><span class="tsd-kind-call-signature">xxh64</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">seed</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">XXHash</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">U64</span><span class="tsd-signature-symbol">&gt;</span><a href="#xxh64" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="xxh64"><span class="tsd-kind-call-signature">xxh64</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">seed</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_pacote_xxhash.XXHash.html" class="tsd-signature-type tsd-kind-interface">XXHash</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">U64</span><span class="tsd-signature-symbol">&gt;</span><a href="#xxh64" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Creates a XXHash64 hasher using unsigned 64-bit integer values of type <code>U64</code>.</p>
 </div>
@@ -30,11 +30,14 @@
 <div class="tsd-comment tsd-typography"><p>Optional seed, defaults to <code>0</code>.</p>
 </div>
 <div class="tsd-comment tsd-typography"></div></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">XXHash</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">U64</span><span class="tsd-signature-symbol">&gt;</span></h4><p>Hasher instance.</p>
+<h4 class="tsd-returns-title">Returns <a href="../interfaces/_pacote_xxhash.XXHash.html" class="tsd-signature-type tsd-kind-interface">XXHash</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">U64</span><span class="tsd-signature-symbol">&gt;</span></h4><p>Hasher instance.</p>
 
-<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<div class="tsd-comment tsd-typography">
+<h4>Example</h4><pre><code class="language-typescript"><span class="hl-2">import</span><span class="hl-0"> { </span><span class="hl-3">xxh64</span><span class="hl-0"> } </span><span class="hl-2">from</span><span class="hl-0"> </span><span class="hl-1">&#39;@pacote/xxhash&#39;</span><br/><br/><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-8">hasher</span><span class="hl-0"> = </span><span class="hl-4">xxh64</span><span class="hl-0">(</span><span class="hl-7">2654435761</span><span class="hl-0">)</span><br/><br/><span class="hl-3">hasher</span><span class="hl-0">.</span><span class="hl-4">update</span><span class="hl-0">(</span><span class="hl-1">&#39;data&#39;</span><span class="hl-0">).</span><span class="hl-4">digest</span><span class="hl-0">(</span><span class="hl-1">&#39;hex&#39;</span><span class="hl-0">) </span><span class="hl-6">// =&gt; &#39;5014607643a9b4c3&#39;</span>
+</code><button>Copy</button></pre>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/b6f0223/packages/xxhash/src/xxh64.ts#L90">xxh64.ts:90</a></li></ul></aside></li></ul></section></div>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/6fbe24e/packages/xxhash/src/xxh64.ts#L100">xxh64.ts:100</a></li></ul></aside></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
