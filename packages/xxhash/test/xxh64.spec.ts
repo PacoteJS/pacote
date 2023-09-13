@@ -3,7 +3,7 @@ import { XXHash64 } from 'xxhash-addon'
 import { sanityBuffer } from './sanity'
 import { xxh64, xxh64BigInt } from '../src/index'
 
-function clonedSlice(buffer: Buffer, length: number): Uint8Array {
+function cloneSlice(buffer: Buffer, length: number): Uint8Array {
   return buffer.reduce((clone, value, index) => {
     clone[index] = value
     return clone
@@ -44,7 +44,7 @@ describe.each([xxh64, xxh64BigInt])('%p', (testHash) => {
     [222, 0, 'b641ae8cb691c174'],
     [222, 2654435761, '20cb8ab7ae10c14a'],
   ])('sanity buffer (length %d, seed %d)', (length, seed, expected) => {
-    const data = clonedSlice(sanityBuffer, length)
+    const data = cloneSlice(sanityBuffer, length)
 
     const actual = testHash(seed).update(data.buffer).digest('hex')
     expect(actual).toBe(expected)
