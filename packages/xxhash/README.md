@@ -12,18 +12,6 @@ Fast non-cryptographic hashing algorithm.
 yarn add @pacote/xxhash
 ```
 
-## Usage
-
-```typescript
-import { xxh64 } from '@pacote/xxhash'
-
-const hasher = xxh64(2654435761)
-
-hasher.update('data').digest('hex') // => '5014607643a9b4c3'
-```
-
-### `xxh64(seed?: number | U64): XXHash`
-
 ## License
 
 MIT © [Luís Rodrigues](https://goblindegook.com).

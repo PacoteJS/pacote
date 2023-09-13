@@ -70,12 +70,22 @@ function finalize(buffer: Uint8Array, length: number, hash: bigint): bigint {
 
 /**
  * Creates a XXHash64 hasher using values of type `BigInt`
- * ([MDN]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt},
- * [Can I Use]{@link https://caniuse.com/bigint}).
+ * ({@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt MDN},
+ * {@link https://caniuse.com/bigint Can I Use}).
  *
  * @param seed Optional seed, defaults to `0`.
  *
  * @returns Hasher instance.
+ *
+ * @example
+ *
+ * ```typescript
+ * import { xxh64 } from '@pacote/xxhash'
+ *
+ * const hasher = xxh64(2654435761)
+ *
+ * hasher.update('data').digest('hex') // => '5014607643a9b4c3'
+ * ```
  */
 export function xxh64BigInt(seed: number | bigint = 0): XXHash<bigint> {
   let _seed: bigint

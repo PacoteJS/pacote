@@ -86,6 +86,16 @@ function finalize(buffer: Uint8Array, length: number, hash: U64): U64 {
  * @param seed Optional seed, defaults to `0`.
  *
  * @returns Hasher instance.
+ *
+ * @example
+ *
+ * ```typescript
+ * import { xxh64 } from '@pacote/xxhash'
+ *
+ * const hasher = xxh64(2654435761)
+ *
+ * hasher.update('data').digest('hex') // => '5014607643a9b4c3'
+ * ```
  */
 export function xxh64(seed: number | U64 = 0): XXHash<U64> {
   let _seed: U64
