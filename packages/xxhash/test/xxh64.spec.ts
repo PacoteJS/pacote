@@ -1,7 +1,7 @@
 import { assert, nat, property, oneof, string, uint8Array } from 'fast-check'
 import { XXHash64 } from 'xxhash-addon'
 import { sanityBuffer } from './sanity'
-import { xxh64 } from '../src/index'
+import { xxh64, xxh64BigInt } from '../src/index'
 
 function clonedSlice(buffer: Buffer, length: number): Uint8Array {
   return buffer.reduce((clone, value, index) => {
@@ -10,10 +10,10 @@ function clonedSlice(buffer: Buffer, length: number): Uint8Array {
   }, new Uint8Array(length))
 }
 
-describe('XXHash64', () => {
+describe.each([xxh64, xxh64BigInt])('%p', (testHash) => {
   test('default seed value is 0', () => {
-    const h1 = xxh64().update(sanityBuffer.toString()).digest('hex')
-    const h2 = xxh64(0).update(sanityBuffer.toString()).digest('hex')
+    const h1 = testHash().update(sanityBuffer.toString()).digest('hex')
+    const h2 = testHash(0).update(sanityBuffer.toString()).digest('hex')
     expect(h2).toBe(h1)
   })
 
@@ -21,12 +21,12 @@ describe('XXHash64', () => {
     assert(
       property(
         nat(),
-        oneof(string({ maxLength: 256 }), uint8Array({ maxLength: 256 })),
+        oneof(string({ maxLength: 1024 }), uint8Array({ maxLength: 1024 })),
         (seed, data) => {
           const referenceHash = new XXHash64(seed)
             .hash(Buffer.from(data))
             .toString('hex')
-          const hash = xxh64(seed).update(data).digest('hex')
+          const hash = testHash(seed).update(data).digest('hex')
           expect(hash).toBe(referenceHash)
         },
       ),
@@ -46,17 +46,17 @@ describe('XXHash64', () => {
   ])('sanity buffer (length %d, seed %d)', (length, seed, expected) => {
     const data = clonedSlice(sanityBuffer, length)
 
-    const actual = xxh64(seed).update(data.buffer).digest('hex')
+    const actual = testHash(seed).update(data.buffer).digest('hex')
     expect(actual).toBe(expected)
   })
 
   test('chunked updates', () => {
     assert(
       property(nat(), string({ maxLength: 256 }), (seed, data) => {
-        const hashFromWhole = xxh64(seed).update(data).digest('hex')
+        const hashFromWhole = testHash(seed).update(data).digest('hex')
         const hashFromChunks = data
           .split('')
-          .reduce((hasher, element) => hasher.update(element), xxh64(seed))
+          .reduce((hasher, element) => hasher.update(element), testHash(seed))
           .digest('hex')
         expect(hashFromChunks).toBe(hashFromWhole)
       }),
@@ -64,14 +64,14 @@ describe('XXHash64', () => {
   })
 
   test('hasher is reset after digest', () => {
-    const hasher = xxh64(2654435761)
+    const hasher = testHash(2654435761)
     const h1 = hasher.update(sanityBuffer.toString()).digest('hex')
     const h2 = hasher.update(sanityBuffer.toString()).digest('hex')
     expect(h2).toBe(h1)
   })
 
   test('resetting the hasher without a seed uses the original seed', () => {
-    const hasher = xxh64(2654435761)
+    const hasher = testHash(2654435761)
     const h1 = hasher.update(sanityBuffer.toString()).digest('hex')
     hasher.reset()
     const h2 = hasher.update(sanityBuffer.toString()).digest('hex')
