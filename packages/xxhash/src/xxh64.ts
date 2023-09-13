@@ -80,6 +80,13 @@ function finalize(buffer: Uint8Array, length: number, hash: U64): U64 {
   return avalanche(_hash)
 }
 
+/**
+ * Creates a XXHash64 hasher using unsigned 64-bit integer values of type `U64`.
+ *
+ * @param seed Optional seed, defaults to `0`.
+ *
+ * @returns Hasher instance.
+ */
 export function xxh64(seed: number | U64 = 0): XXHash<U64> {
   let _seed: U64
   let v1: U64
@@ -160,17 +167,15 @@ export function xxh64(seed: number | U64 = 0): XXHash<U64> {
       bufferSize = 0
     }
 
-    if (index <= length - 32) {
-      do {
-        v1 = round(v1, readUint64LE(input, index))
-        index += 8
-        v2 = round(v2, readUint64LE(input, index))
-        index += 8
-        v3 = round(v3, readUint64LE(input, index))
-        index += 8
-        v4 = round(v4, readUint64LE(input, index))
-        index += 8
-      } while (index <= length - 32)
+    while (index <= length - 32) {
+      v1 = round(v1, readUint64LE(input, index))
+      index += 8
+      v2 = round(v2, readUint64LE(input, index))
+      index += 8
+      v3 = round(v3, readUint64LE(input, index))
+      index += 8
+      v4 = round(v4, readUint64LE(input, index))
+      index += 8
     }
 
     if (index < length) {
