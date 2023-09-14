@@ -10,7 +10,7 @@ const PRIME_5 = BigInt('2870177450012600261')
 
 const asUint64 = (n: bigint) => BigInt.asUintN(64, n)
 
-function readUintNLE(bits: number, buffer: Uint8Array, offset: number): bigint {
+function readUintN(bits: number, buffer: Uint8Array, offset: number): bigint {
   const max = Math.ceil(bits / 8)
   let result = ZERO
   for (let i = 0; i < max; i++) {
@@ -24,9 +24,9 @@ function shiftRightUint64(value: bigint, bits: number): bigint {
 }
 
 function rotateLeftUint64(value: bigint, bits: number): bigint {
-  const n = asUint64(value)
-  const b = BigInt(bits % 64)
-  return (n << b) | (n >> (BigInt(64) - b))
+  const v = asUint64(value)
+  const b = BigInt(bits)
+  return (v << b) | (v >> (BigInt(64) - b))
 }
 
 function round(acc: bigint, value: bigint): bigint {
@@ -48,13 +48,13 @@ function finalize(buffer: Uint8Array, length: number, hash: bigint): bigint {
   let _hash = hash
 
   while (index <= length - 8) {
-    const k1 = round(ZERO, readUintNLE(64, buffer, index))
+    const k1 = round(ZERO, readUintN(64, buffer, index))
     _hash = PRIME_4 + PRIME_1 * rotateLeftUint64(_hash ^ k1, 27)
     index += 8
   }
 
   while (index <= length - 4) {
-    const k1 = PRIME_1 * readUintNLE(32, buffer, index)
+    const k1 = PRIME_1 * readUintN(32, buffer, index)
     _hash = PRIME_3 + PRIME_2 * rotateLeftUint64(_hash ^ k1, 23)
     index += 4
   }
@@ -129,9 +129,7 @@ export function xxh64BigInt(seed: number | bigint = 0): XXHash<bigint> {
       hash = v3 + PRIME_5
     }
 
-    hash = hash + BigInt(totalLength)
-
-    hash = finalize(buffer, bufferSize, hash)
+    hash = finalize(buffer, bufferSize, hash + BigInt(totalLength))
 
     reset(_seed)
 
@@ -140,8 +138,6 @@ export function xxh64BigInt(seed: number | bigint = 0): XXHash<bigint> {
 
   const update = (data: string | ArrayBuffer) => {
     const input = typeof data === 'string' ? encode(data) : new Uint8Array(data)
-
-    let index = 0
     const length = input.length
 
     totalLength += length
@@ -156,25 +152,24 @@ export function xxh64BigInt(seed: number | bigint = 0): XXHash<bigint> {
       return { digest, reset, update }
     }
 
+    let index = 0
+
     if (bufferSize > 0) {
       buffer.set(input.subarray(0, 32 - bufferSize), bufferSize)
-      v1 = round(v1, readUintNLE(64, buffer, 0))
-      v2 = round(v2, readUintNLE(64, buffer, 8))
-      v3 = round(v3, readUintNLE(64, buffer, 16))
-      v4 = round(v4, readUintNLE(64, buffer, 24))
+      v1 = round(v1, readUintN(64, buffer, 0))
+      v2 = round(v2, readUintN(64, buffer, 8))
+      v3 = round(v3, readUintN(64, buffer, 16))
+      v4 = round(v4, readUintN(64, buffer, 24))
       index += 32 - bufferSize
       bufferSize = 0
     }
 
     while (index <= length - 32) {
-      v1 = round(v1, readUintNLE(64, input, index))
-      index += 8
-      v2 = round(v2, readUintNLE(64, input, index))
-      index += 8
-      v3 = round(v3, readUintNLE(64, input, index))
-      index += 8
-      v4 = round(v4, readUintNLE(64, input, index))
-      index += 8
+      v1 = round(v1, readUintN(64, input, index))
+      v2 = round(v2, readUintN(64, input, index + 8))
+      v3 = round(v3, readUintN(64, input, index + 16))
+      v4 = round(v4, readUintN(64, input, index + 24))
+      index += 32
     }
 
     if (index < length) {
