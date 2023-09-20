@@ -42,7 +42,7 @@ export async function retry<T>(
   options: RetryOptions = {},
 ): Promise<T> {
   return new Promise((resolve, reject) => {
-    let intervalId: number | NodeJS.Timer
+    let intervalId: number | NodeJS.Timeout
     let timeoutId: number | NodeJS.Timeout
     let isPending = false
     let lastError: unknown
