@@ -1263,17 +1263,17 @@
 "@pacote/bloom-filter@file:packages/bloom-filter":
   version "0.6.5"
   dependencies:
-    "@pacote/array" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-filter-0.6.5-39137aa6-bd0f-4504-aa23-4595b3a7153d-1695295824574/node_modules/@pacote/array"
-    "@pacote/memoize" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-filter-0.6.5-39137aa6-bd0f-4504-aa23-4595b3a7153d-1695295824574/node_modules/@pacote/memoize"
-    "@pacote/xxhash" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-filter-0.6.5-39137aa6-bd0f-4504-aa23-4595b3a7153d-1695295824574/node_modules/@pacote/xxhash"
+    "@pacote/array" "file:packages/array"
+    "@pacote/memoize" "file:packages/memoize"
+    "@pacote/xxhash" "file:packages/xxhash"
 
 "@pacote/bloom-search@file:packages/bloom-search":
   version "0.17.3"
   dependencies:
-    "@pacote/array" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-search-0.17.3-83a47952-cc58-4794-98a5-134f505ed74c-1695295824577/node_modules/@pacote/array"
-    "@pacote/bloom-filter" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-search-0.17.3-83a47952-cc58-4794-98a5-134f505ed74c-1695295824577/node_modules/@pacote/bloom-filter"
-    "@pacote/memoize" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-search-0.17.3-83a47952-cc58-4794-98a5-134f505ed74c-1695295824577/node_modules/@pacote/memoize"
-    "@pacote/xxhash" "file:../../Library/Caches/Yarn/v6/npm-@pacote-bloom-search-0.17.3-83a47952-cc58-4794-98a5-134f505ed74c-1695295824577/node_modules/@pacote/xxhash"
+    "@pacote/array" "file:packages/array"
+    "@pacote/bloom-filter" "file:packages/bloom-filter"
+    "@pacote/memoize" "file:packages/memoize"
+    "@pacote/xxhash" "file:packages/xxhash"
 
 "@pacote/computus@file:packages/computus":
   version "2.0.2"
@@ -1296,7 +1296,7 @@
 "@pacote/ffetch@file:packages/ffetch":
   version "7.0.2"
   dependencies:
-    "@pacote/error" "file:../../Library/Caches/Yarn/v6/npm-@pacote-ffetch-7.0.2-a2cb0dee-0b54-48fc-9542-b6bc96c873d8-1695295824581/node_modules/@pacote/error"
+    "@pacote/error" "file:packages/error"
 
 "@pacote/flux-actions@file:packages/flux-actions":
   version "3.0.2"
@@ -1307,7 +1307,7 @@
 "@pacote/iff@file:packages/iff":
   version "3.0.2"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-iff-3.0.2-301ae548-c47d-4299-9695-a9363f03b0db-1695295824582/node_modules/@pacote/option"
+    "@pacote/option" "file:packages/option"
 
 "@pacote/immutable@file:packages/immutable":
   version "2.0.1"
@@ -1321,7 +1321,7 @@
 "@pacote/jest-either@file:packages/jest-either":
   version "5.0.7"
   dependencies:
-    "@pacote/is-plain-object" "file:../../Library/Caches/Yarn/v6/npm-@pacote-jest-either-5.0.7-d88256b8-e145-409c-846c-e37fb00f4fb5-1695295824584/node_modules/@pacote/is-plain-object"
+    "@pacote/is-plain-object" "file:packages/is-plain-object"
     jest-diff "^29.0.1"
     jest-matcher-utils "^29.0.1"
     ramda "^0.29.0"
@@ -1329,7 +1329,7 @@
 "@pacote/linked-list@file:packages/linked-list":
   version "0.7.4"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-linked-list-0.7.4-300cfc14-7c86-48f7-814c-07a718ae13cd-1695295824587/node_modules/@pacote/option"
+    "@pacote/option" "file:packages/option"
 
 "@pacote/lru-cache@file:packages/lru-cache":
   version "0.1.1"
@@ -1337,12 +1337,12 @@
 "@pacote/memoize@file:packages/memoize":
   version "2.1.1"
   dependencies:
-    "@pacote/lru-cache" "file:../../Library/Caches/Yarn/v6/npm-@pacote-memoize-2.1.1-dd2d422f-9f35-44d1-a7ba-694d66e4fe6e-1695295824575/node_modules/@pacote/lru-cache"
+    "@pacote/lru-cache" "file:packages/lru-cache"
 
 "@pacote/non-empty-array@file:packages/non-empty-array":
   version "0.3.2"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-non-empty-array-0.3.2-9a859af6-bb91-4bc9-8922-eb6540df9b2e-1695295824588/node_modules/@pacote/option"
+    "@pacote/option" "file:packages/option"
 
 "@pacote/option@file:packages/option":
   version "4.0.2"
@@ -1353,7 +1353,7 @@
 "@pacote/pixels@file:packages/pixels":
   version "2.0.2"
   dependencies:
-    "@pacote/get-style" "file:../../Library/Caches/Yarn/v6/npm-@pacote-pixels-2.0.2-d3bfb508-52b1-4902-95ef-a23e95c9e9f1-1695295824589/node_modules/@pacote/get-style"
+    "@pacote/get-style" "file:packages/get-style"
 
 "@pacote/react-use-outside@file:packages/react-use-outside":
   version "2.0.2"
@@ -1364,7 +1364,7 @@
 "@pacote/result@file:packages/result":
   version "4.0.2"
   dependencies:
-    "@pacote/option" "file:../../Library/Caches/Yarn/v6/npm-@pacote-result-4.0.2-052943bc-b1ea-4825-a492-18f962db3955-1695295824591/node_modules/@pacote/option"
+    "@pacote/option" "file:packages/option"
 
 "@pacote/retry@file:packages/retry":
   version "0.2.2"
@@ -1384,13 +1384,13 @@
 "@pacote/validation@file:packages/validation":
   version "0.3.2"
   dependencies:
-    "@pacote/non-empty-array" "file:../../Library/Caches/Yarn/v6/npm-@pacote-validation-0.3.2-946dbc5b-1a15-43f2-9884-b26b39cf2912-1695295824598/node_modules/@pacote/non-empty-array"
-    "@pacote/result" "file:../../Library/Caches/Yarn/v6/npm-@pacote-validation-0.3.2-946dbc5b-1a15-43f2-9884-b26b39cf2912-1695295824598/node_modules/@pacote/result"
+    "@pacote/non-empty-array" "file:packages/non-empty-array"
+    "@pacote/result" "file:packages/result"
 
 "@pacote/xxhash@file:packages/xxhash":
   version "0.3.2"
   dependencies:
-    "@pacote/u64" "file:../../Library/Caches/Yarn/v6/npm-@pacote-xxhash-0.3.2-cd165136-3383-4ed0-8e48-80baac6c13f3-1695295824575/node_modules/@pacote/u64"
+    "@pacote/u64" "file:packages/u64"
 
 "@parcel/watcher@2.0.4":
   version "2.0.4"
@@ -1732,20 +1732,15 @@
   resolved "https://registry.yarnpkg.com/@types/ms/-/ms-0.7.31.tgz#31b7ca6407128a3d2bbc27fe2d21b345397f6197"
   integrity sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==
 
-"@types/node@*":
-  version "20.6.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.6.0.tgz#9d7daa855d33d4efec8aea88cd66db1c2f0ebe16"
-  integrity sha512-najjVq5KN2vsH2U/xyh2opaSEz6cZMR2SetLIlxlj08nOcmPOemJmUK2o4kUzfLqfrWE0PIrNeE16XhYDd3nqg==
+"@types/node@*", "@types/node@^20.6.3":
+  version "20.6.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.6.5.tgz#4c6a79adf59a8e8193ac87a0e522605b16587258"
+  integrity sha512-2qGq5LAOTh9izcc0+F+dToFigBWiK1phKPt7rNhOqJSr35y8rlIBjDwGtFSgAI6MGIhjwOVNSQZVdJsZJ2uR1w==
 
 "@types/node@20.4.7":
   version "20.4.7"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-20.4.7.tgz#74d323a93f1391a63477b27b9aec56669c98b2ab"
   integrity sha512-bUBrPjEry2QUTsnuEjzjbS7voGWCc30W0qzgMf90GPeDGFRakvrz47ju+oqDAKCXLUCe39u57/ORMl/O/04/9g==
-
-"@types/node@^20.6.3":
-  version "20.6.3"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.6.3.tgz#5b763b321cd3b80f6b8dde7a37e1a77ff9358dd9"
-  integrity sha512-HksnYH4Ljr4VQgEy2lTStbCKv/P590tmPe5HqOnv9Gprffgv5WXAY+Y5Gqniu0GGqeTCUdBnzC3QSrzPkBkAMA==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.1"
