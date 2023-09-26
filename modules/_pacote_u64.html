@@ -23,7 +23,12 @@
 large integers via the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt"><code>BigInt</code></a>
 type, it is not available in older browsers and tooling doesn&#39;t always
 transpile <code>BigInt</code> operations into a backwards-compatible format.</p>
-<p>If you target ECMAScript 2020 or later, you will probably not need this.</p>
+<p><code>U64</code> also turned out to be more performant than <code>BigInt</code> in tests. <code>@pacote</code>&#39;s
+implementation of the XXH64 algorithm based on <code>U64</code> is 4.5 times faster than
+the one based on <code>BigInt</code>, although optimizations to JavaScript runtimes might
+change this in the future.</p>
+<p>If you target ECMAScript 2020 or later, and you do not care about the
+differences in performance, you will <em>probably</em> not need this.</p>
 <p>The <code>U64</code> type provided by this package is represented as a tuple of four 16-bit
 integers. For example, the number 1 is <code>[1, 0, 0, 0]</code>. It is not an object class
 with built-in methods. Instead of methods, the package provides functions to
