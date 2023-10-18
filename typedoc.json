@@ -5,6 +5,7 @@
     "./packages/bloom-filter",
     "./packages/bloom-search",
     "./packages/computus",
+    "./packages/disposable",
     "./packages/emitter",
     "./packages/error",
     "./packages/ffetch",
