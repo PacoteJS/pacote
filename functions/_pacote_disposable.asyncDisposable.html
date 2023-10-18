@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>and | Pacote</title><meta name="description" content="Documentation for Pacote"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>asyncDisposable | Pacote</title><meta name="description" content="Documentation for Pacote"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
 <div class="tsd-toolbar-contents container">
 <div class="table-cell" id="tsd-search" data-base="..">
 <div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
@@ -13,43 +13,48 @@
 <div class="tsd-page-title">
 <ul class="tsd-breadcrumb">
 <li><a href="../index.html">Pacote</a></li>
-<li><a href="../modules/_pacote_result.html">@pacote/result</a></li>
-<li><a href="_pacote_result.and.html">and</a></li></ul>
-<h1>Function and</h1></div>
+<li><a href="../modules/_pacote_disposable.html">@pacote/disposable</a></li>
+<li><a href="_pacote_disposable.asyncDisposable.html">asyncDisposable</a></li></ul>
+<h1>Function asyncDisposable</h1></div>
 <section class="tsd-panel">
 <ul class="tsd-signatures">
-<li class="tsd-signature tsd-anchor-link" id="and"><span class="tsd-kind-call-signature">and</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">alternative</span>, <span class="tsd-kind-parameter">result</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../types/_pacote_result.Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">&gt;</span><a href="#and" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="asyncDisposable"><span class="tsd-kind-call-signature">async<wbr/>Disposable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">resource</span>, <span class="tsd-kind-parameter">callback</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type ">AsyncDisposable</span><a href="#asyncDisposable" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Conjunction of two results.</p>
+<div class="tsd-comment tsd-typography"><p>Creates a version of the resource that can be disposed of
+asynchronously at the end of a function block.</p>
 </div>
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
 <li>
-<h4><span class="tsd-kind-type-parameter">T</span></h4></li>
-<li>
-<h4><span class="tsd-kind-type-parameter">E</span></h4></li>
-<li>
-<h4><span class="tsd-kind-type-parameter">U</span></h4></li></ul></section>
+<h4><span class="tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">object</span></h4></li></ul></section>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><span class="tsd-kind-parameter">alternative</span>: <a href="../types/_pacote_result.Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">&gt;</span></h5>
-<div class="tsd-comment tsd-typography"><p>Alternative result.</p>
+<h5><span class="tsd-kind-parameter">resource</span>: <span class="tsd-signature-type tsd-kind-type-parameter">T</span></h5>
+<div class="tsd-comment tsd-typography"><p>Resource to make asynchronously disposable.</p>
 </div>
 <div class="tsd-comment tsd-typography"></div></li>
 <li>
-<h5><span class="tsd-kind-parameter">result</span>: <a href="../types/_pacote_result.Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">&gt;</span></h5>
-<div class="tsd-comment tsd-typography"><p>Result to evaluate.</p>
+<h5><span class="tsd-kind-parameter">callback</span>: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span></h5>
+<div class="tsd-comment tsd-typography"><p>Function to call when disposing of the resource.</p>
 </div>
-<div class="tsd-comment tsd-typography"></div></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="../types/_pacote_result.Result.html" class="tsd-signature-type tsd-kind-type-alias">Result</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">U</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">E</span><span class="tsd-signature-symbol">&gt;</span></h4><p>Result if it is <code>Err</code>, otherwise returns the
-                     alternative.</p>
+<div class="tsd-comment tsd-typography"></div>
+<ul class="tsd-parameters">
+<li class="tsd-parameter-signature">
+<ul class="tsd-signatures">
+<li class="tsd-signature"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4></li></ul></li></ul></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type ">AsyncDisposable</span></h4><p>Asynchronously disposable version of the resource.</p>
 
-<div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
+<div class="tsd-comment tsd-typography">
+<h4>Example</h4><pre><code class="language-typescript"><span class="hl-2">import</span><span class="hl-0"> { </span><span class="hl-3">open</span><span class="hl-0"> } </span><span class="hl-2">from</span><span class="hl-0"> </span><span class="hl-1">&quot;node:fs/promises&quot;</span><br/><span class="hl-2">import</span><span class="hl-0"> { </span><span class="hl-3">asyncDisposable</span><span class="hl-0"> } </span><span class="hl-2">from</span><span class="hl-0"> </span><span class="hl-1">&quot;@pacote/disposable&quot;</span><br/><br/><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-4">getFileHandle</span><span class="hl-0"> = </span><span class="hl-5">async</span><span class="hl-0"> (</span><span class="hl-3">path</span><span class="hl-0">: </span><span class="hl-9">string</span><span class="hl-0">) </span><span class="hl-5">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-5">const</span><span class="hl-0"> </span><span class="hl-8">fileHandle</span><span class="hl-0"> = </span><span class="hl-2">await</span><span class="hl-0"> </span><span class="hl-4">open</span><span class="hl-0">(</span><span class="hl-3">path</span><span class="hl-0">)</span><br/><span class="hl-0">  </span><span class="hl-2">return</span><span class="hl-0"> </span><span class="hl-4">asyncDisposable</span><span class="hl-0">(</span><span class="hl-3">fileHandle</span><span class="hl-0">, </span><span class="hl-3">fileHandle</span><span class="hl-0">.</span><span class="hl-3">close</span><span class="hl-0">)</span><br/><span class="hl-0">};</span><br/><br/><span class="hl-0">{</span><br/><span class="hl-0">  </span><span class="hl-2">await</span><span class="hl-0"> </span><span class="hl-3">using</span><span class="hl-0"> </span><span class="hl-3">fileHandle</span><span class="hl-0"> = </span><span class="hl-2">await</span><span class="hl-0"> </span><span class="hl-4">getFileHandle</span><span class="hl-0">(</span><span class="hl-1">&quot;file.txt&quot;</span><span class="hl-0">);</span><br/><span class="hl-0">  </span><span class="hl-2">await</span><span class="hl-0"> </span><span class="hl-3">fileHandle</span><span class="hl-0">.</span><span class="hl-4">read</span><span class="hl-0">(</span><span class="hl-3">buffer</span><span class="hl-0">)</span><br/><span class="hl-0">  </span><span class="hl-6">// fileHandle is automatically closed</span><br/><span class="hl-0">}</span>
+</code><button>Copy</button></pre>
+</div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/6c887c9/packages/result/src/index.ts#L240">index.ts:240</a></li></ul></aside></li></ul></section></div>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/6c887c9/packages/disposable/src/index.ts#L66">index.ts:66</a></li></ul></aside></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
