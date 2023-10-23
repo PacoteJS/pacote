@@ -28,13 +28,13 @@
     "test": "test"
   },
   "scripts": {
-    "build": "yarn build:esm && yarn build:cjs",
+    "build": "pnpm build:esm && pnpm build:cjs",
     "build:cjs": "tsc -p ./tsconfig.cjs.json",
     "build:esm": "tsc -p ./tsconfig.esm.json",
-    "watch": "concurrently 'watch:cjs' 'yarn watch:esm'",
+    "watch": "concurrently 'pnpm watch:cjs' 'pnpm watch:esm'",
     "watch:cjs": "tsc -w -p ./tsconfig.cjs.json",
     "watch:esm": "tsc -w -p ./tsconfig.esm.json",
-    "prepublish": "yarn build"
+    "prepublish": "pnpm build"
   },
   "dependencies": {
     "@pacote/array": "file:../array",

@@ -6,6 +6,7 @@
       "tsx": true,
       "decorators": false,
       "dynamicImport": false
-    }
+    },
+    "externalHelpers": true
   }
 }

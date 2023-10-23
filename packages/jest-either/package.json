@@ -36,7 +36,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "prepublish": "yarn build"
+    "prepublish": "pnpm build"
   },
   "dependencies": {
     "@pacote/is-plain-object": "file:../is-plain-object",

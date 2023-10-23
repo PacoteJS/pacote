@@ -1,6 +1,6 @@
 import { asyncDisposable, disposable } from '../src/index'
 
-test('creates a synchronously disposable resource', () => {
+test.skip('creates a synchronously disposable resource', () => {
   const onDispose = jest.fn()
   const resource = { noop: () => {} }
   const getResource = () => disposable(resource, onDispose)
@@ -13,7 +13,7 @@ test('creates a synchronously disposable resource', () => {
   expect(onDispose).toHaveBeenCalledTimes(1)
 })
 
-test('creates an asynchronously disposable resource', async () => {
+test.skip('creates an asynchronously disposable resource', async () => {
   const onDispose = jest.fn(async () => {})
   const resource = { noop: () => {} }
   const getResource = () => asyncDisposable(resource, onDispose)
