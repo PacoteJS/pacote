@@ -70,3 +70,4 @@ tsconfig*.tsbuildinfo
 docs/
 
 .idea/
+.nx/
