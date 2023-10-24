@@ -1,9 +1,9 @@
-import { assert, nat, property, oneof, string, uint8Array } from 'fast-check'
+import { assert, nat, property, string, uint8Array } from 'fast-check'
 import { XXHash64 } from 'xxhash-addon'
 import { sanityBuffer } from './sanity'
 import { xxh64, xxh64BigInt } from '../src/index'
 
-function cloneSlice(buffer: Buffer, length: number): Uint8Array {
+function cloneSlice(buffer: Uint8Array, length: number): Uint8Array {
   return buffer.reduce((clone, value, index) => {
     clone[index] = value
     return clone
@@ -19,17 +19,11 @@ describe.each([xxh64, xxh64BigInt])('%p', (testHash) => {
 
   test('XXH64 reference implementation comparison', () => {
     assert(
-      property(
-        nat(),
-        oneof(string({ maxLength: 1024 }), uint8Array({ maxLength: 1024 })),
-        (seed, data) => {
-          const referenceHash = new XXHash64(seed)
-            .hash(Buffer.from(data))
-            .toString('hex')
-          const hash = testHash(seed).update(data).digest('hex')
-          expect(hash).toBe(referenceHash)
-        },
-      ),
+      property(nat(), uint8Array({ maxLength: 1024 }), (seed, data) => {
+        const referenceHash = new XXHash64(seed).hash(data).toString('hex')
+        const hash = testHash(seed).update(data).digest('hex')
+        expect(hash).toBe(referenceHash)
+      }),
     )
   })
 
