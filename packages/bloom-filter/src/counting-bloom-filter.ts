@@ -64,7 +64,7 @@ export class CountingBloomFilter<T extends { toString(): string }> {
   }
 }
 
-type SerialisedCountingBloomFilter = {
+export type SerialisedCountingBloomFilter = {
   readonly size: number
   readonly hashes: number
   readonly seed: number
