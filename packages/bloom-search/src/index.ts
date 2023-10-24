@@ -3,9 +3,10 @@ import { range, unique, windowed } from '@pacote/array'
 import { queryTerms } from './query'
 import { entries, keys, pick } from './object'
 import { countIdf } from './tf-idf'
-import { xxh64 } from '@pacote/xxhash'
+import { XXHash, xxh64 } from '@pacote/xxhash'
 import { memoize } from '@pacote/memoize'
 import { findLast } from './array'
+import { U64 } from '@pacote/u64'
 
 export type PreprocessFunction<Document, Field extends keyof Document> = (
   value: Document[Field],
@@ -123,6 +124,11 @@ const defaultTokenizer = (text: string): string[] =>
     .split(/[\s-]+/)
     .map((token) => token.replace(/\W/gi, ''))
 
+const memoizedHash = (hash: XXHash<U64>) =>
+  memoize(String, (data) =>
+    parseInt(hash.update(data).digest('hex').substring(8, 16), 16),
+  )
+
 /**
  * Encapsulates search functionality based on Bloom filters.
  */
@@ -214,17 +220,8 @@ export class BloomSearch<
     this.tokenizer = options.tokenizer ?? defaultTokenizer
     this.seed = options.seed ?? 0x00c0ffee
 
-    const toUint32 = (hex: string) => parseInt(hex.substring(8, 16), 16)
-
-    const x1 = xxh64(this.seed + 1)
-    const h1 = memoize(String, (data) =>
-      toUint32(x1.update(data).digest('hex')),
-    )
-
-    const x2 = xxh64(this.seed + 2)
-    const h2 = memoize(String, (data) =>
-      toUint32(x2.update(data).digest('hex')),
-    )
+    const h1 = memoizedHash(xxh64(this.seed + 1))
+    const h2 = memoizedHash(xxh64(this.seed + 2))
 
     this.hash = (i, data) => h1(data) + i * h2(data) + i ** 3
   }
