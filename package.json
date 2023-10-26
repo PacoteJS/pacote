@@ -31,15 +31,15 @@
   },
   "scripts": {
     "build": "lerna run build",
-    "clean": "rimraf coverage packages/*/lib packages/*/tsconfig.tsbuildinfo",
+    "build:docs": "typedoc",
+    "clean": "rimraf coverage docs packages/*/lib packages/*/tsconfig.tsbuildinfo",
     "commit": "git-cz",
-    "docs": "typedoc",
     "format": "prettier --write 'packages/*/{src,test}/**/*.{js,jsx,ts,tsx,json,css,md}'",
     "lint": "eslint 'packages/*/{src,test}/**/*.{js,ts,tsx}'",
     "plop": "plop",
     "release": "lerna publish",
-    "test:coverage": "jest --coverage",
-    "test": "pnpm lint && jest"
+    "test": "pnpm lint && jest",
+    "test:coverage": "jest --coverage"
   },
   "lint-staged": {
     "**/*.{js,json,css,md}": [
