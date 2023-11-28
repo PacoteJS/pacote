@@ -31,8 +31,8 @@ function merge<T>(
   return isEmpty(left) || isEmpty(right)
     ? concat(reverse(result), concat(left, right))
     : compare(car(left), car(right)) > 0
-    ? merge(compare, prepend(car(right), result), left, cdr(right))
-    : merge(compare, prepend(car(left), result), cdr(left), right)
+      ? merge(compare, prepend(car(right), result), left, cdr(right))
+      : merge(compare, prepend(car(left), result), cdr(left), right)
 }
 
 function mergeSort<T>(

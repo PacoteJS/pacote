@@ -13,10 +13,10 @@ export function queryTerms(query: string): SearchTerm[] {
       term.startsWith('"')
         ? 'phrase'
         : term.startsWith('+')
-        ? 'require'
-        : term.startsWith('-')
-        ? 'exclude'
-        : 'include',
+          ? 'require'
+          : term.startsWith('-')
+            ? 'exclude'
+            : 'include',
     ])
     .filter(([term]) => term.length)
 }

@@ -23,8 +23,8 @@ function recursiveFind<T, R>(
   return isEmpty(current)
     ? onFinished()
     : predicate(car(current), index)
-    ? onFound(car(current), index)
-    : recursiveFind(predicate, onFound, onFinished, cdr(current), index + 1)
+      ? onFound(car(current), index)
+      : recursiveFind(predicate, onFound, onFinished, cdr(current), index + 1)
 }
 
 /**

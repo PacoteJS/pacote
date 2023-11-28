@@ -23,13 +23,13 @@ type InnerProps<Component extends InnerComponent<any>> =
     ? ReactHTML[Component] extends DetailedHTMLFactory<infer HTMLProps, any>
       ? HTMLProps
       : Component extends keyof ReactSVG
-      ? ReactSVG[Component] extends DOMFactory<infer SVGProps, SVGElement>
-        ? SVGProps
+        ? ReactSVG[Component] extends DOMFactory<infer SVGProps, SVGElement>
+          ? SVGProps
+          : never
         : never
-      : never
     : Component extends ComponentType<infer Props>
-    ? Props
-    : any
+      ? Props
+      : any
 
 function getDisplayName(Component: InnerComponent<any>): string {
   return typeof Component === 'string'

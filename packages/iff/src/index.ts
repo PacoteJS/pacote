@@ -16,6 +16,6 @@ export function iff<T>(
       ? onConsequent()
       : onAlternative()
     : predicate
-    ? Some(onConsequent())
-    : None
+      ? Some(onConsequent())
+      : None
 }
