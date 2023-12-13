@@ -28,13 +28,13 @@ importers:
         version: file:packages/error
       '@pacote/eslint-config':
         specifier: file:packages/eslint-config
-        version: file:packages/eslint-config(@typescript-eslint/eslint-plugin@6.14.0)(eslint-config-prettier@9.0.0)(eslint-config-standard@17.1.0)(eslint-plugin-import@2.29.0)(eslint-plugin-n@16.4.0)(eslint-plugin-prettier@5.0.1)(eslint-plugin-promise@6.1.1)(eslint@8.55.0)
+        version: file:packages/eslint-config(@typescript-eslint/eslint-plugin@6.14.0)(eslint-config-prettier@9.1.0)(eslint-config-standard@17.1.0)(eslint-plugin-import@2.29.0)(eslint-plugin-n@16.4.0)(eslint-plugin-prettier@5.0.1)(eslint-plugin-promise@6.1.1)(eslint@8.55.0)
       '@pacote/eslint-config-jest':
         specifier: file:packages/eslint-config-jest
         version: file:packages/eslint-config-jest(eslint-plugin-jest-dom@5.1.0)(eslint-plugin-jest@27.6.0)(eslint-plugin-testing-library@6.2.0)(eslint@8.55.0)
       '@pacote/eslint-config-react':
         specifier: file:packages/eslint-config-react
-        version: file:packages/eslint-config-react(eslint-config-prettier@9.0.0)(eslint-plugin-jsx-a11y@6.8.0)(eslint-plugin-react-hooks@4.6.0)(eslint-plugin-react@7.33.2)(eslint@8.55.0)
+        version: file:packages/eslint-config-react(eslint-config-prettier@9.1.0)(eslint-plugin-jsx-a11y@6.8.0)(eslint-plugin-react-hooks@4.6.0)(eslint-plugin-react@7.33.2)(eslint@8.55.0)
       '@pacote/ffetch':
         specifier: file:packages/ffetch
         version: file:packages/ffetch(fp-ts@2.16.1)
@@ -152,7 +152,7 @@ importers:
         version: 8.55.0
       eslint-config-prettier:
         specifier: ^9.0.0
-        version: 9.0.0(eslint@8.55.0)
+        version: 9.1.0(eslint@8.55.0)
       eslint-config-standard:
         specifier: ^17.1.0
         version: 17.1.0(eslint-plugin-import@2.29.0)(eslint-plugin-n@16.4.0)(eslint-plugin-promise@6.1.1)(eslint@8.55.0)
@@ -173,7 +173,7 @@ importers:
         version: 16.4.0(eslint@8.55.0)
       eslint-plugin-prettier:
         specifier: ^5.0.1
-        version: 5.0.1(eslint-config-prettier@9.0.0)(eslint@8.55.0)(prettier@3.1.1)
+        version: 5.0.1(eslint-config-prettier@9.1.0)(eslint@8.55.0)(prettier@3.1.1)
       eslint-plugin-promise:
         specifier: ^6.1.1
         version: 6.1.1(eslint@8.55.0)
@@ -4157,8 +4157,8 @@ packages:
       eslint: 8.51.0
     dev: false
 
-  /eslint-config-prettier@9.0.0(eslint@8.55.0):
-    resolution: {integrity: sha512-IcJsTkJae2S35pRsRAwoCE+925rJJStOdkKnLVgtE+tEpqU0EVVM7OqrwxqgptKdX29NUwC82I5pXsGFIgSevw==}
+  /eslint-config-prettier@9.1.0(eslint@8.55.0):
+    resolution: {integrity: sha512-NSWl5BFQWEPi1j4TjVNItzYV7dZXZ+wP6I6ZhrBGpChQhZRUaElihE9uRRkcbRnNb76UMKDF3r+WTmNcGPKsqw==}
     hasBin: true
     peerDependencies:
       eslint: '>=7.0.0'
@@ -4539,7 +4539,7 @@ packages:
       synckit: 0.8.5
     dev: false
 
-  /eslint-plugin-prettier@5.0.1(eslint-config-prettier@9.0.0)(eslint@8.55.0)(prettier@3.1.1):
+  /eslint-plugin-prettier@5.0.1(eslint-config-prettier@9.1.0)(eslint@8.55.0)(prettier@3.1.1):
     resolution: {integrity: sha512-m3u5RnR56asrwV/lDC4GHorlW75DsFfmUcjfCYylTUs85dBRnB7VM6xG8eCMJdeDRnppzmxZVf1GEPJvl1JmNg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -4554,7 +4554,7 @@ packages:
         optional: true
     dependencies:
       eslint: 8.55.0
-      eslint-config-prettier: 9.0.0(eslint@8.55.0)
+      eslint-config-prettier: 9.1.0(eslint@8.55.0)
       prettier: 3.1.1
       prettier-linter-helpers: 1.0.0
       synckit: 0.8.5
@@ -10034,7 +10034,7 @@ packages:
     name: '@pacote/error'
     dev: false
 
-  file:packages/eslint-config(@typescript-eslint/eslint-plugin@6.14.0)(eslint-config-prettier@9.0.0)(eslint-config-standard@17.1.0)(eslint-plugin-import@2.29.0)(eslint-plugin-n@16.4.0)(eslint-plugin-prettier@5.0.1)(eslint-plugin-promise@6.1.1)(eslint@8.55.0):
+  file:packages/eslint-config(@typescript-eslint/eslint-plugin@6.14.0)(eslint-config-prettier@9.1.0)(eslint-config-standard@17.1.0)(eslint-plugin-import@2.29.0)(eslint-plugin-n@16.4.0)(eslint-plugin-prettier@5.0.1)(eslint-plugin-promise@6.1.1)(eslint@8.55.0):
     resolution: {directory: packages/eslint-config, type: directory}
     id: file:packages/eslint-config
     name: '@pacote/eslint-config'
@@ -10050,11 +10050,11 @@ packages:
     dependencies:
       '@typescript-eslint/eslint-plugin': 6.14.0(@typescript-eslint/parser@6.13.2)(eslint@8.55.0)(typescript@5.2.2)
       eslint: 8.55.0
-      eslint-config-prettier: 9.0.0(eslint@8.55.0)
+      eslint-config-prettier: 9.1.0(eslint@8.55.0)
       eslint-config-standard: 17.1.0(eslint-plugin-import@2.29.0)(eslint-plugin-n@16.4.0)(eslint-plugin-promise@6.1.1)(eslint@8.55.0)
       eslint-plugin-import: 2.29.0(@typescript-eslint/parser@6.13.2)(eslint@8.55.0)
       eslint-plugin-n: 16.4.0(eslint@8.55.0)
-      eslint-plugin-prettier: 5.0.1(eslint-config-prettier@9.0.0)(eslint@8.55.0)(prettier@3.1.1)
+      eslint-plugin-prettier: 5.0.1(eslint-config-prettier@9.1.0)(eslint@8.55.0)(prettier@3.1.1)
       eslint-plugin-promise: 6.1.1(eslint@8.55.0)
     dev: false
 
@@ -10074,7 +10074,7 @@ packages:
       eslint-plugin-testing-library: 6.2.0(eslint@8.55.0)(typescript@5.2.2)
     dev: false
 
-  file:packages/eslint-config-react(eslint-config-prettier@9.0.0)(eslint-plugin-jsx-a11y@6.8.0)(eslint-plugin-react-hooks@4.6.0)(eslint-plugin-react@7.33.2)(eslint@8.55.0):
+  file:packages/eslint-config-react(eslint-config-prettier@9.1.0)(eslint-plugin-jsx-a11y@6.8.0)(eslint-plugin-react-hooks@4.6.0)(eslint-plugin-react@7.33.2)(eslint@8.55.0):
     resolution: {directory: packages/eslint-config-react, type: directory}
     id: file:packages/eslint-config-react
     name: '@pacote/eslint-config-react'
@@ -10086,7 +10086,7 @@ packages:
       eslint-plugin-react-hooks: '>= 4'
     dependencies:
       eslint: 8.55.0
-      eslint-config-prettier: 9.0.0(eslint@8.55.0)
+      eslint-config-prettier: 9.1.0(eslint@8.55.0)
       eslint-plugin-jsx-a11y: 6.8.0(eslint@8.55.0)
       eslint-plugin-react: 7.33.2(eslint@8.55.0)
       eslint-plugin-react-hooks: 4.6.0(eslint@8.55.0)
