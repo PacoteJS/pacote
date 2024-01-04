@@ -230,7 +230,7 @@ importers:
         version: 18.2.0(react@18.2.0)
       redux:
         specifier: ^5.0.0
-        version: 5.0.0
+        version: 5.0.1
       rimraf:
         specifier: ^5.0.5
         version: 5.0.5
@@ -8555,8 +8555,8 @@ packages:
       strip-indent: 3.0.0
     dev: true
 
-  /redux@5.0.0:
-    resolution: {integrity: sha512-blLIYmYetpZMET6Q6uCY7Jtl/Im5OBldy+vNPauA8vvsdqyt66oep4EUpAMWNHauTC6xa9JuRPhRB72rY82QGA==}
+  /redux@5.0.1:
+    resolution: {integrity: sha512-M9/ELqF6fy8FwmkpnF0S3YKOqMyoWJ4+CS5Efg2ct3oY9daQvd/Pc71FpGZsVsbl3Cpb+IIcjBDUnnyBdQbq4w==}
     dev: true
 
   /reflect.getprototypeof@1.0.4:
