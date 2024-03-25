@@ -96,7 +96,7 @@
     "typedoc": "^0.25.2",
     "typescript": "^5.2.2",
     "whatwg-fetch": "^3.6.19",
-    "xxhash-addon": "^1.5.0"
+    "xxhash-addon": "^2.0.3"
   },
   "dependencies": {
     "@pacote/array": "file:packages/array",
