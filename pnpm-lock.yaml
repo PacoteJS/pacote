@@ -125,7 +125,7 @@ importers:
         version: 0.2.36(@swc/core@1.4.2)
       '@testing-library/react':
         specifier: ^14.0.0
-        version: 14.1.2(react-dom@18.2.0)(react@18.2.0)
+        version: 14.2.2(react-dom@18.2.0)(react@18.2.0)
       '@types/jest':
         specifier: ^29.5.6
         version: 29.5.11
@@ -2021,8 +2021,8 @@ packages:
       pretty-format: 27.5.1
     dev: true
 
-  /@testing-library/react@14.1.2(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-z4p7DVBTPjKM5qDZ0t5ZjzkpSNb+fZy1u6bzO7kk8oeGagpPCAtgh4cx1syrfp7a+QWkM021jGqjJaxJJnXAZg==}
+  /@testing-library/react@14.2.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-SOUuM2ysCvjUWBXTNfQ/ztmnKDmqaiPV3SvoIuyxMUca45rbSWWAT/qB8CUs/JQ/ux/8JFs9DNdFQ3f6jH3crA==}
     engines: {node: '>=14'}
     peerDependencies:
       react: ^18.0.0
