@@ -37,7 +37,7 @@ importers:
         version: file:packages/eslint-config-react(eslint-config-prettier@9.1.0)(eslint-plugin-jsx-a11y@6.8.0)(eslint-plugin-react-hooks@4.6.0)(eslint-plugin-react@7.34.1)(eslint@8.57.0)
       '@pacote/ffetch':
         specifier: file:packages/ffetch
-        version: file:packages/ffetch(fp-ts@2.16.2)
+        version: file:packages/ffetch(fp-ts@2.16.5)
       '@pacote/flux-actions':
         specifier: file:packages/flux-actions
         version: file:packages/flux-actions
@@ -58,7 +58,7 @@ importers:
         version: file:packages/is-plain-object
       '@pacote/jest-either':
         specifier: file:packages/jest-either
-        version: file:packages/jest-either(fp-ts@2.16.2)
+        version: file:packages/jest-either(fp-ts@2.16.5)
       '@pacote/linked-list':
         specifier: file:packages/linked-list
         version: file:packages/linked-list
@@ -191,7 +191,7 @@ importers:
         version: 3.15.1
       fp-ts:
         specifier: ^2.16.1
-        version: 2.16.2
+        version: 2.16.5
       git-cz:
         specifier: ^4.9.0
         version: 4.9.0
@@ -5303,8 +5303,8 @@ packages:
     resolution: {integrity: sha512-by7U5W8dkIzcvDofUcO42yl9JbnHTEDBrzu3pt5fKT+Z4Oy85I21K80EYJYdjQGC2qum4Vo55Ag57iiIK4FYuA==}
     dev: false
 
-  /fp-ts@2.16.2:
-    resolution: {integrity: sha512-CkqAjnIKFqvo3sCyoBTqgJvF+bHrSik584S9nhTjtBESLx26cbtVMR/T9a6ApChOcSDAaM3JydDmWDUn4EEXng==}
+  /fp-ts@2.16.5:
+    resolution: {integrity: sha512-N8T8PwMSeTKKtkm9lkj/zSTAnPC/aJIIrQhnHxxkL0KLsRCNUPANksJOlMXxcKKCo7H1ORP3No9EMD+fP0tsdA==}
 
   /fs-constants@1.0.0:
     resolution: {integrity: sha512-y6OAwoSIf7FyjMIv94u+b5rdheZEjzR63GTyZJm5qh4Bi+2YgwLCcI/fPFZkL5PSixOt6ZNKm+w+Hfp/Bciwow==}
@@ -10520,7 +10520,7 @@ packages:
       eslint-plugin-react-hooks: 4.6.0(eslint@8.57.0)
     dev: false
 
-  file:packages/ffetch(fp-ts@2.16.2):
+  file:packages/ffetch(fp-ts@2.16.5):
     resolution: {directory: packages/ffetch, type: directory}
     id: file:packages/ffetch
     name: '@pacote/ffetch'
@@ -10528,7 +10528,7 @@ packages:
       fp-ts: ^2.6.0
     dependencies:
       '@pacote/error': file:packages/error
-      fp-ts: 2.16.2
+      fp-ts: 2.16.5
     dev: false
 
   file:packages/flux-actions:
@@ -10563,7 +10563,7 @@ packages:
     name: '@pacote/is-plain-object'
     dev: false
 
-  file:packages/jest-either(fp-ts@2.16.2):
+  file:packages/jest-either(fp-ts@2.16.5):
     resolution: {directory: packages/jest-either, type: directory}
     id: file:packages/jest-either
     name: '@pacote/jest-either'
@@ -10572,7 +10572,7 @@ packages:
       fp-ts: ^2.0.0
     dependencies:
       '@pacote/is-plain-object': file:packages/is-plain-object
-      fp-ts: 2.16.2
+      fp-ts: 2.16.5
       jest-diff: 29.7.0
       jest-matcher-utils: 29.7.0
       ramda: 0.29.1
