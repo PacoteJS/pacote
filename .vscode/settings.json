@@ -4,5 +4,6 @@
   "eslint.enable": true,
   "html.format.enable": false,
   "workbench.colorCustomizations": {},
-  "deno.enable": false
+  "deno.enable": false,
+  "jest.jestCommandLine": "pnpm jest"
 }
