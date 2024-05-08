@@ -193,7 +193,7 @@ importers:
         specifier: ^24.0.0
         version: 24.0.0
       lerna:
-        specifier: ^8.0.0
+        specifier: ^8.1.2
         version: 8.1.2(encoding@0.1.13)
       lint-staged:
         specifier: ^15.0.2
@@ -7197,9 +7197,9 @@ snapshots:
   execa@5.0.0:
     dependencies:
       cross-spawn: 7.0.3
-      get-stream: 6.0.0
+      get-stream: 6.0.1
       human-signals: 2.1.0
-      is-stream: 2.0.0
+      is-stream: 2.0.1
       merge-stream: 2.0.0
       npm-run-path: 4.0.1
       onetime: 5.1.2
@@ -8614,7 +8614,7 @@ snapshots:
       array-differ: 3.0.0
       array-union: 2.1.0
       arrify: 2.0.1
-      minimatch: 3.0.5
+      minimatch: 3.1.2
 
   mute-stream@0.0.8: {}
 
