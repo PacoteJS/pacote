@@ -69,7 +69,6 @@ describe('sort()', () => {
     )
   })
 
-  // eslint-disable-next-line jest/no-disabled-tests
   test.skip('Array#sort comparison', () => {
     fc.assert(
       fc.property(
