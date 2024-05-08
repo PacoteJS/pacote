@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest'
 import { assert, nat, property, string, uint8Array } from 'fast-check'
 import { XXHash64 } from 'xxhash-addon'
 import { sanityBuffer } from './sanity'

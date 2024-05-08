@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest'
 import { createAction, reducerFromState } from '../src/index'
 import { createStore } from 'redux'
 

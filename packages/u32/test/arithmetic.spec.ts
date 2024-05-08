@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest'
 import { assert, nat, integer, property } from 'fast-check'
 import {
   add,

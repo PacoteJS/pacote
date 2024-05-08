@@ -1,34 +1,37 @@
+import { afterEach, test, expect, vi, MockInstance } from 'vitest'
 import { throttle } from '../src/index'
 
 const tock = (() => {
-  let spy: jest.SpyInstance<number, []> = jest.fn()
+  let spy: MockInstance<[], number> = vi.fn()
   let mockedTime = 0
 
   return {
     useFakeTime(time = 0) {
       mockedTime = time
       spy.mockRestore()
-      spy = jest.spyOn(Date, 'now').mockReturnValue(mockedTime)
-      jest.useFakeTimers()
+      spy = vi.spyOn(Date, 'now').mockReturnValue(mockedTime)
+      vi.useFakeTimers()
     },
 
     advanceTime(time = 0) {
       mockedTime = mockedTime + time
       spy.mockReturnValue(mockedTime)
-      jest.advanceTimersByTime(time)
+      vi.advanceTimersByTime(time)
     },
 
     useRealTime() {
       spy.mockRestore()
-      jest.useRealTimers()
+      vi.useRealTimers()
     },
   }
 })()
 
-afterEach(tock.useRealTime)
+afterEach(() => {
+  tock.useRealTime()
+})
 
 test(`throttled function is called immediately`, () => {
-  const fn = jest.fn()
+  const fn = vi.fn()
   const throttledFn = throttle(fn)
 
   throttledFn()
@@ -37,7 +40,7 @@ test(`throttled function is called immediately`, () => {
 })
 
 test(`throttled function is called with the passed arguments`, () => {
-  const fn = jest.fn()
+  const fn = vi.fn()
   const throttledFn = throttle(fn)
 
   throttledFn(1, 2, 3)
@@ -48,7 +51,7 @@ test(`throttled function is called with the passed arguments`, () => {
 test(`throttled functions can be called past the delay interval`, () => {
   tock.useFakeTime(Date.now())
 
-  const fn = jest.fn()
+  const fn = vi.fn()
   const throttledFn = throttle(fn, 100)
 
   throttledFn(1)
@@ -63,7 +66,7 @@ test(`throttled functions can be called past the delay interval`, () => {
 test(`throttled function can be called at most once during the delay interval`, () => {
   tock.useFakeTime(Date.now())
 
-  const fn = jest.fn()
+  const fn = vi.fn()
   const throttledFn = throttle(fn, 100)
 
   throttledFn(1)
@@ -77,7 +80,7 @@ test(`throttled function can be called at most once during the delay interval`, 
 test(`throttled function only considers the most recent call`, () => {
   tock.useFakeTime(Date.now())
 
-  const fn = jest.fn()
+  const fn = vi.fn()
   const throttledFn = throttle(fn, 100)
 
   throttledFn(1)
@@ -93,7 +96,7 @@ test(`throttled function only considers the most recent call`, () => {
 test(`cancelling pending function calls`, () => {
   tock.useFakeTime(Date.now())
 
-  const fn = jest.fn()
+  const fn = vi.fn()
   const throttledFn = throttle(fn, 100)
 
   throttledFn(1)

@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest'
 import { Result, fold, Ok, Err } from '@pacote/result'
 import { createAction, reducerFromState } from '../src/index'
 

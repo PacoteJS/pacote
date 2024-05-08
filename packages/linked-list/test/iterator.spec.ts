@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest'
 import * as L from '../src/index'
 
 describe('entries()', () => {

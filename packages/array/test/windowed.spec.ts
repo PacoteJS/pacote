@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest'
 import { windowed } from '../src/index'
 
 test('an empty array has no windows', () => {

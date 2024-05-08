@@ -1,3 +1,4 @@
+import { test, expect, vi } from 'vitest'
 import { assert, property, func, string, anything } from 'fast-check'
 import { memoize } from '../src/index'
 
@@ -17,7 +18,7 @@ test('memoize caches function calls', () => {
 })
 
 test('clear memoize cache', () => {
-  const mockFn = jest.fn()
+  const mockFn = vi.fn()
   const memoizedFn = memoize(() => '_', mockFn)
 
   memoizedFn()
@@ -28,7 +29,7 @@ test('clear memoize cache', () => {
 })
 
 test('evict LRU calls', () => {
-  const mockFn = jest.fn()
+  const mockFn = vi.fn()
   const memoizedFn = memoize((n) => n, mockFn, { capacity: 1 })
 
   memoizedFn(1)

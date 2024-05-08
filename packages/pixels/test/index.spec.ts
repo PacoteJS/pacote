@@ -1,3 +1,8 @@
+/**
+ * @vitest-environment jsdom
+ */
+
+import { afterEach, describe, test, expect } from 'vitest'
 import { pixels } from '../src'
 
 afterEach(() => {

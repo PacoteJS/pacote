@@ -1,18 +1,46 @@
-import 'whatwg-fetch'
+/**
+ * @vitest-environment jsdom
+ */
+
+import { beforeAll, afterEach, afterAll, test, expect, vi } from 'vitest'
 import matchers from '@pacote/jest-either'
-import { ffetch, createFetch } from '../src'
-import { rest } from 'msw'
+import { createFetch } from '../src'
+import { HttpResponse, http } from 'msw'
 import { setupServer } from 'msw/node'
 import { NetworkError, StatusError, ParserError } from '../src/errors'
 
 expect.extend(matchers)
 
-const url = 'http://localhost'
+const handlers = [
+  http.get('/json', () => HttpResponse.json({ json: true })),
+  http.get('/text', () => HttpResponse.text('<plain text>')),
+  http.get('/text-error', () =>
+    HttpResponse.text('<not found>', { status: 404 }),
+  ),
+  http.get('/json-error', () =>
+    HttpResponse.json({ json: true }, { status: 500 }),
+  ),
+  http.get(
+    '/bad-content',
+    () =>
+      new HttpResponse('<not json>', {
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      }),
+  ),
+  http.get(
+    '/bad-content-error',
+    () =>
+      new HttpResponse('<not json>', {
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+        status: 400,
+      }),
+  ),
+]
 
-const server = setupServer()
+const server = setupServer(...handlers)
 
 beforeAll(() => {
-  server.listen()
+  server.listen({ onUnhandledRequest: 'error' })
 })
 
 afterEach(() => {
@@ -24,22 +52,20 @@ afterAll(() => {
 })
 
 test('successful JSON responses', async () => {
-  const body = { foo: 'bar' }
-  server.use(rest.get('/', (_, res, ctx) => res(ctx.json(body))))
-  const actual = await ffetch(url)()
-  expect(actual).toEqualRight(body)
+  const ffetch = createFetch()
+  const actual = await ffetch('/json')()
+  expect(actual).toEqualRight({ json: true })
 })
 
 test('successful plain text responses', async () => {
-  const body = '<plain text>'
-  server.use(rest.get('/', (_, res, ctx) => res(ctx.text(body))))
-  const actual = await ffetch(url)()
-  expect(actual).toEqualRight(body)
+  const ffetch = createFetch()
+  const actual = await ffetch('/text')()
+  expect(actual).toEqualRight('<plain text>')
 })
 
 test('connection errors', async () => {
-  server.use(rest.get('/', (_, res) => res.networkError('')))
-  const actual = await ffetch(url)()
+  const ffetch = createFetch()
+  const actual = await ffetch('')()
   expect(actual).toEqualLeft(
     new NetworkError('Network request failed', [
       new TypeError('Network request failed'),
@@ -48,27 +74,16 @@ test('connection errors', async () => {
 })
 
 test('status code errors', async () => {
-  const status = 500
-  const body = { foo: 'bar' }
-  server.use(
-    rest.get('/', (_, res, ctx) => res(ctx.status(status), ctx.json(body))),
-  )
-  const actual = await ffetch(url)()
+  const ffetch = createFetch()
+  const actual = await ffetch('/json-error')()
   expect(actual).toEqualLeft(
-    new StatusError(status, 'Internal Server Error', body),
+    new StatusError(500, 'Internal Server Error', { json: true }),
   )
 })
 
 test('invalid response body', async () => {
-  server.use(
-    rest.get('/', (_, res, ctx) =>
-      res(
-        ctx.set('content-type', 'application/json; charset=utf-8'),
-        ctx.body('<not json>'),
-      ),
-    ),
-  )
-  const actual = await ffetch(url)()
+  const ffetch = createFetch()
+  const actual = await ffetch('/bad-content')()
   expect(actual).toEqualLeft(
     new ParserError('Could not parse response', [
       new Error('Unexpected token < in JSON at position 0'),
@@ -77,52 +92,35 @@ test('invalid response body', async () => {
 })
 
 test('plain text body for status errors', async () => {
-  const status = 404
-  const body = '<ok>'
-  server.use(
-    rest.get('/', (_, res, ctx) => res(ctx.status(status), ctx.text(body))),
-  )
-  const actual = await ffetch(url)()
-  expect(actual).toEqualLeft(new StatusError(status, 'Not Found', body))
+  const ffetch = createFetch()
+  const actual = await ffetch('/text-error')()
+  expect(actual).toEqualLeft(new StatusError(404, 'Not Found', '<not found>'))
 })
 
 test('invalid JSON body for status errors', async () => {
-  const status = 400
-  const body = '<not json>'
-  server.use(
-    rest.get('/', (_, res, ctx) =>
-      res(
-        ctx.status(status),
-        ctx.set('content-type', 'application/json; charset=utf-8'),
-        ctx.body(body),
-      ),
-    ),
-  )
-  const actual = await ffetch(url)()
-  expect(actual).toEqualLeft(new StatusError(status, 'Bad Request', body))
+  const ffetch = createFetch()
+  const actual = await ffetch('/bad-content-error')()
+  expect(actual).toEqualLeft(new StatusError(400, 'Bad Request', '<not json>'))
 })
 
 test('custom body parser success', async () => {
-  const status = 201
-  const expected = `Received a response with status code ${status}.`
-  server.use(rest.get('/', (_, res, ctx) => res(ctx.status(status))))
+  const expected = 'Received a response with status code 200.'
   const customFetch = createFetch({
     parse: async () => Promise.resolve(expected),
   })
 
-  const actual = await customFetch(url)()
+  const actual = await customFetch('/json')()
 
   expect(actual).toEqualRight(expected)
 })
 
 test('custom parser error', async () => {
   const error = new Error('custom parser error')
-  server.use(rest.get('/', (_, res) => res()))
   const customFetch = createFetch({
     parse: async () => Promise.reject(error),
   })
 
-  const actual = await customFetch(url)()
+  const actual = await customFetch('/text')()
 
   expect(actual).toEqualLeft(
     new ParserError('Could not parse response', [error]),
@@ -130,49 +128,43 @@ test('custom parser error', async () => {
 })
 
 test('custom error parser success', async () => {
-  const status = 500
-  const body = `Received a response with status code ${status}.`
-  server.use(
-    rest.get('/', (_, res, ctx) => res(ctx.status(status), ctx.text(body))),
-  )
+  const body = 'Received a response with status code 404.'
   const customFetch = createFetch({
     parseLeft: async () => Promise.resolve(body),
   })
 
-  const actual = await customFetch(url)()
+  const actual = await customFetch('/text-error')()
 
-  expect(actual).toEqualLeft(
-    new StatusError(status, 'Internal Server Error', body),
-  )
+  expect(actual).toEqualLeft(new StatusError(404, 'Not Found', body))
 })
 
 test('custom error parser failure', async () => {
-  const status = 500
   const error = new Error('custom error parser failure')
-  server.use(rest.get('/', (_, res, ctx) => res(ctx.status(status))))
   const customFetch = createFetch({
     parseLeft: async () => Promise.reject(error),
   })
 
-  const actual = await customFetch(url)()
+  const actual = await customFetch('/text-error')()
 
   expect(actual).toEqualLeft(
     new ParserError('Could not parse error response', [
-      new StatusError(status, 'Internal Server Error'),
+      new StatusError(404, 'Not Found'),
       error,
     ]),
   )
 })
 
 test('custom Fetch polyfill', async () => {
-  const mockFetch = jest.fn().mockResolvedValue({
-    clone: jest.fn().mockReturnThis(),
+  const mockFetch = vi.fn().mockResolvedValue({
+    clone: vi.fn().mockReturnThis(),
     headers: {
-      get: jest.fn(),
+      get: vi.fn(),
     },
-    text: jest.fn().mockResolvedValue(''),
+    text: vi.fn().mockResolvedValue(''),
   })
   const customFetch = createFetch({ fetch: mockFetch })
-  await customFetch(url, { method: 'POST ' })()
-  expect(mockFetch).toHaveBeenCalledWith(url, { method: 'POST ' })
+  await customFetch('/', { method: 'POST ' })()
+  expect(mockFetch).toHaveBeenCalledWith('/', {
+    method: 'POST ',
+  })
 })

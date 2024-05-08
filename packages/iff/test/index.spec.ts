@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest'
 import { None, Some } from '@pacote/option'
 import { iff } from '../src/index'
 

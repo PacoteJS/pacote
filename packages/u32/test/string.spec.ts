@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest'
 import { assert, nat, property } from 'fast-check'
 import { from, toString } from '../src/index'
 

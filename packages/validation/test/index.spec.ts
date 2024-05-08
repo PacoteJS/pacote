@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest'
 import { Err, Ok } from '@pacote/result'
 import { lift, validation } from '../src/index'
 

@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest'
 import { BaseError, ComplexError } from '../src'
 
 test('BaseError is an instance of Error', () => {

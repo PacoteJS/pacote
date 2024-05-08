@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest'
 import { StatusError, ParserError, NetworkError } from '../src/errors'
 
 const status = 500

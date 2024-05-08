@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest'
 import { assert, property, anything, func } from 'fast-check'
 import * as O from '../src/index'
 

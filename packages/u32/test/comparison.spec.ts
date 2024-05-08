@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest'
 import { equals, from, greaterThan, lessThan } from '../src/index'
 
 describe('equals', () => {

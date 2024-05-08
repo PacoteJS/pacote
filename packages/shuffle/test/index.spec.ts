@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest'
 import { assert, property, integer } from 'fast-check'
 import { range } from '@pacote/array'
 import { shuffle } from '../src/index'

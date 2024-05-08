@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest'
 import { unique } from '../src/index'
 
 test('an empty array is returned unchanged', () => {

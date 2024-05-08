@@ -1,3 +1,4 @@
+import { describe, it, test, expect, vi } from 'vitest'
 import { BloomSearch } from '../src/index'
 
 test('searching an empty index yields no results', () => {
@@ -100,7 +101,7 @@ test('search results return only fields in the summary list', () => {
 })
 
 test('stopwords are passed through a language-aware filter', () => {
-  const stopwords = jest.fn((text) => text.length > 1)
+  const stopwords = vi.fn((text) => text.length > 1)
 
   const bs = new BloomSearch({
     fields: ['text'],
@@ -140,7 +141,7 @@ test('undefined fields are not indexed', () => {
 })
 
 test('tokens are passed through a language-aware stemmer', () => {
-  const stemmer = jest.fn((text) => text.substring(0, 3))
+  const stemmer = vi.fn((text) => text.substring(0, 3))
 
   const bs = new BloomSearch({
     fields: ['text'],
@@ -158,7 +159,7 @@ test('tokens are passed through a language-aware stemmer', () => {
 })
 
 test('tokens can be generated with a custom tokenizer', () => {
-  const tokenizer = jest.fn((text) => text.split('-'))
+  const tokenizer = vi.fn((text) => text.split('-'))
 
   const bs = new BloomSearch({
     fields: ['text'],
@@ -173,7 +174,7 @@ test('tokens can be generated with a custom tokenizer', () => {
 })
 
 test('document fields can be preprocessed for the index', () => {
-  const preprocess = jest.fn((text) => text.replace(/-/g, ' '))
+  const preprocess = vi.fn((text) => text.replace(/-/g, ' '))
 
   const bs = new BloomSearch({
     fields: ['text'],

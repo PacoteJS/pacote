@@ -1,3 +1,8 @@
+/**
+ * @vitest-environment jsdom
+ */
+
+import { describe, test, expect } from 'vitest'
 import React, { FunctionComponent, ReactNode } from 'react'
 import { render } from '@testing-library/react'
 import { withProps, withDefaultProps } from '../src'

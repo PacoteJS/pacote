@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest'
 import { optimal } from '../src/index'
 
 test('calculate optimised size and hashes from length and error rate', () => {

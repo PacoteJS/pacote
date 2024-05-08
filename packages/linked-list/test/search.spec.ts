@@ -1,3 +1,4 @@
+import { describe, test, expect, vi } from 'vitest'
 import * as fc from 'fast-check'
 import { Some, None } from '@pacote/option'
 import * as L from '../src/index'
@@ -36,7 +37,7 @@ describe('find()', () => {
 
   test("calls the predicate function for every item in the list until it's satisfied", () => {
     const list = L.listOf(1, 2, 3)
-    const predicate = jest.fn((i) => i === 2)
+    const predicate = vi.fn((i) => i === 2)
 
     const actual = L.find(predicate, list)
 
@@ -76,7 +77,7 @@ describe('findIndex()', () => {
 
   test("calls the predicate function for every item in the list until it's satisfied", () => {
     const list = L.listOf('a', 'b', 'c')
-    const predicate = jest.fn((i) => i === 'b')
+    const predicate = vi.fn((i) => i === 'b')
 
     const actual = L.findIndex(predicate, list)
 
@@ -199,7 +200,7 @@ describe('every()', () => {
 
   test('predicate is called for every item until the predicate fails', () => {
     const list = L.listOf(1, 2, 3)
-    const predicate = jest.fn((value) => value < 2)
+    const predicate = vi.fn((value) => value < 2)
 
     L.every(predicate, list)
 
@@ -222,7 +223,7 @@ describe('some()', () => {
 
   test('predicate is called for every item until the predicate succeeds', () => {
     const list = L.listOf(1, 2, 3)
-    const predicate = jest.fn((value) => value > 1)
+    const predicate = vi.fn((value) => value > 1)
 
     L.some(predicate, list)
 

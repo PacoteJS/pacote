@@ -1,3 +1,4 @@
+import { test, expect, vi } from 'vitest'
 import { assert, nat, property } from 'fast-check'
 import { times } from '../src/index'
 
@@ -9,7 +10,7 @@ test('an empty array is returned when function is run 0 times', () => {
 test('no functions are called when run zero times', () => {
   assert(
     property(nat(100), (n) => {
-      const fn = jest.fn()
+      const fn = vi.fn()
       times(n, fn)
       expect(fn).toHaveBeenCalledTimes(n)
     }),

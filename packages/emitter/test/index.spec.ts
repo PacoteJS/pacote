@@ -1,8 +1,9 @@
+import { test, expect, vi } from 'vitest'
 import { createEmitter } from '../src'
 
 test(`event subscription`, () => {
   const emitter = createEmitter()
-  const callback = jest.fn()
+  const callback = vi.fn()
 
   emitter.on('test', callback)
   emitter.emit('test')
@@ -16,8 +17,8 @@ test(`multiple event subscribers`, () => {
   }
 
   const emitter = createEmitter<TestEvents>()
-  const callback1 = jest.fn()
-  const callback2 = jest.fn()
+  const callback1 = vi.fn()
+  const callback2 = vi.fn()
 
   emitter.on('test', callback1)
   emitter.on('test', callback2)
@@ -33,7 +34,7 @@ test(`unsubscribing from an event`, () => {
   }
 
   const emitter = createEmitter<TestEvents>()
-  const callback = jest.fn()
+  const callback = vi.fn()
 
   const unsubcribe = emitter.on('test', callback)
   unsubcribe()
@@ -48,7 +49,7 @@ test(`passing event parameters`, () => {
   }
 
   const emitter = createEmitter<TestEvents>()
-  const callback = jest.fn()
+  const callback = vi.fn()
 
   emitter.on('test', callback)
   emitter.emit('test', 'ok', 0)

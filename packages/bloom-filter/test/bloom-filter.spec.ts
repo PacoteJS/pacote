@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest'
 import { assert, property, string } from 'fast-check'
 import { BloomFilter } from '../src/index'
 import { xxh64 } from '@pacote/xxhash'

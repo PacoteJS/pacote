@@ -1,3 +1,4 @@
+import { describe, test, expect, vi } from 'vitest'
 import * as fc from 'fast-check'
 import { Some, None } from '@pacote/option'
 import * as L from '../src/index'
@@ -180,7 +181,7 @@ describe('filter()', () => {
     fc.assert(
       fc.property(arbitraryArray, (items) => {
         const list = L.listOf(...items)
-        const predicate = jest.fn()
+        const predicate = vi.fn()
 
         L.filter(predicate, list)
 
@@ -223,7 +224,7 @@ describe('map()', () => {
     fc.assert(
       fc.property(arbitraryArray, (items) => {
         const list = L.listOf(...items)
-        const callback = jest.fn()
+        const callback = vi.fn()
 
         L.map(callback, list)
 
@@ -251,7 +252,7 @@ describe('flatMap()', () => {
     fc.assert(
       fc.property(arbitraryArray, (items) => {
         const list = L.listOf(...items)
-        const callback = jest.fn()
+        const callback = vi.fn()
 
         L.flatMap(callback, list)
 
@@ -283,7 +284,7 @@ describe('reduce()', () => {
 
   test('calls the callback function for every item in the list', () => {
     const list = L.listOf(1, 2, 3)
-    const callback = jest.fn((acc, i) => acc + i)
+    const callback = vi.fn((acc, i) => acc + i)
 
     L.reduce(callback, 0, list)
 
@@ -308,7 +309,7 @@ describe('reduceRight()', () => {
 
   test('calls the callback function for every item in the list', () => {
     const list = L.listOf(1, 2, 3)
-    const callback = jest.fn((acc, i) => acc + i)
+    const callback = vi.fn((acc, i) => acc + i)
 
     L.reduceRight(callback, 0, list)
 

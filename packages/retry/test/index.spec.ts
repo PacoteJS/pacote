@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest'
 import { retry } from '../src/index'
 
 test('evaluating a callback and returning its result', async () => {

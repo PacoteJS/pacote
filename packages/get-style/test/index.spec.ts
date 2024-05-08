@@ -1,3 +1,8 @@
+/**
+ * @vitest-environment jsdom
+ */
+
+import { afterEach, test, expect } from 'vitest'
 import { getStyle } from '../src'
 
 afterEach(() => {

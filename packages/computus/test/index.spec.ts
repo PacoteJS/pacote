@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest'
 import { assert, property, integer } from 'fast-check'
 import { gregorian, julian } from '../src/index'
 

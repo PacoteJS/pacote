@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest'
 import { assert, nat, property, string } from 'fast-check'
 import { times } from '@pacote/array'
 import { CountingBloomFilter } from '../src/index'

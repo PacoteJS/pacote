@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest'
 import { left, right } from 'fp-ts/lib/Either'
 import matchers from '../src/index'
 

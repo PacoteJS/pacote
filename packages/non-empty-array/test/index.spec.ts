@@ -1,3 +1,4 @@
+import { describe, it, test, expect } from 'vitest'
 import { anything, Arbitrary, array, assert, property, tuple } from 'fast-check'
 import { Some, None } from '@pacote/option'
 import { fromElements, fromArray, concat, isNonEmptyArray } from '../src/index'

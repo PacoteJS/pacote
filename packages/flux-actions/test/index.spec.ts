@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest'
 import { createAction, isType, reducerFromState } from '../src/index'
 import { assert, property, string, anything } from 'fast-check'
 

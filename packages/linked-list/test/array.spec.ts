@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest'
 import * as fc from 'fast-check'
 import * as L from '../src/index'
 
@@ -11,9 +12,9 @@ describe('toArray()', () => {
     const arbitraryArray = fc.array(fc.anything())
 
     fc.assert(
-      fc.property(arbitraryArray, (items) =>
-        expect(L.toArray(L.listOf(...items))).toEqual(items),
-      ),
+      fc.property(arbitraryArray, (items) => {
+        expect(L.toArray(L.listOf(...items))).toEqual(items)
+      }),
     )
   })
 })

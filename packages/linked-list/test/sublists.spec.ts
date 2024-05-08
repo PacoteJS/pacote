@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest'
 import * as fc from 'fast-check'
 import * as L from '../src/index'
 

@@ -1,5 +1,10 @@
+/**
+ * @vitest-environment jsdom
+ */
+
+import { test, afterEach, expect, vi } from 'vitest'
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, cleanup } from '@testing-library/react'
 import { useOutside } from '../src'
 
 function renderTestComponent(
@@ -19,6 +24,10 @@ function renderTestComponent(
   return render(<Test />)
 }
 
+afterEach(() => {
+  cleanup()
+})
+
 test.each<
   [
     keyof DocumentEventMap,
@@ -29,7 +38,7 @@ test.each<
   ['touchend', fireEvent.touchEnd],
   ['mouseover', fireEvent.mouseOver],
 ])('handler is called on %s outside', (type, fireFunction) => {
-  const handler = jest.fn()
+  const handler = vi.fn()
   const screen = renderTestComponent(type, handler)
   fireFunction(screen.getByText('Outside'))
   expect(handler).toHaveBeenCalled()
@@ -45,14 +54,14 @@ test.each<
   ['touchend', fireEvent.touchEnd],
   ['mouseover', fireEvent.mouseOver],
 ])('handler is not called on %s inside', (type, fireFunction) => {
-  const handler = jest.fn()
+  const handler = vi.fn()
   const screen = renderTestComponent(type, handler)
   fireFunction(screen.getByText('Inside'))
   expect(handler).not.toHaveBeenCalled()
 })
 
 test('handler is called for multiple event types', () => {
-  const handler = jest.fn()
+  const handler = vi.fn()
   const screen = renderTestComponent(['click', 'touchend'], handler)
   fireEvent.click(screen.getByText('Outside'))
   fireEvent.touchEnd(screen.getByText('Outside'))
