@@ -107,12 +107,6 @@ importers:
       '@pacote/xxhash':
         specifier: file:packages/xxhash
         version: link:packages/xxhash
-      jest-diff:
-        specifier: ^29.0.1
-        version: 29.7.0
-      jest-matcher-utils:
-        specifier: ^29.0.1
-        version: 29.7.0
     devDependencies:
       '@commitlint/cli':
         specifier: ^18.0.0
