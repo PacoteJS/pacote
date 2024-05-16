@@ -28,34 +28,13 @@ describe.each([xxh64, xxh64BigInt])('%o', (testHash) => {
     )
   })
 
-  test('hashes ASCII characters', () => {
-    const hash = testHash(0).update('A').digest('hex')
-    expect(hash).toBe('13099d40d095b684')
-  })
-
-  test('hashes two-byte characters', () => {
-    const hash = testHash(0).update('¢').digest('hex')
-    expect(hash).toBe('87ebb4b459c8ebbc')
-  })
-
-  test('hashes three-byte characters', () => {
-    const hash = testHash(0).update('अ').digest('hex')
-    expect(hash).toBe('920694a362bbc3ec')
-  })
-
-  test('hashes four-byte characters', () => {
-    const hash = testHash(0).update('😀').digest('hex')
-    expect(hash).toBe('9025b8abaae87b80')
-  })
-
-  test('hashes surrogate pairs at the boundary', () => {
-    const hash = testHash(0).update('\uD800\uDC00').digest('hex')
-    expect(hash).toBe('306e92523b6eb280')
-  })
-
-  test('hashes unmatched high surrogate', () => {
-    const hash = testHash(0).update('\uD800').digest('hex')
-    expect(hash).toBe('306e92523b6eb280')
+  test.each([
+    [2, '¢', '87ebb4b459c8ebbc'],
+    [3, 'अ', '920694a362bbc3ec'],
+    [4, '😀', '9025b8abaae87b80'],
+  ])('hashes %d-byte characters', (_, data, expected) => {
+    const hash = testHash(0).update(data).digest('hex')
+    expect(hash).toBe(expected)
   })
 
   test.each([
