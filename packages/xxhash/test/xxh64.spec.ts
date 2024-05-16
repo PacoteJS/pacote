@@ -31,7 +31,7 @@ describe.each([xxh64, xxh64BigInt])('%o', (testHash) => {
   test.each([
     [2, '¢', '87ebb4b459c8ebbc'],
     [3, 'अ', '920694a362bbc3ec'],
-    [4, '😀', '9025b8abaae87b80'],
+    [4, '💀', '443ac27a2a3e80e8'],
   ])('hashes %d-byte characters', (_, data, expected) => {
     const hash = testHash(0).update(data).digest('hex')
     expect(hash).toBe(expected)
