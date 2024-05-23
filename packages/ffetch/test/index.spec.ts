@@ -14,12 +14,6 @@ expect.extend(matchers)
 const handlers = [
   http.get('/json', () => HttpResponse.json({ json: true })),
   http.get('/text', () => HttpResponse.text('<plain text>')),
-  http.get('/text-error', () =>
-    HttpResponse.text('<not found>', { status: 404 }),
-  ),
-  http.get('/json-error', () =>
-    HttpResponse.json({ json: true }, { status: 500 }),
-  ),
   http.get(
     '/bad-content',
     () =>
@@ -27,8 +21,15 @@ const handlers = [
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
       }),
   ),
+  http.get('/error/network', () => undefined),
+  http.get('/error/text', () =>
+    HttpResponse.text('<not found>', { status: 404 }),
+  ),
+  http.get('/error/json', () =>
+    HttpResponse.json({ json: true }, { status: 500 }),
+  ),
   http.get(
-    '/bad-content-error',
+    '/error/bad-content',
     () =>
       new HttpResponse('<not json>', {
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
@@ -65,7 +66,7 @@ test('successful plain text responses', async () => {
 
 test('connection errors', async () => {
   const ffetch = createFetch()
-  const actual = await ffetch('')()
+  const actual = await ffetch('/error/network')()
   expect(actual).toEqualLeft(
     new NetworkError('Network request failed', [
       new TypeError('Network request failed'),
@@ -75,7 +76,7 @@ test('connection errors', async () => {
 
 test('status code errors', async () => {
   const ffetch = createFetch()
-  const actual = await ffetch('/json-error')()
+  const actual = await ffetch('/error/json')()
   expect(actual).toEqualLeft(
     new StatusError(500, 'Internal Server Error', { json: true }),
   )
@@ -93,13 +94,13 @@ test('invalid response body', async () => {
 
 test('plain text body for status errors', async () => {
   const ffetch = createFetch()
-  const actual = await ffetch('/text-error')()
+  const actual = await ffetch('/error/text')()
   expect(actual).toEqualLeft(new StatusError(404, 'Not Found', '<not found>'))
 })
 
 test('invalid JSON body for status errors', async () => {
   const ffetch = createFetch()
-  const actual = await ffetch('/bad-content-error')()
+  const actual = await ffetch('/error/bad-content')()
   expect(actual).toEqualLeft(new StatusError(400, 'Bad Request', '<not json>'))
 })
 
@@ -133,7 +134,7 @@ test('custom error parser success', async () => {
     parseLeft: async () => Promise.resolve(body),
   })
 
-  const actual = await customFetch('/text-error')()
+  const actual = await customFetch('/error/text')()
 
   expect(actual).toEqualLeft(new StatusError(404, 'Not Found', body))
 })
@@ -144,7 +145,7 @@ test('custom error parser failure', async () => {
     parseLeft: async () => Promise.reject(error),
   })
 
-  const actual = await customFetch('/text-error')()
+  const actual = await customFetch('/error/text')()
 
   expect(actual).toEqualLeft(
     new ParserError('Could not parse error response', [
