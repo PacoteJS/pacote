@@ -1,5 +1,9 @@
-import { NonEmptyArray, concat, fromElements } from '@pacote/non-empty-array'
-import { Result, isErr, and, mapErr } from '@pacote/result'
+import {
+  type NonEmptyArray,
+  concat,
+  fromElements,
+} from '@pacote/non-empty-array'
+import { type Result, and, isErr, mapErr } from '@pacote/result'
 
 /**
  * Validation data type.

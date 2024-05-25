@@ -13,7 +13,7 @@ function fontSize(element?: HTMLElement | null): string {
 
 function parse(providedLength?: string | null): [number, string] {
   const length = providedLength || '0'
-  const value = parseFloat(length)
+  const value = Number.parseFloat(length)
   const match = length.match(/[\d-.]+(\w+)$/)
   const unit = match?.[1] ?? ''
   return [value, unit.toLowerCase()]

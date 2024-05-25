@@ -1,5 +1,5 @@
-import { fromNumber, U32 } from './u32'
 import { fromString } from './string'
+import { type U32, fromNumber } from './u32'
 
 export { toNumber, U32, ZERO } from './u32'
 export {

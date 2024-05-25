@@ -1,13 +1,13 @@
 import { listOf } from './array'
 import {
-  LinkedList,
-  isEmpty,
-  concat,
-  prepend,
+  type LinkedList,
   car,
   cdr,
-  reverse,
+  concat,
+  isEmpty,
   length,
+  prepend,
+  reverse,
 } from './core'
 import { drop, take } from './sublists'
 

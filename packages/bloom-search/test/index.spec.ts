@@ -1,4 +1,4 @@
-import { describe, it, test, expect, vi } from 'vitest'
+import { describe, expect, it, test, vi } from 'vitest'
 import { BloomSearch } from '../src/index'
 
 test('searching an empty index yields no results', () => {

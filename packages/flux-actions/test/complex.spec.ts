@@ -1,5 +1,5 @@
-import { test, expect } from 'vitest'
-import { Result, fold, Ok, Err } from '@pacote/result'
+import { Err, Ok, type Result, fold } from '@pacote/result'
+import { expect, test } from 'vitest'
 import { createAction, reducerFromState } from '../src/index'
 
 test('complex payloads', () => {

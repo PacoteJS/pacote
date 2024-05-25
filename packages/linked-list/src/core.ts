@@ -1,4 +1,4 @@
-import { None, Option, Some } from '@pacote/option'
+import { None, type Option, Some } from '@pacote/option'
 
 type Empty = undefined
 type Cons<T> = readonly [value: T, next: Cons<T> | Empty]

@@ -1,6 +1,6 @@
 import { shiftLeft, shiftRight } from './bitwise'
 import { equals, greaterThan, lessThan } from './comparison'
-import { clamp, clampBlocks, overflow, U64, ZERO } from './u64'
+import { type U64, ZERO, clamp, clampBlocks, overflow } from './u64'
 
 /**
  * Adds two `U64` values. Equivalent to the numeric `+` operator.

@@ -1,6 +1,6 @@
 import { range } from '@pacote/array'
 import { defaultHash } from './hash'
-import { Options } from './options'
+import type { Options } from './options'
 
 export class BloomFilter<T extends { toString(): string }> {
   readonly size: number

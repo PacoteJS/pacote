@@ -1,7 +1,7 @@
-import { test, expect } from 'vitest'
-import { assert, property, string } from 'fast-check'
-import { BloomFilter } from '../src/index'
 import { xxh64 } from '@pacote/xxhash'
+import { assert, property, string } from 'fast-check'
+import { expect, test } from 'vitest'
+import { BloomFilter } from '../src/index'
 
 test('a Bloom filter is empty when created', () => {
   assert(
@@ -27,8 +27,14 @@ test('elements added to a Bloom filter can be found using provided hash function
   const h2 = xxh64(2)
 
   const hash = (i: number, data: string): number => {
-    const d1 = parseInt(h1.update(data).digest('hex').substring(8, 16), 16)
-    const d2 = parseInt(h2.update(data).digest('hex').substring(8, 16), 16)
+    const d1 = Number.parseInt(
+      h1.update(data).digest('hex').substring(8, 16),
+      16,
+    )
+    const d2 = Number.parseInt(
+      h2.update(data).digest('hex').substring(8, 16),
+      16,
+    )
     return d1 + i * d2 + i ** 3
   }
 

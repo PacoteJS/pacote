@@ -1,5 +1,5 @@
-import { test, expect } from 'vitest'
-import { StatusError, ParserError, NetworkError } from '../src/errors'
+import { expect, test } from 'vitest'
+import { NetworkError, ParserError, StatusError } from '../src/errors'
 
 const status = 500
 

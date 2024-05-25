@@ -1,4 +1,4 @@
-import { Option, Some, None } from '@pacote/option'
+import { None, type Option, Some } from '@pacote/option'
 
 export type NonEmptyArray<T> = [T, ...T[]]
 

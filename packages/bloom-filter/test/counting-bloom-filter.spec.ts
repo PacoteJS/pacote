@@ -1,6 +1,6 @@
-import { test, expect } from 'vitest'
-import { assert, nat, property, string } from 'fast-check'
 import { times } from '@pacote/array'
+import { assert, nat, property, string } from 'fast-check'
+import { expect, test } from 'vitest'
 import { CountingBloomFilter } from '../src/index'
 
 test('a counting Bloom filter is empty when created', () => {

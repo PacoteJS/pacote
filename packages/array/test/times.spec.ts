@@ -1,5 +1,5 @@
-import { test, expect, vi } from 'vitest'
 import { assert, nat, property } from 'fast-check'
+import { expect, test, vi } from 'vitest'
 import { times } from '../src/index'
 
 test('an empty array is returned when function is run 0 times', () => {

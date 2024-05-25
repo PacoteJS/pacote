@@ -1,5 +1,5 @@
-import { Either, fold } from 'fp-ts/lib/Either'
 import { pipe } from 'fp-ts/function'
+import { type Either, fold } from 'fp-ts/lib/Either'
 import { diff } from 'jest-diff'
 import { printExpected, printReceived } from 'jest-matcher-utils'
 

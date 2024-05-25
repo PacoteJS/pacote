@@ -1,4 +1,4 @@
-import { afterEach, test, expect, vi, MockInstance } from 'vitest'
+import { type MockInstance, afterEach, expect, test, vi } from 'vitest'
 import { throttle } from '../src/index'
 
 const tock = (() => {
@@ -30,7 +30,7 @@ afterEach(() => {
   tock.useRealTime()
 })
 
-test(`throttled function is called immediately`, () => {
+test('throttled function is called immediately', () => {
   const fn = vi.fn()
   const throttledFn = throttle(fn)
 
@@ -39,7 +39,7 @@ test(`throttled function is called immediately`, () => {
   expect(fn).toHaveBeenCalledTimes(1)
 })
 
-test(`throttled function is called with the passed arguments`, () => {
+test('throttled function is called with the passed arguments', () => {
   const fn = vi.fn()
   const throttledFn = throttle(fn)
 
@@ -48,7 +48,7 @@ test(`throttled function is called with the passed arguments`, () => {
   expect(fn).toHaveBeenCalledWith(1, 2, 3)
 })
 
-test(`throttled functions can be called past the delay interval`, () => {
+test('throttled functions can be called past the delay interval', () => {
   tock.useFakeTime(Date.now())
 
   const fn = vi.fn()
@@ -63,7 +63,7 @@ test(`throttled functions can be called past the delay interval`, () => {
   expect(fn).toHaveBeenCalledTimes(3)
 })
 
-test(`throttled function can be called at most once during the delay interval`, () => {
+test('throttled function can be called at most once during the delay interval', () => {
   tock.useFakeTime(Date.now())
 
   const fn = vi.fn()
@@ -77,7 +77,7 @@ test(`throttled function can be called at most once during the delay interval`, 
   expect(fn).not.toHaveBeenCalledWith(2)
 })
 
-test(`throttled function only considers the most recent call`, () => {
+test('throttled function only considers the most recent call', () => {
   tock.useFakeTime(Date.now())
 
   const fn = vi.fn()
@@ -93,7 +93,7 @@ test(`throttled function only considers the most recent call`, () => {
   expect(fn).toHaveBeenCalledWith(3)
 })
 
-test(`cancelling pending function calls`, () => {
+test('cancelling pending function calls', () => {
   tock.useFakeTime(Date.now())
 
   const fn = vi.fn()

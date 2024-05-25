@@ -1,6 +1,6 @@
-import { test, expect } from 'vitest'
-import { assert, property, integer } from 'fast-check'
 import { range } from '@pacote/array'
+import { assert, integer, property } from 'fast-check'
+import { expect, test } from 'vitest'
 import { shuffle } from '../src/index'
 
 test('shuffling an array', () => {

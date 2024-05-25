@@ -1,13 +1,13 @@
-import { describe, it, expect } from 'vitest'
-import { assert, nat, integer, property } from 'fast-check'
+import { assert, integer, nat, property } from 'fast-check'
+import { describe, expect, it } from 'vitest'
 import {
+  ZERO,
   add,
   divide,
   from,
   multiply,
   remainder,
   subtract,
-  ZERO,
 } from '../src/index'
 
 describe('addition', () => {

@@ -1,4 +1,4 @@
-import { Some, None, Option } from '@pacote/option'
+import { None, type Option, Some } from '@pacote/option'
 
 const T_OK = Symbol('Ok')
 const T_ERR = Symbol('Err')

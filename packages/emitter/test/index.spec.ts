@@ -1,4 +1,4 @@
-import { test, expect, vi } from 'vitest'
+import { expect, test, vi } from 'vitest'
 import { createEmitter } from '../src'
 
 test(`event subscription`, () => {

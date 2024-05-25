@@ -1,5 +1,5 @@
-import { test, expect } from 'vitest'
 import { assert, nat, property } from 'fast-check'
+import { expect, test } from 'vitest'
 import { from, toNumber } from '../src/index'
 
 test.each([

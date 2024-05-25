@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest'
 import { Err, Ok } from '@pacote/result'
+import { describe, expect, it } from 'vitest'
 import { lift, validation } from '../src/index'
 
 describe('lift()', () => {

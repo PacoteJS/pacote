@@ -1,12 +1,12 @@
-import { BloomFilter, optimal } from '@pacote/bloom-filter'
 import { range, unique, windowed } from '@pacote/array'
-import { queryTerms } from './query'
-import { entries, keys, pick } from './object'
-import { countIdf } from './tf-idf'
-import { XXHash, xxh64 } from '@pacote/xxhash'
+import { BloomFilter, optimal } from '@pacote/bloom-filter'
 import { memoize } from '@pacote/memoize'
+import type { U64 } from '@pacote/u64'
+import { type XXHash, xxh64 } from '@pacote/xxhash'
 import { findLast } from './array'
-import { U64 } from '@pacote/u64'
+import { entries, keys, pick } from './object'
+import { queryTerms } from './query'
+import { countIdf } from './tf-idf'
 
 export type PreprocessFunction<Document, Field extends keyof Document> = (
   value: Document[Field],
@@ -126,7 +126,7 @@ const defaultTokenizer = (text: string): string[] =>
 
 const memoizedHash = (hash: XXHash<U64>) =>
   memoize(String, (data) =>
-    parseInt(hash.update(data).digest('hex').substring(8, 16), 16),
+    Number.parseInt(hash.update(data).digest('hex').substring(8, 16), 16),
   )
 
 /**
@@ -285,9 +285,9 @@ export class BloomSearch<
           .filter((token) => token.length && this.stopwords(token, language))
           .map((token) => this.stemmer(token, language))
 
-        const ngrams = range(2, this.ngrams + 1)
-          .map((i) => windowed(i, fieldTokens).map((ngram) => ngram.join(' ')))
-          .flat()
+        const ngrams = range(2, this.ngrams + 1).flatMap((i) =>
+          windowed(i, fieldTokens).map((ngram) => ngram.join(' ')),
+        )
 
         tokens.set(field, unigrams.concat(ngrams))
       }

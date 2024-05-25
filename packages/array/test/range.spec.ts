@@ -1,4 +1,4 @@
-import { test, expect } from 'vitest'
+import { expect, test } from 'vitest'
 import { range } from '../src/index'
 
 test('an empty range (end is not inclusive)', () => {

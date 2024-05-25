@@ -1,5 +1,5 @@
-import { describe, test, expect } from 'vitest'
 import * as fc from 'fast-check'
+import { describe, expect, test } from 'vitest'
 import * as L from '../src/index'
 
 describe('sort()', () => {

@@ -2,10 +2,10 @@
  * @vitest-environment jsdom
  */
 
-import { test, afterEach, expect, vi } from 'vitest'
-import React from 'react'
 // eslint-disable-next-line testing-library/no-manual-cleanup
-import { render, fireEvent, cleanup } from '@testing-library/react'
+import { cleanup, fireEvent, render } from '@testing-library/react'
+import React from 'react'
+import { afterEach, expect, test, vi } from 'vitest'
 import { useOutside } from '../src'
 
 function renderTestComponent(

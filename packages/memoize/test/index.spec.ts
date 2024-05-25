@@ -1,5 +1,5 @@
-import { test, expect, vi } from 'vitest'
-import { assert, property, func, string, anything } from 'fast-check'
+import { assert, anything, func, property, string } from 'fast-check'
+import { expect, test, vi } from 'vitest'
 import { memoize } from '../src/index'
 
 test('memoize calls the original function', () => {

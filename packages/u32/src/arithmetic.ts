@@ -1,6 +1,6 @@
-import { shiftLeft, shiftRight, negate } from './bitwise'
+import { negate, shiftLeft, shiftRight } from './bitwise'
 import { equals, greaterThan, lessThan } from './comparison'
-import { clamp, clampBlocks, overflow, U32, ZERO } from './u32'
+import { type U32, ZERO, clamp, clampBlocks, overflow } from './u32'
 
 export function add(augend: U32, addend: U32): U32 {
   const r0 = augend[0] + addend[0]

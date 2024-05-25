@@ -1,5 +1,5 @@
-import { describe, test, expect } from 'vitest'
 import { left, right } from 'fp-ts/lib/Either'
+import { describe, expect, test } from 'vitest'
 import matchers from '../src/index'
 
 expect.extend(matchers)

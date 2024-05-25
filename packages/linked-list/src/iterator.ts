@@ -1,4 +1,4 @@
-import { car, cdr, isEmpty, LinkedList } from './core'
+import { type LinkedList, car, cdr, isEmpty } from './core'
 
 function iterator<T, R>(
   list: LinkedList<T>,

@@ -1,8 +1,8 @@
 // eslint-disable export
 
+import type { Either } from 'fp-ts/lib/Either'
 import { matcherHint, printExpected } from 'jest-matcher-utils'
-import { Either } from 'fp-ts/lib/Either'
-import { matchObject, matchString, leftPredicate } from './shared/predicates'
+import { leftPredicate, matchObject, matchString } from './shared/predicates'
 import { printReceivedLeft } from './shared/print'
 
 declare global {

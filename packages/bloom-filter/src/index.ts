@@ -1,4 +1,4 @@
-import { Options } from './options'
+import type { Options } from './options'
 
 export { BloomFilter } from './bloom-filter'
 export { CountingBloomFilter } from './counting-bloom-filter'

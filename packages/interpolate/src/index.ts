@@ -9,7 +9,9 @@ export function interpolate(
   return (data: ReplaceMap<string | number | null | undefined> = {}): string =>
     template.replace(regexp, (match, capture = '') => {
       const key = capture.trim()
-      const value = Array.isArray(data) ? data[parseInt(key, 10)] : data[key]
+      const value = Array.isArray(data)
+        ? data[Number.parseInt(key, 10)]
+        : data[key]
       return String(value ?? '')
     })
 }

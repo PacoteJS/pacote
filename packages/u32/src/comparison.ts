@@ -1,4 +1,4 @@
-import { U32 } from './u32'
+import type { U32 } from './u32'
 
 export function lessThan(a: U32, b: U32): boolean {
   if (a[1] < b[1]) return true

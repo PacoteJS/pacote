@@ -2,10 +2,10 @@
  * @vitest-environment jsdom
  */
 
-import { describe, test, expect } from 'vitest'
-import React, { FunctionComponent, ReactNode } from 'react'
 import { render } from '@testing-library/react'
-import { withProps, withDefaultProps } from '../src'
+import React, { type FunctionComponent, type ReactNode } from 'react'
+import { describe, expect, test } from 'vitest'
+import { withDefaultProps, withProps } from '../src'
 
 describe('withProps()', () => {
   test('wraps a component', () => {

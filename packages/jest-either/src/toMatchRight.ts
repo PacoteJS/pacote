@@ -1,5 +1,5 @@
+import type { Either } from 'fp-ts/lib/Either'
 import { matcherHint, printReceived } from 'jest-matcher-utils'
-import { Either } from 'fp-ts/lib/Either'
 import { matchObject, matchString, rightPredicate } from './shared/predicates'
 import { printReceivedRight } from './shared/print'
 

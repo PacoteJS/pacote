@@ -1,9 +1,9 @@
-import { describe, test, expect } from 'vitest'
 import { None, Some } from '@pacote/option'
+import { describe, expect, test } from 'vitest'
 import { iff } from '../src/index'
 
-describe(`when both consequent and alternative functions are provided`, () => {
-  test(`calls consequent when predicate is satisfied`, () => {
+describe('when both consequent and alternative functions are provided', () => {
+  test('calls consequent when predicate is satisfied', () => {
     const actual = iff(
       true,
       () => 'consequent',
@@ -12,7 +12,7 @@ describe(`when both consequent and alternative functions are provided`, () => {
     expect(actual).toBe('consequent')
   })
 
-  test(`calls alternative when predicate fails`, () => {
+  test('calls alternative when predicate fails', () => {
     const actual = iff(
       false,
       () => 'consequent',
@@ -22,13 +22,13 @@ describe(`when both consequent and alternative functions are provided`, () => {
   })
 })
 
-describe(`when only the consequent function is provided`, () => {
-  test(`calls consequent when predicate is satisfied, yielding Some(type)`, () => {
+describe('when only the consequent function is provided', () => {
+  test('calls consequent when predicate is satisfied, yielding Some(type)', () => {
     const actual = iff(true, () => 'consequent')
     expect(actual).toEqual(Some('consequent'))
   })
 
-  test(`yields None when predicate fails and alternative is undefined`, () => {
+  test('yields None when predicate fails and alternative is undefined', () => {
     const actual = iff(false, () => 'consequent')
     expect(actual).toEqual(None)
   })

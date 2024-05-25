@@ -1,5 +1,5 @@
-import { test, expect } from 'vitest'
 import { assert, object, property } from 'fast-check'
+import { expect, test } from 'vitest'
 import { associate } from '../src/index'
 
 test('turn an empty array into an empty record', () => {

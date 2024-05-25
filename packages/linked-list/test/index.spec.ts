@@ -1,6 +1,6 @@
-import { describe, test, expect, vi } from 'vitest'
+import { None, Some } from '@pacote/option'
 import * as fc from 'fast-check'
-import { Some, None } from '@pacote/option'
+import { describe, expect, test, vi } from 'vitest'
 import * as L from '../src/index'
 
 const arbitraryArray = fc.array(fc.anything())
@@ -279,7 +279,7 @@ describe('flatMap()', () => {
 describe('reduce()', () => {
   test('returns the initial value for an empty list', () => {
     const list = L.listOf()
-    expect(L.reduce(() => Infinity, 0, list)).toEqual(0)
+    expect(L.reduce(() => Number.POSITIVE_INFINITY, 0, list)).toEqual(0)
   })
 
   test('calls the callback function for every item in the list', () => {
@@ -304,7 +304,7 @@ describe('reduce()', () => {
 describe('reduceRight()', () => {
   test('returns the initial value for an empty list', () => {
     const list = L.listOf()
-    expect(L.reduceRight(() => Infinity, 0, list)).toEqual(0)
+    expect(L.reduceRight(() => Number.POSITIVE_INFINITY, 0, list)).toEqual(0)
   })
 
   test('calls the callback function for every item in the list', () => {

@@ -1,6 +1,6 @@
 import { add, divide, multiply, remainder } from './arithmetic'
 import { greaterThan } from './comparison'
-import { fromNumber, toNumber, U64, ZERO } from './u64'
+import { type U64, ZERO, fromNumber, toNumber } from './u64'
 
 const MAX_CHUNK_SIZE = 5
 
@@ -11,7 +11,7 @@ export function fromString(value: string, radix: number): U64 {
   for (let i = 0; i < length; i += MAX_CHUNK_SIZE) {
     const size = Math.min(MAX_CHUNK_SIZE, length - i)
     const factor = fromNumber(Math.pow(radix, Math.min(size, MAX_CHUNK_SIZE)))
-    const chunk = fromNumber(parseInt(value.slice(i, i + size), radix))
+    const chunk = fromNumber(Number.parseInt(value.slice(i, i + size), radix))
     result = add(chunk, multiply(result, factor))
   }
 

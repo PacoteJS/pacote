@@ -1,6 +1,6 @@
-import { test, expect } from 'vitest'
+import { assert, anything, property, string } from 'fast-check'
+import { expect, test } from 'vitest'
 import { createAction, isType, reducerFromState } from '../src/index'
-import { assert, property, string, anything } from 'fast-check'
 
 test('creates an action creator', () => {
   assert(

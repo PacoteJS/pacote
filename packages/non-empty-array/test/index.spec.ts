@@ -1,7 +1,14 @@
-import { describe, it, test, expect } from 'vitest'
-import { anything, Arbitrary, array, assert, property, tuple } from 'fast-check'
-import { Some, None } from '@pacote/option'
-import { fromElements, fromArray, concat, isNonEmptyArray } from '../src/index'
+import { None, Some } from '@pacote/option'
+import {
+  assert,
+  type Arbitrary,
+  anything,
+  array,
+  property,
+  tuple,
+} from 'fast-check'
+import { describe, expect, it, test } from 'vitest'
+import { concat, fromArray, fromElements, isNonEmptyArray } from '../src/index'
 
 describe('fromElements()', () => {
   it('creates non-empty array from a single element', () => {

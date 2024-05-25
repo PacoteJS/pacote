@@ -1,4 +1,4 @@
-import { clamp, clampBlocks, overflow, U64 } from './u64'
+import { type U64, clamp, clampBlocks, overflow } from './u64'
 
 function softClampBlocks([v0, v1, v2, v3]: U64): U64 {
   return [clamp(v0), clamp(v1), clamp(v2), v3]

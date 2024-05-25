@@ -1,5 +1,5 @@
-import { test, expect } from 'vitest'
 import { assert, nat, property } from 'fast-check'
+import { expect, test } from 'vitest'
 import { from, toString } from '../src/index'
 
 test('creates U32 values from strings', () => {

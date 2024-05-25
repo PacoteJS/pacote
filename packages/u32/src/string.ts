@@ -1,7 +1,7 @@
-import { toNumber, U32 } from './u32'
+import { type U32, toNumber } from './u32'
 
 export function fromString(value: string, radix: number): U32 {
-  const result = parseInt(value, radix)
+  const result = Number.parseInt(value, radix)
   return [result & 0xffff, result >>> 16]
 }
 

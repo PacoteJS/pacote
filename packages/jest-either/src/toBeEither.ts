@@ -1,5 +1,5 @@
+import { type Either, isLeft, isRight } from 'fp-ts/lib/Either'
 import { matcherHint, printReceived } from 'jest-matcher-utils'
-import { Either, isLeft, isRight } from 'fp-ts/lib/Either'
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace

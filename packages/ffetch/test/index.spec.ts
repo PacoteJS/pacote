@@ -2,12 +2,12 @@
  * @vitest-environment jsdom
  */
 
-import { beforeAll, afterEach, afterAll, test, expect, vi } from 'vitest'
 import matchers from '@pacote/jest-either'
-import { createFetch } from '../src'
-import { HttpResponse, http } from 'msw'
+import { http, HttpResponse } from 'msw'
 import { setupServer } from 'msw/node'
-import { NetworkError, StatusError, ParserError } from '../src/errors'
+import { afterAll, afterEach, beforeAll, expect, test, vi } from 'vitest'
+import { createFetch } from '../src'
+import { NetworkError, ParserError, StatusError } from '../src/errors'
 
 expect.extend(matchers)
 

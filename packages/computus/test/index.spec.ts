@@ -1,5 +1,5 @@
-import { describe, test, expect } from 'vitest'
-import { assert, property, integer } from 'fast-check'
+import { assert, integer, property } from 'fast-check'
+import { describe, expect, test } from 'vitest'
 import { gregorian, julian } from '../src/index'
 
 describe('Gregorian calendar Easter', () => {

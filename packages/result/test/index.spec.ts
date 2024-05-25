@@ -1,6 +1,6 @@
-import { describe, test, expect } from 'vitest'
-import { assert, property, anything, func } from 'fast-check'
 import * as O from '@pacote/option'
+import { assert, anything, func, property } from 'fast-check'
+import { describe, expect, test } from 'vitest'
 import * as R from '../src/index'
 
 describe('ofNullable()', () => {

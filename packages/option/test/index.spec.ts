@@ -1,5 +1,5 @@
-import { describe, test, expect } from 'vitest'
-import { assert, property, anything, func } from 'fast-check'
+import { assert, anything, func, property } from 'fast-check'
+import { describe, expect, test } from 'vitest'
 import * as O from '../src/index'
 
 describe('isSome()', () => {

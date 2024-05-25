@@ -1,6 +1,6 @@
-import { describe, test, expect, vi } from 'vitest'
+import { None, Some } from '@pacote/option'
 import * as fc from 'fast-check'
-import { Some, None } from '@pacote/option'
+import { describe, expect, test, vi } from 'vitest'
 import * as L from '../src/index'
 
 const arbitraryArray = fc.array(fc.anything())

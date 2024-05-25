@@ -1,4 +1,4 @@
-import { useRef, RefObject, useEffect } from 'react'
+import { type RefObject, useEffect, useRef } from 'react'
 
 type EventType = keyof DocumentEventMap
 

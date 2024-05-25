@@ -2,7 +2,7 @@ import { memoize } from '@pacote/memoize'
 import { xxh64 } from '@pacote/xxhash'
 
 function toUint32(hex: string): number {
-  return parseInt(hex.substring(8, 16), 16)
+  return Number.parseInt(hex.substring(8, 16), 16)
 }
 
 export function defaultHash(seed: number) {

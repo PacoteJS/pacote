@@ -1,4 +1,4 @@
-import { U64 } from './u64'
+import type { U64 } from './u64'
 
 export function lessThan(a: U64, b: U64): boolean {
   for (let i = 3; i >= 0; i--) {

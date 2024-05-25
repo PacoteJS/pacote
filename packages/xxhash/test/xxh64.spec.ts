@@ -1,8 +1,8 @@
-import { describe, test, expect } from 'vitest'
 import { assert, nat, property, string, uint8Array } from 'fast-check'
+import { describe, expect, test } from 'vitest'
 import { XXHash64 } from 'xxhash-addon'
-import { sanityBuffer } from './sanity'
 import { xxh64, xxh64BigInt } from '../src/index'
+import { sanityBuffer } from './sanity'
 
 function cloneSlice(buffer: Uint8Array, length: number): Uint8Array {
   return buffer.reduce((clone, value, index) => {

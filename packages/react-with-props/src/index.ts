@@ -1,12 +1,12 @@
 import {
+  type ComponentType,
+  type DOMFactory,
+  type DetailedHTMLFactory,
+  type FunctionComponent,
+  type ReactHTML,
+  type ReactNode,
+  type ReactSVG,
   createElement,
-  ReactSVG,
-  ReactHTML,
-  ComponentType,
-  ReactNode,
-  FunctionComponent,
-  DetailedHTMLFactory,
-  DOMFactory,
 } from 'react'
 
 type Injector<Props, InjectedProps> = (props?: Props) => InjectedProps

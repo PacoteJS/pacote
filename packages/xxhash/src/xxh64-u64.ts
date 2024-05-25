@@ -1,4 +1,6 @@
 import {
+  type U64,
+  ZERO,
   add,
   from,
   multiply,
@@ -6,11 +8,9 @@ import {
   shiftRight,
   subtract,
   toString,
-  U64,
   xor,
-  ZERO,
 } from '@pacote/u64'
-import { XXHash } from './interface'
+import type { XXHash } from './interface'
 import { encode } from './utf8'
 
 const PRIME_1 = from('11400714785074694791')

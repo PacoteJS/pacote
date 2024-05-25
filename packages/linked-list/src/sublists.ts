@@ -1,13 +1,13 @@
 import {
+  type LinkedList,
   car,
   cdr,
   concat,
-  LinkedList,
-  reverse,
   emptyList,
-  prepend,
   isEmpty,
+  prepend,
   reduce,
+  reverse,
 } from './core'
 import { includes } from './search'
 

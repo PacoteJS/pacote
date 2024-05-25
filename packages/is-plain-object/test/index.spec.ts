@@ -1,14 +1,14 @@
-import { test, expect } from 'vitest'
 import {
+  assert,
   anything,
   array,
-  assert,
   float,
   func,
   object,
   property,
   string,
 } from 'fast-check'
+import { expect, test } from 'vitest'
 import { isPlainObject } from '../src'
 
 test('Plain objects are plain objects', () => {
@@ -79,7 +79,7 @@ test('Symbol is not a plain object', () => {
 test('RegExp is not a plain object', () => {
   expect(isPlainObject(/a/)).toBe(false)
   // eslint-disable-next-line prefer-regex-literals
-  expect(isPlainObject(RegExp(''))).toBe(false)
+  expect(isPlainObject(/(?:)/)).toBe(false)
 })
 
 test('Promise is not a plain object', () => {

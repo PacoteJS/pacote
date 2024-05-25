@@ -1,4 +1,4 @@
-import { test, expect } from 'vitest'
+import { expect, test } from 'vitest'
 import { interpolate } from '../src/index'
 
 test('no placeholders', () => {

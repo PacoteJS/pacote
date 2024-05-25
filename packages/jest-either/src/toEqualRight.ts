@@ -1,12 +1,12 @@
+import type { Either } from 'fp-ts/lib/Either'
 import { matcherHint, printExpected } from 'jest-matcher-utils'
-import { Either } from 'fp-ts/lib/Either'
 import { equals } from 'ramda'
-import { diffReceivedRight } from './shared/print'
 import {
-  AsymmetricMatcher,
+  type AsymmetricMatcher,
   isAsymmetricMatcher,
   rightPredicate,
 } from './shared/predicates'
+import { diffReceivedRight } from './shared/print'
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace

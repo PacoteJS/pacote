@@ -1,4 +1,4 @@
-import { Option, Some, None } from '@pacote/option'
+import { None, type Option, Some } from '@pacote/option'
 
 export function iff<T>(predicate: boolean, onConsequent: () => T): Option<T>
 export function iff<T>(

@@ -1,4 +1,4 @@
-import { XXHash } from './interface'
+import type { XXHash } from './interface'
 import { encode } from './utf8'
 
 const ZERO = BigInt(0)

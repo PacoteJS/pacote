@@ -1,6 +1,6 @@
-import { test, expect } from 'vitest'
-import { createAction, reducerFromState } from '../src/index'
 import { createStore } from 'redux'
+import { expect, test } from 'vitest'
+import { createAction, reducerFromState } from '../src/index'
 
 test('Redux integration', () => {
   const increment = createAction('INCREMENT')

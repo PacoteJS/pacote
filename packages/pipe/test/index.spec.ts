@@ -1,6 +1,6 @@
-import { describe, it, test, expect } from 'vitest'
-import { anything, assert, func, property } from 'fast-check'
-import { pipe, flow } from '../src/index'
+import { assert, anything, func, property } from 'fast-check'
+import { describe, expect, it, test } from 'vitest'
+import { flow, pipe } from '../src/index'
 
 describe('pipe', () => {
   it('takes any value', () => {

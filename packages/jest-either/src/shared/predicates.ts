@@ -1,7 +1,7 @@
 import { isPlainObject } from '@pacote/is-plain-object'
-import { Either, fold } from 'fp-ts/lib/Either'
 import { pipe } from 'fp-ts/function'
-import { equals, map, where, F } from 'ramda'
+import { type Either, fold } from 'fp-ts/lib/Either'
+import { F, equals, map, where } from 'ramda'
 
 export interface AsymmetricMatcher {
   asymmetricMatch(other: any): boolean

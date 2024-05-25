@@ -1,4 +1,4 @@
-import { emptyList, LinkedList, prepend, reduce } from './core'
+import { type LinkedList, emptyList, prepend, reduce } from './core'
 
 /**
  * Create a new singly linked list with the arguments passed as items.

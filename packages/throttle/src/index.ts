@@ -1,6 +1,4 @@
-interface Throttled<A extends any[]> {
-  (...args: A): void
-}
+type Throttled<A extends any[]> = (...args: A) => void
 
 interface Cancellable {
   cancel: () => void
