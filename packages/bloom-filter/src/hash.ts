@@ -10,7 +10,7 @@ export function defaultHash(seed: number) {
   const h2 = xxh64(seed + 2)
 
   return memoize(
-    (i: number, data: string) => String(i) + ':' + data,
+    (i: number, data: string) => `${String(i)}:${data}`,
     (i: number, data: string): number => {
       const d1 = toUint32(h1.update(data).digest('hex'))
       const d2 = toUint32(h2.update(data).digest('hex'))

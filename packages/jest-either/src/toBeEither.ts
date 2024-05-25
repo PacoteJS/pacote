@@ -11,16 +11,18 @@ declare global {
 }
 
 const passMessage = (actual: any) => () =>
-  matcherHint('.not.toBeEither', 'received', '') +
-  '\n\n' +
-  'Unexpected Either, received:\n' +
-  `  ${printReceived(actual)}`
+  `${matcherHint(
+    '.not.toBeEither',
+    'received',
+    '',
+  )}\n\nUnexpected Either, received:\n  ${printReceived(actual)}`
 
 const failMessage = (actual: any) => () =>
-  matcherHint('.toBeEither', 'received', '') +
-  '\n\n' +
-  'Expected Either, received:\n' +
-  `  ${printReceived(actual)}`
+  `${matcherHint(
+    '.toBeEither',
+    'received',
+    '',
+  )}\n\nExpected Either, received:\n  ${printReceived(actual)}`
 
 function isEither(actual: any): actual is Either<any, any> {
   return (

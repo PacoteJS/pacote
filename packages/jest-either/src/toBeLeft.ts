@@ -11,14 +11,18 @@ declare global {
 }
 
 const passMessage = () => () =>
-  matcherHint('.not.toBeLeft', 'received', '') +
-  '\n\n' +
-  'Expected Either not to be left, received left.'
+  `${matcherHint(
+    '.not.toBeLeft',
+    'received',
+    '',
+  )}\n\nExpected Either not to be left, received left.`
 
 const failMessage = () => () =>
-  matcherHint('.toBeLeft', 'received', '') +
-  '\n\n' +
-  'Expected Either to be left, received right.'
+  `${matcherHint(
+    '.toBeLeft',
+    'received',
+    '',
+  )}\n\nExpected Either to be left, received right.`
 
 export function toBeLeft(actual: Either<any, any>) {
   const pass = isLeft(actual)

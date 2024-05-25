@@ -26,11 +26,13 @@ export function negate(value: U32): U32 {
 function _shiftLeft(value: U32, bits: number): U32 {
   if (bits > 16) {
     return [0, value[0] << (bits - 16)]
-  } else if (bits === 16) {
-    return [0, value[0]]
-  } else {
-    return [value[0] << bits, (value[1] << bits) | (value[0] >> (16 - bits))]
   }
+
+  if (bits === 16) {
+    return [0, value[0]]
+  }
+
+  return [value[0] << bits, (value[1] << bits) | (value[0] >> (16 - bits))]
 }
 
 export function shiftLeft(value: U32, bits: number, overflow = false): U32 {
@@ -44,9 +46,9 @@ function _shiftRight(value: U32, bits: number): U32 {
 
   if (_bits >= 16) {
     return [value[1] >> (_bits - 16), 0]
-  } else {
-    return [(value[0] >> _bits) | (value[1] << (16 - _bits)), value[1] >> _bits]
   }
+
+  return [(value[0] >> _bits) | (value[1] << (16 - _bits)), value[1] >> _bits]
 }
 
 export function shiftRight(value: U32, bits: number): U32 {

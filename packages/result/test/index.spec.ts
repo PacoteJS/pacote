@@ -95,7 +95,7 @@ describe('getOrElse()', () => {
   })
 
   test('evaluates the function and returns its result on Err', () => {
-    expect(R.getOrElse((err) => 'default: ' + err)(R.Err('error'))).toBe(
+    expect(R.getOrElse((err) => `default: ${err}`)(R.Err('error'))).toBe(
       'default: error',
     )
   })

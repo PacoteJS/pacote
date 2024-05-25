@@ -75,8 +75,7 @@ export async function retry<T>(
       } catch (error) {
         if (options.backoff != null && options.interval != null) {
           clearInterval(intervalId)
-          const nextInterval =
-            Math.pow(options.backoff, retryCount) * options.interval
+          const nextInterval = options.backoff ** retryCount * options.interval
           intervalId = setInterval(evaluateCallback, nextInterval)
         }
 

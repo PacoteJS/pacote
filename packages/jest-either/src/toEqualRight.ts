@@ -20,19 +20,22 @@ declare global {
 const passMessage =
   <R>(expected: R) =>
   () =>
-    matcherHint('.not.toEqualRight', 'received', 'expectedRight') +
-    '\n\n' +
-    'Expected Either not to equal right:\n' +
-    `  ${printExpected(expected)}` +
-    '\n\n' +
-    "But it's the same."
+    `${matcherHint(
+      '.not.toEqualRight',
+      'received',
+      'expectedRight',
+    )}\n\nExpected Either not to equal right:\n  ${printExpected(
+      expected,
+    )}\n\nBut it's the same.`
 
 const failMessage =
   <R>(actual: Either<any, R>, expected: R) =>
   () =>
-    matcherHint('.toEqualRight', 'received', 'expectedRight') +
-    '\n\n' +
-    diffReceivedRight(actual, expected)
+    `${matcherHint(
+      '.toEqualRight',
+      'received',
+      'expectedRight',
+    )}\n\n${diffReceivedRight(actual, expected)}`
 
 export function toEqualRight<R>(
   actual: Either<any, R>,

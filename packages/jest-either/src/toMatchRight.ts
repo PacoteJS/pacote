@@ -15,22 +15,24 @@ declare global {
 const passMessage =
   <R>(actual: Either<any, string | R>, expected: RegExp | Partial<R>) =>
   () =>
-    matcherHint('.not.toMatchRight', 'received', 'rightMatch') +
-    '\n\n' +
-    'Expected Either not to match right:\n' +
-    `  ${printReceived(expected)}` +
-    '\n\n' +
-    printReceivedRight(actual)
+    `${matcherHint(
+      '.not.toMatchRight',
+      'received',
+      'rightMatch',
+    )}\n\nExpected Either not to match right:\n  ${printReceived(
+      expected,
+    )}\n\n${printReceivedRight(actual)}`
 
 const failMessage =
   <R>(actual: Either<any, string | R>, expected: RegExp | Partial<R>) =>
   () =>
-    matcherHint('.toMatchRight', 'received', 'rightMatch') +
-    '\n\n' +
-    'Expected Either to match right:\n' +
-    `  ${printReceived(expected)}` +
-    '\n\n' +
-    printReceivedRight(actual)
+    `${matcherHint(
+      '.toMatchRight',
+      'received',
+      'rightMatch',
+    )}\n\nExpected Either to match right:\n  ${printReceived(
+      expected,
+    )}\n\n${printReceivedRight(actual)}`
 
 export function toMatchRight(actual: Either<any, string>, expected: RegExp): any
 export function toMatchRight<R>(

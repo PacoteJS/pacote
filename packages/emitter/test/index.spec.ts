@@ -1,7 +1,7 @@
 import { expect, test, vi } from 'vitest'
 import { createEmitter } from '../src'
 
-test(`event subscription`, () => {
+test('event subscription', () => {
   const emitter = createEmitter()
   const callback = vi.fn()
 
@@ -11,7 +11,7 @@ test(`event subscription`, () => {
   expect(callback).toHaveBeenCalledTimes(1)
 })
 
-test(`multiple event subscribers`, () => {
+test('multiple event subscribers', () => {
   type TestEvents = {
     test: () => void
   }
@@ -28,7 +28,7 @@ test(`multiple event subscribers`, () => {
   expect(callback1).toHaveBeenCalledTimes(1)
 })
 
-test(`unsubscribing from an event`, () => {
+test('unsubscribing from an event', () => {
   type TestEvents = {
     test: () => void
   }
@@ -43,7 +43,7 @@ test(`unsubscribing from an event`, () => {
   expect(callback).toHaveBeenCalledTimes(0)
 })
 
-test(`passing event parameters`, () => {
+test('passing event parameters', () => {
   type TestEvents = {
     test: (a: string, b: number) => void
   }
@@ -58,7 +58,7 @@ test(`passing event parameters`, () => {
   expect(callback).toHaveBeenCalledWith('ok', 0)
 })
 
-test(`no errors emitting unsubscribed events`, () => {
+test('no errors emitting unsubscribed events', () => {
   const emitter = createEmitter()
   expect(() => emitter.emit('test')).not.toThrow()
 })

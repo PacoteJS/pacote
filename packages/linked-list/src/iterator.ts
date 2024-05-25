@@ -14,11 +14,10 @@ function iterator<T, R>(
     next() {
       if (isEmpty(current)) {
         return { done: true, value: undefined }
-      } else {
-        const value = result(key++, car(current))
-        current = cdr(current)
-        return { done: false, value }
       }
+      const value = result(key++, car(current))
+      current = cdr(current)
+      return { done: false, value }
     },
   }
 }

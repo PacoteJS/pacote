@@ -10,7 +10,7 @@ afterEach(() => {
   window.document.body.textContent = ''
 })
 
-test(`fetches a property value`, () => {
+test('fetches a property value', () => {
   window.document.body.style.fontSize = '2rem'
   expect(getStyle(window.document.body, 'fontSize')).toBe('2rem')
 })

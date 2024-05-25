@@ -69,7 +69,7 @@ describe('shift right', () => {
     ['2147483648', 31, '1'],
     ['2415919104', 28, '9'],
     ['1', 32, '1'],
-  ])(`shifts %s right by %d bits`, (value, bits, expected) => {
+  ])('shifts %s right by %d bits', (value, bits, expected) => {
     expect(shiftRight(from(value), bits)).toEqual(from(expected))
   })
 })

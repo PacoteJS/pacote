@@ -21,7 +21,7 @@ export function from(value: string, radix?: number): U32
 export function from(value: string | number, radix = 10): U32 {
   if (typeof value === 'number') {
     return fromNumber(value)
-  } else {
-    return fromString(value, radix)
   }
+
+  return fromString(value, radix)
 }

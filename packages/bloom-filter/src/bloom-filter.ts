@@ -26,11 +26,11 @@ export class BloomFilter<T extends { toString(): string }> {
   }
 
   add(element: T): void {
-    range(0, this.hashes).forEach((i) => {
+    for (const i of range(0, this.hashes)) {
       const hashedValue = this.hash(i, element.toString()) % this.size
       const position = Math.floor(hashedValue / 32)
       this.filter[position] |= 1 << (hashedValue - position * 32)
-    })
+    }
   }
 
   has(element: T): boolean {

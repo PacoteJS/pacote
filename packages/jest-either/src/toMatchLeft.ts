@@ -17,22 +17,24 @@ declare global {
 const passMessage =
   <L>(actual: Either<L, any>, expected: RegExp | Partial<L>) =>
   () =>
-    matcherHint('.not.toMatchLeft', 'received', 'expectedLeft') +
-    '\n\n' +
-    'Expected Either not to match left:\n' +
-    `  ${printExpected(expected)}` +
-    '\n\n' +
-    printReceivedLeft(actual)
+    `${matcherHint(
+      '.not.toMatchLeft',
+      'received',
+      'expectedLeft',
+    )}\n\nExpected Either not to match left:\n  ${printExpected(
+      expected,
+    )}\n\n${printReceivedLeft(actual)}`
 
 const failMessage =
   <L>(actual: Either<L, any>, expected: RegExp | Partial<L>) =>
   () =>
-    matcherHint('.toMatchLeft', 'received', 'expectedLeft') +
-    '\n\n' +
-    'Expected Either to match left:\n' +
-    `  ${printExpected(expected)}` +
-    '\n\n' +
-    printReceivedLeft(actual)
+    `${matcherHint(
+      '.toMatchLeft',
+      'received',
+      'expectedLeft',
+    )}\n\nExpected Either to match left:\n  ${printExpected(
+      expected,
+    )}\n\n${printReceivedLeft(actual)}`
 
 export function toMatchLeft(actual: Either<string, any>, expected: RegExp): any
 export function toMatchLeft<L>(
