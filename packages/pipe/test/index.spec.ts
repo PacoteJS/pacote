@@ -22,9 +22,9 @@ describe('pipe', () => {
   })
 
   it('maps multiple functions in succession', () => {
-    const doubleSay = (s: string) => s + ', ' + s
+    const doubleSay = (s: string) => `${s}, ${s}`
     const capitalize = (s: string) => s[0].toUpperCase() + s.substring(1)
-    const exclaim = (s: string) => s + '!'
+    const exclaim = (s: string) => `${s}!`
 
     const result = pipe('hello', doubleSay, capitalize, exclaim)
 
@@ -66,9 +66,9 @@ describe('flow', () => {
   })
 
   it('maps multiple functions in succession', () => {
-    const doubleSay = (s: string) => s + ', ' + s
+    const doubleSay = (s: string) => `${s}, ${s}`
     const capitalize = (s: string) => s[0].toUpperCase() + s.substring(1)
-    const exclaim = (s: string) => s + '!'
+    const exclaim = (s: string) => `${s}!`
 
     const fn = flow(doubleSay, capitalize, exclaim)
 

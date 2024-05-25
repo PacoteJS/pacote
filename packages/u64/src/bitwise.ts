@@ -26,10 +26,14 @@ function _shiftLeft(value: U64, bits: number): U64 {
   if (_bits >= 48) {
     const n = _bits - 48
     return [0, 0, 0, value[0] << n]
-  } else if (_bits >= 32) {
+  }
+
+  if (_bits >= 32) {
     const n = _bits - 32
     return [0, 0, value[0] << n, (value[1] << n) | (value[0] >> (16 - n))]
-  } else if (_bits >= 16) {
+  }
+
+  if (_bits >= 16) {
     const n = _bits - 16
     return [
       0,
@@ -37,15 +41,15 @@ function _shiftLeft(value: U64, bits: number): U64 {
       (value[1] << n) | (value[0] >> (16 - n)),
       (value[2] << n) | (value[1] >> (16 - n)),
     ]
-  } else {
-    const n = _bits
-    return [
-      value[0] << n,
-      (value[1] << n) | (value[0] >> (16 - n)),
-      (value[2] << n) | (value[1] >> (16 - n)),
-      (value[3] << n) | (value[2] >> (16 - n)),
-    ]
   }
+
+  const n = _bits
+  return [
+    value[0] << n,
+    (value[1] << n) | (value[0] >> (16 - n)),
+    (value[2] << n) | (value[1] >> (16 - n)),
+    (value[3] << n) | (value[2] >> (16 - n)),
+  ]
 }
 
 export function shiftLeft(value: U64, bits: number, overflow = false): U64 {
@@ -60,10 +64,14 @@ function _shiftRight(value: U64, bits: number): U64 {
   if (_bits >= 48) {
     const n = _bits - 48
     return [value[3] >> n, 0, 0, 0]
-  } else if (_bits >= 32) {
+  }
+
+  if (_bits >= 32) {
     const n = _bits - 32
     return [(value[2] >> n) | (value[3] << (16 - n)), value[3] >> n, 0, 0]
-  } else if (_bits >= 16) {
+  }
+
+  if (_bits >= 16) {
     const n = _bits - 16
     return [
       (value[1] >> (_bits - 16)) | (value[2] << (16 - n)),
@@ -71,15 +79,15 @@ function _shiftRight(value: U64, bits: number): U64 {
       value[3] >> (_bits - 16),
       0,
     ]
-  } else {
-    const n = _bits
-    return [
-      (value[0] >> n) | (value[1] << (16 - n)),
-      (value[1] >> n) | (value[2] << (16 - n)),
-      (value[2] >> n) | (value[3] << (16 - n)),
-      value[3] >> n,
-    ]
   }
+
+  const n = _bits
+  return [
+    (value[0] >> n) | (value[1] << (16 - n)),
+    (value[1] >> n) | (value[2] << (16 - n)),
+    (value[2] >> n) | (value[3] << (16 - n)),
+    value[3] >> n,
+  ]
 }
 
 export function shiftRight(value: U64, bits: number): U64 {

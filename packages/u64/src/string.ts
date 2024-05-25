@@ -10,7 +10,7 @@ export function fromString(value: string, radix: number): U64 {
 
   for (let i = 0; i < length; i += MAX_CHUNK_SIZE) {
     const size = Math.min(MAX_CHUNK_SIZE, length - i)
-    const factor = fromNumber(Math.pow(radix, Math.min(size, MAX_CHUNK_SIZE)))
+    const factor = fromNumber(radix ** Math.min(size, MAX_CHUNK_SIZE))
     const chunk = fromNumber(Number.parseInt(value.slice(i, i + size), radix))
     result = add(chunk, multiply(result, factor))
   }
@@ -23,6 +23,7 @@ const PADDING: Record<number, number | undefined> = {
   16: 16,
 }
 
+// biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
 export function toString(value: U64, radix = 10): string {
   const _radix = fromNumber(radix)
 
