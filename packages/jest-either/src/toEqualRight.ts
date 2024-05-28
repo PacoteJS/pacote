@@ -9,10 +9,9 @@ import {
 import { diffReceivedRight } from './shared/print'
 
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace jest {
     interface Matchers<R> {
-      toEqualRight(expected: any): R
+      toEqualRight(expected: unknown): R
     }
   }
 }
@@ -29,7 +28,7 @@ const passMessage =
     )}\n\nBut it's the same.`
 
 const failMessage =
-  <R>(actual: Either<any, R>, expected: R) =>
+  <R>(actual: Either<unknown, R>, expected: R) =>
   () =>
     `${matcherHint(
       '.toEqualRight',
@@ -38,7 +37,7 @@ const failMessage =
     )}\n\n${diffReceivedRight(actual, expected)}`
 
 export function toEqualRight<R>(
-  actual: Either<any, R>,
+  actual: Either<unknown, R>,
   expected: R | AsymmetricMatcher,
 ) {
   const predicate = isAsymmetricMatcher(expected)

@@ -110,7 +110,6 @@ export function xxh64BigInt(seed: number | bigint = 0): XXHash<bigint> {
 
   reset(seed)
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const digest = (encoding: 'hex') => {
     let hash: bigint
 

@@ -8,8 +8,10 @@ export type Options = {
   capacity?: number
 }
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 type Fn<A extends any[], R> = (...args: A) => R
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 type MemoizedFn<A extends any[], R> = Fn<A, R> & {
   clear(): void
 }
@@ -38,6 +40,8 @@ type MemoizedFn<A extends any[], R> = Fn<A, R> & {
  * memoizedFunction('bar') // Same result as previous call with 'bar'.
  * ```
  */
+
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export function memoize<A extends any[], K, V>(
   cacheKeyFn: Fn<A, K>,
   fn: Fn<A, V>,
@@ -54,7 +58,7 @@ export function memoize<A extends any[], K, V>(
       cache.set(key, fn(...args))
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    // biome-ignore lint/style/noNonNullAssertion: <explanation>
     return cache.get(key)!
   }
 

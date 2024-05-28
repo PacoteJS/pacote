@@ -1,4 +1,5 @@
 interface Events {
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   [name: string]: (...args: any[]) => void
 }
 
@@ -19,8 +20,9 @@ export function createEmitter<E extends Events>(): Emitter<E> {
       }
     },
     emit(name, ...args) {
-      // biome-ignore lint/complexity/noForEach: small array
-      events[name]?.forEach((fn) => fn(...args))
+      for (const fn of events[name] ?? []) {
+        fn(...args)
+      }
     },
   }
 }

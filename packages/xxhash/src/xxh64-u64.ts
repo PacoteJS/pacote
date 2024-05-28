@@ -7,6 +7,7 @@ import {
   rotateLeft,
   shiftRight,
   subtract,
+  // biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
   toString,
   xor,
 } from '@pacote/u64'
@@ -120,7 +121,6 @@ export function xxh64(seed: number | U64 = 0): XXHash<U64> {
 
   reset(seed)
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const digest = (encoding: 'hex') => {
     let hash: U64
 

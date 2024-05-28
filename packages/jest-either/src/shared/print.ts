@@ -3,7 +3,7 @@ import { type Either, fold } from 'fp-ts/lib/Either'
 import { diff } from 'jest-diff'
 import { printExpected, printReceived } from 'jest-matcher-utils'
 
-export function printReceivedLeft(actual: Either<any, any>): string {
+export function printReceivedLeft(actual: Either<unknown, unknown>): string {
   return pipe(
     actual,
     fold(
@@ -13,7 +13,7 @@ export function printReceivedLeft(actual: Either<any, any>): string {
   )
 }
 
-export function printReceivedRight(actual: Either<any, any>): string {
+export function printReceivedRight(actual: Either<unknown, unknown>): string {
   return pipe(
     actual,
     fold(
@@ -24,8 +24,8 @@ export function printReceivedRight(actual: Either<any, any>): string {
 }
 
 export function diffReceivedLeft(
-  actual: Either<any, any>,
-  expected: any,
+  actual: Either<unknown, unknown>,
+  expected: unknown,
 ): string {
   return pipe(
     actual,
@@ -47,8 +47,8 @@ export function diffReceivedLeft(
 }
 
 export function diffReceivedRight(
-  actual: Either<any, any>,
-  expected: any,
+  actual: Either<unknown, unknown>,
+  expected: unknown,
 ): string {
   return pipe(
     actual,

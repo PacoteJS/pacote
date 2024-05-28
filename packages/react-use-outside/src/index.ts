@@ -20,13 +20,17 @@ export function useOutside<E extends HTMLElement>(
     }
 
     const types = Array<EventType>().concat(type)
+    const controller = new AbortController()
+    const options = { signal: controller.signal }
 
-    types.forEach((t) => document.addEventListener(t, listener, true))
+    for (const t of types) {
+      document.addEventListener(t, listener, options)
+    }
 
     return () => {
-      types.forEach((t) => document.removeEventListener(t, listener, true))
+      controller.abort()
     }
-  }, [type, handler, inside])
+  }, [type, handler])
 
   return inside
 }

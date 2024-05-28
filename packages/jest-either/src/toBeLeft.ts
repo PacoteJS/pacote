@@ -2,7 +2,6 @@ import { type Either, isLeft } from 'fp-ts/lib/Either'
 import { matcherHint } from 'jest-matcher-utils'
 
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace jest {
     interface Matchers<R> {
       toBeLeft(): R
@@ -24,7 +23,7 @@ const failMessage = () => () =>
     '',
   )}\n\nExpected Either to be left, received right.`
 
-export function toBeLeft(actual: Either<any, any>) {
+export function toBeLeft(actual: Either<unknown, unknown>) {
   const pass = isLeft(actual)
   return {
     pass,

@@ -37,7 +37,7 @@ export function emptyList<T>(): LinkedList<T> {
  *
  * @returns `true` if the provided linked list is empty, `false` otherwise.
  */
-export function isEmpty(list: any): list is Empty {
+export function isEmpty(list: unknown): list is Empty {
   return list === undefined
 }
 

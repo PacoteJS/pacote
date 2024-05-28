@@ -1,10 +1,13 @@
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 type Throttled<A extends any[]> = (...args: A) => void
 
 interface Cancellable {
   cancel: () => void
 }
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export function throttle<A extends any[]>(
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   fn: (...args: A) => any,
   delay = 0,
 ): Throttled<A> & Cancellable {

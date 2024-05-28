@@ -49,14 +49,11 @@ export async function retry<T>(
     let retryCount = 0
 
     if (options.timeout) {
-      // eslint-disable-next-line @typescript-eslint/no-use-before-define
       timeoutId = setTimeout(onTimeout, options.timeout)
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     intervalId = setInterval(evaluateCallback, options.interval)
 
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     evaluateCallback()
 
     function clearTimers() {

@@ -2,7 +2,6 @@ import { type Either, isLeft, isRight } from 'fp-ts/lib/Either'
 import { matcherHint, printReceived } from 'jest-matcher-utils'
 
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace jest {
     interface Matchers<R> {
       toBeEither(): R
@@ -10,21 +9,22 @@ declare global {
   }
 }
 
-const passMessage = (actual: any) => () =>
+const passMessage = (actual: unknown) => () =>
   `${matcherHint(
     '.not.toBeEither',
     'received',
     '',
   )}\n\nUnexpected Either, received:\n  ${printReceived(actual)}`
 
-const failMessage = (actual: any) => () =>
+const failMessage = (actual: unknown) => () =>
   `${matcherHint(
     '.toBeEither',
     'received',
     '',
   )}\n\nExpected Either, received:\n  ${printReceived(actual)}`
 
-function isEither(actual: any): actual is Either<any, any> {
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+function isEither(actual: any): actual is Either<unknown, unknown> {
   return (
     actual !== undefined &&
     actual !== null &&
@@ -32,7 +32,7 @@ function isEither(actual: any): actual is Either<any, any> {
   )
 }
 
-export function toBeEither(actual: any) {
+export function toBeEither(actual: unknown) {
   const pass = isEither(actual)
   return {
     pass,

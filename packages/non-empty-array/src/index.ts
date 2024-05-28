@@ -13,7 +13,7 @@ function isNotEmpty<T>(value: readonly T[]): value is NonEmptyArray<T> {
  *
  * @returns Whether the value is a non-empty array.
  */
-export function isNonEmptyArray<T>(value: any): value is NonEmptyArray<T> {
+export function isNonEmptyArray<T>(value: unknown): value is NonEmptyArray<T> {
   return Array.isArray(value) && isNotEmpty(value)
 }
 

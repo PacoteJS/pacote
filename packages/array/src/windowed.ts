@@ -1,4 +1,4 @@
-function isReadonlyArray(array: any): array is readonly any[] {
+function isReadonlyArray<T>(array: unknown): array is readonly T[] {
   return Array.isArray(array)
 }
 

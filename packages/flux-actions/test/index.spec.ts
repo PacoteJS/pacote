@@ -14,7 +14,7 @@ test('creates an action creator', () => {
 test('creates an action creator that takes a payload', () => {
   assert(
     property(string(), anything(), (type, payload) => {
-      const testAction = createAction<any>(type)
+      const testAction = createAction<unknown>(type)
       expect(testAction(payload)).toEqual({ type, payload })
     }),
   )
@@ -23,7 +23,7 @@ test('creates an action creator that takes a payload', () => {
 test('creates an action creator that takes payload and metadata', () => {
   assert(
     property(string(), anything(), anything(), (type, payload, meta) => {
-      const testAction = createAction<any, any>(type)
+      const testAction = createAction<unknown, unknown>(type)
       expect(testAction(payload, meta)).toEqual({ type, payload, meta })
     }),
   )
@@ -31,7 +31,7 @@ test('creates an action creator that takes payload and metadata', () => {
 
 test('matches action using action creator', () => {
   const testAction = createAction<{ age: number }>('@@TEST/MATCHER')
-  const action = testAction({ age: 18 }) as any
+  const action = testAction({ age: 18 })
   expect(isType(testAction, action)).toBe(true)
   expect(action.payload.age).toBe(18)
 })

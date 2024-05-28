@@ -17,47 +17,32 @@
     "build:docs": "typedoc",
     "clean": "rimraf coverage docs packages/*/lib packages/*/tsconfig.tsbuildinfo",
     "commit": "git-cz",
-    "format": "prettier --write 'packages/*/{src,test}/**/*.{js,jsx,ts,tsx,json,css,md}'",
-    "lint": "eslint 'packages/*/{src,test}/**/*.{js,ts,tsx}'",
+    "format": "biome check --apply .",
+    "lint": "biome lint .",
     "plop": "plop",
     "release": "lerna publish",
     "test": "pnpm lint && vitest",
     "test:coverage": "vitest run --coverage"
   },
   "lint-staged": {
-    "**/*.{js,json,css,md}": [
+    "**/*.{css,md}": [
       "prettier --write"
     ],
-    "**/*.{ts,tsx}": [
-      "prettier --write",
-      "eslint"
+    "**/*.{js,json,ts,tsx}": [
+      "biome check --apply ."
     ]
   },
   "devDependencies": {
+    "@biomejs/biome": "1.7.3",
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@testing-library/react": "^15.0.7",
     "@types/node": "^20.8.7",
     "@types/ramda": "^0.30.0",
     "@types/react": "^18.2.31",
-    "@typescript-eslint/eslint-plugin": "^7.0.0",
-    "@typescript-eslint/parser": "^7.9.0",
     "@vitest/coverage-v8": "^1.6.0",
     "@vitest/ui": "^1.6.0",
     "concurrently": "^8.2.2",
-    "eslint": "^8.52.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-import": "^2.29.0",
-    "eslint-plugin-jest": "^28.5.0",
-    "eslint-plugin-jest-dom": "^5.1.0",
-    "eslint-plugin-jsx-a11y": "^6.7.1",
-    "eslint-plugin-n": "^16.2.0",
-    "eslint-plugin-prettier": "^5.0.1",
-    "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-testing-library": "^6.1.0",
     "fast-check": "^3.13.2",
     "fp-ts": "^2.16.1",
     "git-cz": "^4.9.0",

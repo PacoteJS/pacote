@@ -11,6 +11,7 @@ import {
 
 type Injector<Props, InjectedProps> = (props?: Props) => InjectedProps
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 type InnerComponent<Props = any> =
   | ComponentType<Props>
   | keyof ReactHTML
@@ -18,9 +19,11 @@ type InnerComponent<Props = any> =
 
 type Enhanced<I, P extends I> = Omit<P & { children?: ReactNode }, keyof I>
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 type InnerProps<Component extends InnerComponent<any>> =
   Component extends keyof ReactHTML
-    ? ReactHTML[Component] extends DetailedHTMLFactory<infer HTMLProps, any>
+    ? // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+      ReactHTML[Component] extends DetailedHTMLFactory<infer HTMLProps, any>
       ? HTMLProps
       : Component extends keyof ReactSVG
         ? ReactSVG[Component] extends DOMFactory<infer SVGProps, SVGElement>
@@ -29,8 +32,10 @@ type InnerProps<Component extends InnerComponent<any>> =
         : never
     : Component extends ComponentType<infer Props>
       ? Props
-      : any
+      : // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+        any
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 function getDisplayName(Component: InnerComponent<any>): string {
   return typeof Component === 'string'
     ? Component
@@ -38,6 +43,7 @@ function getDisplayName(Component: InnerComponent<any>): string {
 }
 
 function isInjector<OuterProps, InjectedProps>(
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   injector: any,
 ): injector is Injector<OuterProps, InjectedProps> {
   return typeof injector === 'function'
@@ -59,6 +65,7 @@ export function withProps<
     createElement(
       BaseComponent,
       Object.assign<ComponentProps, EnhancedProps, InjectedProps>(
+        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         {} as any,
         props,
         isInjector<OuterProps, InjectedProps>(injected)
@@ -84,6 +91,7 @@ export function withDefaultProps<
     createElement(
       BaseComponent,
       Object.assign<ComponentProps, InjectedProps, EnhancedProps>(
+        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         {} as any,
         injectedProps,
         props,

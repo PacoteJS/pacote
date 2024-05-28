@@ -1,21 +1,18 @@
-// eslint-disable export
-
 import type { Either } from 'fp-ts/lib/Either'
 import { matcherHint, printExpected } from 'jest-matcher-utils'
 import { leftPredicate, matchObject, matchString } from './shared/predicates'
 import { printReceivedLeft } from './shared/print'
 
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace jest {
     interface Matchers<R> {
-      toMatchLeft(expected: any): R
+      toMatchLeft(expected: unknown): R
     }
   }
 }
 
 const passMessage =
-  <L>(actual: Either<L, any>, expected: RegExp | Partial<L>) =>
+  <L>(actual: Either<L, unknown>, expected: RegExp | Partial<L>) =>
   () =>
     `${matcherHint(
       '.not.toMatchLeft',
@@ -26,7 +23,7 @@ const passMessage =
     )}\n\n${printReceivedLeft(actual)}`
 
 const failMessage =
-  <L>(actual: Either<L, any>, expected: RegExp | Partial<L>) =>
+  <L>(actual: Either<L, unknown>, expected: RegExp | Partial<L>) =>
   () =>
     `${matcherHint(
       '.toMatchLeft',
@@ -36,13 +33,18 @@ const failMessage =
       expected,
     )}\n\n${printReceivedLeft(actual)}`
 
-export function toMatchLeft(actual: Either<string, any>, expected: RegExp): any
-export function toMatchLeft<L>(
-  actual: Either<L, any>,
-  expected: Partial<L>,
+export function toMatchLeft(
+  actual: Either<string, unknown>,
+  expected: RegExp,
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 ): any
 export function toMatchLeft<L>(
-  actual: Either<L, any>,
+  actual: Either<L, unknown>,
+  expected: Partial<L>,
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+): any
+export function toMatchLeft<L>(
+  actual: Either<L, unknown>,
   expected: RegExp | Partial<L>,
 ) {
   const predicate =

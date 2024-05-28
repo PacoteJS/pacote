@@ -14,7 +14,7 @@
  * @param array Array to transform into a `Record`.
  * @returns Record version of the array with the computed keys and values.
  */
-export function associate<T, K extends keyof any, V>(
+export function associate<T, K extends string | number | symbol, V>(
   transform: (value: T) => [K, V],
   array: readonly T[],
 ): Record<K, V> {

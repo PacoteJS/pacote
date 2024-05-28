@@ -78,7 +78,6 @@ test('Symbol is not a plain object', () => {
 
 test('RegExp is not a plain object', () => {
   expect(isPlainObject(/a/)).toBe(false)
-  // eslint-disable-next-line prefer-regex-literals
   expect(isPlainObject(/(?:)/)).toBe(false)
 })
 
@@ -86,8 +85,15 @@ test('Promise is not a plain object', () => {
   expect(isPlainObject(Promise.resolve())).toBe(false)
 })
 
-test.each<[string, any]>([
-  ['ArrayBuffer', ArrayBuffer],
+test('ArrayBuffer is not a plain object', () => {
+  expect(isPlainObject(new ArrayBuffer(1))).toBe(false)
+})
+
+interface Constructable<T> {
+  new (): T
+}
+
+test.each<[string, Constructable<unknown>]>([
   ['Date', Date],
   ['Float32Array', Float32Array],
   ['Float64Array', Float64Array],

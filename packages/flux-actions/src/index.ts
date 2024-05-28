@@ -1,20 +1,21 @@
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export interface Action<P = any, M = any> {
   type: string
   payload: P
   meta: M
 }
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 type ActionCreator<P = any, M = any> = {
   type: string
   (payload: P, meta?: M): Action<P, M>
 } & (P extends void
-  ? {
-      (payload?: P, meta?: M): Action<P, M>
-    }
+  ? (payload?: P, meta?: M) => Action<P, M>
   : Record<string, unknown>)
 
 type Reducer<S> = (state: S | undefined, action: Action) => S
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 type ReduceHandler<S, P = any, M = any> = (state: S, action: Action<P, M>) => S
 
 type ReducerMatch<S> = [ActionCreator, ReduceHandler<S>]

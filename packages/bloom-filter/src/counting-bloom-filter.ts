@@ -26,19 +26,19 @@ export class CountingBloomFilter<T extends { toString(): string }> {
   }
 
   add(element: T): void {
-    range(0, this.hashes).forEach((i) => {
+    for (const i of range(0, this.hashes)) {
       const position = this.hashPosition(i, element)
       this.filter[position] += 1
-    })
+    }
   }
 
   remove(element: T): void {
-    range(0, this.hashes).forEach((i) => {
+    for (const i of range(0, this.hashes)) {
       const position = this.hashPosition(i, element)
       if (this.filter[position] > 0) {
         this.filter[position] -= 1
       }
-    })
+    }
   }
 
   has(element: T): number {

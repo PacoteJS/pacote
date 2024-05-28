@@ -302,11 +302,11 @@ export class BloomSearch<
 
     const frequency: Record<string, number> = {}
 
-    entries(this.fields).forEach(([field, weight = 1]) =>
-      (tokensByField.get(field) ?? []).forEach((token) => {
+    for (const [field, weight = 1] of entries(this.fields)) {
+      for (const token of tokensByField.get(field) ?? []) {
         frequency[token] = (frequency[token] ?? 0) + weight
-      }),
-    )
+      }
+    }
 
     const tokensByFrequency = Array.from(uniqueTokens).reduce<
       Record<number, string[]>
@@ -331,9 +331,9 @@ export class BloomSearch<
         seed: this.seed,
         hash: this.hash,
       })
-      tokens.forEach((token) => {
+      for (const token of tokens) {
         acc[frequencyBucket].add(token)
-      })
+      }
       return acc
     }, {})
 

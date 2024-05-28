@@ -10,6 +10,7 @@ const PADDING: Record<number, number | undefined> = {
   16: 8,
 }
 
+// biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
 export function toString(value: U32, radix = 10): string {
   return toNumber(value)
     .toString(radix)

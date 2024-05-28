@@ -4,16 +4,15 @@ import { matchObject, matchString, rightPredicate } from './shared/predicates'
 import { printReceivedRight } from './shared/print'
 
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace jest {
     interface Matchers<R> {
-      toMatchRight(expected: any): R
+      toMatchRight(expected: unknown): R
     }
   }
 }
 
 const passMessage =
-  <R>(actual: Either<any, string | R>, expected: RegExp | Partial<R>) =>
+  <R>(actual: Either<unknown, string | R>, expected: RegExp | Partial<R>) =>
   () =>
     `${matcherHint(
       '.not.toMatchRight',
@@ -24,7 +23,7 @@ const passMessage =
     )}\n\n${printReceivedRight(actual)}`
 
 const failMessage =
-  <R>(actual: Either<any, string | R>, expected: RegExp | Partial<R>) =>
+  <R>(actual: Either<unknown, string | R>, expected: RegExp | Partial<R>) =>
   () =>
     `${matcherHint(
       '.toMatchRight',
@@ -34,13 +33,18 @@ const failMessage =
       expected,
     )}\n\n${printReceivedRight(actual)}`
 
-export function toMatchRight(actual: Either<any, string>, expected: RegExp): any
-export function toMatchRight<R>(
-  actual: Either<any, R>,
-  expected: Partial<R>,
+export function toMatchRight(
+  actual: Either<unknown, string>,
+  expected: RegExp,
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 ): any
 export function toMatchRight<R>(
-  actual: Either<any, string | R>,
+  actual: Either<unknown, R>,
+  expected: Partial<R>,
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+): any
+export function toMatchRight<R>(
+  actual: Either<unknown, string | R>,
   expected: RegExp | Partial<R>,
 ) {
   const predicate =

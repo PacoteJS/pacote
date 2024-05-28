@@ -1,5 +1,6 @@
 import { assert, nat, property } from 'fast-check'
 import { expect, test } from 'vitest'
+// biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
 import { from, toString } from '../src/index'
 
 test('creates U64 values from strings', () => {

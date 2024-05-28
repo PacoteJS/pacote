@@ -2,7 +2,6 @@
  * @vitest-environment jsdom
  */
 
-// eslint-disable-next-line testing-library/no-manual-cleanup
 import { cleanup, fireEvent, render } from '@testing-library/react'
 import React from 'react'
 import { afterEach, expect, test, vi } from 'vitest'
@@ -40,7 +39,6 @@ test.each<
   ['mouseover', fireEvent.mouseOver],
 ])('handler is called on %s outside', (type, fireFunction) => {
   const handler = vi.fn()
-  // eslint-disable-next-line testing-library/render-result-naming-convention
   const screen = renderTestComponent(type, handler)
   fireFunction(screen.getByText('Outside'))
   expect(handler).toHaveBeenCalled()
@@ -57,7 +55,6 @@ test.each<
   ['mouseover', fireEvent.mouseOver],
 ])('handler is not called on %s inside', (type, fireFunction) => {
   const handler = vi.fn()
-  // eslint-disable-next-line testing-library/render-result-naming-convention
   const screen = renderTestComponent(type, handler)
   fireFunction(screen.getByText('Inside'))
   expect(handler).not.toHaveBeenCalled()
@@ -65,7 +62,6 @@ test.each<
 
 test('handler is called for multiple event types', () => {
   const handler = vi.fn()
-  // eslint-disable-next-line testing-library/render-result-naming-convention
   const screen = renderTestComponent(['click', 'touchend'], handler)
   fireEvent.click(screen.getByText('Outside'))
   fireEvent.touchEnd(screen.getByText('Outside'))
