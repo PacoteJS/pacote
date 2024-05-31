@@ -98,8 +98,8 @@ export type Options<
   stopwords?: StopwordsFunction
   /**
    * Allows a custom tokenizer function. By default content is transformed to
-   * lowercase, split at every whitespace of hyphen, and non-word (`A-Z`, `0-9`,
-   * and `_`) characters replaced.
+   * lowercase, split at every whitespace or hyphen, and stripped of any
+   * non-word (`A-Z`, `0-9`, and `_`) characters.
    */
   tokenizer?: TokenizerFunction
 }
