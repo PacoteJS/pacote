@@ -2,14 +2,30 @@
   "targetDefaults": {
     "build": {
       "cache": true,
-      "dependsOn": ["^build"],
-      "outputs": ["{projectRoot}/lib"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "{projectRoot}/lib"
+      ]
     },
     "build:cjs": {
-      "dependsOn": []
+      "dependsOn": [
+        "^build:cjs"
+      ],
+      "cache": true,
+      "outputs": [
+        "{projectRoot}/lib"
+      ]
     },
     "build:esm": {
-      "dependsOn": []
+      "dependsOn": [
+        "^build:esm"
+      ],
+      "cache": true,
+      "outputs": [
+        "{projectRoot}/lib"
+      ]
     },
     "prepublish": {
       "dependsOn": []
