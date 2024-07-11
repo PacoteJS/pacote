@@ -19,9 +19,9 @@
   },
   "main": "index.js",
   "peerDependencies": {
-    "eslint": ">= 6",
-    "eslint-plugin-jest": ">= 24",
-    "eslint-plugin-jest-dom": ">= 3",
-    "eslint-plugin-testing-library": ">= 4"
+    "eslint": "^8",
+    "eslint-plugin-jest": "^27",
+    "eslint-plugin-jest-dom": "^5",
+    "eslint-plugin-testing-library": "^6"
   }
 }

@@ -19,12 +19,12 @@
   },
   "main": "index.js",
   "peerDependencies": {
-    "@typescript-eslint/eslint-plugin": ">= 4",
-    "eslint": ">= 6",
+    "@typescript-eslint/eslint-plugin": "^7",
+    "eslint": "^8",
     "eslint-config-prettier": ">= 8",
-    "eslint-config-standard": ">= 16",
+    "eslint-config-standard": "^17",
     "eslint-plugin-import": ">= 2",
-    "eslint-plugin-n": ">= 15",
+    "eslint-plugin-n": "^16",
     "eslint-plugin-prettier": ">= 3",
     "eslint-plugin-promise": ">= 4"
   }
