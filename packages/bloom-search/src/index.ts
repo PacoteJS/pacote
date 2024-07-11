@@ -2,10 +2,10 @@ import { range, unique, windowed } from '@pacote/array'
 import { BloomFilter, optimal } from '@pacote/bloom-filter'
 import { memoize } from '@pacote/memoize'
 import type { U64 } from '@pacote/u64'
-import { type XXHash, xxh64 } from '@pacote/xxhash'
+import { xxh64, type XXHash } from '@pacote/xxhash'
 import { findLast } from './array'
 import { entries, keys, pick } from './object'
-import { queryTerms } from './query'
+import { EXCLUDE, PHRASE, queryTerms, REQUIRE } from './query'
 import { countIdf } from './tf-idf'
 
 export type PreprocessFunction<Document, Field extends keyof Document> = (
@@ -430,13 +430,13 @@ export class BloomSearch<
   private parseQuery(query: string, language?: string): SearchTokens {
     return queryTerms(query).reduce<SearchTokens>(
       ({ required, included, excluded }, [term, type]) => {
-        const token = type === 'phrase' ? term : this.stemmer(term, language)
+        const token = type === PHRASE ? term : this.stemmer(term, language)
         return {
-          required: ['require', 'phrase'].includes(type)
+          required: [REQUIRE, PHRASE].includes(type)
             ? required.concat(token)
             : required,
-          included: type !== 'exclude' ? included.concat(token) : included,
-          excluded: type === 'exclude' ? excluded.concat(token) : excluded,
+          included: type !== EXCLUDE ? included.concat(token) : included,
+          excluded: type === EXCLUDE ? excluded.concat(token) : excluded,
         }
       },
       { required: [], included: [], excluded: [] },

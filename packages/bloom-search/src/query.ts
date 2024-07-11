@@ -1,4 +1,9 @@
-type SearchTerm = [string, 'include' | 'exclude' | 'require' | 'phrase']
+const NORMAL = Symbol('normal')
+export const EXCLUDE = Symbol('exclude')
+export const PHRASE = Symbol('phrase')
+export const REQUIRE = Symbol('require')
+
+type SearchTerm = [string, typeof NORMAL | typeof EXCLUDE | typeof REQUIRE | typeof PHRASE]
 
 const joinPhrase = (term: string) => term.replace(/\s+/g, '_')
 const splitPhrase = (term: string) => term.replace(/_+/g, ' ')
@@ -11,12 +16,12 @@ export function queryTerms(query: string): SearchTerm[] {
     .map<SearchTerm>((term) => [
       removeOperators(splitPhrase(term)).toLowerCase(),
       term.startsWith('"')
-        ? 'phrase'
+        ? PHRASE
         : term.startsWith('+')
-          ? 'require'
+          ? REQUIRE
           : term.startsWith('-')
-            ? 'exclude'
-            : 'include',
+            ? EXCLUDE
+            : NORMAL,
     ])
     .filter(([term]) => term.length)
 }
