@@ -131,7 +131,7 @@ importers:
         version: 18.3.3
       '@vitest/coverage-v8':
         specifier: ^1.6.0
-        version: 1.6.0(vitest@1.6.0(@types/node@20.14.11)(@vitest/ui@1.6.0)(jsdom@24.1.0))
+        version: 1.6.0(vitest@1.6.0(@types/node@20.14.11)(@vitest/ui@1.6.0)(jsdom@24.1.1))
       '@vitest/ui':
         specifier: ^1.6.0
         version: 1.6.0(vitest@1.6.0)
@@ -152,7 +152,7 @@ importers:
         version: 9.1.1
       jsdom:
         specifier: ^24.1.0
-        version: 24.1.0
+        version: 24.1.1
       lerna:
         specifier: ^8.1.6
         version: 8.1.7(encoding@0.1.13)
@@ -194,7 +194,7 @@ importers:
         version: 4.3.2(typescript@5.5.3)(vite@5.3.3(@types/node@20.14.11))
       vitest:
         specifier: ^1.6.0
-        version: 1.6.0(@types/node@20.14.11)(@vitest/ui@1.6.0)(jsdom@24.1.0)
+        version: 1.6.0(@types/node@20.14.11)(@vitest/ui@1.6.0)(jsdom@24.1.1)
       xxhash-addon:
         specifier: ^1.5.0
         version: 1.5.0
@@ -3291,8 +3291,8 @@ packages:
   jsbn@1.1.0:
     resolution: {integrity: sha512-4bYVV3aAMtDTTu4+xsDYa6sy9GyJ69/amsu9sYF2zqjiEoZA5xJi3BrfX3uY+/IekIu7MwdObdbDWpoZdBv3/A==}
 
-  jsdom@24.1.0:
-    resolution: {integrity: sha512-6gpM7pRXCwIOKxX47cgOyvyQDN/Eh0f1MeKySBV2xGdKtqJBLj8P25eY3EVCWo2mglDDzozR2r2MW4T+JiNUZA==}
+  jsdom@24.1.1:
+    resolution: {integrity: sha512-5O1wWV99Jhq4DV7rCLIoZ/UIhyQeDR7wHVyZAHAshbrvZsLs+Xzz7gtwnlJTJDjleiTKh54F4dXrX70vJQTyJQ==}
     engines: {node: '>=18'}
     peerDependencies:
       canvas: ^2.11.2
@@ -6520,7 +6520,7 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vitest/coverage-v8@1.6.0(vitest@1.6.0(@types/node@20.14.11)(@vitest/ui@1.6.0)(jsdom@24.1.0))':
+  '@vitest/coverage-v8@1.6.0(vitest@1.6.0(@types/node@20.14.11)(@vitest/ui@1.6.0)(jsdom@24.1.1))':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@bcoe/v8-coverage': 0.2.3
@@ -6535,7 +6535,7 @@ snapshots:
       std-env: 3.7.0
       strip-literal: 2.1.0
       test-exclude: 6.0.0
-      vitest: 1.6.0(@types/node@20.14.11)(@vitest/ui@1.6.0)(jsdom@24.1.0)
+      vitest: 1.6.0(@types/node@20.14.11)(@vitest/ui@1.6.0)(jsdom@24.1.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -6570,7 +6570,7 @@ snapshots:
       pathe: 1.1.2
       picocolors: 1.0.1
       sirv: 2.0.4
-      vitest: 1.6.0(@types/node@20.14.11)(@vitest/ui@1.6.0)(jsdom@24.1.0)
+      vitest: 1.6.0(@types/node@20.14.11)(@vitest/ui@1.6.0)(jsdom@24.1.1)
 
   '@vitest/utils@1.6.0':
     dependencies:
@@ -8769,7 +8769,7 @@ snapshots:
 
   jsbn@1.1.0: {}
 
-  jsdom@24.1.0:
+  jsdom@24.1.1:
     dependencies:
       cssstyle: 4.0.1
       data-urls: 5.0.0
@@ -10751,7 +10751,7 @@ snapshots:
       '@types/node': 20.14.11
       fsevents: 2.3.3
 
-  vitest@1.6.0(@types/node@20.14.11)(@vitest/ui@1.6.0)(jsdom@24.1.0):
+  vitest@1.6.0(@types/node@20.14.11)(@vitest/ui@1.6.0)(jsdom@24.1.1):
     dependencies:
       '@vitest/expect': 1.6.0
       '@vitest/runner': 1.6.0
@@ -10776,7 +10776,7 @@ snapshots:
     optionalDependencies:
       '@types/node': 20.14.11
       '@vitest/ui': 1.6.0(vitest@1.6.0)
-      jsdom: 24.1.0
+      jsdom: 24.1.1
     transitivePeerDependencies:
       - less
       - lightningcss
