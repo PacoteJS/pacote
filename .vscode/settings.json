@@ -5,5 +5,5 @@
   "html.format.enable": false,
   "workbench.colorCustomizations": {},
   "deno.enable": false,
-  "jest.jestCommandLine": "pnpm jest"
+  "jest.jestCommandLine": "pnpm vitest"
 }

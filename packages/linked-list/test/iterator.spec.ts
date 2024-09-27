@@ -38,6 +38,20 @@ describe('entries()', () => {
     expect(iterator.next().value).toEqual([1, 'second'])
     expect(iterator.next().done).toEqual(true)
   })
+
+  test('iterator can be looped over with for...of', () => {
+    const list = L.listOf('first', 'second')
+    const values = []
+
+    for (const value of L.entries(list)) {
+      values.push(value)
+    }
+
+    expect(values).toEqual([
+      [0, 'first'],
+      [1, 'second'],
+    ])
+  })
 })
 
 describe('keys()', () => {
@@ -77,6 +91,17 @@ describe('keys()', () => {
     expect(iterator.next().value).toEqual(1)
     expect(iterator.next().done).toEqual(true)
   })
+
+  test('iterator can be looped over with for...of', () => {
+    const list = L.listOf('first', 'second')
+    const values = []
+
+    for (const value of L.keys(list)) {
+      values.push(value)
+    }
+
+    expect(values).toEqual([0, 1])
+  })
 })
 
 describe('values()', () => {
@@ -115,5 +140,16 @@ describe('values()', () => {
     expect(iterator.next().value).toEqual('first')
     expect(iterator.next().value).toEqual('second')
     expect(iterator.next().done).toEqual(true)
+  })
+
+  test('iterator can be looped over with for...of', () => {
+    const list = L.listOf('first', 'second')
+    const values = []
+
+    for (const value of L.values(list)) {
+      values.push(value)
+    }
+
+    expect(values).toEqual(['first', 'second'])
   })
 })
