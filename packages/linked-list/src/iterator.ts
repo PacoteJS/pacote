@@ -2,7 +2,7 @@ import { type LinkedList, car, cdr, isEmpty } from './core'
 
 function iterator<T, R>(
   list: LinkedList<T>,
-  result: (key: number, value: T) => R,
+  transformer: (key: number, value: T) => R,
 ): IterableIterator<R> {
   let key = 0
   let current = list
@@ -15,7 +15,7 @@ function iterator<T, R>(
       if (isEmpty(current)) {
         return { done: true, value: undefined }
       }
-      const value = result(key++, car(current))
+      const value = transformer(key++, car(current))
       current = cdr(current)
       return { done: false, value }
     },
