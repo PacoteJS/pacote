@@ -1,7 +1,7 @@
 {
   "name": "@pacote/immutable",
   "description": "Immutable generic type.",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "sideEffects": false,
   "license": "MIT",
   "author": {
@@ -9,7 +9,9 @@
     "email": "hello@goblindegook.com",
     "url": "https://goblindegook.com"
   },
-  "keywords": ["immutability"],
+  "keywords": [
+    "immutability"
+  ],
   "repository": "github:PacoteJS/pacote",
   "bugs": {
     "url": "https://github.com/PacoteJS/pacote/issues"

@@ -1,7 +1,7 @@
 {
   "name": "@pacote/disposable",
   "description": "Create disposable resources for Explicit Resource Management.",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "sideEffects": false,
   "license": "MIT",
   "author": {
@@ -9,7 +9,11 @@
     "email": "hello@goblindegook.com",
     "url": "https://goblindegook.com"
   },
-  "keywords": ["async-dispose", "dispose", "explicit resource management"],
+  "keywords": [
+    "async-dispose",
+    "dispose",
+    "explicit resource management"
+  ],
   "repository": "github:PacoteJS/pacote",
   "bugs": {
     "url": "https://github.com/PacoteJS/pacote/issues"

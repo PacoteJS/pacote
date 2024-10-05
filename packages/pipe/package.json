@@ -1,7 +1,7 @@
 {
   "name": "@pacote/pipe",
   "description": "Chain function calls with right-composition, improving readability when chaining several functions together.",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "sideEffects": false,
   "license": "MIT",
   "author": {
@@ -9,7 +9,10 @@
     "email": "hello@goblindegook.com",
     "url": "https://goblindegook.com"
   },
-  "keywords": ["pipe", "composition"],
+  "keywords": [
+    "pipe",
+    "composition"
+  ],
   "repository": "github:PacoteJS/pacote",
   "bugs": {
     "url": "https://github.com/PacoteJS/pacote/issues"

@@ -1,7 +1,7 @@
 {
   "name": "@pacote/react-with-props",
   "description": "Higher-order component to apply props to React components.",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "sideEffects": false,
   "license": "MIT",
   "author": {
@@ -9,7 +9,12 @@
     "email": "hello@goblindegook.com",
     "url": "https://goblindegook.com"
   },
-  "keywords": ["react", "components", "hoc", "props"],
+  "keywords": [
+    "react",
+    "components",
+    "hoc",
+    "props"
+  ],
   "repository": "github:PacoteJS/pacote",
   "bugs": {
     "url": "https://github.com/PacoteJS/pacote/issues"

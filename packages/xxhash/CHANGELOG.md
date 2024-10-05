@@ -3,13 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/PacoteJS/pacote/compare/@pacote/xxhash@0.3.2...@pacote/xxhash@0.4.0) (2024-10-05)
+
+### Bug Fixes
+
+- 🐛 coerce initial seed to unsigned 64-bit integer ([17c3c22](https://github.com/PacoteJS/pacote/commit/17c3c22c96762329d93a92278b6cb3b659af9d0e))
+
+### Features
+
+- 🎸 XXHash64 implementation using BigInt ([32d694d](https://github.com/PacoteJS/pacote/commit/32d694d5c334663e9d731d0da573081c0635713d))
+
 ## [0.3.2](https://github.com/PacoteJS/pacote/compare/@pacote/xxhash@0.3.1...@pacote/xxhash@0.3.2) (2023-08-25)
 
 **Note:** Version bump only for package @pacote/xxhash
-
-
-
-
 
 ## [0.3.1](https://github.com/PacoteJS/pacote/compare/@pacote/xxhash@0.3.0...@pacote/xxhash@0.3.1) (2023-04-22)
 

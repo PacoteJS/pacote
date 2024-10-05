@@ -1,7 +1,7 @@
 {
   "name": "@pacote/is-plain-object",
   "description": "Checks whether the provided object is a plain JavaScript object.",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "sideEffects": false,
   "license": "MIT",
   "author": {
@@ -9,7 +9,9 @@
     "email": "hello@goblindegook.com",
     "url": "https://goblindegook.com"
   },
-  "keywords": ["object"],
+  "keywords": [
+    "object"
+  ],
   "repository": "github:PacoteJS/pacote",
   "bugs": {
     "url": "https://github.com/PacoteJS/pacote/issues"

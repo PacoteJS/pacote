@@ -1,7 +1,7 @@
 {
   "name": "@pacote/shuffle",
   "description": "An implementation of the Durstenfeld algorithm for shuffling collections.",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "sideEffects": false,
   "license": "MIT",
   "author": {
@@ -9,7 +9,12 @@
     "email": "hello@goblindegook.com",
     "url": "https://goblindegook.com"
   },
-  "keywords": ["shuffle", "random", "durstenfeld", "fisher-yates"],
+  "keywords": [
+    "shuffle",
+    "random",
+    "durstenfeld",
+    "fisher-yates"
+  ],
   "repository": "github:PacoteJS/pacote",
   "bugs": {
     "url": "https://github.com/PacoteJS/pacote/issues"

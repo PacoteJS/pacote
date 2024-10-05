@@ -1,7 +1,7 @@
 {
   "name": "@pacote/result",
   "description": "Result type inspired by Rust.",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "sideEffects": false,
   "license": "MIT",
   "author": {
@@ -9,7 +9,12 @@
     "email": "hello@goblindegook.com",
     "url": "https://goblindegook.com"
   },
-  "keywords": ["result", "monad", "either", "functional programming"],
+  "keywords": [
+    "result",
+    "monad",
+    "either",
+    "functional programming"
+  ],
   "repository": "github:PacoteJS/pacote",
   "bugs": {
     "url": "https://github.com/PacoteJS/pacote/issues"

@@ -3,13 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/PacoteJS/pacote/compare/@pacote/array@0.7.2...@pacote/array@0.8.0) (2024-10-05)
+
+### Features
+
+- 🎸 chunked arrays ([9b50908](https://github.com/PacoteJS/pacote/commit/9b509080210b50c9e53aead247e46665f97bd047))
+
 ## [0.7.2](https://github.com/PacoteJS/pacote/compare/@pacote/array@0.7.1...@pacote/array@0.7.2) (2023-08-25)
 
 **Note:** Version bump only for package @pacote/array
-
-
-
-
 
 ## [0.7.1](https://github.com/PacoteJS/pacote/compare/@pacote/array@1.0.0-alpha.0...@pacote/array@0.7.1) (2023-06-15)
 
