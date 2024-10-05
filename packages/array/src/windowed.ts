@@ -50,8 +50,7 @@ export function windowed<T>(
   if (size <= 0) throw Error('size must be a positive integer')
   if (step <= 0) throw Error('step must be a positive integer')
 
-  if (array.length === 0) return []
-  if (array.length <= size) return [[...array]]
+  if (array.length && array.length <= size) return [[...array]]
 
   const indexLimit = array.length - size
   const snapshots = []
