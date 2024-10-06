@@ -53,6 +53,12 @@ module.exports = (plop) => {
         templateFile: 'templates/npmignore.hbs',
       },
       {
+        type: 'add',
+        path: 'packages/{{ name }}/README.md',
+        templateFile: 'templates/README.md.hbs',
+        data,
+      },
+      {
         type: 'addMany',
         destination: 'packages/{{ name }}',
         base: 'templates',
@@ -113,6 +119,12 @@ module.exports = (plop) => {
         type: 'add',
         path: 'packages/{{ name }}/.npmignore',
         templateFile: 'templates/npmignore.hbs',
+      },
+      {
+        type: 'add',
+        path: 'packages/{{ name }}/README.md',
+        templateFile: 'templates/README.md.hbs',
+        data,
       },
       {
         type: 'addMany',
