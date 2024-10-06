@@ -28,6 +28,7 @@
     "./packages/result",
     "./packages/retry",
     "./packages/shuffle",
+    "./packages/task",
     "./packages/throttle",
     "./packages/u32",
     "./packages/u64",
