@@ -163,8 +163,8 @@ importers:
         specifier: ^2.3.1
         version: 2.4.9(typescript@5.6.2)
       nx:
-        specifier: ^19.4.2
-        version: 19.8.4
+        specifier: ^20.0.3
+        version: 20.0.3
       plop:
         specifier: ^4.0.1
         version: 4.0.1
@@ -270,7 +270,7 @@ importers:
         version: 8.57.0
       eslint-plugin-jest:
         specifier: ^27
-        version: 27.9.0(@typescript-eslint/eslint-plugin@7.11.0(@typescript-eslint/parser@7.11.0(eslint@8.57.0)(typescript@5.6.2))(eslint@8.57.0)(typescript@5.6.2))(eslint@8.57.0)(typescript@5.6.2)
+        version: 27.9.0(@typescript-eslint/eslint-plugin@7.11.0(@typescript-eslint/parser@7.11.0(eslint@9.4.0)(typescript@5.6.2))(eslint@8.57.0)(typescript@5.6.2))(eslint@8.57.0)(typescript@5.6.2)
       eslint-plugin-jest-dom:
         specifier: ^5
         version: 5.4.0(@testing-library/dom@10.1.0)(eslint@8.57.0)
@@ -390,6 +390,8 @@ importers:
   packages/retry: {}
 
   packages/shuffle: {}
+
+  packages/task: {}
 
   packages/throttle: {}
 
@@ -939,8 +941,20 @@ packages:
     cpu: [arm64]
     os: [darwin]
 
+  '@nx/nx-darwin-arm64@20.0.3':
+    resolution: {integrity: sha512-/wjxSuQZOHwDopNAfuh2BTsaDtDECjTDrKHJdTknrSVjdsB2b1hwSdL7Ct0PXBiSnf+0gfYBR2fuPmLZYb3AXA==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [darwin]
+
   '@nx/nx-darwin-x64@19.8.4':
     resolution: {integrity: sha512-lTcXUCXNvqHdLmrNCOyDF+u6pDx209Ew7nSR47sQPvkycIHYi0gvgk0yndFn1Swah0lP4OxWg7rzAfmOlZd6ew==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [darwin]
+
+  '@nx/nx-darwin-x64@20.0.3':
+    resolution: {integrity: sha512-Gobgkvsx61P5TI0uuDQTI/D2AXJt3xnBuAWQ4V/NW/OpkvL8j/q8zk81uK0tumVvIc4p5kSlGmQ46/ytSrdqvg==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [darwin]
@@ -951,8 +965,20 @@ packages:
     cpu: [x64]
     os: [freebsd]
 
+  '@nx/nx-freebsd-x64@20.0.3':
+    resolution: {integrity: sha512-nbYp89BP0z0DzuaUH/yVVhCbL96vUUaKmCVmmdlvQRgiaX89BChAMuEdLNSeaDHFrhgTYB87ku3Ok6DRCAIOcg==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [freebsd]
+
   '@nx/nx-linux-arm-gnueabihf@19.8.4':
     resolution: {integrity: sha512-Wahul8oz9huEm/Jv3wud5IGWdZxkGG4tdJm9i5TV5wxfUMAWbKU9v2nzZZins452UYESWvwvDkiuBPZqSto3qw==}
+    engines: {node: '>= 10'}
+    cpu: [arm]
+    os: [linux]
+
+  '@nx/nx-linux-arm-gnueabihf@20.0.3':
+    resolution: {integrity: sha512-eKIYJPvXO/N1FjteZHC4DLV0u+2h70RmrDQODPztfl3mI5AjCwFdLf9RPN1D+SuNdfK1WwZIszY+FiVxrpK19A==}
     engines: {node: '>= 10'}
     cpu: [arm]
     os: [linux]
@@ -963,8 +989,20 @@ packages:
     cpu: [arm64]
     os: [linux]
 
+  '@nx/nx-linux-arm64-gnu@20.0.3':
+    resolution: {integrity: sha512-CDFy2WNsMZvxshtGdFV/yCux1XkLtcqh0FiitNvGdgNugXXp3CLVEUx6dI3VBuIBNGbfozdr7n+fuXN6F2S4MQ==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [linux]
+
   '@nx/nx-linux-arm64-musl@19.8.4':
     resolution: {integrity: sha512-0q8r8I8WCsY3xowDI2j109SCUSkFns/BJ40aCfRh9hhrtaIIc5qXUw2YFTjxUZNcRJXx9j9+hTe9jBkUSIGvCw==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@nx/nx-linux-arm64-musl@20.0.3':
+    resolution: {integrity: sha512-BGrSRNPuDyj0yeP2MyzF1MMij1KO4Q/2YSgBbYzVSc8JdrUqf+3rqI8VXNTr3FcAKMTPgFjkFZ3XD3s/62gsdg==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
@@ -975,8 +1013,20 @@ packages:
     cpu: [x64]
     os: [linux]
 
+  '@nx/nx-linux-x64-gnu@20.0.3':
+    resolution: {integrity: sha512-xGGjQ8q5XuF0/432APvAi/OSMdR3LZ1yQ9hYh+JGvM5wh44I3UbgBXRCJlsHp+t2hdlilF6kpaeMSiP1Z9CEbg==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
+
   '@nx/nx-linux-x64-musl@19.8.4':
     resolution: {integrity: sha512-JB4tAuZBCF0yqSnKF3pHXa0b7LA3ebi3Bw08QmMr//ON4aU+eXURGBuj9XvULD2prY+gpBrvf+MsG1XJAHL6Zg==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
+
+  '@nx/nx-linux-x64-musl@20.0.3':
+    resolution: {integrity: sha512-fTmZNbq3QQF5BLGPB8PGuFuNo3s2F86IQDOUYWpjXiuKjoI1Y5yM14RQpHLwYOGnUNoKYOhlv/JAyFrDX6ALZA==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
@@ -987,8 +1037,20 @@ packages:
     cpu: [arm64]
     os: [win32]
 
+  '@nx/nx-win32-arm64-msvc@20.0.3':
+    resolution: {integrity: sha512-hdtfg9pIzhtLqqGvsTemQYwe+kqqL1JGNgrlf3V59HSbbAADYZbHnliujoRybJo7dpeS/DDTNMNeblg99tFQLA==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [win32]
+
   '@nx/nx-win32-x64-msvc@19.8.4':
     resolution: {integrity: sha512-//JntLrN3L7WL/WgP3D0FE34caYTPcG/GIMBguC9w7YDyTlEikLgLbobjdCPz+2f9OWGvIZbJgGmtHNjnETM/g==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [win32]
+
+  '@nx/nx-win32-x64-msvc@20.0.3':
+    resolution: {integrity: sha512-HcqE8AlWuwcsIOj0OnKDQ3q7L0RZsOrBRhDRKbJeUnIFz/t2R3q8Y6trrqTyFAafgW6JNLBp+tgcUyfHPUy/eQ==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
@@ -2443,6 +2505,7 @@ packages:
   eslint@8.57.0:
     resolution: {integrity: sha512-dZ6+mexnaTIbSBZWgou51U6OmzIhYM2VcNdtiTtI7qPNZm35Akpr0f6vtw3w1Kmn5PYo+tZVfh13WrhpS6oLqQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
 
   eslint@9.4.0:
@@ -3845,6 +3908,18 @@ packages:
 
   nx@19.8.4:
     resolution: {integrity: sha512-fc833c3UKo6kuoG4z0kSKet17yWym3VzcQ+yPWYspxxxd8GFVVk42+9wieyVQDi9YqtKZQ6PdQfSEPm59/M7SA==}
+    hasBin: true
+    peerDependencies:
+      '@swc-node/register': ^1.8.0
+      '@swc/core': ^1.3.85
+    peerDependenciesMeta:
+      '@swc-node/register':
+        optional: true
+      '@swc/core':
+        optional: true
+
+  nx@20.0.3:
+    resolution: {integrity: sha512-6ZuZ09IdMIwbklKqEwUAHspuVMsDr7TIcCyeytmdDC1XbA+Tbb93wriyJyiI9EBQw4StrlJF9vSXAZsuDiOKeA==}
     hasBin: true
     peerDependencies:
       '@swc-node/register': ^1.8.0
@@ -5972,31 +6047,61 @@ snapshots:
   '@nx/nx-darwin-arm64@19.8.4':
     optional: true
 
+  '@nx/nx-darwin-arm64@20.0.3':
+    optional: true
+
   '@nx/nx-darwin-x64@19.8.4':
+    optional: true
+
+  '@nx/nx-darwin-x64@20.0.3':
     optional: true
 
   '@nx/nx-freebsd-x64@19.8.4':
     optional: true
 
+  '@nx/nx-freebsd-x64@20.0.3':
+    optional: true
+
   '@nx/nx-linux-arm-gnueabihf@19.8.4':
+    optional: true
+
+  '@nx/nx-linux-arm-gnueabihf@20.0.3':
     optional: true
 
   '@nx/nx-linux-arm64-gnu@19.8.4':
     optional: true
 
+  '@nx/nx-linux-arm64-gnu@20.0.3':
+    optional: true
+
   '@nx/nx-linux-arm64-musl@19.8.4':
+    optional: true
+
+  '@nx/nx-linux-arm64-musl@20.0.3':
     optional: true
 
   '@nx/nx-linux-x64-gnu@19.8.4':
     optional: true
 
+  '@nx/nx-linux-x64-gnu@20.0.3':
+    optional: true
+
   '@nx/nx-linux-x64-musl@19.8.4':
+    optional: true
+
+  '@nx/nx-linux-x64-musl@20.0.3':
     optional: true
 
   '@nx/nx-win32-arm64-msvc@19.8.4':
     optional: true
 
+  '@nx/nx-win32-arm64-msvc@20.0.3':
+    optional: true
+
   '@nx/nx-win32-x64-msvc@19.8.4':
+    optional: true
+
+  '@nx/nx-win32-x64-msvc@20.0.3':
     optional: true
 
   '@octokit/auth-token@3.0.4': {}
@@ -6351,6 +6456,25 @@ snapshots:
       typescript: 5.6.2
     transitivePeerDependencies:
       - supports-color
+
+  '@typescript-eslint/eslint-plugin@7.11.0(@typescript-eslint/parser@7.11.0(eslint@9.4.0)(typescript@5.6.2))(eslint@8.57.0)(typescript@5.6.2)':
+    dependencies:
+      '@eslint-community/regexpp': 4.10.0
+      '@typescript-eslint/parser': 7.11.0(eslint@9.4.0)(typescript@5.6.2)
+      '@typescript-eslint/scope-manager': 7.11.0
+      '@typescript-eslint/type-utils': 7.11.0(eslint@8.57.0)(typescript@5.6.2)
+      '@typescript-eslint/utils': 7.11.0(eslint@8.57.0)(typescript@5.6.2)
+      '@typescript-eslint/visitor-keys': 7.11.0
+      eslint: 8.57.0
+      graphemer: 1.4.0
+      ignore: 5.3.1
+      natural-compare: 1.4.0
+      ts-api-utils: 1.3.0(typescript@5.6.2)
+    optionalDependencies:
+      typescript: 5.6.2
+    transitivePeerDependencies:
+      - supports-color
+    optional: true
 
   '@typescript-eslint/eslint-plugin@7.11.0(@typescript-eslint/parser@7.11.0(eslint@9.4.0)(typescript@5.6.2))(eslint@9.4.0)(typescript@5.6.2)':
     dependencies:
@@ -7660,12 +7784,12 @@ snapshots:
     optionalDependencies:
       '@testing-library/dom': 10.1.0
 
-  eslint-plugin-jest@27.9.0(@typescript-eslint/eslint-plugin@7.11.0(@typescript-eslint/parser@7.11.0(eslint@8.57.0)(typescript@5.6.2))(eslint@8.57.0)(typescript@5.6.2))(eslint@8.57.0)(typescript@5.6.2):
+  eslint-plugin-jest@27.9.0(@typescript-eslint/eslint-plugin@7.11.0(@typescript-eslint/parser@7.11.0(eslint@9.4.0)(typescript@5.6.2))(eslint@8.57.0)(typescript@5.6.2))(eslint@8.57.0)(typescript@5.6.2):
     dependencies:
       '@typescript-eslint/utils': 5.62.0(eslint@8.57.0)(typescript@5.6.2)
       eslint: 8.57.0
     optionalDependencies:
-      '@typescript-eslint/eslint-plugin': 7.11.0(@typescript-eslint/parser@7.11.0(eslint@8.57.0)(typescript@5.6.2))(eslint@8.57.0)(typescript@5.6.2)
+      '@typescript-eslint/eslint-plugin': 7.11.0(@typescript-eslint/parser@7.11.0(eslint@9.4.0)(typescript@5.6.2))(eslint@8.57.0)(typescript@5.6.2)
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -9572,6 +9696,54 @@ snapshots:
       '@nx/nx-linux-x64-musl': 19.8.4
       '@nx/nx-win32-arm64-msvc': 19.8.4
       '@nx/nx-win32-x64-msvc': 19.8.4
+    transitivePeerDependencies:
+      - debug
+
+  nx@20.0.3:
+    dependencies:
+      '@napi-rs/wasm-runtime': 0.2.4
+      '@yarnpkg/lockfile': 1.1.0
+      '@yarnpkg/parsers': 3.0.0-rc.46
+      '@zkochan/js-yaml': 0.0.7
+      axios: 1.7.7
+      chalk: 4.1.2
+      cli-cursor: 3.1.0
+      cli-spinners: 2.6.1
+      cliui: 8.0.1
+      dotenv: 16.4.5
+      dotenv-expand: 11.0.6
+      enquirer: 2.3.6
+      figures: 3.2.0
+      flat: 5.0.2
+      front-matter: 4.0.2
+      ignore: 5.3.1
+      jest-diff: 29.7.0
+      jsonc-parser: 3.2.0
+      lines-and-columns: 2.0.3
+      minimatch: 9.0.3
+      node-machine-id: 1.1.12
+      npm-run-path: 4.0.1
+      open: 8.4.2
+      ora: 5.3.0
+      semver: 7.6.2
+      string-width: 4.2.3
+      tar-stream: 2.2.0
+      tmp: 0.2.3
+      tsconfig-paths: 4.2.0
+      tslib: 2.6.3
+      yargs: 17.7.2
+      yargs-parser: 21.1.1
+    optionalDependencies:
+      '@nx/nx-darwin-arm64': 20.0.3
+      '@nx/nx-darwin-x64': 20.0.3
+      '@nx/nx-freebsd-x64': 20.0.3
+      '@nx/nx-linux-arm-gnueabihf': 20.0.3
+      '@nx/nx-linux-arm64-gnu': 20.0.3
+      '@nx/nx-linux-arm64-musl': 20.0.3
+      '@nx/nx-linux-x64-gnu': 20.0.3
+      '@nx/nx-linux-x64-musl': 20.0.3
+      '@nx/nx-win32-arm64-msvc': 20.0.3
+      '@nx/nx-win32-x64-msvc': 20.0.3
     transitivePeerDependencies:
       - debug
 
