@@ -1,5 +1,7 @@
 export { associate } from './associate'
 export { chunked } from './chunked'
+export { difference } from './difference'
+export { intersect } from './intersect'
 export { range } from './range'
 export { times } from './times'
 export { unique } from './unique'
