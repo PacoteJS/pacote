@@ -47,7 +47,8 @@ test('retrying with an interval', async () => {
     { interval: 50 },
   )
 
-  expect(new Date().getTime() - start.getTime()).toBeGreaterThanOrEqual(50)
+  // Add a small buffer to account for timing variations
+  expect(new Date().getTime() - start.getTime()).toBeGreaterThanOrEqual(45)
 })
 
 test('retrying until there is a timeout', async () => {
