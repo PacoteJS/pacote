@@ -10,6 +10,8 @@ import { unique } from './unique'
  * intersect(['a', 'b', 'c'], ['b', 'c', 'd']) // => ['b', 'c']
  * ```
  *
+ * @template T The type of the elements in the arrays.
+ *
  * @param left The first array.
  * @param right The second array.
  *

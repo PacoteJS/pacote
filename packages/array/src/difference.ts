@@ -8,6 +8,8 @@
  * difference(['a', 'b'], ['b', 'c']) // => [['a'], ['c']]
  * ```
  *
+ * @template T The type of the elements in the arrays.
+ *
  * @param left  Left array.
  * @param right Right array.
  *
