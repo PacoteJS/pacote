@@ -1,6 +1,13 @@
 /**
  * Returns a tuple with the difference between two arrays.
  *
+ * @example
+ * ```typescript
+ * import { chunked } from '@pacote/array'
+ *
+ * difference(['a', 'b'], ['b', 'c']) // => [['a'], ['c']]
+ * ```
+ *
  * @param left  Left array.
  * @param right Right array.
  *

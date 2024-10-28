@@ -3,6 +3,13 @@ import { unique } from './unique'
 /**
  * Returns the intersection between two arrays.
  *
+ * @example
+ * ```typescript
+ * import { intersect } from '@pacote/array'
+ *
+ * intersect(['a', 'b', 'c'], ['b', 'c', 'd']) // => ['b', 'c']
+ * ```
+ *
  * @param left The first array.
  * @param right The second array.
  *
