@@ -35,23 +35,6 @@ Search](https://goblindegook.github.io/bloom-search-poc/).
 yarn add @pacote/bloom-search
 ```
 
-## Example
-
-```typescript
-import { BloomSearch } from '@pacote/bloom-search'
-
-const bs = new BloomSearch({
-  fields: ['text'],
-  summary: ['id'],
-})
-
-bs.add('id1', { id: 1, text: 'foo bar' })
-bs.add('id2', { id: 2, text: 'foo baz' })
-
-bs.search('foo +bar') // => [{ id: 1 }])
-bs.search('foo -bar') // => [{ id: 2 }])
-```
-
 ## License
 
 MIT © [Luís Rodrigues](https://goblindegook.com).

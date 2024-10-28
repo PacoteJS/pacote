@@ -17,6 +17,12 @@ export type StopwordsFunction = (token: string, language?: string) => boolean
 export type StemmerFunction = (token: string, language?: string) => string
 export type TokenizerFunction = (token: string, language?: string) => string[]
 
+/**
+ * Represents an indexed document in the search index.
+ *
+ * @template Document     The type of document being indexed.
+ * @template SummaryField The document keys that can be returned in search results.
+ */
 export type IndexedDocument<Document, SummaryField extends keyof Document> = {
   /**
    * Summary fields for the document. These are preserved as-is.
@@ -34,6 +40,13 @@ export type Index<Document, SummaryField extends keyof Document> = {
   documents: Record<string, IndexedDocument<Document, SummaryField>>
 }
 
+/**
+ * Configuration options for creating a search index.
+ *
+ * @template Document     The type of document being indexed.
+ * @template SummaryField The document keys that can be returned in search results.
+ * @template IndexField   The document keys to be indexed for searching.
+ */
 export type Options<
   Document extends Record<string, unknown>,
   SummaryField extends keyof Document = keyof Document,
@@ -130,7 +143,22 @@ const memoizedHash = (hash: XXHash<U64>) =>
   )
 
 /**
- * Encapsulates search functionality based on Bloom filters.
+ * Indexer and searcher based on Bloom filters.
+ *
+ * ```typescript
+ * import { BloomSearch } from '@pacote/bloom-search'
+ *
+ * const bs = new BloomSearch({
+ *   fields: ['text'],
+ *   summary: ['id'],
+ * })
+ *
+ * bs.add('id1', { id: 1, text: 'foo bar' })
+ * bs.add('id2', { id: 2, text: 'foo baz' })
+ *
+ * bs.search('foo +bar') // => [{ id: 1 }])
+ * bs.search('foo -bar') // => [{ id: 2 }])
+ * ```
  */
 export class BloomSearch<
   Document extends Record<string, unknown>,
