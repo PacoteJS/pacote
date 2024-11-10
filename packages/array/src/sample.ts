@@ -39,8 +39,9 @@ export function sample<T>(array: readonly T[]): T | undefined {
  */
 export function sampleN<T>(array: readonly T[], sampleSize: number): T[] {
   if (array.length === 0) return []
-  const result = new Array<T>(sampleSize)
-  for (let i = 0; i < sampleSize; i++) {
+  const maxSamples = Math.max(0, sampleSize)
+  const result = new Array<T>(maxSamples)
+  for (let i = 0; i < maxSamples; i++) {
     // biome-ignore lint/style/noNonNullAssertion: <explanation>
     result[i] = sample(array)!
   }
