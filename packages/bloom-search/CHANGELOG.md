@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.17.5](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.17.4...@pacote/bloom-search@0.17.5) (2025-02-06)
+
+**Note:** Version bump only for package @pacote/bloom-search
+
 ## [0.17.4](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.17.3...@pacote/bloom-search@0.17.4) (2024-10-05)
 
 **Note:** Version bump only for package @pacote/bloom-search

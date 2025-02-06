@@ -1,7 +1,7 @@
 {
   "name": "@pacote/retry",
   "description": "Asynchronous retry handler with timeout and exponential backoff support.",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "sideEffects": false,
   "license": "MIT",
   "author": {

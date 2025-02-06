@@ -2,7 +2,7 @@
   "name": "@pacote/eslint-config-react",
   "description": "Shareable ESLint configuration for React.",
   "deprecated": "This package is no longer maintained.",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "sideEffects": false,
   "license": "MIT",
   "author": {

@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/PacoteJS/pacote/compare/@pacote/array@0.8.0...@pacote/array@0.9.0) (2025-02-06)
+
+### Features
+
+- 🎸 array intersect and difference ([7d5ed83](https://github.com/PacoteJS/pacote/commit/7d5ed831bd77dae9cbdef3e362d212adb38e8f90))
+- 🎸 random sampling with sample and sampleN ([5c16888](https://github.com/PacoteJS/pacote/commit/5c16888eda546b3425336198d146ffba6345c58c))
+
 # [0.8.0](https://github.com/PacoteJS/pacote/compare/@pacote/array@0.7.2...@pacote/array@0.8.0) (2024-10-05)
 
 ### Features

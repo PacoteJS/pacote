@@ -1,7 +1,7 @@
 {
   "name": "@pacote/task",
   "description": "Asynchronous computations that never fail.",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "sideEffects": false,
   "license": "MIT",
   "author": {
