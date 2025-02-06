@@ -9,11 +9,7 @@
     "email": "hello@goblindegook.com",
     "url": "https://goblindegook.com"
   },
-  "keywords": [
-    "async-dispose",
-    "dispose",
-    "explicit resource management"
-  ],
+  "keywords": ["async-dispose", "dispose", "explicit resource management"],
   "repository": "github:PacoteJS/pacote",
   "bugs": {
     "url": "https://github.com/PacoteJS/pacote/issues"

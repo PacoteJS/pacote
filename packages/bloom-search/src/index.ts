@@ -2,10 +2,10 @@ import { range, unique, windowed } from '@pacote/array'
 import { BloomFilter, optimal } from '@pacote/bloom-filter'
 import { memoize } from '@pacote/memoize'
 import type { U64 } from '@pacote/u64'
-import { xxh64, type XXHash } from '@pacote/xxhash'
+import { type XXHash, xxh64 } from '@pacote/xxhash'
 import { findLast } from './array'
 import { entries, keys, pick } from './object'
-import { EXCLUDE, PHRASE, queryTerms, REQUIRE } from './query'
+import { EXCLUDE, PHRASE, REQUIRE, queryTerms } from './query'
 import { countIdf } from './tf-idf'
 
 export type PreprocessFunction<Document, Field extends keyof Document> = (

@@ -9,12 +9,7 @@
     "email": "hello@goblindegook.com",
     "url": "https://goblindegook.com"
   },
-  "keywords": [
-    "react",
-    "components",
-    "hoc",
-    "props"
-  ],
+  "keywords": ["react", "components", "hoc", "props"],
   "repository": "github:PacoteJS/pacote",
   "bugs": {
     "url": "https://github.com/PacoteJS/pacote/issues"

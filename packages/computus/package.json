@@ -9,10 +9,7 @@
     "email": "hello@goblindegook.com",
     "url": "https://goblindegook.com"
   },
-  "keywords": [
-    "easter",
-    "computus"
-  ],
+  "keywords": ["easter", "computus"],
   "repository": "github:PacoteJS/pacote",
   "bugs": {
     "url": "https://github.com/PacoteJS/pacote/issues"

@@ -1,6 +1,6 @@
-import { expect, describe, test } from 'vitest'
+import { assert, array, integer, nat, property } from 'fast-check'
+import { describe, expect, test } from 'vitest'
 import { sample, sampleN } from '../src/index'
-import { array, assert, integer, nat, property } from 'fast-check'
 
 describe('sample', () => {
   test('undefined if the array is empty', () => {

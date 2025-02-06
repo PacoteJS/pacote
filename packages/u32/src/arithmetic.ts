@@ -1,12 +1,12 @@
 import { negate, shiftLeft, shiftRight } from './bitwise'
 import { equals, greaterThan, lessThan } from './comparison'
-import { type U32, ZERO, clamp, clampBlocks, overflow } from './u32'
+import { type U32, ZERO } from './u32'
 
 export function add(augend: U32, addend: U32): U32 {
   const r0 = augend[0] + addend[0]
-  const r1 = overflow(r0) + augend[1] + addend[1]
+  const r1 = (r0 >>> 16) + augend[1] + addend[1]
 
-  return clampBlocks([r0, r1])
+  return [r0 & 0xffff, r1 & 0xffff]
 }
 
 export function subtract(minuend: U32, subtrahend: U32): U32 {
@@ -16,10 +16,10 @@ export function subtract(minuend: U32, subtrahend: U32): U32 {
 export function multiply(multiplier: U32, multiplicand: U32): U32 {
   const r0 = multiplier[0] * multiplicand[0]
   const r1 =
-    clamp(overflow(r0) + multiplier[0] * multiplicand[1]) +
+    (((r0 >>> 16) + multiplier[0] * multiplicand[1]) & 0xffff) +
     multiplier[1] * multiplicand[0]
 
-  return clampBlocks([r0, r1])
+  return [r0 & 0xffff, r1 & 0xffff]
 }
 
 export function divide(dividend: U32, divisor: U32): U32 {

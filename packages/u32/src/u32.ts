@@ -1,10 +1,7 @@
 export type U32 = readonly [number, number]
 
-export const overflow = (value: number) => value >>> 16
-export const clamp = (value: number) => value & 0xffff
-
 export function fromNumber(value: number): U32 {
-  return [clamp(value), overflow(value)]
+  return [value & 0xffff, value >>> 16]
 }
 
 export function toNumber(value: U32): number {
@@ -12,7 +9,3 @@ export function toNumber(value: U32): number {
 }
 
 export const ZERO = fromNumber(0)
-
-export function clampBlocks([v0, v1]: U32): U32 {
-  return [clamp(v0), clamp(v1)]
-}

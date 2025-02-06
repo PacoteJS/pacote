@@ -9,11 +9,7 @@
     "email": "hello@goblindegook.com",
     "url": "https://goblindegook.com"
   },
-  "keywords": [
-    "memoize",
-    "fp",
-    "functional programming"
-  ],
+  "keywords": ["memoize", "fp", "functional programming"],
   "repository": "github:PacoteJS/pacote",
   "bugs": {
     "url": "https://github.com/PacoteJS/pacote/issues"

@@ -1,6 +1,6 @@
+import { assert, anything, asyncProperty, func } from 'fast-check'
 import { describe, expect, test } from 'vitest'
-import { anything, assert, asyncProperty, func } from 'fast-check'
-import { flatMap, flatten, map, Task } from '../src/index'
+import { Task, flatMap, flatten, map } from '../src/index'
 
 test('run a task', async () => {
   const task = Task('ok')
@@ -30,7 +30,7 @@ describe('monad laws', () => {
         const direct = Task(fn(value))
 
         expect(await bound()).toEqual(await direct())
-      })
+      }),
     )
   })
 
@@ -41,7 +41,7 @@ describe('monad laws', () => {
         const direct = Task(value)
 
         expect(await bound()).toEqual(await direct())
-      })
+      }),
     )
   })
 
@@ -57,11 +57,11 @@ describe('monad laws', () => {
           const t = Task(value)
 
           const left = flatMap(gt, flatMap(ft, t))
-          const right = flatMap(x => flatMap(gt, ft(x)), t)
+          const right = flatMap((x) => flatMap(gt, ft(x)), t)
 
           expect(await left()).toEqual(await right())
-        }
-      )
+        },
+      ),
     )
   })
 })

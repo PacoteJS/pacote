@@ -1,6 +1,7 @@
 type UnknownRecord = Record<string | number | symbol, unknown>
 
-export const keys = <O extends UnknownRecord>(o: O) => Object.keys(o) as (keyof O)[]
+export const keys = <O extends UnknownRecord>(o: O) =>
+  Object.keys(o) as (keyof O)[]
 
 export const entries = <O extends UnknownRecord>(o: O) =>
   Object.entries(o) as [keyof O, O[keyof O]][]

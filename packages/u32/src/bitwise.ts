@@ -1,8 +1,4 @@
-import { type U32, clamp, clampBlocks, overflow } from './u32'
-
-function softClampBlocks([v0, v1]: U32): U32 {
-  return [clamp(v0), v1]
-}
+import type { U32 } from './u32'
 
 export function and(a: U32, b: U32): U32 {
   return [a[0] & b[0], a[1] & b[1]]
@@ -17,10 +13,10 @@ export function xor(a: U32, b: U32): U32 {
 }
 
 export function negate(value: U32): U32 {
-  const r0 = clamp(~value[0]) + 1
-  const r1 = clamp(~value[1]) + overflow(r0)
+  const r0 = (~value[0] & 0xffff) + 1
+  const r1 = (~value[1] & 0xffff) + (r0 >>> 16)
 
-  return clampBlocks([r0, r1])
+  return [r0 & 0xffff, r1 & 0xffff]
 }
 
 function _shiftLeft(value: U32, bits: number): U32 {
@@ -36,9 +32,10 @@ function _shiftLeft(value: U32, bits: number): U32 {
 }
 
 export function shiftLeft(value: U32, bits: number, overflow = false): U32 {
+  const [v0, v1]: U32 = _shiftLeft(value, bits)
   return overflow
-    ? softClampBlocks(_shiftLeft(value, bits))
-    : clampBlocks(_shiftLeft(value, bits))
+    ? [v0 & 0xffff, v1]
+    : [v0 & 0xffff, v1 & 0xffff]
 }
 
 function _shiftRight(value: U32, bits: number): U32 {
@@ -52,17 +49,18 @@ function _shiftRight(value: U32, bits: number): U32 {
 }
 
 export function shiftRight(value: U32, bits: number): U32 {
-  return clampBlocks(_shiftRight(value, bits))
+  const [v0, v1]: U32 = _shiftRight(value, bits)
+  return [v0 & 0xffff, v1 & 0xffff]
 }
 
 export function rotateLeft(value: U32, bits: number): U32 {
   let v = (value[1] << 16) | value[0]
   v = (v << bits) | (v >>> (32 - bits))
-  return [clamp(v), overflow(v)]
+  return [v & 0xffff, v >>> 16]
 }
 
 export function rotateRight(value: U32, bits: number): U32 {
   let v = (value[1] << 16) | value[0]
   v = (v >>> bits) | (v << (32 - bits))
-  return [clamp(v), overflow(v)]
+  return [v & 0xffff, v >>> 16]
 }

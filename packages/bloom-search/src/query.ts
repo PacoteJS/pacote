@@ -3,7 +3,10 @@ export const EXCLUDE = Symbol('exclude')
 export const PHRASE = Symbol('phrase')
 export const REQUIRE = Symbol('require')
 
-type SearchTerm = [string, typeof NORMAL | typeof EXCLUDE | typeof REQUIRE | typeof PHRASE]
+type SearchTerm = [
+  string,
+  typeof NORMAL | typeof EXCLUDE | typeof REQUIRE | typeof PHRASE,
+]
 
 const joinPhrase = (term: string) => term.replace(/\s+/g, '_')
 const splitPhrase = (term: string) => term.replace(/_+/g, ' ')

@@ -25,12 +25,8 @@
     "test:coverage": "vitest run --coverage"
   },
   "lint-staged": {
-    "**/*.{css,md}": [
-      "prettier --write"
-    ],
-    "**/*.{js,json,ts,tsx}": [
-      "biome check --apply ."
-    ]
+    "**/*.{css,md}": ["prettier --write"],
+    "**/*.{js,json,ts,tsx}": ["biome check --apply ."]
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
