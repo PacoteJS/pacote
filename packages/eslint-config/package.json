@@ -1,6 +1,7 @@
 {
   "name": "@pacote/eslint-config",
   "description": "Shareable ESLint configuration.",
+  "deprecated": "This package is no longer maintained.",
   "version": "6.0.2",
   "sideEffects": false,
   "license": "MIT",

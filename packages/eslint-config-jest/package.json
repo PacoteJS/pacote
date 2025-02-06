@@ -1,6 +1,7 @@
 {
   "name": "@pacote/eslint-config-jest",
   "description": "Shareable ESLint configuration for Jest.",
+  "deprecated": "This package is no longer maintained.",
   "version": "3.0.3",
   "sideEffects": false,
   "license": "MIT",
