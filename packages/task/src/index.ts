@@ -33,10 +33,7 @@ export function map<T, R>(fn: (value: T) => R, task: Task<T>): Task<R> {
  *
  * @returns Flatmapped task.
  */
-export function flatMap<T, R>(
-  fn: (result: T) => Task<R>,
-  task: Task<T>,
-): Task<R> {
+export function flatMap<T, R>(fn: (result: T) => Task<R>, task: Task<T>): Task<R> {
   return () => task().then((result) => fn(result)())
 }
 
