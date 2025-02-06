@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const pkg = require('./package.json')
 
 const data = {
