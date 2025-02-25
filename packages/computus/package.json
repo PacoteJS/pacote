@@ -1,7 +1,7 @@
 {
   "name": "@pacote/computus",
   "description": "Determine the calendar date of the Easter holiday.",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "sideEffects": false,
   "license": "MIT",
   "author": {
@@ -9,7 +9,10 @@
     "email": "hello@goblindegook.com",
     "url": "https://goblindegook.com"
   },
-  "keywords": ["easter", "computus"],
+  "keywords": [
+    "easter",
+    "computus"
+  ],
   "repository": "github:PacoteJS/pacote",
   "bugs": {
     "url": "https://github.com/PacoteJS/pacote/issues"

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.2](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-filter@0.7.1...@pacote/bloom-filter@0.7.2) (2025-02-25)
+
+### Performance Improvements
+
+- ⚡️ faster add and lookup methods ([f8785e4](https://github.com/PacoteJS/pacote/commit/f8785e4d01a4ae71eeae32cbd344a99625276d87))
+
 ## [0.7.1](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-filter@0.7.0...@pacote/bloom-filter@0.7.1) (2025-02-06)
 
 **Note:** Version bump only for package @pacote/bloom-filter

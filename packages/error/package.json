@@ -1,7 +1,7 @@
 {
   "name": "@pacote/error",
   "description": "Functional errors.",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "sideEffects": false,
   "license": "MIT",
   "author": {
@@ -9,7 +9,11 @@
     "email": "hello@goblindegook.com",
     "url": "https://goblindegook.com"
   },
-  "keywords": ["error", "fp", "functional programming"],
+  "keywords": [
+    "error",
+    "fp",
+    "functional programming"
+  ],
   "repository": "github:PacoteJS/pacote",
   "bugs": {
     "url": "https://github.com/PacoteJS/pacote/issues"

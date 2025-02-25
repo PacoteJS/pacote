@@ -1,14 +1,19 @@
 {
   "name": "@pacote/flux-actions",
   "description": "Typed actions and reducers for Flux and Flux-like architectures.",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "sideEffects": false,
   "author": {
     "name": "Luís Rodrigues",
     "email": "hello@goblindegook.com",
     "url": "https://goblindegook.com"
   },
-  "keywords": ["flux", "redux", "actions", "reducers"],
+  "keywords": [
+    "flux",
+    "redux",
+    "actions",
+    "reducers"
+  ],
   "repository": "github:PacoteJS/pacote",
   "bugs": {
     "url": "https://github.com/PacoteJS/pacote/issues"

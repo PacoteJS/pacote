@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.0.4](https://github.com/PacoteJS/pacote/compare/@pacote/ffetch@7.0.3...@pacote/ffetch@7.0.4) (2025-02-25)
+
+**Note:** Version bump only for package @pacote/ffetch
+
 ## [7.0.3](https://github.com/PacoteJS/pacote/compare/@pacote/ffetch@7.0.2...@pacote/ffetch@7.0.3) (2024-10-05)
 
 **Note:** Version bump only for package @pacote/ffetch

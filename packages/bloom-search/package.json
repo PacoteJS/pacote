@@ -1,7 +1,7 @@
 {
   "name": "@pacote/bloom-search",
   "description": "Document search using Bloom filters.",
-  "version": "0.17.5",
+  "version": "0.17.6",
   "sideEffects": false,
   "license": "MIT",
   "author": {
@@ -9,7 +9,10 @@
     "email": "hello@goblindegook.com",
     "url": "https://goblindegook.com"
   },
-  "keywords": ["search", "bloom filters"],
+  "keywords": [
+    "search",
+    "bloom filters"
+  ],
   "repository": "github:PacoteJS/pacote",
   "bugs": {
     "url": "https://github.com/PacoteJS/pacote/issues"
