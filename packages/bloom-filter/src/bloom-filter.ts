@@ -1,4 +1,3 @@
-import { range } from '@pacote/array'
 import { defaultHash } from './hash'
 import type { Options } from './options'
 
@@ -26,19 +25,24 @@ export class BloomFilter<T extends { toString(): string }> {
   }
 
   add(element: T): void {
-    for (const i of range(0, this.hashes)) {
-      const hashedValue = this.hash(i, element.toString()) % this.size
+    const str = element.toString()
+    for (let i = 0; i < this.hashes; i++) {
+      const hashedValue = this.hash(i, str) % this.size
       const position = Math.floor(hashedValue / 32)
-      this.filter[position] |= 1 << (hashedValue - position * 32)
+      this.filter[position] |= 1 << hashedValue % 32
     }
   }
 
   has(element: T): boolean {
-    return range(0, this.hashes).every((i) => {
-      const hashedValue = this.hash(i, element.toString()) % this.size
+    const str = element.toString()
+    for (let i = 0; i < this.hashes; i++) {
+      const hashedValue = this.hash(i, str) % this.size
       const position = Math.floor(hashedValue / 32)
-      return this.filter[position] & (1 << (hashedValue - position * 32))
-    })
+      if (!(this.filter[position] & (1 << hashedValue % 32))) {
+        return false
+      }
+    }
+    return true
   }
 
   toJSON(): SerialisedBloomFilter {

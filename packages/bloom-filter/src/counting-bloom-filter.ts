@@ -1,4 +1,3 @@
-import { range } from '@pacote/array'
 import { defaultHash } from './hash'
 import type { Options } from './options'
 
@@ -26,14 +25,14 @@ export class CountingBloomFilter<T extends { toString(): string }> {
   }
 
   add(element: T): void {
-    for (const i of range(0, this.hashes)) {
+    for (let i = 0; i < this.hashes; i++) {
       const position = this.hashPosition(i, element)
       this.filter[position] += 1
     }
   }
 
   remove(element: T): void {
-    for (const i of range(0, this.hashes)) {
+    for (let i = 0; i < this.hashes; i++) {
       const position = this.hashPosition(i, element)
       if (this.filter[position] > 0) {
         this.filter[position] -= 1
@@ -42,12 +41,12 @@ export class CountingBloomFilter<T extends { toString(): string }> {
   }
 
   has(element: T): number {
-    return Math.min(
-      ...range(0, this.hashes).map((i) => {
-        const position = this.hashPosition(i, element)
-        return this.filter[position]
-      }),
-    )
+    let min = Number.POSITIVE_INFINITY
+    for (let i = 0; i < this.hashes; i++) {
+      const position = this.hashPosition(i, element)
+      min = Math.min(min, this.filter[position])
+    }
+    return min
   }
 
   toJSON(): SerialisedCountingBloomFilter {
