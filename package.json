@@ -25,10 +25,7 @@
     "test:coverage": "vitest run --coverage"
   },
   "lint-staged": {
-    "**/*.{css,md}": [
-      "prettier --write"
-    ],
-    "**/*.{js,json,ts,tsx}": [
+    "**/*.{css,js,json,ts,tsx}": [
       "biome check --apply ."
     ]
   },
@@ -53,7 +50,6 @@
     "msw": "^2.3.1",
     "nx": "^20.0.6",
     "plop": "^4.0.1",
-    "prettier": "^3.3.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "redux": "^5.0.1",
