@@ -1,7 +1,7 @@
 import { fromString } from './string'
-import { type U64, fromNumber } from './u64'
+import { fromNumber, type U64 } from './u64'
 
-export { toNumber, U64, ZERO } from './u64'
+export { toNumber, type U64, ZERO } from './u64'
 export {
   and,
   or,
@@ -9,7 +9,7 @@ export {
   shiftLeft,
   shiftRight,
   rotateLeft,
-  rotateRight,
+  rotateRight
 } from './bitwise'
 export { equals, greaterThan, lessThan } from './comparison'
 export {
@@ -18,7 +18,7 @@ export {
   multiply,
   divide,
   remainder,
-  negate,
+  negate
 } from './arithmetic'
 export { toString } from './string'
 

@@ -7,7 +7,12 @@
     "esModuleInterop": true,
     "target": "ES5",
     "sourceMap": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext", "ScriptHost"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext",
+      "ScriptHost"
+    ],
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "module": "CommonJS",
@@ -15,12 +20,16 @@
     "jsx": "react",
     "allowJs": false,
     "exactOptionalPropertyTypes": true,
+    "erasableSyntaxOnly": true,
     "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
     "noImplicitReturns": true,
+    "noImplicitAny": true,
     "noImplicitThis": true,
     "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedSideEffectImports": true,
     "noUnusedLocals": true,
     "noUnusedParameters": false,
     "resolveJsonModule": true,
@@ -31,7 +40,9 @@
     "stripInternal": true,
     "baseUrl": ".",
     "paths": {
-      "@pacote/*": ["./packages/*/src"]
+      "@pacote/*": [
+        "./packages/*/src"
+      ]
     }
   }
 }

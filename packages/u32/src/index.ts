@@ -1,7 +1,7 @@
 import { fromString } from './string'
-import { type U32, fromNumber } from './u32'
+import { fromNumber, type U32 } from './u32'
 
-export { toNumber, U32, ZERO } from './u32'
+export { toNumber, type U32, ZERO } from './u32'
 export {
   and,
   or,
@@ -10,7 +10,7 @@ export {
   shiftLeft,
   shiftRight,
   rotateLeft,
-  rotateRight,
+  rotateRight
 } from './bitwise'
 export { equals, greaterThan, lessThan } from './comparison'
 export { add, subtract, multiply, divide, remainder } from './arithmetic'
