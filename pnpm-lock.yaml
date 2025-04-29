@@ -28,7 +28,7 @@ importers:
         version: link:packages/error
       '@pacote/ffetch':
         specifier: file:packages/ffetch
-        version: file:packages/ffetch(fp-ts@2.16.9)
+        version: file:packages/ffetch(fp-ts@2.16.10)
       '@pacote/flux-actions':
         specifier: file:packages/flux-actions
         version: link:packages/flux-actions
@@ -49,7 +49,7 @@ importers:
         version: link:packages/is-plain-object
       '@pacote/jest-either':
         specifier: file:packages/jest-either
-        version: file:packages/jest-either(fp-ts@2.16.9)
+        version: file:packages/jest-either(fp-ts@2.16.10)
       '@pacote/linked-list':
         specifier: file:packages/linked-list
         version: link:packages/linked-list
@@ -134,7 +134,7 @@ importers:
         version: 4.1.1
       fp-ts:
         specifier: ^2.16.8
-        version: 2.16.9
+        version: 2.16.10
       git-cz:
         specifier: ^4.9.0
         version: 4.9.0
@@ -2024,11 +2024,11 @@ packages:
     resolution: {integrity: sha512-hGfm/slu0ZabnNt4oaRZ6uREyfCj6P4fT/n6A1rGV+Z0VdGXjfOhVUpkn6qVQONHGIFwmveGXyDs75+nr6FM8w==}
     engines: {node: '>= 6'}
 
+  fp-ts@2.16.10:
+    resolution: {integrity: sha512-vuROzbNVfCmUkZSUbnWSltR1sbheyQbTzug7LB/46fEa1c0EucLeBaCEUE0gF3ZGUGBt9lVUiziGOhhj6K1ORA==}
+
   fp-ts@2.16.6:
     resolution: {integrity: sha512-v7w209VPj4L6pPn/ftFRJu31Oa8QagwcVw7BZmLCUWU4AQoc954rX9ogSIahDf67Pg+GjPbkW/Kn9XWnlWJG0g==}
-
-  fp-ts@2.16.9:
-    resolution: {integrity: sha512-+I2+FnVB+tVaxcYyQkHUq7ZdKScaBlX53A41mxQtpIccsfyv8PzdzP7fzp2AY832T4aoK6UZ5WRX/ebGd8uZuQ==}
 
   front-matter@4.0.2:
     resolution: {integrity: sha512-I8ZuJ/qG92NWX8i5x1Y8qyj3vizhXS31OxjKDu3LKP+7/qBgfIKValiZIEwoVoJKUHlhWtYrktkxV1XsX+pPlg==}
@@ -5005,17 +5005,17 @@ snapshots:
 
   '@pacote/error@file:packages/error': {}
 
-  '@pacote/ffetch@file:packages/ffetch(fp-ts@2.16.9)':
+  '@pacote/ffetch@file:packages/ffetch(fp-ts@2.16.10)':
     dependencies:
       '@pacote/error': file:packages/error
-      fp-ts: 2.16.9
+      fp-ts: 2.16.10
 
   '@pacote/is-plain-object@file:packages/is-plain-object': {}
 
-  '@pacote/jest-either@file:packages/jest-either(fp-ts@2.16.9)':
+  '@pacote/jest-either@file:packages/jest-either(fp-ts@2.16.10)':
     dependencies:
       '@pacote/is-plain-object': file:packages/is-plain-object
-      fp-ts: 2.16.9
+      fp-ts: 2.16.10
       jest-diff: 29.7.0
       jest-matcher-utils: 29.7.0
       ramda: 0.30.1
@@ -6059,9 +6059,9 @@ snapshots:
       es-set-tostringtag: 2.1.0
       mime-types: 2.1.35
 
-  fp-ts@2.16.6: {}
+  fp-ts@2.16.10: {}
 
-  fp-ts@2.16.9: {}
+  fp-ts@2.16.6: {}
 
   front-matter@4.0.2:
     dependencies:
