@@ -259,7 +259,7 @@ importers:
         version: 2.16.10
       jest-diff:
         specifier: ^30.0.0
-        version: 30.0.0
+        version: 30.0.2
       jest-matcher-utils:
         specifier: ^30.0.0
         version: 30.0.0
