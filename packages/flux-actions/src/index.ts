@@ -1,11 +1,11 @@
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: ignore
 export interface Action<P = any, M = any> {
   type: string
   payload: P
   meta: M
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: ignore
 type ActionCreator<P = any, M = any> = {
   type: string
   (payload: P, meta?: M): Action<P, M>
@@ -15,7 +15,7 @@ type ActionCreator<P = any, M = any> = {
 
 type Reducer<S> = (state: S | undefined, action: Action) => S
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: ignore
 type ReduceHandler<S, P = any, M = any> = (state: S, action: Action<P, M>) => S
 
 type ReducerMatch<S> = [ActionCreator, ReduceHandler<S>]
@@ -58,7 +58,7 @@ function createReducer<S>(
     on(creators, handler) {
       return createReducer(initialState, [
         ...matches,
-        ...Array<ActionCreator>()
+        ...([] as ActionCreator[])
           .concat(creators)
           .map<ReducerMatch<S>>((creator) => [creator, handler]),
       ])

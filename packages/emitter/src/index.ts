@@ -1,6 +1,5 @@
 interface Events {
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  [name: string]: (...args: any[]) => void
+  [name: string]: (...args: unknown[]) => void
 }
 
 interface Emitter<E extends Events> {

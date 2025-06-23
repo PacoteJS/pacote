@@ -110,7 +110,7 @@ export function xxh64BigInt(seed: number | bigint = 0): XXHash<bigint> {
 
   reset(seed)
 
-  const digest = (encoding: 'hex') => {
+  const digest = (_encoding: 'hex') => {
     let hash: bigint
 
     if (totalLength >= 32) {

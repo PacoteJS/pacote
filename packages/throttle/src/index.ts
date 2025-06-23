@@ -1,5 +1,4 @@
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-type Throttled<A extends any[]> = (...args: A) => void
+type Throttled<A extends unknown[]> = (...args: A) => void
 
 interface Cancellable {
   cancel: () => void
@@ -28,11 +27,9 @@ interface Cancellable {
  * throttledFn() // fn() is scheduled for execution after 100ms
  * throttledFn() // fn() is scheduled for execution, cancelling the previous one
  */
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export function throttle<A extends any[]>(
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  fn: (...args: A) => any,
-  delay = 0
+export function throttle<A extends unknown[]>(
+  fn: (...args: A) => unknown,
+  delay = 0,
 ): Throttled<A> & Cancellable {
   let lastCalled = 0
   let timer: NodeJS.Timeout
@@ -56,6 +53,6 @@ export function throttle<A extends any[]>(
     cancel: () => {
       lastCalled = 0
       clearTimeout(timer)
-    }
+    },
   })
 }

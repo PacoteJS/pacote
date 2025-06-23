@@ -1,6 +1,6 @@
 import { add, divide, multiply, remainder } from './arithmetic'
 import { greaterThan } from './comparison'
-import { type U64, ZERO, fromNumber, toNumber } from './u64'
+import { fromNumber, toNumber, type U64, ZERO } from './u64'
 
 const MAX_CHUNK_SIZE = 5
 
@@ -23,7 +23,7 @@ const PADDING: Record<number, number | undefined> = {
   16: 16,
 }
 
-// biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
+// biome-ignore lint/suspicious/noShadowRestrictedNames: global toString not used
 export function toString(value: U64, radix = 10): string {
   const _radix = fromNumber(radix)
 

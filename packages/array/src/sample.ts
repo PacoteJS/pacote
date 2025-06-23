@@ -1,3 +1,9 @@
+type NonEmptyArray<T> = readonly [T, ...T[]]
+
+function isNotEmpty<T>(value: readonly T[]): value is NonEmptyArray<T> {
+  return value.length > 0
+}
+
 /**
  * Picks a random element from an array, or `undefined` if the provided array
  * is empty.
@@ -15,8 +21,9 @@
  * @returns Random element from the provided array, or `undefined` if the array
  *          is empty.
  */
+export function sample<T>(array: NonEmptyArray<T>): T
 export function sample<T>(array: readonly T[]): T | undefined {
-  if (array.length === 0) return undefined
+  if (!isNotEmpty(array)) return undefined
   return array[Math.floor(Math.random() * array.length)]
 }
 
@@ -38,12 +45,11 @@ export function sample<T>(array: readonly T[]): T | undefined {
  * @returns Array of random elements from the provided array.
  */
 export function sampleN<T>(array: readonly T[], sampleSize: number): T[] {
-  if (array.length === 0) return []
+  if (!isNotEmpty(array)) return []
   const maxSamples = Math.max(0, sampleSize)
   const result = new Array<T>(maxSamples)
   for (let i = 0; i < maxSamples; i++) {
-    // biome-ignore lint/style/noNonNullAssertion: <explanation>
-    result[i] = sample(array)!
+    result[i] = sample(array)
   }
   return result
 }

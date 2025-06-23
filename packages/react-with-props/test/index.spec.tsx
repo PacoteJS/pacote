@@ -2,8 +2,9 @@
  * @vitest-environment jsdom
  */
 
-import { render } from '@testing-library/react'
-import React, { type FunctionComponent, type ReactNode } from 'react'
+import { render, renderHook } from '@testing-library/react'
+// biome-ignore lint/correctness/noUnusedImports: required to render JSX
+import React, { type FunctionComponent, type ReactNode, useId } from 'react'
 import { describe, expect, test } from 'vitest'
 import { withDefaultProps, withProps } from '../src'
 
@@ -67,6 +68,7 @@ describe('withProps()', () => {
         {name}: {value}
       </>
     )
+    // @ts-ignore
     const Wrapped = withProps({ name: 'Test' }, Test)
     const { container: actual } = render(<Wrapped value="OK" />)
     const { container: expected } = render(<Test name="Test" value="OK" />)
@@ -82,15 +84,17 @@ describe('withProps()', () => {
 
   test('forwards props to DOM components', () => {
     const Wrapped = withProps({}, 'footer')
-    const { container: actual } = render(<Wrapped id="test" />)
-    const { container: expected } = render(<footer id="test" />)
+    const id = renderHook(useId)
+    const { container: actual } = render(<Wrapped id={id.result.current} />)
+    const { container: expected } = render(<footer id={id.result.current} />)
     expect(actual.id).toEqual(expected.id)
   })
 
   test('injects props into DOM components', () => {
-    const Wrapped = withProps({ id: 'test' }, 'footer')
+    const id = renderHook(useId)
+    const Wrapped = withProps({ id: id.result.current }, 'footer')
     const { container: actual } = render(<Wrapped />)
-    const { container: expected } = render(<footer id="test" />)
+    const { container: expected } = render(<footer id={id.result.current} />)
     expect(actual.id).toEqual(expected.id)
   })
 
@@ -131,6 +135,7 @@ describe('withProps()', () => {
       </>
     )
     const injector = ({ foo = '' }) => ({ name: foo })
+    // @ts-ignore
     const Wrapped = withProps(injector, Test)
     const { container: actual } = render(<Wrapped foo="Test" value="OK" />)
     const { container: expected } = render(<Test name="Test" value="OK" />)
@@ -198,6 +203,7 @@ describe('withDefaultProps()', () => {
         {name}: {value}
       </>
     )
+    // @ts-ignore
     const Wrapped = withDefaultProps({ name: 'Test' }, Test)
     const { container: actual } = render(<Wrapped value="OK" />)
     const { container: expected } = render(<Test name="Test" value="OK" />)
@@ -214,6 +220,7 @@ describe('withDefaultProps()', () => {
         {name}: {value}
       </>
     )
+    // @ts-ignore
     const Wrapped = withDefaultProps({ name: 'Test' }, Test)
     const { container: actual } = render(<Wrapped name="Override" value="OK" />)
     const { container: expected } = render(<Test name="Override" value="OK" />)
@@ -228,16 +235,18 @@ describe('withDefaultProps()', () => {
   })
 
   test('forwards props to DOM components', () => {
+    const id = renderHook(useId)
     const Wrapped = withDefaultProps({}, 'footer')
-    const { container: actual } = render(<Wrapped id="test" />)
-    const { container: expected } = render(<footer id="test" />)
+    const { container: actual } = render(<Wrapped id={id.result.current} />)
+    const { container: expected } = render(<footer id={id.result.current} />)
     expect(actual.id).toBe(expected.id)
   })
 
   test('injects props into DOM components', () => {
-    const Wrapped = withDefaultProps({ id: 'test' }, 'footer')
+    const id = renderHook(useId)
+    const Wrapped = withDefaultProps({ id: id.result.current }, 'footer')
     const { container: actual } = render(<Wrapped />)
-    const { container: expected } = render(<footer id="test" />)
+    const { container: expected } = render(<footer id={id.result.current} />)
     expect(actual.id).toBe(expected.id)
   })
 
@@ -257,9 +266,10 @@ describe('withDefaultProps()', () => {
   })
 
   test('overrides props injected into DOM components', () => {
+    const id = renderHook(useId)
     const Wrapped = withDefaultProps({ id: 'test' }, 'footer')
-    const { container: actual } = render(<Wrapped id="override" />)
-    const { container: expected } = render(<footer id="override" />)
+    const { container: actual } = render(<Wrapped id={id.result.current} />)
+    const { container: expected } = render(<footer id={id.result.current} />)
     expect(actual.id).toBe(expected.id)
   })
 

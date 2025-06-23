@@ -3,6 +3,7 @@
  */
 
 import { cleanup, fireEvent, render } from '@testing-library/react'
+// biome-ignore lint/correctness/noUnusedImports: required to render JSX
 import React from 'react'
 import { afterEach, expect, test, vi } from 'vitest'
 import { useOutside } from '../src'

@@ -19,7 +19,7 @@ export function useOutside<E extends HTMLElement>(
       }
     }
 
-    const types = Array<EventType>().concat(type)
+    const types = ([] as ReadonlyArray<EventType>).concat(type)
     const controller = new AbortController()
     const options = { signal: controller.signal }
 

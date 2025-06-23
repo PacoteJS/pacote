@@ -23,7 +23,7 @@ const failMessage = (actual: unknown) => () =>
     '',
   )}\n\nExpected Either, received:\n  ${printReceived(actual)}`
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: receives anything
 function isEither(actual: any): actual is Either<unknown, unknown> {
   return (
     actual !== undefined &&

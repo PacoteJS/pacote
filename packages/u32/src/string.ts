@@ -1,4 +1,4 @@
-import { type U32, toNumber } from './u32'
+import { toNumber, type U32 } from './u32'
 
 export function fromString(value: string, radix: number): U32 {
   const result = Number.parseInt(value, radix)
@@ -10,7 +10,7 @@ const PADDING: Record<number, number | undefined> = {
   16: 8,
 }
 
-// biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
+// biome-ignore lint/suspicious/noShadowRestrictedNames: global toString not used
 export function toString(value: U32, radix = 10): string {
   return toNumber(value)
     .toString(radix)

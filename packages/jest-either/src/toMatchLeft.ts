@@ -36,13 +36,11 @@ const failMessage =
 export function toMatchLeft(
   actual: Either<string, unknown>,
   expected: RegExp,
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-): any
+): unknown
 export function toMatchLeft<L>(
   actual: Either<L, unknown>,
   expected: Partial<L>,
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-): any
+): unknown
 export function toMatchLeft<L>(
   actual: Either<L, unknown>,
   expected: RegExp | Partial<L>,

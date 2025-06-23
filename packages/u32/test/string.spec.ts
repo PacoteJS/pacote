@@ -1,7 +1,7 @@
 import { assert, nat, property } from 'fast-check'
 import { expect, test } from 'vitest'
-// biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
-import { from, toString } from '../src/index'
+// biome-ignore lint/suspicious/noShadowRestrictedNames: global toString not used
+import { from, toString } from '../src'
 
 test('creates U32 values from strings', () => {
   assert(

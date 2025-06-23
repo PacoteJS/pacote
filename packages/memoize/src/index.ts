@@ -8,11 +8,9 @@ export type Options = {
   capacity?: number
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-type Fn<A extends any[], R> = (...args: A) => R
+type Fn<A extends unknown[], R> = (...args: A) => R
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-type MemoizedFn<A extends any[], R> = Fn<A, R> & {
+type MemoizedFn<A extends unknown[], R> = Fn<A, R> & {
   clear(): void
 }
 
@@ -41,8 +39,7 @@ type MemoizedFn<A extends any[], R> = Fn<A, R> & {
  * ```
  */
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export function memoize<A extends any[], K, V>(
+export function memoize<A extends unknown[], K, V>(
   cacheKeyFn: Fn<A, K>,
   fn: Fn<A, V>,
   options: Options = {},
@@ -58,7 +55,7 @@ export function memoize<A extends any[], K, V>(
       cache.set(key, fn(...args))
     }
 
-    // biome-ignore lint/style/noNonNullAssertion: <explanation>
+    // biome-ignore lint/style/noNonNullAssertion: set ensures key exists
     return cache.get(key)!
   }
 

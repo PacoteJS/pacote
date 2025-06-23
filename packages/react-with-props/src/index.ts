@@ -1,28 +1,29 @@
 import {
   type ComponentType,
-  type DOMFactory,
+  createElement,
   type DetailedHTMLFactory,
+  type DOMFactory,
   type FunctionComponent,
   type ReactHTML,
   type ReactNode,
-  type ReactSVG,
-  createElement,
+  type ReactSVG
 } from 'react'
+
+type UnknownProps = Record<string, unknown>
 
 type Injector<Props, InjectedProps> = (props?: Props) => InjectedProps
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-type InnerComponent<Props = any> =
+type InnerComponent<Props = UnknownProps> =
   | ComponentType<Props>
   | keyof ReactHTML
   | keyof ReactSVG
 
 type Enhanced<I, P extends I> = Omit<P & { children?: ReactNode }, keyof I>
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: TODO
 type InnerProps<Component extends InnerComponent<any>> =
   Component extends keyof ReactHTML
-    ? // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    ? // biome-ignore lint/suspicious/noExplicitAny: TODO
       ReactHTML[Component] extends DetailedHTMLFactory<infer HTMLProps, any>
       ? HTMLProps
       : Component extends keyof ReactSVG
@@ -32,10 +33,10 @@ type InnerProps<Component extends InnerComponent<any>> =
         : never
     : Component extends ComponentType<infer Props>
       ? Props
-      : // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+      : // biome-ignore lint/suspicious/noExplicitAny: TODO
         any
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: TODO
 function getDisplayName(Component: InnerComponent<any>): string {
   return typeof Component === 'string'
     ? Component
@@ -43,8 +44,7 @@ function getDisplayName(Component: InnerComponent<any>): string {
 }
 
 function isInjector<OuterProps, InjectedProps>(
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  injector: any,
+  injector: unknown,
 ): injector is Injector<OuterProps, InjectedProps> {
   return typeof injector === 'function'
 }
@@ -65,8 +65,7 @@ export function withProps<
     createElement(
       BaseComponent,
       Object.assign<ComponentProps, EnhancedProps, InjectedProps>(
-        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-        {} as any,
+        {} as ComponentProps,
         props,
         isInjector<OuterProps, InjectedProps>(injected)
           ? injected(props)
@@ -91,8 +90,7 @@ export function withDefaultProps<
     createElement(
       BaseComponent,
       Object.assign<ComponentProps, InjectedProps, EnhancedProps>(
-        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-        {} as any,
+        {} as ComponentProps,
         injectedProps,
         props,
       ),

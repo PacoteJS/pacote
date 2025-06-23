@@ -36,13 +36,11 @@ const failMessage =
 export function toMatchRight(
   actual: Either<unknown, string>,
   expected: RegExp,
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-): any
+): unknown
 export function toMatchRight<R>(
   actual: Either<unknown, R>,
   expected: Partial<R>,
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-): any
+): unknown
 export function toMatchRight<R>(
   actual: Either<unknown, string | R>,
   expected: RegExp | Partial<R>,

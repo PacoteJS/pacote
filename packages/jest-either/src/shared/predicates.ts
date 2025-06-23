@@ -1,20 +1,20 @@
 import { isPlainObject } from '@pacote/is-plain-object'
 import { pipe } from 'fp-ts/function'
 import { type Either, fold } from 'fp-ts/lib/Either'
-import { F, equals, map, where } from 'ramda'
+import { equals, F, map, where } from 'ramda'
 
 export interface AsymmetricMatcher {
   asymmetricMatch(other: unknown): boolean
 }
 
 export function isAsymmetricMatcher(
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // biome-ignore lint/suspicious/noExplicitAny: can be anything
   matcher: any,
 ): matcher is AsymmetricMatcher {
   return typeof matcher.asymmetricMatch === 'function'
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+// biome-ignore lint/suspicious/noExplicitAny: can be anything
 export const matchObject = (s: any) => (o: unknown) =>
   isPlainObject(o) ? where(map(matchObject, s), o) : equals(s, o)
 

@@ -1,6 +1,6 @@
-import { assert, anything, asyncProperty, func } from 'fast-check'
+import { anything, assert, asyncProperty, func } from 'fast-check'
 import { describe, expect, test } from 'vitest'
-import { Task, flatMap, flatten, map } from '../src/index'
+import { flatMap, flatten, map, Task } from '../src/index'
 
 test('run a task', async () => {
   const task = Task('ok')
@@ -8,12 +8,12 @@ test('run a task', async () => {
 })
 
 test('map a task', async () => {
-  const task = map((a: string) => 1, Task('ok'))
+  const task = map((_: string) => 1, Task('ok'))
   await expect(task()).resolves.toBe(1)
 })
 
 test('flatmap a task', async () => {
-  const task = flatMap((a: string) => Task(1), Task('ok'))
+  const task = flatMap((_: string) => Task(1), Task('ok'))
   await expect(task()).resolves.toBe(1)
 })
 

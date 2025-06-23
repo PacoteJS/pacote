@@ -1,16 +1,5 @@
-import {
-  type U64,
-  ZERO,
-  add,
-  from,
-  multiply,
-  rotateLeft,
-  shiftRight,
-  subtract,
-  // biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
-  toString,
-  xor,
-} from '@pacote/u64'
+// biome-ignore lint/suspicious/noShadowRestrictedNames: use imported toString
+import { add, from, multiply, rotateLeft, shiftRight, subtract, toString, type U64, xor, ZERO } from '@pacote/u64'
 import type { XXHash } from './interface'
 import { encode } from './utf8'
 
@@ -22,7 +11,7 @@ const PRIME_5 = from('2870177450012600261')
 
 function readUint64LE(buffer: Uint8Array, index: number): U64 {
   return [
-    (buffer[index + 1] << 8) | buffer[index + 0],
+    (buffer[index + 1] << 8) | buffer[index],
     (buffer[index + 3] << 8) | buffer[index + 2],
     (buffer[index + 5] << 8) | buffer[index + 4],
     (buffer[index + 7] << 8) | buffer[index + 6],
@@ -31,7 +20,7 @@ function readUint64LE(buffer: Uint8Array, index: number): U64 {
 
 function readUint32LE(buffer: Uint8Array, index: number): U64 {
   return [
-    (buffer[index + 1] << 8) | buffer[index + 0],
+    (buffer[index + 1] << 8) | buffer[index],
     (buffer[index + 3] << 8) | buffer[index + 2],
     0,
     0,
@@ -121,7 +110,7 @@ export function xxh64(seed: number | U64 = 0): XXHash<U64> {
 
   reset(seed)
 
-  const digest = (encoding: 'hex') => {
+  const digest = (_encoding: 'hex') => {
     let hash: U64
 
     if (totalLength >= 32) {

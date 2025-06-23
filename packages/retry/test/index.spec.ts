@@ -48,7 +48,7 @@ test('retrying with an interval', async () => {
   )
 
   // Add a small buffer to account for timing variations
-  expect(new Date().getTime() - start.getTime()).toBeGreaterThanOrEqual(45)
+  expect(Date.now() - start.getTime()).toBeGreaterThanOrEqual(45)
 })
 
 test('retrying until there is a timeout', async () => {
@@ -63,7 +63,7 @@ test('retrying until there is a timeout', async () => {
     ),
   ).rejects.toBeInstanceOf(Error)
 
-  expect(new Date().getTime() - start.getTime()).toBeGreaterThanOrEqual(50)
+  expect(Date.now() - start.getTime()).toBeGreaterThanOrEqual(50)
 })
 
 test('retrying with an exponential backoff', async () => {
@@ -79,7 +79,7 @@ test('retrying with an exponential backoff', async () => {
     { backoff: 2, interval: 10 },
   )
 
-  expect(new Date().getTime() - start.getTime()).toBeGreaterThanOrEqual(70)
+  expect(Date.now() - start.getTime()).toBeGreaterThanOrEqual(70)
 })
 
 test('do not call a slow async callback until the previous call has finished', async () => {
