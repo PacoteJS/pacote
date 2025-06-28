@@ -262,7 +262,7 @@ importers:
         version: 30.0.0
       jest-matcher-utils:
         specifier: ^30.0.0
-        version: 30.0.0
+        version: 30.0.3
       ramda:
         specifier: ^0.30.0
         version: 0.30.1
@@ -1221,8 +1221,8 @@ packages:
   '@sinclair/typebox@0.34.33':
     resolution: {integrity: sha512-5HAV9exOMcXRUxo+9iYB5n09XxzCXnfy4VTNW4xnDv+FgjzAGY989C28BIdljKqmF+ZltUwujE3aossvcVtq6g==}
 
-  '@sinclair/typebox@0.34.36':
-    resolution: {integrity: sha512-JFHFhF6MqqRE49JDAGX/EPlHwxIukrKMhNwlMoB/wIJBkvu3+ciO335yDYPP3soI01FkhVXWnyNPKEl+EsC4Zw==}
+  '@sinclair/typebox@0.34.37':
+    resolution: {integrity: sha512-2TRuQVgQYfy+EzHRTIvkhv2ADEouJ2xNS/Vq+W5EuuewBdOrvATvljZTxHWZSTYr2sTjTHpGvucaGAt67S2akw==}
 
   '@testing-library/dom@10.1.0':
     resolution: {integrity: sha512-wdsYKy5zupPyLCW2Je5DLHSxSfbIp6h80WoHOQc+RPtmPGA52O9x5MJEkv92Sjonpq+poOAtUKhh1kBGAXBrNA==}
@@ -2632,16 +2632,16 @@ packages:
     resolution: {integrity: sha512-2UjrNvDJDn/oHFpPrUTVmvYYDNeNtw2DlY3er8bI6vJJb9Fb35ycp/jFLd5RdV59tJ8ekVXX3o/nwPcscgXZJQ==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
 
+  jest-diff@30.0.3:
+    resolution: {integrity: sha512-Q1TAV0cUcBTic57SVnk/mug0/ASyAqtSIOkr7RAlxx97llRYsM74+E8N5WdGJUlwCKwgxPAkVjKh653h1+HA9A==}
+    engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
+
   jest-get-type@29.6.3:
     resolution: {integrity: sha512-zrteXnqYxfQh7l5FHyL38jL39di8H8rHoecLH3JNxH3BwOrBsNeabdap5e0I23lD4HHI8W5VFBZqG4Eaq5LNcw==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
 
-  jest-matcher-utils@30.0.0:
-    resolution: {integrity: sha512-m5mrunqopkrqwG1mMdJxe1J4uGmS9AHHKYUmoxeQOxBcLjEvirIrIDwuKmUYrecPHVB/PUBpXs2gPoeA2FSSLQ==}
-    engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
-
-  jest-matcher-utils@30.0.2:
-    resolution: {integrity: sha512-1FKwgJYECR8IT93KMKmjKHSLyru0DqguThov/aWpFccC0wbiXGOxYEu7SScderBD7ruDOpl7lc5NG6w3oxKfaA==}
+  jest-matcher-utils@30.0.3:
+    resolution: {integrity: sha512-hMpVFGFOhYmIIRGJ0HgM9htC5qUiJ00famcc9sRFchJJiLZbbVKrAztcgE6VnXLRxA3XZ0bvNA7hQWh3oHXo/A==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
 
   jiti@2.4.2:
@@ -4776,7 +4776,7 @@ snapshots:
 
   '@jest/schemas@30.0.1':
     dependencies:
-      '@sinclair/typebox': 0.34.36
+      '@sinclair/typebox': 0.34.37
 
   '@jridgewell/gen-mapping@0.3.5':
     dependencies:
@@ -5187,7 +5187,7 @@ snapshots:
       '@pacote/is-plain-object': file:packages/is-plain-object
       fp-ts: 2.16.10
       jest-diff: 30.0.2
-      jest-matcher-utils: 30.0.2
+      jest-matcher-utils: 30.0.3
       ramda: 0.30.1
 
   '@pkgjs/parseargs@0.11.0':
@@ -5308,7 +5308,7 @@ snapshots:
 
   '@sinclair/typebox@0.34.33': {}
 
-  '@sinclair/typebox@0.34.36': {}
+  '@sinclair/typebox@0.34.37': {}
 
   '@testing-library/dom@10.1.0':
     dependencies:
@@ -6760,20 +6760,20 @@ snapshots:
       chalk: 4.1.2
       pretty-format: 30.0.2
 
+  jest-diff@30.0.3:
+    dependencies:
+      '@jest/diff-sequences': 30.0.1
+      '@jest/get-type': 30.0.1
+      chalk: 4.1.2
+      pretty-format: 30.0.2
+
   jest-get-type@29.6.3: {}
 
-  jest-matcher-utils@30.0.0:
-    dependencies:
-      '@jest/get-type': 30.0.0
-      chalk: 4.1.2
-      jest-diff: 30.0.0
-      pretty-format: 30.0.0
-
-  jest-matcher-utils@30.0.2:
+  jest-matcher-utils@30.0.3:
     dependencies:
       '@jest/get-type': 30.0.1
       chalk: 4.1.2
-      jest-diff: 30.0.2
+      jest-diff: 30.0.3
       pretty-format: 30.0.2
 
   jiti@2.4.2: {}
