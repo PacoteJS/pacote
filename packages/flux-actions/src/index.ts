@@ -69,3 +69,7 @@ function createReducer<S>(
 export function reducerFromState<S>(initialState: S): EnhancedReducer<S> {
   return createReducer(initialState, [])
 }
+
+export function reducer<S>() {
+  return createReducer<S>({} as S, [])
+}

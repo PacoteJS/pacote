@@ -1,6 +1,13 @@
-import { assert, anything, property, string } from 'fast-check'
+/**
+ * @vitest-environment jsdom
+ */
+
+import { renderHook } from '@testing-library/react'
+import { anything, assert, property, string } from 'fast-check'
+import { act, useReducer } from 'react'
 import { expect, test } from 'vitest'
-import { createAction, isType, reducerFromState } from '../src/index'
+import { createAction, isType, reducer, reducerFromState } from '../src/index'
+
 
 test('creates an action creator', () => {
   assert(
@@ -39,11 +46,9 @@ test('matches action using action creator', () => {
 test('reducer has initial state', () => {
   const initialState = 'initialState'
   const testReducer = reducerFromState(initialState)
-  const testAction = createAction<void>('@@TEST/INITIAL')
+  const testAction = createAction<void>('@@TEST/IGNORED')
   expect(testReducer(undefined, testAction())).toEqual(initialState)
 })
-
-test.todo('reducer can be created without an initial state')
 
 test('reducer is a function', () => {
   const testReducer = reducerFromState('initialState')
@@ -84,4 +89,19 @@ test('reducer is immutable', () => {
   const testReducer = reducerFromState('').on(action, () => 'immutability ok')
   testReducer.on(action, () => 'immutability nok')
   expect(testReducer(undefined, action())).toBe('immutability ok')
+})
+
+test('reducer without initial state has state initialised by useReducer', () => {
+  const testReducer = reducer<string>()
+  const { result } = renderHook(() => useReducer(testReducer, 'initialState'))
+  expect(result.current[0]).toEqual('initialState')
+})
+
+test('reducer without an initial state handles useReducer actions', () => {
+  const accelerate = createAction<void>('@@TEST/ACCELERATE')
+  const testReducer = reducer<{ speed: number }>()
+    .on(accelerate, (s) => ({ speed: s.speed + 1 }))
+  const { result } = renderHook(() => useReducer(testReducer, { speed: 87 }))
+  act(() => result.current[1](accelerate()))
+  expect(result.current[0]).toEqual({ speed: 88 })
 })
