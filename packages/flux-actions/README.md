@@ -41,7 +41,7 @@ Calling `changeYear(1955)` will generate the following action object:
 
 #### Action metadata
 
-The action creator supports an optional metadata parameter. For example, `changeYear(1955, meta: { test: true })` will create:
+The action creator supports an optional metadata parameter. For example, `changeYear(1955, { test: true })` will create:
 
 ```javascript
 {

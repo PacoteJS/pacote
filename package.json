@@ -15,7 +15,6 @@
   "scripts": {
     "build": "lerna run build",
     "build:docs": "typedoc",
-    "clean": "rimraf coverage docs packages/*/lib packages/*/tsconfig.tsbuildinfo",
     "commit": "git-cz",
     "format": "biome check --apply .",
     "lint": "biome lint .",
@@ -53,7 +52,6 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "redux": "^5.0.1",
-    "rimraf": "^6.0.1",
     "typedoc": "^0.28.0",
     "typescript": "^5.5.3",
     "vite-tsconfig-paths": "^5.0.1",

@@ -4,5 +4,10 @@
   "html.format.enable": false,
   "workbench.colorCustomizations": {},
   "deno.enable": false,
-  "jest.jestCommandLine": "pnpm vitest"
+  "jest.jestCommandLine": "pnpm vitest",
+  "editor.defaultFormatter": "biomejs.biome",
+  "biome.requireConfiguration": true,
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  }
 }
