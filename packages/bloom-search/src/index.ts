@@ -305,20 +305,23 @@ export class BloomSearch<
    */
   add(ref: string, document: Document, language?: string): void {
     const tokensByField = keys(this.fields).reduce((tokens, field) => {
-      if (document[field] !== undefined) {
-        const fieldText = this.preprocess(document[field], field, document)
-        const fieldTokens = this.tokenizer(fieldText, language)
-
-        const unigrams = fieldTokens
-          .filter((token) => token.length && this.stopwords(token, language))
-          .map((token) => this.stemmer(token, language))
-
-        const ngrams = range(2, this.ngrams + 1).flatMap((i) =>
-          windowed(i, fieldTokens).map((ngram) => ngram.join(' ')),
-        )
-
-        tokens.set(field, unigrams.concat(ngrams))
+      if (document[field] == null) {
+        return tokens
       }
+
+      const fieldText = this.preprocess(document[field], field, document)
+      const fieldTokens = this.tokenizer(fieldText, language)
+
+      const unigrams = fieldTokens
+        .filter((token) => token.length && this.stopwords(token, language))
+        .map((token) => this.stemmer(token, language))
+
+      const ngrams = range(2, this.ngrams + 1).flatMap((i) =>
+        windowed(i, fieldTokens).map((ngram) => ngram.join(' ')),
+      )
+
+      tokens.set(field, unigrams.concat(ngrams))
+
       return tokens
     }, new Map<IndexField, string[]>())
 
