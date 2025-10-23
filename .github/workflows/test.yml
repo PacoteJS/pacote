@@ -1,13 +1,13 @@
 name: Test
 
-on: [push]
+on: [ push ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ['18', '20']
+        node: [ '22', '24' ]
     name: Run on Node ${{ matrix.node }}
     steps:
       - name: Checkout

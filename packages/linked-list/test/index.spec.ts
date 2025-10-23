@@ -186,9 +186,9 @@ describe('filter()', () => {
         L.filter(predicate, list)
 
         expect(predicate).toHaveBeenCalledTimes(items.length)
-        items.forEach((item, index) =>
-          expect(predicate).toHaveBeenCalledWith(item, index, list),
-        )
+        items.forEach((item, index) => {
+          expect(predicate).toHaveBeenCalledWith(item, index, list)
+        })
       }),
     )
   })
@@ -229,9 +229,9 @@ describe('map()', () => {
         L.map(callback, list)
 
         expect(callback).toHaveBeenCalledTimes(items.length)
-        items.forEach((item, index) =>
-          expect(callback).toHaveBeenCalledWith(item, index, list),
-        )
+        items.forEach((item, index) => {
+          expect(callback).toHaveBeenCalledWith(item, index, list)
+        })
       }),
     )
   })
@@ -257,9 +257,9 @@ describe('flatMap()', () => {
         L.flatMap(callback, list)
 
         expect(callback).toHaveBeenCalledTimes(items.length)
-        items.forEach((item, index) =>
-          expect(callback).toHaveBeenCalledWith(item, index, list),
-        )
+        items.forEach((item, index) => {
+          expect(callback).toHaveBeenCalledWith(item, index, list)
+        })
       }),
     )
   })

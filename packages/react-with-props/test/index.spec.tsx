@@ -68,7 +68,7 @@ describe('withProps()', () => {
         {name}: {value}
       </>
     )
-    // @ts-ignore
+    // @ts-expect-error
     const Wrapped = withProps({ name: 'Test' }, Test)
     const { container: actual } = render(<Wrapped value="OK" />)
     const { container: expected } = render(<Test name="Test" value="OK" />)
@@ -135,7 +135,7 @@ describe('withProps()', () => {
       </>
     )
     const injector = ({ foo = '' }) => ({ name: foo })
-    // @ts-ignore
+    // @ts-expect-error
     const Wrapped = withProps(injector, Test)
     const { container: actual } = render(<Wrapped foo="Test" value="OK" />)
     const { container: expected } = render(<Test name="Test" value="OK" />)
@@ -203,7 +203,7 @@ describe('withDefaultProps()', () => {
         {name}: {value}
       </>
     )
-    // @ts-ignore
+    // @ts-expect-error
     const Wrapped = withDefaultProps({ name: 'Test' }, Test)
     const { container: actual } = render(<Wrapped value="OK" />)
     const { container: expected } = render(<Test name="Test" value="OK" />)
@@ -220,7 +220,7 @@ describe('withDefaultProps()', () => {
         {name}: {value}
       </>
     )
-    // @ts-ignore
+    // @ts-expect-error
     const Wrapped = withDefaultProps({ name: 'Test' }, Test)
     const { container: actual } = render(<Wrapped name="Override" value="OK" />)
     const { container: expected } = render(<Test name="Override" value="OK" />)
