@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.1.0](https://github.com/PacoteJS/pacote/compare/@pacote/jest-either@5.0.9...@pacote/jest-either@5.1.0) (2025-10-23)
+
+
+### Features
+
+* 🎸 support for asymmetric matchers ([a5758e2](https://github.com/PacoteJS/pacote/commit/a5758e271b56ae80d94519690e8809f0d859991a))
+
+
+
+
+
 ## [5.0.9](https://github.com/PacoteJS/pacote/compare/@pacote/jest-either@5.0.8...@pacote/jest-either@5.0.9) (2025-02-25)
 
 **Note:** Version bump only for package @pacote/jest-either

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1](https://github.com/PacoteJS/pacote/compare/@pacote/xxhash@0.4.0...@pacote/xxhash@0.4.1) (2025-10-23)
+
+
+### Bug Fixes
+
+* 🐛 export types ([7f3abab](https://github.com/PacoteJS/pacote/commit/7f3ababaac4c31ddd20848da2328a767d1c55909))
+
+
+
+
+
 # [0.4.0](https://github.com/PacoteJS/pacote/compare/@pacote/xxhash@0.3.2...@pacote/xxhash@0.4.0) (2024-10-05)
 
 ### Bug Fixes

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.1.0](https://github.com/PacoteJS/pacote/compare/@pacote/flux-actions@3.0.4...@pacote/flux-actions@3.1.0) (2025-10-23)
+
+
+### Features
+
+* 🎸 reducer factory without initial state for useReducer ([fe91128](https://github.com/PacoteJS/pacote/commit/fe911284e10c50068755bdead5eba3ec2ce522ab)), closes [#3](https://github.com/PacoteJS/pacote/issues/3)
+
+
+
+
+
 ## [3.0.4](https://github.com/PacoteJS/pacote/compare/@pacote/flux-actions@3.0.3...@pacote/flux-actions@3.0.4) (2025-02-25)
 
 **Note:** Version bump only for package @pacote/flux-actions

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.5](https://github.com/PacoteJS/pacote/compare/@pacote/u32@0.3.4...@pacote/u32@0.3.5) (2025-10-23)
+
+
+### Bug Fixes
+
+* 🐛 export types ([7f3abab](https://github.com/PacoteJS/pacote/commit/7f3ababaac4c31ddd20848da2328a767d1c55909))
+
+
+
+
+
 ## [0.3.4](https://github.com/PacoteJS/pacote/compare/@pacote/u32@0.3.3...@pacote/u32@0.3.4) (2025-02-25)
 
 **Note:** Version bump only for package @pacote/u32

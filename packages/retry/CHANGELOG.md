@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.5](https://github.com/PacoteJS/pacote/compare/@pacote/retry@0.2.4...@pacote/retry@0.2.5) (2025-10-23)
+
+**Note:** Version bump only for package @pacote/retry
+
+
+
+
+
 ## [0.2.4](https://github.com/PacoteJS/pacote/compare/@pacote/retry@0.2.3...@pacote/retry@0.2.4) (2025-02-06)
 
 **Note:** Version bump only for package @pacote/retry
