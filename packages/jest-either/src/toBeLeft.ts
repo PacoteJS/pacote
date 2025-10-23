@@ -1,5 +1,7 @@
-import { type Either, isLeft } from 'fp-ts/lib/Either'
-import { matcherHint } from 'jest-matcher-utils'
+import { isLeft } from 'fp-ts/lib/Either'
+import { matcherHint, printReceived } from 'jest-matcher-utils'
+import { isEither } from './shared/isEither'
+import type { MatcherResult } from './shared/types'
 
 declare global {
   namespace jest {
@@ -23,7 +25,21 @@ const failMessage = () => () =>
     '',
   )}\n\nExpected Either to be left, received right.`
 
-export function toBeLeft(actual: Either<unknown, unknown>) {
+const notEitherMessage = (actual: unknown) => () =>
+  `${matcherHint(
+    '.toBeLeft',
+    'received',
+    '',
+  )}\n\nExpected value to be an Either.\n  Received: ${printReceived(actual)}`
+
+export function toBeLeft(actual: unknown): MatcherResult {
+  if (!isEither(actual)) {
+    return {
+      pass: false,
+      message: notEitherMessage(actual),
+    }
+  }
+
   const pass = isLeft(actual)
   return {
     pass,

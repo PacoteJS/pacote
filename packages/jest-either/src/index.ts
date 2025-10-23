@@ -5,8 +5,9 @@ import { toEqualLeft } from './toEqualLeft'
 import { toEqualRight } from './toEqualRight'
 import { toMatchLeft } from './toMatchLeft'
 import { toMatchRight } from './toMatchRight'
+import type { MatchersObject } from './shared/types'
 
-export default {
+const matchers = {
   toBeEither,
   toBeLeft,
   toBeRight,
@@ -15,3 +16,5 @@ export default {
   toMatchLeft,
   toMatchRight,
 }
+
+export default matchers as MatchersObject

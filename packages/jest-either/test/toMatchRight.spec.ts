@@ -17,6 +17,17 @@ describe('.toMatchRight()', () => {
     expect(right('aa')).toMatchRight(/a/)
   })
 
+  test('passes when asymmetric matchers match the value on the right', () => {
+    expect(right({ a: 'alpha', b: 2 })).toMatchRight({
+      a: expect.stringContaining('alp'),
+      b: expect.any(Number),
+    })
+  })
+
+  test('passes when asymmetric matcher matches a string on the right', () => {
+    expect(right('alphabet')).toMatchRight(expect.stringContaining('alpha'))
+  })
+
   test('fails when spec does not match the object on the left', () => {
     expect(() => expect(right({ a: 1 })).toMatchRight({ a: 2 })).toThrow()
   })
@@ -27,6 +38,14 @@ describe('.toMatchRight()', () => {
 
   test('fails when regular expression does not match a string on the right', () => {
     expect(() => expect(right('aa')).toMatchRight(/b/)).toThrow()
+  })
+
+  test('fails when asymmetric matcher does not match the value on the right', () => {
+    expect(() =>
+      expect(right({ a: 'alpha' })).toMatchRight({
+        a: expect.stringContaining('beta'),
+      }),
+    ).toThrow()
   })
 })
 
@@ -41,6 +60,12 @@ describe('.not.toMatchRight()', () => {
 
   test('passes when regular expression does not match a string on the right', () => {
     expect(right('aa')).not.toMatchRight(/b/)
+  })
+
+  test('passes when asymmetric matcher does not match the value on the right', () => {
+    expect(right({ a: 'alpha' })).not.toMatchRight({
+      a: expect.stringContaining('beta'),
+    })
   })
 
   test('fails when spec deeply matches the object on the right', () => {
@@ -59,5 +84,13 @@ describe('.not.toMatchRight()', () => {
 
   test('fails when regular expression matches a string on the right', () => {
     expect(() => expect(right('aa')).not.toMatchRight(/a/)).toThrow()
+  })
+
+  test('fails when asymmetric matcher matches the value on the right', () => {
+    expect(() =>
+      expect(right({ a: 'alpha' })).not.toMatchRight({
+        a: expect.stringContaining('alp'),
+      }),
+    ).toThrow()
   })
 })

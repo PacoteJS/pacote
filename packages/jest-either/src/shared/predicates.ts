@@ -14,9 +14,20 @@ export function isAsymmetricMatcher(
   return typeof matcher.asymmetricMatch === 'function'
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: can be anything
-export const matchObject = (s: any) => (o: unknown) =>
-  isPlainObject(o) ? where(map(matchObject, s), o) : equals(s, o)
+export const matchObject = (expected: unknown) => (actual: unknown) => {
+  if (isAsymmetricMatcher(expected)) {
+    return expected.asymmetricMatch(actual)
+  }
+
+  if (isPlainObject(expected) && isPlainObject(actual)) {
+    return where(
+      map(matchObject, expected as Record<string, unknown>),
+      actual as Record<string, unknown>,
+    )
+  }
+
+  return equals(expected, actual)
+}
 
 export const matchString = (s: RegExp) => (o: unknown) => s.test(String(o))
 

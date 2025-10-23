@@ -1,7 +1,15 @@
 import type { Either } from 'fp-ts/lib/Either'
-import { matcherHint, printExpected } from 'jest-matcher-utils'
-import { leftPredicate, matchObject, matchString } from './shared/predicates'
+import { matcherHint, printExpected, printReceived } from 'jest-matcher-utils'
+import {
+  type AsymmetricMatcher,
+  isAsymmetricMatcher,
+  leftPredicate,
+  matchObject,
+  matchString,
+} from './shared/predicates'
 import { printReceivedLeft } from './shared/print'
+import { isEither } from './shared/isEither'
+import type { MatcherResult } from './shared/types'
 
 declare global {
   namespace jest {
@@ -12,7 +20,10 @@ declare global {
 }
 
 const passMessage =
-  <L>(actual: Either<L, unknown>, expected: RegExp | Partial<L>) =>
+  <L>(
+    actual: Either<L, unknown>,
+    expected: RegExp | Partial<L> | AsymmetricMatcher,
+  ) =>
   () =>
     `${matcherHint(
       '.not.toMatchLeft',
@@ -23,7 +34,10 @@ const passMessage =
     )}\n\n${printReceivedLeft(actual)}`
 
 const failMessage =
-  <L>(actual: Either<L, unknown>, expected: RegExp | Partial<L>) =>
+  <L>(
+    actual: Either<L, unknown>,
+    expected: RegExp | Partial<L> | AsymmetricMatcher,
+  ) =>
   () =>
     `${matcherHint(
       '.toMatchLeft',
@@ -33,20 +47,41 @@ const failMessage =
       expected,
     )}\n\n${printReceivedLeft(actual)}`
 
+const notEitherMessage = (expected: unknown, actual: unknown) => () =>
+  `${matcherHint(
+    '.toMatchLeft',
+    'received',
+    'expectedLeft',
+  )}\n\nExpected value to be an Either.\n  Expected: ${printExpected(
+    expected,
+  )}\n  Received: ${printReceived(actual)}`
+
 export function toMatchLeft(
-  actual: Either<string, unknown>,
-  expected: RegExp,
-): unknown
+  actual: unknown,
+  expected: RegExp | AsymmetricMatcher,
+): MatcherResult
 export function toMatchLeft<L>(
-  actual: Either<L, unknown>,
-  expected: Partial<L>,
-): unknown
+  actual: unknown,
+  expected: Partial<L> | AsymmetricMatcher,
+): MatcherResult
 export function toMatchLeft<L>(
-  actual: Either<L, unknown>,
-  expected: RegExp | Partial<L>,
-) {
+  actual: unknown,
+  expected: RegExp | Partial<L> | AsymmetricMatcher,
+): MatcherResult {
+  if (!isEither(actual)) {
+    return {
+      expected,
+      pass: false,
+      message: notEitherMessage(expected, actual),
+    }
+  }
+
   const predicate =
-    expected instanceof RegExp ? matchString(expected) : matchObject(expected)
+    expected instanceof RegExp
+      ? matchString(expected)
+      : isAsymmetricMatcher(expected)
+        ? expected.asymmetricMatch.bind(expected)
+        : matchObject(expected)
 
   const pass = leftPredicate(actual, predicate)
 
