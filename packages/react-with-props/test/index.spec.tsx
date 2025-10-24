@@ -2,11 +2,15 @@
  * @vitest-environment jsdom
  */
 
-import { render, renderHook } from '@testing-library/react'
-// biome-ignore lint/correctness/noUnusedImports: required to render JSX
-import React, { type FunctionComponent, type ReactNode, useId } from 'react'
-import { describe, expect, test } from 'vitest'
+import { cleanup, render, renderHook, screen } from '@testing-library/react'
+import React from 'react'
+import styled from 'styled-components'
+import { afterEach, describe, expect, test } from 'vitest'
 import { withDefaultProps, withProps } from '../src'
+
+afterEach(() => {
+  cleanup()
+})
 
 describe('withProps()', () => {
   test('wraps a component', () => {
@@ -18,10 +22,8 @@ describe('withProps()', () => {
   })
 
   test('wraps a component and forwards props', () => {
-    interface TestProps {
-      text?: string
-    }
-    const Test: FunctionComponent<TestProps> = ({ text = '' }) => <>{text}</>
+    type TestProps = { text?: string }
+    const Test = ({ text = '' }: TestProps) => <>{text}</>
     const Wrapped = withProps({}, Test)
     const { container: actual } = render(<Wrapped text="Test" />)
     const { container: expected } = render(<Test text="Test" />)
@@ -29,9 +31,7 @@ describe('withProps()', () => {
   })
 
   test('forwards children to components', () => {
-    interface TestProps {
-      children?: ReactNode
-    }
+    type TestProps = { children?: React.ReactNode }
     const Test = ({ children }: TestProps) => <>{children}</>
     const Wrapped = withProps({}, Test)
     const { container: actual } = render(
@@ -48,9 +48,7 @@ describe('withProps()', () => {
   })
 
   test('injects optional props into components', () => {
-    interface TestProps {
-      text?: string
-    }
+    type TestProps = { text?: string }
     const Test = ({ text }: TestProps) => <>{text}</>
     const Wrapped = withProps({ text: 'Test' }, Test)
     const { container: actual } = render(<Wrapped />)
@@ -59,16 +57,12 @@ describe('withProps()', () => {
   })
 
   test('injects mandatory props into components', () => {
-    interface TestProps {
-      name: string
-      value: string
-    }
+    type TestProps = { name: string; value: string }
     const Test = ({ name, value }: TestProps) => (
       <>
         {name}: {value}
       </>
     )
-    // @ts-expect-error
     const Wrapped = withProps({ name: 'Test' }, Test)
     const { container: actual } = render(<Wrapped value="OK" />)
     const { container: expected } = render(<Test name="Test" value="OK" />)
@@ -84,14 +78,14 @@ describe('withProps()', () => {
 
   test('forwards props to DOM components', () => {
     const Wrapped = withProps({}, 'footer')
-    const id = renderHook(useId)
+    const id = renderHook(React.useId)
     const { container: actual } = render(<Wrapped id={id.result.current} />)
     const { container: expected } = render(<footer id={id.result.current} />)
     expect(actual.id).toEqual(expected.id)
   })
 
   test('injects props into DOM components', () => {
-    const id = renderHook(useId)
+    const id = renderHook(React.useId)
     const Wrapped = withProps({ id: id.result.current }, 'footer')
     const { container: actual } = render(<Wrapped />)
     const { container: expected } = render(<footer id={id.result.current} />)
@@ -125,21 +119,23 @@ describe('withProps()', () => {
   })
 
   test('injects props into components from a function', () => {
-    interface TestProps {
-      name: string
-      value: string
-    }
+    type TestProps = { name: string; value: string }
     const Test = ({ name, value }: TestProps) => (
       <>
         {name}: {value}
       </>
     )
     const injector = ({ foo = '' }) => ({ name: foo })
-    // @ts-expect-error
     const Wrapped = withProps(injector, Test)
     const { container: actual } = render(<Wrapped foo="Test" value="OK" />)
     const { container: expected } = render(<Test name="Test" value="OK" />)
     expect(actual).toEqual(expected)
+  })
+
+  test('styled-components compatibility', () => {
+    const Wrapped = withProps({ title: 'Test' }, styled.button``)
+    render(<Wrapped />)
+    expect(screen.getByRole('button')).toHaveProperty('title', 'Test')
   })
 })
 
@@ -153,10 +149,8 @@ describe('withDefaultProps()', () => {
   })
 
   test('wraps a component and forwards props', () => {
-    interface TestProps {
-      text?: string
-    }
-    const Test: FunctionComponent<TestProps> = ({ text = '' }) => <>{text}</>
+    type TestProps = { text?: string }
+    const Test = ({ text = '' }: TestProps) => <>{text}</>
     const Wrapped = withDefaultProps({}, Test)
     const { container: actual } = render(<Wrapped text="Test" />)
     const { container: expected } = render(<Test text="Test" />)
@@ -164,9 +158,7 @@ describe('withDefaultProps()', () => {
   })
 
   test('forwards children to components', () => {
-    interface TestProps {
-      children?: ReactNode
-    }
+    type TestProps = { children?: React.ReactNode }
     const Test = ({ children }: TestProps) => <>{children}</>
     const Wrapped = withDefaultProps({}, Test)
     const { container: actual } = render(
@@ -183,9 +175,7 @@ describe('withDefaultProps()', () => {
   })
 
   test('injects optional props into components', () => {
-    interface TestProps {
-      text?: string
-    }
+    type TestProps = { text?: string }
     const Test = ({ text }: TestProps) => <>{text}</>
     const Wrapped = withDefaultProps({ text: 'Test' }, Test)
     const { container: actual } = render(<Wrapped />)
@@ -194,16 +184,12 @@ describe('withDefaultProps()', () => {
   })
 
   test('injects mandatory props into components', () => {
-    interface TestProps {
-      name: string
-      value: string
-    }
+    type TestProps = { name: string; value: string }
     const Test = ({ name, value }: TestProps) => (
       <>
         {name}: {value}
       </>
     )
-    // @ts-expect-error
     const Wrapped = withDefaultProps({ name: 'Test' }, Test)
     const { container: actual } = render(<Wrapped value="OK" />)
     const { container: expected } = render(<Test name="Test" value="OK" />)
@@ -211,16 +197,12 @@ describe('withDefaultProps()', () => {
   })
 
   test('overrides injected props into components', () => {
-    interface TestProps {
-      name: string
-      value: string
-    }
+    type TestProps = { name: string; value: string }
     const Test = ({ name, value }: TestProps) => (
       <>
         {name}: {value}
       </>
     )
-    // @ts-expect-error
     const Wrapped = withDefaultProps({ name: 'Test' }, Test)
     const { container: actual } = render(<Wrapped name="Override" value="OK" />)
     const { container: expected } = render(<Test name="Override" value="OK" />)
@@ -235,7 +217,7 @@ describe('withDefaultProps()', () => {
   })
 
   test('forwards props to DOM components', () => {
-    const id = renderHook(useId)
+    const id = renderHook(React.useId)
     const Wrapped = withDefaultProps({}, 'footer')
     const { container: actual } = render(<Wrapped id={id.result.current} />)
     const { container: expected } = render(<footer id={id.result.current} />)
@@ -243,7 +225,7 @@ describe('withDefaultProps()', () => {
   })
 
   test('injects props into DOM components', () => {
-    const id = renderHook(useId)
+    const id = renderHook(React.useId)
     const Wrapped = withDefaultProps({ id: id.result.current }, 'footer')
     const { container: actual } = render(<Wrapped />)
     const { container: expected } = render(<footer id={id.result.current} />)
@@ -266,7 +248,7 @@ describe('withDefaultProps()', () => {
   })
 
   test('overrides props injected into DOM components', () => {
-    const id = renderHook(useId)
+    const id = renderHook(React.useId)
     const Wrapped = withDefaultProps({ id: 'test' }, 'footer')
     const { container: actual } = render(<Wrapped id={id.result.current} />)
     const { container: expected } = render(<footer id={id.result.current} />)
@@ -282,5 +264,11 @@ describe('withDefaultProps()', () => {
   test('sets the display name for DOM components', () => {
     const Wrapped = withDefaultProps({}, 'div')
     expect(Wrapped.displayName).toBe('WithDefaultProps(div)')
+  })
+
+  test('styled-components compatibility', () => {
+    const Wrapped = withDefaultProps({ title: 'Test' }, styled.button``)
+    render(<Wrapped />)
+    expect(screen.getByRole('button')).toHaveProperty('title', 'Test')
   })
 })

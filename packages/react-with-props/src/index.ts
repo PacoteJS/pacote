@@ -1,100 +1,58 @@
-import {
-  type ComponentType,
-  createElement,
-  type DetailedHTMLFactory,
-  type DOMFactory,
-  type FunctionComponent,
-  type ReactHTML,
-  type ReactNode,
-  type ReactSVG
-} from 'react'
+import { type ComponentPropsWithoutRef, type ComponentType, createElement, type ElementType } from 'react'
 
-type UnknownProps = Record<string, unknown>
-
-type Injector<Props, InjectedProps> = (props?: Props) => InjectedProps
-
-type InnerComponent<Props = UnknownProps> =
-  | ComponentType<Props>
-  | keyof ReactHTML
-  | keyof ReactSVG
-
-type Enhanced<I, P extends I> = Omit<P & { children?: ReactNode }, keyof I>
-
-// biome-ignore lint/suspicious/noExplicitAny: TODO
-type InnerProps<Component extends InnerComponent<any>> =
-  Component extends keyof ReactHTML
-    ? // biome-ignore lint/suspicious/noExplicitAny: TODO
-      ReactHTML[Component] extends DetailedHTMLFactory<infer HTMLProps, any>
-      ? HTMLProps
-      : Component extends keyof ReactSVG
-        ? ReactSVG[Component] extends DOMFactory<infer SVGProps, SVGElement>
-          ? SVGProps
-          : never
-        : never
-    : Component extends ComponentType<infer Props>
-      ? Props
-      : // biome-ignore lint/suspicious/noExplicitAny: TODO
-        any
-
-// biome-ignore lint/suspicious/noExplicitAny: TODO
-function getDisplayName(Component: InnerComponent<any>): string {
+function getDisplayName<C extends ElementType>(Component: C): string {
   return typeof Component === 'string'
     ? Component
     : Component.displayName || Component.name || 'Component'
 }
 
-function isInjector<OuterProps, InjectedProps>(
-  injector: unknown,
-): injector is Injector<OuterProps, InjectedProps> {
+type ExternalProps<
+  C extends ElementType,
+  P extends object,
+  I extends object = {},
+> = Omit<ComponentPropsWithoutRef<C>, keyof P> & I
+
+type Injector<C extends ElementType, P extends object, I extends object> = (
+  props: ExternalProps<C, P, I>,
+) => P
+
+function isInjector<
+  P extends object,
+  C extends ElementType,
+  I extends object = {},
+>(injector: P | Injector<C, P, I>): injector is Injector<C, P, I> {
   return typeof injector === 'function'
 }
 
 export function withProps<
-  OuterProps extends Record<string, unknown>,
-  InjectedProps extends Record<string, unknown>,
-  ComponentProps extends InjectedProps,
-  Component extends InnerComponent<ComponentProps>,
-  EnhancedProps = Enhanced<InjectedProps, InnerProps<Component>>,
+  C extends ElementType,
+  P extends object,
+  I extends object = {},
 >(
-  injected: Injector<OuterProps, InjectedProps> | InjectedProps,
-  BaseComponent: Component,
-): ComponentType<OuterProps & EnhancedProps> {
-  const EnhancedComponent: FunctionComponent<OuterProps & EnhancedProps> = (
-    props,
-  ) =>
-    createElement(
-      BaseComponent,
-      Object.assign<ComponentProps, EnhancedProps, InjectedProps>(
-        {} as ComponentProps,
-        props,
-        isInjector<OuterProps, InjectedProps>(injected)
-          ? injected(props)
-          : injected,
-      ),
-    )
+  inject: P | Injector<C, P, I>,
+  BaseComponent: C,
+): ComponentType<ExternalProps<C, P, I>> {
+  const EnhancedComponent = (props: ExternalProps<C, P, I>) =>
+    createElement(BaseComponent, {
+      ...props,
+      ...(isInjector(inject) ? inject(props) : inject),
+    })
   EnhancedComponent.displayName = `WithProps(${getDisplayName(BaseComponent)})`
   return EnhancedComponent
 }
 
+type Defaultize<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>
+
 export function withDefaultProps<
-  InjectedProps extends Record<string, unknown>,
-  ComponentProps extends InjectedProps,
-  Component extends InnerComponent<ComponentProps>,
-  EnhancedProps = Enhanced<InjectedProps, InnerProps<Component>> &
-    Partial<InjectedProps>,
+  C extends ElementType,
+  P extends Partial<ComponentPropsWithoutRef<C>>,
 >(
-  injectedProps: InjectedProps,
-  BaseComponent: Component,
-): ComponentType<EnhancedProps> {
-  const EnhancedComponent: FunctionComponent<EnhancedProps> = (props) =>
-    createElement(
-      BaseComponent,
-      Object.assign<ComponentProps, InjectedProps, EnhancedProps>(
-        {} as ComponentProps,
-        injectedProps,
-        props,
-      ),
-    )
+  inject: P,
+  BaseComponent: C,
+): ComponentType<Defaultize<ComponentPropsWithoutRef<C>, keyof P>> {
+  const EnhancedComponent = (
+    props: Defaultize<ComponentPropsWithoutRef<C>, keyof P>,
+  ) => createElement(BaseComponent, { ...inject, ...props })
   EnhancedComponent.displayName = `WithDefaultProps(${getDisplayName(
     BaseComponent,
   )})`

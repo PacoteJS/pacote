@@ -2,12 +2,15 @@
  * @vitest-environment jsdom
  */
 
-import { renderHook } from '@testing-library/react'
+import { cleanup, renderHook } from '@testing-library/react'
 import { anything, assert, property, string } from 'fast-check'
 import { act, useReducer } from 'react'
-import { expect, test } from 'vitest'
+import { afterEach, expect, test } from 'vitest'
 import { createAction, isType, reducer, reducerFromState } from '../src/index'
 
+afterEach(() => {
+  cleanup()
+})
 
 test('creates an action creator', () => {
   assert(
@@ -99,8 +102,9 @@ test('reducer without initial state has state initialised by useReducer', () => 
 
 test('reducer without an initial state handles useReducer actions', () => {
   const accelerate = createAction<void>('@@TEST/ACCELERATE')
-  const testReducer = reducer<{ speed: number }>()
-    .on(accelerate, (s) => ({ speed: s.speed + 1 }))
+  const testReducer = reducer<{ speed: number }>().on(accelerate, (s) => ({
+    speed: s.speed + 1,
+  }))
   const { result } = renderHook(() => useReducer(testReducer, { speed: 87 }))
   act(() => result.current[1](accelerate()))
   expect(result.current[0]).toEqual({ speed: 88 })
