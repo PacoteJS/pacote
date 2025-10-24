@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.6](https://github.com/PacoteJS/pacote/compare/@pacote/react-with-props@2.0.5...@pacote/react-with-props@2.0.6) (2025-10-24)
+
+
+### Bug Fixes
+
+* 🐛 improved, simplified typings ([1d10c24](https://github.com/PacoteJS/pacote/commit/1d10c2441775cf4619ff062033952c1d6d56da85)), closes [#1555](https://github.com/PacoteJS/pacote/issues/1555) [#5](https://github.com/PacoteJS/pacote/issues/5) [#1](https://github.com/PacoteJS/pacote/issues/1)
+
+
+
+
+
 ## [2.0.5](https://github.com/PacoteJS/pacote/compare/@pacote/react-with-props@2.0.4...@pacote/react-with-props@2.0.5) (2025-10-23)
 
 **Note:** Version bump only for package @pacote/react-with-props

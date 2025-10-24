@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.6](https://github.com/PacoteJS/pacote/compare/@pacote/react-use-outside@2.0.5...@pacote/react-use-outside@2.0.6) (2025-10-24)
+
+
+### Bug Fixes
+
+* 🐛 match returned type ([22f6c48](https://github.com/PacoteJS/pacote/commit/22f6c48a37c4ee605261a85d603a988e27167d99))
+
+
+
+
+
 ## [2.0.5](https://github.com/PacoteJS/pacote/compare/@pacote/react-use-outside@2.0.4...@pacote/react-use-outside@2.0.5) (2025-10-23)
 
 **Note:** Version bump only for package @pacote/react-use-outside

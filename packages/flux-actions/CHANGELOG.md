@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.1](https://github.com/PacoteJS/pacote/compare/@pacote/flux-actions@3.1.0...@pacote/flux-actions@3.1.1) (2025-10-24)
+
+
+### Bug Fixes
+
+* 🐛 improved, simplified typings ([1d10c24](https://github.com/PacoteJS/pacote/commit/1d10c2441775cf4619ff062033952c1d6d56da85)), closes [#1555](https://github.com/PacoteJS/pacote/issues/1555) [#5](https://github.com/PacoteJS/pacote/issues/5) [#1](https://github.com/PacoteJS/pacote/issues/1)
+
+
+
+
+
 # [3.1.0](https://github.com/PacoteJS/pacote/compare/@pacote/flux-actions@3.0.4...@pacote/flux-actions@3.1.0) (2025-10-23)
 
 
