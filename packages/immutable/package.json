@@ -1,7 +1,7 @@
 {
   "name": "@pacote/immutable",
   "description": "Immutable generic type.",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "sideEffects": false,
   "license": "MIT",
   "author": {

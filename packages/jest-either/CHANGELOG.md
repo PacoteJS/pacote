@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.1](https://github.com/PacoteJS/pacote/compare/@pacote/jest-either@5.1.0...@pacote/jest-either@5.1.1) (2025-10-27)
+
+
+### Bug Fixes
+
+* 🐛 CommonJS compilation target ([d61f204](https://github.com/PacoteJS/pacote/commit/d61f204e3fb22eb952f608628ed2864f5cae449b)), closes [#333](https://github.com/PacoteJS/pacote/issues/333)
+
+
+
+
+
 # [5.1.0](https://github.com/PacoteJS/pacote/compare/@pacote/jest-either@5.0.9...@pacote/jest-either@5.1.0) (2025-10-23)
 
 

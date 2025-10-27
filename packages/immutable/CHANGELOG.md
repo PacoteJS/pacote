@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.4](https://github.com/PacoteJS/pacote/compare/@pacote/immutable@2.0.3...@pacote/immutable@2.0.4) (2025-10-27)
+
+
+### Bug Fixes
+
+* 🐛 tuple and map key immutability ([e32e2ff](https://github.com/PacoteJS/pacote/commit/e32e2ff26e07306af5be5ca1fb99dc4e2f845b6b))
+
+
+
+
+
 ## [2.0.3](https://github.com/PacoteJS/pacote/compare/@pacote/immutable@2.0.2...@pacote/immutable@2.0.3) (2025-02-25)
 
 **Note:** Version bump only for package @pacote/immutable
