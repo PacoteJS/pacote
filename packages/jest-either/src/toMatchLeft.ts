@@ -56,6 +56,29 @@ const notEitherMessage = (expected: unknown, actual: unknown) => () =>
     expected,
   )}\n  Received: ${printReceived(actual)}`
 
+/**
+ * Asserts that the left side of an `Either` matches a value, partial object, or
+ * regular expression.
+ *
+ * @typeParam L Type of the left value contained in the `Either`.
+ *
+ * @param expected Pattern, partial object, or asymmetric matcher for the left.
+ *
+ * @example
+ * ```typescript
+ * import { left } from 'fp-ts/lib/Either'
+ *
+ * test('passes when left of Either matches an object', () => {
+ *   const actual = left({ test: 'ok', foo: 'bar' })
+ *   expect(actual).toMatchLeft({ test: 'ok' })
+ * })
+ *
+ * test('passes when left of Either does not match an object', () => {
+ *   const actual = left({ test: 'unexpected', foo: 'bar' })
+ *   expect(actual).not.toMatchLeft({ test: 'ok' })
+ * })
+ * ```
+ */
 export function toMatchLeft(
   actual: unknown,
   expected: RegExp | AsymmetricMatcher,

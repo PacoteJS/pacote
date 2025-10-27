@@ -24,6 +24,23 @@ const failMessage = (actual: unknown) => () =>
     '',
   )}\n\nExpected Either, received:\n  ${printReceived(actual)}`
 
+/**
+ * Asserts that the received value is an `Either` instance.
+ *
+ * @example
+ * ```typescript
+ * import { left, right } from 'fp-ts/lib/Either'
+ *
+ * test('passes when value is an Either', () => {
+ *   expect(left(true)).toBeEither()
+ *   expect(right(true)).toBeEither()
+ * })
+ *
+ * test('passes when value is not an Either', () => {
+ *   expect(undefined).not.toBeEither()
+ * })
+ * ```
+ */
 export function toBeEither(actual: unknown): MatcherResult {
   const pass = isEither(actual)
   return {

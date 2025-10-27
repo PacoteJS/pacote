@@ -32,6 +32,24 @@ const notEitherMessage = (actual: unknown) => () =>
     '',
   )}\n\nExpected value to be an Either.\n  Received: ${printReceived(actual)}`
 
+/**
+ * Asserts that the received `Either` is a `Right`.
+ *
+ * @example
+ * ```typescript
+ * import { left, right } from 'fp-ts/lib/Either'
+ *
+ * test('passes when Either is a right', () => {
+ *   const actual = right({ test: 'ok' })
+ *   expect(actual).toBeRight()
+ * })
+ *
+ * test('passes when Either is a left', () => {
+ *   const actual = left(Error())
+ *   expect(actual).not.toBeRight()
+ * })
+ * ```
+ */
 export function toBeRight(actual: unknown): MatcherResult {
   if (!isEither(actual)) {
     return {

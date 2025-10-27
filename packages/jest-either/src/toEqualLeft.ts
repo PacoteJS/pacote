@@ -48,6 +48,29 @@ const notEitherMessage = (expected: unknown, actual: unknown) => () =>
     expected,
   )}\n  Received: ${printReceived(actual)}`
 
+/**
+ * Asserts that the left side of an `Either` equals an expected value or
+ * asymmetric matcher.
+ *
+ * @typeParam L Type of the expected left value.
+ *
+ * @param expected Value or asymmetric matcher that should equal the left side.
+ *
+ * @example
+ * ```typescript
+ * import { left } from 'fp-ts/lib/Either'
+ *
+ * test('passes when left of Either equals a value', () => {
+ *   const actual = left(Error('message'))
+ *   expect(actual).toEqualLeft(Error('message'))
+ * })
+ *
+ * test('passes when left of Either does not equal a value', () => {
+ *   const actual = left(Error('unexpected'))
+ *   expect(actual).not.toEqualLeft(Error('message'))
+ * })
+ * ```
+ */
 export function toEqualLeft<L>(
   actual: unknown,
   expected: L | AsymmetricMatcher,

@@ -1,14 +1,14 @@
 import type { Either } from 'fp-ts/lib/Either'
 import { matcherHint, printExpected, printReceived } from 'jest-matcher-utils'
+import { isEither } from './shared/isEither'
 import {
   type AsymmetricMatcher,
   isAsymmetricMatcher,
   matchObject,
   matchString,
-  rightPredicate,
+  rightPredicate
 } from './shared/predicates'
 import { printReceivedRight } from './shared/print'
-import { isEither } from './shared/isEither'
 import type { MatcherResult } from './shared/types'
 
 declare global {
@@ -56,6 +56,29 @@ const notEitherMessage = (expected: unknown, actual: unknown) => () =>
     expected,
   )}\n  Received: ${printReceived(actual)}`
 
+/**
+ * Asserts that the right side of an `Either` matches a value, partial object,
+ * or regular expression.
+ *
+ * @typeParam R Type of the right value contained in the `Either`.
+ *
+ * @param expected Pattern, partial object, or asymmetric matcher for the right.
+ *
+ * @example
+ * ```typescript
+ * import { right } from 'fp-ts/lib/Either'
+ *
+ * test('passes when right of Either matches an object', () => {
+ *   const actual = right({ test: 'ok', foo: 'bar' })
+ *   expect(actual).toMatchRight({ test: 'ok' })
+ * })
+ *
+ * test('passes when right of Either does not match an object', () => {
+ *   const actual = right({ test: 'unexpected', foo: 'bar' })
+ *   expect(actual).not.toMatchRight({ test: 'ok' })
+ * })
+ * ```
+ */
 export function toMatchRight(
   actual: unknown,
   expected: RegExp | AsymmetricMatcher,
