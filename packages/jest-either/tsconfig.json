@@ -1,12 +1,16 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "module": "ES2020",
-    "target": "esnext",
-    "rootDir": "src",
-    "outDir": "lib"
+    "checkJs": false,
+    "rootDir": ".",
+    "downlevelIteration": true
   },
-  "include": ["src"],
-  "exclude": ["lib"],
-  "references": [{ "path": "../is-plain-object/tsconfig.esm.json" }]
+  "exclude": [
+    "lib"
+  ],
+  "references": [
+    {
+      "path": "../is-plain-object"
+    }
+  ]
 }

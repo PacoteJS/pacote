@@ -28,14 +28,23 @@
   "publishConfig": {
     "access": "public"
   },
-  "module": "lib/index.js",
-  "typings": "lib/index.d.ts",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/esm/index.js",
+      "require": "./lib/cjs/index.js"
+    }
+  },
   "directories": {
     "lib": "lib",
     "test": "test"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "pnpm build:esm && pnpm build:cjs",
+    "build:cjs": "tsc -p ./tsconfig.cjs.json",
+    "build:esm": "tsc -p ./tsconfig.esm.json",
     "prepublish": "pnpm build"
   },
   "dependencies": {
