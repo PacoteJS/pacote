@@ -15,7 +15,7 @@ yarn add @pacote/immutable
 ## Usage
 
 ```typescript
-import { Immutable } from '@pacote/immutable'
+import type { Immutable } from '@pacote/immutable'
 
 type Foo = { foo: string }
 
