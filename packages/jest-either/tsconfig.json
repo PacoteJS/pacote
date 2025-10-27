@@ -1,9 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "checkJs": false,
-    "rootDir": ".",
-    "downlevelIteration": true
+    "rootDir": "."
   },
   "exclude": [
     "lib"
