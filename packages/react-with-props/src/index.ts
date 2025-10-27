@@ -11,15 +11,17 @@ function getDisplayName<C extends ElementType>(Component: C): string {
     : Component.displayName || Component.name || 'Component'
 }
 
-type ExternalProps<
+export type ExternalProps<
   C extends ElementType,
   P extends object,
   I extends object = {},
 > = Omit<ComponentPropsWithoutRef<C>, keyof P> & I
 
-type Injector<C extends ElementType, P extends object, I extends object> = (
-  props: ExternalProps<C, P, I>,
-) => P
+export type Injector<
+  C extends ElementType,
+  P extends object,
+  I extends object,
+> = (props: ExternalProps<C, P, I>) => P
 
 function isInjector<
   P extends object,
@@ -46,7 +48,7 @@ export function withProps<
   return EnhancedComponent
 }
 
-type Defaultize<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>
+export type Defaultize<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>
 
 export function withDefaultProps<
   C extends ElementType,

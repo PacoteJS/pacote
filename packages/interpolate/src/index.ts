@@ -1,4 +1,4 @@
-type ReplaceMap<T> = { [placeholder: string]: T } | T[]
+export type ReplaceMap<T> = { [placeholder: string]: T } | T[]
 
 /**
  * Creates a renderer that substitutes placeholders in a template with values

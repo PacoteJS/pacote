@@ -1,7 +1,7 @@
 import { None, type Option, Some } from '@pacote/option'
 
-const T_OK = Symbol('Ok')
-const T_ERR = Symbol('Err')
+export const T_OK = Symbol('Ok')
+export const T_ERR = Symbol('Err')
 
 /**
  * Successful result type.
