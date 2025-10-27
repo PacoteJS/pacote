@@ -1,14 +1,19 @@
-export type Immutable<T> = T extends Array<infer E>
-  ? ImmutableArray<E>
-  : T extends Map<infer K, infer V>
-    ? ImmutableMap<K, V>
-    : T extends Set<infer E>
-      ? ImmutableSet<E>
-      : T extends Record<string, infer V>
-        ? ImmutableObject<T, V>
-        : T
+export type Immutable<T> = T extends readonly [infer First, ...infer Rest]
+  ? readonly [Immutable<First>, ...ImmutableTuple<Rest>]
+  : T extends readonly (infer E)[]
+    ? ReadonlyArray<Immutable<E>>
+    : T extends Map<infer K, infer V>
+      ? ReadonlyMap<Immutable<K>, Immutable<V>>
+      : T extends Set<infer E>
+        ? ReadonlySet<Immutable<E>>
+        : T extends Record<string, infer V>
+          ? { readonly [P in keyof T]: Immutable<V> }
+          : T
 
-type ImmutableArray<T> = ReadonlyArray<Immutable<T>>
-type ImmutableObject<T, V> = { readonly [P in keyof T]: Immutable<V> }
-type ImmutableMap<K, V> = ReadonlyMap<K, Immutable<V>>
-type ImmutableSet<T> = ReadonlySet<Immutable<T>>
+// biome-ignore lint/suspicious/noExplicitAny: extend tuples of any type
+export type ImmutableTuple<T extends readonly any[]> = T extends readonly [
+  infer F,
+  ...infer R,
+]
+  ? readonly [Immutable<F>, ...ImmutableTuple<R>]
+  : readonly []
