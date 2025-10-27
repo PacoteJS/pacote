@@ -1,4 +1,9 @@
-import { type ComponentPropsWithoutRef, type ComponentType, createElement, type ElementType } from 'react'
+import {
+  type ComponentPropsWithoutRef,
+  type ComponentType,
+  createElement,
+  type ElementType,
+} from 'react'
 
 function getDisplayName<C extends ElementType>(Component: C): string {
   return typeof Component === 'string'

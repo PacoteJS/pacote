@@ -33,9 +33,7 @@ function _shiftLeft(value: U32, bits: number): U32 {
 
 export function shiftLeft(value: U32, bits: number, overflow = false): U32 {
   const [v0, v1]: U32 = _shiftLeft(value, bits)
-  return overflow
-    ? [v0 & 0xffff, v1]
-    : [v0 & 0xffff, v1 & 0xffff]
+  return overflow ? [v0 & 0xffff, v1] : [v0 & 0xffff, v1 & 0xffff]
 }
 
 function _shiftRight(value: U32, bits: number): U32 {

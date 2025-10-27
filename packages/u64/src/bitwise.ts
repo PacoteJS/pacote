@@ -165,7 +165,8 @@ export function rotateLeft(value: U64, bits: number): U64 {
 
   const bitsToShift = _bits >= 32 ? _bits - 32 : _bits
 
-  const _value: U64 = _bits >= 32 ? [value[2], value[3], value[0], value[1]] : value
+  const _value: U64 =
+    _bits >= 32 ? [value[2], value[3], value[0], value[1]] : value
 
   if (bitsToShift === 0) return _value
 
@@ -192,7 +193,8 @@ export function rotateRight(value: U64, bits: number): U64 {
   const _bits = bits % 64
 
   const bitsToShift = _bits >= 32 ? _bits - 32 : _bits
-  const _value: U64 = _bits >= 32 ? [value[2], value[3], value[0], value[1]] : value
+  const _value: U64 =
+    _bits >= 32 ? [value[2], value[3], value[0], value[1]] : value
 
   if (bitsToShift === 0) return _value
 

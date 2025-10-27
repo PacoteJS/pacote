@@ -29,7 +29,7 @@ export class BloomFilter<T extends { toString(): string }> {
     for (let i = 0; i < this.hashes; i++) {
       const hashedValue = this.hash(i, str) % this.size
       const position = Math.floor(hashedValue / 32)
-      this.filter[position] |= 1 << hashedValue % 32
+      this.filter[position] |= 1 << (hashedValue % 32)
     }
   }
 
@@ -38,7 +38,7 @@ export class BloomFilter<T extends { toString(): string }> {
     for (let i = 0; i < this.hashes; i++) {
       const hashedValue = this.hash(i, str) % this.size
       const position = Math.floor(hashedValue / 32)
-      if (!(this.filter[position] & (1 << hashedValue % 32))) {
+      if (!(this.filter[position] & (1 << (hashedValue % 32)))) {
         return false
       }
     }

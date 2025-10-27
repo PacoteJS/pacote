@@ -16,7 +16,7 @@
     "build": "lerna run build",
     "build:docs": "typedoc",
     "commit": "git-cz",
-    "format": "biome check --apply .",
+    "format": "biome format --write .",
     "lint": "biome lint .",
     "plop": "plop",
     "release": "lerna publish",

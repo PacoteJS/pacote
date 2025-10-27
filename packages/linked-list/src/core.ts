@@ -59,18 +59,18 @@ function recursiveReduce<T, R>(
   current: LinkedList<T>,
   step: -1 | 1,
   index: number,
-  collection: LinkedList<T>
+  collection: LinkedList<T>,
 ): R {
   return isEmpty(current)
     ? acc
     : recursiveReduce(
-      callback(acc, car(current), index, collection),
-      callback,
-      cdr(current),
-      step,
-      index + step,
-      collection
-    )
+        callback(acc, car(current), index, collection),
+        callback,
+        cdr(current),
+        step,
+        index + step,
+        collection,
+      )
 }
 
 /**
@@ -94,7 +94,7 @@ function recursiveReduce<T, R>(
 export function reduce<T, R>(
   callback: ReduceCallback<T, R>,
   initial: R,
-  list: LinkedList<T>
+  list: LinkedList<T>,
 ): R {
   return recursiveReduce(initial, callback, list, 1, 0, list)
 }
@@ -122,7 +122,7 @@ export function reverse<T>(list: LinkedList<T>): LinkedList<T> {
  */
 export function concat<T>(
   front: LinkedList<T>,
-  back: LinkedList<T>
+  back: LinkedList<T>,
 ): LinkedList<T> {
   return reduce((acc, value) => prepend(value, acc), back, reverse(front))
 }
@@ -164,7 +164,7 @@ export function length<T>(list: LinkedList<T>): number {
 export function reduceRight<T, R>(
   callback: ReduceCallback<T, R>,
   initial: R,
-  list: LinkedList<T>
+  list: LinkedList<T>,
 ): R {
   const lastIndex = length(list) - 1
   return recursiveReduce(initial, callback, reverse(list), -1, lastIndex, list)
@@ -184,15 +184,15 @@ export function reduceRight<T, R>(
  */
 export function map<T, R>(
   callback: MapCallback<T, R>,
-  list: LinkedList<T>
+  list: LinkedList<T>,
 ): LinkedList<R> {
   return reverse(
     reduce(
       (acc, value, index, collection) =>
         prepend(callback(value, index, collection), acc),
       emptyList(),
-      list
-    )
+      list,
+    ),
   )
 }
 
@@ -210,15 +210,15 @@ export function map<T, R>(
  */
 export function flatMap<T, R>(
   callback: MapCallback<T, LinkedList<R>>,
-  list: LinkedList<T>
+  list: LinkedList<T>,
 ): LinkedList<R> {
   return reverse(
     reduce(
       (acc, value, index, collection) =>
         concat(reverse(callback(value, index, collection)), acc),
       emptyList(),
-      list
-    )
+      list,
+    ),
   )
 }
 
@@ -237,15 +237,15 @@ export function flatMap<T, R>(
  */
 export function filter<T>(
   predicate: PredicateFunction<T>,
-  list: LinkedList<T>
+  list: LinkedList<T>,
 ): LinkedList<T> {
   return reverse(
     reduce(
       (acc, value, index, collection) =>
         predicate(value, index, collection) ? prepend(value, acc) : acc,
       emptyList(),
-      list
-    )
+      list,
+    ),
   )
 }
 

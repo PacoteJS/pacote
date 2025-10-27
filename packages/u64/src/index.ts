@@ -9,7 +9,7 @@ export {
   shiftLeft,
   shiftRight,
   rotateLeft,
-  rotateRight
+  rotateRight,
 } from './bitwise'
 export { equals, greaterThan, lessThan } from './comparison'
 export {
@@ -18,7 +18,7 @@ export {
   multiply,
   divide,
   remainder,
-  negate
+  negate,
 } from './arithmetic'
 export { toString } from './string'
 

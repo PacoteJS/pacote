@@ -7,12 +7,7 @@
     "esModuleInterop": true,
     "target": "ES5",
     "sourceMap": true,
-    "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ESNext",
-      "ScriptHost"
-    ],
+    "lib": ["DOM", "DOM.Iterable", "ESNext", "ScriptHost"],
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "module": "CommonJS",
@@ -40,9 +35,7 @@
     "stripInternal": true,
     "baseUrl": ".",
     "paths": {
-      "@pacote/*": [
-        "./packages/*/src"
-      ]
+      "@pacote/*": ["./packages/*/src"]
     }
   }
 }

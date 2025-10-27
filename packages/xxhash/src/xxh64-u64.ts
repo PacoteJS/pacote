@@ -1,5 +1,16 @@
-// biome-ignore lint/suspicious/noShadowRestrictedNames: use imported toString
-import { add, from, multiply, rotateLeft, shiftRight, subtract, toString, type U64, xor, ZERO } from '@pacote/u64'
+import {
+  add,
+  from,
+  multiply,
+  rotateLeft,
+  shiftRight,
+  subtract,
+  // biome-ignore lint/suspicious/noShadowRestrictedNames: use imported toString
+  toString,
+  type U64,
+  xor,
+  ZERO,
+} from '@pacote/u64'
 import type { XXHash } from './interface'
 import { encode } from './utf8'
 

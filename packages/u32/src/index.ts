@@ -10,7 +10,7 @@ export {
   shiftLeft,
   shiftRight,
   rotateLeft,
-  rotateRight
+  rotateRight,
 } from './bitwise'
 export { equals, greaterThan, lessThan } from './comparison'
 export { add, subtract, multiply, divide, remainder } from './arithmetic'

@@ -3,9 +3,7 @@
   "compilerOptions": {
     "rootDir": "."
   },
-  "exclude": [
-    "lib"
-  ],
+  "exclude": ["lib"],
   "references": [
     {
       "path": "../is-plain-object"
