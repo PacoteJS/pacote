@@ -1,3 +1,28 @@
+/**
+ * Generic type that converts deeply nested structures into immutable variants.
+ *
+ * Useful when you want to treat mutable shapes such as arrays, maps, sets, and
+ * plain objects as readonly data structures throughout your application.
+ *
+ * @example
+ * import type { Immutable } from '@pacote/immutable'
+ *
+ * type Foo = { foo: string }
+ *
+ * const mutable: Foo[] = [{ foo: 'bar' }]
+ *
+ * // Allowed:
+ * mutable.push({ foo: 'baz' })
+ * mutable[0].foo = 'baz'
+ * delete mutable[0].foo
+ *
+ * const immutable: Immutable<Foo[]> = [{ foo: 'bar' }]
+ *
+ * // Not allowed:
+ * immutable.push({ foo: 'baz' })
+ * immutable[0].foo = 'baz'
+ * delete immutable[0].foo
+ */
 export type Immutable<T> = T extends readonly [infer First, ...infer Rest]
   ? readonly [Immutable<First>, ...ImmutableTuple<Rest>]
   : T extends readonly (infer E)[]

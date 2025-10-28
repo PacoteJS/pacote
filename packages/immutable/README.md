@@ -12,28 +12,6 @@ Generic type for deeply immutable data.
 yarn add @pacote/immutable
 ```
 
-## Usage
-
-```typescript
-import type { Immutable } from '@pacote/immutable'
-
-type Foo = { foo: string }
-
-const mutable: Foo[] = [{ foo: 'bar' }]
-
-// Allowed:
-mutable.push({ foo: 'baz' })
-mutable[0].foo = 'baz'
-delete mutable[0].foo
-
-const immutable: Immutable<Foo[]> = [{ foo: 'bar' }]
-
-// Not allowed:
-immutable.push({ foo: 'baz' })
-immutable[0].foo = 'baz'
-delete immutable[0].foo
-```
-
 ## License
 
 MIT © [Luís Rodrigues](https://goblindegook.com).
