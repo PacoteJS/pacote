@@ -14,7 +14,7 @@ function getDisplayName<C extends ElementType>(Component: C): string {
 export type ExternalProps<
   C extends ElementType,
   P extends object,
-  I extends object = {},
+  I extends object = object,
 > = Omit<ComponentPropsWithoutRef<C>, keyof P> & I
 
 export type Injector<
@@ -26,7 +26,7 @@ export type Injector<
 function isInjector<
   P extends object,
   C extends ElementType,
-  I extends object = {},
+  I extends object = object,
 >(injector: P | Injector<C, P, I>): injector is Injector<C, P, I> {
   return typeof injector === 'function'
 }
@@ -34,7 +34,7 @@ function isInjector<
 export function withProps<
   C extends ElementType,
   P extends object,
-  I extends object = {},
+  I extends object = object,
 >(
   inject: P | Injector<C, P, I>,
   BaseComponent: C,
