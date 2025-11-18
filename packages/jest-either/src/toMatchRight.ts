@@ -6,7 +6,7 @@ import {
   isAsymmetricMatcher,
   matchObject,
   matchString,
-  rightPredicate
+  rightPredicate,
 } from './shared/predicates'
 import { printReceivedRight } from './shared/print'
 import type { MatcherResult } from './shared/types'

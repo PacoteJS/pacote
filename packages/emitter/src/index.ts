@@ -1,5 +1,7 @@
 interface Events {
-  [name: string]: (...args: unknown[]) => void
+  // Allow event maps with specific parameter lists to satisfy the constraint.
+  // biome-ignore lint/suspicious/noExplicitAny: any argument
+  [name: string]: (...args: any[]) => void
 }
 
 interface Emitter<E extends Events> {

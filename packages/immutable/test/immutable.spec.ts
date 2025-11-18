@@ -4,7 +4,9 @@ import type { Immutable } from '../src/index'
 describe('Immutable', () => {
   it('marks nested object properties as readonly', () => {
     type Actual = Immutable<{ foo: { bar: string } }>
-    type Expected = { readonly foo: { readonly bar: string } }
+    interface Expected {
+      readonly foo: { readonly bar: string }
+    }
     expectTypeOf<Actual>().toEqualTypeOf<Expected>()
   })
 

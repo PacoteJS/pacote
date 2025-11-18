@@ -2,10 +2,10 @@ import { range, unique, windowed } from '@pacote/array'
 import { BloomFilter, optimal } from '@pacote/bloom-filter'
 import { memoize } from '@pacote/memoize'
 import type { U64 } from '@pacote/u64'
-import { type XXHash, xxh64 } from '@pacote/xxhash'
+import { xxh64, type XXHash } from '@pacote/xxhash'
 import { findLast } from './array'
 import { entries, keys, pick } from './object'
-import { EXCLUDE, PHRASE, REQUIRE, queryTerms } from './query'
+import { EXCLUDE, PHRASE, queryTerms, REQUIRE } from './query'
 import { countIdf } from './tf-idf'
 
 export type PreprocessFunction<Document, Field extends keyof Document> = (
@@ -23,7 +23,10 @@ export type TokenizerFunction = (token: string, language?: string) => string[]
  * @template Document     The type of document being indexed.
  * @template SummaryField The document keys that can be returned in search results.
  */
-export type IndexedDocument<Document, SummaryField extends keyof Document> = {
+export interface IndexedDocument<
+  Document,
+  SummaryField extends keyof Document,
+> {
   /**
    * Summary fields for the document. These are preserved as-is.
    */
@@ -35,7 +38,7 @@ export type IndexedDocument<Document, SummaryField extends keyof Document> = {
   readonly signatures: Record<number, BloomFilter<string>>
 }
 
-export type Index<Document, SummaryField extends keyof Document> = {
+export interface Index<Document, SummaryField extends keyof Document> {
   version: number
   documents: Record<string, IndexedDocument<Document, SummaryField>>
 }
@@ -47,11 +50,11 @@ export type Index<Document, SummaryField extends keyof Document> = {
  * @template SummaryField The document keys that can be returned in search results.
  * @template IndexField   The document keys to be indexed for searching.
  */
-export type Options<
+export interface Options<
   Document extends Record<string, unknown>,
   SummaryField extends keyof Document = keyof Document,
   IndexField extends keyof Document = keyof Document,
-> = {
+> {
   /**
    * The fields to index, provided as an array or as a record of field keys and
    * weight values.
@@ -117,13 +120,13 @@ export type Options<
   tokenizer?: TokenizerFunction
 }
 
-type SearchTokens = {
+interface SearchTokens {
   required: string[]
   included: string[]
   excluded: string[]
 }
 
-type Result<Document, SummaryField extends keyof Document> = {
+interface Result<Document, SummaryField extends keyof Document> {
   readonly summary: Pick<Document, SummaryField>
   readonly score: number
 }

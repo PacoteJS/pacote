@@ -1,3 +1,5 @@
+/** biome-ignore-all lint/style/useConsistentTypeDefinitions: tests require type */
+
 import { expect, test, vi } from 'vitest'
 import { createEmitter } from '../src'
 

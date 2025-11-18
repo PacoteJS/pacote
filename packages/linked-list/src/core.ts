@@ -1,12 +1,16 @@
 import { None, type Option, Some } from '@pacote/option'
 
-type Empty = undefined
-type Cons<T> = readonly [value: T, next: Cons<T> | Empty]
+export type Empty = undefined
+export type Cons<T> = readonly [value: T, next: Cons<T> | Empty]
 export type LinkedList<T> = Cons<T> | Empty
 
-type CallbackArgs<T> = [value: T, index: number, collection: LinkedList<T>]
-type MapCallback<T, R> = (...args: CallbackArgs<T>) => R
-type ReduceCallback<T, R> = (acc: R, ...args: CallbackArgs<T>) => R
+export type CallbackArgs<T> = [
+  value: T,
+  index: number,
+  collection: LinkedList<T>,
+]
+export type MapCallback<T, R> = (...args: CallbackArgs<T>) => R
+export type ReduceCallback<T, R> = (acc: R, ...args: CallbackArgs<T>) => R
 export type PredicateFunction<T> = MapCallback<T, boolean>
 
 export function car<T>(cons: Cons<T>): T {

@@ -1,4 +1,4 @@
-export type RetryOptions = {
+export interface RetryOptions {
   /**
    * Exponential backoff applied to the interval.
    */

@@ -1,6 +1,6 @@
 import { LRUCache } from '@pacote/lru-cache'
 
-export type Options = {
+export interface Options {
   /**
    * Maximum number of cached results. If set, caching will use a least-recently
    * used strategy to evict excess items.
@@ -10,7 +10,7 @@ export type Options = {
 
 type Fn<A extends unknown[], R> = (...args: A) => R
 
-type MemoizedFn<A extends unknown[], R> = Fn<A, R> & {
+interface MemoizedFn<A extends unknown[], R> extends Fn<A, R> {
   clear(): void
 }
 

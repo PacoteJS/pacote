@@ -78,11 +78,14 @@ test('clear', () => {
   expect(cache.get('delete')).toBe(undefined)
 })
 
-test.each([-1, 0, 0.5, Number.POSITIVE_INFINITY, Number.NaN])(
-  'invalid capacity',
-  (capacity) => {
-    expect(() => new LRUCache(capacity)).toThrow(
-      'Capacity must be a positive integer',
-    )
-  },
-)
+test.each([
+  -1,
+  0,
+  0.5,
+  Number.POSITIVE_INFINITY,
+  Number.NaN,
+])('invalid capacity', (capacity) => {
+  expect(() => new LRUCache(capacity)).toThrow(
+    'Capacity must be a positive integer',
+  )
+})

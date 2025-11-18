@@ -55,7 +55,7 @@ export class BloomFilter<T extends { toString(): string }> {
   }
 }
 
-export type SerialisedBloomFilter = {
+export interface SerialisedBloomFilter {
   readonly size: number
   readonly hashes: number
   readonly seed: number
