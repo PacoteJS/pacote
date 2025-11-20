@@ -4,7 +4,7 @@ interface Events {
   [name: string]: (...args: any[]) => void
 }
 
-interface Emitter<E extends Events> {
+export interface Emitter<E extends Events> {
   /**
    * Binds a subscriber function to an event with the supplied name.
    *
