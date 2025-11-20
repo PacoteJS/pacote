@@ -10,7 +10,7 @@ export interface Options {
 
 type Fn<A extends unknown[], R> = (...args: A) => R
 
-interface MemoizedFn<A extends unknown[], R> extends Fn<A, R> {
+export interface MemoizedFn<A extends unknown[], R> extends Fn<A, R> {
   clear(): void
 }
 
