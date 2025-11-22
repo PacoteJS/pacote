@@ -8,16 +8,25 @@ test('event subscription', () => {
   const callback = vi.fn()
 
   emitter.on('test', callback)
-  emitter.emit('test')
 
+  emitter.emit('test')
+  expect(callback).toHaveBeenCalledTimes(1)
+})
+
+test('the same function can only listen once', () => {
+  type TestEvents = { test: () => void }
+  const emitter = createEmitter<TestEvents>()
+  const callback = vi.fn()
+
+  emitter.on('test', callback)
+  emitter.on('test', callback)
+
+  emitter.emit('test')
   expect(callback).toHaveBeenCalledTimes(1)
 })
 
 test('multiple event subscribers', () => {
-  type TestEvents = {
-    test: () => void
-  }
-
+  type TestEvents = { test: () => void }
   const emitter = createEmitter<TestEvents>()
   const callback1 = vi.fn()
   const callback2 = vi.fn()
@@ -30,26 +39,33 @@ test('multiple event subscribers', () => {
   expect(callback1).toHaveBeenCalledTimes(1)
 })
 
-test('unsubscribing from an event', () => {
-  type TestEvents = {
-    test: () => void
-  }
-
+test('unsubscribing from an event through the callback', () => {
+  type TestEvents = { test: () => void }
   const emitter = createEmitter<TestEvents>()
   const callback = vi.fn()
-
   const unsubcribe = emitter.on('test', callback)
-  unsubcribe()
-  emitter.emit('test')
 
+  unsubcribe()
+
+  emitter.emit('test')
+  expect(callback).toHaveBeenCalledTimes(0)
+})
+
+test('unsubscribing from an event through an AbortController signal', () => {
+  type TestEvents = { test: () => void }
+  const emitter = createEmitter<TestEvents>()
+  const callback = vi.fn()
+  const controller = new AbortController()
+  emitter.on('test', callback, { signal: controller.signal })
+
+  controller.abort()
+
+  emitter.emit('test')
   expect(callback).toHaveBeenCalledTimes(0)
 })
 
 test('passing event parameters', () => {
-  type TestEvents = {
-    test: (a: string, b: number) => void
-  }
-
+  type TestEvents = { test: (a: string, b: number) => void }
   const emitter = createEmitter<TestEvents>()
   const callback = vi.fn()
 
