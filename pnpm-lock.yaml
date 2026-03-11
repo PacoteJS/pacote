@@ -268,8 +268,8 @@ importers:
         specifier: ^30.0.0
         version: 30.0.0
       ramda:
-        specifier: ^0.31.3
-        version: 0.31.3
+        specifier: ^0.32.0
+        version: 0.32.0
 
   packages/linked-list:
     dependencies:
@@ -380,6 +380,10 @@ packages:
     resolution: {integrity: sha512-KKBU1VGYR7ORr3At5HAtUQ+TV3SzRCXmA/8OdDZiLDBIZxVyzXuztPjfLd3BV1PRAQGCMWWSHYhL0F8d5uHBDQ==}
     engines: {node: '>=6.0.0'}
     hasBin: true
+
+  '@babel/runtime@7.28.6':
+    resolution: {integrity: sha512-05WQkdpL9COIMz4LjTxGpPNCdlpyimKppYNoJ5Di5EUObifl8t4tuLuUBBZEpoLYOmfvIWrsp9fCl0HoPRVTdA==}
+    engines: {node: '>=6.9.0'}
 
   '@babel/runtime@7.28.6':
     resolution: {integrity: sha512-05WQkdpL9COIMz4LjTxGpPNCdlpyimKppYNoJ5Di5EUObifl8t4tuLuUBBZEpoLYOmfvIWrsp9fCl0HoPRVTdA==}
@@ -3434,8 +3438,8 @@ packages:
     resolution: {integrity: sha512-ARhCpm70fzdcvNQfPoy49IaanKkTlRWF2JMzqhcJbhSFRZv7nPTvZJdcY7301IPmvW+/p0RgIWnQDLJxifsQ7g==}
     engines: {node: '>=8'}
 
-  ramda@0.31.3:
-    resolution: {integrity: sha512-xKADKRNnqmDdX59PPKLm3gGmk1ZgNnj3k7DryqWwkamp4TJ6B36DdpyKEQ0EoEYmH2R62bV4Q+S0ym2z8N2f3Q==}
+  ramda@0.32.0:
+    resolution: {integrity: sha512-GQWAHhxhxWBWA8oIBr1XahFVjQ9Fic6MK9ikijfd4TZHfE2+urfk+irVlR5VOn48uwMgM+loRRBJd6Yjsbc0zQ==}
 
   react-dom@18.3.1:
     resolution: {integrity: sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==}
@@ -4313,6 +4317,8 @@ snapshots:
 
   '@babel/runtime@7.28.6': {}
 
+  '@babel/runtime@7.28.6': {}
+
   '@babel/types@7.28.5':
     dependencies:
       '@babel/helper-string-parser': 7.27.1
@@ -5150,7 +5156,7 @@ snapshots:
       fp-ts: 2.16.11
       jest-diff: 30.0.2
       jest-matcher-utils: 30.0.2
-      ramda: 0.31.3
+      ramda: 0.32.0
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
@@ -7638,7 +7644,7 @@ snapshots:
 
   quick-lru@4.0.1: {}
 
-  ramda@0.31.3: {}
+  ramda@0.32.0: {}
 
   react-dom@18.3.1(react@18.3.1):
     dependencies:
