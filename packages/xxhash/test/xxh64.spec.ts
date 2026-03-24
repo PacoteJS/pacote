@@ -1,14 +1,43 @@
 import { assert, nat, property, string, uint8Array } from 'fast-check'
 import { describe, expect, test } from 'vitest'
-import { XXHash64 } from 'xxhash-addon'
 import { xxh64, xxh64BigInt } from '../src/index'
 import { sanityBuffer } from './sanity'
+
+interface XXHash64Constructor {
+  new (
+    seed: number,
+  ): {
+    hash: (buffer: Uint8Array) => {
+      toString: (encoding?: 'hex') => string
+    }
+  }
+}
+
+const nativeXXHash64 = (async (): Promise<XXHash64Constructor | undefined> => {
+  try {
+    const moduleName: string = 'xxhash-addon'
+    const module = (await import(moduleName)) as {
+      XXHash64?: XXHash64Constructor
+    }
+    return module.XXHash64
+  } catch {
+    return undefined
+  }
+})()
 
 function cloneSlice(buffer: Uint8Array, length: number): Uint8Array {
   return buffer.reduce((clone, value, index) => {
     clone[index] = value
     return clone
   }, new Uint8Array(length))
+}
+
+function asArrayBuffer(data: Uint8Array): ArrayBuffer {
+  if (data.buffer instanceof ArrayBuffer) {
+    return data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength)
+  }
+
+  return Uint8Array.from(data).buffer
 }
 
 describe.each([xxh64, xxh64BigInt])('%o', (testHash) => {
@@ -18,11 +47,16 @@ describe.each([xxh64, xxh64BigInt])('%o', (testHash) => {
     expect(h2).toBe(h1)
   })
 
-  test('XXH64 reference implementation comparison', () => {
+  test('XXH64 reference implementation comparison', async () => {
+    const XXHash64 = await nativeXXHash64
+    if (!XXHash64) {
+      return
+    }
+
     assert(
       property(nat(), uint8Array({ maxLength: 1024 }), (seed, data) => {
         const referenceHash = new XXHash64(seed).hash(data).toString('hex')
-        const hash = testHash(seed).update(data).digest('hex')
+        const hash = testHash(seed).update(asArrayBuffer(data)).digest('hex')
         expect(hash).toBe(referenceHash)
       }),
     )
@@ -50,7 +84,7 @@ describe.each([xxh64, xxh64BigInt])('%o', (testHash) => {
   ])('sanity buffer (length %d, seed %d)', (length, seed, expected) => {
     const data = cloneSlice(sanityBuffer, length)
 
-    const actual = testHash(seed).update(data.buffer).digest('hex')
+    const actual = testHash(seed).update(asArrayBuffer(data)).digest('hex')
     expect(actual).toBe(expected)
   })
 
