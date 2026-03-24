@@ -29,11 +29,11 @@
     ]
   },
   "devDependencies": {
-    "@biomejs/biome": "2.3.6",
+    "@biomejs/biome": "2.4.8",
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
     "@testing-library/react": "^16.3.0",
-    "@types/node": "^24.10.1",
+    "@types/node": "^25.5.0",
     "@types/ramda": "^0.31.1",
     "@types/react": "^19.2.5",
     "@vitest/coverage-v8": "^4.0.9",
@@ -43,7 +43,7 @@
     "fp-ts": "^2.16.11",
     "git-cz": "^4.9.0",
     "husky": "^9.1.7",
-    "jsdom": "^27.2.0",
+    "jsdom": "^29.0.1",
     "lerna": "^9.0.1",
     "lint-staged": "^16.2.6",
     "msw": "^2.12.2",
@@ -54,8 +54,7 @@
     "redux": "^5.0.1",
     "styled-components": "^6.1.19",
     "typedoc": "^0.28.14",
-    "typescript": "^5.9.3",
-    "vite-tsconfig-paths": "^5.1.4",
+    "typescript": "^6.0.2",
     "vitest": "^4.0.9",
     "xxhash-addon": "^1.5.0"
   },
