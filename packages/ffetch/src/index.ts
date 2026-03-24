@@ -1,6 +1,17 @@
 import { pipe } from 'fp-ts/function'
-import { chain, chainW, left, type TaskEither, tryCatch } from 'fp-ts/lib/TaskEither'
-import { type FetchError, NetworkError, ParserError, StatusError } from './errors'
+import {
+  chain,
+  chainW,
+  left,
+  type TaskEither,
+  tryCatch,
+} from 'fp-ts/lib/TaskEither'
+import {
+  type FetchError,
+  NetworkError,
+  ParserError,
+  StatusError,
+} from './errors'
 
 type Fetch<E, T> = (
   input: Request | string,

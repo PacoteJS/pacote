@@ -11,9 +11,14 @@ export class BaseError extends Error {
    * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error#Custom_Error_Types
    */
   public static imprint(instance: BaseError): void {
+    type ConstructorLike = (...args: unknown[]) => unknown
+
     const captureStackTrace = (
       Error as ErrorConstructor & {
-        captureStackTrace?: (target: object, constructorOpt?: Function) => void
+        captureStackTrace?: (
+          target: object,
+          constructorOpt?: ConstructorLike,
+        ) => void
       }
     ).captureStackTrace
 
@@ -22,7 +27,7 @@ export class BaseError extends Error {
 
     if (captureStackTrace) {
       // biome-ignore lint/complexity/noThisInStatic: imprint stack trace
-      captureStackTrace(instance, this.constructor)
+      captureStackTrace(instance, this.constructor as ConstructorLike)
     }
 
     if (Object.setPrototypeOf) {

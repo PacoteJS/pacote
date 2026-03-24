@@ -17,10 +17,7 @@
     }
   },
   "files": {
-    "includes": [
-      "**",
-      "!**/.vscode"
-    ]
+    "includes": ["**", "!**/.vscode"]
   },
   "linter": {
     "rules": {
