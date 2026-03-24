@@ -5,13 +5,17 @@
     "declaration": true,
     "declarationMap": false,
     "esModuleInterop": true,
-    "target": "ES5",
+    "target": "ES2015",
     "sourceMap": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext", "ScriptHost"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext",
+      "ScriptHost"
+    ],
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "module": "CommonJS",
-    "moduleResolution": "Node",
     "jsx": "react",
     "allowJs": false,
     "exactOptionalPropertyTypes": true,
@@ -33,9 +37,10 @@
     "strictNullChecks": true,
     "useUnknownInCatchVariables": true,
     "stripInternal": true,
-    "baseUrl": ".",
     "paths": {
-      "@pacote/*": ["./packages/*/src"]
+      "@pacote/*": [
+        "./packages/*/src"
+      ]
     }
   }
 }

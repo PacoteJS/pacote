@@ -32,7 +32,7 @@ export function throttle<A extends unknown[]>(
   delay = 0,
 ): Throttled<A> & Cancellable {
   let lastCalled = 0
-  let timer: NodeJS.Timeout
+  let timer: ReturnType<typeof setTimeout>
 
   const throttledFn: Throttled<A> = (...args) => {
     const remainingDelay = Math.max(0, lastCalled + delay - Date.now())

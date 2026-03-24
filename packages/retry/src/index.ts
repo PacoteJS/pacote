@@ -42,8 +42,8 @@ export async function retry<T>(
   options: RetryOptions = {},
 ): Promise<T> {
   return new Promise((resolve, reject) => {
-    let intervalId: number | NodeJS.Timeout
-    let timeoutId: number | NodeJS.Timeout
+    let intervalId: ReturnType<typeof setInterval>
+    let timeoutId: ReturnType<typeof setTimeout>
     let isPending = false
     let lastError: unknown
     let retryCount = 0

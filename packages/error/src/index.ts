@@ -11,12 +11,18 @@ export class BaseError extends Error {
    * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error#Custom_Error_Types
    */
   public static imprint(instance: BaseError): void {
+    const captureStackTrace = (
+      Error as ErrorConstructor & {
+        captureStackTrace?: (target: object, constructorOpt?: Function) => void
+      }
+    ).captureStackTrace
+
     // biome-ignore lint/complexity/noThisInStatic: imprint class name
     instance.name = this.name
 
-    if (Error.captureStackTrace) {
+    if (captureStackTrace) {
       // biome-ignore lint/complexity/noThisInStatic: imprint stack trace
-      Error.captureStackTrace(instance, this.constructor)
+      captureStackTrace(instance, this.constructor)
     }
 
     if (Object.setPrototypeOf) {
