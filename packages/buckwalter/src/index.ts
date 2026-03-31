@@ -56,10 +56,28 @@ function transliterateWithMap(input: string, map: Map<string, string>): string {
   return [...input].map((character) => map.get(character) ?? character).join('')
 }
 
+/**
+ * Transliterate Arabic text to Buckwalter transliteration.
+ *
+ * Characters without a Buckwalter mapping are preserved as-is.
+ *
+ * @param arabic Arabic text to transliterate.
+ *
+ * @returns Buckwalter transliterated text.
+ */
 export function transliterate(arabic: string): string {
   return transliterateWithMap(arabic, arabicToBuckwalter)
 }
 
+/**
+ * Transliterate Buckwalter text back to Arabic script.
+ *
+ * Characters without a reverse mapping are preserved as-is.
+ *
+ * @param latin Buckwalter text to reverse transliterate.
+ *
+ * @returns Arabic script text.
+ */
 export function transliterateReverse(latin: string): string {
   return transliterateWithMap(latin, buckwalterToArabic)
 }
