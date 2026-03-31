@@ -1,7 +1,7 @@
 {
   "name": "@pacote/disposable",
   "description": "Create disposable resources for Explicit Resource Management.",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "sideEffects": false,
   "license": "MIT",
   "author": {

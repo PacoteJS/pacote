@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0](https://github.com/PacoteJS/pacote/compare/@pacote/result@4.0.4...@pacote/result@5.0.0) (2026-03-31)
+
+
+### Bug Fixes
+
+* 🐛 expose used types ([4a9b07d](https://github.com/PacoteJS/pacote/commit/4a9b07ded1e5a2fda70f27b0b23022aff7df5856))
+
+
+### chore
+
+* 🤖 upgrade TypeScript and move CommonJS target to ES2015 ([49c0139](https://github.com/PacoteJS/pacote/commit/49c0139aa17e6430f3048656b25311b5fda8aa40))
+
+
+### BREAKING CHANGES
+
+* 🧨 CommonJS no longer compiles to ES5, only ES2015
+
+
+
+
+
 ## [4.0.4](https://github.com/PacoteJS/pacote/compare/@pacote/result@4.0.3...@pacote/result@4.0.4) (2025-02-25)
 
 **Note:** Version bump only for package @pacote/result

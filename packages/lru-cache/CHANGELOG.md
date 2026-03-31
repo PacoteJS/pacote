@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/PacoteJS/pacote/compare/@pacote/lru-cache@0.1.2...@pacote/lru-cache@0.2.0) (2026-03-31)
+
+
+### chore
+
+* 🤖 upgrade TypeScript and move CommonJS target to ES2015 ([49c0139](https://github.com/PacoteJS/pacote/commit/49c0139aa17e6430f3048656b25311b5fda8aa40))
+
+
+### BREAKING CHANGES
+
+* 🧨 CommonJS no longer compiles to ES5, only ES2015
+
+
+
+
+
 ## [0.1.2](https://github.com/PacoteJS/pacote/compare/@pacote/lru-cache@0.1.1...@pacote/lru-cache@0.1.2) (2024-10-05)
 
 **Note:** Version bump only for package @pacote/lru-cache

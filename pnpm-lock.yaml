@@ -213,6 +213,8 @@ importers:
         specifier: file:../xxhash
         version: link:../xxhash
 
+  packages/buckwalter: {}
+
   packages/computus: {}
 
   packages/disposable: {}

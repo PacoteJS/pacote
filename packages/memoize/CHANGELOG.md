@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://github.com/PacoteJS/pacote/compare/@pacote/memoize@2.1.4...@pacote/memoize@3.0.0) (2026-03-31)
+
+
+### Bug Fixes
+
+* 🐛 export public type ([db8d0df](https://github.com/PacoteJS/pacote/commit/db8d0dfa15f3eafe7e2e4c3683cb073101a30a17))
+
+
+### chore
+
+* 🤖 upgrade TypeScript and move CommonJS target to ES2015 ([49c0139](https://github.com/PacoteJS/pacote/commit/49c0139aa17e6430f3048656b25311b5fda8aa40))
+
+
+### BREAKING CHANGES
+
+* 🧨 CommonJS no longer compiles to ES5, only ES2015
+
+
+
+
+
 ## [2.1.4](https://github.com/PacoteJS/pacote/compare/@pacote/memoize@2.1.3...@pacote/memoize@2.1.4) (2025-10-23)
 
 **Note:** Version bump only for package @pacote/memoize
