@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.18.1](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.18.0...@pacote/bloom-search@0.18.1) (2026-04-01)
+
+
+### Bug Fixes
+
+* 🐛 handle query tokenisation consistently with indexing ([71b37cc](https://github.com/PacoteJS/pacote/commit/71b37ccc7b2aae5d2b7cbcb63bf8673d21d7556d))
+* 🐛 preserve underscores in search terms ([f8b4c02](https://github.com/PacoteJS/pacote/commit/f8b4c02910005ee3b2ef3add526e359af316748a))
+
+
+
+
+
 # [0.18.0](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.17.7...@pacote/bloom-search@0.18.0) (2026-03-31)
 
 
