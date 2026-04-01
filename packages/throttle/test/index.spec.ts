@@ -1,4 +1,4 @@
-import { type MockInstance, afterEach, expect, test, vi } from 'vitest'
+import { afterEach, expect, type MockInstance, test, vi } from 'vitest'
 import { throttle } from '../src/index'
 
 const tock = (() => {

@@ -1,10 +1,10 @@
 import { listOf } from './array'
 import {
-  type LinkedList,
   car,
   cdr,
   concat,
   isEmpty,
+  type LinkedList,
   length,
   prepend,
   reverse,

@@ -1,4 +1,4 @@
-import { assert, anything, func, property } from 'fast-check'
+import { anything, assert, func, property } from 'fast-check'
 import { describe, expect, it, test } from 'vitest'
 import { flow, pipe } from '../src/index'
 

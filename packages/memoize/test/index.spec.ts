@@ -1,4 +1,4 @@
-import { assert, anything, func, property, string } from 'fast-check'
+import { anything, assert, func, property, string } from 'fast-check'
 import { expect, test, vi } from 'vitest'
 import { memoize } from '../src/index'
 

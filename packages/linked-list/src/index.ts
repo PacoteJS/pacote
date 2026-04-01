@@ -1,3 +1,4 @@
+export { listOf, toArray } from './array'
 export {
   append,
   cdr as rest,
@@ -14,7 +15,6 @@ export {
   reverse,
   tail,
 } from './core'
-export { listOf, toArray } from './array'
 export { entries, keys, values } from './iterator'
 export {
   at,
@@ -23,10 +23,10 @@ export {
   findIndex,
   get,
   includes,
-  item,
   indexOf,
+  item,
   lastIndexOf,
   some,
 } from './search'
-export { slice, remove, drop, take, unique } from './sublists'
 export { sort } from './sort'
+export { drop, remove, slice, take, unique } from './sublists'

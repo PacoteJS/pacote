@@ -1,4 +1,4 @@
-import { Err, Ok, type Result, fold } from '@pacote/result'
+import { Err, fold, Ok, type Result } from '@pacote/result'
 import { expect, test } from 'vitest'
 import { createAction, reducerFromState } from '../src/index'
 

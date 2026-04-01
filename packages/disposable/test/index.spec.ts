@@ -1,4 +1,4 @@
-import { test, vi, expect } from 'vitest'
+import { expect, test, vi } from 'vitest'
 import { asyncDisposable, disposable } from '../src/index'
 
 test('creates a synchronously disposable resource', () => {

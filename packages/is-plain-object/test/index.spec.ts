@@ -1,7 +1,7 @@
 import {
-  assert,
   anything,
   array,
+  assert,
   float,
   func,
   object,

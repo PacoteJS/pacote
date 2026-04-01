@@ -1,26 +1,26 @@
 import { fromString } from './string'
 import { fromNumber, type U64 } from './u64'
 
-export { toNumber, type U64, ZERO } from './u64'
+export {
+  add,
+  divide,
+  multiply,
+  negate,
+  remainder,
+  subtract,
+} from './arithmetic'
 export {
   and,
   or,
-  xor,
-  shiftLeft,
-  shiftRight,
   rotateLeft,
   rotateRight,
+  shiftLeft,
+  shiftRight,
+  xor,
 } from './bitwise'
 export { equals, greaterThan, lessThan } from './comparison'
-export {
-  add,
-  subtract,
-  multiply,
-  divide,
-  remainder,
-  negate,
-} from './arithmetic'
 export { toString } from './string'
+export { toNumber, type U64, ZERO } from './u64'
 
 /**
  * Creates a new `U64` from a number.

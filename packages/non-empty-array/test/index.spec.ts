@@ -1,9 +1,9 @@
 import { None, Some } from '@pacote/option'
 import {
-  assert,
   type Arbitrary,
   anything,
   array,
+  assert,
   property,
   tuple,
 } from 'fast-check'

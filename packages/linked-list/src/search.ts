@@ -1,11 +1,11 @@
-import { None, type Option, Some, map } from '@pacote/option'
+import { map, None, type Option, Some } from '@pacote/option'
 import {
-  type LinkedList,
-  type PredicateFunction,
   car,
   cdr,
   isEmpty,
+  type LinkedList,
   length,
+  type PredicateFunction,
   reverse,
 } from './core'
 

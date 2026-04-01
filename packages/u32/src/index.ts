@@ -1,20 +1,20 @@
 import { fromString } from './string'
 import { fromNumber, type U32 } from './u32'
 
-export { toNumber, type U32, ZERO } from './u32'
+export { add, divide, multiply, remainder, subtract } from './arithmetic'
 export {
   and,
-  or,
-  xor,
   negate,
-  shiftLeft,
-  shiftRight,
+  or,
   rotateLeft,
   rotateRight,
+  shiftLeft,
+  shiftRight,
+  xor,
 } from './bitwise'
 export { equals, greaterThan, lessThan } from './comparison'
-export { add, subtract, multiply, divide, remainder } from './arithmetic'
 export { toString } from './string'
+export { toNumber, type U32, ZERO } from './u32'
 
 export function from(value: number): U32
 export function from(value: string, radix?: number): U32

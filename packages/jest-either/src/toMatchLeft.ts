@@ -1,5 +1,6 @@
 import type { Either } from 'fp-ts/lib/Either'
 import { matcherHint, printExpected, printReceived } from 'jest-matcher-utils'
+import { isEither } from './shared/isEither'
 import {
   type AsymmetricMatcher,
   isAsymmetricMatcher,
@@ -8,7 +9,6 @@ import {
   matchString,
 } from './shared/predicates'
 import { printReceivedLeft } from './shared/print'
-import { isEither } from './shared/isEither'
 import type { MatcherResult } from './shared/types'
 
 declare global {

@@ -1,10 +1,10 @@
 import {
-  type LinkedList,
   car,
   cdr,
   concat,
   emptyList,
   isEmpty,
+  type LinkedList,
   prepend,
   reduce,
   reverse,
