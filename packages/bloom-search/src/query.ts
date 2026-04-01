@@ -8,8 +8,8 @@ type SearchTerm = [
   typeof NORMAL | typeof EXCLUDE | typeof REQUIRE | typeof PHRASE,
 ]
 
-const joinPhrase = (term: string) => term.replace(/\s+/g, '_')
-const splitPhrase = (term: string) => term.replace(/_+/g, ' ')
+const joinPhrase = (term: string) => term.replace(/\s+/g, '\0')
+const splitPhrase = (term: string) => term.replace(/\0+/g, ' ')
 const removeOperators = (term: string) => term.replace(/(^\+|^-|^"|"$)/g, '')
 
 export function queryTerms(query: string): SearchTerm[] {

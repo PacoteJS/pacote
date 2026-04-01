@@ -181,6 +181,14 @@ test('non-phrase query terms are tokenized like indexed content', () => {
   expect(bs.search('foo-bar')).toEqual([{ text: 'foo-bar' }])
 })
 
+test('query terms with underscores are tokenized like indexed content', () => {
+  const bs = new BloomSearch({ fields: ['text'], summary: ['text'] })
+
+  bs.add('1', { text: 'foo_bar' })
+
+  expect(bs.search('foo_bar')).toEqual([{ text: 'foo_bar' }])
+})
+
 test('document fields can be preprocessed for the index', () => {
   const preprocess = vi.fn((text) => text.replace(/-/g, ' '))
 
