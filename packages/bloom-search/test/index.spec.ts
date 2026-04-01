@@ -173,6 +173,14 @@ test('tokens can be generated with a custom tokenizer', () => {
   expect(bs.search('foo', 'en-GB')).toEqual([{ text: 'foo-bar' }])
 })
 
+test('non-phrase query terms are tokenized like indexed content', () => {
+  const bs = new BloomSearch({ fields: ['text'], summary: ['text'] })
+
+  bs.add('1', { text: 'foo-bar' })
+
+  expect(bs.search('foo-bar')).toEqual([{ text: 'foo-bar' }])
+})
+
 test('document fields can be preprocessed for the index', () => {
   const preprocess = vi.fn((text) => text.replace(/-/g, ' '))
 

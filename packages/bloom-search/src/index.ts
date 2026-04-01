@@ -2,7 +2,7 @@ import { range, unique, windowed } from '@pacote/array'
 import { BloomFilter, optimal } from '@pacote/bloom-filter'
 import { memoize } from '@pacote/memoize'
 import type { U64 } from '@pacote/u64'
-import { xxh64, type XXHash } from '@pacote/xxhash'
+import { type XXHash, xxh64 } from '@pacote/xxhash'
 import { findLast } from './array'
 import { entries, keys, pick } from './object'
 import { EXCLUDE, PHRASE, queryTerms, REQUIRE } from './query'
@@ -464,13 +464,20 @@ export class BloomSearch<
   private parseQuery(query: string, language?: string): SearchTokens {
     return queryTerms(query).reduce<SearchTokens>(
       ({ required, included, excluded }, [term, type]) => {
-        const token = type === PHRASE ? term : this.stemmer(term, language)
+        const tokens =
+          type === PHRASE
+            ? [term]
+            : this.tokenizer(term, language)
+                .filter(
+                  (token) => token.length && this.stopwords(token, language),
+                )
+                .map((token) => this.stemmer(token, language))
         return {
           required: [REQUIRE, PHRASE].includes(type)
-            ? required.concat(token)
+            ? required.concat(tokens)
             : required,
-          included: type !== EXCLUDE ? included.concat(token) : included,
-          excluded: type === EXCLUDE ? excluded.concat(token) : excluded,
+          included: type !== EXCLUDE ? included.concat(tokens) : included,
+          excluded: type === EXCLUDE ? excluded.concat(tokens) : excluded,
         }
       },
       { required: [], included: [], excluded: [] },
