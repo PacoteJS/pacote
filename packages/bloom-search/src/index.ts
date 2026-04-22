@@ -172,7 +172,13 @@ export class BloomSearch<
    * Collection containing document summaries and Bloom filter signatures used
    * to search, with document shorthand reference identifier used as keys.
    */
-  public index: Index<Document, SummaryField> = { version: 1, documents: {} }
+  public index: Index<Document, SummaryField> = {
+    version: 1,
+    documents: Object.create(null) as Record<
+      string,
+      IndexedDocument<Document, SummaryField>
+    >,
+  }
 
   /**
    * A record containing the name of all indexable fields and their relative
@@ -292,7 +298,7 @@ export class BloomSearch<
         }, {}),
       }
       return acc
-    }, {})
+    }, Object.create(null) as Record<string, IndexedDocument<Document, SummaryField>>)
   }
 
   /**

@@ -75,6 +75,20 @@ test('document indices can be replaced', () => {
   expect(bs.search('bar')).toEqual([{ text: 'bar' }])
 })
 
+test('special document refs are indexed safely', () => {
+  const bs = new BloomSearch({
+    fields: ['text'],
+    summary: ['text'],
+  })
+
+  bs.add('__proto__', { text: 'foo' })
+  bs.add('constructor', { text: 'bar' })
+
+  expect(bs.search('foo')).toEqual([{ text: 'foo' }])
+  expect(bs.search('bar')).toEqual([{ text: 'bar' }])
+  expect(Object.getPrototypeOf(bs.index.documents)).toBeNull()
+})
+
 test('document indices can be removed', () => {
   const bs = new BloomSearch({
     errorRate: 0.002,
