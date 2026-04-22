@@ -419,7 +419,7 @@ export class BloomSearch<
     const tokens = this.parseQuery(query, language)
     const totalDocuments = keys(this.index.documents).length
 
-    return Object.values<IndexedDocument<Document, SummaryField>>(
+    const candidates = Object.values<IndexedDocument<Document, SummaryField>>(
       this.index.documents,
     )
       .filter(
@@ -435,12 +435,16 @@ export class BloomSearch<
         return { summary: document.summary, matches }
       })
       .filter(({ matches }) => Object.values(matches).some((match) => match))
-      .reduce<Result<Document, SummaryField>[]>((all, result, _, results) => {
+
+    const documentTermFrequencies = candidates.map(({ matches }) => matches)
+
+    return candidates
+      .reduce<Result<Document, SummaryField>[]>((all, result) => {
         all.push({
           ...result,
           score: countIdf(
             result.matches,
-            results.map(({ matches }) => matches),
+            documentTermFrequencies,
             totalDocuments,
           ),
         })
