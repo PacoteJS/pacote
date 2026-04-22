@@ -131,6 +131,8 @@ interface Result<Document, SummaryField extends keyof Document> {
   readonly score: number
 }
 
+const INDEX_VERSION = 1
+
 const compare = (a: number, b: number) => (a === b ? 0 : a > b ? -1 : 1)
 
 const defaultTokenizer = (text: string): string[] =>
@@ -168,18 +170,6 @@ export class BloomSearch<
   SummaryField extends keyof Document = keyof Document,
   IndexField extends keyof Document = keyof Document,
 > {
-  /**
-   * Collection containing document summaries and Bloom filter signatures used
-   * to search, with document shorthand reference identifier used as keys.
-   */
-  public index: Index<Document, SummaryField> = {
-    version: 1,
-    documents: Object.create(null) as Record<
-      string,
-      IndexedDocument<Document, SummaryField>
-    >,
-  }
-
   /**
    * A record containing the name of all indexable fields and their relative
    * weight used to rank search results.
@@ -226,6 +216,10 @@ export class BloomSearch<
   private readonly stopwords: StopwordsFunction
   private readonly tokenizer: TokenizerFunction
   private readonly hash: (i: number, token: string) => number
+  private readonly documents = new Map<
+    string,
+    IndexedDocument<Document, SummaryField>
+  >()
 
   /**
    * Creates a new Bloom search instance based on Bloom filters, which can be
@@ -264,6 +258,21 @@ export class BloomSearch<
   }
 
   /**
+   * Collection containing document summaries and Bloom filter signatures used
+   * to search, with document shorthand reference identifier used as keys.
+   */
+  public get index(): Index<Document, SummaryField> {
+    return {
+      version: INDEX_VERSION,
+      documents: this.snapshotDocuments(),
+    }
+  }
+
+  public set index(index: Index<Document, SummaryField>) {
+    this.load(index)
+  }
+
+  /**
    * Replaces the instance's index with an index from another instance. Its
    * primary use case is to rehydrate the index from a static file or payload.
    *
@@ -276,16 +285,16 @@ export class BloomSearch<
    * @param index Replacement index.
    */
   load(index: Index<Document, SummaryField>): void {
-    if (index.version !== this.index.version) {
+    if (index.version !== INDEX_VERSION) {
       throw new Error(
-        `incompatible index schema version ${index.version}, expected ${this.index.version}`,
+        `incompatible index schema version ${index.version}, expected ${INDEX_VERSION}`,
       )
     }
 
-    this.index.documents = entries(index.documents).reduce<
-      Record<string, IndexedDocument<Document, SummaryField>>
-    >((acc, [ref, entry]) => {
-      acc[ref] = {
+    this.documents.clear()
+
+    for (const [ref, entry] of entries(index.documents)) {
+      const document = {
         summary: entry.summary,
         signatures: entries(entry.signatures).reduce<
           Record<number, BloomFilter<string>>
@@ -297,8 +306,9 @@ export class BloomSearch<
           return signatures
         }, {}),
       }
-      return acc
-    }, Object.create(null) as Record<string, IndexedDocument<Document, SummaryField>>)
+
+      this.documents.set(ref, document)
+    }
   }
 
   /**
@@ -377,10 +387,10 @@ export class BloomSearch<
       return acc
     }, {})
 
-    this.index.documents[ref] = {
+    this.documents.set(ref, {
       summary: pick(this.summary, document),
       signatures,
-    }
+    })
   }
 
   /**
@@ -389,7 +399,7 @@ export class BloomSearch<
    * @param ref - Reference identifier of the document to remove.
    */
   remove(ref: string): void {
-    delete this.index.documents[ref]
+    this.documents.delete(ref)
   }
 
   /**
@@ -423,11 +433,9 @@ export class BloomSearch<
    */
   search(query: string, language?: string): Pick<Document, SummaryField>[] {
     const tokens = this.parseQuery(query, language)
-    const totalDocuments = keys(this.index.documents).length
+    const totalDocuments = this.documents.size
 
-    const candidates = Object.values<IndexedDocument<Document, SummaryField>>(
-      this.index.documents,
-    )
+    const candidates = Array.from(this.documents.values())
       .filter(
         (document) =>
           tokens.excluded.every((token) => !this.hasToken(document, token)) &&
@@ -458,6 +466,19 @@ export class BloomSearch<
       }, [])
       .sort((a, b) => compare(a.score, b.score))
       .map(({ summary }) => summary)
+  }
+
+  toJSON() {
+    return {
+      errorRate: this.errorRate,
+      fields: this.fields,
+      index: this.index,
+      minSize: this.minSize,
+      ngrams: this.ngrams,
+      seed: this.seed,
+      summary: this.summary,
+      termFrequencyBuckets: this.termFrequencyBuckets,
+    }
   }
 
   private hasToken(
@@ -495,6 +516,18 @@ export class BloomSearch<
         }
       },
       { required: [], included: [], excluded: [] },
+    )
+  }
+
+  private snapshotDocuments(): Record<
+    string,
+    IndexedDocument<Document, SummaryField>
+  > {
+    return Object.assign(
+      Object.create(null),
+      Object.fromEntries<IndexedDocument<Document, SummaryField>>(
+        this.documents,
+      ),
     )
   }
 }

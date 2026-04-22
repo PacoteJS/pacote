@@ -321,6 +321,44 @@ describe('-excluded term search', () => {
 })
 
 describe('serialisation', () => {
+  it('serialises public properties without exposing internal maps', () => {
+    const bs = new BloomSearch({
+      fields: ['text'],
+      summary: ['text'],
+    })
+    bs.add('1', { text: 'foo' })
+
+    const serialised = JSON.parse(JSON.stringify(bs))
+
+    expect(serialised).toEqual({
+      errorRate: 0.0001,
+      fields: { text: 1 },
+      index: {
+        version: 1,
+        documents: {
+          '1': {
+            signatures: {
+              1: {
+                filter: [664200],
+                hashes: 14,
+                seed: 12648430,
+                size: 20,
+              },
+            },
+            summary: {
+              text: 'foo',
+            },
+          },
+        },
+      },
+      minSize: 0,
+      ngrams: 1,
+      seed: 12648430,
+      summary: ['text'],
+      termFrequencyBuckets: [1, 2, 3, 4, 8, 16, 32, 64],
+    })
+  })
+
   it('serialises an instance', () => {
     const bs = new BloomSearch({
       fields: ['text'],
