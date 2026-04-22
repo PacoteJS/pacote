@@ -470,7 +470,11 @@ export class BloomSearch<
       ({ required, included, excluded }, [term, type]) => {
         const tokens =
           type === PHRASE
-            ? [term]
+            ? [
+                this.tokenizer(term, language)
+                  .filter((token) => token.length)
+                  .join(' '),
+              ].filter((token) => token.length)
             : this.tokenizer(term, language)
                 .filter(
                   (token) => token.length && this.stopwords(token, language),

@@ -417,4 +417,17 @@ describe('ngram search', () => {
       { text: 'FOO bar' },
     ])
   })
+
+  it('normalizes phrase terms with the tokenizer', () => {
+    const bs = new BloomSearch({
+      fields: ['text'],
+      summary: ['text'],
+      ngrams: 2,
+    })
+
+    bs.add('1', { text: 'foo bar baz' })
+    bs.add('2', { text: 'foo baz bar' })
+
+    expect(bs.search('"foo, bar"')).toEqual([{ text: 'foo bar baz' }])
+  })
 })
