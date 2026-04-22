@@ -1,12 +1,11 @@
-import { range, unique, windowed } from '@pacote/array'
+import { windowed } from '@pacote/array'
 import { BloomFilter, optimal } from '@pacote/bloom-filter'
 import { memoize } from '@pacote/memoize'
 import type { U64 } from '@pacote/u64'
 import { type XXHash, xxh64 } from '@pacote/xxhash'
-import { findLast } from './array'
-import { entries, keys, pick } from './object'
+import { entries, pick } from './object'
 import { EXCLUDE, PHRASE, queryTerms, REQUIRE } from './query'
-import { countIdf } from './tf-idf'
+import { countIdf, createIdfLookup } from './tf-idf'
 
 export type PreprocessFunction<Document, Field extends keyof Document> = (
   value: Document[Field],
@@ -323,67 +322,69 @@ export class BloomSearch<
    *                      decide how to handle these steps.
    */
   add(ref: string, document: Document, language?: string): void {
-    const tokensByField = keys(this.fields).reduce((tokens, field) => {
-      if (document[field] == null) {
-        return tokens
-      }
-
-      const fieldText = this.preprocess(document[field], field, document)
-      const fieldTokens = this.tokenizer(fieldText, language)
-
-      const unigrams = fieldTokens
-        .filter((token) => token.length && this.stopwords(token, language))
-        .map((token) => this.stemmer(token, language))
-
-      const ngrams = range(2, this.ngrams + 1).flatMap((i) =>
-        windowed(i, fieldTokens).map((ngram) => ngram.join(' ')),
-      )
-
-      tokens.set(field, unigrams.concat(ngrams))
-
-      return tokens
-    }, new Map<IndexField, string[]>())
-
-    const uniqueTokens = unique(Array.from(tokensByField.values()).flat())
-
-    if (uniqueTokens.length === 0) {
-      return
-    }
-
+    const uniqueTokens = new Set<string>()
     const frequency: Record<string, number> = {}
 
     for (const [field, weight = 1] of entries(this.fields)) {
-      for (const token of tokensByField.get(field) ?? []) {
+      if (document[field] == null) continue
+
+      const fieldText = this.preprocess(document[field], field, document)
+      const fieldTokens = this.tokenizer(fieldText, language)
+      const indexedTokens: string[] = []
+
+      for (const token of fieldTokens)
+        if (token.length && this.stopwords(token, language))
+          indexedTokens.push(this.stemmer(token, language))
+
+      for (let size = 2; size <= this.ngrams; size += 1)
+        for (const ngram of windowed(size, fieldTokens))
+          indexedTokens.push(ngram.join(' '))
+
+      for (const token of indexedTokens) {
+        uniqueTokens.add(token)
         frequency[token] = (frequency[token] ?? 0) + weight
       }
     }
 
-    const tokensByFrequency = Array.from(uniqueTokens).reduce<
-      Record<number, string[]>
-    >((tokens, token) => {
-      const frequencyBucket =
-        findLast(
-          this.termFrequencyBuckets,
-          (limit) => frequency[token] >= limit,
-        ) ?? 0
-      if (!tokens[frequencyBucket]) {
-        tokens[frequencyBucket] = []
-      }
-      tokens[frequencyBucket].push(token)
-      return tokens
-    }, {})
+    if (uniqueTokens.size === 0) return
 
-    const signatures = entries(tokensByFrequency).reduce<
+    const tokensByFrequency = new Array<string[]>(
+      this.termFrequencyBuckets.length + 1,
+    )
+
+    for (const token of uniqueTokens) {
+      let frequencyBucketIndex = 0
+      for (let i = this.termFrequencyBuckets.length - 1; i >= 0; i -= 1) {
+        if (frequency[token] >= this.termFrequencyBuckets[i]) {
+          frequencyBucketIndex = i + 1
+          break
+        }
+      }
+
+      if (!tokensByFrequency[frequencyBucketIndex]) {
+        tokensByFrequency[frequencyBucketIndex] = []
+      }
+      tokensByFrequency[frequencyBucketIndex].push(token)
+    }
+
+    const signatures = tokensByFrequency.reduce<
       Record<number, BloomFilter<string>>
-    >((acc, [frequencyBucket, tokens]) => {
+    >((acc, tokens, frequencyBucketIndex) => {
+      if (!tokens?.length) return acc
+
+      const frequencyBucket =
+        frequencyBucketIndex === 0
+          ? 0
+          : this.termFrequencyBuckets[frequencyBucketIndex - 1]
+
       acc[frequencyBucket] = new BloomFilter({
         ...optimal(Math.max(this.minSize, tokens.length), this.errorRate),
         seed: this.seed,
         hash: this.hash,
       })
-      for (const token of tokens) {
-        acc[frequencyBucket].add(token)
-      }
+
+      for (const token of tokens) acc[frequencyBucket].add(token)
+
       return acc
     }, {})
 
@@ -435,32 +436,57 @@ export class BloomSearch<
     const tokens = this.parseQuery(query, language)
     const totalDocuments = this.documents.size
 
-    const candidates = Array.from(this.documents.values())
-      .filter(
-        (document) =>
-          tokens.excluded.every((token) => !this.hasToken(document, token)) &&
-          tokens.required.every((token) => this.hasToken(document, token)),
-      )
-      .map((document) => {
-        const matches: Record<string, number> = {}
-        for (const token of tokens.included) {
-          matches[token] = this.hasToken(document, token)
+    const candidates = Array.from(this.documents.values()).reduce<
+      {
+        summary: Pick<Document, SummaryField>
+        matches: Record<string, number>
+      }[]
+    >((all, document) => {
+      const tokenMatches = new Map<string, number>()
+      const getTokenMatch = (token: string): number => {
+        if (tokenMatches.has(token)) {
+          return tokenMatches.get(token) ?? 0
         }
-        return { summary: document.summary, matches }
-      })
-      .filter(({ matches }) => Object.values(matches).some((match) => match))
+        const match = this.hasToken(document, token)
+        tokenMatches.set(token, match)
+        return match
+      }
+
+      for (const token of tokens.excluded) {
+        if (getTokenMatch(token)) {
+          return all
+        }
+      }
+
+      for (const token of tokens.required) {
+        if (!getTokenMatch(token)) {
+          return all
+        }
+      }
+
+      let matchCount = 0
+      const matches: Record<string, number> = {}
+      for (const token of tokens.included) {
+        const match = getTokenMatch(token)
+        if (match > 0) {
+          matches[token] = match
+          matchCount += 1
+        }
+      }
+
+      if (matchCount > 0) all.push({ summary: document.summary, matches })
+
+      return all
+    }, [])
 
     const documentTermFrequencies = candidates.map(({ matches }) => matches)
+    const idfByTerm = createIdfLookup(documentTermFrequencies, totalDocuments)
 
     return candidates
       .reduce<Result<Document, SummaryField>[]>((all, result) => {
         all.push({
           ...result,
-          score: countIdf(
-            result.matches,
-            documentTermFrequencies,
-            totalDocuments,
-          ),
+          score: countIdf(result.matches, idfByTerm),
         })
         return all
       }, [])
@@ -485,38 +511,44 @@ export class BloomSearch<
     document: IndexedDocument<Document, SummaryField>,
     token: string,
   ): number {
-    return (
-      keys(document.signatures).find((frequency) =>
-        document.signatures[frequency].has(token),
-      ) ?? 0
-    )
+    for (const frequency in document.signatures) {
+      if (document.signatures[frequency].has(token)) {
+        return Number(frequency)
+      }
+    }
+    return 0
   }
 
   private parseQuery(query: string, language?: string): SearchTokens {
-    return queryTerms(query).reduce<SearchTokens>(
-      ({ required, included, excluded }, [term, type]) => {
-        const tokens =
-          type === PHRASE
-            ? [
-                this.tokenizer(term, language)
-                  .filter((token) => token.length)
-                  .join(' '),
-              ].filter((token) => token.length)
-            : this.tokenizer(term, language)
-                .filter(
-                  (token) => token.length && this.stopwords(token, language),
-                )
-                .map((token) => this.stemmer(token, language))
-        return {
-          required: [REQUIRE, PHRASE].includes(type)
-            ? required.concat(tokens)
-            : required,
-          included: type !== EXCLUDE ? included.concat(tokens) : included,
-          excluded: type === EXCLUDE ? excluded.concat(tokens) : excluded,
-        }
-      },
-      { required: [], included: [], excluded: [] },
-    )
+    const required = new Set<string>()
+    const included = new Set<string>()
+    const excluded = new Set<string>()
+
+    for (const [term, type] of queryTerms(query)) {
+      const tokenizedTerm = this.tokenizer(term, language)
+      const termTokens =
+        type === PHRASE
+          ? [tokenizedTerm.filter((token) => token.length).join(' ')].filter(
+              (token) => token.length,
+            )
+          : tokenizedTerm
+              .filter(
+                (token) => token.length && this.stopwords(token, language),
+              )
+              .map((token) => this.stemmer(token, language))
+
+      for (const token of termTokens) {
+        if (type !== EXCLUDE) included.add(token)
+        else excluded.add(token)
+        if (type === REQUIRE || type === PHRASE) required.add(token)
+      }
+    }
+
+    return {
+      required: Array.from(required),
+      included: Array.from(included),
+      excluded: Array.from(excluded),
+    }
   }
 
   private snapshotDocuments(): Record<

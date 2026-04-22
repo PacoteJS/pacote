@@ -1,21 +1,33 @@
 import { entries } from './object'
 
-function idfSmooth(
-  term: string,
+export function createIdfLookup(
   frequencies: Record<string, number>[],
   totalDocuments: number,
-): number {
-  const nt = 1 + frequencies.filter((frequency) => frequency[term] > 0).length
-  return 1 + Math.log(totalDocuments / nt)
+): Record<string, number> {
+  const documentFrequencyByTerm: Record<string, number> = {}
+
+  for (const termFrequencies of frequencies) {
+    for (const [term, tf] of entries(termFrequencies)) {
+      if (tf <= 0) continue
+      documentFrequencyByTerm[term] = (documentFrequencyByTerm[term] ?? 0) + 1
+    }
+  }
+
+  return entries(documentFrequencyByTerm).reduce<Record<string, number>>(
+    (idfByTerm, [term, nt]) => {
+      idfByTerm[term] = 1 + Math.log(totalDocuments / (1 + nt))
+      return idfByTerm
+    },
+    {},
+  )
 }
 
 export function countIdf(
   termFrequencies: Record<string, number>,
-  documentTermFrequencies: Record<string, number>[],
-  totalDocuments: number,
+  idfByTerm: Record<string, number>,
 ): number {
-  return entries(termFrequencies).reduce<number>((tfidf, [term, tf]) => {
-    const idf = idfSmooth(term, documentTermFrequencies, totalDocuments)
-    return tfidf + tf * idf
+  return entries(termFrequencies).reduce((tfidf, [term, tf]) => {
+    if (tf <= 0 || idfByTerm[term] == null) return tfidf
+    return tfidf + tf * idfByTerm[term]
   }, 0)
 }
