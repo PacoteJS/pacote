@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.18.2](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.18.1...@pacote/bloom-search@0.18.2) (2026-04-22)
+
+
+### Bug Fixes
+
+* 🐛 prevent prototype mutation via reference name ([07ab911](https://github.com/PacoteJS/pacote/commit/07ab911d2895c09ceafc3d82dafd5170f6889b66))
+* 🐛 tokenize queries consistently ([5c1aef4](https://github.com/PacoteJS/pacote/commit/5c1aef42b36498817376d39e853d0fdb9b805a96))
+
+
+### Performance Improvements
+
+* ⚡️ optimize index and query hot paths ([0786c8c](https://github.com/PacoteJS/pacote/commit/0786c8c6d99bfbdcf79f24613eb28ce285f6157a))
+* ⚡️ precompute document term frequencies ([4604ec3](https://github.com/PacoteJS/pacote/commit/4604ec32670c7ecd145d6f0d2e62ad506467b8de))
+* ⚡️ switch to Map internally ([6814da2](https://github.com/PacoteJS/pacote/commit/6814da286c2b6247acf7b3ba2d19d38e622dfaa0))
+
+
+
+
+
 ## [0.18.1](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-search@0.18.0...@pacote/bloom-search@0.18.1) (2026-04-01)
 
 
