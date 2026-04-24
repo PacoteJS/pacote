@@ -1,11 +1,10 @@
 import { windowed } from '@pacote/array'
 import { BloomFilter, optimal } from '@pacote/bloom-filter'
-import { memoize } from '@pacote/memoize'
-import type { U64 } from '@pacote/u64'
-import { type XXHash, xxh64 } from '@pacote/xxhash'
+import { createHash, type HashFunction } from './hash'
 import { entries, pick } from './object'
 import { EXCLUDE, PHRASE, queryTerms, REQUIRE } from './query'
 import { countIdf, createIdfLookup } from './tf-idf'
+import { defaultTokenizer } from './token'
 
 export type PreprocessFunction<Document, Field extends keyof Document> = (
   value: Document[Field],
@@ -134,18 +133,6 @@ const INDEX_VERSION = 1
 
 const compare = (a: number, b: number) => (a === b ? 0 : a > b ? -1 : 1)
 
-const defaultTokenizer = (text: string): string[] =>
-  text
-    .normalize('NFD')
-    .toLowerCase()
-    .split(/[\s-]+/)
-    .map((token) => token.replace(/\W/gi, ''))
-
-const memoizedHash = (hash: XXHash<U64>) =>
-  memoize(String, (data) =>
-    Number.parseInt(hash.update(data).digest('hex').substring(8, 16), 16),
-  )
-
 /**
  * Indexer and searcher based on Bloom filters.
  *
@@ -214,7 +201,7 @@ export class BloomSearch<
   private readonly stemmer: StemmerFunction
   private readonly stopwords: StopwordsFunction
   private readonly tokenizer: TokenizerFunction
-  private readonly hash: (i: number, token: string) => number
+  private readonly hash: HashFunction
   private readonly documents = new Map<
     string,
     IndexedDocument<Document, SummaryField>
@@ -249,11 +236,7 @@ export class BloomSearch<
     this.stopwords = options.stopwords ?? (() => true)
     this.tokenizer = options.tokenizer ?? defaultTokenizer
     this.seed = options.seed ?? 0x00c0ffee
-
-    const h1 = memoizedHash(xxh64(this.seed + 1))
-    const h2 = memoizedHash(xxh64(this.seed + 2))
-
-    this.hash = (i, data) => h1(data) + i * h2(data) + i ** 3
+    this.hash = createHash(this.seed)
   }
 
   /**
