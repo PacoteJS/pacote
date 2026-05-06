@@ -181,8 +181,8 @@ importers:
         specifier: ^4.0.9
         version: 4.1.1(@types/node@25.5.0)(@vitest/ui@4.1.1)(jsdom@29.0.1)(msw@2.13.1(@types/node@25.5.0)(typescript@6.0.3))(vite@8.0.2(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@types/node@25.5.0)(jiti@2.6.1)(yaml@2.8.3))
       xxhash-addon:
-        specifier: ^1.5.0
-        version: 1.5.0
+        specifier: ^2.1.0
+        version: 2.1.0
 
   packages/array: {}
 
@@ -2814,6 +2814,10 @@ packages:
   neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
 
+  node-gyp-build@4.8.4:
+    resolution: {integrity: sha512-LA4ZjwlnUblHVgq0oBF3Jl/6h/Nvs5fzBLwdEF4nuxnFdsfajde4WfxtJr3CaiH+F6ewcIB/q4jQ4UzPyid+CQ==}
+    hasBin: true
+
   node-gyp@12.2.0:
     resolution: {integrity: sha512-q23WdzrQv48KozXlr0U1v9dwO/k59NHeSzn6loGcasyf0UnSrtzs8kRxM+mfwJSf0DkX0s43hcqgnSO4/VNthQ==}
     engines: {node: ^20.17.0 || >=22.9.0}
@@ -3887,8 +3891,8 @@ packages:
     resolution: {integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==}
     engines: {node: '>=0.4'}
 
-  xxhash-addon@1.5.0:
-    resolution: {integrity: sha512-ZkfBZMrrpbyT8/uw7x+2voPBXO2oczajlGo11+OOO1YqGbk6DuF7erwirCUPvydN17lEjilu3VGDWWG4+fV45Q==}
+  xxhash-addon@2.1.0:
+    resolution: {integrity: sha512-y69Lhs6msXn4eLPZkDqSKff3OLHyOL7a5lhxbJ0NN4x6XYhVI+lKIXt7JxQqSHssEhUWLgAWIbUbT9X9KUTbcw==}
     engines: {node: '>=8.6.0 <9.0.0 || >=10.0.0'}
 
   y18n@5.0.8:
@@ -6494,6 +6498,8 @@ snapshots:
 
   neo-async@2.6.2: {}
 
+  node-gyp-build@4.8.4: {}
+
   node-gyp@12.2.0:
     dependencies:
       env-paths: 2.2.1
@@ -7599,7 +7605,9 @@ snapshots:
 
   xtend@4.0.2: {}
 
-  xxhash-addon@1.5.0: {}
+  xxhash-addon@2.1.0:
+    dependencies:
+      node-gyp-build: 4.8.4
 
   y18n@5.0.8: {}
 
