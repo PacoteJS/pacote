@@ -38,7 +38,7 @@
     "@types/react": "^19.2.5",
     "@vitest/coverage-v8": "^4.0.9",
     "@vitest/ui": "^4.0.9",
-    "concurrently": "^9.2.1",
+    "concurrently": "^10.0.3",
     "fast-check": "^4.3.0",
     "fp-ts": "^2.16.11",
     "git-cz": "^4.9.0",
