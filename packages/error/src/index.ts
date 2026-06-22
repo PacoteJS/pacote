@@ -37,7 +37,6 @@ export class BaseError extends Error {
   }
 
   public static fromString(message?: string): BaseError {
-    // biome-ignore lint/complexity/noThisInStatic: constructor method
     return new this(message)
   }
 }
@@ -57,7 +56,6 @@ export class ComplexError extends BaseError {
   public static fromErrors(
     errors: readonly (Error | BaseError)[],
   ): ComplexError {
-    // biome-ignore lint/complexity/noThisInStatic: constructor method
     return new this(undefined, errors)
   }
 }
