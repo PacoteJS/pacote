@@ -1,6 +1,11 @@
 packages:
   - packages/**
 
+allowBuilds:
+  msw: true
+  nx: true
+  xxhash-addon: true
+
 onlyBuiltDependencies:
   - msw
   - nx
