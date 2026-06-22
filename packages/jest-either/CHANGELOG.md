@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.2](https://github.com/PacoteJS/pacote/compare/@pacote/jest-either@6.0.1...@pacote/jest-either@6.0.2) (2026-06-22)
+
+
+### Bug Fixes
+
+* correct jest-either type exports ([#1684](https://github.com/PacoteJS/pacote/issues/1684)) ([c683835](https://github.com/PacoteJS/pacote/commit/c6838358c97d578fa4621228d8dc6037a35947b5))
+
+
+
+
+
 ## [6.0.1](https://github.com/PacoteJS/pacote/compare/@pacote/jest-either@6.0.0...@pacote/jest-either@6.0.1) (2026-04-01)
 
 **Note:** Version bump only for package @pacote/jest-either
