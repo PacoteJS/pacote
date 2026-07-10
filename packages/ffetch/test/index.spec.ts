@@ -7,7 +7,7 @@ import { HttpResponse, http } from 'msw'
 import { setupServer } from 'msw/node'
 import { afterAll, afterEach, beforeAll, expect, test, vi } from 'vitest'
 import { createFetch } from '../src'
-import { NetworkError, ParserError, StatusError } from '../src/errors'
+import { ParserError, StatusError } from '../src/errors'
 
 expect.extend(matchers)
 
@@ -67,11 +67,13 @@ test('successful plain text responses', async () => {
 test('connection errors', async () => {
   const ffetch = createFetch()
   const actual = await ffetch('/error/network')()
-  expect(actual).toEqualLeft(
-    new NetworkError('Network request failed', [
-      new TypeError('Network request failed'),
-    ]),
-  )
+  // Node's fetch implementation wraps connection failures differently across
+  // versions (message text, cause chain), so only the cause's type is checked.
+  expect(actual).toMatchLeft({
+    name: 'NetworkError',
+    message: 'Network request failed',
+    causes: [expect.any(TypeError)],
+  })
 })
 
 test('status code errors', async () => {
@@ -85,11 +87,13 @@ test('status code errors', async () => {
 test('invalid response body', async () => {
   const ffetch = createFetch()
   const actual = await ffetch('/bad-content')()
-  expect(actual).toEqualLeft(
-    new ParserError('Could not parse response', [
-      new Error('Unexpected token < in JSON at position 0'),
-    ]),
-  )
+  // JSON.parse's SyntaxError message format varies across V8/Node versions,
+  // so only the cause's type is checked.
+  expect(actual).toMatchLeft({
+    name: 'ParserError',
+    message: 'Could not parse response',
+    causes: [expect.any(SyntaxError)],
+  })
 })
 
 test('plain text body for status errors', async () => {
