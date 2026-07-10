@@ -9,7 +9,7 @@ import {
   rightPredicate,
 } from './shared/predicates'
 import { printReceivedRight } from './shared/print'
-import type { MatcherResult } from './shared/types'
+import type { MatcherContext, MatcherResult } from './shared/types'
 
 declare global {
   namespace jest {
@@ -80,14 +80,17 @@ const notEitherMessage = (expected: unknown, actual: unknown) => () =>
  * ```
  */
 export function toMatchRight(
+  this: MatcherContext,
   actual: unknown,
   expected: RegExp | AsymmetricMatcher,
 ): MatcherResult
 export function toMatchRight<R>(
+  this: MatcherContext,
   actual: unknown,
   expected: Partial<R> | AsymmetricMatcher,
 ): MatcherResult
 export function toMatchRight<R>(
+  this: MatcherContext,
   actual: unknown,
   expected: RegExp | Partial<R> | AsymmetricMatcher,
 ): MatcherResult {
@@ -104,7 +107,7 @@ export function toMatchRight<R>(
       ? matchString(expected)
       : isAsymmetricMatcher(expected)
         ? expected.asymmetricMatch.bind(expected)
-        : matchObject(expected)
+        : matchObject(this, expected)
 
   const pass = rightPredicate(actual, predicate)
 

@@ -5,8 +5,12 @@ export interface MatcherResult {
   expected?: unknown
 }
 
+export interface MatcherContext {
+  equals(a: unknown, b: unknown): boolean
+}
+
 export type MatcherFn = (
-  this: unknown,
+  this: MatcherContext,
   received: unknown,
   ...expected: Array<unknown>
 ) => MatcherResult | Promise<MatcherResult>

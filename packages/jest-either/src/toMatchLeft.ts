@@ -9,7 +9,7 @@ import {
   matchString,
 } from './shared/predicates'
 import { printReceivedLeft } from './shared/print'
-import type { MatcherResult } from './shared/types'
+import type { MatcherContext, MatcherResult } from './shared/types'
 
 declare global {
   namespace jest {
@@ -80,14 +80,17 @@ const notEitherMessage = (expected: unknown, actual: unknown) => () =>
  * ```
  */
 export function toMatchLeft(
+  this: MatcherContext,
   actual: unknown,
   expected: RegExp | AsymmetricMatcher,
 ): MatcherResult
 export function toMatchLeft<L>(
+  this: MatcherContext,
   actual: unknown,
   expected: Partial<L> | AsymmetricMatcher,
 ): MatcherResult
 export function toMatchLeft<L>(
+  this: MatcherContext,
   actual: unknown,
   expected: RegExp | Partial<L> | AsymmetricMatcher,
 ): MatcherResult {
@@ -104,7 +107,7 @@ export function toMatchLeft<L>(
       ? matchString(expected)
       : isAsymmetricMatcher(expected)
         ? expected.asymmetricMatch.bind(expected)
-        : matchObject(expected)
+        : matchObject(this, expected)
 
   const pass = leftPredicate(actual, predicate)
 

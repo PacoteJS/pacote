@@ -1,7 +1,9 @@
 import { isPlainObject } from '@pacote/is-plain-object'
 import { pipe } from 'fp-ts/function'
 import { type Either, fold } from 'fp-ts/lib/Either'
-import { equals, F, map, where } from 'ramda'
+import type { MatcherContext } from './types'
+
+const F = () => false
 
 export interface AsymmetricMatcher {
   asymmetricMatch(other: unknown): boolean
@@ -14,20 +16,21 @@ export function isAsymmetricMatcher(
   return typeof matcher.asymmetricMatch === 'function'
 }
 
-export const matchObject = (expected: unknown) => (actual: unknown) => {
-  if (isAsymmetricMatcher(expected)) {
-    return expected.asymmetricMatch(actual)
-  }
+export const matchObject =
+  (context: MatcherContext, expected: unknown) =>
+  (actual: unknown): boolean => {
+    if (isAsymmetricMatcher(expected)) {
+      return expected.asymmetricMatch(actual)
+    }
 
-  if (isPlainObject(expected) && isPlainObject(actual)) {
-    return where(
-      map(matchObject, expected as Record<string, unknown>),
-      actual as Record<string, unknown>,
-    )
-  }
+    if (isPlainObject(expected) && isPlainObject(actual)) {
+      return Object.entries(expected).every(([key, value]) =>
+        matchObject(context, value)((actual as Record<string, unknown>)[key]),
+      )
+    }
 
-  return equals(expected, actual)
-}
+    return context.equals(actual, expected)
+  }
 
 export const matchString = (s: RegExp) => (o: unknown) => s.test(String(o))
 

@@ -1,6 +1,5 @@
 import type { Either } from 'fp-ts/lib/Either'
 import { matcherHint, printExpected, printReceived } from 'jest-matcher-utils'
-import { equals } from 'ramda'
 import { isEither } from './shared/isEither'
 import {
   type AsymmetricMatcher,
@@ -8,7 +7,7 @@ import {
   leftPredicate,
 } from './shared/predicates'
 import { diffReceivedLeft } from './shared/print'
-import type { MatcherResult } from './shared/types'
+import type { MatcherContext, MatcherResult } from './shared/types'
 
 declare global {
   namespace jest {
@@ -72,6 +71,7 @@ const notEitherMessage = (expected: unknown, actual: unknown) => () =>
  * ```
  */
 export function toEqualLeft<L>(
+  this: MatcherContext,
   actual: unknown,
   expected: L | AsymmetricMatcher,
 ): MatcherResult {
@@ -85,7 +85,7 @@ export function toEqualLeft<L>(
 
   const predicate = isAsymmetricMatcher(expected)
     ? expected.asymmetricMatch.bind(expected)
-    : equals(expected)
+    : (value: unknown) => this.equals(value, expected)
 
   const pass = leftPredicate(actual, predicate)
 
