@@ -167,7 +167,7 @@ importers:
         version: 5.0.1
       styled-components:
         specifier: ^6.1.19
-        version: 6.4.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 6.4.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       typedoc:
         specifier: ^0.28.14
         version: 0.28.20(typescript@6.0.3)
@@ -3543,8 +3543,8 @@ packages:
     resolution: {integrity: sha512-laJTa3Jb+VQpaC6DseHhF7dXVqHTfJPCRDaEbid/drOhgitgYku/letMUqOXFoWV0zIIUbjpdH2t+tYj4bQMRQ==}
     engines: {node: '>=8'}
 
-  styled-components@6.4.3:
-    resolution: {integrity: sha512-wYXrhu+JmDjZ1Tv7O0OopGTfztbzun43Pjjhh2H+xc0h5A09dwpZ5FJbrifJDcL8g5TA9btpWOX2+iSRuJTExw==}
+  styled-components@6.4.4:
+    resolution: {integrity: sha512-tJk5CmKUPMDoTsZQ8m0hHInBk9HFKUPSusqmbBuefDX+yUbMBWea2Ob/wdXFyHW8XZqXkprJscysAdKeGWNqlA==}
     engines: {node: '>= 16'}
     peerDependencies:
       css-to-react-native: '>= 3.2.0'
@@ -7539,7 +7539,7 @@ snapshots:
     dependencies:
       min-indent: 1.0.1
 
-  styled-components@6.4.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  styled-components@6.4.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@emotion/is-prop-valid': 1.4.0
       csstype: 3.2.3
