@@ -4,6 +4,7 @@
     "./packages/array",
     "./packages/bloom-filter",
     "./packages/bloom-search",
+    "./packages/buckwalter",
     "./packages/computus",
     "./packages/disposable",
     "./packages/emitter",
