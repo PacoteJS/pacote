@@ -11,11 +11,16 @@ export interface Options {
 type Fn<A extends unknown[], R> = (...args: A) => R
 
 export interface MemoizedFn<A extends unknown[], R> extends Fn<A, R> {
+  /** Clears all cached results. */
   clear(): void
 }
 
 /**
+ * Returns a wrapper that caches a function's result for each generated key.
  *
+ * Repeated calls with the same key return the first result without invoking
+ * the wrapped function again. Set `capacity` to evict least recently used
+ * entries when the cache grows beyond the limit.
  * @param cacheKeyFn A function that generates a string key for cached results.
  *                   This function takes the same arguments as the function to
  *                   memoize.
