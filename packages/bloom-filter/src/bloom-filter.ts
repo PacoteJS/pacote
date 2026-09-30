@@ -12,9 +12,14 @@ import type { Options } from './options'
  * @typeParam T - Values represented by the filter.
  * @example
  * ```typescript
- * const filter = new BloomFilter({ size: 22056, hashes: 8 })
+ * import { BloomFilter, optimal } from '@pacote/bloom-filter'
+ *
+ * const filter = new BloomFilter(optimal(1000, 0.01))
  * filter.add('foo')
+ * filter.add('bar')
  * filter.has('foo') // => true
+ * filter.has('bar') // => true
+ * filter.has('baz') // => false
  * ```
  */
 export class BloomFilter<T extends { toString(): string }> {

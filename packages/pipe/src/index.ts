@@ -39,26 +39,92 @@ type Compose8<A, B, C, D, E, F, G, H, I> = readonly [
   Fn<H, I>,
 ]
 
+/**
+ * Passes a value through a sequence of functions from left to right.
+ *
+ * @param initial - Value passed to the first function.
+ * @returns The result returned by the last function, or `initial` when no
+ * functions are supplied.
+ * @example
+ * ```typescript
+ * const doubleSay = (value: string) => `${value}, ${value}`
+ * const capitalize = (value: string) =>
+ *   value.charAt(0).toUpperCase() + value.slice(1)
+ * const exclaim = (value: string) => `${value}!`
+ *
+ * pipe('hello', doubleSay, capitalize, exclaim)
+ * // => 'Hello, hello!'
+ * // equivalent to exclaim(capitalize(doubleSay('hello')))
+ * ```
+*/
 export function pipe<A>(initial: A): A
+/**
+ * Passes `initial` through functions from left to right.
+ * @param initial - Value passed to the first function.
+ * @param fns - Functions applied in order; each receives the previous result.
+ * @returns The result returned by the last function.
+ */
 export function pipe<A, B>(initial: A, ...fns: Compose1<A, B>): B
+/**
+ * Passes `initial` through functions from left to right.
+ * @param initial - Value passed to the first function.
+ * @param fns - Functions applied in order; each receives the previous result.
+ * @returns The result returned by the last function.
+ */
 export function pipe<A, B, C>(initial: A, ...fns: Compose2<A, B, C>): C
+/**
+ * Passes `initial` through functions from left to right.
+ * @param initial - Value passed to the first function.
+ * @param fns - Functions applied in order; each receives the previous result.
+ * @returns The result returned by the last function.
+ */
 export function pipe<A, B, C, D>(initial: A, ...fns: Compose3<A, B, C, D>): D
+/**
+ * Passes `initial` through functions from left to right.
+ * @param initial - Value passed to the first function.
+ * @param fns - Functions applied in order; each receives the previous result.
+ * @returns The result returned by the last function.
+ */
 export function pipe<A, B, C, D, E>(
   initial: A,
   ...fns: Compose4<A, B, C, D, E>
 ): E
+/**
+ * Passes `initial` through functions from left to right.
+ * @param initial - Value passed to the first function.
+ * @param fns - Functions applied in order; each receives the previous result.
+ * @returns The result returned by the last function.
+ */
 export function pipe<A, B, C, D, E, F>(
   initial: A,
   ...fns: Compose5<A, B, C, D, E, F>
 ): F
+/**
+ * Passes `initial` through functions from left to right.
+ * @param initial - Value passed to the first function.
+ * @param fns - Functions applied in order; each receives the previous result.
+ * @returns The result returned by the last function.
+ */
 export function pipe<A, B, C, D, E, F, G>(
   initial: A,
   ...fns: Compose6<A, B, C, D, E, F, G>
 ): G
+/**
+ * Passes `initial` through functions from left to right.
+ * @param initial - Value passed to the first function.
+ * @param fns - Functions applied in order; each receives the previous result.
+ * @returns The result returned by the last function.
+ */
 export function pipe<A, B, C, D, E, F, G, H>(
   initial: A,
   ...fns: Compose7<A, B, C, D, E, F, G, H>
 ): H
+/**
+ * Passes `initial` through functions from left to right.
+ * @param initial - Value passed to the first function.
+ * @param fns - Functions applied in order; each receives the previous result.
+ * @returns The result returned by the last function.
+ */
 export function pipe<A, B, C, D, E, F, G, H, I>(
   initial: A,
   ...fns: Compose8<A, B, C, D, E, F, G, H, I>
@@ -70,6 +136,23 @@ export function pipe(
   return fns.reduce((result, fn) => fn(result), initial)
 }
 
+/**
+ * Composes functions into a new function that applies them from left to right.
+ *
+ * @param fns - Functions to apply in order.
+ * @returns A function that accepts the first input and returns the final result.
+ * @example
+ * ```typescript
+ * const doubleSay = (value: string) => `${value}, ${value}`
+ * const capitalize = (value: string) =>
+ *   value.charAt(0).toUpperCase() + value.slice(1)
+ * const exclaim = (value: string) => `${value}!`
+ *
+ * const transform = flow(doubleSay, capitalize, exclaim)
+ * transform('hello') // => 'Hello, hello!'
+ * // equivalent to (value) => exclaim(capitalize(doubleSay(value)))
+ * ```
+ */
 export function flow<A, B>(...fns: Compose1<A, B>): Fn<A, B>
 export function flow<A, B, C>(...fns: Compose2<A, B, C>): Fn<A, C>
 export function flow<A, B, C, D>(...fns: Compose3<A, B, C, D>): Fn<A, D>

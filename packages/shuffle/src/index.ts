@@ -18,6 +18,8 @@ function swap<T>(i: number, j: number, items: T[]): void {
  * @returns A new array containing the same items in random order.
  * @example
  * ```typescript
+ * import { shuffle } from '@pacote/shuffle'
+ *
  * shuffle([1, 2, 3]) // => a shuffled copy of the array
  * ```
  */

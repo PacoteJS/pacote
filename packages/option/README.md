@@ -12,17 +12,17 @@
 yarn add @pacote/option
 ```
 
-## Usage
+## Example
 
 ```typescript
 import { None, Some, map } from '@pacote/option'
 
 function divide(numerator: number, denominator: number): Option<number> {
-  return denominator === 0 : None ? Some(numerator / denominator)
+  return denominator === 0 ? None : Some(numerator / denominator)
 }
 
-map(n => n + 1, divide(4, 2)) // => Some(3)
-map(n => n + 1, divide(4, 0)) // => None
+map((n) => n + 1, divide(4, 2)) // => Some(3)
+map((n) => n + 1, divide(4, 0)) // => None
 ```
 
 ## License
