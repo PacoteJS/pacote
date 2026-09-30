@@ -20,38 +20,6 @@ functions left-to-right in the order they are applied.</p>
 <pre><code class="bash"><span class="hl-0">yarn</span><span class="hl-1"> </span><span class="hl-2">add</span><span class="hl-1"> </span><span class="hl-2">@pacote/pipe</span>
 </code><button type="button">Copy</button></pre>
 
-<h2 id="usage" class="tsd-anchor-link">Usage<a href="#usage" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2>
-<pre><code class="typescript"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">pipe</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@pacote/pipe&#39;</span><br/><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-0">doubleSay</span><span class="hl-1"> = (</span><span class="hl-4">text</span><span class="hl-1">: </span><span class="hl-9">string</span><span class="hl-1">) </span><span class="hl-5">=&gt;</span><span class="hl-1"> </span><span class="hl-4">text</span><span class="hl-1"> + </span><span class="hl-2">&#39;, &#39;</span><span class="hl-1"> + </span><span class="hl-4">text</span><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-0">capitalize</span><span class="hl-1"> = (</span><span class="hl-4">text</span><span class="hl-1">: </span><span class="hl-9">string</span><span class="hl-1">) </span><span class="hl-5">=&gt;</span><span class="hl-1"> </span><span class="hl-4">text</span><span class="hl-1">[</span><span class="hl-8">0</span><span class="hl-1">].</span><span class="hl-0">toUpperCase</span><span class="hl-1">() + </span><span class="hl-4">text</span><span class="hl-1">.</span><span class="hl-0">substring</span><span class="hl-1">(</span><span class="hl-8">1</span><span class="hl-1">)</span><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-0">exclaim</span><span class="hl-1"> = (</span><span class="hl-4">text</span><span class="hl-1">: </span><span class="hl-9">string</span><span class="hl-1">) </span><span class="hl-5">=&gt;</span><span class="hl-1"> </span><span class="hl-4">text</span><span class="hl-1"> + </span><span class="hl-2">&#39;!&#39;</span><br/><br/><span class="hl-0">exclaim</span><span class="hl-1">(</span><span class="hl-0">capitalize</span><span class="hl-1">(</span><span class="hl-0">doubleSay</span><span class="hl-1">(</span><span class="hl-2">&#39;hello&#39;</span><span class="hl-1">))) </span><span class="hl-6">// =&gt; &#39;Hello, hello!&#39;</span><br/><br/><span class="hl-0">pipe</span><span class="hl-1">(</span><span class="hl-2">&#39;hello&#39;</span><span class="hl-1">, </span><span class="hl-4">doubleSay</span><span class="hl-1">, </span><span class="hl-4">capitalize</span><span class="hl-1">, </span><span class="hl-4">exclaim</span><span class="hl-1">) </span><span class="hl-6">// =&gt; &#39;Hello, hello!&#39;</span>
-</code><button type="button">Copy</button></pre>
-
-<h3 id="_" class="tsd-anchor-link"><code>pipe(initial: unknown, ...fns: readonly Function[]): unknown</code><a href="#_" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<p><code>pipe()</code> allows you to pass a value into a sequence of functions chained
-left-to-right.</p>
-<p>It takes an argument of any type plus any number of functions that accept the
-preceding result, then feeds the first argument into the first function, the
-output of the first function into the second function, and so on until the
-output of the last function is finally returned.</p>
-<p>Given three functions <code>f</code>, <code>g</code>, and <code>h</code>:</p>
-<pre><code class="typescript"><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-7">result</span><span class="hl-1"> = </span><span class="hl-0">pipe</span><span class="hl-1">(</span><span class="hl-4">x</span><span class="hl-1">, </span><span class="hl-4">f</span><span class="hl-1">, </span><span class="hl-4">g</span><span class="hl-1">, </span><span class="hl-4">h</span><span class="hl-1">)</span>
-</code><button type="button">Copy</button></pre>
-
-<p>is equivalent to:</p>
-<pre><code class="typescript"><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-7">result</span><span class="hl-1"> = </span><span class="hl-0">h</span><span class="hl-1">(</span><span class="hl-0">g</span><span class="hl-1">(</span><span class="hl-0">f</span><span class="hl-1">(</span><span class="hl-4">x</span><span class="hl-1">)))</span>
-</code><button type="button">Copy</button></pre>
-
-<h3 id="_-1" class="tsd-anchor-link"><code>flow(...fns: readonly Function[]): Function</code><a href="#_-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<p><code>flow()</code> lets you chain functions left-to-right in a point-free manner.</p>
-<p>It takes any number of functions that accept the preceding result, and returns
-a composed function that takes an initial value and returns the last function
-output after the initial value is chained through the intervening functions.</p>
-<p>Given three functions <code>f</code>, <code>g</code>, and <code>h</code>:</p>
-<pre><code class="typescript"><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-7">fn</span><span class="hl-1"> = </span><span class="hl-0">flow</span><span class="hl-1">(</span><span class="hl-4">f</span><span class="hl-1">, </span><span class="hl-4">g</span><span class="hl-1">, </span><span class="hl-4">h</span><span class="hl-1">)</span>
-</code><button type="button">Copy</button></pre>
-
-<p>is equivalent to:</p>
-<pre><code class="typescript"><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-0">fn</span><span class="hl-1"> = (</span><span class="hl-4">x</span><span class="hl-1">) </span><span class="hl-5">=&gt;</span><span class="hl-1"> </span><span class="hl-0">h</span><span class="hl-1">(</span><span class="hl-0">g</span><span class="hl-1">(</span><span class="hl-0">f</span><span class="hl-1">(</span><span class="hl-4">x</span><span class="hl-1">)))</span>
-</code><button type="button">Copy</button></pre>
-
 <h2 id="license" class="tsd-anchor-link">License<a href="#license" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2>
 <p>MIT © <a href="https://goblindegook.com">Luís Rodrigues</a>.</p>
 </section>
@@ -73,11 +41,6 @@ output after the initial value is chained through the intervening functions.</p>
 <div class="tsd-accordion-details"><a href="#pacotepipe"><span>@pacote/pipe</span></a>
 <ul>
 <li><a href="#installation"><span>Installation</span></a></li>
-<li><a href="#usage"><span>Usage</span></a></li>
-<li>
-<ul>
-<li><a href="#_"><span></span></a></li>
-<li><a href="#_-1"><span></span></a></li></ul></li>
 <li><a href="#license"><span>License</span></a></li></ul>
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Functions"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Functions</summary>
 <div><a href="#flow"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function"><use href="../assets/icons.svg#icon-64"></use></svg><span>flow</span></a><a href="#pipe"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Function"><use href="../assets/icons.svg#icon-64"></use></svg><span>pipe</span></a></div></details></div></details></div>
