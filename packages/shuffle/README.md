@@ -12,19 +12,6 @@ An implementation of the Durstenfeld algorithm for shuffling collections.
 yarn add @pacote/shuffle
 ```
 
-## Usage
-
-```typescript
-import { shuffle } from '@pacote/shuffle'
-
-shuffle([1, 2, 3])
-```
-
-### `shuffle<T>(items: T[]): T[]`
-
-`shuffle()` takes an item sequence and returns a randomly permutated sequence
-of its elements.
-
 ## License
 
 MIT © [Luís Rodrigues](https://goblindegook.com).

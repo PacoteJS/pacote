@@ -8,6 +8,19 @@ function swap<T>(i: number, j: number, items: T[]): void {
   items[j] = swapped
 }
 
+/**
+ * Returns a randomly shuffled copy of a collection using the Durstenfeld
+ * algorithm.
+ *
+ * The input collection is not modified.
+ *
+ * @param items - Items to shuffle.
+ * @returns A new array containing the same items in random order.
+ * @example
+ * ```typescript
+ * shuffle([1, 2, 3]) // => a shuffled copy of the array
+ * ```
+ */
 export function shuffle<T>(items: readonly T[]): T[] {
   const shuffled = [...items]
   for (let i = 0; i < items.length - 1; i++) {
