@@ -36,12 +36,6 @@ The number of hashes, or _k_, is determined by the formula:
 
 ![](docs/optimal-hashes.svg)
 
-## Hashing algorithms
-
-This class depends on [`xxhashjs`](https://www.npmjs.com/package/xxhashjs) for
-an implementation of the [fast XXH64 non-cryptographic hashing algorithm](https://cyan4973.github.io/xxHash/)
-to build and search the filter via enhanced double hashing.
-
 ## License
 
 MIT © [Luís Rodrigues](https://goblindegook.com).
