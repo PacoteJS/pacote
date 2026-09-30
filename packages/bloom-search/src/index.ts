@@ -6,13 +6,17 @@ import { EXCLUDE, PHRASE, queryTerms, REQUIRE } from './query'
 import { countIdf, createIdfLookup } from './tf-idf'
 import { defaultTokenizer } from './token'
 
+/** Converts an indexed field value to text before tokenization. */
 export type PreprocessFunction<Document, Field extends keyof Document> = (
   value: Document[Field],
   field: Field,
   document: Document,
 ) => string
+/** Returns whether a token should be kept in the search index. */
 export type StopwordsFunction = (token: string, language?: string) => boolean
+/** Maps a token to its stem before it is indexed or searched. */
 export type StemmerFunction = (token: string, language?: string) => string
+/** Splits text into searchable tokens. */
 export type TokenizerFunction = (token: string, language?: string) => string[]
 
 /**
@@ -36,6 +40,7 @@ export interface IndexedDocument<
   readonly signatures: Record<number, BloomFilter<string>>
 }
 
+/** Serialised search index containing document summaries and signatures. */
 export interface Index<Document, SummaryField extends keyof Document> {
   version: number
   documents: Record<string, IndexedDocument<Document, SummaryField>>
@@ -213,6 +218,7 @@ export class BloomSearch<
    * set.
    *
    * @param options Bloom search options.
+   * @returns A new search indexer and searcher.
    */
   constructor(options: Options<Document, SummaryField, IndexField>) {
     this.fields = Array.isArray(options.fields)
@@ -242,6 +248,7 @@ export class BloomSearch<
   /**
    * Collection containing document summaries and Bloom filter signatures used
    * to search, with document shorthand reference identifier used as keys.
+   * @returns The current index with serialisable document summaries.
    */
   public get index(): Index<Document, SummaryField> {
     return {
@@ -250,6 +257,10 @@ export class BloomSearch<
     }
   }
 
+  /**
+   * Restores document summaries and signatures from a compatible index.
+   * @param index - Compatible index to load.
+   */
   public set index(index: Index<Document, SummaryField>) {
     this.load(index)
   }
@@ -265,6 +276,7 @@ export class BloomSearch<
    * not be found in the rehydrated index.
    *
    * @param index Replacement index.
+   * @throws Error when the index schema version is incompatible.
    */
   load(index: Index<Document, SummaryField>): void {
     if (index.version !== INDEX_VERSION) {
@@ -303,6 +315,7 @@ export class BloomSearch<
    * @param [language]  - Language identifier which is fed back into the
    *                      `stemmer` and `stopwords` callback functions to help
    *                      decide how to handle these steps.
+   *
    */
   add(ref: string, document: Document, language?: string): void {
     const uniqueTokens = new Set<string>()
@@ -477,6 +490,10 @@ export class BloomSearch<
       .map(({ summary }) => summary)
   }
 
+  /**
+   * Returns the options and index in a JSON-serialisable object.
+   * @returns The search options and serialisable index data.
+   */
   toJSON() {
     return {
       errorRate: this.errorRate,

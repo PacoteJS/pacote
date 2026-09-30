@@ -1,6 +1,15 @@
 import { defaultHash } from './hash'
 import type { Options } from './options'
 
+/**
+ * A counting Bloom filter that tracks approximate membership counts and
+ * supports removal.
+ *
+ * Like a standard Bloom filter, it can report false positives. The returned
+ * count is therefore a possible count, not proof of exact membership.
+ *
+ * @typeParam T - Values represented by the filter.
+ */
 export class CountingBloomFilter<T extends { toString(): string }> {
   readonly size: number
   readonly hashes: number
@@ -8,6 +17,13 @@ export class CountingBloomFilter<T extends { toString(): string }> {
   readonly filter: Uint32Array
   private hash: (i: number, element: string) => number
 
+  /**
+   * Creates a counting filter from its size, hash count, and optional seed or counters.
+   *
+   * @param options - Filter size, hash count, and optional initial state.
+   * @returns A new counting Bloom filter.
+   * @throws Error if `size` or `hashes` is less than 1.
+   */
   constructor(options: Options) {
     if (options.size < 1) {
       throw Error('size must be greater than 0')
@@ -24,6 +40,10 @@ export class CountingBloomFilter<T extends { toString(): string }> {
     this.hash = options.hash ?? defaultHash(this.seed)
   }
 
+  /**
+   * Adds an instance of an element and increments its counters.
+   * @param element - Value to add.
+   */
   add(element: T): void {
     for (let i = 0; i < this.hashes; i++) {
       const position = this.hashPosition(i, element)
@@ -31,6 +51,10 @@ export class CountingBloomFilter<T extends { toString(): string }> {
     }
   }
 
+  /**
+   * Removes an instance of an element without allowing counters below zero.
+   * @param element - Value to remove.
+   */
   remove(element: T): void {
     for (let i = 0; i < this.hashes; i++) {
       const position = this.hashPosition(i, element)
@@ -40,6 +64,11 @@ export class CountingBloomFilter<T extends { toString(): string }> {
     }
   }
 
+  /**
+   * Returns the possible number of times an element was added.
+   * @param element - Value to look up.
+   * @returns The minimum counter value for this element's hash positions.
+   */
   has(element: T): number {
     let min = Number.POSITIVE_INFINITY
     for (let i = 0; i < this.hashes; i++) {
@@ -49,6 +78,10 @@ export class CountingBloomFilter<T extends { toString(): string }> {
     return min
   }
 
+  /**
+   * Returns the filter state in a JSON-serialisable form.
+   * @returns Filter size, hash count, seed, and counter data.
+   */
   toJSON(): SerialisedCountingBloomFilter {
     return {
       filter: Array.from(this.filter),
