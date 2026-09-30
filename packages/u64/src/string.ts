@@ -4,6 +4,12 @@ import { fromNumber, toNumber, type U64, ZERO } from './u64'
 
 const MAX_CHUNK_SIZE = 5
 
+/**
+ * Parses a numeric string into a `U64` tuple using the specified base.
+ * @param value - Numeric string to parse.
+ * @param radix - Base used to parse the string.
+ * @returns The parsed value.
+ */
 export function fromString(value: string, radix: number): U64 {
   const length = value.length
   let result = ZERO
@@ -23,6 +29,12 @@ const PADDING: Record<number, number | undefined> = {
   16: 16,
 }
 
+/**
+ * Converts a `U64` value to a string in the specified base (default 10).
+ * @param value - Value to convert.
+ * @param radix - Numeric base for the result.
+ * @returns The string representation.
+ */
 // biome-ignore lint/suspicious/noShadowRestrictedNames: global toString not used
 export function toString(value: U64, radix = 10): string {
   const _radix = fromNumber(radix)

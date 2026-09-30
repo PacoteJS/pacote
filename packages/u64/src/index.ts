@@ -26,6 +26,7 @@ export { toNumber, type U64, ZERO } from './u64'
  * Creates a new `U64` from a number.
  *
  * @param value - Number to convert.
+ * @returns The corresponding four-block `U64` value.
  *
  * @category Creation
  */
@@ -35,6 +36,7 @@ export function from(value: number): U64
  *
  * @param value   - Numerical string to convert.
  * @param [radix] - Base radix, defaults to `10`.
+ * @returns The parsed four-block `U64` value.
  *
  * @category Creation
  */
