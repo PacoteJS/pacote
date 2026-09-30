@@ -16,6 +16,10 @@
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="shuffle"><span class="tsd-kind-call-signature">shuffle</span><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#shufflet">T</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">items</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">readonly</span> <a class="tsd-signature-type tsd-kind-type-parameter" href="#shufflet">T</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a class="tsd-signature-type tsd-kind-type-parameter" href="#shufflet">T</a><span class="tsd-signature-symbol">[]</span><a href="#shuffle" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Returns a randomly shuffled copy of a collection using the Durstenfeld
+algorithm.</p>
+<p>The input collection is not modified.</p>
+</div>
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
@@ -23,10 +27,19 @@
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
-<li><span><span class="tsd-kind-parameter">items</span>: <span class="tsd-signature-keyword">readonly</span> <a class="tsd-signature-type tsd-kind-type-parameter" href="#shufflet">T</a><span class="tsd-signature-symbol">[]</span></span></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a class="tsd-signature-type tsd-kind-type-parameter" href="#shufflet">T</a><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
+<li><span><span class="tsd-kind-parameter">items</span>: <span class="tsd-signature-keyword">readonly</span> <a class="tsd-signature-type tsd-kind-type-parameter" href="#shufflet">T</a><span class="tsd-signature-symbol">[]</span></span>
+<div class="tsd-comment tsd-typography"><p>Items to shuffle.</p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a class="tsd-signature-type tsd-kind-type-parameter" href="#shufflet">T</a><span class="tsd-signature-symbol">[]</span></h4><p>A new array containing the same items in random order.</p>
+
+<div class="tsd-comment tsd-typography">
+<div class="tsd-tag-example">
+<h4 class="tsd-anchor-link" id="example">Example<a href="#example" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="typescript"><span class="hl-0">shuffle</span><span class="hl-1">([</span><span class="hl-8">1</span><span class="hl-1">, </span><span class="hl-8">2</span><span class="hl-1">, </span><span class="hl-8">3</span><span class="hl-1">]) </span><span class="hl-6">// =&gt; a shuffled copy of the array</span>
+</code><button type="button">Copy</button></pre>
+
+</div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/a50a624c65889ba3263614531966707b9f547413/packages/shuffle/src/index.ts#L11">index.ts:11</a></li></ul></aside></div></li></ul></section></div>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/a1143cd0faef06764a3e3d571d76a15713720c37/packages/shuffle/src/index.ts#L24">index.ts:24</a></li></ul></aside></div></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
