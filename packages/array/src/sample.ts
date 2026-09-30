@@ -28,7 +28,7 @@ export function sample<T>(array: readonly T[]): T | undefined {
 }
 
 /**
- * Picks a mumber of random elements from an array determined by the sample
+ * Picks a number of random elements from an array determined by the sample
  * size.
  *
  * @example
@@ -40,7 +40,7 @@ export function sample<T>(array: readonly T[]): T | undefined {
  * ```
  *
  * @param array  The array to sample.
- * @param number A non-negative sample size.
+ * @param sampleSize Number of elements to sample; negative values are treated as zero.
  *
  * @returns Array of random elements from the provided array.
  */
