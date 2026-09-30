@@ -86,7 +86,6 @@ export class LRUCache<K, V> {
    *
    * @param key    Item cache key.
    * @param value  Item value.
-   * @returns Nothing.
    */
   set(key: K, value: V): void {
     let pointer = this.pointers.get(key)
@@ -118,7 +117,6 @@ export class LRUCache<K, V> {
    * Note: deleting a cached value will not contract the size of the cache.
    *
    * @param key  Item cache key to remove.
-   * @returns Nothing.
    */
   delete(key: K): void {
     this.pointers.delete(key)
@@ -126,7 +124,6 @@ export class LRUCache<K, V> {
 
   /**
    * Clears the cache.
-   * @returns Nothing.
   */
   clear() {
     this.cacheSize = 0
