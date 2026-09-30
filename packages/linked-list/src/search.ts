@@ -87,6 +87,11 @@ export function at<T>(index: number, list: LinkedList<T>): Option<T> {
 }
 
 /**
+ * Returns the element at an index, counting negative indexes from the end.
+ *
+ * @param index Element index; negative values count from the end.
+ * @param list Linked list to search.
+ * @returns The element at the index, or `None` when it is out of bounds.
  * @deprecated Use `at()`.
  */
 export function item<T>(index: number, list: LinkedList<T>): Option<T> {

@@ -13,6 +13,11 @@ export type MapCallback<T, R> = (...args: CallbackArgs<T>) => R
 export type ReduceCallback<T, R> = (acc: R, ...args: CallbackArgs<T>) => R
 export type PredicateFunction<T> = MapCallback<T, boolean>
 
+/**
+ * Returns the first element of a non-empty linked list.
+ * @param cons - Non-empty list to read.
+ * @returns The value at the head of the list.
+ */
 export function car<T>(cons: Cons<T>): T {
   return cons[0]
 }
@@ -30,6 +35,10 @@ export function cdr<T>(cons: LinkedList<T>): LinkedList<T> {
   return cons?.[1]
 }
 
+/**
+ * Creates an empty linked list.
+ * @returns An empty list (`undefined`) with the requested element type.
+ */
 export function emptyList<T>(): LinkedList<T> {
   return undefined
 }
