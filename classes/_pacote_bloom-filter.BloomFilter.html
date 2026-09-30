@@ -11,12 +11,27 @@
 <li><a href="../modules/_pacote_bloom-filter.html">@pacote/bloom-filter</a></li>
 <li><a href="" aria-current="page">BloomFilter</a></li></ul>
 <h1>Class BloomFilter&lt;T&gt;</h1></div>
+<section class="tsd-panel tsd-comment">
+<div class="tsd-comment tsd-typography"><p>A space-efficient probabilistic set for values with a stable <code>toString()</code>.</p>
+<p>Membership checks can produce false positives, but never false negatives.
+Use <code>CountingBloomFilter</code> when values must be removed.
+The filter uses seeded XXH64 hashing with enhanced double hashing. This hash
+is non-cryptographic and should not be used for security-sensitive purposes.</p>
+</div>
+<div class="tsd-comment tsd-typography">
+<div class="tsd-tag-example">
+<h4 class="tsd-anchor-link" id="example">Example<a href="#example" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="typescript"><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-7">filter</span><span class="hl-1"> = </span><span class="hl-5">new</span><span class="hl-1"> </span><span class="hl-0">BloomFilter</span><span class="hl-1">({ </span><span class="hl-4">size:</span><span class="hl-1"> </span><span class="hl-8">22056</span><span class="hl-1">, </span><span class="hl-4">hashes:</span><span class="hl-1"> </span><span class="hl-8">8</span><span class="hl-1"> })</span><br/><span class="hl-4">filter</span><span class="hl-1">.</span><span class="hl-0">add</span><span class="hl-1">(</span><span class="hl-2">&#39;foo&#39;</span><span class="hl-1">)</span><br/><span class="hl-4">filter</span><span class="hl-1">.</span><span class="hl-0">has</span><span class="hl-1">(</span><span class="hl-2">&#39;foo&#39;</span><span class="hl-1">) </span><span class="hl-6">// =&gt; true</span>
+</code><button type="button">Copy</button></pre>
+
+</div></div></section>
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
-<li><span id="t"><span class="tsd-kind-type-parameter">T</span> <span class="tsd-signature-keyword">extends</span> <span class="tsd-signature-symbol">{</span> <span class="tsd-kind-call-signature">toString</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">}</span></span></li></ul></section><aside class="tsd-sources">
+<li><span id="t"><span class="tsd-kind-type-parameter">T</span> <span class="tsd-signature-keyword">extends</span> <span class="tsd-signature-symbol">{</span> <span class="tsd-kind-call-signature">toString</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">}</span></span>
+<div class="tsd-comment tsd-typography"><p>Values represented by the filter.</p>
+</div></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/62514a14857d12fd40c133e10c8b4cae67354ce3/packages/bloom-filter/src/bloom-filter.ts#L4">bloom-filter.ts:4</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/243256a07937965091eb03e8a4d7a6d67d47945f/packages/bloom-filter/src/bloom-filter.ts#L20">bloom-filter.ts:20</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -48,17 +63,28 @@
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="constructorbloomfilter"><span class="tsd-signature-keyword">new</span> <span class="tsd-kind-constructor-signature">BloomFilter</span><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#constructorbloomfiltert">T</a> <span class="tsd-signature-keyword">extends</span> <span class="tsd-signature-symbol">{</span> <span class="tsd-kind-call-signature">toString</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><br/>    <span class="tsd-kind-parameter">options</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Options</span><span class="tsd-signature-symbol">,</span><br/><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a href="" class="tsd-signature-type tsd-kind-class">BloomFilter</a><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#t">T</a><span class="tsd-signature-symbol">&gt;</span><a href="#constructorbloomfilter" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Creates a filter from its size, hash count, and optional seed or bit data.</p>
+</div>
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
-<li><span id="constructorbloomfiltert"><span class="tsd-kind-type-parameter">T</span> <span class="tsd-signature-keyword">extends</span> <span class="tsd-signature-symbol">{</span> <span class="tsd-kind-call-signature">toString</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">}</span></span></li></ul></section>
+<li><span id="constructorbloomfiltert"><span class="tsd-kind-type-parameter">T</span> <span class="tsd-signature-keyword">extends</span> <span class="tsd-signature-symbol">{</span> <span class="tsd-kind-call-signature">toString</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">}</span></span>
+<div class="tsd-comment tsd-typography"><p>Values represented by the filter.</p>
+</div></li></ul></section>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
-<li><span><span class="tsd-kind-parameter">options</span>: <span class="tsd-signature-type">Options</span></span></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="" class="tsd-signature-type tsd-kind-class">BloomFilter</a><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#t">T</a><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
+<li><span><span class="tsd-kind-parameter">options</span>: <span class="tsd-signature-type">Options</span></span>
+<div class="tsd-comment tsd-typography"><p>Filter size, hash count, and optional initial state.</p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="" class="tsd-signature-type tsd-kind-class">BloomFilter</a><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#t">T</a><span class="tsd-signature-symbol">&gt;</span></h4><p>A new Bloom filter.</p>
+
+<div class="tsd-comment tsd-typography">
+<div class="tsd-tag-throws">
+<h4 class="tsd-anchor-link" id="throws">Throws<a href="#throws" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>Error if <code>size</code> or <code>hashes</code> is less than 1.</p>
+</div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/62514a14857d12fd40c133e10c8b4cae67354ce3/packages/bloom-filter/src/bloom-filter.ts#L11">bloom-filter.ts:11</a></li></ul></aside></div></li></ul></section></section></details>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/243256a07937965091eb03e8a4d7a6d67d47945f/packages/bloom-filter/src/bloom-filter.ts#L34">bloom-filter.ts:34</a></li></ul></aside></div></li></ul></section></section></details>
 <details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
 <h2 class="tsd-anchor-link" id="properties-1">Properties<a href="#properties-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
 <section>
@@ -66,22 +92,22 @@
 <h3 class="tsd-anchor-link" id="filter"><code class="tsd-tag">Readonly</code><span>filter</span><a href="#filter" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">filter</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Uint32Array</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/62514a14857d12fd40c133e10c8b4cae67354ce3/packages/bloom-filter/src/bloom-filter.ts#L8">bloom-filter.ts:8</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/243256a07937965091eb03e8a4d7a6d67d47945f/packages/bloom-filter/src/bloom-filter.ts#L24">bloom-filter.ts:24</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="hashes"><code class="tsd-tag">Readonly</code><span>hashes</span><a href="#hashes" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">hashes</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/62514a14857d12fd40c133e10c8b4cae67354ce3/packages/bloom-filter/src/bloom-filter.ts#L6">bloom-filter.ts:6</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/243256a07937965091eb03e8a4d7a6d67d47945f/packages/bloom-filter/src/bloom-filter.ts#L22">bloom-filter.ts:22</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="seed"><code class="tsd-tag">Readonly</code><span>seed</span><a href="#seed" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">seed</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/62514a14857d12fd40c133e10c8b4cae67354ce3/packages/bloom-filter/src/bloom-filter.ts#L7">bloom-filter.ts:7</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/243256a07937965091eb03e8a4d7a6d67d47945f/packages/bloom-filter/src/bloom-filter.ts#L23">bloom-filter.ts:23</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="size"><code class="tsd-tag">Readonly</code><span>size</span><a href="#size" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">size</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/62514a14857d12fd40c133e10c8b4cae67354ce3/packages/bloom-filter/src/bloom-filter.ts#L5">bloom-filter.ts:5</a></li></ul></aside></section></section></details>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/243256a07937965091eb03e8a4d7a6d67d47945f/packages/bloom-filter/src/bloom-filter.ts#L21">bloom-filter.ts:21</a></li></ul></aside></section></section></details>
 <details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
 <h2 class="tsd-anchor-link" id="methods-1">Methods<a href="#methods-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
 <section>
@@ -91,35 +117,48 @@
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="add-1"><span class="tsd-kind-call-signature">add</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">element</span><span class="tsd-signature-symbol">:</span> <a class="tsd-signature-type tsd-kind-type-parameter" href="#t">T</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#add-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Adds an element to the filter.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
-<li><span><span class="tsd-kind-parameter">element</span>: <a class="tsd-signature-type tsd-kind-type-parameter" href="#t">T</a></span></li></ul></div>
+<li><span><span class="tsd-kind-parameter">element</span>: <a class="tsd-signature-type tsd-kind-type-parameter" href="#t">T</a></span>
+<div class="tsd-comment tsd-typography"><p>Value to add.</p>
+</div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/62514a14857d12fd40c133e10c8b4cae67354ce3/packages/bloom-filter/src/bloom-filter.ts#L27">bloom-filter.ts:27</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/243256a07937965091eb03e8a4d7a6d67d47945f/packages/bloom-filter/src/bloom-filter.ts#L54">bloom-filter.ts:54</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="has"><span>has</span><a href="#has" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="has-1"><span class="tsd-kind-call-signature">has</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">element</span><span class="tsd-signature-symbol">:</span> <a class="tsd-signature-type tsd-kind-type-parameter" href="#t">T</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><a href="#has-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Checks whether an element may be present in the filter.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
-<li><span><span class="tsd-kind-parameter">element</span>: <a class="tsd-signature-type tsd-kind-type-parameter" href="#t">T</a></span></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
+<li><span><span class="tsd-kind-parameter">element</span>: <a class="tsd-signature-type tsd-kind-type-parameter" href="#t">T</a></span>
+<div class="tsd-comment tsd-typography"><p>Value to look up.</p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><p><code>false</code> guarantees the element is absent; <code>true</code> means it may be
+present and can be a false positive.</p>
+<aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/62514a14857d12fd40c133e10c8b4cae67354ce3/packages/bloom-filter/src/bloom-filter.ts#L36">bloom-filter.ts:36</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/243256a07937965091eb03e8a4d7a6d67d47945f/packages/bloom-filter/src/bloom-filter.ts#L69">bloom-filter.ts:69</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="tojson"><span>to<wbr/>JSON</span><a href="#tojson" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="tojson-1"><span class="tsd-kind-call-signature">toJSON</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">SerialisedBloomFilter</span><a href="#tojson-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">SerialisedBloomFilter</span></h4><aside class="tsd-sources">
+<div class="tsd-comment tsd-typography"><p>Returns the filter state in a JSON-serialisable form.</p>
+</div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">SerialisedBloomFilter</span></h4><p>Filter size, hash count, seed, and bit data.</p>
+<aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/62514a14857d12fd40c133e10c8b4cae67354ce3/packages/bloom-filter/src/bloom-filter.ts#L48">bloom-filter.ts:48</a></li></ul></aside></div></li></ul></section></section></details></div>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/243256a07937965091eb03e8a4d7a6d67d47945f/packages/bloom-filter/src/bloom-filter.ts#L85">bloom-filter.ts:85</a></li></ul></aside></div></li></ul></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

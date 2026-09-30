@@ -27,90 +27,7 @@ each element.</p>
 <pre><code class="bash"><span class="hl-0">yarn</span><span class="hl-1"> </span><span class="hl-2">add</span><span class="hl-1"> </span><span class="hl-2">@pacote/bloom-filter</span>
 </code><button type="button">Copy</button></pre>
 
-<h2 id="usage" class="tsd-anchor-link">Usage<a href="#usage" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2>
-<pre><code class="typescript"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">BloomFilter</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@pacote/bloom-filter&#39;</span><br/><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-7">filter</span><span class="hl-1"> = </span><span class="hl-5">new</span><span class="hl-1"> </span><span class="hl-0">BloomFilter</span><span class="hl-1">({ </span><span class="hl-4">size:</span><span class="hl-1"> </span><span class="hl-8">22056</span><span class="hl-1">, </span><span class="hl-4">hashes:</span><span class="hl-1"> </span><span class="hl-8">8</span><span class="hl-1"> })</span><br/><br/><span class="hl-4">filter</span><span class="hl-1">.</span><span class="hl-0">add</span><span class="hl-1">(</span><span class="hl-2">&#39;foo&#39;</span><span class="hl-1">)</span><br/><span class="hl-4">filter</span><span class="hl-1">.</span><span class="hl-0">add</span><span class="hl-1">(</span><span class="hl-2">&#39;bar&#39;</span><span class="hl-1">)</span><br/><br/><span class="hl-4">filter</span><span class="hl-1">.</span><span class="hl-0">has</span><span class="hl-1">(</span><span class="hl-2">&#39;foo&#39;</span><span class="hl-1">) </span><span class="hl-6">// -&gt; true</span><br/><span class="hl-4">filter</span><span class="hl-1">.</span><span class="hl-0">has</span><span class="hl-1">(</span><span class="hl-2">&#39;bar&#39;</span><span class="hl-1">) </span><span class="hl-6">// -&gt; true</span><br/><span class="hl-4">filter</span><span class="hl-1">.</span><span class="hl-0">has</span><span class="hl-1">(</span><span class="hl-2">&#39;baz&#39;</span><span class="hl-1">) </span><span class="hl-6">// -&gt; false</span>
-</code><button type="button">Copy</button></pre>
-
-<h3 id="_" class="tsd-anchor-link"><code>BloomFilter&lt;T extends { toString(): string }&gt;</code><a href="#_" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<p><code>BloomFilter</code> builds a data structure that may be used to test the membership of
-any <code>String</code>-serialisable value (i.e. an object which implements the
-<code>toString()</code> method).</p>
-<p>Because a Bloom filter is so simple, it cannot handle removing elements. You may
-use a <code>CountingBloomFilter</code> for that.</p>
-<p>The class constructor takes an <code>Options</code> object with the following properties:</p>
-<ul>
-<li>
-<p><code>size</code> (<code>number</code>, required) determines the size of the filter in bits. The
-value is required and must not be negative.</p>
-</li>
-<li>
-<p><code>hashes</code> (<code>number</code>, required) sets the number of distinct hashes that need to
-be calculated. A higher number performs more slowly, but lowers the
-probability of false positives occuring. The value is required and must be a
-positive integer.</p>
-</li>
-<li>
-<p><code>seed</code> (<code>number</code>) sets the seed for the hashing function. The default is
-<code>0x00c0ffee</code>.</p>
-</li>
-<li>
-<p><code>filter</code> (<code>BloomFilter&lt;T&gt;</code>) allows initialising the filter from an array of
-unsigned 32-bit integers.</p>
-</li>
-</ul>
-<p>Class instances may be serialised into JSON using <code>JSON.stringify()</code> for storage
-or for sending over the network. The JSON string can then be deserialised and
-fed back into the constructor to recreate the original Bloom filter.</p>
-<h4 id="_-1" class="tsd-anchor-link"><code>add(element: T): void</code><a href="#_-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4>
-<p>The <code>add()</code> method mutates to filter to indicate that the provided serialisable
-element is present.</p>
-<h4 id="_-2" class="tsd-anchor-link"><code>has(element: T): boolean</code><a href="#_-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4>
-<p>The <code>has()</code> method checks the filter for membership of the provided value. If
-<code>false</code>, it is guaranteed not to be present. Otherwise, there's the possibility
-of it being a false positive result.</p>
-<h3 id="_-3" class="tsd-anchor-link"><code>CountingBloomFilter&lt;T extends { toString(): string }&gt;</code><a href="#_-3" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
-<p><code>CountingBloomFilter</code> builds a data structure that may be used to test the
-membership of any <code>String</code>-serialisable value (i.e. an object which implements
-the <code>toString()</code> method). It's a generalisation of <code>BloomFilter</code> that counts the
-number of times an element was added to the set.</p>
-<p>Unlike the simpler <code>BloomFilter</code>, this class supports element removal.</p>
-<p>The class constructor takes an <code>Options</code> object with the following properties:</p>
-<ul>
-<li>
-<p><code>size</code> (<code>number</code>, required) determines the number of filter counters. The
-value is required and must not be negative.</p>
-</li>
-<li>
-<p><code>hashes</code> (<code>number</code>, required) sets the number of distinct hashes that need to
-be calculated. A higher number performs more slowly, but lowers the
-probability of false positives occuring. The value is required and must be a
-positive integer.</p>
-</li>
-<li>
-<p><code>seed</code> (<code>number</code>) sets the seed for the hashing function. The default is
-<code>0x00c0ffee</code>.</p>
-</li>
-<li>
-<p><code>filter</code> (<code>BloomFilter&lt;T&gt;</code>) allows initialising the filter from an array of
-unsigned 32-bit integers.</p>
-</li>
-</ul>
-<p>Class instances may be serialised into JSON using <code>JSON.stringify()</code> for storage
-or for sending over the network. The JSON string can then be deserialised and
-fed back into the constructor to recreate the original Bloom filter.</p>
-<h4 id="_-4" class="tsd-anchor-link"><code>add(element: T): void</code><a href="#_-4" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4>
-<p>The <code>add()</code> method mutates to filter and increments its counters to indicate
-an instance of the element was added.</p>
-<h4 id="_-5" class="tsd-anchor-link"><code>remove(element: T): void</code><a href="#_-5" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4>
-<p>The <code>remove()</code> method mutates to filter and decrements its counters to indicate
-an instance of the element was removed.</p>
-<h4 id="_-6" class="tsd-anchor-link"><code>has(element: T): number</code><a href="#_-6" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4>
-<p>The <code>has()</code> method checks the filter for membership of the provided element and
-returns the possible number of times it was added to the filter.</p>
-<p>As with regular Bloom filters, there is a possibility of the result being a
-false positive, meaning the element may have been added fewer times than
-the returned value indicates.</p>
-<h3 id="_-7" class="tsd-anchor-link"><code>optimal(items: number, errorRate: number): Options</code><a href="#_-7" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<h2 id="sizing-formulas" class="tsd-anchor-link">Sizing formulas<a href="#sizing-formulas" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2>
 <p>The <code>optimal()</code> helper function calculates the optimal Bloom filter <code>size</code> and
 <code>hashes</code> options based on the number of items in the filter (<em>n</em>) and the
 desired false positive error rate (<em>ε</em>).</p>
@@ -145,21 +62,7 @@ to build and search the filter via enhanced double hashing.</p>
 <div class="tsd-accordion-details"><a href="#pacotebloom-filter"><span>@pacote/bloom-<wbr/>filter</span></a>
 <ul>
 <li><a href="#installation"><span>Installation</span></a></li>
-<li><a href="#usage"><span>Usage</span></a></li>
-<li>
-<ul>
-<li><a href="#_"><span></span></a></li>
-<li>
-<ul>
-<li><a href="#_-1"><span></span></a></li>
-<li><a href="#_-2"><span></span></a></li></ul></li>
-<li><a href="#_-3"><span></span></a></li>
-<li>
-<ul>
-<li><a href="#_-4"><span></span></a></li>
-<li><a href="#_-5"><span></span></a></li>
-<li><a href="#_-6"><span></span></a></li></ul></li>
-<li><a href="#_-7"><span></span></a></li></ul></li>
+<li><a href="#sizing-formulas"><span>Sizing formulas</span></a></li>
 <li><a href="#hashing-algorithms"><span>Hashing algorithms</span></a></li>
 <li><a href="#license"><span>License</span></a></li></ul>
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Classes"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Classes</summary>
