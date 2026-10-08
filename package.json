@@ -82,6 +82,7 @@
     "@pacote/react-with-props": "file:packages/react-with-props",
     "@pacote/result": "file:packages/result",
     "@pacote/retry": "file:packages/retry",
+    "@pacote/ribbon-filter": "file:packages/ribbon-filter",
     "@pacote/shuffle": "file:packages/shuffle",
     "@pacote/throttle": "file:packages/throttle",
     "@pacote/u32": "file:packages/u32",

@@ -28,6 +28,7 @@
     "./packages/react-with-props",
     "./packages/result",
     "./packages/retry",
+    "./packages/ribbon-filter",
     "./packages/shuffle",
     "./packages/task",
     "./packages/throttle",

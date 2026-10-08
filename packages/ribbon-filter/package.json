@@ -1,0 +1,39 @@
+{
+  "name": "@pacote/ribbon-filter",
+  "description": "Space-efficient static approximate membership filter.",
+  "version": "0.0.0",
+  "sideEffects": false,
+  "license": "MIT",
+  "author": {
+    "name": "Luís Rodrigues",
+    "email": "hello@goblindegook.com",
+    "url": "https://goblindegook.com"
+  },
+  "keywords": [
+    "ribbon filters",
+    "probabilistic data structures"
+  ],
+  "repository": "github:PacoteJS/pacote",
+  "bugs": {
+    "url": "https://github.com/PacoteJS/pacote/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
+  "typings": "lib/esm/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "build": "pnpm build:esm && pnpm build:cjs",
+    "build:cjs": "tsc -p ./tsconfig.cjs.json",
+    "build:esm": "tsc -p ./tsconfig.esm.json",
+    "prepublish": "pnpm build"
+  },
+  "dependencies": {
+    "@pacote/xxhash": "file:../xxhash"
+  }
+}

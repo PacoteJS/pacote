@@ -80,6 +80,9 @@ importers:
       '@pacote/retry':
         specifier: file:packages/retry
         version: link:packages/retry
+      '@pacote/ribbon-filter':
+        specifier: file:packages/ribbon-filter
+        version: link:packages/ribbon-filter
       '@pacote/shuffle':
         specifier: file:packages/shuffle
         version: link:packages/shuffle
@@ -313,6 +316,12 @@ importers:
         version: link:../option
 
   packages/retry: {}
+
+  packages/ribbon-filter:
+    dependencies:
+      '@pacote/xxhash':
+        specifier: file:../xxhash
+        version: link:../xxhash
 
   packages/shuffle: {}
 
