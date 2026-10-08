@@ -17,9 +17,9 @@ const mask = (bits: number): number =>
  * filter with the same false positive rate.
  *
  * This is a Standard Ribbon filter (Dillinger and Walzer, 2021) with a ribbon
- * width of at most 32 bits. The filter uses seeded XXH64 hashing by default.
- * This hash is non-cryptographic and should not be used for
- * security-sensitive purposes.
+ * width of at most 32 bits. The filter uses seeded XXH64 hashing with
+ * enhanced double hashing by default. This hash is non-cryptographic and
+ * should not be used for security-sensitive purposes.
  *
  * @typeParam T - Values represented by the filter.
  * @example
