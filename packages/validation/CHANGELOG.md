@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.2](https://github.com/PacoteJS/pacote/compare/%40pacote%2Fvalidation%400.4.1...%40pacote%2Fvalidation%400.4.2) (2026-10-08)
+
+**Note:** Version bump only for package @pacote/validation
+
+
+
+
+
 ## [0.4.1](https://github.com/PacoteJS/pacote/compare/@pacote/validation@0.4.0...@pacote/validation@0.4.1) (2026-04-01)
 
 **Note:** Version bump only for package @pacote/validation

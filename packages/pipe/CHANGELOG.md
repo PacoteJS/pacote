@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.2](https://github.com/PacoteJS/pacote/compare/%40pacote%2Fpipe%400.3.1...%40pacote%2Fpipe%400.3.2) (2026-10-08)
+
+**Note:** Version bump only for package @pacote/pipe
+
+
+
+
+
 ## [0.3.1](https://github.com/PacoteJS/pacote/compare/@pacote/pipe@0.3.0...@pacote/pipe@0.3.1) (2026-04-01)
 
 **Note:** Version bump only for package @pacote/pipe

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.2](https://github.com/PacoteJS/pacote/compare/%40pacote%2Farray%400.10.1...%40pacote%2Farray%400.10.2) (2026-10-08)
+
+**Note:** Version bump only for package @pacote/array
+
+
+
+
+
 ## [0.10.1](https://github.com/PacoteJS/pacote/compare/@pacote/array@0.10.0...@pacote/array@0.10.1) (2026-04-01)
 
 **Note:** Version bump only for package @pacote/array

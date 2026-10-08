@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.2](https://github.com/PacoteJS/pacote/compare/%40pacote%2Fu32%400.4.1...%40pacote%2Fu32%400.4.2) (2026-10-08)
+
+**Note:** Version bump only for package @pacote/u32
+
+
+
+
+
 ## [0.4.1](https://github.com/PacoteJS/pacote/compare/@pacote/u32@0.4.0...@pacote/u32@0.4.1) (2026-04-01)
 
 **Note:** Version bump only for package @pacote/u32

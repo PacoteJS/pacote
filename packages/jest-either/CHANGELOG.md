@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.3](https://github.com/PacoteJS/pacote/compare/%40pacote%2Fjest-either%406.0.2...%40pacote%2Fjest-either%406.0.3) (2026-10-08)
+
+**Note:** Version bump only for package @pacote/jest-either
+
+
+
+
+
 ## [6.0.2](https://github.com/PacoteJS/pacote/compare/@pacote/jest-either@6.0.1...@pacote/jest-either@6.0.2) (2026-06-22)
 
 

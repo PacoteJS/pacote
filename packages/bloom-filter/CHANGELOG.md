@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.2](https://github.com/PacoteJS/pacote/compare/%40pacote%2Fbloom-filter%400.8.1...%40pacote%2Fbloom-filter%400.8.2) (2026-10-08)
+
+### Bug Fixes
+
+* 🐛 better option validation ([dce7db4](https://github.com/PacoteJS/pacote/commit/dce7db4cbe3433448a49137cbf7fa9fcb56526c2))
+
+
 ## [0.8.1](https://github.com/PacoteJS/pacote/compare/@pacote/bloom-filter@0.8.0...@pacote/bloom-filter@0.8.1) (2026-04-01)
 
 **Note:** Version bump only for package @pacote/bloom-filter

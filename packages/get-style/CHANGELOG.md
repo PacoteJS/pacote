@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1](https://github.com/PacoteJS/pacote/compare/%40pacote%2Fget-style%403.0.0...%40pacote%2Fget-style%403.0.1) (2026-10-08)
+
+**Note:** Version bump only for package @pacote/get-style
+
+
+
+
+
 # [3.0.0](https://github.com/PacoteJS/pacote/compare/@pacote/get-style@2.0.4...@pacote/get-style@3.0.0) (2026-03-31)
 
 

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.2](https://github.com/PacoteJS/pacote/compare/%40pacote%2Foption%405.0.1...%40pacote%2Foption%405.0.2) (2026-10-08)
+
+**Note:** Version bump only for package @pacote/option
+
+
+
+
+
 ## [5.0.1](https://github.com/PacoteJS/pacote/compare/@pacote/option@5.0.0...@pacote/option@5.0.1) (2026-04-01)
 
 **Note:** Version bump only for package @pacote/option
