@@ -4,6 +4,9 @@
 ![minified](https://badgen.net/bundlephobia/min/@pacote/bloom-search)
 ![minified + gzip](https://badgen.net/bundlephobia/minzip/@pacote/bloom-search)
 
+**This package has been superseded by `@pacote/signature-search`, which uses
+ribbon filters and can be up to 25% more compact.**
+
 Document search using [Bloom filters](../bloom-filter/).
 
 This module was created to support basic full-text search on static sites
@@ -27,7 +30,7 @@ function, but more "advanced" features like suffix matching cannot be
 performed at all.
 
 See [how several client-side search engines compare against Bloom
-Search](https://goblindegook.github.io/bloom-search-poc/).
+Search](https://bloom-search.goblindegook.com/).
 
 ## Installation
 

@@ -26,6 +26,9 @@ partial matching can be remedied through the use of a custom stemmer
 function, but more "advanced" features like suffix matching cannot be
 performed at all.
 
+See [how several client-side search engines compare against Signature
+Search](https://signature-search.goblindegook.com/).
+
 ## Installation
 
 ```bash
