@@ -47,6 +47,8 @@ type Compose8<A, B, C, D, E, F, G, H, I> = readonly [
  * functions are supplied.
  * @example
  * ```typescript
+ * import { pipe } from '@pacote/pipe'
+ *
  * const doubleSay = (value: string) => `${value}, ${value}`
  * const capitalize = (value: string) =>
  *   value.charAt(0).toUpperCase() + value.slice(1)
@@ -143,6 +145,8 @@ export function pipe(
  * @returns A function that accepts the first input and returns the final result.
  * @example
  * ```typescript
+ * import { flow } from '@pacote/pipe'
+ *
  * const doubleSay = (value: string) => `${value}, ${value}`
  * const capitalize = (value: string) =>
  *   value.charAt(0).toUpperCase() + value.slice(1)
