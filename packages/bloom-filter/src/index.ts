@@ -1,7 +1,10 @@
 import type { Options } from './options'
 
+export type { SerialisedBloomFilter } from './bloom-filter'
 export { BloomFilter } from './bloom-filter'
+export type { SerialisedCountingBloomFilter } from './counting-bloom-filter'
 export { CountingBloomFilter } from './counting-bloom-filter'
+export type { HashFunction, Options } from './options'
 
 /**
  * Calculates Bloom filter size and hash count for a target item count and

@@ -66,12 +66,40 @@ test('elements missing from a counting Bloom filter cannot be found', () => {
   expect(filter.has('baz')).toBe(0)
 })
 
-test('counting Bloom filter size must be greater than 0', () => {
-  expect(() => new CountingBloomFilter({ size: 0, hashes: 1 })).toThrow()
-})
+test.each([0, 34.5, Number.NaN])(
+  'counting Bloom filter size must be a positive integer, not %d',
+  (size) => {
+    expect(() => new CountingBloomFilter({ size, hashes: 1 })).toThrow(
+      'size must be a positive integer',
+    )
+  },
+)
 
-test('counting Bloom filters require at least one hash', () => {
-  expect(() => new CountingBloomFilter({ size: 34, hashes: 0 })).toThrow()
+test.each([0, 1.5, Number.NaN])(
+  'counting Bloom filters require a positive integer number of hashes, not %d',
+  (hashes) => {
+    expect(() => new CountingBloomFilter({ size: 34, hashes })).toThrow(
+      'number of hashes must be a positive integer',
+    )
+  },
+)
+
+test.each([[[0, 0, 0, 0]], [[0, 0, 0, 0, 0, 0]]])(
+  'counting Bloom filters cannot be restored from counters of the wrong length',
+  (filter) => {
+    expect(
+      () => new CountingBloomFilter({ size: 5, hashes: 1, filter }),
+    ).toThrow('filter data does not match the size')
+  },
+)
+
+test('counting Bloom filters restored from plain arrays hold their counters in a Uint32Array', () => {
+  const filter = new CountingBloomFilter({
+    size: 2,
+    hashes: 1,
+    filter: [0, 0],
+  })
+  expect(filter.filter).toBeInstanceOf(Uint32Array)
 })
 
 test('elements added to a counting Bloom filter can be found in filters deserialised from JSON', () => {

@@ -1,5 +1,5 @@
 import { defaultHash } from './hash'
-import type { Options } from './options'
+import type { HashFunction, Options } from './options'
 
 /**
  * A space-efficient probabilistic set for values with a stable `toString()`.
@@ -27,28 +27,36 @@ export class BloomFilter<T extends { toString(): string }> {
   readonly hashes: number
   readonly seed: number
   readonly filter: Uint32Array
-  private readonly hash: (index: number, element: string) => number
+  private readonly hash: HashFunction
 
   /**
    * Creates a filter from its size, hash count, and optional seed or bit data.
    *
    * @param options - Filter size, hash count, and optional initial state.
    * @returns A new Bloom filter.
-   * @throws Error if `size` or `hashes` is less than 1.
+   * @throws Error if `size` or `hashes` is not a positive integer, or if
+   * `filter` does not hold `size` bits.
    */
   constructor(options: Options) {
-    if (options.size < 1) {
-      throw Error('size must be greater than 0')
+    if (!Number.isInteger(options.size) || options.size < 1) {
+      throw Error('size must be a positive integer')
     }
 
-    if (options.hashes < 1) {
-      throw Error('number of hashes must be greater than 0')
+    if (!Number.isInteger(options.hashes) || options.hashes < 1) {
+      throw Error('number of hashes must be a positive integer')
+    }
+
+    const words = Math.ceil(options.size / 32)
+    if (options.filter && options.filter.length !== words) {
+      throw Error('filter data does not match the size')
     }
 
     this.size = options.size
     this.hashes = options.hashes
     this.seed = options.seed ?? 0x00c0ffee
-    this.filter = options.filter ?? new Uint32Array(Math.ceil(this.size / 32))
+    this.filter = options.filter
+      ? Uint32Array.from(options.filter)
+      : new Uint32Array(words)
     this.hash = options.hash ?? defaultHash(this.seed)
   }
 

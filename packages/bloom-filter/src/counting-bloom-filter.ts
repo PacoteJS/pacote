@@ -1,5 +1,5 @@
 import { defaultHash } from './hash'
-import type { Options } from './options'
+import type { HashFunction, Options } from './options'
 
 /**
  * A counting Bloom filter that tracks approximate membership counts and
@@ -15,28 +15,35 @@ export class CountingBloomFilter<T extends { toString(): string }> {
   readonly hashes: number
   readonly seed: number
   readonly filter: Uint32Array
-  private hash: (i: number, element: string) => number
+  private hash: HashFunction
 
   /**
    * Creates a counting filter from its size, hash count, and optional seed or counters.
    *
    * @param options - Filter size, hash count, and optional initial state.
    * @returns A new counting Bloom filter.
-   * @throws Error if `size` or `hashes` is less than 1.
+   * @throws Error if `size` or `hashes` is not a positive integer, or if
+   * `filter` does not hold `size` counters.
    */
   constructor(options: Options) {
-    if (options.size < 1) {
-      throw Error('size must be greater than 0')
+    if (!Number.isInteger(options.size) || options.size < 1) {
+      throw Error('size must be a positive integer')
     }
 
-    if (options.hashes < 1) {
-      throw Error('number of hashes must be greater than 0')
+    if (!Number.isInteger(options.hashes) || options.hashes < 1) {
+      throw Error('number of hashes must be a positive integer')
+    }
+
+    if (options.filter && options.filter.length !== options.size) {
+      throw Error('filter data does not match the size')
     }
 
     this.size = options.size
     this.hashes = options.hashes
     this.seed = options.seed ?? 0x00c0ffee
-    this.filter = options.filter ?? new Uint32Array(this.size)
+    this.filter = options.filter
+      ? Uint32Array.from(options.filter)
+      : new Uint32Array(this.size)
     this.hash = options.hash ?? defaultHash(this.seed)
   }
 

@@ -54,12 +54,36 @@ test('elements missing from a Bloom filter cannot be found', () => {
   expect(filter.has('baz')).toBe(false)
 })
 
-test('requires at least one hash', () => {
-  expect(() => new BloomFilter({ size: 34, hashes: 0 })).toThrow()
-})
+test.each([0, 1.5, Number.NaN])(
+  'requires a positive integer number of hashes, not %d',
+  (hashes) => {
+    expect(() => new BloomFilter({ size: 34, hashes })).toThrow(
+      'number of hashes must be a positive integer',
+    )
+  },
+)
 
-test('cannot have size 0', () => {
-  expect(() => new BloomFilter({ size: 0, hashes: 1 })).toThrow()
+test.each([0, 34.5, Number.NaN])(
+  'requires a positive integer size, not %d',
+  (size) => {
+    expect(() => new BloomFilter({ size, hashes: 1 })).toThrow(
+      'size must be a positive integer',
+    )
+  },
+)
+
+test.each([[[0]], [[0, 0, 0]]])(
+  'cannot be restored from filter data of the wrong length',
+  (filter) => {
+    expect(() => new BloomFilter({ size: 64, hashes: 1, filter })).toThrow(
+      'filter data does not match the size',
+    )
+  },
+)
+
+test('filters restored from plain arrays hold their data in a Uint32Array', () => {
+  const filter = new BloomFilter({ size: 64, hashes: 1, filter: [0, 0] })
+  expect(filter.filter).toBeInstanceOf(Uint32Array)
 })
 
 test('elements added to a Bloom filter can be found in filters deserialised from JSON', () => {
