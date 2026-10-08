@@ -1,0 +1,45 @@
+{
+  "name": "@pacote/signature-search",
+  "description": "Document search using Ribbon filters.",
+  "version": "0.0.0",
+  "sideEffects": false,
+  "license": "MIT",
+  "author": {
+    "name": "Luís Rodrigues",
+    "email": "hello@goblindegook.com",
+    "url": "https://goblindegook.com"
+  },
+  "keywords": [
+    "search",
+    "ribbon filters"
+  ],
+  "repository": "github:PacoteJS/pacote",
+  "bugs": {
+    "url": "https://github.com/PacoteJS/pacote/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
+  "typings": "lib/esm/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "build": "pnpm build:esm && pnpm build:cjs",
+    "build:cjs": "tsc -p ./tsconfig.cjs.json",
+    "build:esm": "tsc -p ./tsconfig.esm.json",
+    "watch": "concurrently 'pnpm watch:cjs' 'pnpm watch:esm'",
+    "watch:cjs": "tsc -w -p ./tsconfig.cjs.json",
+    "watch:esm": "tsc -w -p ./tsconfig.esm.json",
+    "prepublish": "pnpm build"
+  },
+  "dependencies": {
+    "@pacote/array": "file:../array",
+    "@pacote/memoize": "file:../memoize",
+    "@pacote/ribbon-filter": "file:../ribbon-filter",
+    "@pacote/xxhash": "file:../xxhash"
+  }
+}

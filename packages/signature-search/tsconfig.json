@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "lib": ["ES2023"]
+  },
+  "exclude": ["lib"],
+  "references": [
+    { "path": "../array" },
+    { "path": "../ribbon-filter" },
+    { "path": "../memoize" },
+    { "path": "../xxhash" }
+  ]
+}

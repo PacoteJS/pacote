@@ -30,6 +30,7 @@
     "./packages/retry",
     "./packages/ribbon-filter",
     "./packages/shuffle",
+    "./packages/signature-search",
     "./packages/task",
     "./packages/throttle",
     "./packages/u32",

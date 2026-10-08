@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ES2019",
+    "rootDir": "src",
+    "outDir": "lib/esm"
+  },
+  "include": ["src"],
+  "references": [
+    { "path": "../ribbon-filter/tsconfig.esm.json" },
+    { "path": "../array/tsconfig.esm.json" },
+    { "path": "../memoize/tsconfig.esm.json" },
+    { "path": "../xxhash/tsconfig.esm.json" }
+  ]
+}

@@ -86,6 +86,9 @@ importers:
       '@pacote/shuffle':
         specifier: file:packages/shuffle
         version: link:packages/shuffle
+      '@pacote/signature-search':
+        specifier: file:packages/signature-search
+        version: link:packages/signature-search
       '@pacote/throttle':
         specifier: file:packages/throttle
         version: link:packages/throttle
@@ -321,6 +324,21 @@ importers:
         version: link:../xxhash
 
   packages/shuffle: {}
+
+  packages/signature-search:
+    dependencies:
+      '@pacote/array':
+        specifier: file:../array
+        version: link:../array
+      '@pacote/memoize':
+        specifier: file:../memoize
+        version: link:../memoize
+      '@pacote/ribbon-filter':
+        specifier: file:../ribbon-filter
+        version: link:../ribbon-filter
+      '@pacote/xxhash':
+        specifier: file:../xxhash
+        version: link:../xxhash
 
   packages/task: {}
 
