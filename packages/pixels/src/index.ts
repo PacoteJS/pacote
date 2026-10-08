@@ -19,6 +19,25 @@ function parse(providedLength?: string | null): [number, string] {
   return [value, unit.toLowerCase()]
 }
 
+/**
+ * Converts a CSS length value to pixels.
+ *
+ * Supports font-relative units (`em`, `rem`), viewport units (`vw`, `vh`,
+ * `vmin`, `vmax`), and common absolute units (`px`, `cm`, `mm`, `Q`, `in`,
+ * `pt`, and `pc`). Percentage lengths are not supported because their pixel
+ * value depends on the property and containing element.
+ *
+ * @param length - CSS length string to convert.
+ * @param element - Element used to resolve `em` and viewport-relative values.
+ * @returns The length expressed in pixels.
+ * @example
+ * ```typescript
+ * import { pixels } from '@pacote/pixels'
+ *
+ * // When the root element has `font-size: 16px`:
+ * pixels('2rem') // => 32
+ * ```
+ */
 export function pixels(length: string, element?: HTMLElement | null): number {
   const view = element?.ownerDocument?.defaultView ?? window
   const root = view.document.documentElement || view.document.body
