@@ -16,14 +16,31 @@
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="pixels"><span class="tsd-kind-call-signature">pixels</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">length</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">element</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">HTMLElement</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><a href="#pixels" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Converts a CSS length value to pixels.</p>
+<p>Supports font-relative units (<code>em</code>, <code>rem</code>), viewport units (<code>vw</code>, <code>vh</code>,
+<code>vmin</code>, <code>vmax</code>), and common absolute units (<code>px</code>, <code>cm</code>, <code>mm</code>, <code>Q</code>, <code>in</code>,
+<code>pt</code>, and <code>pc</code>). Percentage lengths are not supported because their pixel
+value depends on the property and containing element.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
-<li><span><span class="tsd-kind-parameter">length</span>: <span class="tsd-signature-type">string</span></span></li>
-<li><span><code class="tsd-tag">Optional</code><span class="tsd-kind-parameter">element</span>: <span class="tsd-signature-type">HTMLElement</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></span></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
+<li><span><span class="tsd-kind-parameter">length</span>: <span class="tsd-signature-type">string</span></span>
+<div class="tsd-comment tsd-typography"><p>CSS length string to convert.</p>
+</div></li>
+<li><span><code class="tsd-tag">Optional</code><span class="tsd-kind-parameter">element</span>: <span class="tsd-signature-type">HTMLElement</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span></span>
+<div class="tsd-comment tsd-typography"><p>Element used to resolve <code>em</code> and viewport-relative values.</p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><p>The length expressed in pixels.</p>
+
+<div class="tsd-comment tsd-typography">
+<div class="tsd-tag-example">
+<h4 class="tsd-anchor-link" id="example">Example<a href="#example" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="typescript"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">pixels</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@pacote/pixels&#39;</span><br/><br/><span class="hl-6">// When the root element has `font-size: 16px`:</span><br/><span class="hl-0">pixels</span><span class="hl-1">(</span><span class="hl-2">&#39;2rem&#39;</span><span class="hl-1">) </span><span class="hl-6">// =&gt; 32</span>
+</code><button type="button">Copy</button></pre>
+
+</div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/00d2749d537e55b23accb663bde8272093be3ad8/packages/pixels/src/index.ts#L22">index.ts:22</a></li></ul></aside></div></li></ul></section></div>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/a00510e268285402254158bf59b834ed7c5b5aec/packages/pixels/src/index.ts#L41">index.ts:41</a></li></ul></aside></div></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
