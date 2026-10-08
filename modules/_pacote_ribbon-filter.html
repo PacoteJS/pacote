@@ -14,13 +14,26 @@
 <p><img src="https://badgen.net/npm/v/@pacote/ribbon-filter" alt="version">
 <img src="https://badgen.net/bundlephobia/min/@pacote/ribbon-filter" alt="minified">
 <img src="https://badgen.net/bundlephobia/minzip/@pacote/ribbon-filter" alt="minified + gzip"></p>
-<p>Space-efficient static approximate membership filter.</p>
+<p>A Ribbon filter is a space-efficient probabilistic data structure that allows
+testing whether an element belongs to a set.</p>
+<p>Ribbon filters relax result accuracy for this efficiency. With Ribbon filters,
+false positive matches are possible, but false negatives are not. That is to
+say, while it can tell you with certainty when an element is not in a set, any
+positive responses indicate only a possibility.</p>
+<p>Unlike Bloom filters, Ribbon filters are static: they are built once from the
+complete set of elements and cannot be changed afterwards. In exchange, they
+use less space than a Bloom filter with the same false positive error rate.</p>
+<p>This false positive error rate can be lowered — but never completely eliminated
+— by increasing the number of fingerprint bits stored for each element.</p>
 <h2 id="installation" class="tsd-anchor-link">Installation<a href="#installation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2>
-<pre><code class="bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-2">@pacote/ribbon-filter</span>
+<pre><code class="bash"><span class="hl-0">yarn</span><span class="hl-1"> </span><span class="hl-2">add</span><span class="hl-1"> </span><span class="hl-2">@pacote/ribbon-filter</span>
 </code><button type="button">Copy</button></pre>
 
-<h2 id="documentation" class="tsd-anchor-link">Documentation<a href="#documentation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2>
-<p>API documentation for <a href="https://pacotejs.github.io/pacote/modules/_pacote_ribbon-filter.html"><code>@pacote/ribbon-filter</code></a>.</p>
+<h2 id="sizing-formulas" class="tsd-anchor-link">Sizing formulas<a href="#sizing-formulas" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>The <code>optimal()</code> helper function calculates the optimal Ribbon filter
+<code>fingerprintBits</code> option based on the desired false positive error rate (<em>ε</em>).</p>
+<p>The number of fingerprint bits, or <em>r</em>, is determined by the formula:</p>
+<p><em>r</em> = ⌈log₂(1/<em>ε</em>)⌉</p>
 <h2 id="license" class="tsd-anchor-link">License<a href="#license" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2>
 <p>MIT © <a href="https://goblindegook.com">Luís Rodrigues</a>.</p>
 </section>
@@ -48,7 +61,7 @@
 <div class="tsd-accordion-details"><a href="#pacoteribbon-filter"><span>@pacote/ribbon-<wbr/>filter</span></a>
 <ul>
 <li><a href="#installation"><span>Installation</span></a></li>
-<li><a href="#documentation"><span>Documentation</span></a></li>
+<li><a href="#sizing-formulas"><span>Sizing formulas</span></a></li>
 <li><a href="#license"><span>License</span></a></li></ul>
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Classes"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Classes</summary>
 <div><a href="#ribbonfilter"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Class"><use href="../assets/icons.svg#icon-128"></use></svg><span>Ribbon<wbr/>Filter</span></a></div></details>
