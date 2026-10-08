@@ -12,52 +12,9 @@ Custom error classes and utilities.
 yarn add @pacote/error
 ```
 
-## Usage
-
-### `BaseError`
+## Compatibility
 
 `BaseError` is an error class which provides a convenience static `imprint()` method to get around [issues with extending the built-in JavaScript `Error` class](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error). It's by no means a bullet-proof solution and full support is not available in older browsers (such as Internet Explorer up to version 10).
-
-```typescript
-import { BaseError } from '@pacote/error'
-
-class StatusError extends BaseError {
-  constructor(public readonly status: number, message?: string) {
-    super(message)
-    StatusError.imprint(this)
-  }
-}
-
-const e = new StatusError(404, 'Not found')
-
-e instanceOf Error       // true
-e instanceOf BaseError   // true
-e instanceOf StatusError // true
-e.message                // 'Not found'
-e.status                 // 404
-e.stack                  // <defined>
-```
-
-### `ComplexError`
-
-`ComplexError` aggregates multiple error objects so they can be thrown as one. Its primary use case is to support validation errors caused by multiple failing conditions.
-
-```typescript
-import { ComplexError } from '@pacote/error'
-
-function doSomething() {
-  throw new ComplexError('Could not do something', [
-    new Error('one'),
-    new Error('two'),
-  ])
-}
-
-try {
-  doSomething()
-} catch (e) {
-  e.causes.forEach(console.error) // Outputs Error('one'), Error('two')
-}
-```
 
 ## License
 
