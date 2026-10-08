@@ -6,8 +6,6 @@
 export type HashFunction = (index: number, data: string) => number
 
 interface CommonOptions {
-  /** Number of rows in the solution table. */
-  readonly size: number
   /** Bits per fingerprint, between 1 and 32; the false positive rate is 2^-bits. */
   readonly fingerprintBits: number
   /** Seed for the default hash function; defaults to `0x00c0ffee`. */
@@ -38,5 +36,4 @@ export interface SerialisedRibbonFilter {
   readonly filter: number[]
   readonly fingerprintBits: number
   readonly seed: number
-  readonly size: number
 }

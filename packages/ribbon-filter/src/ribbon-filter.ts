@@ -12,9 +12,7 @@ const mask = (bits: number): number =>
  *
  * A Ribbon filter is built once from its complete set of elements and cannot
  * be changed afterwards. Membership checks can produce false positives, at a
- * rate of 2^-`fingerprintBits`, but never false negatives. It stores about
- * 1.09 × `fingerprintBits` bits per element, roughly 25% less than a Bloom
- * filter with the same false positive rate.
+ * rate of 2^-`fingerprintBits`, but never false negatives.
  *
  * This is a Standard Ribbon filter (Dillinger and Walzer, 2021) with a ribbon
  * width of at most 32 bits. The filter uses seeded XXH64 hashing with
@@ -27,7 +25,7 @@ const mask = (bits: number): number =>
  * import { optimal, RibbonFilter } from '@pacote/ribbon-filter'
  *
  * const filter = new RibbonFilter({
- *   ...optimal(2, 0.01),
+ *   ...optimal(0.01),
  *   elements: ['foo', 'bar'],
  * })
  * filter.has('foo') // => true
@@ -49,23 +47,20 @@ export class RibbonFilter<T extends { toString(): string }> {
   /**
    * Builds a filter from its elements, or restores a serialised filter.
    *
-   * When the elements cannot be stored in a table of the requested size, the
-   * table grows by about 3% and the build is retried.
-   *
-   * @param options - Filter size, fingerprint bits, and either the elements
-   * to build from or the filter data to restore.
+   * @param options - Fingerprint bits, and either the elements to build from
+   * or the filter data to restore.
    * @returns A new Ribbon filter.
-   * @throws Error if `size` is less than 1, if `fingerprintBits` is not
-   * between 1 and 32, if both `elements` and `filter` are provided, or if the
-   * elements cannot be stored after repeated attempts.
+   * @throws Error if `fingerprintBits` is not an integer between 1 and 32, if
+   * both `elements` and `filter` are provided, if `filter` is empty, or if
+   * the elements cannot be stored.
    */
   constructor(options: Options<T>) {
-    if (options.size < 1) {
-      throw Error('size must be greater than 0')
-    }
-
-    if (options.fingerprintBits < 1 || options.fingerprintBits > 32) {
-      throw Error('fingerprint bits must be between 1 and 32')
+    if (
+      !Number.isInteger(options.fingerprintBits) ||
+      options.fingerprintBits < 1 ||
+      options.fingerprintBits > 32
+    ) {
+      throw Error('fingerprint bits must be an integer between 1 and 32')
     }
 
     if (options.elements && options.filter) {
@@ -77,7 +72,12 @@ export class RibbonFilter<T extends { toString(): string }> {
     this.hash = options.hash ?? defaultHash(this.seed)
 
     if (options.filter) {
-      this.size = options.size
+      if (options.filter.length === 0) {
+        throw Error('filter data cannot be empty')
+      }
+      this.size = Math.floor(
+        (options.filter.length * 32) / this.fingerprintBits,
+      )
       this.filter = Uint32Array.from(options.filter)
       return
     }
@@ -86,12 +86,20 @@ export class RibbonFilter<T extends { toString(): string }> {
     const hashes = Array.from(options.elements ?? [], (e) => this.hashes(e))
     const equations = (size: number) =>
       hashes.map((h) => equation(h, size, this.fingerprintBits))
+    const fill = (size: number) =>
+      Math.floor(
+        (Math.ceil((size * this.fingerprintBits) / 32) * 32) /
+          this.fingerprintBits,
+      )
 
-    let size = options.size
+    const initialSize = fill(rowsFor(hashes.length))
+    let size = initialSize
     let rows = solve(equations(size), size)
-    for (let attempt = 1; !rows; attempt++) {
-      if (attempt === MAX_ATTEMPTS) throw Error('unable to build the filter')
-      size = grow(size)
+    while (!rows) {
+      size = fill(grow(size))
+      if (size > 2 * initialSize + MAX_WIDTH) {
+        throw Error('unable to build the filter')
+      }
       rows = solve(equations(size), size)
     }
     this.size = size
@@ -119,14 +127,13 @@ export class RibbonFilter<T extends { toString(): string }> {
 
   /**
    * Returns the filter state in a JSON-serialisable form.
-   * @returns Filter size, fingerprint bits, seed, and table data.
+   * @returns Fingerprint bits, seed, and table data.
    */
   toJSON(): SerialisedRibbonFilter {
     return {
       filter: Array.from(this.filter),
       fingerprintBits: this.fingerprintBits,
       seed: this.seed,
-      size: this.size,
     }
   }
 
@@ -180,8 +187,15 @@ interface Equation {
   readonly fingerprint: number
 }
 
-// ponytail: provisional, tuned by measuring build success on real bucket sizes.
-const MAX_ATTEMPTS = 10
+// Median spare rows a first build needs, measured from 1,000 to 10M elements.
+function rowsFor(elements: number): number {
+  return Math.max(
+    elements + 1,
+    Math.ceil(
+      (1 + Math.max(0, Math.log(elements) / MAX_WIDTH - 0.17)) * elements,
+    ),
+  )
+}
 
 /** Larger tables move every start position, so a retry solves a new system. */
 function grow(size: number): number {

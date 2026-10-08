@@ -4,17 +4,35 @@
 ![minified](https://badgen.net/bundlephobia/min/@pacote/ribbon-filter)
 ![minified + gzip](https://badgen.net/bundlephobia/minzip/@pacote/ribbon-filter)
 
-Space-efficient static approximate membership filter.
+A Ribbon filter is a space-efficient probabilistic data structure that allows
+testing whether an element belongs to a set.
+
+Ribbon filters relax result accuracy for this efficiency. With Ribbon filters,
+false positive matches are possible, but false negatives are not. That is to
+say, while it can tell you with certainty when an element is not in a set, any
+positive responses indicate only a possibility.
+
+Unlike Bloom filters, Ribbon filters are static: they are built once from the
+complete set of elements and cannot be changed afterwards. In exchange, they
+use less space than a Bloom filter with the same false positive error rate.
+
+This false positive error rate can be lowered — but never completely eliminated
+— by increasing the number of fingerprint bits stored for each element.
 
 ## Installation
 
 ```bash
-npm install @pacote/ribbon-filter
+yarn add @pacote/ribbon-filter
 ```
 
-## Documentation
+## Sizing formulas
 
-API documentation for [`@pacote/ribbon-filter`](https://pacotejs.github.io/pacote/modules/_pacote_ribbon-filter.html).
+The `optimal()` helper function calculates the optimal Ribbon filter
+`fingerprintBits` option based on the desired false positive error rate (_ε_).
+
+The number of fingerprint bits, or _r_, is determined by the formula:
+
+_r_ = ⌈log₂(1/_ε_)⌉
 
 ## License
 

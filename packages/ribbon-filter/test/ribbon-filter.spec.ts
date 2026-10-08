@@ -22,7 +22,6 @@ test('a Ribbon filter built from no elements is empty', () => {
   assert(
     property(string(), (text) => {
       const filter = new RibbonFilter<string>({
-        size: 34,
         fingerprintBits: 32,
         elements: [],
       })
@@ -35,7 +34,7 @@ test('elements a Ribbon filter was built from can be found', () => {
   assert(
     property(array(string(), { maxLength: 200 }), (elements) => {
       const filter = new RibbonFilter({
-        ...optimal(elements.length, 0.001),
+        ...optimal(0.001),
         elements,
       })
       for (const element of elements) expect(filter.has(element)).toBe(true)
@@ -51,7 +50,7 @@ test('elements a Ribbon filter was built from can be found using a provided hash
   assert(
     property(array(string(), { maxLength: 50 }), (elements) => {
       const filter = new RibbonFilter({
-        ...optimal(elements.length, 0.001),
+        ...optimal(0.001),
         hash,
         elements,
       })
@@ -62,7 +61,7 @@ test('elements a Ribbon filter was built from can be found using a provided hash
 
 test('elements missing from a Ribbon filter cannot be found', () => {
   const filter = new RibbonFilter({
-    ...optimal(2, 0.001),
+    ...optimal(0.001),
     elements: ['foo', 'bar'],
   })
   expect(filter.has('baz')).toBe(false)
@@ -70,67 +69,74 @@ test('elements missing from a Ribbon filter cannot be found', () => {
 
 test('duplicate elements can be found', () => {
   const filter = new RibbonFilter({
-    ...optimal(3, 0.001),
+    ...optimal(0.001),
     elements: ['foo', 'foo', 'bar'],
   })
-  expect([filter.has('foo'), filter.has('bar')]).toEqual([true, true])
+  expect(filter.has('foo')).toBe(true)
+  expect(filter.has('bar')).toBe(true)
 })
 
 test('non-ASCII elements can be found', () => {
   const elements = ['ação', 'naïve', '日本語', '🎀']
-  const filter = new RibbonFilter({ ...optimal(4, 0.001), elements })
-  expect(elements.map((element) => filter.has(element))).toEqual([
-    true,
-    true,
-    true,
-    true,
-  ])
+  const filter = new RibbonFilter({ ...optimal(0.001), elements })
+  for (const element of elements) expect(filter.has(element)).toBe(true)
 })
 
 test.each([1, 32])(
   'elements can be found with %i fingerprint bits',
   (fingerprintBits) => {
     const elements = ['foo', 'bar', 'baz']
-    const filter = new RibbonFilter({ size: 8, fingerprintBits, elements })
-    expect(elements.map((element) => filter.has(element))).toEqual([
-      true,
-      true,
-      true,
-    ])
+    const filter = new RibbonFilter({ fingerprintBits, elements })
+    for (const element of elements) expect(filter.has(element)).toBe(true)
   },
 )
 
-describe('construction failure', () => {
-  test('grows the filter until conflicting elements can be stored', () => {
-    // With 40 rows and a 32-row band there are 9 start positions, so starts
-    // 0 and 9 collide; at 42 rows (one growth step) they no longer do.
+describe('table size', () => {
+  test('a table built from a few elements has one spare row', () => {
     const filter = new RibbonFilter({
-      size: 40,
-      fingerprintBits: 8,
-      hash: fixedHash({ foo: [0, 0, 1], bar: [9, 0, 2] }),
+      fingerprintBits: 32,
+      hash: fixedHash({ foo: [0, 0, 1], bar: [0, 0b10, 2] }),
       elements: ['foo', 'bar'],
     })
-    expect(filter.size).toBe(42)
-    expect([filter.has('foo'), filter.has('bar')]).toEqual([true, true])
+    expect(filter.size).toBe(3)
   })
 
-  test('grows a filter smaller than the band by one row', () => {
-    // Below 32 rows the band spans the whole filter. Coefficients 0b10000 are
-    // masked to 0b00001 at 4 rows, the same as foo's; at 5 rows they differ.
+  test('a table built from 10,000 elements has 11% to 20% spare rows', () => {
     const filter = new RibbonFilter({
-      size: 4,
       fingerprintBits: 8,
-      hash: fixedHash({ foo: [0, 0, 1], bar: [0, 0b10000, 2] }),
+      hash: fastHash,
+      elements: Array.from({ length: 10_000 }, (_, i) => `present ${i}`),
+    })
+    expect(filter.size).toBeGreaterThanOrEqual(11_100)
+    expect(filter.size).toBeLessThanOrEqual(12_000)
+  })
+
+  test('grows a table that cannot store its elements', () => {
+    // A 3-row table masks bar's coefficients 0b1000 to 0b000, which makes
+    // them the same as foo's; a 4-row table keeps them apart.
+    const filter = new RibbonFilter({
+      fingerprintBits: 32,
+      hash: fixedHash({ foo: [0, 0, 1], bar: [0, 0b1000, 2] }),
       elements: ['foo', 'bar'],
     })
-    expect(filter.size).toBe(5)
-    expect([filter.has('foo'), filter.has('bar')]).toEqual([true, true])
+    expect(filter.size).toBe(4)
+    expect(filter.has('foo')).toBe(true)
+    expect(filter.has('bar')).toBe(true)
+  })
+
+  test('rounds the table up to fill its last 32-bit word', () => {
+    // Two 8-bit rows plus a spare one take 3 of the 4 rows in one word.
+    const filter = new RibbonFilter({
+      fingerprintBits: 8,
+      hash: fixedHash({ foo: [0, 0, 1], bar: [0, 0b10, 2] }),
+      elements: ['foo', 'bar'],
+    })
+    expect(filter.size).toBe(4)
   })
 
   test('throws when elements can never be stored together', () => {
     const build = () =>
       new RibbonFilter({
-        size: 40,
         fingerprintBits: 8,
         hash: fixedHash({ foo: [0, 0, 1], bar: [0, 0, 2] }),
         elements: ['foo', 'bar'],
@@ -155,7 +161,6 @@ describe('false positive rate', () => {
       const rate = 2 ** -fingerprintBits
       const queries = 64 / rate
       const filter = new RibbonFilter({
-        size: optimal(items, rate).size,
         fingerprintBits,
         hash: fastHash,
         elements: Array.from({ length: items }, (_, i) => `present ${i}`),
@@ -175,7 +180,7 @@ describe('false positive rate', () => {
     const rate = 2 ** -8
     const queries = 32 / rate
     const filter = new RibbonFilter({
-      ...optimal(1000, rate),
+      ...optimal(rate),
       elements: Array.from({ length: 1000 }, (_, i) => `present ${i}`),
     })
 
@@ -189,24 +194,32 @@ describe('false positive rate', () => {
   }, 30_000)
 })
 
-test('requires between 1 and 32 fingerprint bits', () => {
-  expect(
-    () => new RibbonFilter({ size: 8, fingerprintBits: 0, elements: [] }),
-  ).toThrow()
-  expect(
-    () => new RibbonFilter({ size: 8, fingerprintBits: 33, elements: [] }),
-  ).toThrow()
+test.each([0, 33, 8.5, Number.NaN])(
+  'requires an integer between 1 and 32 fingerprint bits, not %d',
+  (fingerprintBits) => {
+    expect(() => new RibbonFilter({ fingerprintBits, elements: [] })).toThrow(
+      'fingerprint bits must be an integer between 1 and 32',
+    )
+  },
+)
+
+test('cannot be restored from empty filter data', () => {
+  expect(() => new RibbonFilter({ fingerprintBits: 8, filter: [] })).toThrow(
+    'filter data cannot be empty',
+  )
 })
 
-test('cannot have size 0', () => {
-  expect(
-    () => new RibbonFilter({ size: 0, fingerprintBits: 8, elements: [] }),
-  ).toThrow()
+test('a restored filter has the size of the filter it was serialised from', () => {
+  const filter = new RibbonFilter({
+    fingerprintBits: 14,
+    elements: Array.from({ length: 100 }, (_, i) => `element ${i}`),
+  })
+  const restored = new RibbonFilter(JSON.parse(JSON.stringify(filter)))
+  expect(restored.size).toBe(filter.size)
 })
 
 test('cannot be built from elements and restored from filter data at once', () => {
   const options = {
-    size: 8,
     fingerprintBits: 8,
     elements: ['foo'],
     filter: [0, 0],
@@ -219,7 +232,7 @@ test('elements a Ribbon filter was built from can be found in filters deserialis
   assert(
     property(array(string(), { maxLength: 50 }), (elements) => {
       const filter = new RibbonFilter({
-        ...optimal(elements.length, 0.001),
+        ...optimal(0.001),
         elements,
       })
       const deserialisedFilter = new RibbonFilter(
@@ -234,30 +247,29 @@ test('elements a Ribbon filter was built from can be found in filters deserialis
 
 test('the same elements and options build the same filter', () => {
   const build = () =>
-    new RibbonFilter({ ...optimal(3, 0.001), elements: ['foo', 'bar', 'baz'] })
+    new RibbonFilter({ ...optimal(0.001), elements: ['foo', 'bar', 'baz'] })
   expect(JSON.stringify(build())).toEqual(JSON.stringify(build()))
 })
 
-test.each([
-  [8, 8, 2],
-  [100, 14, 44],
-  [33, 32, 33],
-  [3, 1, 1],
-])(
-  'stores %i rows of %i bits in %i 32-bit words',
-  (size, fingerprintBits, words) => {
-    const filter = new RibbonFilter({ size, fingerprintBits, elements: [] })
-    expect(filter.toJSON().filter).toHaveLength(words)
+test.each([1, 8, 14, 32])(
+  'packs rows of %i bits into 32-bit words',
+  (fingerprintBits) => {
+    const filter = new RibbonFilter({
+      fingerprintBits,
+      elements: Array.from({ length: 100 }, (_, i) => `element ${i}`),
+    })
+    expect(filter.toJSON().filter).toHaveLength(
+      Math.ceil((filter.size * fingerprintBits) / 32),
+    )
   },
 )
 
 test('serialization', () => {
-  const filter = new RibbonFilter({ size: 8, fingerprintBits: 8, elements: [] })
+  const filter = new RibbonFilter({ fingerprintBits: 8, elements: [] })
   const serialised = JSON.stringify(filter)
   expect(JSON.parse(serialised)).toEqual({
-    filter: [0, 0],
+    filter: [0],
     fingerprintBits: 8,
     seed: 12648430,
-    size: 8,
   })
 })
