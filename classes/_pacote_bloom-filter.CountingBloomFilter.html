@@ -24,7 +24,7 @@ count is therefore a possible count, not proof of exact membership.</p>
 <div class="tsd-comment tsd-typography"><p>Values represented by the filter.</p>
 </div></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/bbb02e2a2e8402a9d30b1abd620ae90ed757dfcf/packages/bloom-filter/src/counting-bloom-filter.ts#L13">counting-bloom-filter.ts:13</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/14b9b3993b37c96451fa5b0ebaefb90de5251cca/packages/bloom-filter/src/counting-bloom-filter.ts#L13">counting-bloom-filter.ts:13</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -55,7 +55,7 @@ count is therefore a possible count, not proof of exact membership.</p>
 <h3 class="tsd-anchor-link" id="constructor"><span>constructor</span><a href="#constructor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
-<div class="tsd-signature tsd-anchor-link" id="constructorcountingbloomfilter"><span class="tsd-signature-keyword">new</span> <span class="tsd-kind-constructor-signature">CountingBloomFilter</span><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#constructorcountingbloomfiltert">T</a> <span class="tsd-signature-keyword">extends</span> <span class="tsd-signature-symbol">{</span> <span class="tsd-kind-call-signature">toString</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><br/>    <span class="tsd-kind-parameter">options</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Options</span><span class="tsd-signature-symbol">,</span><br/><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a href="" class="tsd-signature-type tsd-kind-class">CountingBloomFilter</a><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#t">T</a><span class="tsd-signature-symbol">&gt;</span><a href="#constructorcountingbloomfilter" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-signature tsd-anchor-link" id="constructorcountingbloomfilter"><span class="tsd-signature-keyword">new</span> <span class="tsd-kind-constructor-signature">CountingBloomFilter</span><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#constructorcountingbloomfiltert">T</a> <span class="tsd-signature-keyword">extends</span> <span class="tsd-signature-symbol">{</span> <span class="tsd-kind-call-signature">toString</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><br/>    <span class="tsd-kind-parameter">options</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/_pacote_bloom-filter.Options.html" class="tsd-signature-type tsd-kind-interface">Options</a><span class="tsd-signature-symbol">,</span><br/><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a href="" class="tsd-signature-type tsd-kind-class">CountingBloomFilter</a><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#t">T</a><span class="tsd-signature-symbol">&gt;</span><a href="#constructorcountingbloomfilter" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Creates a counting filter from its size, hash count, and optional seed or counters.</p>
 </div>
@@ -68,17 +68,18 @@ count is therefore a possible count, not proof of exact membership.</p>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
-<li><span><span class="tsd-kind-parameter">options</span>: <span class="tsd-signature-type">Options</span></span>
+<li><span><span class="tsd-kind-parameter">options</span>: <a href="../interfaces/_pacote_bloom-filter.Options.html" class="tsd-signature-type tsd-kind-interface">Options</a></span>
 <div class="tsd-comment tsd-typography"><p>Filter size, hash count, and optional initial state.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="" class="tsd-signature-type tsd-kind-class">CountingBloomFilter</a><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#t">T</a><span class="tsd-signature-symbol">&gt;</span></h4><p>A new counting Bloom filter.</p>
 
 <div class="tsd-comment tsd-typography">
 <div class="tsd-tag-throws">
-<h4 class="tsd-anchor-link" id="throws">Throws<a href="#throws" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>Error if <code>size</code> or <code>hashes</code> is less than 1.</p>
+<h4 class="tsd-anchor-link" id="throws">Throws<a href="#throws" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>Error if <code>size</code> or <code>hashes</code> is not a positive integer, or if
+<code>filter</code> does not hold <code>size</code> counters.</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/bbb02e2a2e8402a9d30b1abd620ae90ed757dfcf/packages/bloom-filter/src/counting-bloom-filter.ts#L27">counting-bloom-filter.ts:27</a></li></ul></aside></div></li></ul></section></section></details>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/14b9b3993b37c96451fa5b0ebaefb90de5251cca/packages/bloom-filter/src/counting-bloom-filter.ts#L28">counting-bloom-filter.ts:28</a></li></ul></aside></div></li></ul></section></section></details>
 <details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
 <h2 class="tsd-anchor-link" id="properties-1">Properties<a href="#properties-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
 <section>
@@ -86,22 +87,22 @@ count is therefore a possible count, not proof of exact membership.</p>
 <h3 class="tsd-anchor-link" id="filter"><code class="tsd-tag">Readonly</code><span>filter</span><a href="#filter" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">filter</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Uint32Array</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/bbb02e2a2e8402a9d30b1abd620ae90ed757dfcf/packages/bloom-filter/src/counting-bloom-filter.ts#L17">counting-bloom-filter.ts:17</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/14b9b3993b37c96451fa5b0ebaefb90de5251cca/packages/bloom-filter/src/counting-bloom-filter.ts#L17">counting-bloom-filter.ts:17</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="hashes"><code class="tsd-tag">Readonly</code><span>hashes</span><a href="#hashes" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">hashes</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/bbb02e2a2e8402a9d30b1abd620ae90ed757dfcf/packages/bloom-filter/src/counting-bloom-filter.ts#L15">counting-bloom-filter.ts:15</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/14b9b3993b37c96451fa5b0ebaefb90de5251cca/packages/bloom-filter/src/counting-bloom-filter.ts#L15">counting-bloom-filter.ts:15</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="seed"><code class="tsd-tag">Readonly</code><span>seed</span><a href="#seed" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">seed</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/bbb02e2a2e8402a9d30b1abd620ae90ed757dfcf/packages/bloom-filter/src/counting-bloom-filter.ts#L16">counting-bloom-filter.ts:16</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/14b9b3993b37c96451fa5b0ebaefb90de5251cca/packages/bloom-filter/src/counting-bloom-filter.ts#L16">counting-bloom-filter.ts:16</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="size"><code class="tsd-tag">Readonly</code><span>size</span><a href="#size" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">size</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/bbb02e2a2e8402a9d30b1abd620ae90ed757dfcf/packages/bloom-filter/src/counting-bloom-filter.ts#L14">counting-bloom-filter.ts:14</a></li></ul></aside></section></section></details>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/14b9b3993b37c96451fa5b0ebaefb90de5251cca/packages/bloom-filter/src/counting-bloom-filter.ts#L14">counting-bloom-filter.ts:14</a></li></ul></aside></section></section></details>
 <details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
 <h2 class="tsd-anchor-link" id="methods-1">Methods<a href="#methods-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
 <section>
@@ -121,7 +122,7 @@ count is therefore a possible count, not proof of exact membership.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/bbb02e2a2e8402a9d30b1abd620ae90ed757dfcf/packages/bloom-filter/src/counting-bloom-filter.ts#L47">counting-bloom-filter.ts:47</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/14b9b3993b37c96451fa5b0ebaefb90de5251cca/packages/bloom-filter/src/counting-bloom-filter.ts#L54">counting-bloom-filter.ts:54</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="has"><span>has</span><a href="#has" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -139,7 +140,7 @@ count is therefore a possible count, not proof of exact membership.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><p>The minimum counter value for this element's hash positions.</p>
 <aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/bbb02e2a2e8402a9d30b1abd620ae90ed757dfcf/packages/bloom-filter/src/counting-bloom-filter.ts#L72">counting-bloom-filter.ts:72</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/14b9b3993b37c96451fa5b0ebaefb90de5251cca/packages/bloom-filter/src/counting-bloom-filter.ts#L79">counting-bloom-filter.ts:79</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="remove"><span>remove</span><a href="#remove" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -156,19 +157,19 @@ count is therefore a possible count, not proof of exact membership.</p>
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/bbb02e2a2e8402a9d30b1abd620ae90ed757dfcf/packages/bloom-filter/src/counting-bloom-filter.ts#L58">counting-bloom-filter.ts:58</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/14b9b3993b37c96451fa5b0ebaefb90de5251cca/packages/bloom-filter/src/counting-bloom-filter.ts#L65">counting-bloom-filter.ts:65</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="tojson"><span>to<wbr/>JSON</span><a href="#tojson" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
-<div class="tsd-signature tsd-anchor-link" id="tojson-1"><span class="tsd-kind-call-signature">toJSON</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">SerialisedCountingBloomFilter</span><a href="#tojson-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-signature tsd-anchor-link" id="tojson-1"><span class="tsd-kind-call-signature">toJSON</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/_pacote_bloom-filter.SerialisedCountingBloomFilter.html" class="tsd-signature-type tsd-kind-interface">SerialisedCountingBloomFilter</a><a href="#tojson-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Returns the filter state in a JSON-serialisable form.</p>
 </div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">SerialisedCountingBloomFilter</span></h4><p>Filter size, hash count, seed, and counter data.</p>
+<h4 class="tsd-returns-title">Returns <a href="../interfaces/_pacote_bloom-filter.SerialisedCountingBloomFilter.html" class="tsd-signature-type tsd-kind-interface">SerialisedCountingBloomFilter</a></h4><p>Filter size, hash count, seed, and counter data.</p>
 <aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/bbb02e2a2e8402a9d30b1abd620ae90ed757dfcf/packages/bloom-filter/src/counting-bloom-filter.ts#L85">counting-bloom-filter.ts:85</a></li></ul></aside></div></li></ul></section></section></details></div>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/14b9b3993b37c96451fa5b0ebaefb90de5251cca/packages/bloom-filter/src/counting-bloom-filter.ts#L92">counting-bloom-filter.ts:92</a></li></ul></aside></div></li></ul></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
