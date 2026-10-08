@@ -191,9 +191,6 @@ importers:
       '@pacote/array':
         specifier: file:../array
         version: link:../array
-      '@pacote/memoize':
-        specifier: file:../memoize
-        version: link:../memoize
       '@pacote/xxhash':
         specifier: file:../xxhash
         version: link:../xxhash

@@ -124,7 +124,7 @@ export class LRUCache<K, V> {
 
   /**
    * Clears the cache.
-  */
+   */
   clear() {
     this.cacheSize = 0
     this.head = 0

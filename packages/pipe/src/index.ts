@@ -58,7 +58,7 @@ type Compose8<A, B, C, D, E, F, G, H, I> = readonly [
  * // => 'Hello, hello!'
  * // equivalent to exclaim(capitalize(doubleSay('hello')))
  * ```
-*/
+ */
 export function pipe<A>(initial: A): A
 /**
  * Passes `initial` through functions from left to right.
