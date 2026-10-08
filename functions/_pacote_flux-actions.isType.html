@@ -16,19 +16,36 @@
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="istype"><span class="tsd-kind-call-signature">isType</span><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#istypep">P</a><span class="tsd-signature-symbol">,</span> <a class="tsd-signature-type tsd-kind-type-parameter" href="#istypem">M</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">match</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ActionCreator</span><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#istypep">P</a><span class="tsd-signature-symbol">,</span> <a class="tsd-signature-type tsd-kind-type-parameter" href="#istypem">M</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">action</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/_pacote_flux-actions.Action.html" class="tsd-signature-type tsd-kind-interface">Action</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-kind-parameter">action</span> <span class="tsd-signature-keyword">is</span> <a href="../interfaces/_pacote_flux-actions.Action.html" class="tsd-signature-type tsd-kind-interface">Action</a><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#istypep">P</a><span class="tsd-signature-symbol">,</span> <a class="tsd-signature-type tsd-kind-type-parameter" href="#istypem">M</a><span class="tsd-signature-symbol">&gt;</span><a href="#istype" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Checks an action's type and narrows its payload and metadata types.</p>
+</div>
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
-<li><span id="istypep"><span class="tsd-kind-type-parameter">P</span></span></li>
-<li><span id="istypem"><span class="tsd-kind-type-parameter">M</span></span></li></ul></section>
+<li><span id="istypep"><span class="tsd-kind-type-parameter">P</span></span>
+<div class="tsd-comment tsd-typography"><p>Payload type of the action creator.</p>
+</div></li>
+<li><span id="istypem"><span class="tsd-kind-type-parameter">M</span></span>
+<div class="tsd-comment tsd-typography"><p>Metadata type of the action creator.</p>
+</div></li></ul></section>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
-<li><span><span class="tsd-kind-parameter">match</span>: <span class="tsd-signature-type">ActionCreator</span><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#istypep">P</a><span class="tsd-signature-symbol">,</span> <a class="tsd-signature-type tsd-kind-type-parameter" href="#istypem">M</a><span class="tsd-signature-symbol">&gt;</span></span></li>
-<li><span><span class="tsd-kind-parameter">action</span>: <a href="../interfaces/_pacote_flux-actions.Action.html" class="tsd-signature-type tsd-kind-interface">Action</a></span></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-kind-parameter">action</span> <span class="tsd-signature-keyword">is</span> <a href="../interfaces/_pacote_flux-actions.Action.html" class="tsd-signature-type tsd-kind-interface">Action</a><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#istypep">P</a><span class="tsd-signature-symbol">,</span> <a class="tsd-signature-type tsd-kind-type-parameter" href="#istypem">M</a><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
+<li><span><span class="tsd-kind-parameter">match</span>: <span class="tsd-signature-type">ActionCreator</span><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#istypep">P</a><span class="tsd-signature-symbol">,</span> <a class="tsd-signature-type tsd-kind-type-parameter" href="#istypem">M</a><span class="tsd-signature-symbol">&gt;</span></span>
+<div class="tsd-comment tsd-typography"><p>Action creator whose type to match.</p>
+</div></li>
+<li><span><span class="tsd-kind-parameter">action</span>: <a href="../interfaces/_pacote_flux-actions.Action.html" class="tsd-signature-type tsd-kind-interface">Action</a></span>
+<div class="tsd-comment tsd-typography"><p>Action to check.</p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-kind-parameter">action</span> <span class="tsd-signature-keyword">is</span> <a href="../interfaces/_pacote_flux-actions.Action.html" class="tsd-signature-type tsd-kind-interface">Action</a><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#istypep">P</a><span class="tsd-signature-symbol">,</span> <a class="tsd-signature-type tsd-kind-type-parameter" href="#istypem">M</a><span class="tsd-signature-symbol">&gt;</span></h4><p><code>true</code> when the action type matches the creator.</p>
+
+<div class="tsd-comment tsd-typography">
+<div class="tsd-tag-example">
+<h4 class="tsd-anchor-link" id="example">Example<a href="#example" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="typescript"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">createAction</span><span class="hl-1">, </span><span class="hl-4">isType</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@pacote/flux-actions&#39;</span><br/><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-7">changeYear</span><span class="hl-1"> = </span><span class="hl-0">createAction</span><span class="hl-1">&lt;</span><span class="hl-9">number</span><span class="hl-1">&gt;(</span><span class="hl-2">&#39;CHANGE_YEAR&#39;</span><span class="hl-1">)</span><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-7">action</span><span class="hl-1"> = </span><span class="hl-0">changeYear</span><span class="hl-1">(</span><span class="hl-8">1955</span><span class="hl-1">)</span><br/><br/><span class="hl-3">if</span><span class="hl-1"> (</span><span class="hl-0">isType</span><span class="hl-1">(</span><span class="hl-4">changeYear</span><span class="hl-1">, </span><span class="hl-4">action</span><span class="hl-1">)) {</span><br/><span class="hl-1">  </span><span class="hl-4">action</span><span class="hl-1">.</span><span class="hl-4">payload</span><span class="hl-1"> </span><span class="hl-6">// number</span><br/><span class="hl-1">}</span>
+</code><button type="button">Copy</button></pre>
+
+</div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/14b9b3993b37c96451fa5b0ebaefb90de5251cca/packages/flux-actions/src/index.ts#L39">index.ts:39</a></li></ul></aside></div></li></ul></section></div>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/f64ae1091c42c1f33ea3e7fd8b0ee4cfcad69c3e/packages/flux-actions/src/index.ts#L86">index.ts:86</a></li></ul></aside></div></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

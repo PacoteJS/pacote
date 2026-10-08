@@ -16,6 +16,9 @@
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="useoutside"><span class="tsd-kind-call-signature">useOutside</span><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#useoutsidee">E</a> <span class="tsd-signature-keyword">extends</span> <span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><br/>    <span class="tsd-kind-parameter">type</span><span class="tsd-signature-symbol">:</span> (keyof DocumentEventMap) <span class="tsd-signature-symbol">|</span> (keyof DocumentEventMap)<span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">handler</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventListener</span><span class="tsd-signature-symbol">,</span><br/><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RefObject</span><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#useoutsidee">E</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span><a href="#useoutside" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Returns a ref for an element and calls a handler when selected document
+events occur outside that element.</p>
+</div>
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
@@ -23,11 +26,22 @@
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
-<li><span><span class="tsd-kind-parameter">type</span>: (keyof DocumentEventMap) <span class="tsd-signature-symbol">|</span> (keyof DocumentEventMap)<span class="tsd-signature-symbol">[]</span></span></li>
-<li><span><span class="tsd-kind-parameter">handler</span>: <span class="tsd-signature-type">EventListener</span></span></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">RefObject</span><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#useoutsidee">E</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
+<li><span><span class="tsd-kind-parameter">type</span>: (keyof DocumentEventMap) <span class="tsd-signature-symbol">|</span> (keyof DocumentEventMap)<span class="tsd-signature-symbol">[]</span></span>
+<div class="tsd-comment tsd-typography"><p>One or more document event names to observe.</p>
+</div></li>
+<li><span><span class="tsd-kind-parameter">handler</span>: <span class="tsd-signature-type">EventListener</span></span>
+<div class="tsd-comment tsd-typography"><p>Listener called for events whose target is outside the element.</p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">RefObject</span><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#useoutsidee">E</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span></h4><p>A ref to attach to the element treated as inside.</p>
+
+<div class="tsd-comment tsd-typography">
+<div class="tsd-tag-example">
+<h4 class="tsd-anchor-link" id="example">Example<a href="#example" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="tsx"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">useOutside</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@pacote/react-use-outside&#39;</span><br/><br/><span class="hl-5">function</span><span class="hl-1"> </span><span class="hl-0">Modal</span><span class="hl-1">({ </span><span class="hl-4">onClose</span><span class="hl-1"> }: { </span><span class="hl-0">onClose</span><span class="hl-1">: () </span><span class="hl-5">=&gt;</span><span class="hl-1"> </span><span class="hl-9">void</span><span class="hl-1"> }) {</span><br/><span class="hl-1">  </span><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-7">ref</span><span class="hl-1"> = </span><span class="hl-0">useOutside</span><span class="hl-1">&lt;</span><span class="hl-9">HTMLDivElement</span><span class="hl-1">&gt;(</span><span class="hl-2">&#39;click&#39;</span><span class="hl-1">, () </span><span class="hl-5">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-4">console</span><span class="hl-1">.</span><span class="hl-0">log</span><span class="hl-1">(</span><span class="hl-2">&#39;Clicked outside&#39;</span><span class="hl-1">)</span><br/><span class="hl-1">    </span><span class="hl-0">onClose</span><span class="hl-1">()</span><br/><span class="hl-1">  })</span><br/><br/><span class="hl-1">  </span><span class="hl-3">return</span><span class="hl-1"> </span><span class="hl-14">&lt;</span><span class="hl-15">div</span><span class="hl-1"> </span><span class="hl-16">ref</span><span class="hl-1">=</span><span class="hl-5">{</span><span class="hl-4">ref</span><span class="hl-5">}</span><span class="hl-14">&gt;</span><span class="hl-1">Click outside this element</span><span class="hl-14">&lt;/</span><span class="hl-15">div</span><span class="hl-14">&gt;</span><br/><span class="hl-1">}</span>
+</code><button type="button">Copy</button></pre>
+
+</div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/14b9b3993b37c96451fa5b0ebaefb90de5251cca/packages/react-use-outside/src/index.ts#L5">index.ts:5</a></li></ul></aside></div></li></ul></section></div>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/f64ae1091c42c1f33ea3e7fd8b0ee4cfcad69c3e/packages/react-use-outside/src/index.ts#L26">index.ts:26</a></li></ul></aside></div></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

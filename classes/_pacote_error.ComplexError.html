@@ -11,6 +11,15 @@
 <li><a href="../modules/_pacote_error.html">@pacote/error</a></li>
 <li><a href="" aria-current="page">ComplexError</a></li></ul>
 <h1>Class ComplexError</h1></div>
+<section class="tsd-panel tsd-comment">
+<div class="tsd-comment tsd-typography"><p>Error that groups several underlying errors under one message.</p>
+</div>
+<div class="tsd-comment tsd-typography">
+<div class="tsd-tag-example">
+<h4 class="tsd-anchor-link" id="example">Example<a href="#example" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="typescript"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">ComplexError</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@pacote/error&#39;</span><br/><br/><span class="hl-3">try</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-3">throw</span><span class="hl-1"> </span><span class="hl-5">new</span><span class="hl-1"> </span><span class="hl-0">ComplexError</span><span class="hl-1">(</span><span class="hl-2">&#39;Validation failed&#39;</span><span class="hl-1">, [</span><br/><span class="hl-1">    </span><span class="hl-5">new</span><span class="hl-1"> </span><span class="hl-0">Error</span><span class="hl-1">(</span><span class="hl-2">&#39;Name is required&#39;</span><span class="hl-1">),</span><br/><span class="hl-1">    </span><span class="hl-5">new</span><span class="hl-1"> </span><span class="hl-0">Error</span><span class="hl-1">(</span><span class="hl-2">&#39;Email is invalid&#39;</span><span class="hl-1">),</span><br/><span class="hl-1">  ])</span><br/><span class="hl-1">} </span><span class="hl-3">catch</span><span class="hl-1"> (</span><span class="hl-4">error</span><span class="hl-1">) {</span><br/><span class="hl-1">  </span><span class="hl-3">if</span><span class="hl-1"> (</span><span class="hl-4">error</span><span class="hl-1"> </span><span class="hl-5">instanceof</span><span class="hl-1"> </span><span class="hl-9">ComplexError</span><span class="hl-1">) {</span><br/><span class="hl-1">    </span><span class="hl-4">console</span><span class="hl-1">.</span><span class="hl-0">error</span><span class="hl-1">(</span><span class="hl-4">error</span><span class="hl-1">.</span><span class="hl-4">message</span><span class="hl-1">)</span><br/><span class="hl-1">    </span><span class="hl-3">for</span><span class="hl-1"> (</span><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-7">cause</span><span class="hl-1"> </span><span class="hl-5">of</span><span class="hl-1"> </span><span class="hl-4">error</span><span class="hl-1">.</span><span class="hl-4">causes</span><span class="hl-1">) </span><span class="hl-4">console</span><span class="hl-1">.</span><span class="hl-0">error</span><span class="hl-1">(</span><span class="hl-4">cause</span><span class="hl-1">.</span><span class="hl-4">message</span><span class="hl-1">)</span><br/><span class="hl-1">  }</span><br/><span class="hl-1">}</span>
+</code><button type="button">Copy</button></pre>
+
+</div></div></section>
 <section class="tsd-panel tsd-hierarchy" data-refl="1745">
 <h4>Hierarchy (<a href="../hierarchy.html#@pacote/error.ComplexError">View Summary</a>)</h4>
 <ul class="tsd-hierarchy">
@@ -18,7 +27,7 @@
 <ul class="tsd-hierarchy">
 <li class="tsd-hierarchy-item"><span class="tsd-hierarchy-target">ComplexError</span></li></ul></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/14b9b3993b37c96451fa5b0ebaefb90de5251cca/packages/error/src/index.ts#L44">packages/error/src/index.ts:44</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/f64ae1091c42c1f33ea3e7fd8b0ee4cfcad69c3e/packages/error/src/index.ts#L99">packages/error/src/index.ts:99</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -52,15 +61,22 @@
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="constructorcomplexerror"><span class="tsd-signature-keyword">new</span> <span class="tsd-kind-constructor-signature">ComplexError</span><span class="tsd-signature-symbol">(</span><br/>    <span class="tsd-kind-parameter">message</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">causes</span><span class="tsd-signature-symbol">?:</span> <a href="_pacote_error.BaseError.html" class="tsd-signature-type tsd-kind-class">BaseError</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">Error</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-keyword">readonly</span> (<a href="_pacote_error.BaseError.html" class="tsd-signature-type tsd-kind-class">BaseError</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">Error</span>)<span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">,</span><br/><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a href="" class="tsd-signature-type tsd-kind-class">ComplexError</a><a href="#constructorcomplexerror" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Creates a complex error from one cause or a list of causes.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
-<li><span><span class="tsd-kind-parameter">message</span>: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#39;&#39;</span></span></li>
-<li><span><span class="tsd-kind-parameter">causes</span>: <a href="_pacote_error.BaseError.html" class="tsd-signature-type tsd-kind-class">BaseError</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">Error</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-keyword">readonly</span> (<a href="_pacote_error.BaseError.html" class="tsd-signature-type tsd-kind-class">BaseError</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">Error</span>)<span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></span></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="" class="tsd-signature-type tsd-kind-class">ComplexError</a></h4><aside class="tsd-sources">
+<li><span><span class="tsd-kind-parameter">message</span>: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#39;&#39;</span></span>
+<div class="tsd-comment tsd-typography"><p>Error message; defaults to an empty string.</p>
+</div></li>
+<li><span><span class="tsd-kind-parameter">causes</span>: <a href="_pacote_error.BaseError.html" class="tsd-signature-type tsd-kind-class">BaseError</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">Error</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-keyword">readonly</span> (<a href="_pacote_error.BaseError.html" class="tsd-signature-type tsd-kind-class">BaseError</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">Error</span>)<span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></span>
+<div class="tsd-comment tsd-typography"><p>One cause or a list of causes; defaults to an empty list.</p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="" class="tsd-signature-type tsd-kind-class">ComplexError</a></h4><p>The new <code>ComplexError</code> instance.</p>
+<aside class="tsd-sources">
 <p>Overrides <a href="_pacote_error.BaseError.html">BaseError</a>.<a href="_pacote_error.BaseError.html#constructor">constructor</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/14b9b3993b37c96451fa5b0ebaefb90de5251cca/packages/error/src/index.ts#L47">packages/error/src/index.ts:47</a></li></ul></aside></div></li></ul></section></section></details>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/f64ae1091c42c1f33ea3e7fd8b0ee4cfcad69c3e/packages/error/src/index.ts#L108">packages/error/src/index.ts:108</a></li></ul></aside></div></li></ul></section></section></details>
 <details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
 <h2 class="tsd-anchor-link" id="properties-1">Properties<a href="#properties-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
 <section>
@@ -74,13 +90,13 @@
 <h3 class="tsd-anchor-link" id="causes"><code class="tsd-tag">Readonly</code><span>causes</span><a href="#causes" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">causes</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">readonly</span> (<a href="_pacote_error.BaseError.html" class="tsd-signature-type tsd-kind-class">BaseError</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">Error</span>)<span class="tsd-signature-symbol">[]</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/14b9b3993b37c96451fa5b0ebaefb90de5251cca/packages/error/src/index.ts#L45">packages/error/src/index.ts:45</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/f64ae1091c42c1f33ea3e7fd8b0ee4cfcad69c3e/packages/error/src/index.ts#L100">packages/error/src/index.ts:100</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="message"><code class="tsd-tag">Readonly</code><span>message</span><a href="#message" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">message</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div><aside class="tsd-sources">
 <p>Inherited from <a href="_pacote_error.BaseError.html">BaseError</a>.<a href="_pacote_error.BaseError.html#message">message</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/14b9b3993b37c96451fa5b0ebaefb90de5251cca/packages/error/src/index.ts#L2">packages/error/src/index.ts:2</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/f64ae1091c42c1f33ea3e7fd8b0ee4cfcad69c3e/packages/error/src/index.ts#L23">packages/error/src/index.ts:23</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="name"><span>name</span><a href="#name" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div><aside class="tsd-sources">
@@ -102,43 +118,55 @@
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="fromerrors-1"><span class="tsd-kind-call-signature">fromErrors</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">errors</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">readonly</span> (<a href="_pacote_error.BaseError.html" class="tsd-signature-type tsd-kind-class">BaseError</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">Error</span>)<span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a href="" class="tsd-signature-type tsd-kind-class">ComplexError</a><a href="#fromerrors-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Creates a complex error from a list of errors.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
-<li><span><span class="tsd-kind-parameter">errors</span>: <span class="tsd-signature-keyword">readonly</span> (<a href="_pacote_error.BaseError.html" class="tsd-signature-type tsd-kind-class">BaseError</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">Error</span>)<span class="tsd-signature-symbol">[]</span></span></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="" class="tsd-signature-type tsd-kind-class">ComplexError</a></h4><aside class="tsd-sources">
+<li><span><span class="tsd-kind-parameter">errors</span>: <span class="tsd-signature-keyword">readonly</span> (<a href="_pacote_error.BaseError.html" class="tsd-signature-type tsd-kind-class">BaseError</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">Error</span>)<span class="tsd-signature-symbol">[]</span></span>
+<div class="tsd-comment tsd-typography"><p>Errors to include as causes.</p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="" class="tsd-signature-type tsd-kind-class">ComplexError</a></h4><p>A <code>ComplexError</code> containing the provided causes.</p>
+<aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/14b9b3993b37c96451fa5b0ebaefb90de5251cca/packages/error/src/index.ts#L56">packages/error/src/index.ts:56</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/f64ae1091c42c1f33ea3e7fd8b0ee4cfcad69c3e/packages/error/src/index.ts#L122">packages/error/src/index.ts:122</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="fromstring"><code class="tsd-tag">Static</code><span>from<wbr/>String</span><a href="#fromstring" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited">
 <li class="tsd-is-inherited">
 <div class="tsd-signature tsd-anchor-link" id="fromstring-1"><span class="tsd-kind-call-signature">fromString</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">message</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a href="_pacote_error.BaseError.html" class="tsd-signature-type tsd-kind-class">BaseError</a><a href="#fromstring-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Creates an instance from an optional message string.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
-<li><span><code class="tsd-tag">Optional</code><span class="tsd-kind-parameter">message</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
-<h4 class="tsd-returns-title">Returns <a href="_pacote_error.BaseError.html" class="tsd-signature-type tsd-kind-class">BaseError</a></h4><aside class="tsd-sources">
+<li><span><code class="tsd-tag">Optional</code><span class="tsd-kind-parameter">message</span>: <span class="tsd-signature-type">string</span></span>
+<div class="tsd-comment tsd-typography"><p>Error message; defaults to an empty string.</p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <a href="_pacote_error.BaseError.html" class="tsd-signature-type tsd-kind-class">BaseError</a></h4><p>A new <code>BaseError</code> instance.</p>
+<aside class="tsd-sources">
 <p>Inherited from <a href="_pacote_error.BaseError.html">BaseError</a>.<a href="_pacote_error.BaseError.html#fromstring">fromString</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/14b9b3993b37c96451fa5b0ebaefb90de5251cca/packages/error/src/index.ts#L39">packages/error/src/index.ts:39</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/f64ae1091c42c1f33ea3e7fd8b0ee4cfcad69c3e/packages/error/src/index.ts#L74">packages/error/src/index.ts:74</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="imprint"><code class="tsd-tag">Static</code><span>imprint</span><a href="#imprint" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited">
 <li class="tsd-is-inherited">
 <div class="tsd-signature tsd-anchor-link" id="imprint-1"><span class="tsd-kind-call-signature">imprint</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">instance</span><span class="tsd-signature-symbol">:</span> <a href="_pacote_error.BaseError.html" class="tsd-signature-type tsd-kind-class">BaseError</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">void</span><a href="#imprint-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
-<div class="tsd-comment tsd-typography"><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error#Custom_Error_Types">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error#Custom_Error_Types</a></p>
+<div class="tsd-comment tsd-typography"><p>Repairs an error instance's name, stack trace, and prototype chain.</p>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
-<li><span><span class="tsd-kind-parameter">instance</span>: <a href="_pacote_error.BaseError.html" class="tsd-signature-type tsd-kind-class">BaseError</a></span></li></ul></div>
+<li><span><span class="tsd-kind-parameter">instance</span>: <a href="_pacote_error.BaseError.html" class="tsd-signature-type tsd-kind-class">BaseError</a></span>
+<div class="tsd-comment tsd-typography"><p>Error instance to repair.</p>
+</div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <p>Inherited from <a href="_pacote_error.BaseError.html">BaseError</a>.<a href="_pacote_error.BaseError.html#imprint">imprint</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/14b9b3993b37c96451fa5b0ebaefb90de5251cca/packages/error/src/index.ts#L13">packages/error/src/index.ts:13</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/f64ae1091c42c1f33ea3e7fd8b0ee4cfcad69c3e/packages/error/src/index.ts#L43">packages/error/src/index.ts:43</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-inherited tsd-is-external">
 <h3 class="tsd-anchor-link" id="iserror"><code class="tsd-tag">Static</code><span>is<wbr/>Error</span><a href="#iserror" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-inherited tsd-is-external">

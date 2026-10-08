@@ -16,18 +16,37 @@
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="createaction"><span class="tsd-kind-call-signature">createAction</span><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#createactionp">P</a> <span class="tsd-signature-symbol">=</span> <span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">,</span> <a class="tsd-signature-type tsd-kind-type-parameter" href="#createactionm">M</a> <span class="tsd-signature-symbol">=</span> <span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">type</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ActionCreator</span><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#createactionp">P</a><span class="tsd-signature-symbol">,</span> <a class="tsd-signature-type tsd-kind-type-parameter" href="#createactionm">M</a><span class="tsd-signature-symbol">&gt;</span><a href="#createaction" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Creates a typed action creator for a fixed action type.</p>
+<p>The returned function accepts a payload and optional metadata. Use <code>void</code>
+payloads for actions that need no payload; errors should be wrapped in a
+value such as <code>Either</code> when they are part of the action data.
+Metadata is stored on the <code>meta</code> field of the action object.</p>
+</div>
 <section class="tsd-panel">
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameter-list">
-<li><span id="createactionp"><span class="tsd-kind-type-parameter">P</span> = <span class="tsd-signature-type">void</span></span></li>
-<li><span id="createactionm"><span class="tsd-kind-type-parameter">M</span> = <span class="tsd-signature-type">void</span></span></li></ul></section>
+<li><span id="createactionp"><span class="tsd-kind-type-parameter">P</span> = <span class="tsd-signature-type">void</span></span>
+<div class="tsd-comment tsd-typography"><p>Action payload type.</p>
+</div></li>
+<li><span id="createactionm"><span class="tsd-kind-type-parameter">M</span> = <span class="tsd-signature-type">void</span></span>
+<div class="tsd-comment tsd-typography"><p>Action metadata type.</p>
+</div></li></ul></section>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
-<li><span><span class="tsd-kind-parameter">type</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ActionCreator</span><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#createactionp">P</a><span class="tsd-signature-symbol">,</span> <a class="tsd-signature-type tsd-kind-type-parameter" href="#createactionm">M</a><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
+<li><span><span class="tsd-kind-parameter">type</span>: <span class="tsd-signature-type">string</span></span>
+<div class="tsd-comment tsd-typography"><p>Stable action type string.</p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ActionCreator</span><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#createactionp">P</a><span class="tsd-signature-symbol">,</span> <a class="tsd-signature-type tsd-kind-type-parameter" href="#createactionm">M</a><span class="tsd-signature-symbol">&gt;</span></h4><p>An action creator carrying the supplied <code>type</code> property.</p>
+
+<div class="tsd-comment tsd-typography">
+<div class="tsd-tag-example">
+<h4 class="tsd-anchor-link" id="example">Example<a href="#example" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="typescript"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">createAction</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@pacote/flux-actions&#39;</span><br/><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-3">type</span><span class="hl-1"> </span><span class="hl-4">Either</span><span class="hl-1">, </span><span class="hl-4">tryCatch</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;fp-ts/lib/Either&#39;</span><br/><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-7">changeYear</span><span class="hl-1"> = </span><span class="hl-0">createAction</span><span class="hl-1">&lt;</span><span class="hl-9">number</span><span class="hl-1">&gt;(</span><span class="hl-2">&#39;CHANGE_YEAR&#39;</span><span class="hl-1">)</span><br/><span class="hl-0">changeYear</span><span class="hl-1">(</span><span class="hl-8">1955</span><span class="hl-1">) </span><span class="hl-6">// { type: &#39;CHANGE_YEAR&#39;, payload: 1955, meta: undefined }</span><br/><span class="hl-0">changeYear</span><span class="hl-1">(</span><span class="hl-8">1955</span><span class="hl-1">, { </span><span class="hl-4">test:</span><span class="hl-1"> </span><span class="hl-5">true</span><span class="hl-1"> })</span><br/><span class="hl-6">// { type: &#39;CHANGE_YEAR&#39;, payload: 1955, meta: { test: true } }</span><br/><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-7">changeYearWithError</span><span class="hl-1"> = </span><span class="hl-0">createAction</span><span class="hl-1">&lt;</span><span class="hl-9">Either</span><span class="hl-1">&lt;</span><span class="hl-9">Error</span><span class="hl-1">, </span><span class="hl-9">number</span><span class="hl-1">&gt;&gt;(</span><span class="hl-2">&#39;CHANGE_YEAR&#39;</span><span class="hl-1">)</span><br/><span class="hl-0">changeYearWithError</span><span class="hl-1">(</span><span class="hl-0">tryCatch</span><span class="hl-1">(() </span><span class="hl-5">=&gt;</span><span class="hl-1"> </span><span class="hl-0">Number</span><span class="hl-1">(</span><span class="hl-2">&#39;1985&#39;</span><span class="hl-1">), (</span><span class="hl-4">error</span><span class="hl-1">) </span><span class="hl-5">=&gt;</span><span class="hl-1"> </span><span class="hl-4">error</span><span class="hl-1"> </span><span class="hl-3">as</span><span class="hl-1"> </span><span class="hl-9">Error</span><span class="hl-1">))</span>
+</code><button type="button">Copy</button></pre>
+
+</div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/14b9b3993b37c96451fa5b0ebaefb90de5251cca/packages/flux-actions/src/index.ts#L32">index.ts:32</a></li></ul></aside></div></li></ul></section></div>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/f64ae1091c42c1f33ea3e7fd8b0ee4cfcad69c3e/packages/flux-actions/src/index.ts#L59">index.ts:59</a></li></ul></aside></div></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

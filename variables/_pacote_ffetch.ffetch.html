@@ -11,9 +11,20 @@
 <li><a href="../modules/_pacote_ffetch.html">@pacote/ffetch</a></li>
 <li><a href="" aria-current="page">ffetch</a></li></ul>
 <h1>Variable ffetch<code class="tsd-tag">Const</code></h1></div>
-<div class="tsd-signature"><span class="tsd-kind-variable">ffetch</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Fetch</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div><aside class="tsd-sources">
+<div class="tsd-signature"><span class="tsd-kind-variable">ffetch</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Fetch</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography"><p>Default fetch wrapper using the global Fetch API and JSON/text parsing.</p>
+</div>
+<div class="tsd-comment tsd-typography">
+<div class="tsd-tag-returns">
+<h4 class="tsd-anchor-link" id="returns">Returns<a href="#returns" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>A lazy Fetch API wrapper that resolves to an <code>Either</code> result.</p>
+</div>
+<div class="tsd-tag-example">
+<h4 class="tsd-anchor-link" id="example">Example<a href="#example" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><pre><code class="typescript"><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-7">result</span><span class="hl-1"> = </span><span class="hl-3">await</span><span class="hl-1"> </span><span class="hl-0">ffetch</span><span class="hl-1">(</span><span class="hl-2">&#39;/api/items&#39;</span><span class="hl-1">)()</span><br/><span class="hl-6">// result is an Either containing the parsed body or a request error</span>
+</code><button type="button">Copy</button></pre>
+
+</div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/14b9b3993b37c96451fa5b0ebaefb90de5251cca/packages/ffetch/src/index.ts#L97">index.ts:97</a></li></ul></aside></div>
+<li>Defined in <a href="https://github.com/PacoteJS/pacote/blob/f64ae1091c42c1f33ea3e7fd8b0ee4cfcad69c3e/packages/ffetch/src/index.ts#L159">index.ts:159</a></li></ul></aside></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
