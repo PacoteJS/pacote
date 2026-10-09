@@ -333,12 +333,11 @@ describe('serialisation', () => {
       errorRate: 0.0001,
       fields: { text: 1 },
       index: {
-        version: 2,
+        version: 3,
         documents: {
           '1': {
-            signatures: {
-              1: 'STYAAA==',
-            },
+            buckets: [1],
+            signature: 'xQEAAA==',
             summary: {
               text: 'foo',
             },
@@ -362,12 +361,11 @@ describe('serialisation', () => {
     const serialised = JSON.stringify(bs.index)
 
     expect(JSON.parse(serialised)).toEqual({
-      version: 2,
+      version: 3,
       documents: {
         '1': {
-          signatures: {
-            1: 'STYAAA==',
-          },
+          buckets: [1],
+          signature: 'xQEAAA==',
           summary: {
             text: 'foo',
           },
