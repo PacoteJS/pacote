@@ -333,15 +333,11 @@ describe('serialisation', () => {
       errorRate: 0.0001,
       fields: { text: 1 },
       index: {
-        version: 1,
+        version: 2,
         documents: {
           '1': {
             signatures: {
-              1: {
-                filter: [13897],
-                fingerprintBits: 14,
-                seed: 12648430,
-              },
+              1: 'STYAAA==',
             },
             summary: {
               text: 'foo',
@@ -366,15 +362,11 @@ describe('serialisation', () => {
     const serialised = JSON.stringify(bs.index)
 
     expect(JSON.parse(serialised)).toEqual({
-      version: 1,
+      version: 2,
       documents: {
         '1': {
           signatures: {
-            1: {
-              filter: [13897],
-              fingerprintBits: 14,
-              seed: 12648430,
-            },
+            1: 'STYAAA==',
           },
           summary: {
             text: 'foo',
@@ -402,6 +394,21 @@ describe('serialised instance hydration', () => {
       { text: 'previous foo' },
       { text: 'additional foo' },
     ])
+  })
+
+  it('loads an index with many words', () => {
+    const options = {
+      fields: ['text'],
+      summary: ['id'],
+    }
+    const words = Array.from({ length: 200 }, (_, i) => `word${i}`)
+    const previous = new SignatureSearch(options)
+    previous.add('1', { id: 1, text: words.join(' ') })
+    const current = new SignatureSearch(options)
+
+    current.load(JSON.parse(JSON.stringify(previous.index)))
+
+    expect(words.every((word) => current.search(word).length === 1)).toBe(true)
   })
 
   it('replaces an index', () => {

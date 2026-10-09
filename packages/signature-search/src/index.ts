@@ -34,9 +34,15 @@ export interface IndexedDocument<
    */
   readonly summary: Pick<Document, SummaryField>
   /**
-   * Ribbon filter signatures for the document grouped by word frequency. Any
-   * words added to a signature are searchable but not retrievable.
+   * Base64-encoded Ribbon filter signatures for the document grouped by word
+   * frequency. Any words added to a signature are searchable but not
+   * retrievable.
    */
+  readonly signatures: Record<number, string>
+}
+
+interface SearchableDocument<Document, SummaryField extends keyof Document> {
+  readonly summary: Pick<Document, SummaryField>
   readonly signatures: Record<number, RibbonFilter<string>>
 }
 
@@ -128,7 +134,10 @@ interface Result<Document, SummaryField extends keyof Document> {
   readonly score: number
 }
 
-const INDEX_VERSION = 1
+const INDEX_VERSION = 2
+
+declare function btoa(data: string): string
+declare function atob(data: string): string
 
 const compare = (a: number, b: number) => (a === b ? 0 : a > b ? -1 : 1)
 
@@ -196,7 +205,7 @@ export class SignatureSearch<
   private readonly hash: HashFunction
   private readonly documents = new Map<
     string,
-    IndexedDocument<Document, SummaryField>
+    SearchableDocument<Document, SummaryField>
   >()
 
   /**
@@ -257,8 +266,8 @@ export class SignatureSearch<
    *
    * **NB:** Calling this method will not change any other attributes in the
    * instance. It is up to developers to ensure that the instances were
-   * initialised with compatible options, in particular the `stemmer`
-   * function. Incompatible `stemmer` implementations may cause matches to
+   * initialised with compatible options, in particular `errorRate`, `seed`,
+   * and the `stemmer` function. Incompatible options may cause matches to
    * not be found in the rehydrated index.
    *
    * @param index Replacement index.
@@ -280,8 +289,12 @@ export class SignatureSearch<
           Record<number, RibbonFilter<string>>
         >((signatures, [frequency, signature]) => {
           signatures[frequency] = new RibbonFilter({
-            ...signature,
+            ...optimal(this.errorRate),
+            seed: this.seed,
             hash: this.hash,
+            filter: new Uint32Array(
+              Uint8Array.from(atob(signature), (c) => c.charCodeAt(0)).buffer,
+            ),
           })
           return signatures
         }, {}),
@@ -492,7 +505,7 @@ export class SignatureSearch<
   }
 
   private hasToken(
-    document: IndexedDocument<Document, SummaryField>,
+    document: SearchableDocument<Document, SummaryField>,
     token: string,
   ): number {
     for (const frequency in document.signatures) {
@@ -539,11 +552,18 @@ export class SignatureSearch<
     string,
     IndexedDocument<Document, SummaryField>
   > {
-    return Object.assign(
-      Object.create(null),
-      Object.fromEntries<IndexedDocument<Document, SummaryField>>(
-        this.documents,
-      ),
-    )
+    const documents = Object.create(null)
+    for (const [ref, { summary, signatures }] of this.documents) {
+      const encoded: Record<number, string> = {}
+      for (const [frequency, { filter }] of entries(signatures))
+        encoded[frequency] = btoa(
+          Array.from(
+            new Uint8Array(filter.buffer, filter.byteOffset, filter.byteLength),
+            (byte) => String.fromCharCode(byte),
+          ).join(''),
+        )
+      documents[ref] = { summary, signatures: encoded }
+    }
+    return documents
   }
 }
