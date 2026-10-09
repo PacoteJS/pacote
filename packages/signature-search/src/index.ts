@@ -1,6 +1,5 @@
 import { windowed } from '@pacote/array'
 import { optimal, RibbonFilter } from '@pacote/ribbon-filter'
-import { findLast } from './array'
 import { createHash, type HashFunction } from './hash'
 import { entries, pick } from './object'
 import { EXCLUDE, PHRASE, queryTerms, REQUIRE } from './query'
@@ -35,20 +34,16 @@ export interface IndexedDocument<
    */
   readonly summary: Pick<Document, SummaryField>
   /**
-   * Word frequency buckets that hold at least one word in the signature.
+   * Base64-encoded Ribbon filter signatures for the document grouped by word
+   * frequency. Any words added to a signature are searchable but not
+   * retrievable.
    */
-  readonly buckets: number[]
-  /**
-   * Base64-encoded Ribbon filter signature for the document. Any words added
-   * to a signature are searchable but not retrievable.
-   */
-  readonly signature: string
+  readonly signatures: Record<number, string>
 }
 
 interface SearchableDocument<Document, SummaryField extends keyof Document> {
   readonly summary: Pick<Document, SummaryField>
-  readonly buckets: number[]
-  readonly signature: RibbonFilter<string>
+  readonly signatures: Record<number, RibbonFilter<string>>
 }
 
 /** Serialised search index containing document summaries and signatures. */
@@ -139,7 +134,7 @@ interface Result<Document, SummaryField extends keyof Document> {
   readonly score: number
 }
 
-const INDEX_VERSION = 3
+const INDEX_VERSION = 2
 
 declare function btoa(data: string): string
 declare function atob(data: string): string
@@ -287,21 +282,25 @@ export class SignatureSearch<
 
     this.documents.clear()
 
-    for (const [ref, { summary, buckets, signature }] of entries(
-      index.documents,
-    )) {
-      this.documents.set(ref, {
-        summary,
-        buckets,
-        signature: new RibbonFilter({
-          ...optimal(this.errorRate),
-          seed: this.seed,
-          hash: this.hash,
-          filter: new Uint32Array(
-            Uint8Array.from(atob(signature), (c) => c.charCodeAt(0)).buffer,
-          ),
-        }),
-      })
+    for (const [ref, entry] of entries(index.documents)) {
+      const document = {
+        summary: entry.summary,
+        signatures: entries(entry.signatures).reduce<
+          Record<number, RibbonFilter<string>>
+        >((signatures, [frequency, signature]) => {
+          signatures[frequency] = new RibbonFilter({
+            ...optimal(this.errorRate),
+            seed: this.seed,
+            hash: this.hash,
+            filter: new Uint32Array(
+              Uint8Array.from(atob(signature), (c) => c.charCodeAt(0)).buffer,
+            ),
+          })
+          return signatures
+        }, {}),
+      }
+
+      this.documents.set(ref, document)
     }
   }
 
@@ -344,25 +343,48 @@ export class SignatureSearch<
 
     if (uniqueTokens.size === 0) return
 
-    const buckets = new Set<number>()
-    const elements: string[] = []
+    const tokensByFrequency = new Array<string[]>(
+      this.termFrequencyBuckets.length + 1,
+    )
 
     for (const token of uniqueTokens) {
-      const bucket =
-        findLast(this.termFrequencyBuckets, (b) => frequency[token] >= b) ?? 0
-      buckets.add(bucket)
-      elements.push(`${bucket}:${token}`)
+      let frequencyBucketIndex = 0
+      for (let i = this.termFrequencyBuckets.length - 1; i >= 0; i -= 1) {
+        if (frequency[token] >= this.termFrequencyBuckets[i]) {
+          frequencyBucketIndex = i + 1
+          break
+        }
+      }
+
+      if (!tokensByFrequency[frequencyBucketIndex]) {
+        tokensByFrequency[frequencyBucketIndex] = []
+      }
+      tokensByFrequency[frequencyBucketIndex].push(token)
     }
 
-    this.documents.set(ref, {
-      summary: pick(this.summary, document),
-      buckets: Array.from(buckets).sort((a, b) => a - b),
-      signature: new RibbonFilter({
+    const signatures = tokensByFrequency.reduce<
+      Record<number, RibbonFilter<string>>
+    >((acc, tokens, frequencyBucketIndex) => {
+      if (!tokens?.length) return acc
+
+      const frequencyBucket =
+        frequencyBucketIndex === 0
+          ? 0
+          : this.termFrequencyBuckets[frequencyBucketIndex - 1]
+
+      acc[frequencyBucket] = new RibbonFilter({
         ...optimal(this.errorRate),
         seed: this.seed,
         hash: this.hash,
-        elements,
-      }),
+        elements: tokens,
+      })
+
+      return acc
+    }, {})
+
+    this.documents.set(ref, {
+      summary: pick(this.summary, document),
+      signatures,
     })
   }
 
@@ -486,8 +508,11 @@ export class SignatureSearch<
     document: SearchableDocument<Document, SummaryField>,
     token: string,
   ): number {
-    for (const bucket of document.buckets)
-      if (document.signature.has(`${bucket}:${token}`)) return bucket
+    for (const frequency in document.signatures) {
+      if (document.signatures[frequency].has(token)) {
+        return Number(frequency)
+      }
+    }
     return 0
   }
 
@@ -528,20 +553,16 @@ export class SignatureSearch<
     IndexedDocument<Document, SummaryField>
   > {
     const documents = Object.create(null)
-    for (const [ref, { summary, buckets, signature }] of this.documents) {
-      const { filter } = signature
-      const bytes = new Uint8Array(
-        filter.buffer,
-        filter.byteOffset,
-        filter.byteLength,
-      )
-      documents[ref] = {
-        summary,
-        buckets,
-        signature: btoa(
-          Array.from(bytes, (byte) => String.fromCharCode(byte)).join(''),
-        ),
-      }
+    for (const [ref, { summary, signatures }] of this.documents) {
+      const encoded: Record<number, string> = {}
+      for (const [frequency, { filter }] of entries(signatures))
+        encoded[frequency] = btoa(
+          Array.from(
+            new Uint8Array(filter.buffer, filter.byteOffset, filter.byteLength),
+            (byte) => String.fromCharCode(byte),
+          ).join(''),
+        )
+      documents[ref] = { summary, signatures: encoded }
     }
     return documents
   }
