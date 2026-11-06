@@ -66,7 +66,8 @@ export interface Options<
 > {
   /**
    * The fields to index, provided as an array or as a record of field keys and
-   * weight values.
+   * weight values. Weights must be integers, and a weight of `0` leaves the
+   * field out of the index.
    */
   fields: IndexField[] | Record<IndexField, number>
   /**
@@ -95,7 +96,8 @@ export interface Options<
   seed?: number
   /**
    * Optimises storage by grouping indexed terms into buckets according to term
-   * frequency in a document. Defaults to `[1, 2, 3, 4, 8, 16, 32, 64]`.
+   * frequency in a document. Bucket thresholds cannot be lower than `1`.
+   * Defaults to `[1, 2, 3, 4, 8, 16, 32, 64]`.
    */
   termFrequencyBuckets?: number[]
   /**
@@ -117,7 +119,7 @@ export interface Options<
   stopwords?: StopwordsFunction
   /**
    * Allows a custom tokenizer function. By default content is transformed to
-   * lowercase, split at every whitespace or hyphen, and stripped of any
+   * lowercase, split at every whitespace, hyphen or slash, and stripped of any
    * non-word (`A-Z`, `0-9`, and `_`) characters.
    */
   tokenizer?: TokenizerFunction
@@ -226,12 +228,26 @@ export class SignatureSearch<
           {} as Record<IndexField, number>,
         )
       : options.fields
+
+    for (const [field, weight] of entries(this.fields))
+      if (!Number.isInteger(weight))
+        throw new Error(
+          `field weight for "${String(field)}" must be an integer, got ${weight}`,
+        )
+
     this.summary = options.summary
     this.errorRate = options.errorRate ?? 0.0001
     this.ngrams = options.ngrams ?? 1
     this.termFrequencyBuckets = options.termFrequencyBuckets ?? [
       1, 2, 3, 4, 8, 16, 32, 64,
     ]
+
+    for (const threshold of this.termFrequencyBuckets)
+      if (!Number.isInteger(threshold) || threshold < 1)
+        throw new Error(
+          `term frequency buckets must be integers of at least 1, got ${threshold}`,
+        )
+
     this.preprocess = options.preprocess ?? String
     this.stemmer = options.stemmer ?? ((token) => token)
     this.stopwords = options.stopwords ?? (() => true)
@@ -321,7 +337,7 @@ export class SignatureSearch<
     const frequency: Record<string, number> = {}
 
     for (const [field, weight = 1] of entries(this.fields)) {
-      if (document[field] == null) continue
+      if (document[field] == null || weight === 0) continue
 
       const fieldText = this.preprocess(document[field], field, document)
       const fieldTokens = this.tokenizer(fieldText, language)
@@ -510,7 +526,7 @@ export class SignatureSearch<
   ): number {
     for (const frequency in document.signatures) {
       if (document.signatures[frequency].has(token)) {
-        return Number(frequency)
+        return Math.max(Number(frequency), 1)
       }
     }
     return 0

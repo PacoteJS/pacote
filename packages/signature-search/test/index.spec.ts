@@ -61,6 +61,79 @@ describe('ranking', () => {
   })
 })
 
+describe('option validation', () => {
+  test('fractional field weights are rejected', () => {
+    expect(
+      () => new SignatureSearch({ fields: { text: 0.5 }, summary: ['text'] }),
+    ).toThrow('field weight for "text" must be an integer, got 0.5')
+  })
+
+  test('integer field weights are accepted', () => {
+    expect(
+      () => new SignatureSearch({ fields: { text: 2 }, summary: ['text'] }),
+    ).not.toThrow()
+  })
+
+  test('term frequency buckets below 1 are rejected', () => {
+    expect(
+      () =>
+        new SignatureSearch({
+          fields: ['text'],
+          summary: ['text'],
+          termFrequencyBuckets: [0, 2],
+        }),
+    ).toThrow('term frequency buckets must be integers of at least 1, got 0')
+  })
+
+  test('fractional term frequency buckets are rejected', () => {
+    expect(
+      () =>
+        new SignatureSearch({
+          fields: ['text'],
+          summary: ['text'],
+          termFrequencyBuckets: [1, 1.5],
+        }),
+    ).toThrow('term frequency buckets must be integers of at least 1, got 1.5')
+  })
+
+  test('term frequency buckets of 1 or more are accepted', () => {
+    expect(
+      () =>
+        new SignatureSearch({
+          fields: ['text'],
+          summary: ['text'],
+          termFrequencyBuckets: [1, 5],
+        }),
+    ).not.toThrow()
+  })
+})
+
+describe('terms below the first term frequency bucket', () => {
+  test('are found when the first threshold is above 1', () => {
+    const bs = new SignatureSearch({
+      fields: ['text'],
+      summary: ['text'],
+      termFrequencyBuckets: [2, 4],
+    })
+
+    bs.add('1', { text: 'foo' })
+
+    expect(bs.search('foo')).toEqual([{ text: 'foo' }])
+  })
+
+  test('are not indexed from fields with weight 0', () => {
+    const bs = new SignatureSearch({
+      fields: { id: 0, text: 1 },
+      summary: ['text'],
+      termFrequencyBuckets: [2, 4],
+    })
+
+    bs.add('1', { id: 'abc', text: 'foo' })
+
+    expect(bs.search('abc')).toEqual([])
+  })
+})
+
 test('document indices can be replaced', () => {
   const bs = new SignatureSearch({
     errorRate: 0.002,
