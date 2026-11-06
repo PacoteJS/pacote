@@ -3,7 +3,7 @@
  */
 
 import matchers from '@pacote/jest-either'
-import { HttpResponse, http } from 'msw'
+import { HttpResponse, http } from 'msw/http'
 import { setupServer } from 'msw/node'
 import { afterAll, afterEach, beforeAll, expect, test, vi } from 'vitest'
 import { createFetch } from '../src'
@@ -41,7 +41,7 @@ const handlers = [
 const server = setupServer(...handlers)
 
 beforeAll(() => {
-  server.listen({ onUnhandledRequest: 'error' })
+  server.listen({ onUnhandledFrame: 'error' })
 })
 
 afterEach(() => {

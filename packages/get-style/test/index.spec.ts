@@ -11,6 +11,7 @@ afterEach(() => {
 })
 
 test('fetches a property value', () => {
+  window.document.documentElement.style.fontSize = '16px'
   window.document.body.style.fontSize = '2rem'
-  expect(getStyle(window.document.body, 'fontSize')).toBe('2rem')
+  expect(getStyle(window.document.body, 'fontSize')).toBe('32px')
 })
