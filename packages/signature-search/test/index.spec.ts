@@ -172,6 +172,17 @@ test('tokens are passed through a language-aware stemmer', () => {
   expect(stemmer).toHaveBeenCalledWith('foo', 'en-GB')
 })
 
+test('words separated by slashes are searched individually', () => {
+  const bs = new SignatureSearch({
+    fields: ['text'],
+    summary: ['text'],
+  })
+
+  bs.add('1', { text: 'orders/returns' })
+
+  expect(bs.search('returns')).toEqual([{ text: 'orders/returns' }])
+})
+
 test('tokens can be generated with a custom tokenizer', () => {
   const tokenizer = vi.fn((text) => text.split('-'))
 
