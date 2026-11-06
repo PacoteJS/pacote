@@ -1,17 +1,12 @@
+/// <reference types="node" />
+
+import { Buffer } from 'node:buffer'
 import { assert, nat, property, string, uint8Array } from 'fast-check'
 import { describe, expect, test } from 'vitest'
 import { xxh64, xxh64BigInt } from '../src/index'
 import { sanityBuffer } from './sanity'
 
-interface XXHash64Constructor {
-  new (
-    seed: number,
-  ): {
-    hash: (buffer: Uint8Array) => {
-      toString: (encoding?: 'hex') => string
-    }
-  }
-}
+type XXHash64Constructor = typeof import('xxhash-addon').XXHash64
 
 const nativeXXHash64 = (async (): Promise<XXHash64Constructor | undefined> => {
   try {
@@ -54,11 +49,19 @@ describe.each([xxh64, xxh64BigInt])('%o', (testHash) => {
     }
 
     assert(
-      property(nat(), uint8Array({ maxLength: 1024 }), (seed, data) => {
-        const referenceHash = new XXHash64(seed).hash(data).toString('hex')
-        const hash = testHash(seed).update(asArrayBuffer(data)).digest('hex')
-        expect(hash).toBe(referenceHash)
-      }),
+      property(
+        nat({ max: 0xffffffff }),
+        uint8Array({ maxLength: 1024 }),
+        (seed, data) => {
+          const seedBuffer = Buffer.alloc(4)
+          seedBuffer.writeUInt32BE(seed)
+          const referenceHasher = new XXHash64(seedBuffer)
+          referenceHasher.update(Buffer.from(data))
+          const referenceHash = referenceHasher.digest().toString('hex')
+          const hash = testHash(seed).update(asArrayBuffer(data)).digest('hex')
+          expect(hash).toBe(referenceHash)
+        },
+      ),
     )
   })
 
