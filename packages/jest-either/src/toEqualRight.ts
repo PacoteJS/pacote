@@ -1,13 +1,13 @@
-import type { Either } from 'fp-ts/lib/Either'
+import type { Either } from 'fp-ts/lib/Either.js'
 import { matcherHint, printExpected, printReceived } from 'jest-matcher-utils'
-import { isEither } from './shared/isEither'
+import { isEither } from './shared/isEither.js'
 import {
   type AsymmetricMatcher,
   isAsymmetricMatcher,
   rightPredicate,
-} from './shared/predicates'
-import { diffReceivedRight } from './shared/print'
-import type { MatcherContext, MatcherResult } from './shared/types'
+} from './shared/predicates.js'
+import { diffReceivedRight } from './shared/print.js'
+import type { MatcherContext, MatcherResult } from './shared/types.js'
 
 declare global {
   namespace jest {

@@ -70,3 +70,4 @@ docs/
 .idea/
 .nx/
 .impact/
+/palace.yaml

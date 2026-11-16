@@ -1,4 +1,4 @@
-import type { Either } from 'fp-ts/lib/Either'
+import type { Either } from 'fp-ts/lib/Either.js'
 
 interface TaggedValue {
   _tag?: unknown

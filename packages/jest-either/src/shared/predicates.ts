@@ -1,7 +1,7 @@
 import { isPlainObject } from '@pacote/is-plain-object'
-import { pipe } from 'fp-ts/function'
-import { type Either, fold } from 'fp-ts/lib/Either'
-import type { MatcherContext } from './types'
+import { type Either, fold } from 'fp-ts/lib/Either.js'
+import { pipe } from 'fp-ts/lib/function.js'
+import type { MatcherContext } from './types.js'
 
 const F = () => false
 

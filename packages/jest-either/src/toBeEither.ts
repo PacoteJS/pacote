@@ -1,6 +1,6 @@
 import { matcherHint, printReceived } from 'jest-matcher-utils'
-import { isEither } from './shared/isEither'
-import type { MatcherResult } from './shared/types'
+import { isEither } from './shared/isEither.js'
+import type { MatcherResult } from './shared/types.js'
 
 declare global {
   namespace jest {
